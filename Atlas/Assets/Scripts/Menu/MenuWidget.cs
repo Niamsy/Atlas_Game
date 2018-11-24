@@ -5,12 +5,8 @@ using UnityEngine.UI;
 namespace Menu
 {
     [RequireComponent(typeof(Animator))]
-    public abstract class MainMenuWidget : MonoBehaviour
+    public abstract class MenuWidget : MonoBehaviour
     {
-        protected RequestManager        ActualRequestManager;
-
-        [SerializeField] protected Text ErrorText;
-
         #region Displayed
         [SerializeField] private bool   _displayed;
         public bool                     Displayed
@@ -27,10 +23,6 @@ namespace Menu
         private void Awake()
         {
             _animator = GetComponent<Animator>();
-            ActualRequestManager = FindObjectOfType<RequestManager>();
-        
-            if (ActualRequestManager == null)
-                Debug.LogError("ERROR: No RequestManager found.");
 
             InitialiseWidget();
             
@@ -39,11 +31,10 @@ namespace Menu
 
         protected abstract void InitialiseWidget();
         
-        public void Show(bool display)
+        public virtual void Show(bool display)
         {
             _animator.SetBool(_hashShowed, display);
             _displayed = display;
-            ErrorText.text = "";
         }
         
         /// <summary>
