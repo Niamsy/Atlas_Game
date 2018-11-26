@@ -1,4 +1,5 @@
 ﻿using Game;
+using Networking;
 using UnityEngine;
 
 namespace Menu
@@ -18,6 +19,11 @@ namespace Menu
 		{
 			TimeManager.Instance.PauseGame(value);
 			base.Show(value);
+		}
+
+		public void QuitTheGame()
+		{
+			Application.Quit();
 		}
 	}
 }
