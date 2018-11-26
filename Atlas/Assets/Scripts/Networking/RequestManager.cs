@@ -8,7 +8,6 @@ namespace Networking
 	public class RequestManager : MonoBehaviour
 	{
 		#region Variables
-		
 		#region API Adress & Request adress
 		#if ATLAS_RELEASE
 				public static string ApiAdress { get { return ("http://163.5.84.246:3000/"); } }
@@ -31,7 +30,7 @@ namespace Networking
 		private Coroutine 				_actualOperation = null;
 		public bool 					CanReceiveANewRequest
 		{
-			get { return (_actualOperation == null); }
+			get { return (_actualOperation == null && _quiting == false); }
 		}
 		#endregion
 		
@@ -64,14 +63,41 @@ namespace Networking
 
 		
 		#endregion
+		
 		/// <summary>
 		/// Initialize the manager
 		/// </summary>
 		private void Awake()
 		{
 			DontDestroyOnLoad(gameObject);
+			Application.wantsToQuit += StartQuitSequence;
 		}
 
+		#region Disconnection on Quit
+		private bool _quiting;
+		private bool StartQuitSequence()
+		{
+			if (_ApiToken == null)
+				return true;
+
+			if (_quiting)
+				return (false);
+			
+			if (_actualOperation != null)
+				StopCoroutine(_actualOperation);
+			OnDisconnectionFinished += QuitOnAfterDisconnection;
+			_actualOperation = StartCoroutine(DisconnectionCoroutine());
+			_quiting = true;
+			return false;
+		}
+
+		private void QuitOnAfterDisconnection(bool sucess, string message)
+		{
+			Debug.Log("Quit");
+			Application.Quit();
+		}
+		#endregion
+		
 		/// <summary>
 		/// Clean the manager to be ready to receive the next request
 		/// </summary>
@@ -199,9 +225,9 @@ namespace Networking
 
 			Body_ReturnBase bodyReturn = JsonUtility.FromJson<Body_ReturnBase>(postRequest.downloadHandler.text);
 
-			if (success)
-				_ApiToken = null;
-			else
+			_ApiToken = null;
+
+			if (!success)
 				Debug.Log("ERROR HTTP: " + postRequest.responseCode + ":" + postRequest.error);
 			
 			CleanForNextRequest();
