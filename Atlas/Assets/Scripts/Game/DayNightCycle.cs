@@ -4,28 +4,32 @@ using UnityEngine;
 
 public class DayNightCycle : MonoBehaviour {
 
-    /**
-     *  Public variables
-     **/
+    #region Public Variables
+
     public Light sun;
     public float secondsInFullDay = 120f;
     [Range(0, 1)]
     public float currentTime = 0;
     [HideInInspector]
     public float timeMultiplayer = 1f;
-    
-    /**
-     *  Private variables
-     **/
+    public CalendarManager Calendar;
+    #endregion
+
+    #region Private Variables
+
+    private const int SECOND_IN_DAYS = 86400;
     private float _sunInitialIntensity;
     private float _sunUp = 0.23f;
     private float _sunDown = 0.73f;
     private float _latitude = 90;
     private float _longitude = 170;
 
-	// Use this for initialization
-	void Start () {
+    #endregion
+
+    // Use this for initialization
+    void Start () {
         _sunInitialIntensity = sun.intensity;
+        currentTime = (((Calendar.GetHours() * 3600 + Calendar.GetMinutes() * 60 + Calendar.GetSeconds()) * 100) / SECOND_IN_DAYS) / 100f;
 	}
 	
 	// Update is called once per frame
@@ -33,10 +37,13 @@ public class DayNightCycle : MonoBehaviour {
         UpdateSun();
 
         currentTime += (Time.deltaTime / secondsInFullDay) * timeMultiplayer;
-
         if (currentTime >= 1)
+        {
             currentTime = 0;
-	}
+            Calendar.NextDay();
+        }
+        Calendar.SetTime(Mathf.RoundToInt((currentTime * 100 * SECOND_IN_DAYS) / 100));
+    }
 
     void UpdateSun()
     {
