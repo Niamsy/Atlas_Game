@@ -2,20 +2,78 @@
 using System.Collections.Generic;
 using UnityEngine;
 using InputManagement;
+using Atlas_Physics;
 
 namespace Player
 {
     [RequireComponent(typeof(Animator))]
-    [RequireComponent(typeof(Rigidbody))]
-    [RequireComponent(typeof(MovementController))]
+    [RequireComponent(typeof(BodyController))]
+    [RequireComponent(typeof(AtlasGravity))]
     public class PlayerController : MonoBehaviour
     {
-        #region
+        #region public variables
+        [Header("Movement")]
         public float _WalkSpeed = 5f;
+        [Range(1f, 3f)]
+        [Tooltip("Multiply the Movement speed by this scale to obtain the sprint speed")]
         public float _SprintScale = 1.3f;
+        [Range(0f, 1f)]
+        public float _CrouchScale = .4f;
+        [Range(0f, 1f)]
+        public float _ProneScale = 0f;
         public float _Acceleration = 100f;
         public float _Deceleration = 100f;
-        public float _JumpHeight = 2f;
+        [Header("Jump")]
+        [Range(0f, 4f)]
+        public float _JumpHeight = 0f;
+        [Tooltip("Every object with those layers will be used as a ground for various movement computations")]
+        public LayerMask _GroundLayers;
+        [Tooltip("Define at which distance from the ground the player is consisered \"Grounded\"")]
+        public float _GroundDistance = 2f;
+        public Vector3 _GroundCheckerPosition;
+        #endregion
+
+        #region accessible properties
+        public Rigidbody Body
+        {
+            get { return _Body; }
+        }
+        public bool IsGrounded
+        {
+            get { return _Animator.GetBool(_HashGrounded); }
+            set {
+                _Animator.SetBool(_HashGrounded, value);
+                _Gravity.SetScale(value ? 1f : 10f);
+            }
+        }
+        public bool IsSprinting
+        {
+            get { return _Animator.GetBool(_HashSprinting);  }
+            set { _Animator.SetBool(_HashSprinting, value); }
+        }
+        public bool IsCrouched
+        {
+            get { return _Animator.GetBool(_HashCrouched); }
+            set {
+                _Animator.SetBool(_HashCrouched, value);
+                if (value && IsProned)
+                {
+                    IsProned = false;
+                }
+            }
+        }
+        public bool IsProned
+        {
+            get { return _Animator.GetBool(_HashProned); }
+            set
+            {
+                _Animator.SetBool(_HashProned, value);
+                if (value && IsCrouched)
+                {
+                    IsCrouched = false;
+                }
+            }
+        }
         #endregion
 
         #region private variables
@@ -25,26 +83,41 @@ namespace Player
         private Camera _Camera;
         private Rigidbody _Body;
         private Animator _Animator;
-        private MovementController _MovementController;
+        private BodyController _BodyController;
+        private GameObject _GroundChecker;
+        private AtlasGravity _Gravity;
         #endregion
 
-        #region accessible properties
-        public Rigidbody Body { get { return _Body; } }
+        #region animator variables hashes
+        private readonly int _HashIdle = Animator.StringToHash("Idle");
+        private readonly int _HashJumpSpeed = Animator.StringToHash("JumpSpeed");
+        private readonly int _HashHorizontalSpeed = Animator.StringToHash("HorizontalSpeed");
+        private readonly int _HashVerticalSpeed = Animator.StringToHash("VerticalSpeed");
+        private readonly int _HashGrounded = Animator.StringToHash("Grounded");
+        private readonly int _HashSprinting = Animator.StringToHash("Sprinting");
+        private readonly int _HashCrouched = Animator.StringToHash("Crouched");
+        private readonly int _HashProned = Animator.StringToHash("Proned");
         #endregion
 
+        #region Initialisation
         // Use this for initialization
         private void Awake()
         {
             _Camera = Camera.main;
             _Body = GetComponent<Rigidbody>();
             _Animator = GetComponent<Animator>();
-            _MovementController = GetComponent<MovementController>();
+            _BodyController = GetComponent<BodyController>();
+            _GroundChecker = new GameObject("GroundChecker");
+            _GroundChecker.transform.SetParent(transform);
+            _GroundChecker.transform.localPosition = _GroundCheckerPosition;
+            _Gravity = GetComponent<AtlasGravity>();
         }
 
         private void Start()
         {
             StateMachine.State<PlayerController>.Initialise(_Animator, this);
         }
+        #endregion
 
         /// <summary>
         /// Transform the player input so the correct animation is played relative to the player rotation
@@ -58,8 +131,8 @@ namespace Player
             float refAngle = Vector3.SignedAngle(Vector3.back, localPos, Vector3.up);
             //Multiply the input vector by the refAngle 
             Vector3 newInput = Quaternion.Euler(0, refAngle, 0) * _Input;
-            //_Animator.SetFloat(_HashHorizontalSpeedPara, newInput.x);
-            //_Animator.SetFloat(_HashVerticalSpeedPara, newInput.z);
+            _Animator.SetFloat(_HashHorizontalSpeed, newInput.x);
+            _Animator.SetFloat(_HashVerticalSpeed, newInput.z);
         }
 
         private void FixedUpdate()
@@ -68,15 +141,23 @@ namespace Player
             //    TransformInputRelativelyToMouse();
             //else
             //{
-            //    _Animator.SetFloat(_HashHorizontalSpeedPara, _Input.x);
-            //    _Animator.SetFloat(_HashVerticalSpeedPara, _Input.z);
+            _Animator.SetFloat(_HashHorizontalSpeed, _Input.x);
+            _Animator.SetFloat(_HashVerticalSpeed, _Input.z);
             //}
             if (_Input.normalized != _CurrentDirection && CheckForIdle() == false)
             {
                 _CurrentDirection = _Input.normalized;
                 transform.LookAt(new Vector3(_CurrentDirection.x * 180, _CurrentDirection.y, _CurrentDirection.z * 180));
             }
-            _MovementController.Move(_Move * Time.fixedDeltaTime);
+            _BodyController.Move(_Move * Time.fixedDeltaTime);
+        }
+
+        /// <summary>
+        /// Check if the player is on the ground
+        /// </summary>
+        public void CheckForGrounded()
+        {
+            IsGrounded = Physics.CheckSphere(_GroundChecker.transform.position, _GroundDistance, _GroundLayers);
         }
 
         /// <summary>
@@ -88,9 +169,16 @@ namespace Player
             return _Input.x == 0 && _Input.z == 0;
         }
 
-        public void GoToIdleState()
+        public void GoToIdleState(bool state)
         {
-            //_Animator.SetTrigger(_HashIdlePara);
+            if (state)
+            {
+                _Animator.SetTrigger(_HashIdle);
+            }
+            else
+            {
+                _Animator.ResetTrigger(_HashIdle);
+            }
         }
 
         /// <summary>
@@ -103,7 +191,22 @@ namespace Player
             _Input.z = cInput.GetAxisRaw(InputManager.AXIS_VERTICAL);
         }
 
-        public void GroundedHorizontalMovement(bool useInput, float speedScale = 1f)
+        public void Walk()
+        {
+            GroundedHorizontalMovement(true, IsSprinting ? _SprintScale : 1f);
+        }
+
+        public void Crouch()
+        {
+            GroundedHorizontalMovement(true, _CrouchScale);
+        }
+
+        public void Prone()
+        {
+            GroundedHorizontalMovement(true, _ProneScale);
+        }
+
+        private void GroundedHorizontalMovement(bool useInput, float speedScale = 1f)
         {
             Vector3 input = _Input.normalized;
             float desiredSpeedH = useInput ? input.x * _WalkSpeed * speedScale : 0f;
@@ -150,9 +253,8 @@ namespace Player
         /// </summary>
         /// <returns></returns>
         public bool CheckForJumpInput()
-        {
-            // TODO check if the player is grounded
-            return cInput.GetButtonDown(InputManager.JUMP);
+        { 
+            return IsGrounded && cInput.GetButton(InputManager.JUMP);
         }
 
         /// <summary>
@@ -160,8 +262,45 @@ namespace Player
         /// </summary>
         public void Jump()
         {
-            _Body.AddForce(Vector3.up * Mathf.Sqrt(_JumpHeight * -3f * Physics.gravity.y), ForceMode.Impulse);
-            //_Animator.SetFloat(_HashJumpSpeedPara, Body.velocity.y);
+            _Body.AddForce(Vector3.up * Mathf.Sqrt(_JumpHeight * -2f * Physics.gravity.y), ForceMode.Impulse);
+            _Animator.SetFloat(_HashJumpSpeed, Body.velocity.y);
+        }
+
+        /// <summary>
+        /// Check for Sprint input 
+        /// </summary>
+        /// <returns></returns>
+        public bool CheckForSprintInput()
+        {
+            if (cInput.GetKeyDown(InputManager.SPRINT))
+            {
+                IsSprinting = true;
+            }
+            if (cInput.GetKeyUp(InputManager.SPRINT))
+            {
+                IsSprinting = false;
+            }
+            return IsGrounded && IsSprinting;
+        }
+
+        public bool CheckForCrouchedInput()
+        {
+            return IsGrounded && cInput.GetKeyDown(InputManager.CROUCH);
+        }
+
+        public bool CheckForPronedInput()
+        {
+            return IsGrounded && cInput.GetKeyDown(InputManager.PRONE);
+        }
+
+        public void ToggleCrouchedState()
+        {
+            IsCrouched = !IsCrouched;
+        }
+
+        public void TogglePronedState()
+        {
+            IsProned = !IsProned;
         }
 
         /// <summary>

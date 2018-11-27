@@ -1,27 +1,33 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Player
+namespace Atlas_Physics
 {
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(Collider))]
-    public class MovementController : MonoBehaviour
-    {
-        Rigidbody _Rigidbody;
-        Collider _Collider;
-        Vector3 _PreviousPosition;
-        Vector3 _CurrentPosition;
-        Vector3 _NextMovement;
+    [RequireComponent(typeof(AtlasGravity))]
+    public class BodyController : MonoBehaviour
+    { 
+        #region public variables
+        #endregion
 
+        #region properties
         public bool IsGrounded { get; protected set; }
         public bool IsCeilinged { get; protected set; }
         public Vector3 Velocity { get; protected set; }
         public Rigidbody Rigidbody { get { return _Rigidbody; } }
+        #endregion
+
+        #region private variables
+        Rigidbody _Rigidbody;
+        Vector3 _PreviousPosition;
+        Vector3 _CurrentPosition;
+        Vector3 _NextMovement;
+        #endregion
 
         void Awake()
         {
             _Rigidbody = GetComponent<Rigidbody>();
-            _Collider = GetComponent<Collider>();
             _CurrentPosition = _Rigidbody.position;
             _PreviousPosition = _Rigidbody.position;
         }
