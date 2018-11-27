@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using StateMachine;
-using Player;
 
-namespace InputManagement {
+namespace Player {
 
-    public class GroundedState : State<PlayerController> {
+    public class LocomotionState : State<PlayerController> {
 
         public override void OnSLStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
@@ -22,14 +21,20 @@ namespace InputManagement {
 
         private void DoLogic()
         {
-            //_Actor.CheckForGrounded();
+            _Actor.CheckForGrounded();
             _Actor.GetInput();
-            _Actor.RotateAim();
-            _Actor.GroundedHorizontalMovement(true);
-            if (_Actor.CheckForIdle())
-                _Actor.GoToIdleState();
+            //_Actor.RotateAim();
+            _Actor.CheckForSprintInput();
+            _Actor.Walk();
+            _Actor.GoToIdleState(_Actor.CheckForIdle());
+            if (_Actor.CheckForCrouchedInput())
+            {
+                _Actor.ToggleCrouchedState();
+            } 
             if (_Actor.CheckForJumpInput())
+            {
                 _Actor.Jump();
+            }
         }
     }
 }
