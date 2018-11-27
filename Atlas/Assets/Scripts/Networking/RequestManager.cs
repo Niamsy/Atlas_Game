@@ -267,7 +267,7 @@ namespace Networking
 
 			bool success = (postRequest.responseCode == 200);
 
-			BodyReturnBase bodyReturn = JsonUtility.FromJson<BodyReturnBase>(postRequest.downloadHandler.text);
+//			BodyReturnBase bodyReturn = JsonUtility.FromJson<BodyReturnBase>(postRequest.downloadHandler.text);
 
 			_apiToken = null;
 
