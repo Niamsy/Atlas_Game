@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using Localization;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -22,8 +24,8 @@ namespace Networking
 		#endregion
 
 		#region API Token
-		private string _ApiToken = null;
-		public bool IsConnected() { return (_ApiToken != null);}
+		private string _apiToken = null;
+		public bool IsConnected() { return (_apiToken != null);}
 		#endregion
 
 		#region NetworkManager Status
@@ -36,24 +38,24 @@ namespace Networking
 		
 		#region JSon body
 		[Serializable]
-		private sealed class Body_ReturnBase
+		private sealed class BodyReturnBase
 		{
-			public string message = "";
+			public string Message = "";
 		}
 		
 		[Serializable]
-		private sealed class Body_ReturnApiToken
+		private sealed class BodyReturnApiToken
 		{
-			public string message = "";
-			public string api_token = "";
+			public string Message = "";
+			public string ApiToken = "";
 		}
 		
 		[Serializable]
-		private sealed class Body_SendRegister
+		private sealed class BodySendRegister
 		{
-			public string username = "";
-			public string email = "";
-			public string password = "";
+			public string Username = "";
+			public string Email = "";
+			public string Password = "";
 		}
 		
 		
@@ -61,23 +63,33 @@ namespace Networking
 		
 		public delegate void RequestFinishedDelegate(bool sucess, string message);
 
-		
+		[SerializeField] private RequestErrorDictionnary _errorDictionnary;
 		#endregion
-		
+
 		/// <summary>
 		/// Initialize the manager
 		/// </summary>
 		private void Awake()
 		{
+//			errorCode.GetLocaleValue(LocalizationManager.Instance.CurrentLanguage);
+			
 			DontDestroyOnLoad(gameObject);
 			Application.wantsToQuit += StartQuitSequence;
+		}
+		
+		/// <summary>
+		/// Clean the manager to be ready to receive the next request
+		/// </summary>
+		private void CleanForNextRequest()
+		{
+			_actualOperation = null;
 		}
 
 		#region Disconnection on Quit
 		private bool _quiting;
 		private bool StartQuitSequence()
 		{
-			if (_ApiToken == null)
+			if (_apiToken == null)
 				return true;
 
 			if (_quiting)
@@ -97,14 +109,6 @@ namespace Networking
 			Application.Quit();
 		}
 		#endregion
-		
-		/// <summary>
-		/// Clean the manager to be ready to receive the next request
-		/// </summary>
-		private void CleanForNextRequest()
-		{
-			_actualOperation = null;
-		}
 		
 		#region Connection
 		
@@ -134,16 +138,34 @@ namespace Networking
 
 			bool success = (postRequest.responseCode == 200);
 
-			Body_ReturnApiToken bodyReturn = JsonUtility.FromJson<Body_ReturnApiToken>(postRequest.downloadHandler.text);
+			BodyReturnApiToken bodyReturn = JsonUtility.FromJson<BodyReturnApiToken>(postRequest.downloadHandler.text);
 
+			string errorMsg = "";
 			if (success)
-				_ApiToken = bodyReturn.api_token;
+				_apiToken = bodyReturn.ApiToken;
 			else
+			{
 				Debug.Log("ERROR HTTP: " + postRequest.responseCode + ":" + postRequest.error);
-			
+				switch (postRequest.responseCode)
+				{
+					case (500):
+						errorMsg = _errorDictionnary.ApiError;
+						break;
+					case (0):
+						errorMsg = _errorDictionnary.ApiUnreachable;
+						break;
+					case (400):
+						errorMsg = _errorDictionnary.AuthentificationWrongPairing;
+						break;
+					default:
+						errorMsg = _errorDictionnary.UnknowError;
+						break;
+				}
+			}
+
 			CleanForNextRequest();
 			if (OnConnectionFinished != null)
-				OnConnectionFinished(success, bodyReturn.message);
+				OnConnectionFinished(success, errorMsg);
 		}
 		
 		public event RequestFinishedDelegate OnConnectionFinished;
@@ -170,7 +192,7 @@ namespace Networking
 
 		private IEnumerator RegisterCoroutine(string username, string email, string password)
 		{
-			Body_SendRegister body = new Body_SendRegister {username = username, email = email, password = password};
+			BodySendRegister body = new BodySendRegister {Username = username, Email = email, Password = password};
 			string bodyJson = JsonUtility.ToJson(body) ?? "";
 			
 			UnityWebRequest postRequest = UnityWebRequest.Put(ApiAdress + RegisterPath, bodyJson);
@@ -180,16 +202,38 @@ namespace Networking
 
 			bool success = (postRequest.responseCode == 200);
 
-			Body_ReturnApiToken bodyReturn = JsonUtility.FromJson<Body_ReturnApiToken>(postRequest.downloadHandler.text);
+			BodyReturnApiToken bodyReturn = JsonUtility.FromJson<BodyReturnApiToken>(postRequest.downloadHandler.text);
+
+			string errorMsg = "";
 
 			if (success)
-				_ApiToken = bodyReturn.api_token;
+				_apiToken = bodyReturn.ApiToken;
 			else
-				Debug.Log("ERROR HTTP: " + postRequest.responseCode + ":" + bodyReturn.message + ". For " + bodyJson);
-
+			{
+				Debug.Log("ERROR HTTP: " + postRequest.responseCode + ":" + postRequest.error);
+				switch (postRequest.responseCode)
+				{
+					case (500):
+						errorMsg = _errorDictionnary.ApiError;
+						break;
+					case (0):
+						errorMsg = _errorDictionnary.ApiUnreachable;
+						break;
+					case (400):
+						errorMsg = _errorDictionnary.RegistrationPasswordNotLongEnought;
+						break;
+					case (401):
+						errorMsg = _errorDictionnary.RegistrationEmailAlreadyUsed;
+						break;
+					default:
+						errorMsg = _errorDictionnary.UnknowError;
+						break;
+				}
+			}
+			
 			CleanForNextRequest();
 			if (OnRegisterFinished != null)
-				OnRegisterFinished(success, bodyReturn.message);
+				OnRegisterFinished(success, errorMsg);
 		}
 		
 		public event RequestFinishedDelegate OnRegisterFinished;
@@ -218,21 +262,37 @@ namespace Networking
 		private IEnumerator DisconnectionCoroutine()
 		{
 			UnityWebRequest postRequest = UnityWebRequest.Post(ApiAdress + DisconnectionPath, "");
-			postRequest.SetRequestHeader("api_token", _ApiToken);
+			postRequest.SetRequestHeader("api_token", _apiToken);
 			yield return postRequest.SendWebRequest();
 
 			bool success = (postRequest.responseCode == 200);
 
-			Body_ReturnBase bodyReturn = JsonUtility.FromJson<Body_ReturnBase>(postRequest.downloadHandler.text);
+			BodyReturnBase bodyReturn = JsonUtility.FromJson<BodyReturnBase>(postRequest.downloadHandler.text);
 
-			_ApiToken = null;
+			_apiToken = null;
+
+			string errorMsg = "";
 
 			if (!success)
+			{
 				Debug.Log("ERROR HTTP: " + postRequest.responseCode + ":" + postRequest.error);
+				switch (postRequest.responseCode)
+				{
+					case (500):
+						errorMsg = _errorDictionnary.ApiError;
+						break;
+					case (0):
+						errorMsg = _errorDictionnary.ApiUnreachable;
+						break;
+					default:
+						errorMsg = _errorDictionnary.UnknowError;
+						break;
+				}
+			}
 			
 			CleanForNextRequest();
 			if (OnDisconnectionFinished != null)
-				OnDisconnectionFinished(success, bodyReturn.message);
+				OnDisconnectionFinished(success, errorMsg);
 		}
 
 		public event RequestFinishedDelegate OnDisconnectionFinished;
