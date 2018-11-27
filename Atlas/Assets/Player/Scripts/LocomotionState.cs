@@ -7,6 +7,7 @@ namespace Player {
 
         public override void OnSLStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
+            _Actor.SetSpeedScale(_Actor.IsSprinting ? _Actor._SprintScale : 1f);
             DoLogic();
         }
 
@@ -23,9 +24,9 @@ namespace Player {
         {
             _Actor.CheckForGrounded();
             _Actor.GetInput();
-            //_Actor.RotateAim();
+            _Actor.RotateAim();
             _Actor.CheckForSprintInput();
-            _Actor.Walk();
+            //_Actor.Walk();
             _Actor.GoToIdleState(_Actor.CheckForIdle());
             if (_Actor.CheckForCrouchedInput())
             {

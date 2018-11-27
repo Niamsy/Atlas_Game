@@ -9,9 +9,9 @@ namespace Player
         {
             _Actor.CheckForGrounded();
             _Actor.GetInput();
-            _Actor.Walk();
+            //_Actor.Walk();
             _Actor.CheckForSprintInput();
-            //_Actor.RotateAim();
+            _Actor.RotateAim();
             if (_Actor.CheckForCrouchedInput())
             {
                 _Actor.ToggleCrouchedState();
