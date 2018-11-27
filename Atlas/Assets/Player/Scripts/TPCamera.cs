@@ -98,7 +98,7 @@ namespace Player
                     _RotateBehind = false;
                 }
             }
-            else if (cInput.GetAxisRaw(InputManager.R_AXIS_HORIZONTAL) != 0 || cInput.GetAxisRaw(InputManager.R_AXIS_VERTICAL) != 0 || _RotateBehind)
+            else if (cInput.GetAxis(InputManager.R_AXIS_HORIZONTAL) != 0 || cInput.GetAxis(InputManager.R_AXIS_VERTICAL) != 0 || _RotateBehind)
             {
                 ResetCameraPosition();
             }
@@ -109,7 +109,6 @@ namespace Player
             Quaternion rotation = Quaternion.Euler(_Angles.y, _Angles.x, 0f);
 
             // Desired Range
-            Debug.Log(cInput.GetAxisRaw(InputManager.AXIS_CAMERA_ZOOM));
             _DesiredRange -= cInput.GetAxisRaw(InputManager.AXIS_CAMERA_ZOOM) * Time.deltaTime * _ZoomSpeed * Mathf.Abs(_DesiredRange);
             _DesiredRange = Mathf.Clamp(_DesiredRange, _MinimunRange, _MaximumRange);
             _CorrectedRange = _DesiredRange;

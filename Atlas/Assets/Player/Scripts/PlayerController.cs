@@ -23,6 +23,7 @@ namespace Player
         public float _ProneScale = 0f;
         public float _Acceleration = 100f;
         public float _Deceleration = 100f;
+        public float _RotationSpeed = 150f;
         [Header("Jump")]
         [Range(0f, 4f)]
         public float _JumpHeight = 0f;
@@ -49,12 +50,17 @@ namespace Player
         public bool IsSprinting
         {
             get { return _Animator.GetBool(_HashSprinting);  }
-            set { _Animator.SetBool(_HashSprinting, value); }
+            set {
+                _Animator.SetBool(_HashSprinting, value);
+                _CurrentSpeed = value && !(IsCrouched || IsProned) ? _WalkSpeed * _SprintScale : _CurrentSpeed;
+                _CurrentSpeed = !value && !(IsCrouched || IsProned) ? _WalkSpeed : _CurrentSpeed;
+            }
         }
         public bool IsCrouched
         {
             get { return _Animator.GetBool(_HashCrouched); }
-            set {
+            set
+            {
                 _Animator.SetBool(_HashCrouched, value);
                 if (value && IsProned)
                 {
@@ -81,6 +87,7 @@ namespace Player
         private Vector3 _Move;
         private Vector3 _CurrentDirection;
         private Camera _Camera;
+        private float _CurrentSpeed;
         private Rigidbody _Body;
         private Animator _Animator;
         private BodyController _BodyController;
@@ -111,6 +118,7 @@ namespace Player
             _GroundChecker.transform.SetParent(transform);
             _GroundChecker.transform.localPosition = _GroundCheckerPosition;
             _Gravity = GetComponent<AtlasGravity>();
+            _CurrentSpeed = _WalkSpeed;
         }
 
         private void Start()
@@ -122,10 +130,10 @@ namespace Player
         /// <summary>
         /// Transform the player input so the correct animation is played relative to the player rotation
         /// </summary>
-        private void TransformInputRelativelyToMouse()
+        private void TransformInputRelativelyToCamera()
         {
-            Vector3 mousePos = _Camera.ScreenToWorldPoint(Input.mousePosition);
-            Vector3 localPos = transform.InverseTransformPoint(mousePos).normalized;
+            Vector3 CameraPos = _Camera.transform.position;
+            Vector3 localPos = transform.TransformPoint(CameraPos).normalized;
             localPos.y = 0;
             // Get the angle we should rotate the input. This angle is equal to zero wen the player is facing top
             float refAngle = Vector3.SignedAngle(Vector3.back, localPos, Vector3.up);
@@ -135,20 +143,34 @@ namespace Player
             _Animator.SetFloat(_HashVerticalSpeed, newInput.z);
         }
 
+        private void Update()
+        {
+            if (cInput.GetKey(InputManager.CAMERA_LOCK))
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+        }
+
         private void FixedUpdate()
         {
-            //if (useEightDirectionMovement)
-            //    TransformInputRelativelyToMouse();
-            //else
-            //{
             _Animator.SetFloat(_HashHorizontalSpeed, _Input.x);
             _Animator.SetFloat(_HashVerticalSpeed, _Input.z);
-            //}
-            if (_Input.normalized != _CurrentDirection && CheckForIdle() == false)
+            _Move = new Vector3((cInput.GetKey(InputManager.CAMERA_LOCK) ? cInput.GetAxis(InputManager.AXIS_HORIZONTAL): 0), 0, cInput.GetAxis(InputManager.AXIS_VERTICAL));
+
+            if (cInput.GetKey(InputManager.CAMERA_LOCK) &&
+                (cInput.GetAxis(InputManager.AXIS_HORIZONTAL) > 0f || 
+                cInput.GetAxis(InputManager.AXIS_VERTICAL) > 0f))
             {
-                _CurrentDirection = _Input.normalized;
-                transform.LookAt(new Vector3(_CurrentDirection.x * 180, _CurrentDirection.y, _CurrentDirection.z * 180));
+                _Move *= 0.7f;
             }
+
+            _Move = transform.TransformDirection(_Move) * _CurrentSpeed;
             _BodyController.Move(_Move * Time.fixedDeltaTime);
         }
 
@@ -189,6 +211,11 @@ namespace Player
             _Input.x = cInput.GetAxisRaw(InputManager.AXIS_HORIZONTAL);
             _Input.y = 0;
             _Input.z = cInput.GetAxisRaw(InputManager.AXIS_VERTICAL);
+        }
+
+        public void SetSpeedScale(float Scale)
+        {
+            _CurrentSpeed = _WalkSpeed * Scale;
         }
 
         public void Walk()
@@ -322,15 +349,30 @@ namespace Player
         }
 
         /// <summary>
+        /// Rotate player with mouse
+        /// </summary>
+        private void CameraAim()
+        {
+            if (cInput.GetKey(InputManager.CAMERA_LOCK))
+            {
+                transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
+            }
+            else
+            {
+                transform.Rotate(0, cInput.GetAxis(InputManager.AXIS_HORIZONTAL) * _RotationSpeed * Time.deltaTime, 0);
+            }
+        }
+
+        /// <summary>
         /// Rotate with controller right joystick
         /// </summary>
         private void RJoystickAim()
         {
-            Vector3 direction = Vector3.right * cInput.GetAxisRaw(InputManager.R_AXIS_HORIZONTAL) + Vector3.forward * cInput.GetAxisRaw(InputManager.R_AXIS_VERTICAL);
-            if (direction.sqrMagnitude > 0f)
-            {
-                transform.rotation = Quaternion.LookRotation(direction);
-            }
+            //Vector3 direction = Vector3.right * cInput.GetAxisRaw(InputManager.R_AXIS_HORIZONTAL) + Vector3.forward * cInput.GetAxisRaw(InputManager.R_AXIS_VERTICAL);
+            //if (direction.sqrMagnitude > 0f)
+            //{
+            //    transform.rotation = Quaternion.LookRotation(direction);
+            //}
         }
 
         /// <summary>
@@ -339,7 +381,7 @@ namespace Player
         public void RotateAim()
         {
             if (!InputManager.IsJoystickConnected())
-                MouseAim();
+                CameraAim();
             else
                 RJoystickAim();
         }

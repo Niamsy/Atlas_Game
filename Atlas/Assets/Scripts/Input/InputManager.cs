@@ -13,8 +13,8 @@ namespace InputManagement
         public static string RIGHT = "Right";
         public static string LOOK_UP = "Lookup";
         public static string LOOK_DOWN = "Lookdown";
-        public static string LOOK_RIGHT = "Lookdown";
-        public static string LOOK_LEFT = "Lookdown";
+        public static string LOOK_RIGHT = "LookRight";
+        public static string LOOK_LEFT = "LoolLeft";
         public static string JUMP = "Jump";
         public static string SPRINT = "Sprint";
         public static string CROUCH = "Crouch";
@@ -27,13 +27,14 @@ namespace InputManagement
         public static string R_AXIS_VERTICAL = "RVertical";
         public static string CAMERA_LOCK = "CameraLock";
         public static string CAMERA_ZOOM_IN = "CameraZoomIn";
-        public static string CAMERA_ZOOM_OUT = "CameraZoomIn";
-        public static string AXIS_CAMERA_ZOOM = "CameraZoomIn";
+        public static string CAMERA_ZOOM_OUT = "CameraZoomOut";
+        public static string AXIS_CAMERA_ZOOM = "CameraZoom";
         #endregion
 
         private void Awake()
         {
             cInput.Init();
+            //cInput.Clear();
         }
 
         void Start()
