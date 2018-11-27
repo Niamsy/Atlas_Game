@@ -122,6 +122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 170076735}
   - component: {fileID: 170076734}
+  - component: {fileID: 170076736}
   m_Layer: 0
   m_Name: Sun
   m_TagString: Untagged
@@ -179,6 +180,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &170076736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 170076733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00a1386a3605a624a8c83e96a3f109a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Hours: 0
+  Minutes: 0
+  Seconds: 0
+  Day: 1
+  Month: 1
+  Year: 0
+  IsReal: 1
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,8 +304,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sun: {fileID: 170076734}
   secondsInFullDay: 120
-  currentTime: 0.8
+  currentTime: 0.001
   timeMultiplayer: 1
+  Calendar: {fileID: 170076736}
 --- !u!4 &626589994
 Transform:
   m_ObjectHideFlags: 0
