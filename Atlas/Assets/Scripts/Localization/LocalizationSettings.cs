@@ -10,7 +10,7 @@ namespace Localization
     [CreateAssetMenu(fileName = "LocalizationSettings", menuName = "Localization/Localization Settings", order = 0)]
     public sealed class LocalizationSettings : ScriptableObject
     {
-        private const string AssetName = "LocalizationSettings";
+        private const string AssetName = "Localization/LocalizationSettings";
         private static LocalizationSettings s_Instance = null;
 
         [SerializeField, Tooltip("Enabled languages for the application.")]
