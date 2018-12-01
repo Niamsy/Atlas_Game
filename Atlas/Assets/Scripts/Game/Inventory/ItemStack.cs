@@ -73,6 +73,17 @@ namespace Game.Inventory
             
             FireEvent();
         }
+     
+        public void SetFromGameData(GameData.ItemSaveData other)
+        {
+            if (other == null)
+                return;
+            
+            Content = (other.Quantity == 0) ? (null) : (ItemFactory.GetItemForId(other.ID));
+            Quantity = other.Quantity;
+            
+            FireEvent();
+        }
 
         public void ModifyQuantity(int newQuatity)
         {

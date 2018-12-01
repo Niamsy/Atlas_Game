@@ -7,20 +7,20 @@ namespace Menu.Inventory
     public class InventoryGridHUD : MonoBehaviour
     {
         [SerializeField] private GameObject _slotPrefab;
-        [SerializeField] private InventoryBehaviour _actualInventory;
+        [SerializeField] private BaseInventory _actualBaseInventory;
         private List<ItemStackHUD> _slots = new List<ItemStackHUD>();
 
-        private void Awake()
+        private void OnEnable()
         {
-            if (_actualInventory != null)
-                LoadThisInventory(_actualInventory);
+            if (_actualBaseInventory != null)
+                LoadThisInventory(_actualBaseInventory);
         }
 
-        public void LoadThisInventory(InventoryBehaviour newBehaviour)
+        public void LoadThisInventory(BaseInventory inventoryToLoad)
         {
             var newSize = 0;
-            if (newBehaviour != null)
-                newSize = newBehaviour.Size;
+            if (inventoryToLoad != null)
+                newSize = inventoryToLoad.Size;
             var oldSize = _slots.Count;
             var modif = newSize - oldSize;
 
@@ -31,7 +31,7 @@ namespace Menu.Inventory
                     itemStackHUD = CreateNewSlot();
                 else
                     itemStackHUD = _slots[x];
-                itemStackHUD.SetItemStack(newBehaviour[x]);
+                itemStackHUD.SetItemStack(inventoryToLoad[x]);
             }             
 
             if (modif < 0)

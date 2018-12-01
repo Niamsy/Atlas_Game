@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Game.Item
 {
-    [CreateAssetMenu(fileName = "Seed", menuName = "Item/Seed", order = 1)]
+    [Serializable,
+     CreateAssetMenu(fileName = "Seed", menuName = "Item/Seed", order = 1)]
     public class Seed : ItemAbstract
     {
         public override void Use()

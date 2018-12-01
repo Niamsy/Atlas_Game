@@ -4,12 +4,12 @@ using UnityEngine;
 namespace Game.Inventory
 {
     //[CreateAssetMenu(fileName = "Inventory", menuName = "Item/Inventory", order = 1)]
-    public class InventoryBehaviour : MonoBehaviour
+    public class BaseInventory : MonoBehaviour
     {
-        [SerializeField] private List<ItemStack>      _slots;
+        [SerializeField] protected List<ItemStack> Slots;
         public int Size
         {
-            get { return (_slots.Count); }
+            get { return (Slots.Count); }
         }
         
         #region Initialisation / Destruction
@@ -18,13 +18,17 @@ namespace Game.Inventory
         /// </summary>
         private void Awake()
         {
-            for (int x = 0; x < Size; x++)
-                _slots[x] = _slots[x]??(new ItemStack());
+            InitialiseInventory();
         }
-        /// <summary>
-        /// ""Destructor""
-        /// </summary>
-        private void OnDestroy() {}
+
+        protected void InitMapWithSize(int size)
+        {
+            Slots = new List<ItemStack>();
+            Slots.Capacity = size;
+            for (int x = 0; x < size; x++)
+                Slots.Add(new ItemStack());
+        }
+        protected virtual void InitialiseInventory() {}
         #endregion
 
         public ItemStack this[int index]
@@ -37,14 +41,14 @@ namespace Game.Inventory
         {
             if (index < 0 || index > Size)
                 return (null);
-            return (_slots[index]);
+            return (Slots[index]);
         }
         
         public void SetItem(int index, ItemStack itemStack)
         {
             if (index < 0 || index > Size || itemStack == null)
                 return;
-            _slots[index].CopyStack(itemStack);
+            Slots[index].CopyStack(itemStack);
         }
         
         public List<ItemStack> AddItemStacks(List<ItemStack> newItems)
