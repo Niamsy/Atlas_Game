@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Game.Item
 {
+	[Serializable]
 	public abstract class Tool : ItemAbstract
 	{
 		[SerializeField] private GameObject _prefabHolded;

@@ -1,22 +1,23 @@
 ﻿using UnityEngine;
 using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using Game;
+using Game.Inventory;
 
 public class GameControl : MonoBehaviour {
 
     public static GameControl control;
     public GameData gameData;
-
-    [Serializable]
-    public class GameData
-    {
-    }
+    
+    public bool LoadData = false;
+    public bool SaveData = false;
 
     void OnEnable()
     {
-        Load();
+        if (LoadData)
+            Load();
     }
 
     void Awake()
@@ -34,7 +35,10 @@ public class GameControl : MonoBehaviour {
 
     void OnDisable()
     {
-        Save();
+        Debug.Log("Save game data");
+
+        if (SaveData)
+            Save();
     }
 
     public void Save()

@@ -150,11 +150,229 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4814159356536574, guid: 0dd6fdae96f0cea4ea6edb823250df05, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0dd6fdae96f0cea4ea6edb823250df05, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &359068861
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 359068863}
+  - component: {fileID: 359068862}
+  m_Layer: 0
+  m_Name: '--- Game Control ---'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &359068862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 359068861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccf6c6bd3c6f7a147bf136963a3ef4f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameData:
+    Inventory:
+    - ID: 1
+      Quantity: 1
+    - ID: 1001
+      Quantity: 10
+    - ID: 1
+      Quantity: 1
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    - ID: 0
+      Quantity: 0
+    LeftHandItem:
+      ID: 1
+      Quantity: 1
+    RightHandItem:
+      ID: 0
+      Quantity: 0
+  LoadData: 1
+  SaveData: 1
+--- !u!4 &359068863
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 359068861}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &652778397
 GameObject:
   m_ObjectHideFlags: 0
@@ -334,7 +552,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 28.811, y: 0, z: 0}
 --- !u!1 &924446515
 GameObject:
@@ -361,14 +579,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 924446515}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f898a626645c0c41b0653d3bace249b, type: 3}
+  m_Script: {fileID: 11500000, guid: 6482e620217639b45b772ca35e23478c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _slots:
-  - _content: {fileID: 11400000, guid: 119462f9cc32a404c902c9bd94f835a3, type: 2}
-    _quantity: 1
-  - _content: {fileID: 11400000, guid: 1bbe0c572130e8c46b5ba5305f522551, type: 2}
-    _quantity: 10
+  Slots:
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
   - _content: {fileID: 0}
     _quantity: 0
   - _content: {fileID: 0}
@@ -713,7 +931,7 @@ Prefab:
     - target: {fileID: 224121992111243718, guid: 5d9e75d3beb08454ea1fddd983f9ba8a,
         type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 224121992111243718, guid: 5d9e75d3beb08454ea1fddd983f9ba8a,
         type: 2}
@@ -958,7 +1176,7 @@ Transform:
   - {fileID: 1497357173}
   - {fileID: 1851061331}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1710381251
 GameObject:
@@ -1190,7 +1408,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4581535888989074, guid: a59174c683642a1488be81ac3dc0d96a, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a59174c683642a1488be81ac3dc0d96a, type: 2}
@@ -1296,10 +1514,19 @@ Prefab:
         type: 2}
       propertyPath: _actualInventory
       value: 
-      objectReference: {fileID: 924446516}
+      objectReference: {fileID: 0}
     - target: {fileID: 1769645210317160, guid: b11db136aac8b4b4986c31120d4b2af7, type: 2}
       propertyPath: m_Name
       value: InventoryMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 114065425971329126, guid: b11db136aac8b4b4986c31120d4b2af7,
+        type: 2}
+      propertyPath: _actualBaseInventory
+      value: 
+      objectReference: {fileID: 924446516}
+    - target: {fileID: 1987001885080678, guid: b11db136aac8b4b4986c31120d4b2af7, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b11db136aac8b4b4986c31120d4b2af7, type: 2}

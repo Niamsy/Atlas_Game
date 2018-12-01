@@ -1,8 +1,10 @@
-﻿using Localization;
+﻿using System;
+using Localization;
 using UnityEngine;
 
 namespace Game.Item
 {
+	[Serializable]
 	public abstract class ItemAbstract : ScriptableObject
 	{
 		[SerializeField] private int _id;
