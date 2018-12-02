@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.29658642, g: 0.42386445, b: 0.5353324, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -342,15 +342,15 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1275008375054356, guid: 892f2fbbae158e647b9515a99dd9b494, type: 2}
-      propertyPath: m_Name
-      value: '--- Canvas ---'
-      objectReference: {fileID: 0}
     - target: {fileID: 223255040945248616, guid: 892f2fbbae158e647b9515a99dd9b494,
         type: 2}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1133566755}
+    - target: {fileID: 1275008375054356, guid: 892f2fbbae158e647b9515a99dd9b494, type: 2}
+      propertyPath: m_Name
+      value: '--- Canvas ---'
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 892f2fbbae158e647b9515a99dd9b494, type: 2}
   m_IsPrefabAsset: 0

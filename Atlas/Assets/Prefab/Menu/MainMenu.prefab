@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 222017638790535338}
   - component: {fileID: 114075822881868694}
   - component: {fileID: 114783966794811470}
+  - component: {fileID: 114256680178037346}
   m_Layer: 5
   m_Name: Connect
   m_TagString: Untagged
@@ -477,6 +478,7 @@ GameObject:
   - component: {fileID: 224621882816667392}
   - component: {fileID: 114340757540284786}
   - component: {fileID: 95915920738315656}
+  - component: {fileID: 114587478287767046}
   m_Layer: 5
   m_Name: Connection
   m_TagString: Untagged
@@ -1230,6 +1232,19 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 
+--- !u!114 &114256680178037346
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1096357061437806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb5251f16aaa61b4089ec94e5bebb386, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SceneToLoad: Atlas
+  SceneMode: 0
 --- !u!114 &114299521212260510
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1368,6 +1383,7 @@ MonoBehaviour:
   _password: {fileID: 114847901113133090}
   _connectionButton: {fileID: 114783966794811470}
   _registerButton: {fileID: 114833468253460000}
+  _loader: {fileID: 114587478287767046}
 --- !u!114 &114366966844037156
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1816,6 +1832,19 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Connection
+--- !u!114 &114587478287767046
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1537309569899714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb5251f16aaa61b4089ec94e5bebb386, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SceneToLoad: Atlas
+  SceneMode: 0
 --- !u!114 &114602910609337088
 MonoBehaviour:
   m_ObjectHideFlags: 1
