@@ -13,7 +13,7 @@ namespace Player
     {
         #region public variables
         [Header("Movement")]
-        public float _WalkSpeed = 5f;
+        public float _BaseSpeed = 5f;
         [Range(1f, 3f)]
         [Tooltip("Multiply the Movement speed by this scale to obtain the sprint speed")]
         public float _SprintScale = 1.3f;
@@ -52,8 +52,10 @@ namespace Player
             get { return _Animator.GetBool(_HashSprinting);  }
             set {
                 _Animator.SetBool(_HashSprinting, value);
-                _CurrentSpeed = value && !(IsCrouched || IsProned) ? _WalkSpeed * _SprintScale : _CurrentSpeed;
-                _CurrentSpeed = !value && !(IsCrouched || IsProned) ? _WalkSpeed : _CurrentSpeed;
+                _CurrentSpeed = value && !(IsCrouched || IsProned) ? _BaseSpeed * _SprintScale : _CurrentSpeed;
+                _CurrentSpeed = !value && !(IsCrouched || IsProned) ? _BaseSpeed : _CurrentSpeed;
+                _CurrentAcceleratedSpeed = value && !(IsCrouched || IsProned) ? _CurrentAcceleratedSpeed * _SprintScale : _CurrentAcceleratedSpeed;
+                _CurrentAcceleratedSpeed = !value && !(IsCrouched || IsProned) ? _CurrentAcceleratedSpeed * .5f : _CurrentAcceleratedSpeed;
             }
         }
         public bool IsCrouched
@@ -88,6 +90,7 @@ namespace Player
         private Vector3 _CurrentDirection;
         private Camera _Camera;
         private float _CurrentSpeed;
+        private float _CurrentAcceleratedSpeed;
         private Rigidbody _Body;
         private Animator _Animator;
         private BodyController _BodyController;
@@ -118,10 +121,12 @@ namespace Player
             _GroundChecker.transform.SetParent(transform);
             _GroundChecker.transform.localPosition = _GroundCheckerPosition;
             _Gravity = GetComponent<AtlasGravity>();
-            _CurrentSpeed = _WalkSpeed;
-        }
+            _CurrentSpeed = _BaseSpeed;
+            _CurrentAcceleratedSpeed = 0f;
 
-        private void Start()
+    }
+
+    private void Start()
         {
             StateMachine.State<PlayerController>.Initialise(_Animator, this);
         }
@@ -157,10 +162,38 @@ namespace Player
             }
         }
 
+        private void UpdateScaledInputs()
+        {
+            if (_Input.z > 0 && _CurrentAcceleratedSpeed < _CurrentSpeed)
+            {
+                _CurrentAcceleratedSpeed += _Acceleration * Time.fixedDeltaTime;
+            }
+            else if (_Input.z < 0 && -_CurrentAcceleratedSpeed > -_CurrentSpeed)
+            {
+                _CurrentAcceleratedSpeed += _Acceleration * Time.fixedDeltaTime;
+            }
+            else if (_Input.z == 0)
+            {
+                if (_CurrentAcceleratedSpeed > _Deceleration * Time.fixedDeltaTime)
+                {
+                    _CurrentAcceleratedSpeed -= _Deceleration * Time.fixedDeltaTime;
+                }
+                else if (_CurrentAcceleratedSpeed < -_Deceleration * Time.fixedDeltaTime)
+                {
+                    _CurrentAcceleratedSpeed += _Deceleration + Time.fixedDeltaTime;
+                }
+                else 
+                {
+                    _CurrentAcceleratedSpeed = 0;
+                }
+            }
+            _Animator.SetFloat(_HashVerticalSpeed, _CurrentAcceleratedSpeed / _CurrentSpeed);
+        }
+
         private void FixedUpdate()
         {
+            UpdateScaledInputs();
             _Animator.SetFloat(_HashHorizontalSpeed, _Input.x);
-            _Animator.SetFloat(_HashVerticalSpeed, _Input.z);
             _Move = new Vector3((cInput.GetKey(InputManager.CAMERA_LOCK) ? cInput.GetAxis(InputManager.AXIS_HORIZONTAL): 0), 0, cInput.GetAxis(InputManager.AXIS_VERTICAL));
 
             if (cInput.GetKey(InputManager.CAMERA_LOCK) &&
@@ -170,7 +203,7 @@ namespace Player
                 _Move *= 0.7f;
             }
 
-            _Move = transform.TransformDirection(_Move) * _CurrentSpeed;
+            _Move = transform.TransformDirection(_Move) * _CurrentAcceleratedSpeed;
             _BodyController.Move(_Move * Time.fixedDeltaTime);
         }
 
@@ -215,7 +248,8 @@ namespace Player
 
         public void SetSpeedScale(float Scale)
         {
-            _CurrentSpeed = _WalkSpeed * Scale;
+            _CurrentSpeed = _BaseSpeed * Scale;
+            _CurrentAcceleratedSpeed = _CurrentAcceleratedSpeed * 1f / Scale;
         }
 
         public void Walk()
@@ -236,8 +270,8 @@ namespace Player
         private void GroundedHorizontalMovement(bool useInput, float speedScale = 1f)
         {
             Vector3 input = _Input.normalized;
-            float desiredSpeedH = useInput ? input.x * _WalkSpeed * speedScale : 0f;
-            float desiredSpeedV = useInput ? input.z * _WalkSpeed * speedScale : 0f;
+            float desiredSpeedH = useInput ? input.x * _BaseSpeed * speedScale : 0f;
+            float desiredSpeedV = useInput ? input.z * _BaseSpeed * speedScale : 0f;
             float accelerationH = useInput && input.x != 0 ? _Acceleration : _Deceleration;
             float accelerationV = useInput && input.z != 0 ? _Acceleration : _Deceleration;
             _Move.x = Mathf.MoveTowards(_Move.x, desiredSpeedH, accelerationH * Time.deltaTime);

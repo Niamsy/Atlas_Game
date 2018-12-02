@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 114139355177291468}
   - component: {fileID: 114066179538890572}
   - component: {fileID: 114388899323152888}
+  - component: {fileID: 114171196635902840}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1636,6 +1637,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91b6d1ba0eef34a4cb803de6d9680268, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114171196635902840
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1041429536319508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40ec0ae0cc32ff94f8b3ea59667eb76b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SaveFrequency: 5
 --- !u!114 &114388899323152888
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1647,12 +1660,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa49cca8de1df946aa5356cfcada448, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _WalkSpeed: 5
+  _BaseSpeed: 5
   _SprintScale: 2
   _CrouchScale: 0.4
   _ProneScale: 0
-  _Acceleration: 100
-  _Deceleration: 100
+  _Acceleration: 10
+  _Deceleration: 20
+  _RotationSpeed: 150
   _JumpHeight: 0.5
   _GroundLayers:
     serializedVersion: 2
