@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Game.Inventory;
+using Player;
 
 namespace Game
 {
@@ -23,5 +24,6 @@ namespace Game
 		
 		public ItemSaveData LeftHandItem;
 		public ItemSaveData RightHandItem;
+        public PlayerSaver.PlayerData PlayerData;
 	}
 }
