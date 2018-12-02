@@ -11,6 +11,8 @@ namespace Menu.Main
         [SerializeField] private Button     _connectionButton;
         [SerializeField] private Button     _registerButton;
 
+        [SerializeField] private SceneLoader _loader;
+
         #region Initialisation/Destruction
         protected override void InitialiseWidget()
         {
@@ -52,13 +54,11 @@ namespace Menu.Main
         private void ConnectionFinished(bool success, string message)
         {
             UpdateButtonState();
-            
+
             if (success)
             {
                 Debug.Log("CONNECTED");
-                //
-                // ToDo: Go to next Scene
-                //
+                _loader.Load();
             }
             else
                 ErrorText.text = message;
