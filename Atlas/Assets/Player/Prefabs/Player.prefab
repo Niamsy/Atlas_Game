@@ -229,6 +229,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1266824893386620
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4069770388400094}
+  - component: {fileID: 114687969587722362}
+  - component: {fileID: 114326128495563644}
+  m_Layer: 0
+  m_Name: Inventory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1296983853685426
 GameObject:
   m_ObjectHideFlags: 1
@@ -845,6 +862,19 @@ Transform:
   m_Father: {fileID: 4854138918326406}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4069770388400094
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1266824893386620}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.06666667, y: 0.06666667, z: 0.06666667}
+  m_Children: []
+  m_Father: {fileID: 4093741956441054}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4083816508489294
 Transform:
   m_ObjectHideFlags: 1
@@ -914,6 +944,7 @@ Transform:
   - {fileID: 4522676317372222}
   - {fileID: 4227792800980762}
   - {fileID: 4569041989321488}
+  - {fileID: 4069770388400094}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1648,7 +1679,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40ec0ae0cc32ff94f8b3ea59667eb76b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SaveFrequency: 5
+  _SaveFrequency: 5
+--- !u!114 &114326128495563644
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1266824893386620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e0f8e4902c757d4b83bd414b09c000c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LeftHandItem:
+    _content: {fileID: 0}
+    _quantity: 0
+  RightHandItem:
+    _content: {fileID: 0}
+    _quantity: 0
 --- !u!114 &114388899323152888
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1673,6 +1721,186 @@ MonoBehaviour:
     m_Bits: 512
   _GroundDistance: 0.01
   _GroundCheckerPosition: {x: 0, y: 0, z: 0}
+--- !u!114 &114687969587722362
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1266824893386620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6482e620217639b45b772ca35e23478c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Slots:
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
+  - _content: {fileID: 0}
+    _quantity: 0
 --- !u!137 &137439086304417890
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
