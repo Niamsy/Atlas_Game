@@ -18,7 +18,7 @@ namespace Game.Inventory
         /// </summary>
         private void Awake()
         {
-            InitialiseInventory();
+            InitializeInventory();
         }
 
         protected void InitMapWithSize(int size)
@@ -28,7 +28,7 @@ namespace Game.Inventory
             for (int x = 0; x < size; x++)
                 Slots.Add(new ItemStack());
         }
-        protected virtual void InitialiseInventory() {}
+        protected virtual void InitializeInventory() {}
         #endregion
 
         public ItemStack this[int index]
