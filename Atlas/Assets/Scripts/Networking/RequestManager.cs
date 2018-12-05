@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Localization;
+using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -20,6 +21,7 @@ namespace Networking
 		public static string ConnectionPath { get { return ("user/authentication"); } }
 		public static string DisconnectionPath { get { return ("disconnection"); } }
 		public static string RegisterPath { get { return ("user/registration"); } }
+		public static string ResetPasswordPath { get { return ("user/resetPassword"); } }
 
 		#endregion
 
@@ -40,27 +42,33 @@ namespace Networking
 		[Serializable]
 		private sealed class BodyReturnBase
 		{
-			public string Message = "";
+			public string message = "";
 		}
 		
 		[Serializable]
 		private sealed class BodyReturnApiToken
 		{
-			public string Message = "";
+			public string message = "";
 			public string ApiToken = "";
 		}
 		
 		[Serializable]
-		private sealed class BodySendRegister
+		private sealed class BodySendData
 		{
 			public string Username = "";
-			public string Email = "";
+			public string email = "";
 			public string Password = "";
 		}
 		
 		
 		#endregion
-		
+
+		public static RequestManager Instance
+		{
+			get;
+			private set;
+		}
+
 		public delegate void RequestFinishedDelegate(bool sucess, string message);
 
 		[SerializeField] private RequestErrorDictionnary _errorDictionnary;
@@ -72,11 +80,17 @@ namespace Networking
 		private void Awake()
 		{
 //			errorCode.GetLocaleValue(LocalizationManager.Instance.CurrentLanguage);
-			
-			DontDestroyOnLoad(gameObject);
-			Application.wantsToQuit += StartQuitSequence;
+			if (Instance == null)
+			{
+				Instance = this;
+				DontDestroyOnLoad(gameObject);
+				Application.wantsToQuit += StartQuitSequence;
+			}
+			else
+				Destroy(this);
+
 		}
-		
+
 		/// <summary>
 		/// Clean the manager to be ready to receive the next request
 		/// </summary>
@@ -131,6 +145,8 @@ namespace Networking
 
 		private IEnumerator ConnectionCoroutine(string username, string password)
 		{
+			Debug.Log("Username " + username);
+			Debug.Log("Password " + password);
 			UnityWebRequest postRequest = UnityWebRequest.Post(ApiAdress + ConnectionPath, "");
 			postRequest.SetRequestHeader("username", username);
 			postRequest.SetRequestHeader("password", password);
@@ -145,7 +161,7 @@ namespace Networking
 				_apiToken = bodyReturn.ApiToken;
 			else
 			{
-				Debug.Log("ERROR HTTP: " + postRequest.responseCode + ":" + postRequest.error);
+				Debug.Log("ERROR HTTP: " + postRequest.responseCode + ":" + postRequest.error + " : " + bodyReturn.message);
 				switch (postRequest.responseCode)
 				{
 					case (500):
@@ -192,7 +208,7 @@ namespace Networking
 
 		private IEnumerator RegisterCoroutine(string username, string email, string password)
 		{
-			BodySendRegister body = new BodySendRegister {Username = username, Email = email, Password = password};
+			BodySendData body = new BodySendData {Username = username, email = email, Password = password};
 			string bodyJson = JsonUtility.ToJson(body) ?? "";
 			
 			UnityWebRequest postRequest = UnityWebRequest.Put(ApiAdress + RegisterPath, bodyJson);
@@ -296,6 +312,68 @@ namespace Networking
 		}
 
 		public event RequestFinishedDelegate OnDisconnectionFinished;
+
+		#endregion
+		
+		#region Reset password
+		
+		/// <summary>
+		/// Launch a disconnection request
+		/// </summary>
+		/// <param name="username">The username to use</param>
+		/// <param name="email">The email to use</param>
+		/// <param name="password">The password to use</param>
+		/// <returns>Return true if the networkManager could process the request and false if another request was pending</returns>
+		public bool ResetPassword(string email)
+		{
+			if (!CanReceiveANewRequest)
+				return (false);
+			
+			_actualOperation = StartCoroutine(ResetPasswordCoroutine(email));
+			
+			return (true);
+		}
+
+		private IEnumerator ResetPasswordCoroutine(string email)
+		{
+			BodySendData body = new BodySendData {email = email};
+			string bodyJson = JsonUtility.ToJson(body) ?? "";
+
+			UnityWebRequest postRequest = UnityWebRequest.Put(ApiAdress + ResetPasswordPath, bodyJson);
+			postRequest.method = UnityWebRequest.kHttpVerbPOST;
+			postRequest.SetRequestHeader("Content-Type", "application/json");
+			yield return postRequest.SendWebRequest();
+
+			bool success = (postRequest.responseCode == 200);
+
+			string errorMsg = "";
+			BodyReturnBase bodyReturn = JsonUtility.FromJson<BodyReturnBase>(postRequest.downloadHandler.text);
+			if (!success)
+			{
+				Debug.Log("ERROR HTTP: " + postRequest.responseCode + ":" + postRequest.error);
+				switch (postRequest.responseCode)
+				{
+					case (401):
+						errorMsg = _errorDictionnary.ResetPasswordNoAccount;
+						break;
+					case (500):
+						errorMsg = _errorDictionnary.ApiError;
+						break;
+					case (0):
+						errorMsg = _errorDictionnary.ApiUnreachable;
+						break;
+					default:
+						errorMsg = _errorDictionnary.UnknowError;
+						break;
+				}
+			}
+			
+			CleanForNextRequest();
+			if (OnResetRequestFinished != null)
+				OnResetRequestFinished(success, errorMsg);
+		}
+
+		public event RequestFinishedDelegate OnResetRequestFinished;
 
 		#endregion
 	}

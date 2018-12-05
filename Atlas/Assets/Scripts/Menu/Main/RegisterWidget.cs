@@ -38,10 +38,11 @@ namespace Menu.Main
         /// </summary>
         protected override void UpdateButtonState()
         {
-            _registerButton.interactable = (_username.text.Length > 0 && _emailAddress.text.Length > 0
+            base.UpdateButtonState();
+            _registerButton.interactable &= (_username.text.Length > 0 && _emailAddress.text.Length > 0
                                             && _password.text.Length > 0f && _password.text.Equals(_passwordConfirmation.text)
                                             && ActualRequestManager.CanReceiveANewRequest);
-            _returnButton.interactable = ActualRequestManager.CanReceiveANewRequest;
+            _returnButton.interactable &= ActualRequestManager.CanReceiveANewRequest;
         }
         #endregion
         
