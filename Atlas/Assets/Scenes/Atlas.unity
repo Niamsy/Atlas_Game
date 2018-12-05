@@ -113,6 +113,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &115761400 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114406938707385800, guid: 2750131bd3f330a4b8e6760b3ad81535,
+    type: 2}
+  m_PrefabInternal: {fileID: 211410473}
+  m_Script: {fileID: 11500000, guid: 00a1386a3605a624a8c83e96a3f109a7, type: 3}
 --- !u!1001 &211410473
 Prefab:
   m_ObjectHideFlags: 0
@@ -1179,6 +1185,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 95622680924108468, guid: e13aa2c6f7267b64288ae3cf3840f20e,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e13aa2c6f7267b64288ae3cf3840f20e, type: 2}
   m_IsPrefabAsset: 0
@@ -1236,6 +1247,11 @@ Prefab:
       propertyPath: secondsInFullDay
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 114638519614609606, guid: fee06cd36cafa954cbfde5795d7af0e5,
+        type: 2}
+      propertyPath: Calendar
+      value: 
+      objectReference: {fileID: 115761400}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fee06cd36cafa954cbfde5795d7af0e5, type: 2}
   m_IsPrefabAsset: 0
