@@ -86,7 +86,6 @@ namespace Player {
 
         // Update is called once per frame
         void Update() {
-            Debug.Log(Time.time - _LastSavedTime);
             if (Time.time - _LastSavedTime > _SaveFrequency)
             {
                 Save();

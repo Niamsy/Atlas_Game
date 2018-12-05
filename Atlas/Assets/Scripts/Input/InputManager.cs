@@ -21,6 +21,7 @@ namespace InputManagement
         public static string PRONE = "Prone";
         public static string USE = "Use";
         public static string INVENTORY = "Inventory";
+        public static string PICK = "Pick";
         public static string AXIS_HORIZONTAL = "Horizontal";
         public static string AXIS_VERTICAL = "Vertical";
         public static string R_AXIS_HORIZONTAL = "RHorizontal";
@@ -79,10 +80,12 @@ namespace InputManagement
             #region Actions
             cInput.SetKey(USE, Keys.E);
             cInput.SetKey(INVENTORY, Keys.I);
+            cInput.SetKey(PICK, Keys.E);
             if (shouldSetJoystick)
             {
                 cInput.SetKey(USE, Keys.Joystick1Button2);
                 cInput.SetKey(INVENTORY, Keys.Joystick1Button3);
+                //TODO MAN: Find a joystick key for pick
             }
             #endregion
 
