@@ -7,7 +7,7 @@ namespace Game.Inventory
 	{
 		private readonly int _inventorySize = 84;
 		
-		protected override void InitialiseInventory()
+		protected override void InitializeInventory()
 		{
 			if (!LoadData())
 				InitMapWithSize(_inventorySize);
