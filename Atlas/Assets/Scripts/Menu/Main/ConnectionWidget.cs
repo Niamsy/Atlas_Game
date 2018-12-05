@@ -37,8 +37,9 @@ namespace Menu.Main
         /// </summary>
         protected override void UpdateButtonState()
         {
-            _connectionButton.interactable = (_username.text.Length > 0 && _password.text.Length > 0f && ActualRequestManager.CanReceiveANewRequest);
-            _registerButton.interactable = ActualRequestManager.CanReceiveANewRequest;
+            base.UpdateButtonState();
+            _connectionButton.interactable &= (_username.text.Length > 0 && _password.text.Length > 0f && ActualRequestManager.CanReceiveANewRequest);
+            _registerButton.interactable &= ActualRequestManager.CanReceiveANewRequest;
         }
         #endregion
         

@@ -1,4 +1,5 @@
 ﻿using Networking;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +9,7 @@ namespace Menu
     public abstract class MainMenuWidget : MonoBehaviour
     {
         protected RequestManager        ActualRequestManager;
-
+        private Selectable[]          _childSelectables;
         [SerializeField] protected Text ErrorText;
 
         #region Displayed
@@ -27,7 +28,9 @@ namespace Menu
         private void Awake()
         {
             _animator = GetComponent<Animator>();
-            ActualRequestManager = FindObjectOfType<RequestManager>();
+            _childSelectables = GetComponentsInChildren<Selectable>();
+            
+            ActualRequestManager = RequestManager.Instance;
         
             if (ActualRequestManager == null)
                 Debug.LogError("ERROR: No RequestManager found.");
@@ -43,7 +46,10 @@ namespace Menu
         {
             _animator.SetBool(_hashShowed, display);
             _displayed = display;
-            ErrorText.text = "";
+            if (ErrorText != null)
+                ErrorText.text = "";
+
+            UpdateButtonState();
         }
         
         /// <summary>
@@ -58,6 +64,10 @@ namespace Menu
         /// <summary>
         /// Enable or not the button in case the field are filled correctly
         /// </summary>
-        protected abstract void UpdateButtonState();
+        protected virtual void UpdateButtonState()
+        {
+            foreach (var selectables in _childSelectables)
+                selectables.interactable = Displayed;
+        }
     }
 }
