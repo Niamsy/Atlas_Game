@@ -64,8 +64,14 @@ namespace Game.Inventory
 
             return (returnList);
         }
+        
         public ItemStack AddItemStack(ItemStack newItem)
         {
+            foreach (ItemStack itemStack in Slots)
+            {
+                if (itemStack.FuseStack(newItem) && newItem.IsEmpty)
+                    return (null);
+            }
             return (newItem);
         }
     }
