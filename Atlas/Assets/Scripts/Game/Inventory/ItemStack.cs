@@ -101,16 +101,6 @@ namespace Game.Inventory
         }
 
         #region Fuse/Swap
-        public void SwapOrFuseStack(ItemStack other)
-        {
-            if (other.IsEmpty)
-                return;
-
-            if (!IsEmpty && other.Content.Id != Content.Id)
-                FuseStack(other);
-            else
-                SwapStack(other);
-        }
 
         public void SwapStack(ItemStack other)
         {
@@ -121,13 +111,23 @@ namespace Game.Inventory
             SetItem(otherContent, otherQuantity);
         }
 
-        private void FuseStack(ItemStack other)
+
+        public bool CanBeFusedWith(ItemStack other)
         {
+            return (!IsEmpty && other.Content.Id != Content.Id);
+        }
+        
+        public bool FuseStack(ItemStack other)
+        {
+            if (!CanBeFusedWith(other))
+                return (false);
+            
             int fusedStackSize = other.Quantity + Quantity;
             int restStackItem = fusedStackSize % _content.MaxStackSize;
             
             SetItem(other.Content, fusedStackSize);
             other.ModifyQuantity(restStackItem);
+            return (true);
         }
         #endregion
         #endregion
