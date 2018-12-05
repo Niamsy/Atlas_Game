@@ -36,6 +36,10 @@ namespace Player {
             {
                 _Actor.Jump();
             }
+            if (_Actor.CheckForPickInput())
+            {
+                _Actor.Pick();
+            }
         }
     }
 }
