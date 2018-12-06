@@ -10,6 +10,11 @@ public class GameControl : MonoBehaviour {
 
     public static GameControl control;
     public GameData gameData;
+
+    public delegate void GameControlDelegate(GameControl gameControl);
+    
+    public static event GameControlDelegate BeforeSaving;
+    public static event GameControlDelegate UponLoading;
     
     public bool LoadData = false;
     public bool SaveData = false;
@@ -35,14 +40,15 @@ public class GameControl : MonoBehaviour {
 
     void OnDisable()
     {
-        Debug.Log("Save game data");
-
         if (SaveData)
             Save();
     }
 
     public void Save()
     {
+        if (BeforeSaving != null)
+            BeforeSaving(this);
+        
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/gameInfo.dat");
 
@@ -60,5 +66,8 @@ public class GameControl : MonoBehaviour {
             gameData = (GameData)bf.Deserialize(file);
             file.Close();
         }
+        
+        if (UponLoading != null)
+            UponLoading(this);
     }
 }

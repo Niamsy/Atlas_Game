@@ -7,16 +7,23 @@ namespace Game.Item
 	[Serializable]
 	public abstract class ItemAbstract : ScriptableObject
 	{
+		[Header("Base item variables")]
 		[SerializeField] private int _id;
 		public int Id
 		{
 			get { return (_id); }
 		}
 
-		[SerializeField] private GameObject _prefabMesh;
+		[SerializeField] private GameObject _prefabDroppedGO;
 		public GameObject PrefabMesh
 		{
-			get { return (_prefabMesh); }
+			get { return (_prefabDroppedGO); }
+		}
+		
+		[SerializeField] private GameObject _prefabHoldedGO;
+		public GameObject PrefabHoldedGO
+		{
+			get { return (_prefabHoldedGO); }
 		}
 
 		public virtual int MaxStackSize

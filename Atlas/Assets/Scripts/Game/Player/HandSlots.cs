@@ -6,36 +6,35 @@ namespace Game.Player
     [RequireComponent(typeof(BaseInventory))]
     public class HandSlots : MonoBehaviour
     {
-        /// <summary>
-        /// TEMPORARY WILL BE DELETED LATER
-        /// </summary>
-        private BaseInventory _baseInventory;
-        
-        public ItemStack LeftHandItem;
-        public ItemStack RightHandItem;
+        [SerializeField] private ItemStack _leftHandItem;
+        private GameObject _leftHandGO;
+        private Transform _leftHandTransform;
+        public ItemStack LeftHandItem { get { return (_leftHandItem); } }
+
+        [SerializeField] private ItemStack _rightHandItem;
+        private GameObject _rightHandGO;
+        private Transform _rightHandTransform;
+        public ItemStack RightHandItem { get { return (_rightHandItem); } }
 
         private void Awake()
         {
-            _baseInventory = GetComponent<BaseInventory>();
+            _leftHandItem.OnItemStackUpdated += OnLeftHandUpdate;
+            _rightHandItem.OnItemStackUpdated += OnRightHandUpdate;
 
+            _leftHandTransform = transform.Find("LeftHand");
+            _rightHandTransform = transform.Find("RightHand");
+            
             LoadData();
-        }
 
-        private void OnDisable()
-        {
-            SaveData();
+            GameControl.BeforeSaving += SaveData;
         }
 
         #region Load/Saving Methods
-        private void SaveData()
+        private void SaveData(GameControl gameControl)
         {
-            if (GameControl.control == null)
-                return;
-            
-            GameData gameData = GameControl.control.gameData;
-            gameData.LeftHandItem.SetObject(LeftHandItem);
-            gameData.RightHandItem.SetObject(RightHandItem);
-            
+            GameData gameData = gameControl.gameData;
+            gameData.LeftHandItem.SetObject(_leftHandItem);
+            gameData.RightHandItem.SetObject(_rightHandItem);
         }
 
         private void LoadData()
@@ -49,14 +48,6 @@ namespace Game.Player
         }
         #endregion
         
-        public void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.A))
-                Equip(true, _baseInventory[0]);
-            if (Input.GetKeyDown(KeyCode.E))
-                Equip(false, _baseInventory[1]);
-        }
-        
         public void Equip(bool left, ItemStack newItem)
         {
             if (left)
@@ -65,6 +56,27 @@ namespace Game.Player
                 RightHandItem.SwapStack(newItem);
             
             // ToDo: Display model in game in the hand
+        }
+
+        private void OnLeftHandUpdate(ItemStack updated)
+        {
+            UpdateHand(ref _leftHandGO, updated, _leftHandTransform);
+        }
+
+        private void OnRightHandUpdate(ItemStack updated)
+        {
+            UpdateHand(ref _rightHandGO, updated, _rightHandTransform);
+        }
+
+        private void UpdateHand(ref GameObject itemGo, ItemStack item, Transform position)
+        {
+            if (itemGo != null)
+                Destroy(itemGo);
+
+            if (item.IsEmpty)
+                return;
+
+            itemGo = Instantiate(item.Content.PrefabHoldedGO, position);
         }
     }
 }
