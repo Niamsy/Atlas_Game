@@ -12,6 +12,7 @@ namespace Game.Item
             // ToDo: Plant Seed
         }
 
+        [Header("Seed variables")]
         [SerializeField] private GameObject _prefabPlanted;
         public GameObject PrefabPlanted
         {

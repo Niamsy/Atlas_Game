@@ -6,38 +6,30 @@ namespace Game.Inventory
 	public class PlayerInventory : BaseInventory
 	{
 		private readonly int _inventorySize = 84;
-		
+
 		protected override void InitializeInventory()
 		{
 			if (!LoadData())
 				InitMapWithSize(_inventorySize);
+
+			GameControl.BeforeSaving += SaveData;
 		}
 
-		private void OnDisable()
+		#region Load/Saving Methods
+		private void SaveData(GameControl gameControl)
 		{
-			SaveData();
-		}
-		
-		#region Save/Load
-
-		private bool SaveData()
-		{
-			if (GameControl.control == null)
-				return (false);
-			
-			GameData gameData = GameControl.control.gameData;
+			GameData gameData = gameControl.gameData;
 			for (int x = 0; x < Size; x++)
 				gameData.Inventory[x].SetObject(Slots[x]);
-			return (true);
 		}
 
 		private bool LoadData()
 		{
 			if (GameControl.control == null)
 				return (false);
-			
+
 			GameData gameData = GameControl.control.gameData;
-			
+
 			InitMapWithSize(gameData.Inventory.Count);
 
 			for (int x = 0; x < Size; x++)
@@ -45,10 +37,12 @@ namespace Game.Inventory
 
 				var savedItem = gameData.Inventory[x];
 
-				Slots[x].SetFromGameData(savedItem);				
+				Slots[x].SetFromGameData(savedItem);
 			}
+
 			return (true);
 		}
+
 		#endregion
 	}
 }
