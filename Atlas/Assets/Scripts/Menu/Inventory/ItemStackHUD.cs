@@ -15,7 +15,6 @@ namespace Menu.Inventory
 
         private RectTransform _rectTransform;
         protected ItemStack ActualStack;
-        private Button _button;
         private Canvas _rootCanvas;
         
         private bool ShouldBeDisplayed
@@ -26,7 +25,6 @@ namespace Menu.Inventory
                 
         private void Awake()
         {
-            _button = GetComponent<Button>();
             _rectTransform = GetComponent<RectTransform>();
             _rootCanvas = GetComponentInParent<Canvas>();
         }

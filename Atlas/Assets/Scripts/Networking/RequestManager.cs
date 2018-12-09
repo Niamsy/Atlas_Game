@@ -11,6 +11,8 @@ namespace Networking
 	public class RequestManager : MonoBehaviour
 	{
 		#region Variables
+		
+		
 		#region API Adress & Request adress
 		#if ATLAS_RELEASE
 				public static string ApiAdress { get { return ("http://163.5.84.246:3000/"); } }
@@ -70,27 +72,36 @@ namespace Networking
 		}
 
 		public delegate void RequestFinishedDelegate(bool sucess, string message);
-
-		[SerializeField] private RequestErrorDictionnary _errorDictionnary;
+		private RequestErrorDictionnary _errorDictionnary;
 		#endregion
 
+		#region Initialisation
+		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+		private static void RuntimeInit()
+		{
+			if (FindObjectOfType<RequestManager>() != null)
+				return;
+
+			var go = new GameObject { name = "RequestManager" };
+			go.AddComponent<RequestManager>();
+		}
 		/// <summary>
 		/// Initialize the manager
 		/// </summary>
 		private void Awake()
 		{
-//			errorCode.GetLocaleValue(LocalizationManager.Instance.CurrentLanguage);
 			if (Instance == null)
 			{
 				Instance = this;
 				DontDestroyOnLoad(gameObject);
 				Application.wantsToQuit += StartQuitSequence;
+				_errorDictionnary = Resources.Load<RequestErrorDictionnary>("Localization/RequestManager/RequestErrorDictionnary");
 			}
 			else
 				Destroy(this);
-
 		}
-
+		#endregion
+		
 		/// <summary>
 		/// Clean the manager to be ready to receive the next request
 		/// </summary>
@@ -347,7 +358,6 @@ namespace Networking
 			bool success = (postRequest.responseCode == 200);
 
 			string errorMsg = "";
-			BodyReturnBase bodyReturn = JsonUtility.FromJson<BodyReturnBase>(postRequest.downloadHandler.text);
 			if (!success)
 			{
 				Debug.Log("ERROR HTTP: " + postRequest.responseCode + ":" + postRequest.error);
