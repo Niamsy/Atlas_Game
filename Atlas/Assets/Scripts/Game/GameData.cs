@@ -5,7 +5,7 @@ using Player;
 
 namespace Game
 {
-	[Serializable]
+    [Serializable]
 	public class GameData
 	{
 		[Serializable]
@@ -25,5 +25,6 @@ namespace Game
 		public ItemSaveData LeftHandItem;
 		public ItemSaveData RightHandItem;
         public PlayerSaver.PlayerData PlayerData;
+        public DayNightSaver.CalendarData CalendarData;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
 	}
 }
