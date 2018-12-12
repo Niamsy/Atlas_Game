@@ -4,6 +4,7 @@ using UnityEngine;
 using InputManagement;
 using Atlas_Physics;
 using Game.Inventory;
+using Audio;
 
 namespace Player
 {
@@ -367,6 +368,7 @@ namespace Player
             RaycastHit hit;
 
             Debug.Log("Pick pick");
+            AudioManager.Instance.Play(AudioStore.AUDIO.ASSETS_SCRIPTS_AUDIO_GARBAGE_SHELLEXPLOSION);
 
             if (Physics.Raycast(ray, out hit, _PickRange))
             {
