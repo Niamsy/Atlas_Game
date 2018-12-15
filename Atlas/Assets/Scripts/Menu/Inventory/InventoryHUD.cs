@@ -1,15 +1,19 @@
 ﻿using Game;
 using Menu;
 using UnityEngine;
+using InputManagement;
 
 public class InventoryHUD : MenuWidget
 {
 	protected override void InitialiseWidget() {}
 	protected override void UpdateButtonState() {}
 
+    [Header("Inventory Keys")]
+    public InputKey _Inventory;
+
 	private void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.I))
+		if (_Inventory.GetDown())
 			Show(!Displayed);
 	}
 
