@@ -10,6 +10,12 @@ namespace Player
         [Tooltip("The target that the camera will be controlling")]
         public GameObject _Target;
 
+        [Header("Camera Inputs")]
+        public InputAxis _Horizontal;
+        public InputAxis _Vertical;
+        public InputAxis _CameraZoom;
+        public InputKey _CameraLock;
+
         [Header("Range")]
         public float _MaximumRange = 20f;
         public float _MinimunRange = 0.6f;
@@ -77,10 +83,10 @@ namespace Player
             }
 
             // Right Mouse button being held
-            if (cInput.GetKey(InputManager.CAMERA_LOCK))
+            if (_CameraLock.Get())
             {
                 if (_AllowHorizontalMouseInput) {
-                    _Angles.x += cInput.GetAxis(InputManager.R_AXIS_HORIZONTAL) * _HorizontalSpeed * 0.02f;
+                    _Angles.x += _Horizontal.Get() * _HorizontalSpeed * 0.02f;
                 }
                 else
                 {
@@ -89,7 +95,7 @@ namespace Player
 
                 if (_AllowVerticalMouseInput)
                 {
-                    _Angles.y -= cInput.GetAxis(InputManager.R_AXIS_VERTICAL) * _VerticalSpeed * 0.02f;
+                    _Angles.y -= _Vertical.Get() * _VerticalSpeed * 0.02f;
                 }
 
                 // Interrupt the automatic rotation
@@ -98,7 +104,7 @@ namespace Player
                     _RotateBehind = false;
                 }
             }
-            else if (cInput.GetAxis(InputManager.R_AXIS_HORIZONTAL) != 0 || cInput.GetAxis(InputManager.R_AXIS_VERTICAL) != 0 || _RotateBehind)
+            else if (_Horizontal.Get() != 0 || _Vertical.Get() != 0 || _RotateBehind)
             {
                 ResetCameraPosition();
             }
@@ -109,7 +115,7 @@ namespace Player
             Quaternion rotation = Quaternion.Euler(_Angles.y, _Angles.x, 0f);
 
             // Desired Range
-            _DesiredRange -= cInput.GetAxisRaw(InputManager.AXIS_CAMERA_ZOOM) * Time.deltaTime * _ZoomSpeed * Mathf.Abs(_DesiredRange);
+            _DesiredRange -= _CameraZoom.Get() * Time.deltaTime * _ZoomSpeed * Mathf.Abs(_DesiredRange);
             _DesiredRange = Mathf.Clamp(_DesiredRange, _MinimunRange, _MaximumRange);
             _CorrectedRange = _DesiredRange;
 

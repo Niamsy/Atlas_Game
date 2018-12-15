@@ -14,6 +14,18 @@ namespace Player
     public class PlayerController : MonoBehaviour
     {
         #region public variables
+        [Header("Axis")]
+        public InputAxis _VerticalAxis;
+        public InputAxis _HorizontalAxis;
+
+        [Header("Keys")]
+        public InputKey _Sprint;
+        public InputKey _Jump;
+        public InputKey _Crouch;
+        public InputKey _Prone;
+        public InputKey _CameraLock;
+        public InputKey _Pick;
+
         [Header("Movement")]
         public float _BaseSpeed = 5f;
         [Range(1f, 3f)]
@@ -44,15 +56,17 @@ namespace Player
         public bool IsGrounded
         {
             get { return _Animator.GetBool(_HashGrounded); }
-            set {
+            set
+            {
                 _Animator.SetBool(_HashGrounded, value);
                 _Gravity.SetScale(value ? 1f : 10f);
             }
         }
         public bool IsSprinting
         {
-            get { return _Animator.GetBool(_HashSprinting);  }
-            set {
+            get { return _Animator.GetBool(_HashSprinting); }
+            set
+            {
                 _Animator.SetBool(_HashSprinting, value);
                 _CurrentSpeed = value && !(IsCrouched || IsProned) ? _BaseSpeed * _SprintScale : _CurrentSpeed;
                 _CurrentSpeed = !value && !(IsCrouched || IsProned) ? _BaseSpeed : _CurrentSpeed;
@@ -127,9 +141,9 @@ namespace Player
             _CurrentSpeed = _BaseSpeed;
             _CurrentAcceleratedSpeed = 0f;
             _PickRange = 10f;
-    }
+        }
 
-    private void Start()
+        private void Start()
         {
             StateMachine.State<PlayerController>.Initialise(_Animator, this);
         }
@@ -153,7 +167,7 @@ namespace Player
 
         private void Update()
         {
-            if (cInput.GetKey(InputManager.CAMERA_LOCK))
+            if (_CameraLock.Get())
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
@@ -185,7 +199,7 @@ namespace Player
                 {
                     _CurrentAcceleratedSpeed += _Deceleration + Time.fixedDeltaTime;
                 }
-                else 
+                else
                 {
                     _CurrentAcceleratedSpeed = 0;
                 }
@@ -197,11 +211,11 @@ namespace Player
         {
             UpdateScaledInputs();
             _Animator.SetFloat(_HashHorizontalSpeed, _Input.x);
-            _Move = new Vector3((cInput.GetKey(InputManager.CAMERA_LOCK) ? cInput.GetAxis(InputManager.AXIS_HORIZONTAL): 0), 0, cInput.GetAxis(InputManager.AXIS_VERTICAL));
+            _Move = new Vector3((_CameraLock.Get() ? _HorizontalAxis.Get() : 0), 0, _VerticalAxis.Get());
 
-            if (cInput.GetKey(InputManager.CAMERA_LOCK) &&
-                (cInput.GetAxis(InputManager.AXIS_HORIZONTAL) > 0f || 
-                cInput.GetAxis(InputManager.AXIS_VERTICAL) > 0f))
+            if (_CameraLock.Get() &&
+                (_HorizontalAxis.Get() > 0f ||
+                _VerticalAxis.Get() > 0f))
             {
                 _Move *= 0.7f;
             }
@@ -244,15 +258,15 @@ namespace Player
         /// </summary>
         public void GetInput()
         {
-            _Input.x = cInput.GetAxisRaw(InputManager.AXIS_HORIZONTAL);
+            _Input.x = _HorizontalAxis.Get();
             _Input.y = 0;
-            _Input.z = cInput.GetAxisRaw(InputManager.AXIS_VERTICAL);
+            _Input.z = _VerticalAxis.Get();
         }
 
         public void SetSpeedScale(float Scale)
         {
             _CurrentSpeed = _BaseSpeed * Scale;
-            _CurrentAcceleratedSpeed = _CurrentAcceleratedSpeed * 1f / Scale;
+            _CurrentAcceleratedSpeed = _CurrentAcceleratedSpeed * Scale;
         }
 
         public void Walk()
@@ -317,8 +331,8 @@ namespace Player
         /// </summary>
         /// <returns></returns>
         public bool CheckForJumpInput()
-        { 
-            return IsGrounded && cInput.GetButton(InputManager.JUMP);
+        {
+            return IsGrounded && _Jump.GetDown();
         }
 
         /// <summary>
@@ -336,11 +350,11 @@ namespace Player
         /// <returns></returns>
         public bool CheckForSprintInput()
         {
-            if (cInput.GetKeyDown(InputManager.SPRINT))
+            if (_Sprint.GetDown())
             {
                 IsSprinting = true;
             }
-            if (cInput.GetKeyUp(InputManager.SPRINT))
+            if (_Sprint.GetUp())
             {
                 IsSprinting = false;
             }
@@ -349,17 +363,17 @@ namespace Player
 
         public bool CheckForCrouchedInput()
         {
-            return IsGrounded && cInput.GetKeyDown(InputManager.CROUCH);
+            return IsGrounded && _Crouch.GetDown();
         }
 
         public bool CheckForPronedInput()
         {
-            return IsGrounded && cInput.GetKeyDown(InputManager.PRONE);
+            return IsGrounded && _Prone.GetDown();
         }
 
         public bool CheckForPickInput()
         {
-            return IsGrounded && cInput.GetKeyDown(InputManager.PICK);
+            return IsGrounded && _Pick.GetDown();
         }
 
         public void Pick()
@@ -412,13 +426,13 @@ namespace Player
         /// </summary>
         private void CameraAim()
         {
-            if (cInput.GetKey(InputManager.CAMERA_LOCK))
+            if (_CameraLock.Get())
             {
                 transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
             }
             else
             {
-                transform.Rotate(0, cInput.GetAxis(InputManager.AXIS_HORIZONTAL) * _RotationSpeed * Time.deltaTime, 0);
+                transform.Rotate(0, _HorizontalAxis.Get() * _RotationSpeed * Time.deltaTime, 0);
             }
         }
 
@@ -439,10 +453,8 @@ namespace Player
         /// </summary>
         public void RotateAim()
         {
-            if (!InputManager.IsJoystickConnected())
-                CameraAim();
-            else
-                RJoystickAim();
+            CameraAim();
+            RJoystickAim();
         }
 
         /// <summary>
