@@ -1,5 +1,4 @@
 using UnityEngine;
-using Events;
 
 namespace InputManagement
 {
@@ -7,13 +6,8 @@ namespace InputManagement
     {
         public abstract void Set();
         public abstract T Get();
-        protected bool _isSet = false;
 
-        public bool isSet { get { return _isSet; } private set { } }
-
-        private static bool init = false;
-
-        public GameEvent _Event;
+        public AtlasEvents.Event _Event;
 
         public void OnEnable()
         {
@@ -27,10 +21,7 @@ namespace InputManagement
 
         public void OnEventRaised()
         {
-            if (!isSet)
-            {
-                Set();
-            }
+            Set();
         }
     }
 }

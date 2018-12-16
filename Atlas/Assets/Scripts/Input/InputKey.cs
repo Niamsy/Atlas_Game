@@ -16,7 +16,6 @@ namespace InputManagement
             InputString key = User.Value != "" ? User : Default;
 
             cInput.SetKey(name, key.Value, Button.Value);
-            _isSet = true;
         }
 
         override public bool Get() {
