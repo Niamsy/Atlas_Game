@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
-using Events;
 
 namespace InputManagement
 {
     public class InputManager : MonoBehaviour
     {
-        public GameEvent _AxisSetEvent;
-        public GameEvent _KeySetEvent;
+        public AtlasEvents.Event _AxisSetEvent;
+        public AtlasEvents.Event _KeySetEvent;
 
         public bool _ShouldResetSettings = false;
 

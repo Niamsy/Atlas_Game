@@ -1,9 +1,9 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace Events
+namespace AtlasEvents
 {
-    [CustomEditor(typeof(GameEvent))]
+    [CustomEditor(typeof(AtlasEvents.Event))]
     public class EventEditor : Editor
     {
         public override void OnInspectorGUI()
@@ -12,7 +12,7 @@ namespace Events
 
             GUI.enabled = Application.isPlaying;
 
-            GameEvent e = target as GameEvent;
+            AtlasEvents.Event e = target as AtlasEvents.Event;
             if (GUILayout.Button("Raise"))
                 e.Raise();
         }

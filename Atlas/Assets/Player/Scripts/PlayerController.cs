@@ -4,7 +4,7 @@ using UnityEngine;
 using InputManagement;
 using Atlas_Physics;
 using Game.Inventory;
-using Audio;
+using AtlasAudio;
 
 namespace Player
 {
@@ -13,19 +13,12 @@ namespace Player
     [RequireComponent(typeof(AtlasGravity))]
     public class PlayerController : MonoBehaviour
     {
-        #region public variables
-        [Header("Axis")]
-        public InputAxis _VerticalAxis;
-        public InputAxis _HorizontalAxis;
-
-        [Header("Keys")]
-        public InputKey _Sprint;
-        public InputKey _Jump;
-        public InputKey _Crouch;
-        public InputKey _Prone;
-        public InputKey _CameraLock;
-        public InputKey _Pick;
-
+        #region Public variables
+        #region Inputs
+        public PlayerInputs _Inputs;
+        #endregion
+        #region Movement configuration
+        // TODO: Update using float variables maybe
         [Header("Movement")]
         public float _BaseSpeed = 5f;
         [Range(1f, 3f)]
@@ -41,11 +34,14 @@ namespace Player
         [Header("Jump")]
         [Range(0f, 4f)]
         public float _JumpHeight = 0f;
+        #endregion
+        #region Ground checking
         [Tooltip("Every object with those layers will be used as a ground for various movement computations")]
         public LayerMask _GroundLayers;
         [Tooltip("Define at which distance from the ground the player is consisered \"Grounded\"")]
         public float _GroundDistance = 2f;
         public Vector3 _GroundCheckerPosition;
+        #endregion
         #endregion
 
         #region accessible properties
@@ -167,7 +163,7 @@ namespace Player
 
         private void Update()
         {
-            if (_CameraLock.Get())
+            if (_Inputs.CameraLock.Get())
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
@@ -211,11 +207,11 @@ namespace Player
         {
             UpdateScaledInputs();
             _Animator.SetFloat(_HashHorizontalSpeed, _Input.x);
-            _Move = new Vector3((_CameraLock.Get() ? _HorizontalAxis.Get() : 0), 0, _VerticalAxis.Get());
+            _Move = new Vector3((_Inputs.CameraLock.Get() ? _Inputs.HorizontalAxis.Get() : 0), 0, _Inputs.VerticalAxis.Get());
 
-            if (_CameraLock.Get() &&
-                (_HorizontalAxis.Get() > 0f ||
-                _VerticalAxis.Get() > 0f))
+            if (_Inputs.CameraLock.Get() &&
+                (_Inputs.HorizontalAxis.Get() > 0f ||
+                _Inputs.VerticalAxis.Get() > 0f))
             {
                 _Move *= 0.7f;
             }
@@ -258,9 +254,9 @@ namespace Player
         /// </summary>
         public void GetInput()
         {
-            _Input.x = _HorizontalAxis.Get();
+            _Input.x = _Inputs.HorizontalAxis.Get();
             _Input.y = 0;
-            _Input.z = _VerticalAxis.Get();
+            _Input.z = _Inputs.VerticalAxis.Get();
         }
 
         public void SetSpeedScale(float Scale)
@@ -332,7 +328,7 @@ namespace Player
         /// <returns></returns>
         public bool CheckForJumpInput()
         {
-            return IsGrounded && _Jump.GetDown();
+            return IsGrounded && _Inputs.Jump.GetDown();
         }
 
         /// <summary>
@@ -350,11 +346,11 @@ namespace Player
         /// <returns></returns>
         public bool CheckForSprintInput()
         {
-            if (_Sprint.GetDown())
+            if (_Inputs.Sprint.GetDown())
             {
                 IsSprinting = true;
             }
-            if (_Sprint.GetUp())
+            if (_Inputs.Sprint.GetUp())
             {
                 IsSprinting = false;
             }
@@ -363,17 +359,17 @@ namespace Player
 
         public bool CheckForCrouchedInput()
         {
-            return IsGrounded && _Crouch.GetDown();
+            return IsGrounded && _Inputs.Crouch.GetDown();
         }
 
         public bool CheckForPronedInput()
         {
-            return IsGrounded && _Prone.GetDown();
+            return IsGrounded && _Inputs.Prone.GetDown();
         }
 
         public bool CheckForPickInput()
         {
-            return IsGrounded && _Pick.GetDown();
+            return IsGrounded && _Inputs.Pick.GetDown();
         }
 
         public void Pick()
@@ -382,7 +378,6 @@ namespace Player
             RaycastHit hit;
 
             Debug.Log("Pick pick");
-            AudioManager.Instance.Play(AudioStore.AUDIO.ASSETS_SCRIPTS_AUDIO_GARBAGE_SHELLEXPLOSION);
 
             if (Physics.Raycast(ray, out hit, _PickRange))
             {
@@ -426,13 +421,13 @@ namespace Player
         /// </summary>
         private void CameraAim()
         {
-            if (_CameraLock.Get())
+            if (_Inputs.CameraLock.Get())
             {
                 transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
             }
             else
             {
-                transform.Rotate(0, _HorizontalAxis.Get() * _RotationSpeed * Time.deltaTime, 0);
+                transform.Rotate(0, _Inputs.HorizontalAxis.Get() * _RotationSpeed * Time.deltaTime, 0);
             }
         }
 
