@@ -22,9 +22,9 @@ namespace Player
         public float _DefaultRange = 10f;
 
         [Header("Speed")]
-        [Range(0.6f, 20f)]
+        [Range(0.6f, 200f)]
         public float _HorizontalSpeed = 200f;
-        [Range(0.6f, 20f)]
+        [Range(0.6f, 200f)]
         public float _VerticalSpeed = 200f;
         public int _ZoomSpeed = 40;
         [Tooltip("Automatic rotation speed")]

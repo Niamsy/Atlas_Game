@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-[CreateAssetMenu(menuName = "Audio Events/Audio Pipeline Configuration")]
+//[CreateAssetMenu(menuName = "Audio Events/Audio Pipeline Configuration")]
 public class AudioPipelineSettings : ScriptableObject
 {
     public string ClassName;
