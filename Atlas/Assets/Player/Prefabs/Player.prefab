@@ -289,6 +289,8 @@ MonoBehaviour:
     m_Bits: 512
   _GroundDistance: 0.01
   _GroundCheckerPosition: {x: 0, y: 0, z: 0}
+  _CurrentAcceleratedSpeed: {fileID: 11400000, guid: 043e83c7b2cec854f8f87ef45edf1ccf,
+    type: 2}
 --- !u!114 &114171196635902840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -555,6 +557,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4093355113645750}
+  - component: {fileID: 9094664995810547927}
   m_Layer: 0
   m_Name: mixamorig:Head
   m_TagString: Untagged
@@ -577,6 +580,14 @@ Transform:
   m_Father: {fileID: 4274105368336612}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &9094664995810547927
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1166549137908586}
+  m_Enabled: 1
 --- !u!1 &1209008820232592
 GameObject:
   m_ObjectHideFlags: 0
