@@ -13,6 +13,11 @@ public class ConfigFileManager
         configFile.Open(configFilePath);
     }
 
+    ~ConfigFileManager()
+    {
+        configFile.Close();
+    }
+
     public string getConfigValue(string key, string section = "Default")
     {
         string ret = configFile.ReadValue(section, key, notFoundReference);
