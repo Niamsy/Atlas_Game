@@ -4,7 +4,7 @@ using Random = UnityEngine.Random;
 
 namespace AtlasAudio
 {
-    [CreateAssetMenu(menuName = "Audio Events/Composite")]
+    [CreateAssetMenu(menuName = "Audio/Composite")]
     public class CompositeAudio : Audio
     { 
         [Serializable]
@@ -18,6 +18,7 @@ namespace AtlasAudio
 
         public override void Play(AudioSource source)
         {
+            // TODO Stop Audio if already Playing or not
             float totalWeight = 0;
             foreach (CompositeEntry e in Entries)
                 totalWeight += e.Weight;
