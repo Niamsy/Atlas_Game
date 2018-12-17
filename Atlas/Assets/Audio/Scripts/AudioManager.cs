@@ -22,6 +22,16 @@ namespace AtlasAudio {
 
         public void Play(Audio audio, AudioSource audioSource)
         {
+            if (audioSource)
+            {
+                if (audioSource.isPlaying)
+                    audioSource.Stop();
+            }
+            else
+            {
+                if (_AudioSource.isPlaying)
+                    _AudioSource.Stop();
+            }
             audio.Play(audioSource == null ? _AudioSource : audioSource);
         }
     }

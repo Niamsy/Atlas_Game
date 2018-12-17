@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AtlasAudio
 {
-    [CreateAssetMenu(menuName = "Audio Events/Toggle")]
+    [CreateAssetMenu(menuName = "Audio/Toggle")]
     public class ToggleAudio : Audio
     {
         public AudioClip On;
@@ -18,6 +18,8 @@ namespace AtlasAudio
 
         public override void Play(AudioSource source)
         {
+            // TODO Stop Audio if already Playing or not
+
             source.clip = State ? Off : On;
             State = !State;
             source.volume = Random.Range(Volume.minimum, Volume.maximum);
