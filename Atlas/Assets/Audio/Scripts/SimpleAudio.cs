@@ -3,9 +3,10 @@ using Random = UnityEngine.Random;
 
 namespace AtlasAudio
 {
-    [CreateAssetMenu(menuName = "Audio Events/Simple")]
+    [CreateAssetMenu(menuName = "Audio/Simple")]
     public class SimpleAudio : Audio
     {
+
         public AudioClip[] Clips;
 
         public RangedFloat Volume;
@@ -15,6 +16,8 @@ namespace AtlasAudio
 
         public override void Play(AudioSource source)
         {
+            // TODO Stop Audio if already Playing or not
+
             if (Clips.Length == 0) return;
 
             source.clip = Clips[Random.Range(0, Clips.Length)];
