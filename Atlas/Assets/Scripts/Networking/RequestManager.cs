@@ -10,14 +10,14 @@ namespace Networking
 {
 	public class RequestManager : MonoBehaviour
 	{
-		#region Variables
-		
-		
-		#region API Adress & Request adress
-		#if ATLAS_RELEASE
-				public static string ApiAdress { get { return ("http://163.5.84.246:3000/"); } }
-		#else
-				public static string ApiAdress { get { return ("http://163.5.84.246:3001/"); } }
+        #region Variables
+
+
+        #region API Adress & Request adress
+#if ATLAS_RELEASE
+        public static string ApiAdress { get { return (AtlasFileSystem.Instance.getConfigValue("APIRelAddr")); } }
+#else
+        public static string ApiAdress { get { return AtlasFileSystem.Instance.getConfigValue("APIDevAddr"); } }
 		#endif
 
 		public static string ConnectionPath { get { return ("user/authentication"); } }
