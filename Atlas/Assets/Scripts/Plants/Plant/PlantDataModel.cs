@@ -53,7 +53,6 @@ namespace Plants
         {
             get { return _name; }
         }
-        //  get { return float.Parse(_scientific_name, CultureInfo.InvariantCulture.NumberFormat);
 
         public string Scientifique_Name
         {
