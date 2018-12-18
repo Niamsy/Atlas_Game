@@ -5,39 +5,35 @@ using Variables;
 
 namespace Plants
 {
-    public class Consumer<T> : MonoBehaviour
+    public class Consumer<T> where T : MonoBehaviour, IResource<T>
     {
-        public Resources            type;
-        protected FloatVariable     rate;
+        public  IResource<T>        type;
+        [SerializeField]
+        protected int               _rate;
         protected int               quantity;
-        protected Stock<T>          stock;
+        protected Stock<T>          _stock;
         protected int               starvationTimeLimit;
         protected bool              starverd;
         protected FloatReference    range;
 
         public void Consume()
         {
-
+            _stock.Remove(_rate);
         }
 
         public void Load(Producer<T> producer, int quantity)
         {
-            stock.Put(producer.Unload(quantity));
+            _stock.Put(producer.Unload(quantity));
         }
 
-        public Stock<T> GetStock()
+        public Stock<T> Stock
         {
-            return stock;
+            get { return _stock; } 
         }
 
-        public Resources GetResourceType()
+        public int Rate
         {
-            return type;
-        }
-
-        public void SetRate(FloatVariable n_rate)
-        {
-            rate = n_rate;
+            get { return _rate; }
         }
     }
 }
