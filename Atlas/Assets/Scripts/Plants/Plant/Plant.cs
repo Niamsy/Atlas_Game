@@ -9,6 +9,7 @@ namespace Plants
     {
         public PlantDataModel   data;
         public Soil             soil;
+        public List<Stage>      stages;
 
         public override void Use()
         {
