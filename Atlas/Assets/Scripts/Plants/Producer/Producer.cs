@@ -5,7 +5,7 @@ using Variables;
 
 namespace Plants
 {
-    public class Producer<T> where T : MonoBehaviour, IResource<T>
+    public class Producer<T>  : MonoBehaviour where T : IResource<T>
     {
         public IResource<T>         type;
         [SerializeField]
