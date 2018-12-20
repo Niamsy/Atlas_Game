@@ -10,12 +10,14 @@ namespace Menu.Inventory
     {
         #region Variables
 
-        [SerializeField] private Image _sprite;
-        [SerializeField] private Text _quantity;
+        [SerializeField] private Image     _sprite;
+        [SerializeField] private Text      _quantity;
 
-        private RectTransform _rectTransform;
-        protected ItemStack ActualStack;
-        private Canvas _rootCanvas;
+        protected Button        Button;
+        protected ItemStack     ActualStack;
+
+        private RectTransform    _rectTransform;
+        private Canvas          _rootCanvas;
         
         private bool ShouldBeDisplayed
         {
@@ -23,10 +25,11 @@ namespace Menu.Inventory
         }
         #endregion
                 
-        private void Awake()
+        protected virtual void Awake()
         {
             _rectTransform = GetComponent<RectTransform>();
             _rootCanvas = GetComponentInParent<Canvas>();
+            Button = GetComponent<Button>();
         }
         
         public void SetItemStack(ItemStack newStack)
@@ -47,8 +50,9 @@ namespace Menu.Inventory
             }
         }
 
+        #region Drag&Drop
         private Vector3 _originalPosition;
-        private static ItemStackHUD ActualDrag;
+        private static ItemStackHUD _actualDrag;
         
         public void OnBeginDrag(PointerEventData eventData)
         {
@@ -59,7 +63,7 @@ namespace Menu.Inventory
             position.z = -1;
             _rectTransform.position = position;
             
-            ActualDrag = this;
+            _actualDrag = this;
         }
 
         public void OnDrag(PointerEventData eventData)
@@ -75,13 +79,14 @@ namespace Menu.Inventory
             position.z = 0;
             _rectTransform.position = position;
             
-            ActualDrag = null;
+            _actualDrag = null;
         }
         
         public void OnDrop(PointerEventData eventData)
         {
             if (RectTransformUtility.RectangleContainsScreenPoint(_rectTransform, Input.mousePosition))
-                ActualDrag.ActualStack.SwapStack(ActualStack);
+                _actualDrag.ActualStack.SwapStack(ActualStack);
         }
+        #endregion
     }
 }
