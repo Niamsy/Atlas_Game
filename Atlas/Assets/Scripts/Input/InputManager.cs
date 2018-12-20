@@ -1,29 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace InputManagement
 {
     public class InputManager : MonoBehaviour
     {
-        public InputAxis[] _Axises;
-        public InputKey[] _Keys;
+        public AtlasEvents.Event _AxisSetEvent;
+        public AtlasEvents.Event _KeySetEvent;
+
+        public bool _ShouldResetSettings = false;
 
         private void Awake()
         {
             cInput.Init();
-            ////cInput.Clear();
-
-            foreach (InputKey key in _Keys)
-            {
-                key.Set();
-            }
-
-            foreach (InputAxis axis in _Axises)
-            {
-                axis.Set();
-            }
+            if (_ShouldResetSettings)
+                cInput.Clear();
         }
 
+        private void Start()
+        {
+            _KeySetEvent.Raise();
+            _AxisSetEvent.Raise();   
+        }
     }
 }

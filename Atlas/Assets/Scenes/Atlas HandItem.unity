@@ -1335,6 +1335,24 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -16
       objectReference: {fileID: 0}
+    - target: {fileID: 6962041016043185785, guid: 5d9e75d3beb08454ea1fddd983f9ba8a,
+        type: 3}
+      propertyPath: _Inventory
+      value: 
+      objectReference: {fileID: 11400000, guid: f973d4b4d168a9a4c98a4de51af1a9ff,
+        type: 2}
+    - target: {fileID: 6962041016043185785, guid: 5d9e75d3beb08454ea1fddd983f9ba8a,
+        type: 3}
+      propertyPath: OnToggleGUIEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 574abd74039cd5f40950fb2cf09f4dcb,
+        type: 2}
+    - target: {fileID: 6962041016043185785, guid: 5d9e75d3beb08454ea1fddd983f9ba8a,
+        type: 3}
+      propertyPath: OnToggleGUIAudio
+      value: 
+      objectReference: {fileID: 11400000, guid: 54927784f6ef72e4aa4bac66586cc3eb,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d9e75d3beb08454ea1fddd983f9ba8a, type: 3}
 --- !u!114 &1064023963 stripped
@@ -1497,7 +1515,7 @@ MonoBehaviour:
   _Horizontal: {fileID: 11400000, guid: 0b13b2c078be1ab4fa4e39206a666246, type: 2}
   _Vertical: {fileID: 11400000, guid: f6e059da61032454c9e22849dd7b0a7a, type: 2}
   _CameraZoom: {fileID: 11400000, guid: f5f19933b20abd2499eca90f184e2950, type: 2}
-  _CameraLock: {fileID: 11400000, guid: c5d6d4ea027a51243a645a1de3ba7dac, type: 2}
+  _CameraLock: {fileID: 11400000, guid: 25066ee09a2fb1e4a9610ec522f958ac, type: 2}
   _MaximumRange: 20
   _MinimunRange: 0.6
   _DefaultRange: 10
@@ -1522,7 +1540,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1305090003}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &1305090006
 Camera:
   m_ObjectHideFlags: 0
