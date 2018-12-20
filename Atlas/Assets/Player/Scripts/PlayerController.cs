@@ -4,7 +4,8 @@ using UnityEngine;
 using InputManagement;
 using Atlas_Physics;
 using Game.Inventory;
-using Audio;
+using AtlasAudio;
+using Variables;
 
 namespace Player
 {
@@ -13,19 +14,12 @@ namespace Player
     [RequireComponent(typeof(AtlasGravity))]
     public class PlayerController : MonoBehaviour
     {
-        #region public variables
-        [Header("Axis")]
-        public InputAxis _VerticalAxis;
-        public InputAxis _HorizontalAxis;
-
-        [Header("Keys")]
-        public InputKey _Sprint;
-        public InputKey _Jump;
-        public InputKey _Crouch;
-        public InputKey _Prone;
-        public InputKey _CameraLock;
-        public InputKey _Pick;
-
+        #region Public variables
+        #region Inputs
+        public PlayerInputs _Inputs;
+        #endregion
+        #region Movement configuration
+        // TODO: Update using float variables maybe
         [Header("Movement")]
         public float _BaseSpeed = 5f;
         [Range(1f, 3f)]
@@ -41,11 +35,20 @@ namespace Player
         [Header("Jump")]
         [Range(0f, 4f)]
         public float _JumpHeight = 0f;
+        #endregion
+        #region Ground checking
         [Tooltip("Every object with those layers will be used as a ground for various movement computations")]
         public LayerMask _GroundLayers;
         [Tooltip("Define at which distance from the ground the player is consisered \"Grounded\"")]
         public float _GroundDistance = 2f;
         public Vector3 _GroundCheckerPosition;
+        #endregion
+        #endregion
+
+        #region FloatVariables
+        [Header("Shared States")]
+        [SerializeField]
+        private FloatVariable _CurrentAcceleratedSpeed;
         #endregion
 
         #region accessible properties
@@ -70,8 +73,8 @@ namespace Player
                 _Animator.SetBool(_HashSprinting, value);
                 _CurrentSpeed = value && !(IsCrouched || IsProned) ? _BaseSpeed * _SprintScale : _CurrentSpeed;
                 _CurrentSpeed = !value && !(IsCrouched || IsProned) ? _BaseSpeed : _CurrentSpeed;
-                _CurrentAcceleratedSpeed = value && !(IsCrouched || IsProned) ? _CurrentAcceleratedSpeed * _SprintScale : _CurrentAcceleratedSpeed;
-                _CurrentAcceleratedSpeed = !value && !(IsCrouched || IsProned) ? _CurrentAcceleratedSpeed * .5f : _CurrentAcceleratedSpeed;
+                _CurrentAcceleratedSpeed.Value = value && !(IsCrouched || IsProned) ? _CurrentAcceleratedSpeed.Value * _SprintScale : _CurrentAcceleratedSpeed.Value;
+                _CurrentAcceleratedSpeed.Value = !value && !(IsCrouched || IsProned) ? _CurrentAcceleratedSpeed.Value * .5f : _CurrentAcceleratedSpeed.Value;
             }
         }
         public bool IsCrouched
@@ -106,7 +109,6 @@ namespace Player
         private Vector3 _CurrentDirection;
         private Camera _Camera;
         private float _CurrentSpeed;
-        private float _CurrentAcceleratedSpeed;
         private Rigidbody _Body;
         private Animator _Animator;
         private BodyController _BodyController;
@@ -114,6 +116,7 @@ namespace Player
         private AtlasGravity _Gravity;
         private float _PickRange;
         #endregion
+
 
         #region animator variables hashes
         private readonly int _HashIdle = Animator.StringToHash("Idle");
@@ -139,7 +142,7 @@ namespace Player
             _GroundChecker.transform.localPosition = _GroundCheckerPosition;
             _Gravity = GetComponent<AtlasGravity>();
             _CurrentSpeed = _BaseSpeed;
-            _CurrentAcceleratedSpeed = 0f;
+            _CurrentAcceleratedSpeed.Value = 0f;
             _PickRange = 10f;
         }
 
@@ -167,7 +170,7 @@ namespace Player
 
         private void Update()
         {
-            if (_CameraLock.Get())
+            if (_Inputs.CameraLock.Get())
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
@@ -181,46 +184,46 @@ namespace Player
 
         private void UpdateScaledInputs()
         {
-            if (_Input.z > 0 && _CurrentAcceleratedSpeed < _CurrentSpeed)
+            if (_Input.z > 0 && _CurrentAcceleratedSpeed.Value < _CurrentSpeed)
             {
-                _CurrentAcceleratedSpeed += _Acceleration * Time.fixedDeltaTime;
+                _CurrentAcceleratedSpeed.Value += _Acceleration * Time.fixedDeltaTime;
             }
-            else if (_Input.z < 0 && -_CurrentAcceleratedSpeed > -_CurrentSpeed)
+            else if (_Input.z < 0 && -_CurrentAcceleratedSpeed.Value > -_CurrentSpeed)
             {
-                _CurrentAcceleratedSpeed += _Acceleration * Time.fixedDeltaTime;
+                _CurrentAcceleratedSpeed.Value += _Acceleration * Time.fixedDeltaTime;
             }
             else if (_Input.z == 0)
             {
-                if (_CurrentAcceleratedSpeed > _Deceleration * Time.fixedDeltaTime)
+                if (_CurrentAcceleratedSpeed.Value > _Deceleration * Time.fixedDeltaTime)
                 {
-                    _CurrentAcceleratedSpeed -= _Deceleration * Time.fixedDeltaTime;
+                    _CurrentAcceleratedSpeed.Value -= _Deceleration * Time.fixedDeltaTime;
                 }
-                else if (_CurrentAcceleratedSpeed < -_Deceleration * Time.fixedDeltaTime)
+                else if (_CurrentAcceleratedSpeed.Value < -_Deceleration * Time.fixedDeltaTime)
                 {
-                    _CurrentAcceleratedSpeed += _Deceleration + Time.fixedDeltaTime;
+                    _CurrentAcceleratedSpeed.Value += _Deceleration + Time.fixedDeltaTime;
                 }
                 else
                 {
-                    _CurrentAcceleratedSpeed = 0;
+                    _CurrentAcceleratedSpeed.Value = 0f;
                 }
             }
-            _Animator.SetFloat(_HashVerticalSpeed, _CurrentAcceleratedSpeed / _CurrentSpeed);
+            _Animator.SetFloat(_HashVerticalSpeed, _CurrentAcceleratedSpeed.Value / _CurrentSpeed);
         }
 
         private void FixedUpdate()
         {
             UpdateScaledInputs();
             _Animator.SetFloat(_HashHorizontalSpeed, _Input.x);
-            _Move = new Vector3((_CameraLock.Get() ? _HorizontalAxis.Get() : 0), 0, _VerticalAxis.Get());
+            _Move = new Vector3((_Inputs.CameraLock.Get() ? _Inputs.HorizontalAxis.Get() : 0), 0, _Inputs.VerticalAxis.Get());
 
-            if (_CameraLock.Get() &&
-                (_HorizontalAxis.Get() > 0f ||
-                _VerticalAxis.Get() > 0f))
+            if (_Inputs.CameraLock.Get() &&
+                (_Inputs.HorizontalAxis.Get() > 0f ||
+                _Inputs.VerticalAxis.Get() > 0f))
             {
                 _Move *= 0.7f;
             }
 
-            _Move = transform.TransformDirection(_Move) * _CurrentAcceleratedSpeed;
+            _Move = transform.TransformDirection(_Move) * _CurrentAcceleratedSpeed.Value;
             _BodyController.Move(_Move * Time.fixedDeltaTime);
         }
 
@@ -258,15 +261,15 @@ namespace Player
         /// </summary>
         public void GetInput()
         {
-            _Input.x = _HorizontalAxis.Get();
+            _Input.x = _Inputs.HorizontalAxis.Get();
             _Input.y = 0;
-            _Input.z = _VerticalAxis.Get();
+            _Input.z = _Inputs.VerticalAxis.Get();
         }
 
         public void SetSpeedScale(float Scale)
         {
             _CurrentSpeed = _BaseSpeed * Scale;
-            _CurrentAcceleratedSpeed = _CurrentAcceleratedSpeed * Scale;
+            _CurrentAcceleratedSpeed.Value = _CurrentAcceleratedSpeed.Value * Scale;
         }
 
         public void Walk()
@@ -332,7 +335,7 @@ namespace Player
         /// <returns></returns>
         public bool CheckForJumpInput()
         {
-            return IsGrounded && _Jump.GetDown();
+            return IsGrounded && _Inputs.Jump.GetDown();
         }
 
         /// <summary>
@@ -350,11 +353,11 @@ namespace Player
         /// <returns></returns>
         public bool CheckForSprintInput()
         {
-            if (_Sprint.GetDown())
+            if (_Inputs.Sprint.GetDown())
             {
                 IsSprinting = true;
             }
-            if (_Sprint.GetUp())
+            if (_Inputs.Sprint.GetUp())
             {
                 IsSprinting = false;
             }
@@ -363,17 +366,17 @@ namespace Player
 
         public bool CheckForCrouchedInput()
         {
-            return IsGrounded && _Crouch.GetDown();
+            return IsGrounded && _Inputs.Crouch.GetDown();
         }
 
         public bool CheckForPronedInput()
         {
-            return IsGrounded && _Prone.GetDown();
+            return IsGrounded && _Inputs.Prone.GetDown();
         }
 
         public bool CheckForPickInput()
         {
-            return IsGrounded && _Pick.GetDown();
+            return IsGrounded && _Inputs.Pick.GetDown();
         }
 
         public void Pick()
@@ -382,7 +385,6 @@ namespace Player
             RaycastHit hit;
 
             Debug.Log("Pick pick");
-            AudioManager.Instance.Play(AudioStore.AUDIO.ASSETS_SCRIPTS_AUDIO_GARBAGE_SHELLEXPLOSION);
 
             if (Physics.Raycast(ray, out hit, _PickRange))
             {
@@ -426,13 +428,13 @@ namespace Player
         /// </summary>
         private void CameraAim()
         {
-            if (_CameraLock.Get())
+            if (_Inputs.CameraLock.Get())
             {
                 transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
             }
             else
             {
-                transform.Rotate(0, _HorizontalAxis.Get() * _RotationSpeed * Time.deltaTime, 0);
+                transform.Rotate(0, _Inputs.HorizontalAxis.Get() * _RotationSpeed * Time.deltaTime, 0);
             }
         }
 

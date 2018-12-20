@@ -8,11 +8,16 @@ public class LocalizationUpdate : MonoBehaviour
 
     public void Switch()
     {
+        AtlasFileSystem fs = AtlasFileSystem.Instance;
+        SystemLanguage newLanguage;
         if (IsFrench)
-            Localization.LocalizationManager.Instance.CurrentLanguage = SystemLanguage.English;
+            newLanguage = SystemLanguage.English;
         else
-            Localization.LocalizationManager.Instance.CurrentLanguage = SystemLanguage.French;
+            newLanguage = SystemLanguage.French;
 
+        Localization.LocalizationManager.Instance.CurrentLanguage = newLanguage;
+        fs.setConfigFileValue("Default", "Lang", ((int)newLanguage).ToString());
+        fs.saveConfig();
         IsFrench = !IsFrench;
     }
 }
