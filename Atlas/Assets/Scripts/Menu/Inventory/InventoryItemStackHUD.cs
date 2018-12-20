@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Menu.Inventory.ItemDescription;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace Menu.Inventory

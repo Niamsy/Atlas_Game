@@ -18,5 +18,12 @@ namespace Game.Item
         {
             get { return (_prefabPlanted); }
         }
+        
+        [SerializeField] private PlantStatistics _plantStatistics;
+        public PlantStatistics PlantStatistics
+        {
+            get { return (_plantStatistics); }
+        }
+        
     }
 }
