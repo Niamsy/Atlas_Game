@@ -5,10 +5,15 @@ namespace Menu.Inventory
 {
     public class HandSlotHUD : MonoBehaviour
     {
-        [SerializeField] private HandSlots _handSlot;
+        private HandSlots _handSlot;
         [SerializeField] private ItemStackHUD _leftHandHUD;
         [SerializeField] private ItemStackHUD _rightHandHUD;
 
+        private void Awake()
+        {
+            _handSlot = FindObjectOfType<HandSlots>();
+        }
+        
         private void Start()
         {
             _leftHandHUD.SetItemStack(_handSlot.LeftHandItem);
