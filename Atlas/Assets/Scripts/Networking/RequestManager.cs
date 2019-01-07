@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using Localization;
-using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -12,12 +9,12 @@ namespace Networking
 	{
         #region Variables
 
-
         #region API Adress & Request adress
-#if ATLAS_RELEASE
-        public static string ApiAdress { get { return (AtlasFileSystem.Instance.getConfigValue("APIRelAddr")); } }
-#else
-        public static string ApiAdress { get { return AtlasFileSystem.Instance.getConfigValue("APIDevAddr"); } }
+		
+		#if UNITY_EDITOR
+			public static string ApiAdress { get { return (AtlasFileSystem.Instance.getConfigValue("APIDevAddr")); } }
+		#else
+			public static string ApiAdress { get { return (AtlasFileSystem.Instance.getConfigValue("APIRelAddr")); } }
 		#endif
 
 		public static string ConnectionPath { get { return ("user/authentication"); } }
