@@ -20,20 +20,33 @@ namespace Player
         }
 
         [Tooltip("List of sounds to play")]
-        public Sound[] steps;
+        public Sound[] sounds;
 
         [Tooltip("If a sound has no audiosource, it'll be played globally by an AudioPlayer")]
         public AudioEvent Event;
 
         public void OnSoundEvent(string tag)
         {
-            if (steps.Length > 0)
+            if (sounds.Length > 0)
             {
-                Sound sound = Array.Find(steps, (Sound s) => s.tag == tag);
+                Sound sound = Array.Find(sounds, (Sound s) => s.tag == tag);
 
                 if (sound.tag != "")
                 {
                     PlaySound(sound);
+                }
+            }
+        }
+
+        public void OnSoundStop(string tag)
+        {
+            if (sounds.Length > 0)
+            {
+                Sound sound = Array.Find(sounds, (Sound s) => s.tag == tag);
+
+                if (sound.tag != "")
+                {
+                    StopSound(sound);
                 }
             }
         }
@@ -47,6 +60,14 @@ namespace Player
             else
             {
                 sound.audio.Play(sound.source);
+            }
+        }
+
+        private void StopSound(Sound sound)
+        {
+            if (sound.source)
+            {
+                sound.audio.Stop(sound.source);
             }
         }
     }
