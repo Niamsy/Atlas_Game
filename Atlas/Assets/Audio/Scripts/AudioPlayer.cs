@@ -2,7 +2,7 @@
 using AtlasEvents;
 
 namespace AtlasAudio {
-    public class AudioManager : Singleton<AudioManager>
+    public class AudioPlayer : Singleton<AudioPlayer>
     {
         private AudioSource _AudioSource;
 
@@ -33,6 +33,21 @@ namespace AtlasAudio {
                     _AudioSource.Stop();
             }
             audio.Play(audioSource == null ? _AudioSource : audioSource);
+        }
+
+        public void Stop(Audio audio, AudioSource audioSource)
+        {
+            if (audioSource)
+            {
+                audioSource.Stop();
+            }
+            else
+            {
+                if (_AudioSource.isPlaying)
+                {
+                    _AudioSource.Stop();
+                }
+            }
         }
     }
 }
