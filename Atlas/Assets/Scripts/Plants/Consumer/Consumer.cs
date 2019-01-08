@@ -28,12 +28,42 @@ namespace Plants
 
         public Stock<T> Stock
         {
-            get { return _stock; } 
+            get { return _stock; }
         }
 
         public int Rate
         {
             get { return _rate; }
+
+            set { _rate = value; }
+        }
+
+        public bool Starverd
+        {
+            get { return starverd; }
+
+            set { starverd = value; }
+        }
+
+        public int StarvationTimeLimit
+        {
+            get { return starvationTimeLimit; }
+
+            set { starvationTimeLimit = value; }
+        }
+
+        public int Quantity
+        {
+            get { return _stock.GetCount(); }
+
+            set { quantity = value; }
+        }
+
+        public FloatReference Range
+        {
+            get { return range; }
+
+            set { range = value; }
         }
     }
 }

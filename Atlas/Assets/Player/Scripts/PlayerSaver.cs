@@ -14,7 +14,6 @@ namespace Player {
             public float x;
             public float y;
             public float z;
-
         }
 
         [Serializable]
@@ -29,9 +28,9 @@ namespace Player {
         [Serializable]
         public struct PlayerData
         {
-            public SaveVector position;
-            public SaveQuaternion rotation;
-            public SaveVector scale;
+            public SaveVector       position;
+            public SaveQuaternion   rotation;
+            public SaveVector       scale;
 
             public void SetFromTransform(Transform transform)
             {
@@ -69,7 +68,6 @@ namespace Player {
         }
 
         private float _LastSavedTime = 0f;
-
 
         public void Save()
         {

@@ -38,11 +38,29 @@ namespace Plants
         public int Rate
         {
             get { return _rate; }
+
+            set { _rate = value; }
+        }
+
+        public bool Starverd
+        {
+            get { return starverd; }
+
+            set { starverd = value; }
         }
 
         public int Quantity
         {
             get { return _stock.GetCount(); }
+
+            set { _quantity = value; }
+        }
+
+        public FloatReference Range
+        {
+            get { return range; }
+
+            set { range = value; }
         }
     }
 }
