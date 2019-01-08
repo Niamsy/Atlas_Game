@@ -20,9 +20,19 @@ namespace Plants
             return limit;
         }
 
+        public List<T> GetObjects()
+        {
+            return objects;
+        }
+
         public void SetLimit(int n_limit)
         {
             limit = n_limit;
+        }
+
+        public void SetCount(int lcount)
+        {
+            count = lcount;
         }
 
         public List<T> Put(List<T> quantity)

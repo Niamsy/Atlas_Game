@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Game.Inventory;
 using Player;
+using Plants;
 
 namespace Game
 {
@@ -25,6 +26,7 @@ namespace Game
 		public ItemSaveData LeftHandItem;
 		public ItemSaveData RightHandItem;
         public PlayerSaver.PlayerData PlayerData;
-        public DayNightSaver.CalendarData CalendarData;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+        public DayNightSaver.CalendarData CalendarData;
+        public PlantSaver.PlantData PlantData;
 	}
 }
