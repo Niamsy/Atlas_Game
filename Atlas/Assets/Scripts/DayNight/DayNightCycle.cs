@@ -13,6 +13,9 @@ public class DayNightCycle : MonoBehaviour {
     [HideInInspector]
     public float timeMultiplayer = 1f;
     public CalendarManager Calendar;
+
+    public AtlasEvents.Event SunShow;
+    public AtlasEvents.Event SunHide;
     #endregion
 
     #region Private Variables
@@ -23,7 +26,7 @@ public class DayNightCycle : MonoBehaviour {
     private float _sunDown = 0.73f;
     private float _latitude = 90;
     private float _longitude = 170;
-
+    private float _OldXRotation = 0;
     #endregion
 
     // Use this for initialization
@@ -48,7 +51,17 @@ public class DayNightCycle : MonoBehaviour {
     void UpdateSun()
     {
         sun.transform.localRotation = Quaternion.Euler((currentTime * 360f) - _latitude, _longitude, 0);
+        if (SunHide && _OldXRotation > 0f && sun.transform.localRotation.x <= 0f)
+        {
+            SunHide.Raise();
+        }
+        if (SunShow && _OldXRotation < 0f && sun.transform.localRotation.x >= 0f)
+        {
+            SunShow.Raise();
+        }
 
+
+        _OldXRotation = sun.transform.localRotation.x;
         float intensityMultiplayer = 1f;
 
         if (currentTime <= 0.23f || currentTime >= 0.75)

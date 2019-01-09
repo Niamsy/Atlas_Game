@@ -3,10 +3,9 @@ using Random = UnityEngine.Random;
 
 namespace AtlasAudio
 {
-    [CreateAssetMenu(menuName = "Audio/Simple")]
+    [CreateAssetMenu(menuName="Audio/Simple")]
     public class SimpleAudio : Audio
     {
-
         public AudioClip[] Clips;
 
         public RangedFloat Volume;
