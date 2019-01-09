@@ -9,7 +9,7 @@ namespace Plants
 {
     public class PlantSaver<T, U> : MonoBehaviour where T : IResource<T> where U : IResource<U>
     {
-        public PlantModel plant;
+        public PlantModel<T, U> plant;
         public Producer<T> producer;
         public Consumer<U> consumer;
         private float _LastSavedTime = 0f;
@@ -33,7 +33,7 @@ namespace Plants
         }
 
         [Serializable]
-        public struct StockProd<T>
+        public struct StockProd
         {
             public List<T>     objects;
             public int         count;
@@ -41,7 +41,7 @@ namespace Plants
         }
 
         [Serializable]
-        public struct StockCons<U>
+        public struct StockCons
         {
             public List<U> objects;
             public int count;
@@ -49,21 +49,21 @@ namespace Plants
         }
 
         [Serializable]
-        public struct SaveProd<T>
+        public struct SaveProd
         {
             public int              rate;
             public int              quantity;
-            public StockProd<T>     stock;
+            public StockProd        stock;
             public bool             starverd;
             public FloatReference   range;
         }
 
         [Serializable]
-        public struct SaveCons<U>
+        public struct SaveCons
         {
             public int              rate;
             public int              quantity;
-            public StockCons<U>     stock;
+            public StockCons        stock;
             public int              starvationTimeLimit;
             public bool             starverd;
             public FloatReference   range;
@@ -75,8 +75,8 @@ namespace Plants
             public SaveVector       position;
             public SaveQuaternion   rotation;
             public SaveVector       scale;
-            public SaveProd<T>      prod;
-            public SaveCons<U>      cons;
+            public SaveProd         prod;
+            public SaveCons         cons;
 
             public void SetFromTransform(Transform transform)
             {
@@ -171,18 +171,18 @@ namespace Plants
 
         public void Save()
         {
-            GameControl.control.gameData.PlantData.SetFromTransform(plant.transform);
-            GameControl.control.gameData.PlantData.SetProdData(producer);
-            GameControl.control.gameData.PlantData.SetConsData(consumer);
+            //GameControl.control.gameData.PlantData.SetFromTransform(plant.transform);
+            //GameControl.control.gameData.PlantData.SetProdData(producer);
+            //GameControl.control.gameData.PlantData.SetConsData(consumer);
         }
 
         private void Awake()
         {
-            plant.transform.position = GameControl.control.gameData.PlantData.GetPosition();
-            plant.transform.rotation = GameControl.control.gameData.PlantData.GetRotation();
-            plant.transform.localScale = GameControl.control.gameData.PlantData.GetScale();
-            producer = GameControl.control.gameData.PlantData.GetProducer();
-            consumer = GameControl.control.gameData.PlantData.GetConsumer();
+            //plant.transform.position = GameControl.control.gameData.PlantData.GetPosition();
+            //plant.transform.rotation = GameControl.control.gameData.PlantData.GetRotation();
+            //plant.transform.localScale = GameControl.control.gameData.PlantData.GetScale();
+            //producer = GameControl.control.gameData.PlantData.GetProducer();
+            //consumer = GameControl.control.gameData.PlantData.GetConsumer();
             _LastSavedTime = Time.time;
         }
 
