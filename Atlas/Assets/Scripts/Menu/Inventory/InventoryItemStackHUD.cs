@@ -14,12 +14,14 @@ namespace Menu.Inventory
 		#region OnSelect/Deselect
 		public void OnSelected(BaseEventData eventData)
 		{
-			_description.SetItem(ActualStack.Content);
+            if (ActualStack != null && _description != null)
+			    _description.SetItem(ActualStack.Content);
 		}
 
 		public void OnDeselected(BaseEventData eventData)
 		{
-			_description.SetItem(null);
+            if (_description != null)
+			    _description.SetItem(null);
 		}
 		#endregion
 	}

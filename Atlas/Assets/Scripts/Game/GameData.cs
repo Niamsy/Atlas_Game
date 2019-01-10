@@ -27,6 +27,6 @@ namespace Game
 		public ItemSaveData RightHandItem;
         public PlayerSaver.PlayerData PlayerData;
         public DayNightSaver.CalendarData CalendarData;
-        //public PlantSaver.PlantData PlantData;
+        public PlantSaver.PlantData PlantData;
 	}
 }

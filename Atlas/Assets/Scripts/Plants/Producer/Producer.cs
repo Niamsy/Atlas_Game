@@ -5,41 +5,44 @@ using Variables;
 
 namespace Plants
 {
-    public class Producer<T>  : MonoBehaviour where T : IResource<T>
+    public class Producer  : MonoBehaviour, IProducer
     {
-        public IResource<T>         type;
         [SerializeField]
-        protected int               _rate;
-        protected int               _quantity;
-        protected Stock<T>          _stock;
-        protected bool              starverd;
-        protected FloatReference    range;
+        protected Resources type;
+        [SerializeField]
+        protected int rate;
+        [SerializeField]
+        protected int quantity;
+        protected Stock stocks;
+        protected bool starverd;
+        [SerializeField]
+        protected FloatReference range;
 
         public void Produce()
         {
-            List<T> addToStock = new List<T>();
-            for (int i = 0; i < _rate; ++i)
+            List<Resources> addToStock = new List<Resources>();
+            for (int i = 0; i < rate; ++i)
             {
                 addToStock.Add(type.Create());
             }
-            _stock.Put(addToStock);
+            stocks.Put(addToStock);
         }
 
-        public List<T> Unload(int sub_quantity)
+        public List<Resources> Unload(int sub_quantity)
         {
-            return _stock.Remove(sub_quantity);
+            return stocks.Remove(sub_quantity);
         }
 
-        public Stock<T> Stock
+        public Stock Stocks
         {
-            get { return _stock; }
+            get { return stocks; }
         }
 
         public int Rate
         {
-            get { return _rate; }
+            get { return rate; }
 
-            set { _rate = value; }
+            set { rate = value; }
         }
 
         public bool Starverd
@@ -51,9 +54,9 @@ namespace Plants
 
         public int Quantity
         {
-            get { return _stock.GetCount(); }
+            get { return stocks.GetCount(); }
 
-            set { _quantity = value; }
+            set { quantity = value; }
         }
 
         public FloatReference Range
@@ -61,6 +64,14 @@ namespace Plants
             get { return range; }
 
             set { range = value; }
+        }
+
+        public Resources Type
+        {
+            get
+            {
+                return type;
+            }
         }
     }
 }
