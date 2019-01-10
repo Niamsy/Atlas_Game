@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace Plants
 {
-    public class Stock<T> : MonoBehaviour
+    public class Stock : MonoBehaviour
     {
-        private List<T>     objects;
-        private int         count;
-        protected int       limit;
+        private List<Resources>     objects;
+        private int                 count;
+        protected int               limit;
 
         public int GetCount()
         {
@@ -20,7 +20,7 @@ namespace Plants
             return limit;
         }
 
-        public List<T> GetObjects()
+        public List<Resources> GetObjects()
         {
             return objects;
         }
@@ -35,9 +35,9 @@ namespace Plants
             count = lcount;
         }
 
-        public List<T> Put(List<T> quantity)
+        public List<Resources> Put(List<Resources> quantity)
         {
-            foreach (T obj in quantity)
+            foreach (Resources obj in quantity)
             {
                 objects.Add(obj);
             }
@@ -45,7 +45,7 @@ namespace Plants
             return objects;
         }
 
-        public List<T> Remove(int quantity)
+        public List<Resources> Remove(int quantity)
         {
             if (quantity < count)
             {

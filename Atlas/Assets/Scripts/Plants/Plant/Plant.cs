@@ -5,6 +5,7 @@ using Game.Item;
 
 namespace Plants
 {
+    [CreateAssetMenu(menuName = "Plant System/Plant")]
     public class Plant : ItemAbstract
     {
         public PlantDataModel   data;

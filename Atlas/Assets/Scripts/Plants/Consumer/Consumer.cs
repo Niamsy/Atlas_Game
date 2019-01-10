@@ -5,37 +5,41 @@ using Variables;
 
 namespace Plants
 {
-    public class Consumer<T> : MonoBehaviour where T : IResource<T>
+    public class Consumer : MonoBehaviour, IConsumer
     {
-        public  IResource<T>        type;
         [SerializeField]
-        protected int               _rate;
-        protected int               quantity;
-        protected Stock<T>          _stock;
-        protected int               starvationTimeLimit;
-        protected bool              starverd;
-        protected FloatReference    range;
+        protected Resources        type;
+        [SerializeField]
+        protected int              rate;
+        [SerializeField]
+        protected int              quantity;
+        protected Stock            stocks;
+        [SerializeField]
+        protected int              starvationTimeLimit;
+        protected bool             starverd;
+        [SerializeField]
+        protected FloatReference   range;
 
         public void Consume()
         {
-            _stock.Remove(_rate);
+            stocks.Remove(rate);
         }
 
-        public void Load(Producer<T> producer, int quantity)
+        public void Load(IProducer producer, int quantity)
         {
-            _stock.Put(producer.Unload(quantity));
+            stocks.Put(producer.Unload(quantity));
         }
 
-        public Stock<T> Stock
+        public Stock Stocks
         {
-            get { return _stock; }
+            get { return stocks; }
         }
 
         public int Rate
         {
-            get { return _rate; }
+            get { return rate; }
 
-            set { _rate = value; }
+            set { rate = value; }
         }
 
         public bool Starverd
@@ -54,7 +58,7 @@ namespace Plants
 
         public int Quantity
         {
-            get { return _stock.GetCount(); }
+            get { return stocks.GetCount(); }
 
             set { quantity = value; }
         }
@@ -64,6 +68,14 @@ namespace Plants
             get { return range; }
 
             set { range = value; }
+        }
+
+        public Resources Type
+        {
+            get
+            {
+                return type;
+            }
         }
     }
 }
