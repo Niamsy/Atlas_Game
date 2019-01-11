@@ -54,9 +54,9 @@ namespace Networking
 		[Serializable]
 		private sealed class BodySendData
 		{
-			public string Username = "";
+			public string username = "";
 			public string email = "";
-			public string Password = "";
+			public string password = "";
 		}
 		
 		
@@ -216,9 +216,9 @@ namespace Networking
 
 		private IEnumerator RegisterCoroutine(string username, string email, string password)
 		{
-			BodySendData body = new BodySendData {Username = username, email = email, Password = password};
+			BodySendData body = new BodySendData {username = username, email = email, password = password};
 			string bodyJson = JsonUtility.ToJson(body) ?? "";
-			
+
 			UnityWebRequest postRequest = UnityWebRequest.Put(ApiAdress + RegisterPath, bodyJson);
 			postRequest.method = UnityWebRequest.kHttpVerbPOST;
 			postRequest.SetRequestHeader("Content-Type", "application/json");
@@ -234,7 +234,7 @@ namespace Networking
 				_apiToken = bodyReturn.ApiToken;
 			else
 			{
-				Debug.Log("ERROR HTTP: " + postRequest.responseCode + ":" + postRequest.error);
+				Debug.Log("ERROR HTTP: " + postRequest.responseCode + " : " + postRequest.error);
 				switch (postRequest.responseCode)
 				{
 					case (500):
