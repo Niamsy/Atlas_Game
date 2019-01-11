@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4da2eb506d7a96b418bbe7c6c3611cd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 4722314716208512}
+  Target: {fileID: 0}
 --- !u!1 &1759092918
 GameObject:
   m_ObjectHideFlags: 0
@@ -87,7 +87,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4da2eb506d7a96b418bbe7c6c3611cd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 4012922050469542}
+  Target: {fileID: 0}
 --- !u!1 &1005408015411540
 GameObject:
   m_ObjectHideFlags: 0
@@ -279,17 +279,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Inputs: {fileID: 11400000, guid: b082a3b08f45acc4ea37fd0b948a8496, type: 2}
   _BaseSpeed: 5
-  _SprintScale: 2
+  _SprintScale: 1.3
   _CrouchScale: 0.4
   _ProneScale: 0
-  _Acceleration: 10
-  _Deceleration: 20
+  _Acceleration: 100
+  _Deceleration: 100
   _RotationSpeed: 150
-  _JumpHeight: 0.5
+  _JumpHeight: 0
   _GroundLayers:
     serializedVersion: 2
     m_Bits: 512
-  _GroundDistance: 0.01
+  _GroundDistance: 2
   _GroundCheckerPosition: {x: 0, y: 0, z: 0}
   _CurrentAcceleratedSpeed: {fileID: 11400000, guid: 043e83c7b2cec854f8f87ef45edf1ccf,
     type: 2}
@@ -305,7 +305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40ec0ae0cc32ff94f8b3ea59667eb76b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _SaveFrequency: 2
+  _SaveFrequency: 5
 --- !u!114 &1200721314774352556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,12 +328,6 @@ MonoBehaviour:
   - tag: breath
     source: {fileID: 4085398136620064110}
     audio: {fileID: 11400000, guid: d20764f1e7e4eb04f95a13c41e836f85, type: 2}
-  - tag: leftRun
-    source: {fileID: 281392617323996817}
-    audio: {fileID: 11400000, guid: d8fd4ccc252a8bd4e9b890a9b68466d3, type: 2}
-  - tag: rightRun
-    source: {fileID: 1429460478490814740}
-    audio: {fileID: 11400000, guid: d8fd4ccc252a8bd4e9b890a9b68466d3, type: 2}
   Event: {fileID: 11400000, guid: 574abd74039cd5f40950fb2cf09f4dcb, type: 2}
 --- !u!82 &4085398136620064110
 AudioSource:
@@ -1011,175 +1005,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6482e620217639b45b772ca35e23478c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Slots:
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
-  - _content: {fileID: 0}
-    _quantity: 0
+  Slots: []
 --- !u!114 &114326128495563644
 MonoBehaviour:
   m_ObjectHideFlags: 0
