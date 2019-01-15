@@ -869,6 +869,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114388899323152888, guid: e13aa2c6f7267b64288ae3cf3840f20e,
+        type: 3}
+      propertyPath: _JumpHeight
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114388899323152888, guid: e13aa2c6f7267b64288ae3cf3840f20e,
+        type: 3}
+      propertyPath: _GroundDistance
+      value: -0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e13aa2c6f7267b64288ae3cf3840f20e, type: 3}
 --- !u!1 &1954104313 stripped
@@ -942,6 +952,11 @@ PrefabInstance:
       propertyPath: Calendar
       value: 
       objectReference: {fileID: 115761400}
+    - target: {fileID: 114638519614609606, guid: fee06cd36cafa954cbfde5795d7af0e5,
+        type: 3}
+      propertyPath: secondsInFullDay
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fee06cd36cafa954cbfde5795d7af0e5, type: 3}
 --- !u!1001 &2141135240
