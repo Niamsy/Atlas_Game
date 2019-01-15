@@ -1,16 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class ConfigFileManager
 {
-    public static string configFilePath = Application.dataPath + "/ConfigFiles/atlasConfig.ini";
+    public static string configFilePath = "/atlasConfig.ini";
+    public static string fullConfigFilePath = Application.dataPath + configFilePath;
     private string notFoundReference = "Key does not Exist";
     private INIParser configFile = new INIParser();
     
     public ConfigFileManager()
     {
-        configFile.Open(configFilePath);
+        configFile.Open(fullConfigFilePath);
     }
 
     ~ConfigFileManager()
@@ -36,6 +36,6 @@ public class ConfigFileManager
     public void saveConfig()
     {
         configFile.Close();
-        configFile.Open(configFilePath);
+        configFile.Open(fullConfigFilePath);
     }
 }
