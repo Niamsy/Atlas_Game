@@ -10,6 +10,7 @@ namespace Menu.Main
         
         [SerializeField] private Button     _connectionButton;
         [SerializeField] private Button     _registerButton;
+        [SerializeField] private Button     _passwordLost;
 
         [SerializeField] private SceneLoader _loader;
 
@@ -40,6 +41,7 @@ namespace Menu.Main
             base.UpdateButtonState();
             _connectionButton.interactable &= (_username.text.Length > 0 && _password.text.Length > 0f && ActualRequestManager.CanReceiveANewRequest);
             _registerButton.interactable &= ActualRequestManager.CanReceiveANewRequest;
+            _passwordLost.interactable &= ActualRequestManager.CanReceiveANewRequest;
         }
         #endregion
         
