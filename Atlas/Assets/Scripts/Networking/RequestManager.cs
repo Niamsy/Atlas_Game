@@ -153,8 +153,6 @@ namespace Networking
 
 		private IEnumerator ConnectionCoroutine(string username, string password)
 		{
-			Debug.Log("Username " + username);
-			Debug.Log("Password " + password);
 			UnityWebRequest postRequest = UnityWebRequest.Post(ApiAdress + ConnectionPath, "");
 			postRequest.SetRequestHeader("username", username);
 			postRequest.SetRequestHeader("password", password);
