@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HydrationConstraint : Constraint<float>
 {
-    HydrationConstraint()
+    public HydrationConstraint()
     {
         max = 100;
         current = max;
