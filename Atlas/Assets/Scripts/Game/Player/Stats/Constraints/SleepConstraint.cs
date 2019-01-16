@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SleepConstraint : Constraint<float>
 {
-    SleepConstraint()
+    public SleepConstraint()
     {
         max = 100;
         current = max;

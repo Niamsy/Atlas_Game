@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class HealthConstraint : Constraint<float>
 {
-    HealthConstraint()
+    public HealthConstraint()
     {
-        max = 100;
+        max = 200;
         current = max;
     }
 
     public void Update(double deltaTime)
     {
-        //Operate each frame on the value of the Current Constraint
+        consume((float)0.5);
     }
 
     public void give(float qte)
@@ -22,7 +22,10 @@ public class HealthConstraint : Constraint<float>
 
     public bool consume(float qteToConsume)
     {
-        current -= qteToConsume;
+        if (current > 0)
+        {
+            current -= qteToConsume;
+        }
         return isEmpty();
     }
     public bool isEmpty()

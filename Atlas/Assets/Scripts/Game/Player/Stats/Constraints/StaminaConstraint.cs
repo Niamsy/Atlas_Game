@@ -5,7 +5,7 @@ using UnityEngine;
 public class StaminaConstraint : Constraint<float>
 {
 
-    StaminaConstraint()
+    public StaminaConstraint()
     {
         max = 100;
         current = max;

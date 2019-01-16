@@ -5,13 +5,12 @@ using UnityEngine;
 public class HungerConstraint : Constraint<float>
 {
     
-    HungerConstraint()
+    public HungerConstraint()
     {
         max = 100;
         current = max;
     }
 
-    
     public void Update(double deltaTime)
     {
         //Operate each frame on the value of the Current Constraint

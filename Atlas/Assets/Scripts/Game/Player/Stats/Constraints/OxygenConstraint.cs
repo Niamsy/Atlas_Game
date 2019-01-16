@@ -5,7 +5,7 @@ using UnityEngine;
 public class OxygenConstraint : Constraint<float>
 {
 
-    OxygenConstraint()
+    public OxygenConstraint()
     {
         max = 100;
         current = max;

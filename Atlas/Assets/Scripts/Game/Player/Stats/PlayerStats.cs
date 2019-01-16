@@ -13,7 +13,12 @@ public class PlayerStats : MonoBehaviour
 
     private void Start()
     {
-        
+        playerStamina = new StaminaConstraint();
+        playerHydration = new HydrationConstraint();
+        playerSleep = new SleepConstraint();
+        playerOxygen = new OxygenConstraint();
+        playerHealth = new HealthConstraint();
+        playerHunger = new HungerConstraint();
     }
 
     public void Update()
@@ -22,7 +27,7 @@ public class PlayerStats : MonoBehaviour
         playerHydration.Update(Time.deltaTime);
         playerSleep.Update(Time.deltaTime);
         playerOxygen.Update(Time.deltaTime);
-        playerHealth.Update(Time.deltaTime);
+        playerHealth.Update(Time.deltaTime);//Temporary Here
         playerHunger.Update(Time.deltaTime);
     }
 }
