@@ -23,6 +23,5 @@ namespace Game.Item
             Debug.LogError("Object of id:" + id + " not found");
             return (null);
         }
-        
     }
 }

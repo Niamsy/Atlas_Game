@@ -1,7 +1,8 @@
-﻿using Tools;
+﻿using System.Collections.Generic;
+using Tools;
 using UnityEngine;
 
-namespace Game.Item
+namespace Plants.Plant
 {
     public enum GrowthRate : short
     {
@@ -48,18 +49,18 @@ namespace Game.Item
         public float                               GrowthDuration { get { return (_growthDuration); } }
 
         [Header("Reproduction")]
-        [SerializeField] private short             _reproduction;
-        public short                               ReproductionsRaw { get { return (_reproduction); } }
+        [SerializeField] private Reproduction      _reproduction;
+        public Reproduction                        Reproductions { get { return (_reproduction); } }
 
         [Header("Soil needs")]
-        [SerializeField] private short            _soilType;
-        public short                              SoilTypeRaw { get { return (_soilType); } }
+        [SerializeField] private SoilType         _soilType;
+        public SoilType                           SoilType { get { return (_soilType); } }
         [SerializeField] private RangeFloat       _soilPh;
         public RangeFloat                         SoilPh { get { return (_soilPh); } }
         [SerializeField] private RangeFloat       _soilHumidity;
         public RangeFloat                         SoilHumidity { get { return (_soilHumidity); } }
-        [SerializeField] private short            _plantContainer;
-        public short                              PlantContainers { get { return (_plantContainer); } }
+        [SerializeField] private PlantContainer   _plantContainer;
+        public PlantContainer                     PlantContainers { get { return (_plantContainer); } }
         
         [Header("Environnement needs")]
         [SerializeField] private RangeFloat      _sunExposure;
@@ -76,5 +77,10 @@ namespace Game.Item
         public bool[]                              HarvestPeriods { get { return (_harvestPeriods); } }
         [SerializeField] private bool[]            _cuttingPeriods = new bool[12];
         public bool[]                              CuttingPeriods { get { return (_cuttingPeriods); } }
+        
+        [Header("Stages")]
+        [SerializeField] private List<Stage>       _stages;
+        public List<Stage>                         Stages { get { return (_stages); } }
+
     }
 }

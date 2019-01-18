@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class HydrationConstraint : Constraint<float>
+﻿public class HydrationConstraint : Constraint<float>
 {
     public HydrationConstraint()
     {

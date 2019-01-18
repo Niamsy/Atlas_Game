@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class OxygenConstraint : Constraint<float>
+﻿public class OxygenConstraint : Constraint<float>
 {
 
     public OxygenConstraint()

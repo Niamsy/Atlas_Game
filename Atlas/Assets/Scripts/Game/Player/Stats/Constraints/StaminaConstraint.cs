@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class StaminaConstraint : Constraint<float>
+﻿public class StaminaConstraint : Constraint<float>
 {
 
     public StaminaConstraint()

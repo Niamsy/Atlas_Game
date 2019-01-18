@@ -1,5 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Game.Item.PlantSeed;
+using Plants.Plant;
 using UnityEngine;
 
 namespace Plants
@@ -14,7 +15,7 @@ namespace Plants
         }
 
         [SerializeField]
-        private List<Soil>          _soils;
+        private SoilType              _soils;
         [SerializeField]
         private List<Need>          _needs;
         [SerializeField]
@@ -26,7 +27,7 @@ namespace Plants
         [SerializeField]
         private float               _temperature;
 
-        public List<Soil> Soils
+        public SoilType Soils
         {
             get { return _soils; }
         }

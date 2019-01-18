@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class HungerConstraint : Constraint<float>
+﻿public class HungerConstraint : Constraint<float>
 {
     
     public HungerConstraint()

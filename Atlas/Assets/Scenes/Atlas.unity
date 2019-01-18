@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -266,7 +266,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 351012451}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.13998055, y: 1.1651213, z: -0.41269577}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -285,6 +285,7 @@ GameObject:
   - component: {fileID: 373096876}
   - component: {fileID: 373096875}
   - component: {fileID: 373096874}
+  - component: {fileID: 373096880}
   - component: {fileID: 373096879}
   m_Layer: 0
   m_Name: Plant
@@ -305,10 +306,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b69228655da07144ca7d1db2e3477127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plant: {fileID: 11400000, guid: dd2335f59c9ef0e4283d8315493a3eb6, type: 2}
-  producer:
+  Statistics: {fileID: 11400000, guid: 5dd1736ffc51bda4fa03504d3fbcb801, type: 2}
+  ActualSoil: 1
+  Stages:
+  - {fileID: 11400000, guid: 06d6c70d73bb34e4ea47a94ef10a459e, type: 2}
+  - {fileID: 11400000, guid: 95b80f15be57e1a4dbe8160c769f695b, type: 2}
+  - {fileID: 11400000, guid: a8d3a14164426434dbf68fb8a542e515, type: 2}
+  Water: {fileID: 373096880}
+  Producer:
   - {fileID: 351012452}
-  consumer:
+  Consumer:
   - {fileID: 1769222865}
 --- !u!135 &373096875
 SphereCollider:
@@ -396,6 +403,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   plant: {fileID: 373096874}
   _SaveFrequency: 5
+--- !u!114 &373096880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373096873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43e8698d0207b7b4c99e9e7801956e2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &413161922
 GameObject:
   m_ObjectHideFlags: 0
@@ -1347,7 +1366,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1769222864}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.13998055, y: 1.1651213, z: -0.41269577}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

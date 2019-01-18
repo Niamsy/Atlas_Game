@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class HealthConstraint : Constraint<float>
+﻿public class HealthConstraint : Constraint<float>
 {
     public HealthConstraint()
     {

@@ -1,6 +1,4 @@
-﻿using Networking;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 namespace Menu
 {

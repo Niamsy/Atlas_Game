@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Plants.Plant;
 using UnityEngine;
 using Variables;
 
@@ -196,8 +195,8 @@ namespace Plants
         public void Save()
         {
             GameControl.control.gameData.PlantData.SetFromTransform(plant.transform);
-            GameControl.control.gameData.PlantData.SetProdData(plant.producer);
-            GameControl.control.gameData.PlantData.SetConsData(plant.consumer);
+            GameControl.control.gameData.PlantData.SetProdData(plant.Producer);
+            GameControl.control.gameData.PlantData.SetConsData(plant.Consumer);
         }
 
         private void Awake()
@@ -205,8 +204,8 @@ namespace Plants
             plant.transform.position = GameControl.control.gameData.PlantData.GetPosition();
             plant.transform.rotation = GameControl.control.gameData.PlantData.GetRotation();
             plant.transform.localScale = GameControl.control.gameData.PlantData.GetScale();
-            plant.producer = GameControl.control.gameData.PlantData.GetProducers();
-            plant.consumer = GameControl.control.gameData.PlantData.GetConsumers();
+            plant.Producer = GameControl.control.gameData.PlantData.GetProducers();
+            plant.Consumer = GameControl.control.gameData.PlantData.GetConsumers();
             _LastSavedTime = Time.time;
         }
 

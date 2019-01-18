@@ -16,14 +16,14 @@ MonoBehaviour:
   _growthRate: 2
   _growthDuration: 1
   _reproduction: 1
-  _soilType: 1101
+  _soilType: 1
   _soilPh:
     Min: 0
     Max: 10
   _soilHumidity:
     Min: 25
     Max: 50
-  _plantContainer: 1
+  _plantContainer: -1
   _sunExposure:
     Min: 50
     Max: 100
@@ -34,3 +34,7 @@ MonoBehaviour:
   _floweringPeriods: 000000010101010000000000
   _harvestPeriods: 000000000000000000000000
   _cuttingPeriods: 000000000000000000000000
+  _stages:
+  - {fileID: 11400000, guid: 06d6c70d73bb34e4ea47a94ef10a459e, type: 2}
+  - {fileID: 11400000, guid: 95b80f15be57e1a4dbe8160c769f695b, type: 2}
+  - {fileID: 11400000, guid: a8d3a14164426434dbf68fb8a542e515, type: 2}

@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Plants.Plant;
 using UnityEngine;
 
-namespace Plants
+namespace Plants.GrowerSystem
 {
     public abstract class GrowerSystem : ScriptableObject
     {
-        protected Plant plant;
+        protected PlantModel Plant;
 
         public abstract void Grow();
     }
