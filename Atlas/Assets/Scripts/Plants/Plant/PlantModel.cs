@@ -1,15 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
+using Game.Item.PlantSeed;
 using UnityEngine;
 
-namespace Plants
+namespace Plants.Plant
 {
     public class PlantModel : MonoBehaviour
     {
-        public Plant            plant;
-        public List<Producer>   producer;
-        public List<Consumer>   consumer;
+        
+        
+        public PlantStatistics   Statistics;
+        
+        public SoilType          ActualSoil;
+        
+        public List<Producer>    Producer;
+        public List<Consumer>    Consumer;
     }
 }

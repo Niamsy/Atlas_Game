@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class SleepConstraint : Constraint<float>
+﻿public class SleepConstraint : Constraint<float>
 {
     public SleepConstraint()
     {

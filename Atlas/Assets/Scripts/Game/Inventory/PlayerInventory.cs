@@ -1,7 +1,4 @@
-﻿using Game.Item;
-using UnityEngine;
-
-namespace Game.Inventory
+﻿namespace Game.Inventory
 {
 	public class PlayerInventory : BaseInventory
 	{

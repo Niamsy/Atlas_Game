@@ -1,4 +1,5 @@
 ﻿using Game.Item;
+using Game.Item.PlantSeed;
 using Menu.Inventory.ItemDescription.Details;
 using UnityEngine;
 
@@ -47,12 +48,12 @@ namespace Menu.Inventory.ItemDescription
                 
                 _soilPh.SetValue(_item.PlantStatistics.SoilPh);
                 _soilHumidity.SetValue(_item.PlantStatistics.SoilHumidity);
-                _soilType.SetValue(_item.PlantStatistics.SoilTypeRaw);
+                _soilType.SetValue((short)_item.PlantStatistics.SoilType);
 
                 _sunExposure.SetValue(_item.PlantStatistics.SunExposure);
                 _coldResistance.SetValue(_item.PlantStatistics.ColdResistance);
-                _reproductions.SetValue(_item.PlantStatistics.ReproductionsRaw);
-                _plantContainers.SetValue(_item.PlantStatistics.PlantContainers);
+                _reproductions.SetValue((short)_item.PlantStatistics.Reproductions);
+                _plantContainers.SetValue((short)_item.PlantStatistics.PlantContainers);
 
                 _plantingPeriods.SetValue(_item.PlantStatistics.PlantingPeriods);
                 _floweringPeriods.SetValue(_item.PlantStatistics.FloweringPeriods);

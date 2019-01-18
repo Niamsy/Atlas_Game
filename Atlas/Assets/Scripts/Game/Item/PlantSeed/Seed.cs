@@ -1,7 +1,8 @@
 ﻿using System;
+using Plants.Plant;
 using UnityEngine;
 
-namespace Game.Item
+namespace Game.Item.PlantSeed
 {
     [Serializable,
      CreateAssetMenu(fileName = "Seed", menuName = "Item/Seed", order = 1)]

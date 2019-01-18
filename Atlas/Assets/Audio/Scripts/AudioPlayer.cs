@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using AtlasEvents;
 using System.Collections.Generic;
 
 namespace AtlasAudio {

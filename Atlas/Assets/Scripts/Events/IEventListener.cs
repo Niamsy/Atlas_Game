@@ -1,6 +1,4 @@
-﻿using System;
-
-public interface IEventListener
+﻿public interface IEventListener
 {
     void OnEventRaised();
 }

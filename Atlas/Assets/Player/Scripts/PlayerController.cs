@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using InputManagement;
 using Atlas_Physics;
 using Game.Inventory;
-using AtlasAudio;
 using Variables;
 
 namespace Player
