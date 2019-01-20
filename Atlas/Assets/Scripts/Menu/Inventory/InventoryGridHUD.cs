@@ -12,7 +12,7 @@ namespace Menu.Inventory
 
         private void OnEnable()
         {
-            _slots = new List<ItemStackHUD>(GetComponentsInChildren<ItemStackHUD>());
+            _slots = new List<ItemStackHUD>(GetComponentsInChildren<ItemStackHUD>(true));
             if (_actualBaseInventory != null)
                 LoadThisInventory(_actualBaseInventory);
         }

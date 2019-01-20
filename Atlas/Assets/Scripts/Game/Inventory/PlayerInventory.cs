@@ -1,4 +1,6 @@
-﻿namespace Game.Inventory
+﻿using UnityEngine;
+
+namespace Game.Inventory
 {
 	public class PlayerInventory : BaseInventory
 	{
@@ -13,6 +15,7 @@
 		}
 
 		#region Load/Saving Methods
+		
 		private void SaveData(GameControl gameControl)
 		{
 			GameData gameData = gameControl.gameData;
@@ -36,7 +39,6 @@
 
 				Slots[x].SetFromGameData(savedItem);
 			}
-
 			return (true);
 		}
 

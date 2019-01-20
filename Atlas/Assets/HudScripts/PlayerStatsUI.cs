@@ -6,11 +6,6 @@ public class PlayerStatsUI : MonoBehaviour
     public Image currentHealthBar;
     public PlayerStats stats;
     
-    void Start()
-    {
-        updateBar();    
-    }
-
     private void Update()
     {
         updateBar();
