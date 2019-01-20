@@ -12,7 +12,6 @@ namespace Menu.Inventory.ItemDescription.Details
         {
             _entries = new List<Image>();
             Transform value = transform.Find("Values");
-            int x = 0;
             foreach (Transform child in value)
                 _entries.Add(child.Find("Background").GetComponent<Image>());
         }
