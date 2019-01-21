@@ -17,13 +17,18 @@ namespace Plants.Plant
         public List<Consumer>    Consumer;
 
         #region Methods
-        public void Awake()
+
+        private void Awake()
         {
             MeshRender = GetComponent<MeshRenderer>();
+        }
+
+        private void OnEnable()
+        {
             PlantSystem.Instance.AddPlant(this);
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             PlantSystem.Instance.RemovePlant(this);
         }
