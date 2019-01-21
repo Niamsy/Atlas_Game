@@ -121,9 +121,10 @@ namespace Game.Inventory
         {
             if (!IsEmpty && CanBeFusedWith(other))
             {
-                int fusedStackSize = other.Quantity + Quantity;
-                int restStackItem = fusedStackSize % _content.MaxStackSize;
-
+                int totalQuantity = other.Quantity + Quantity;
+                int fusedStackSize = Mathf.Clamp(totalQuantity, 0, Content.MaxStackSize);
+                int restStackItem = Mathf.Clamp(totalQuantity - fusedStackSize, 0, Content.MaxStackSize);    
+                
                 SetItem(other.Content, fusedStackSize);
                 other.ModifyQuantity(restStackItem);
                 return (true);
