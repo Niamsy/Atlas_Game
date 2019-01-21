@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using Game.Item.PlantSeed;
 using UnityEngine;
 
@@ -8,9 +9,10 @@ namespace Plants.Plant
     public class PlantModel : MonoBehaviour
     {
         public MeshRenderer      MeshRender { get; private set; }
-        
+
         public PlantStatistics   Statistics;
         
+        public float             WaterNeed = 0.5f;
         public SoilType          ActualSoil;
         
         public List<Producer>    Producer;
@@ -33,17 +35,19 @@ namespace Plants.Plant
             PlantSystem.Instance.RemovePlant(this);
         }
 
-        public enum PlantShader
+        public IEnumerator Start()
         {
-            Default,
-            WaterNeed
+            while (true)
+            {
+                yield return new WaitForSeconds(1f);
+                UpdatePlantValue();
+            }
         }
-
-        private PlantShader _plantShader = PlantShader.Default;
-
-        private void SetShader(PlantShader plantShader)
+        
+        public void UpdatePlantValue()
         {
-            
+            foreach (var material in MeshRender.materials)
+                material.SetFloat("_Percentage", WaterNeed);
         }
         #endregion
     }
