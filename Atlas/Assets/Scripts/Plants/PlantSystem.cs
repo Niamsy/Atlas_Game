@@ -50,10 +50,14 @@ namespace Plants
 
         public void SetDisplayType(PlantDisplayState displayType)
         {
-            Camera.main.ResetReplacementShader();
-            Camera.main.SetReplacementShader(displayType.Shader, "RenderType");
-            foreach (var texturePair in displayType.TexturesToSet)
-                Shader.SetGlobalTexture(texturePair.Name, texturePair.Texture);            
+            Camera mainCam = Camera.main;
+            mainCam.ResetReplacementShader();
+            if (displayType.Shader != null)
+            {
+                mainCam.SetReplacementShader(displayType.Shader, "RenderType");
+                foreach (var texturePair in displayType.TexturesToSet)
+                    Shader.SetGlobalTexture(texturePair.Name, texturePair.Texture);            
+            }
         }
         #endregion
     }
