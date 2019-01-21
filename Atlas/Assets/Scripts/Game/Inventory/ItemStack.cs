@@ -117,12 +117,10 @@ namespace Game.Inventory
             return (IsEmpty || other.IsEmpty || other.Content.Id == Content.Id);
         }
 
-        public bool FuseStack(ItemStack other, bool fuseIfEmpty = false)
+        public bool FuseStack(ItemStack other)
         {
-            if ((fuseIfEmpty || !IsEmpty) && CanBeFusedWith(other))
+            if (!IsEmpty && CanBeFusedWith(other))
             {
-                Debug.Log("Fuse");
-
                 int fusedStackSize = other.Quantity + Quantity;
                 int restStackItem = fusedStackSize % _content.MaxStackSize;
 
