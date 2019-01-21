@@ -22,7 +22,7 @@ public class ItemPickable : MonoBehaviour
             Debug.Log(leftStack);
             if (leftStack == null)
             {
-                Destroy(this);
+                Destroy(gameObject);
             }
             else
             {
