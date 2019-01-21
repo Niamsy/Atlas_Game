@@ -117,7 +117,7 @@ namespace Game.Inventory
             return (!IsEmpty && other.Content.Id != Content.Id);
         }
         
-        public bool FuseStack(ItemStack other)
+        public bool FuseStack(ref ItemStack other)
         {
             if (!CanBeFusedWith(other))
                 return (false);
