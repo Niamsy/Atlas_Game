@@ -18,8 +18,6 @@ public class ItemPickable : MonoBehaviour
             PlayerInventory inventory = FindObjectOfType<PlayerInventory>();
             ItemStack baseStack = gameObject.GetComponent<ItemStackBehaviour>().Slot;
             ItemStack leftStack = inventory.AddItemStack(baseStack);
-            Debug.Log(baseStack.Quantity);
-            Debug.Log(leftStack);
             if (leftStack == null)
             {
                 Destroy(gameObject);
