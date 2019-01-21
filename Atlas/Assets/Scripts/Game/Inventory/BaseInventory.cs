@@ -64,13 +64,22 @@ namespace Game.Inventory
 
             return (returnList);
         }
-        
+
         public ItemStack AddItemStack(ItemStack newItem)
         {
             foreach (ItemStack itemStack in Slots)
             {
-                if (itemStack.FuseStack(ref newItem) && newItem.IsEmpty)
+                if (itemStack.FuseStack(newItem) && newItem.IsEmpty)
                     return (null);
+            }
+
+            foreach (ItemStack itemStack in Slots)
+            {
+                if (itemStack.IsEmpty)
+                {
+                    itemStack.SwapStack(newItem);
+                    return (null);
+                }
             }
             return (newItem);
         }
