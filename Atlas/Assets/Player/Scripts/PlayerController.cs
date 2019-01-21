@@ -111,7 +111,6 @@ namespace Player
         private BodyController _BodyController;
         private GameObject _GroundChecker;
         private AtlasGravity _Gravity;
-        private float _PickRange;
         #endregion
 
 
@@ -140,7 +139,6 @@ namespace Player
             _Gravity = GetComponent<AtlasGravity>();
             _CurrentSpeed = _BaseSpeed;
             _CurrentAcceleratedSpeed.Value = 0f;
-            _PickRange = 10f;
         }
 
         private void Start()
@@ -374,22 +372,6 @@ namespace Player
         public bool CheckForPickInput()
         {
             return IsGrounded && _Inputs.Pick.GetDown();
-        }
-
-        public void Pick()
-        {
-            Ray ray = _Camera.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2));
-            RaycastHit hit;
-
-            Debug.Log("Pick pick");
-
-            if (Physics.Raycast(ray, out hit, _PickRange))
-            {
-                if (hit.collider.gameObject.GetComponent<ItemStackBehaviour>() != null)
-                {
-                    Debug.Log("Pick something");
-                }
-            }
         }
 
         public void ToggleCrouchedState()
