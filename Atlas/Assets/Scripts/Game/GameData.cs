@@ -15,6 +15,12 @@ namespace Game
 			public int ID;
 			public int Quantity;
 
+			public ItemSaveData(ItemStack item)
+			{
+				ID = (item.Quantity == 0) ? (0) : (item.Content.Id);
+				Quantity = item.Quantity;
+			}
+
 			public void SetObject(ItemStack item)
 			{
 				ID = (item.Quantity == 0) ? (0) : (item.Content.Id);
