@@ -38,7 +38,7 @@ namespace Player {
             }
             if (_Actor.CheckForPickInput())
             {
-                _Actor.Pick();
+
             }
         }
     }
