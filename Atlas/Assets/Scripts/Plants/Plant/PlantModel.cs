@@ -25,16 +25,6 @@ namespace Plants.Plant
             MeshRender = GetComponent<MeshRenderer>();
         }
 
-        private void OnEnable()
-        {
-            PlantSystem.Instance.AddPlant(this);
-        }
-
-        private void OnDisable()
-        {
-            PlantSystem.Instance.RemovePlant(this);
-        }
-
         public IEnumerator Start()
         {
             while (true)
@@ -47,7 +37,10 @@ namespace Plants.Plant
         public void UpdatePlantValue()
         {
             foreach (var material in MeshRender.materials)
+            {
                 material.SetFloat("_Percentage", WaterNeed);
+                material.SetFloat("_IsPlant", 1);
+            }
         }
         #endregion
     }
