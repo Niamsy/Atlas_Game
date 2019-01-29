@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 4085398136620064110}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -284,11 +284,11 @@ MonoBehaviour:
   _Acceleration: 100
   _Deceleration: 100
   _RotationSpeed: 150
-  _JumpHeight: 0
+  _JumpHeight: 2
   _GroundLayers:
     serializedVersion: 2
     m_Bits: 512
-  _GroundDistance: 2
+  _GroundDistance: 0.05
   _GroundCheckerPosition: {x: 0, y: 0, z: 0}
   _CurrentAcceleratedSpeed: {fileID: 11400000, guid: 043e83c7b2cec854f8f87ef45edf1ccf,
     type: 2}
