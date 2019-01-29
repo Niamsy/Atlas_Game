@@ -78,7 +78,11 @@ namespace Menu.Inventory
             var position = _rectTransform.position;
             position.z = 0;
             _rectTransform.position = position;
-            
+            if (ActualStack.Content.GetType() == typeof(Plants.Plant.PlantItem))
+            {
+                Plants.Plant.PlantItem item = ActualStack.Content as Plants.Plant.PlantItem;
+                item.Sow();
+            }
             _actualDrag = null;
         }
         
