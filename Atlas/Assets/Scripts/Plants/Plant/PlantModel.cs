@@ -10,11 +10,12 @@ namespace Plants.Plant
     {
         public MeshRenderer      MeshRender { get; private set; }
 
-        public PlantStatistics   Statistics;
+        public PlantItem        PlantItem;
         
-        public float             WaterNeed = 0.5f;
-        public SoilType          ActualSoil;
-        
+        public List<Stage>      stages;
+        protected int           current_stage = 0;
+        public SoilType         ActualSoil;
+
         public List<Producer>    Producer;
         public List<Consumer>    Consumer;
 
@@ -38,7 +39,7 @@ namespace Plants.Plant
         {
             foreach (var material in MeshRender.materials)
             {
-                material.SetFloat("_Percentage", WaterNeed);
+                material.SetFloat("_Percentage", stages[current_stage].Needs[0].quantity);
                 material.SetFloat("_IsPlant", 1);
             }
         }

@@ -10,8 +10,8 @@ namespace Plants
     {
         public struct Need
         {
-            Resources       type;
-            int             quantity;
+            public Resources       type;
+            public int             quantity;
         }
 
         [SerializeField]
@@ -20,6 +20,11 @@ namespace Plants
         private List<Need>          _needs;
         [SerializeField]
         private Material            _model;
+        [SerializeField] private GameObject _prefabPlanted;
+        public GameObject PrefabPlanted
+        {
+            get { return (_prefabPlanted); }
+        }
         [SerializeField]
         private AtlasAudio.Audio    _audio;
         [SerializeField]

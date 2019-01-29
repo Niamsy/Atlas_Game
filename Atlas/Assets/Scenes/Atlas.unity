@@ -305,8 +305,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b69228655da07144ca7d1db2e3477127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Statistics: {fileID: 11400000, guid: 5dd1736ffc51bda4fa03504d3fbcb801, type: 2}
-  WaterNeed: 0.5
+  PlantItem: {fileID: 0}
+  stages: []
   ActualSoil: 1
   Producer:
   - {fileID: 351012452}
@@ -721,6 +721,8 @@ GameObject:
   - component: {fileID: 784460315}
   - component: {fileID: 784460314}
   - component: {fileID: 784460313}
+  - component: {fileID: 784460312}
+  - component: {fileID: 784460319}
   m_Layer: 0
   m_Name: Plant (1)
   m_TagString: Untagged
@@ -728,6 +730,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &784460312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 784460311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297947c4f6fdd064e85f656b1a310f42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &784460313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -752,8 +766,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b69228655da07144ca7d1db2e3477127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Statistics: {fileID: 11400000, guid: 5dd1736ffc51bda4fa03504d3fbcb801, type: 2}
-  WaterNeed: 1
+  PlantItem: {fileID: 11400000, guid: 0e5248d95dd8ed745b3cdb00f3845f16, type: 2}
+  stages:
+  - {fileID: 11400000, guid: 06d6c70d73bb34e4ea47a94ef10a459e, type: 2}
+  - {fileID: 11400000, guid: 95b80f15be57e1a4dbe8160c769f695b, type: 2}
+  - {fileID: 11400000, guid: a8d3a14164426434dbf68fb8a542e515, type: 2}
   ActualSoil: 1
   Producer:
   - {fileID: 351012452}
@@ -767,10 +784,10 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 784460311}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1.66
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &784460316
 MeshRenderer:
@@ -831,6 +848,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &784460319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 784460311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08dc12131bb65044f8372c3bda3bd795, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Slot:
+    _content: {fileID: 11400000, guid: 1bbe0c572130e8c46b5ba5305f522551, type: 2}
+    _quantity: 1
 --- !u!1001 &822825684
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1006,7 +1038,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _actualBaseInventory
       value: 
-      objectReference: {fileID: 1954104314}
+      objectReference: {fileID: 0}
     - target: {fileID: 6962041016043185785, guid: 5d9e75d3beb08454ea1fddd983f9ba8a,
         type: 3}
       propertyPath: _displayed
@@ -1278,8 +1310,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b69228655da07144ca7d1db2e3477127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Statistics: {fileID: 11400000, guid: 5dd1736ffc51bda4fa03504d3fbcb801, type: 2}
-  WaterNeed: 0
+  PlantItem: {fileID: 0}
+  stages: []
   ActualSoil: 1
   Producer:
   - {fileID: 351012452}
