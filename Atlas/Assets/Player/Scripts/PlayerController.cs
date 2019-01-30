@@ -74,6 +74,16 @@ namespace Player
                 _CurrentAcceleratedSpeed.Value = !value && !(IsCrouched || IsProned) ? _CurrentAcceleratedSpeed.Value * .5f : _CurrentAcceleratedSpeed.Value;
             }
         }
+
+        public bool IsPicking
+        {
+            get { return _Animator.GetBool(_HashPicking); }
+            set
+            {
+                _Animator.SetBool(_HashPicking, value);
+            }
+        }
+    
         public bool IsCrouched
         {
             get { return _Animator.GetBool(_HashCrouched); }
@@ -123,6 +133,7 @@ namespace Player
         private readonly int _HashSprinting = Animator.StringToHash("Sprinting");
         private readonly int _HashCrouched = Animator.StringToHash("Crouched");
         private readonly int _HashProned = Animator.StringToHash("Proned");
+        private readonly int _HashPicking = Animator.StringToHash("Picking");
         #endregion
 
         #region Initialization
@@ -371,7 +382,15 @@ namespace Player
 
         public bool CheckForPickInput()
         {
-            return IsGrounded && _Inputs.Pick.GetDown();
+            if (_Inputs.Pick.GetDown())
+            {
+                IsPicking = true;
+            }
+            if (_Inputs.Pick.GetUp())
+            {
+                IsPicking = false;
+            }
+            return IsGrounded && IsPicking;
         }
 
         public void ToggleCrouchedState()
