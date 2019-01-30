@@ -25,6 +25,7 @@ namespace Player {
             _Actor.CheckForGrounded();
             _Actor.GetInput();
             _Actor.RotateAim();
+            _Actor.CheckForPickInput();
             _Actor.CheckForSprintInput();
             //_Actor.Walk();
             _Actor.GoToIdleState(_Actor.CheckForIdle());
@@ -35,10 +36,6 @@ namespace Player {
             if (_Actor.CheckForJumpInput())
             {
                 _Actor.Jump();
-            }
-            if (_Actor.CheckForPickInput())
-            {
-
             }
         }
     }
