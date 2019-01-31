@@ -384,10 +384,12 @@ namespace Player
         {
             if (_Inputs.Pick.GetDown())
             {
+                Debug.Log("Pick true");
                 IsPicking = true;
             }
-            if (_Inputs.Pick.GetUp())
+            else if (IsPicking == true)
             {
+                Debug.Log("Pick false");
                 IsPicking = false;
             }
             return IsGrounded && IsPicking;
