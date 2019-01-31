@@ -1,4 +1,5 @@
-﻿using Game.Inventory;
+﻿using System.Collections.Generic;
+using Game.Inventory;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -6,7 +7,7 @@ using UnityEngine.UI;
 namespace Menu.Inventory
 {
     [RequireComponent(typeof(Button))]
-    public class ItemStackHUD : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IDropHandler
+    public class ItemStackHUD : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
     {
         #region Variables
 
@@ -31,6 +32,12 @@ namespace Menu.Inventory
             _rootCanvas = GetComponentInParent<Canvas>();
             Button = GetComponent<Button>();
         }
+
+        public void OnMouseOver()
+        {
+            if (Input.GetKeyDown(KeyCode.F))
+                Drop();                
+        }
         
         public void SetItemStack(ItemStack newStack)
         {
@@ -52,7 +59,6 @@ namespace Menu.Inventory
 
         #region Drag&Drop
         private Vector3 _originalPosition;
-        private static ItemStackHUD _actualDrag;
         
         public void OnBeginDrag(PointerEventData eventData)
         {
@@ -62,8 +68,6 @@ namespace Menu.Inventory
             var position = _rectTransform.position;
             position.z = -1;
             _rectTransform.position = position;
-            
-            _actualDrag = this;
         }
 
         public void OnDrag(PointerEventData eventData)
@@ -78,14 +82,30 @@ namespace Menu.Inventory
             var position = _rectTransform.position;
             position.z = 0;
             _rectTransform.position = position;
-            
-            _actualDrag = null;
+                     
+            PointerEventData pointerData = new PointerEventData (EventSystem.current)
+            {
+                pointerId = -1,
+            };
+         
+            pointerData.position = Input.mousePosition;
+ 
+            List<RaycastResult> results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(pointerData, results);
+         
+            if (results.Count > 0)
+            {
+                var stack = results[0].gameObject.GetComponent<ItemStackHUD>();
+                if (stack != null)
+                    ActualStack.SwapStack(stack.ActualStack);
+            }
+            else if (results.Count == 0)
+                Drop();
         }
-        
-        public void OnDrop(PointerEventData eventData)
+
+        private void Drop()
         {
-            if (RectTransformUtility.RectangleContainsScreenPoint(_rectTransform, Input.mousePosition))
-                _actualDrag.ActualStack.SwapStack(ActualStack);
+            Debug.Log("Drop ActualStack " + ActualStack);
         }
         #endregion
     }
