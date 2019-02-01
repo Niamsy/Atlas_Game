@@ -48,6 +48,18 @@ namespace Player
         private FloatVariable _CurrentAcceleratedSpeed;
         #endregion
 
+        #region Temporary Variables
+
+        private bool _isNextStage = false;
+
+        public bool IsNextStage
+        {
+            get { return _isNextStage; }
+
+            set { _isNextStage = value; }
+        }
+        #endregion
+
         #region accessible properties
         public Rigidbody Body
         {
@@ -84,6 +96,8 @@ namespace Player
             }
         }
     
+
+
         public bool IsCrouched
         {
             get { return _Animator.GetBool(_HashCrouched); }
@@ -391,6 +405,19 @@ namespace Player
                 IsPicking = false;
             }
             return IsGrounded && IsPicking;
+        }
+
+        public bool CheckForNextStageInput()
+        {
+            if (_Inputs.NextStage.GetDown())
+            {
+                IsNextStage = true;
+            }
+            if (_Inputs.NextStage.GetUp())
+            {
+                IsNextStage = false;
+            }
+            return IsGrounded && IsNextStage;
         }
 
         public void ToggleCrouchedState()

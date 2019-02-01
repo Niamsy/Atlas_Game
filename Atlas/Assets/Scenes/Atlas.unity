@@ -396,6 +396,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43e8698d0207b7b4c99e9e7801956e2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &395739202 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114687969587722362, guid: e13aa2c6f7267b64288ae3cf3840f20e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1954104312}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6482e620217639b45b772ca35e23478c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &413161922
 GameObject:
   m_ObjectHideFlags: 0
@@ -723,6 +735,7 @@ GameObject:
   - component: {fileID: 784460313}
   - component: {fileID: 784460312}
   - component: {fileID: 784460319}
+  - component: {fileID: 784460320}
   m_Layer: 0
   m_Name: Plant (1)
   m_TagString: Untagged
@@ -771,7 +784,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 06d6c70d73bb34e4ea47a94ef10a459e, type: 2}
   - {fileID: 11400000, guid: 95b80f15be57e1a4dbe8160c769f695b, type: 2}
   - {fileID: 11400000, guid: a8d3a14164426434dbf68fb8a542e515, type: 2}
-  ActualSoil: 1
+  ActualSoil: -1
   Producer:
   - {fileID: 351012452}
   Consumer:
@@ -863,6 +876,18 @@ MonoBehaviour:
   Slot:
     _content: {fileID: 11400000, guid: 1bbe0c572130e8c46b5ba5305f522551, type: 2}
     _quantity: 1
+--- !u!114 &784460320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 784460311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 230584bad253bef44bdd7054dd28957d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &822825684
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1038,7 +1063,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _actualBaseInventory
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 395739202}
     - target: {fileID: 6962041016043185785, guid: 5d9e75d3beb08454ea1fddd983f9ba8a,
         type: 3}
       propertyPath: _displayed
