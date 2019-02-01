@@ -101,16 +101,15 @@ namespace Menu.Inventory
             }
             else if (results.Count == 0)
                 Drop();
+        }
+
+        private void Drop()
+        {
             if (ActualStack.Content.GetType() == typeof(Plants.Plant.PlantItem))
             {
                 Plants.Plant.PlantItem item = ActualStack.Content as Plants.Plant.PlantItem;
                 item.Sow();
             }
-            _actualDrag = null;
-        }
-
-        private void Drop()
-        {
             Debug.Log("Drop ActualStack " + ActualStack);
         }
         #endregion
