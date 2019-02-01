@@ -20,11 +20,6 @@ namespace Plants
         private List<Need>          _needs;
         [SerializeField]
         private Material            _model;
-        [SerializeField] private GameObject _prefabPlanted;
-        public GameObject PrefabPlanted
-        {
-            get { return (_prefabPlanted); }
-        }
         [SerializeField]
         private AtlasAudio.Audio    _audio;
         [SerializeField]
