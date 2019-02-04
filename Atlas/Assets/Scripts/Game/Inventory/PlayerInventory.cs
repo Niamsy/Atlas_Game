@@ -1,18 +1,18 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Game;
 
 namespace Game.Inventory
 {
-	public class PlayerInventory : BaseInventory
+    public class PlayerInventory : BaseInventory
 	{
 		private readonly int _inventorySize = 84;
 
-		protected override void InitializeInventory()
+        protected override void InitializeInventory()
 		{
-			if (!LoadData())
-				InitMapWithSize(_inventorySize);
-
-			GameControl.BeforeSaving += SaveData;
+            if (!LoadData())
+                InitMapWithSize(_inventorySize);
+		     GameControl.BeforeSaving += SaveData;
 		}
 
 		#region Load/Saving Methods
