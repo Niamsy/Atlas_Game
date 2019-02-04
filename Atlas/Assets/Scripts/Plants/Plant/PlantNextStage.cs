@@ -14,10 +14,27 @@ public class PlantNextStage : MonoBehaviour
             Plants.Plant.PlantModel plant_model = this.GetComponent<Plants.Plant.PlantModel>();
             if (plant_model)
             {
-                Debug.Log("Next Stage");
                 plant_model.GoToNextStage();
             }
             _Item.GetComponent<PlayerController>().IsNextStage = false;
+        }
+        if (_Item && _Item.GetComponent<PlayerController>().CheckForGiveInput())
+        {
+            Plants.Plant.PlantModel plant_model = this.GetComponent<Plants.Plant.PlantModel>();
+            if (plant_model)
+            {
+                plant_model.GiveResource();
+            }
+            _Item.GetComponent<PlayerController>().IsGive = false;
+        }
+        if (_Item && _Item.GetComponent<PlayerController>().CheckForConsumeInput())
+        {
+            Plants.Plant.PlantModel plant_model = this.GetComponent<Plants.Plant.PlantModel>();
+            if (plant_model)
+            {
+                plant_model.ConsumeResource();
+            }
+            _Item.GetComponent<PlayerController>().IsConsume = false;
         }
     }
 

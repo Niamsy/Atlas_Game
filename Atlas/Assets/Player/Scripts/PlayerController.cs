@@ -49,6 +49,23 @@ namespace Player
         #endregion
 
         #region Temporary Variables
+        private bool _isConsume = false;
+
+        public bool IsConsume
+        {
+            get { return _isConsume; }
+
+            set { _isConsume = value; }
+        }
+
+        private bool _isGive = false;
+
+        public bool IsGive
+        {
+            get { return _isGive; }
+
+            set { _isGive = value; }
+        }
 
         private bool _isNextStage = false;
 
@@ -394,16 +411,40 @@ namespace Player
             return IsGrounded && _Inputs.Prone.GetDown();
         }
 
+        public bool CheckForConsumeInput()
+        {
+            if (_Inputs.ConsumeWater.GetDown())
+            {
+                IsConsume = true;
+            }
+            else if (IsConsume == true)
+            {
+                IsConsume = false;
+            }
+            return IsGrounded && IsConsume;
+        }
+
+        public bool CheckForGiveInput()
+        {
+            if (_Inputs.GiveWater.GetDown())
+            {
+                IsGive = true;
+            }
+            else if (IsGive == true)
+            {
+                IsGive = false;
+            }
+            return IsGrounded && IsGive;
+        }
+
         public bool CheckForPickInput()
         {
             if (_Inputs.Pick.GetDown())
             {
-                Debug.Log("Pick true");
                 IsPicking = true;
             }
             else if (IsPicking == true)
             {
-                Debug.Log("Pick false");
                 IsPicking = false;
             }
             return IsGrounded && IsPicking;

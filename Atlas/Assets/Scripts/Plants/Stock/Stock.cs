@@ -9,6 +9,13 @@ namespace Plants
         private int                 count;
         protected int               limit;
 
+        private void Awake()
+        {
+            objects = new List<Resources>();
+            count = 0;
+            limit = 10;
+        }
+
         public int GetCount()
         {
             return count;
@@ -38,6 +45,8 @@ namespace Plants
         {
             foreach (Resources obj in quantity)
             {
+                if (objects.Count > limit)
+                    break;
                 objects.Add(obj);
             }
             count = objects.Count;

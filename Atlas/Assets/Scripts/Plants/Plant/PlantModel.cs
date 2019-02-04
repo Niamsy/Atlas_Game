@@ -8,6 +8,7 @@ namespace Plants.Plant
     [RequireComponent(typeof(MeshRenderer))]
     public class PlantModel : MonoBehaviour
     {
+        public Stock        stock;
         private MeshRenderer meshRenderer;
         public MeshRenderer MeshRender
         {
@@ -28,9 +29,33 @@ namespace Plants.Plant
 
         private void Awake()
         {
+            Animator animator = this.GetComponent<Animator>();
             MeshRender = this.GetComponent<MeshRenderer>();
             if (stages.Count > 0)
                 MeshRender.material = stages[current_stage].Model;
+            if (stock && stock.GetCount() == 0)
+                animator.SetTrigger("FadeIn");
+        }
+
+        public void GiveResource()
+        {
+            Debug.Log("GIVE");
+            Animator animator = this.GetComponent<Animator>();
+            List<Resources> rcs = new List<Resources>();
+            rcs.Add(new Resources());
+            stock.Put(rcs);
+            if (stock.GetCount() > 0)
+                animator.SetTrigger("FadeOut");
+        }
+
+        public void ConsumeResource()
+        {
+            Debug.Log("CONSUME");
+            Animator animator = this.GetComponent<Animator>();
+            if (stock.GetCount() == 1)
+                animator.SetTrigger("FadeIn");
+            if (stock.GetCount() > 0)
+                stock.Remove(1);
         }
 
         public void GoToNextStage()
