@@ -10,8 +10,8 @@ namespace Plants
     {
         public struct Need
         {
-            Resources       type;
-            int             quantity;
+            public Resources       type;
+            public int             quantity;
         }
 
         [SerializeField]

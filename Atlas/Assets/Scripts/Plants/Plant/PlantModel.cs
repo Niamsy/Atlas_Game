@@ -8,21 +8,73 @@ namespace Plants.Plant
     [RequireComponent(typeof(MeshRenderer))]
     public class PlantModel : MonoBehaviour
     {
-        public MeshRenderer      MeshRender { get; private set; }
+        public Stock        stock;
+        private MeshRenderer meshRenderer;
+        public MeshRenderer MeshRender
+        {
+            get { return meshRenderer; }
+            set { meshRenderer = value; }
+        }
 
-        public PlantStatistics   Statistics;
-        
-        public float             WaterNeed = 0.5f;
-        public SoilType          ActualSoil;
-        
-        public List<Producer>    Producer;
-        public List<Consumer>    Consumer;
+        public PlantItem PlantItem;
+
+        public List<Stage> stages;
+        protected int current_stage = 0;
+        public SoilType ActualSoil;
+
+        public List<Producer> Producer;
+        public List<Consumer> Consumer;
 
         #region Methods
 
         private void Awake()
         {
-            MeshRender = GetComponent<MeshRenderer>();
+            Animator animator = this.GetComponent<Animator>();
+            MeshRender = this.GetComponent<MeshRenderer>();
+            if (stages.Count > 0)
+                MeshRender.material = stages[current_stage].Model;
+            if (stock && stock.GetCount() == 0)
+                animator.SetTrigger("FadeIn");
+        }
+
+        public void GiveResource()
+        {
+            Debug.Log("GIVE");
+            Animator animator = this.GetComponent<Animator>();
+            List<Resources> rcs = new List<Resources>();
+            rcs.Add(new Resources());
+            stock.Put(rcs);
+            if (stock.GetCount() > 0)
+                animator.SetTrigger("FadeOut");
+        }
+
+        public void ConsumeResource()
+        {
+            Debug.Log("CONSUME");
+            Animator animator = this.GetComponent<Animator>();
+            if (stock.GetCount() == 1)
+                animator.SetTrigger("FadeIn");
+            if (stock.GetCount() > 0)
+                stock.Remove(1);
+        }
+
+        public void GoToNextStage()
+        {
+            ++current_stage;
+            if (current_stage > stages.Count - 1)
+            {
+                DestroyPlant();
+            }
+            else
+            {
+                Debug.Log(current_stage);
+                MeshRender.material = stages[current_stage].Model;
+            }
+        }
+
+        public void DestroyPlant()
+        {
+            Destroy(this.gameObject);
         }
 
         public IEnumerator Start()
@@ -33,12 +85,12 @@ namespace Plants.Plant
                 UpdatePlantValue();
             }
         }
-        
+
         public void UpdatePlantValue()
         {
             foreach (var material in MeshRender.materials)
             {
-                material.SetFloat("_Percentage", WaterNeed);
+                // material.SetFloat("_Percentage", stages[current_stage].Needs[0].quantity);
                 material.SetFloat("_IsPlant", 1);
             }
         }
