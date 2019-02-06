@@ -48,6 +48,35 @@ namespace Player
         private FloatVariable _CurrentAcceleratedSpeed;
         #endregion
 
+        #region Temporary Variables
+        private bool _isConsume = false;
+
+        public bool IsConsume
+        {
+            get { return _isConsume; }
+
+            set { _isConsume = value; }
+        }
+
+        private bool _isGive = false;
+
+        public bool IsGive
+        {
+            get { return _isGive; }
+
+            set { _isGive = value; }
+        }
+
+        private bool _isNextStage = false;
+
+        public bool IsNextStage
+        {
+            get { return _isNextStage; }
+
+            set { _isNextStage = value; }
+        }
+        #endregion
+
         #region accessible properties
         public Rigidbody Body
         {
@@ -84,6 +113,8 @@ namespace Player
             }
         }
     
+
+
         public bool IsCrouched
         {
             get { return _Animator.GetBool(_HashCrouched); }
@@ -380,19 +411,56 @@ namespace Player
             return IsGrounded && _Inputs.Prone.GetDown();
         }
 
+        public bool CheckForConsumeInput()
+        {
+            if (_Inputs.ConsumeWater.GetDown())
+            {
+                IsConsume = true;
+            }
+            else if (IsConsume == true)
+            {
+                IsConsume = false;
+            }
+            return IsGrounded && IsConsume;
+        }
+
+        public bool CheckForGiveInput()
+        {
+            if (_Inputs.GiveWater.GetDown())
+            {
+                IsGive = true;
+            }
+            else if (IsGive == true)
+            {
+                IsGive = false;
+            }
+            return IsGrounded && IsGive;
+        }
+
         public bool CheckForPickInput()
         {
             if (_Inputs.Pick.GetDown())
             {
-                Debug.Log("Pick true");
                 IsPicking = true;
             }
             else if (IsPicking == true)
             {
-                Debug.Log("Pick false");
                 IsPicking = false;
             }
             return IsGrounded && IsPicking;
+        }
+
+        public bool CheckForNextStageInput()
+        {
+            if (_Inputs.NextStage.GetDown())
+            {
+                IsNextStage = true;
+            }
+            if (_Inputs.NextStage.GetUp())
+            {
+                IsNextStage = false;
+            }
+            return IsGrounded && IsNextStage;
         }
 
         public void ToggleCrouchedState()
