@@ -7,7 +7,7 @@ using UnityEngine.UI;
 namespace Menu.Inventory
 {
     [RequireComponent(typeof(Button))]
-    public class ItemStackHUD : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
+    public class ItemStackHUD : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
     {
         #region Variables
 
@@ -19,7 +19,7 @@ namespace Menu.Inventory
 
         private RectTransform    _rectTransform;
         private Canvas          _rootCanvas;
-        
+        private bool _mouseOver;
         private bool ShouldBeDisplayed
         {
             get { return ((ActualStack != null) && (!ActualStack.IsEmpty)); }
@@ -33,10 +33,10 @@ namespace Menu.Inventory
             Button = GetComponent<Button>();
         }
 
-        public void OnMouseOver()
+        private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.F))
-                Drop();                
+            if (_mouseOver && Input.GetKeyDown(KeyCode.F))
+                Drop();
         }
         
         public void SetItemStack(ItemStack newStack)
@@ -108,5 +108,16 @@ namespace Menu.Inventory
             Debug.Log("Drop ActualStack " + ActualStack);
         }
         #endregion
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            _mouseOver = true;
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            _mouseOver = false;
+        }
     }
 }
+            
