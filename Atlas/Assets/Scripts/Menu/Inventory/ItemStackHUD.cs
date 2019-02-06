@@ -110,6 +110,11 @@ namespace Menu.Inventory
                 Plants.Plant.PlantItem item = ActualStack.Content as Plants.Plant.PlantItem;
                 item.Sow();
             }
+            else
+            {
+                GameObject droppedObject = Instantiate(ActualStack.Content.PrefabHoldedGO);
+                ActualStack.EmptyStack();
+            }
             Debug.Log("Drop ActualStack " + ActualStack);
         }
         #endregion
