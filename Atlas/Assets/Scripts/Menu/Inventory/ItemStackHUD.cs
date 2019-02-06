@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Game.Inventory;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -24,6 +25,8 @@ namespace Menu.Inventory
         {
             get { return ((ActualStack != null) && (!ActualStack.IsEmpty)); }
         }
+
+        private Action<ItemStack> OnDrop;
         #endregion
                 
         protected virtual void Awake()
@@ -39,14 +42,21 @@ namespace Menu.Inventory
                 Drop();
         }
         
-        public void SetItemStack(ItemStack newStack)
+        public void SetItemStack(ItemStack newStack, Action<ItemStack> onDrop = null)
         {
             if (ActualStack != null)
-                ActualStack.OnItemStackUpdated -= SetItemStack;
+                ActualStack.OnItemStackUpdated -= UpdateContent;
             ActualStack = newStack;
             if (ActualStack != null)
-                ActualStack.OnItemStackUpdated += SetItemStack;
+                ActualStack.OnItemStackUpdated += UpdateContent;
+            
+            OnDrop = onDrop;
+            
+            UpdateContent(newStack);
+        }
 
+        public void UpdateContent(ItemStack newStack)
+        {
             _quantity.enabled = ShouldBeDisplayed;   
             _sprite.enabled = ShouldBeDisplayed;
             
@@ -55,6 +65,12 @@ namespace Menu.Inventory
                 _quantity.text = ActualStack.Quantity.ToString();
                 _sprite.sprite = ActualStack.Content.Sprite;
             }
+        }
+        
+        public void Drop()
+        {
+            if (OnDrop != null)
+                OnDrop(ActualStack);
         }
 
         #region Drag&Drop
@@ -101,21 +117,6 @@ namespace Menu.Inventory
             }
             else if (results.Count == 0)
                 Drop();
-        }
-
-        private void Drop()
-        {
-            if (ActualStack.Content.GetType() == typeof(Plants.Plant.PlantItem))
-            {
-                Plants.Plant.PlantItem item = ActualStack.Content as Plants.Plant.PlantItem;
-                item.Sow();
-            }
-            else
-            {
-                GameObject droppedObject = Instantiate(ActualStack.Content.PrefabHoldedGO);
-                ActualStack.EmptyStack();
-            }
-            Debug.Log("Drop ActualStack " + ActualStack);
         }
         #endregion
 

@@ -25,9 +25,10 @@ namespace Menu.Inventory
 
             for (int x = 0; x < oldSize; x++)
             {
-                _slots[x].gameObject.SetActive(x < newSize);
+                ItemStackHUD slot = _slots[x];
+                slot.gameObject.SetActive(x < newSize);
                 if (x < newSize)
-                    _slots[x].SetItemStack(inventoryToLoad[x]);
+                    slot.SetItemStack(inventoryToLoad[x], _actualBaseInventory.Drop);
             }
         }
     }
