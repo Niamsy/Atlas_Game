@@ -27,6 +27,11 @@ namespace Menu.Inventory.ItemDescription
 			UpdateDisplay();
 		}
 
+		public void Reset()
+		{
+			SetItem(null);
+		}
+		
 		public void SetItem(ItemAbstract item)
 		{
 			_item = item;
