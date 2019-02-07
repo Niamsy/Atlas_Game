@@ -8,6 +8,7 @@
     }
     public void Update(double deltaTime)
     {
+        consume((float)0.05);
         //Operate each frame on the value of the Current Constraint
     }
 
@@ -18,7 +19,10 @@
 
     public bool consume(float qteToConsume)
     {
-        current -= qteToConsume;
+        if (current > 0)
+        {
+            current -= qteToConsume;
+        }
         return isEmpty();
     }
     public bool isEmpty()

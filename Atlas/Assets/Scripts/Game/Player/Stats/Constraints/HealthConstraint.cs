@@ -8,7 +8,7 @@
 
     public void Update(double deltaTime)
     {
-        consume((float)0.5);
+        consume((float)0.01);
     }
 
     public void give(float qte)
