@@ -15,7 +15,7 @@ namespace Game.Item
 		}
 
 		[SerializeField] private GameObject _prefabDroppedGO;
-		public GameObject PrefabMesh
+		public GameObject PrefabDroppedGO
 		{
 			get { return (_prefabDroppedGO); }
 		}

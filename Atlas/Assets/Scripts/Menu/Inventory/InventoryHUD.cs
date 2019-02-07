@@ -4,18 +4,24 @@ using UnityEngine;
 using InputManagement;
 using AtlasEvents;
 using AtlasAudio;
+using Menu.Inventory.ItemDescription;
 
 public class InventoryHUD : MenuWidget
 {
-	protected override void InitialiseWidget() {}
-	protected override void UpdateButtonState() {}
+	protected override void InitialiseWidget()
+	{
+	}
 
-    [Header("Audio")]
-    public Audio OnToggleGUIAudio;
-    public AudioEvent OnToggleGUIEvent;
+	protected override void UpdateButtonState()
+	{
+	}
 
-    [Header("Inventory Keys")]
-    public InputKey _Inventory;
+	[Header("Audio")] public Audio OnToggleGUIAudio;
+	public AudioEvent OnToggleGUIEvent;
+
+	[Header("Inventory Keys")] public InputKey _Inventory;
+
+	[SerializeField] private ItemDescriptionHUD _description;
 
 	private void Update()
 	{
@@ -32,6 +38,7 @@ public class InventoryHUD : MenuWidget
 	{
 		TimeManager.Instance.PauseGame(value);
 		base.Show(value);
+		_description.Reset();
 	}
 
 	public void QuitTheGame()
