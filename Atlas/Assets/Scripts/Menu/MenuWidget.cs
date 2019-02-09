@@ -18,7 +18,7 @@ namespace Menu
         private int         _hashShowed = Animator.StringToHash("Showed");
         #endregion
         
-        private void Awake()
+        protected virtual void Awake()
         {
             _animator = GetComponent<Animator>();
 

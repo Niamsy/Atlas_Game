@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Game.Inventory;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -7,7 +8,7 @@ using UnityEngine.UI;
 namespace Menu.Inventory
 {
     [RequireComponent(typeof(Button))]
-    public class ItemStackHUD : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
+    public class ItemStackHUD : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
     {
         #region Variables
 
@@ -19,11 +20,13 @@ namespace Menu.Inventory
 
         private RectTransform    _rectTransform;
         private Canvas          _rootCanvas;
-        
+        private bool _mouseOver;
         private bool ShouldBeDisplayed
         {
             get { return ((ActualStack != null) && (!ActualStack.IsEmpty)); }
         }
+
+        private Action<ItemStack> OnDrop;
         #endregion
                 
         protected virtual void Awake()
@@ -33,20 +36,27 @@ namespace Menu.Inventory
             Button = GetComponent<Button>();
         }
 
-        public void OnMouseOver()
+        private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.F))
-                Drop();                
+            if (_mouseOver && Input.GetKeyDown(KeyCode.F))
+                Drop();
         }
         
-        public void SetItemStack(ItemStack newStack)
+        public void SetItemStack(ItemStack newStack, Action<ItemStack> onDrop = null)
         {
             if (ActualStack != null)
-                ActualStack.OnItemStackUpdated -= SetItemStack;
+                ActualStack.OnItemStackUpdated -= UpdateContent;
             ActualStack = newStack;
             if (ActualStack != null)
-                ActualStack.OnItemStackUpdated += SetItemStack;
+                ActualStack.OnItemStackUpdated += UpdateContent;
+            
+            OnDrop = onDrop;
+            
+            UpdateContent(newStack);
+        }
 
+        public void UpdateContent(ItemStack newStack)
+        {
             _quantity.enabled = ShouldBeDisplayed;   
             _sprite.enabled = ShouldBeDisplayed;
             
@@ -55,6 +65,12 @@ namespace Menu.Inventory
                 _quantity.text = ActualStack.Quantity.ToString();
                 _sprite.sprite = ActualStack.Content.Sprite;
             }
+        }
+        
+        public void Drop()
+        {
+            if (OnDrop != null)
+                OnDrop(ActualStack);
         }
 
         #region Drag&Drop
@@ -102,16 +118,17 @@ namespace Menu.Inventory
             else if (results.Count == 0)
                 Drop();
         }
-
-        private void Drop()
-        {
-            if (ActualStack.Content.GetType() == typeof(Plants.Plant.PlantItem))
-            {
-                Plants.Plant.PlantItem item = ActualStack.Content as Plants.Plant.PlantItem;
-                item.Sow();
-            }
-            Debug.Log("Drop ActualStack " + ActualStack);
-        }
         #endregion
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            _mouseOver = true;
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            _mouseOver = false;
+        }
     }
 }
+            

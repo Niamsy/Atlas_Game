@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace Game.Inventory
 {
-    //[CreateAssetMenu(fileName = "Inventory", menuName = "Item/Inventory", order = 1)]
     public class BaseInventory : MonoBehaviour
     {
         [SerializeField] protected List<ItemStack> Slots;
@@ -82,6 +81,27 @@ namespace Game.Inventory
                 }
             }
             return (newItem);
+        }
+        
+        public void Drop(ItemStack stack)
+        {
+            if (stack.IsEmpty)
+                return;
+            
+            if (stack.Content.GetType() == typeof(Plants.Plant.PlantItem))
+            {
+                Plants.Plant.PlantItem item = stack.Content as Plants.Plant.PlantItem;
+                item.Sow();
+            }
+            else
+            {
+                GameObject droppedObject = Instantiate(stack.Content.PrefabDroppedGO);
+                droppedObject.transform.position = transform.position + transform.forward + Vector3.up;
+                var itemStackB = droppedObject.GetComponent<ItemStackBehaviour>();
+                itemStackB.Slot.SetItem(stack.Content, stack.Quantity);
+                stack.EmptyStack();
+            }
+            Debug.Log("Drop ActualStack " + stack);
         }
     }
 }
