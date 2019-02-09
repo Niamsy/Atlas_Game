@@ -7,6 +7,7 @@ namespace Player {
 
         public override void OnSLStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
+            _Actor.SetSpeedScale(1f);
             DoLogic();
         }
 
