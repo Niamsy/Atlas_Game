@@ -442,6 +442,7 @@ namespace Player
             if (_Inputs.Pick.GetDown())
             {
                 IsPicking = true;
+                _CurrentAcceleratedSpeed.Value = 0f;
             }
             else if (IsPicking == true)
             {
