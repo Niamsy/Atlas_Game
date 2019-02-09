@@ -42,7 +42,6 @@ namespace Game.Inventory
 
 			return (true);
 		}
-
 		#endregion
 	}
 }
