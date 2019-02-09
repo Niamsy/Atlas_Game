@@ -19,7 +19,7 @@ namespace Plants
         [SerializeField]
         private List<Need>          _needs;
         [SerializeField]
-        private Material            _model;
+        private GameObject          _model;
         [SerializeField]
         private AtlasAudio.Audio    _audio;
         [SerializeField]
@@ -37,7 +37,7 @@ namespace Plants
             get { return _needs; }
         }
 
-        public Material Model
+        public GameObject Model
         {
             get { return _model; }
         }

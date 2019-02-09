@@ -32,7 +32,9 @@ namespace Plants.Plant
             Animator animator = this.GetComponent<Animator>();
             MeshRender = this.GetComponent<MeshRenderer>();
             if (stages.Count > 0)
-                MeshRender.material = stages[current_stage].Model;
+            {
+                Instantiate(stages[current_stage].Model, transform);
+            }
             if (stock && stock.GetCount() == 0)
                 animator.SetTrigger("FadeIn");
         }
@@ -60,6 +62,7 @@ namespace Plants.Plant
 
         public void GoToNextStage()
         {
+            DestroyImmediate(stages[current_stage].Model);
             ++current_stage;
             if (current_stage > stages.Count - 1)
             {
@@ -67,13 +70,14 @@ namespace Plants.Plant
             }
             else
             {
-                Debug.Log(current_stage);
-                MeshRender.material = stages[current_stage].Model;
+                Instantiate(stages[current_stage].Model, transform);
             }
         }
 
         public void DestroyPlant()
         {
+            if (current_stage > 1)
+                DestroyImmediate(stages[current_stage - 1].Model);
             Destroy(this.gameObject);
         }
 
