@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Menu
 {
@@ -17,36 +18,29 @@ namespace Menu
         private Animator    _animator;
         private int         _hashShowed = Animator.StringToHash("Showed");
         #endregion
-        
-        protected virtual void Awake()
+
+        private void Awake()
         {
             _animator = GetComponent<Animator>();
 
             InitialiseWidget();
             
-            Show(Displayed);
+            Show(Displayed, true);
         }
 
         protected abstract void InitialiseWidget();
+
+        public event Action<bool> OnShow;
         
-        public virtual void Show(bool display)
+        public virtual void Show(bool display, bool force = false)
         {
+            if (OnShow != null && !force)
+                OnShow(display);
             _animator.SetBool(_hashShowed, display);
             _displayed = display;
         }
         
-        /// <summary>
-        /// Enable or not the button in case the field are filled correctly
-        /// </summary>
-        /// <param name="value">Value unused (Here to be added as a listener)</param>
-        protected void UpdateButtonState_StringListener(string value)
-        {
-            UpdateButtonState();
-        }
-
-        /// <summary>
-        /// Enable or not the button in case the field are filled correctly
-        /// </summary>
-        protected abstract void UpdateButtonState();
+        public void Open() { Show(true); }
+        public void Close() { Show(false); }
     }
 }

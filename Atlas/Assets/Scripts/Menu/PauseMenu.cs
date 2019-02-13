@@ -1,28 +1,47 @@
-﻿using Game;
+﻿using System;
+using Game;
+using Menu.Settings;
 using UnityEngine;
 
 namespace Menu
 {
 	public class PauseMenu : MenuWidget
 	{
-		protected override void InitialiseWidget() {}
-		protected override void UpdateButtonState() {}
+		[Header("Pause specifics")]
+		[SerializeField] private SettingsMenu _settings;
 
+		protected override void InitialiseWidget()
+		{
+			_settings.OnShow += ExitSetting;
+		}
+
+		private void ExitSetting(bool settingsShowing)
+		{
+			if (!settingsShowing)
+				Open();
+		}
+		
 		private void Update()
 		{
 			if (Input.GetKeyDown(KeyCode.P))
 				Show(!Displayed);
 		}
 
-		public override void Show(bool value)
+		public void ShowSettings()
 		{
-			TimeManager.Instance.PauseGame(value);
-			base.Show(value);
+			_settings.Open();
+		}
+		
+		public override void Show(bool display, bool force = false)
+		{
+			TimeManager.Instance.PauseGame(display);
+			base.Show(display, force);
 		}
 
 		public void QuitTheGame()
 		{
 			Application.Quit();
 		}
+		
 	}
 }
