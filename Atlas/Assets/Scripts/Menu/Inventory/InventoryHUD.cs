@@ -12,10 +12,6 @@ public class InventoryHUD : MenuWidget
 	{
 	}
 
-	protected override void UpdateButtonState()
-	{
-	}
-
 	[Header("Audio")] public Audio OnToggleGUIAudio;
 	public AudioEvent OnToggleGUIEvent;
 
@@ -34,10 +30,10 @@ public class InventoryHUD : MenuWidget
         }
     }
 
-	public override void Show(bool value)
+	public override void Show(bool display, bool force = false)
 	{
-		TimeManager.Instance.PauseGame(value);
-		base.Show(value);
+		TimeManager.Instance.PauseGame(display);
+		base.Show(display, force);
 		_description.Reset();
 	}
 

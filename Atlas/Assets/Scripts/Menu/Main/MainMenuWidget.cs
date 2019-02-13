@@ -5,6 +5,7 @@ using UnityEngine.UI;
 namespace Menu
 {
     [RequireComponent(typeof(Animator))]
+    ///ToDo: Should use MenuWidget and remove copy of code
     public abstract class MainMenuWidget : MonoBehaviour
     {
         protected RequestManager        ActualRequestManager;
