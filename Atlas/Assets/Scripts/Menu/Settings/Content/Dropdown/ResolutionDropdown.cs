@@ -1,15 +1,14 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-namespace Menu.Settings
+namespace Menu.Settings.Content.Dropdown
 {
     public class ResolutionDropdown : SettingsEntryDropdown
     {
         private Resolution[]               _resolutions;
         private Resolution                 _actualResolution;
-        
-        protected override void Initialization()
+
+        public override void Initialization()
         {
             _resolutions = Screen.resolutions;
             base.Initialization();
