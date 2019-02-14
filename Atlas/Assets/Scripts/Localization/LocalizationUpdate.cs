@@ -1,21 +1,24 @@
 ﻿using UnityEngine;
 
-public class LocalizationUpdate : MonoBehaviour
+namespace Localization
 {
-    public bool IsFrench = false;
-
-    public void Switch()
+    public class LocalizationUpdate : MonoBehaviour
     {
-        AtlasFileSystem fs = AtlasFileSystem.Instance;
-        SystemLanguage newLanguage;
-        if (IsFrench)
-            newLanguage = SystemLanguage.English;
-        else
-            newLanguage = SystemLanguage.French;
+        public bool IsFrench = false;
 
-        Localization.LocalizationManager.Instance.CurrentLanguage = newLanguage;
-        fs.setConfigFileValue("Default", "Lang", ((int)newLanguage).ToString());
-        fs.saveConfig();
-        IsFrench = !IsFrench;
+        public void Switch()
+        {
+            AtlasFileSystem fs = AtlasFileSystem.Instance;
+            SystemLanguage newLanguage;
+            if (IsFrench)
+                newLanguage = SystemLanguage.English;
+            else
+                newLanguage = SystemLanguage.French;
+
+            Localization.LocalizationManager.Instance.CurrentLanguage = newLanguage;
+            fs.setConfigFileValue("Default", "Lang", ((int)newLanguage).ToString());
+            fs.saveConfig();
+            IsFrench = !IsFrench;
+        }
     }
 }

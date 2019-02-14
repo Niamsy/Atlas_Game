@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Plants.Plant;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Plants
 {
@@ -8,7 +9,6 @@ namespace Plants
     {
         public static PlantSystem Instance;
         
-
         #region Methods
         private void Awake()
         {

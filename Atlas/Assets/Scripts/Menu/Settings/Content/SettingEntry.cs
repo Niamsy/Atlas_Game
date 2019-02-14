@@ -1,23 +1,18 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Menu.Settings
+namespace Menu.Settings.Content
 {
     public abstract class SettingEntry : MonoBehaviour
     {
-        private void Awake()
-        {
-            Initialization();
-        }
-        
-        protected abstract void Initialization();
+        public abstract void Initialization();
         
         public abstract void LoadData();
 
         public abstract bool DidValueChanged();
         
         #region OnValueDidChanged
-        protected void OnValueDidChanged()
+        protected virtual void OnValueDidChanged()
         {
             if (OnValueChanged != null)
                 OnValueChanged();

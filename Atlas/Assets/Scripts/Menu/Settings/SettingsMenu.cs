@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Menu.Settings.Content;
+using Menu.Settings.Content.Dropdown;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Menu.Settings
@@ -22,8 +24,11 @@ namespace Menu.Settings
             _settings = GetComponentsInChildren<SettingEntry>();
 
             foreach (var setting in _settings)
+            {
+                setting.Initialization();
                 setting.OnValueChanged += SubSettingChanged;
-            
+            }
+
             SubSettingChanged();
             
             _saveClose.onClick.AddListener(OnSaveThenClose);

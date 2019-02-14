@@ -1,15 +1,14 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-namespace Menu.Settings
+namespace Menu.Settings.Content.Dropdown
 {
     public abstract class SettingsEntryDropdown : SettingEntry
     {
-        [SerializeField] protected Dropdown  Dropdown;
-        protected int                        CurrentIndex;
+        [SerializeField] protected UnityEngine.UI.Dropdown  Dropdown;
+        protected int                                       CurrentIndex;
 
-        protected override void Initialization()
+        public override void Initialization()
         {
             Dropdown.ClearOptions();
             Dropdown.AddOptions(GetOptions());

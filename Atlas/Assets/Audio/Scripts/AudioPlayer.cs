@@ -1,7 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Audio;
 
 namespace AtlasAudio {
+    public enum AudioGroup
+    {
+        Effect = 1,
+        Music = 2
+    }
+    
     public class AudioPlayer : Singleton<AudioPlayer>
     {
         [MinMaxRange(2, 10)]
@@ -16,8 +23,21 @@ namespace AtlasAudio {
         private ClampedInteger currentMusicSource;
         private ClampedInteger currentMusic;
 
+        #region Volumes
+        private readonly Dictionary<AudioGroup, float> _groupsVolume = new Dictionary<AudioGroup, float> { { AudioGroup.Effect, 0}, { AudioGroup.Music, 0} };
+        private readonly string _volumeSuffix = "Volume";
+        
+        public float MasterVolume { get; private set; }
+
+        public AudioMixer Mixer;
+        #endregion
+            
         // Use this for initialization
-        void Start() {
+        void Start()
+        {
+            LoadMasterVolume();
+            LoadGroupsVolume();
+            
             int i = 0;
             while (i < AudioPoolSize)
             {
@@ -30,7 +50,7 @@ namespace AtlasAudio {
             currentMusicSource = new ClampedInteger(MusicPoolSize);
             currentMusic = new ClampedInteger(MusicPoolSize);
         }
-
+        
         // Update is called once per frame
         void Update() {
             foreach (Music music in musics)
@@ -41,6 +61,63 @@ namespace AtlasAudio {
                 }
             }     
         }
+
+        #region Volume control
+        #region MasterVolume
+        private void LoadMasterVolume()
+        {
+            MasterVolume = PlayerPrefs.GetFloat("Main Volume");
+            AudioListener.volume = MasterVolume;
+        }
+
+        private void SaveMasterVolume()
+        {
+            PlayerPrefs.SetFloat("Main Volume", MasterVolume);
+            AudioListener.volume = MasterVolume;
+        }
+        
+        public void SetMasterVolume(float value)
+        {
+            MasterVolume = value;
+            SaveMasterVolume();
+        }
+        #endregion
+        
+        #region Group Volume
+
+        private static void SetMixerVolume0To1(AudioMixer mixer, string key, float value)
+        {
+            mixer.SetFloat(key, (value * 80) - 80);
+        }
+        
+        private void LoadGroupVolume(AudioGroup audioGroup)
+        {
+            string key = audioGroup + _volumeSuffix;
+            _groupsVolume[audioGroup] = PlayerPrefs.GetFloat(key);
+            SetMixerVolume0To1(Mixer, key, _groupsVolume[audioGroup]);
+        }
+        
+        public void LoadGroupsVolume()
+        {
+            LoadGroupVolume(AudioGroup.Effect);
+            LoadGroupVolume(AudioGroup.Music);
+        }
+
+        public void SetGroupVolume(AudioGroup audioGroup, float value)
+        {
+            _groupsVolume[audioGroup] = value;
+            string key = audioGroup + _volumeSuffix;
+            PlayerPrefs.SetFloat(key, value);
+            SetMixerVolume0To1(Mixer, key, value);
+        }
+        
+        public float GetGroupVolume(AudioGroup audioGroup)
+        {
+            return (_groupsVolume[audioGroup]);
+        }
+        #endregion
+        #endregion
+        
 
         public void Play(Audio audio, AudioSource audioSource)
         {
