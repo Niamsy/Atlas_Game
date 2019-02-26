@@ -17,6 +17,10 @@ namespace Menu.Inventory.ItemDescription
 		[SerializeField] private Text		_name;
 		[SerializeField] private Text		_description;
 		private ItemAbstract				_item;
+		public ItemAbstract DisplayedItem
+		{
+			get { return (_item); }
+		}
 		private ASubItemDescriptionHUD[]	_subDescriptionHUD;
 		#endregion
 		
