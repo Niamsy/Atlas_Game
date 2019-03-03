@@ -27,10 +27,16 @@ namespace Menu.Inventory.ItemDescription
 		#region Methods
 		private void Awake()
 		{
-			_subDescriptionHUD = GetComponentsInChildren<ASubItemDescriptionHUD>();
-			UpdateDisplay();
+			if (_subDescriptionHUD == null)
+				Init();
+				UpdateDisplay();
 		}
 
+		private void Init()
+		{
+			_subDescriptionHUD = GetComponentsInChildren<ASubItemDescriptionHUD>();
+		}
+		
 		public void Reset()
 		{
 			SetItem(null);
@@ -39,7 +45,9 @@ namespace Menu.Inventory.ItemDescription
 		public void SetItem(ItemAbstract item)
 		{
 			_item = item;
-			
+
+			if (_subDescriptionHUD == null)
+				Init();
 			foreach (var subDescriptionHUD in _subDescriptionHUD)
 				subDescriptionHUD.SetItem(_item);
 			UpdateDisplay();
