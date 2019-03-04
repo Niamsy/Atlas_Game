@@ -20,7 +20,7 @@ namespace Plants
 
         void Consume();
 
-        void Load(IProducer producer, int quantity);
+        int Load(IProducer producer, int quantity);
 
     }
 }
