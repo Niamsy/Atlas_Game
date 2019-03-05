@@ -27,6 +27,9 @@ namespace Game
 				Quantity = item.Quantity;
 			}
 		}
+
+        public DateTime lastGetScannedPlant;
+
 		public List<ItemSaveData> Inventory;
 		
 		public ItemSaveData LeftHandItem;
