@@ -48,17 +48,18 @@ namespace Plants
 
         public List<Resources> Remove(int quantity)
         {
-            if (quantity < count)
+            List<Resources> toRemove = new List<Resources>();
+            int i = 0;
+            
+            while (i < quantity && objects.Count > 0)
             {
-                objects.RemoveRange(0, quantity);
-                count = objects.Count;
+                toRemove.Add(objects[0]);
+                objects.RemoveAt(0);
+                ++i;
+                --count;
             }
-            else
-            {
-                objects.Clear();
-                count = 0;
-            }
-            return objects;
+
+            return toRemove;
         }
     }
 }

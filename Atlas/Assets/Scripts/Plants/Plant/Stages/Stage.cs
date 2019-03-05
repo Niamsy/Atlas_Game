@@ -8,24 +8,28 @@ namespace Plants
     [CreateAssetMenu(menuName = "Plant System/Stage")]
     public class Stage : ScriptableObject
     {
+        [System.Serializable]
         public struct Need
         {
             public Resources       type;
             public int             quantity;
         }
-
+        [Header("Gameplay")]
         [SerializeField]
-        private SoilType              _soils;
+        private SoilType            _soils;
         [SerializeField]
         private List<Need>          _needs;
-        [SerializeField]
-        private GameObject          _model;
-        [SerializeField]
-        private AtlasAudio.Audio    _audio;
         [SerializeField]
         private float               _height;
         [SerializeField]
         private float               _temperature;
+        [SerializeField]
+        [Header("Miscellaneous")]
+        private GameObject          _model;
+        [SerializeField]
+        private Material            _material;
+        [SerializeField]
+        private AtlasAudio.Audio    _audio;
 
         public SoilType Soils
         {
@@ -55,6 +59,11 @@ namespace Plants
         public float Temperature
         {
             get { return _temperature; }
+        }
+
+        public Material Material
+        {
+            get { return _material; }
         }
     }
 }
