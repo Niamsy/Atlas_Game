@@ -1,4 +1,6 @@
 ﻿using Game.Inventory;
+using Game.Item.PlantSeed;
+using Player;
 using UnityEngine;
 
 namespace Game.Player
@@ -10,6 +12,11 @@ namespace Game.Player
         private GameObject _leftHandGO;
         private Transform _leftHandTransform;
         public ItemStack LeftHandItem { get { return (_leftHandItem); } }
+        private PlayerController _controller;
+        private int             _handEquipToggle = 0;
+        private Seed            _plant;
+        private ItemStack       _itemStack;
+        private Transform       _itemTransform;
 
         [SerializeField] private ItemStack _rightHandItem;
         private GameObject _rightHandGO;
@@ -23,10 +30,35 @@ namespace Game.Player
 
             _leftHandTransform = transform.Find("LeftHand");
             _rightHandTransform = transform.Find("RightHand");
-            
+            _controller = FindObjectOfType<PlayerController>();
             LoadData();
 
             GameControl.BeforeSaving += SaveData;
+        }
+
+        private void Update()
+        {
+            if ((_handEquipToggle = _controller.CheckForEquippedHandUsed()) > 0)
+            {
+                if ((_handEquipToggle == 1 && RightHandItem.Content is Seed) ||
+                    (_handEquipToggle == 2 && LeftHandItem.Content is Seed))
+                {
+                    _plant = (_handEquipToggle == 1) ? RightHandItem.Content as Seed : LeftHandItem.Content as Seed;
+                    _itemStack = (_handEquipToggle == 1) ? RightHandItem : LeftHandItem;
+                    _itemTransform = (_handEquipToggle == 1) ? _rightHandTransform : _leftHandTransform;
+                    _controller.TrackToSow(_itemTransform);
+                    _controller.CheckForSowing(true);
+                    if (_plant != null && _itemStack != null && _itemStack.Quantity > 0 && _controller.CheckToSow())
+                    {
+                        _controller.SowPlant(_plant);
+                        _itemStack.ModifyQuantity(_itemStack.Quantity - 1);
+                    }
+                }
+                else
+                {
+                    _controller.CheckForSowing(false);
+                }
+            }
         }
 
         #region Load/Saving Methods

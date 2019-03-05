@@ -9,7 +9,7 @@ public class PlantNextStage : MonoBehaviour
 
     void Update()
     {
-        if (_Item && _Item.GetComponent<PlayerController>().CheckForNextStageInput())
+        /* if (_Item && _Item.GetComponent<PlayerController>().CheckForNextStageInput())
         {
             Plants.Plant.PlantModel plant_model = this.GetComponent<Plants.Plant.PlantModel>();
             if (plant_model)
@@ -35,7 +35,7 @@ public class PlantNextStage : MonoBehaviour
                 plant_model.ConsumeResource();
             }
             _Item.GetComponent<PlayerController>().IsConsume = false;
-        }
+        }*/
     }
 
     void OnTriggerEnter(Collider col)
