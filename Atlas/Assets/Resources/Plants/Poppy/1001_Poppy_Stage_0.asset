@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: 1001_Poppy_Stage_0
   m_EditorClassIdentifier: 
   _soils: -1
-  _model: {fileID: 6556300606563020349, guid: c4b9dfe70b685004e9d7aa10edce202f, type: 3}
+  _needs:
+  - type: {fileID: 11400000, guid: f1fecb0851582354a8fb522ebd715a14, type: 2}
+    quantity: 100
+  _height: 1
+  _temperature: 10
+  _model: {fileID: 100000, guid: 79fd22ea6e85d58469218406934156c6, type: 3}
+  _material: {fileID: 2100000, guid: 95d17ba8134fa954cb89b5895d45b392, type: 2}
   _audio: {fileID: 0}
-  _height: 0
-  _temperature: 0
