@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
 using Tools;
 using UnityEngine;
+using Plants.GrowerSystem;
 
 namespace Plants.Plant
 {
-    public enum GrowthRate : short
-    {
-        Slow    = 1, // 001
-        Normal  = 2, // 010
-        Quick   = 4  // 100
-    }
+    //public enum GrowthRate : short
+    //{
+    //    Slow    = 1, // 001
+    //    Normal  = 2, // 010
+    //    Quick   = 4  // 100
+    //}
 
     public enum Reproduction : short
     {
@@ -43,7 +44,7 @@ namespace Plants.Plant
         public float                               MaxHeight { get { return (_maxHeight); } }
 
         [Header("Growth")]
-        [SerializeField] private GrowthRate        _growthRate = GrowthRate.Normal;
+        [SerializeField] private GrowthRate        _growthRate;
         public GrowthRate                          GrowthRate { get { return (_growthRate); } }
         [SerializeField] private float             _growthDuration = 1f;
         public float                               GrowthDuration { get { return (_growthDuration); } }
@@ -79,8 +80,7 @@ namespace Plants.Plant
         public bool[]                              CuttingPeriods { get { return (_cuttingPeriods); } }
         
         [Header("Stages")]
-        [SerializeField] private List<Stage>       _stages;
+        [SerializeField] private List<Stage>       _stages = new List<Stage>();
         public List<Stage>                         Stages { get { return (_stages); } }
-
     }
 }
