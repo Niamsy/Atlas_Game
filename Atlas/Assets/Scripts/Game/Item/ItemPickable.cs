@@ -1,19 +1,25 @@
 ﻿using Game.Inventory;
+using Plants.Plant;
 using Player;
 using UnityEngine;
 
 public class ItemPickable : MonoBehaviour
 {
     private GameObject _Player;
-
+    private PlantModel _ModelPlant;
     void Start()
     {
         _Player = null;
     }
 
+    private void Awake()
+    {
+        _ModelPlant = gameObject.GetComponent<PlantModel>();
+    }
+
     void Update()
     {
-        if (_Player && _Player.GetComponent<PlayerController>().CheckForPickInput())
+        if (_Player && _ModelPlant && _ModelPlant.PlantItem && _ModelPlant.PlantItem.IsSowed == false && _Player.GetComponent<PlayerController>().CheckForPickInput())
         {
             PlayerInventory inventory = FindObjectOfType<PlayerInventory>();
             ItemStack baseStack = gameObject.GetComponent<ItemStackBehaviour>().Slot;
