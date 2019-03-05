@@ -22,6 +22,8 @@ namespace Networking
 		public static string RegisterPath { get { return ("user/registration"); } }
 		public static string ResetPasswordPath { get { return ("user/resetPassword"); } }
 
+        public static string GetScannedPlantsPath { get { return ("user/plants"); } }
+
 		#endregion
 
 		#region API Token
@@ -380,6 +382,60 @@ namespace Networking
 
 		public event RequestFinishedDelegate OnResetRequestFinished;
 
-		#endregion
-	}
+        #endregion
+
+        #region Get scanned plants
+        /// <summary>
+		/// Get last scanned plants
+		/// </summary>
+		/// <returns>Return true if the networkManager could process the request and false if another request was pending</returns>
+		public bool GetScannedPlants()
+        {
+            if (!CanReceiveANewRequest || !IsConnected())
+                return (false);
+
+            _actualOperation = StartCoroutine(GetScannedPlantsCoroutine());
+
+            return (true);
+        }
+
+        private IEnumerator GetScannedPlantsCoroutine()
+        {
+            UnityWebRequest getRequest = UnityWebRequest.Get(ApiAdress + GetScannedPlantsPath);
+            getRequest.method = UnityWebRequest.kHttpVerbGET;
+            getRequest.SetRequestHeader("api_token", _apiToken);
+            getRequest.SetRequestHeader("Content-Type", "application/json");
+            yield return getRequest.SendWebRequest();
+
+            bool success = (getRequest.responseCode == 200);
+
+            BodyReturnApiToken bodyReturn = JsonUtility.FromJson<BodyReturnApiToken>(getRequest.downloadHandler.text);
+            Debug.Log(bodyReturn);
+
+            string errorMsg = "";
+            if (!success)
+            {
+                Debug.Log("ERROR HTTP: " + getRequest.responseCode + ":" + getRequest.error);
+                switch (getRequest.responseCode)
+                {
+                    case (500):
+                        errorMsg = _errorDictionnary.ApiError;
+                        break;
+                    case (0):
+                        errorMsg = _errorDictionnary.ApiUnreachable;
+                        break;
+                    default:
+                        errorMsg = _errorDictionnary.UnknowError;
+                        break;
+                }
+            }
+
+            CleanForNextRequest();
+            if (OnGetScannedPlantsRequestFinished != null)
+                OnGetScannedPlantsRequestFinished(success, errorMsg);
+        }
+
+        public event RequestFinishedDelegate OnGetScannedPlantsRequestFinished;
+        #endregion
+    }
 }
