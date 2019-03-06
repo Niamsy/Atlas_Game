@@ -10,13 +10,13 @@ namespace Plants
 
         int Quantity { get; }
 
-        Stock Stocks { get; }
+        Stock Stock { get; }
 
         int StarvationTimeLimit { get; }
 
-        bool Starverd { get; }
+        bool Starved { get; }
 
-        FloatReference Range { get; }
+        float Range { get; }
 
         void Consume();
 

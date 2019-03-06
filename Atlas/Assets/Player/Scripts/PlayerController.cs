@@ -3,6 +3,8 @@ using InputManagement;
 using Atlas_Physics;
 using Game.Inventory;
 using Variables;
+using Plants.Plant;
+using Game.Item.PlantSeed;
 
 namespace Player
 {
@@ -48,40 +50,26 @@ namespace Player
         private FloatVariable _CurrentAcceleratedSpeed;
         #endregion
 
-        #region Temporary Variables
-        private bool _isConsume = false;
+        #region Sow Variables
 
-        public bool IsConsume
+        private bool _canSow = false;
+        public bool CanSow
         {
-            get { return _isConsume; }
-
-            set { _isConsume = value; }
+            get { return _canSow; }
+            set { _canSow = value; }
         }
 
-        private bool _isGive = false;
+        public Vector3 plantPosition = Vector3.zero;
 
-        public bool IsGive
-        {
-            get { return _isGive; }
-
-            set { _isGive = value; }
-        }
-
-        private bool _isNextStage = false;
-
-        public bool IsNextStage
-        {
-            get { return _isNextStage; }
-
-            set { _isNextStage = value; }
-        }
+        private float decay = 0f;
         #endregion
-
+        
         #region accessible properties
         public Rigidbody Body
         {
             get { return _Body; }
         }
+
         public bool IsGrounded
         {
             get { return _Animator.GetBool(_HashGrounded); }
@@ -112,8 +100,25 @@ namespace Player
                 _Animator.SetBool(_HashPicking, value);
             }
         }
-    
 
+        public bool IsCheckSowing
+        {
+            get { return _Animator.GetBool(_HashCheckSowing); }
+            set { _Animator.SetBool(_HashCheckSowing, value); }
+        }
+
+        public bool IsSowing
+        {
+            get { return _Animator.GetBool(_HashSowing); }
+            set { _Animator.SetBool(_HashSowing, value); }
+        }
+        
+        private bool _isEquippedSlotUsed;
+        public bool IsEquippedSlotUsed
+        {
+            get { return _isEquippedSlotUsed; }
+            set { _isEquippedSlotUsed = value; }
+        }
 
         public bool IsCrouched
         {
@@ -152,6 +157,7 @@ namespace Player
         private BodyController _BodyController;
         private GameObject _GroundChecker;
         private AtlasGravity _Gravity;
+        private int lastCheckSow = 0;
         #endregion
 
 
@@ -165,6 +171,9 @@ namespace Player
         private readonly int _HashCrouched = Animator.StringToHash("Crouched");
         private readonly int _HashProned = Animator.StringToHash("Proned");
         private readonly int _HashPicking = Animator.StringToHash("Picking");
+        private readonly int _HashCheckSowing = Animator.StringToHash("CheckingSow");
+        private readonly int _HashSowing = Animator.StringToHash("Sowing");
+
         #endregion
 
         #region Initialization
@@ -401,6 +410,91 @@ namespace Player
             return IsGrounded && IsSprinting;
         }
 
+        public int CheckForEquippedHandUsed()
+        {
+            IsSowing = false;
+            if (decay > 0f)
+            {
+                decay -= Time.deltaTime;
+            }
+            if (decay < 0f)
+                decay = 0f;
+            if (_Inputs.RightHandUse.GetDown())
+            {
+                if (IsGrounded)
+                    lastCheckSow = 1;
+            }
+            if (_Inputs.LeftHandUse.GetDown())
+            {
+                if (IsGrounded)
+                    lastCheckSow = 2;
+            }
+            Debug.Log("Last check : " + lastCheckSow);
+            return lastCheckSow;
+        }
+
+        public void CheckForSowing(bool isCheck)
+        {
+            IsCheckSowing = isCheck;
+            Debug.Log("Currently checking ...: " + IsCheckSowing);
+        }
+
+        public bool CheckToSow()
+        {
+            if (IsCheckSowing)
+            {
+                if (_Inputs.Sow.GetDown() && CanSow && decay == 0f)
+                {
+                    decay = 1f;
+                    IsSowing = true;
+                    Debug.Log("SOW !!");
+                }
+                if (_Inputs.Sow.GetUp())
+                {
+                    IsSowing = false;
+                }
+                if (_Inputs.Skip.GetDown())
+                {
+                    IsSowing = false;
+                    IsCheckSowing = false;
+                    lastCheckSow = 0;
+                }
+            }
+            return IsGrounded && IsCheckSowing && IsSowing;
+        }
+
+        public void TrackToSow(Transform from)
+        {
+            if (IsCheckSowing)
+            {
+                Ray ray = new Ray(from.position, _Camera.transform.forward * 2000.0f);
+                Debug.DrawRay(ray.origin, ray.direction * 2000.0f, Color.red);
+                RaycastHit raycastHit;
+                if (Physics.Raycast(ray, out raycastHit, 2000.0f, _GroundLayers))
+                {
+                    if (raycastHit.collider.gameObject.layer == LayerMask.NameToLayer("Ground") && raycastHit.distance < 2.0f)
+                    {
+                        Debug.Log("You can SOW here :) !");
+                        CanSow = true;
+                        plantPosition = raycastHit.point;
+                    }
+                    else
+                    {
+                        Debug.Log("You cannot SOW here :/ !");
+                        CanSow = false;
+                    }
+                }
+            }
+        }
+
+        public void SowPlant(Seed plant)
+        {
+            /* PlantModel model = new PlantModel();
+            model.PlantItem = new PlantItem();
+            model.PlantItem.Sow();*/
+            Instantiate(plant.PrefabDroppedGO, plantPosition, new Quaternion(0, 0, 0, 1));
+        }
+
         public bool CheckForCrouchedInput()
         {
             return IsGrounded && _Inputs.Crouch.GetDown();
@@ -409,32 +503,6 @@ namespace Player
         public bool CheckForPronedInput()
         {
             return IsGrounded && _Inputs.Prone.GetDown();
-        }
-
-        public bool CheckForConsumeInput()
-        {
-            if (_Inputs.ConsumeWater.GetDown())
-            {
-                IsConsume = true;
-            }
-            else if (IsConsume == true)
-            {
-                IsConsume = false;
-            }
-            return IsGrounded && IsConsume;
-        }
-
-        public bool CheckForGiveInput()
-        {
-            if (_Inputs.GiveWater.GetDown())
-            {
-                IsGive = true;
-            }
-            else if (IsGive == true)
-            {
-                IsGive = false;
-            }
-            return IsGrounded && IsGive;
         }
 
         public bool CheckForPickInput()
@@ -449,19 +517,6 @@ namespace Player
                 IsPicking = false;
             }
             return IsGrounded && IsPicking;
-        }
-
-        public bool CheckForNextStageInput()
-        {
-            if (_Inputs.NextStage.GetDown())
-            {
-                IsNextStage = true;
-            }
-            if (_Inputs.NextStage.GetUp())
-            {
-                IsNextStage = false;
-            }
-            return IsGrounded && IsNextStage;
         }
 
         public void ToggleCrouchedState()

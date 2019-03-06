@@ -64,8 +64,8 @@ namespace Plants
             public int              quantity;
             public StockCons        stock;
             public int              starvationTimeLimit;
-            public bool             starverd;
-            public FloatReference   range;
+            public bool             starved;
+            public float   range;
         }
 
         [Serializable]
@@ -124,11 +124,11 @@ namespace Plants
 
                     cpy.quantity = lconsumer.Quantity;
                     cpy.rate = lconsumer.Rate;
-                    cpy.starverd = lconsumer.Starverd;
+                    cpy.starved = lconsumer.Starved;
                     cpy.starvationTimeLimit = lconsumer.StarvationTimeLimit;
-                    cpy.stock.count = lconsumer.Stocks.GetCount();
-                    cpy.stock.limit = lconsumer.Stocks.GetLimit();
-                    foreach (Resources obj in lconsumer.Stocks.GetObjects())
+                    cpy.stock.count = lconsumer.Stock.GetCount();
+                    cpy.stock.limit = lconsumer.Stock.GetLimit();
+                    foreach (Resources obj in lconsumer.Stock.GetObjects())
                     {
                         cpy.stock.objects.Add(obj);
                     }
@@ -165,11 +165,11 @@ namespace Plants
                     Consumer copy_consumer = new Consumer();
                     copy_consumer.Quantity = con.quantity;
                     copy_consumer.Rate = con.rate;
-                    copy_consumer.Starverd = con.starverd;
+                    copy_consumer.Starved = con.starved;
                     copy_consumer.StarvationTimeLimit = con.starvationTimeLimit;
-                    copy_consumer.Stocks.SetCount(con.stock.count);
-                    copy_consumer.Stocks.SetLimit(con.stock.limit);
-                    copy_consumer.Stocks.Put(con.stock.objects);
+                    copy_consumer.Stock.SetCount(con.stock.count);
+                    copy_consumer.Stock.SetLimit(con.stock.limit);
+                    copy_consumer.Stock.Put(con.stock.objects);
                     copy_consumer.Range = con.range;
                     consumers.Add(copy_consumer);
                 }
@@ -195,8 +195,8 @@ namespace Plants
         public void Save()
         {
             GameControl.control.gameData.PlantData.SetFromTransform(plant.transform);
-            GameControl.control.gameData.PlantData.SetProdData(plant.Producer);
-            GameControl.control.gameData.PlantData.SetConsData(plant.Consumer);
+            GameControl.control.gameData.PlantData.SetProdData(plant.Producers);
+            GameControl.control.gameData.PlantData.SetConsData(plant.Consumers);
         }
 
         private void Awake()
@@ -204,8 +204,8 @@ namespace Plants
             plant.transform.position = GameControl.control.gameData.PlantData.GetPosition();
             plant.transform.rotation = GameControl.control.gameData.PlantData.GetRotation();
             plant.transform.localScale = GameControl.control.gameData.PlantData.GetScale();
-            plant.Producer = GameControl.control.gameData.PlantData.GetProducers();
-            plant.Consumer = GameControl.control.gameData.PlantData.GetConsumers();
+            plant.Producers = GameControl.control.gameData.PlantData.GetProducers();
+            plant.Consumers = GameControl.control.gameData.PlantData.GetConsumers();
             _LastSavedTime = Time.time;
         }
 
