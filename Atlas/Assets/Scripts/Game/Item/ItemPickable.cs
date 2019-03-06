@@ -19,8 +19,10 @@ public class ItemPickable : MonoBehaviour
 
     void Update()
     {
-        if (_Player && _ModelPlant && _ModelPlant.PlantItem && _ModelPlant.PlantItem.IsSowed == false && _Player.GetComponent<PlayerController>().CheckForPickInput())
+        if (_Player && _Player.GetComponent<PlayerController>().CheckForPickInput())
         {
+            if (_ModelPlant && _ModelPlant.PlantItem && _ModelPlant.PlantItem.IsSowed == true)
+                return;
             PlayerInventory inventory = FindObjectOfType<PlayerInventory>();
             ItemStack baseStack = gameObject.GetComponent<ItemStackBehaviour>().Slot;
             ItemStack leftStack = inventory.AddItemStack(baseStack);

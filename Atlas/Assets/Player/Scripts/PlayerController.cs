@@ -492,7 +492,8 @@ namespace Player
             /* PlantModel model = new PlantModel();
             model.PlantItem = new PlantItem();
             model.PlantItem.Sow();*/
-            Instantiate(plant.PrefabDroppedGO, plantPosition, new Quaternion(0, 0, 0, 1));
+            GameObject plantModel = Instantiate(plant.PrefabDroppedGO, plantPosition, new Quaternion(0, 0, 0, 1));
+            //plantModel.GetComponent<PlantModel>().PlantItem.Sow();
         }
 
         public bool CheckForCrouchedInput()
