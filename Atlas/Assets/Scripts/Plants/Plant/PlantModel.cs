@@ -9,6 +9,7 @@ namespace Plants.Plant
         #region Public Properties
 
         public PlantStatistics PlantStatistics;
+        public PlantItem PlantItem;
 
         #endregion
 
