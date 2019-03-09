@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,7 +8,10 @@ namespace Menu
 {
     public class SceneLoader : MonoBehaviour
     {
-        [SerializeField] private string _startUpScene;
+        #if UNITY_EDITOR
+        public static string ActualLoadedScene;
+        #endif
+        [SerializeField] private SceneAsset _startUpScene;
         
         private static SceneLoader _instance = null;
         public static SceneLoader Instance
@@ -17,7 +21,7 @@ namespace Menu
             {
                 #if UNITY_EDITOR
                 if (_instance == null)
-                    Debug.LogException(new Exception("No SceneLoader found please add the 'Base Managers' Scene, Solve this ASAP"));
+                    Debug.LogError("Please open the ATLAS/Master scene windows");
                 #endif
 
                 return _instance;
@@ -39,13 +43,22 @@ namespace Menu
 
             Instance = this;
         }
-        
-#if !UNITY_EDITOR
+
         private void Start()
         {
-            SceneManager.LoadScene(_startUpScene, LoadSceneMode.Additive);
-        }
+#if UNITY_EDITOR
+            if (ActualLoadedScene == null || ActualLoadedScene == "Master Scene")
+            {
+                if (ActualLoadedScene == null)
+                    Debug.LogError("Please open the ATLAS/Master scene windows");
 #endif
+                SceneManager.LoadScene(_startUpScene.name, LoadSceneMode.Additive);
+#if UNITY_EDITOR
+            }
+            else
+                SceneManager.LoadScene(ActualLoadedScene, LoadSceneMode.Additive);
+#endif
+        }
 
         public void LoadScene(string sceneToLoad, string sceneToUnload)
         {
