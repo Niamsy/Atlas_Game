@@ -101,15 +101,6 @@ namespace Networking
 		#endregion
 
 		#region Initialization
-		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-		private static void RuntimeInit()
-		{
-			if (FindObjectOfType<RequestManager>() != null)
-				return;
-
-			var go = new GameObject { name = "RequestManager" };
-			go.AddComponent<RequestManager>();
-		}
 		/// <summary>
 		/// Initialize the manager
 		/// </summary>
@@ -118,7 +109,6 @@ namespace Networking
 			if (Instance == null)
 			{
 				Instance = this;
-				DontDestroyOnLoad(gameObject);
 				Application.wantsToQuit += StartQuitSequence;
 				_errorDictionnary = Resources.Load<RequestErrorDictionnary>("Localization/RequestManager/RequestErrorDictionnary");
 			}
@@ -153,9 +143,8 @@ namespace Networking
 			return false;
 		}
 
-		private void QuitOnAfterDisconnection(bool sucess, string message)
+		private void QuitOnAfterDisconnection(bool success, string message)
 		{
-			Debug.Log("Quit");
 			Application.Quit();
 		}
 		#endregion
@@ -194,11 +183,15 @@ namespace Networking
 			if (success)
             {
                 _apiToken = bodyReturn.api_token;
+#if UNITY_EDITOR
                 Debug.Log("Connection api token : " + _apiToken);
+#endif
             }
             else
 			{
-				Debug.Log("ERROR HTTP: " + postRequest.responseCode + ":" + postRequest.error + " : " + bodyReturn.message);
+#if UNITY_EDITOR
+				Debug.Log("ERROR HTTP: " + postRequest.responseCode + ":" + postRequest.error);
+#endif
 				switch (postRequest.responseCode)
 				{
 					case (500):
@@ -263,7 +256,9 @@ namespace Networking
 				_apiToken = bodyReturn.api_token;
 			else
 			{
+#if UNITY_EDITOR
 				Debug.Log("ERROR HTTP: " + postRequest.responseCode + " : " + postRequest.error);
+#endif
 				switch (postRequest.responseCode)
 				{
 					case (500):
@@ -328,7 +323,9 @@ namespace Networking
 
 			if (!success)
 			{
+#if UNITY_EDITOR
 				Debug.Log("ERROR HTTP: " + postRequest.responseCode + ":" + postRequest.error);
+#endif
 				switch (postRequest.responseCode)
 				{
 					case (500):
@@ -386,7 +383,9 @@ namespace Networking
 			string errorMsg = "";
 			if (!success)
 			{
+#if UNITY_EDITOR
 				Debug.Log("ERROR HTTP: " + postRequest.responseCode + ":" + postRequest.error);
+#endif
 				switch (postRequest.responseCode)
 				{
 					case (401):
@@ -448,8 +447,10 @@ namespace Networking
                 scannedPlants.AddRange(JsonHelper.GetJsonArray<ScannedPlant>(getRequest.downloadHandler.text));
             else
             {
-                Debug.Log("ERROR HTTP: " + getRequest.responseCode + ":" + getRequest.error);
-                switch (getRequest.responseCode)
+#if UNITY_EDITOR
+	            Debug.Log("ERROR HTTP: " + getRequest.responseCode + ":" + getRequest.error);
+#endif
+	            switch (getRequest.responseCode)
                 {
                     case (500):
                         errorMsg = _errorDictionnary.ApiError;

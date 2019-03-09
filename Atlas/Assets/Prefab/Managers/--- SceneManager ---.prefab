@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7232165751580226536}
   - component: {fileID: 2974265824896447294}
+  - component: {fileID: 6374228670306910177}
   m_Layer: 0
   m_Name: '--- SceneManager ---'
   m_TagString: Untagged
@@ -43,5 +44,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb5251f16aaa61b4089ec94e5bebb386, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _startUpScene: MainMenu
   _loadingScreen: {fileID: 0}
   Progress: 0
+--- !u!114 &6374228670306910177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2974265824896447293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04a5e027dd614c149b0995f0821ceec9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
