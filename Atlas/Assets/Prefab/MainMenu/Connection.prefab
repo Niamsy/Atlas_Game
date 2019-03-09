@@ -1065,7 +1065,6 @@ GameObject:
   - component: {fileID: 5179233159571959724}
   - component: {fileID: 5001363004830079454}
   - component: {fileID: 5019985753733438756}
-  - component: {fileID: 5001609967068260010}
   m_Layer: 5
   m_Name: Connection
   m_TagString: Untagged
@@ -1114,12 +1113,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ErrorText: {fileID: 5001738543291069000}
   _displayed: 1
+  NextScene: Atlas
   _username: {fileID: 5000720418724024484}
   _password: {fileID: 5000777865171097742}
   _connectionButton: {fileID: 5001698321213159650}
   _registerButton: {fileID: 5001714790049392268}
   _passwordLost: {fileID: 5002249870175532186}
-  _loader: {fileID: 5001609967068260010}
 --- !u!95 &5019985753733438756
 Animator:
   serializedVersion: 3
@@ -1139,20 +1138,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &5001609967068260010
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4970609887239613550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb5251f16aaa61b4089ec94e5bebb386, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SceneToLoad: Atlas
-  SceneMode: 0
 --- !u!1 &4970625613751683436
 GameObject:
   m_ObjectHideFlags: 0
@@ -1576,7 +1561,6 @@ GameObject:
   - component: {fileID: 5182115580603262982}
   - component: {fileID: 5002116193242413882}
   - component: {fileID: 5001698321213159650}
-  - component: {fileID: 5002297075130352334}
   m_Layer: 5
   m_Name: Connect
   m_TagString: Untagged
@@ -1683,17 +1667,3 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &5002297075130352334
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4971327845786016194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb5251f16aaa61b4089ec94e5bebb386, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SceneToLoad: Atlas
-  SceneMode: 0
