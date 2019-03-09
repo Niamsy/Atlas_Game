@@ -60,7 +60,7 @@ namespace Menu.Main
             if (success)
             {
                 Debug.Log("CONNECTED");
-                SceneLoader.Instance.LoadScene(NextScene);
+                SceneLoader.Instance.LoadScene(NextScene, "MainMenu");
             }
             else
                 ErrorText.text = message;

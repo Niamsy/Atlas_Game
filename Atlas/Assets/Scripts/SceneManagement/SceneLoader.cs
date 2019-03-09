@@ -7,7 +7,7 @@ namespace Menu
 {
     public class SceneLoader : MonoBehaviour
     {
-        private const string SceneName = "Base Managers";
+        [SerializeField] private string _startUpScene;
         
         private static SceneLoader _instance = null;
         public static SceneLoader Instance
@@ -15,8 +15,10 @@ namespace Menu
             private set { _instance = value;}
             get
             {
+                #if UNITY_EDITOR
                 if (_instance == null)
-                    return CreateAndReturnSceneLoader();
+                    Debug.LogException(new Exception("No SceneLoader found please add the 'Base Managers' Scene, Solve this ASAP"));
+                #endif
 
                 return _instance;
             }
@@ -25,28 +27,8 @@ namespace Menu
         
         [SerializeField] private GameObject _loadingScreen;
         private float _loadingProgress;
-        private string _activeScene;
         private Coroutine _loading;
-
-        public static SceneLoader CreateAndReturnSceneLoader()
-        {
-            #if UNITY_EDITOR
-            Debug.LogException(new Exception("No SceneLoader found please add the 'Base Managers' Scene, Solve this ASAP"));
-            #else
-            SceneManager.LoadScene(SceneName);
-            var scene = SceneManager.GetSceneByName(SceneName);
-            var gameObjects = scene.GetRootGameObjects();
-                    
-            foreach (var gameO in gameObjects)
-            {
-                _instance = gameO.GetComponentInChildren<SceneLoader>();
-                if (_instance != null)
-                    return (_instance);
-            }
-            Debug.LogException(new Exception("No SceneLoader found in the new scene 'Base Managers', Solve this ASAP"));
-            #endif
-            return (_instance);
-        }
+        
         private void Awake()
         {
             if (_instance != null)
@@ -56,23 +38,29 @@ namespace Menu
             }
 
             Instance = this;
-            _activeScene = SceneManager.GetActiveScene().name;
         }
+        
+#if !UNITY_EDITOR
+        private void Start()
+        {
+            SceneManager.LoadScene(_startUpScene, LoadSceneMode.Additive);
+        }
+#endif
 
-        public void LoadScene(string sceneToLoad)
+        public void LoadScene(string sceneToLoad, string sceneToUnload)
         {
             if (_loading == null)
-                _loading = StartCoroutine(FullReloadOfNewScene(sceneToLoad));
+                _loading = StartCoroutine(FullReloadOfNewScene(sceneToLoad, sceneToUnload));
         }
 
         public float Progress = 0f;
-        private IEnumerator FullReloadOfNewScene(string sceneToLoad)
+        private IEnumerator FullReloadOfNewScene(string sceneToLoad, string sceneToUnload)
         {
+            Debug.Log("LOG: " + sceneToLoad + "/" + sceneToUnload);
             Progress = 0f;
             _loadingScreen.SetActive(true);
-            yield return DoAsyncOperationUntil(SceneManager.UnloadSceneAsync(_activeScene), 0f, 0.5f);
+            yield return DoAsyncOperationUntil(SceneManager.UnloadSceneAsync(sceneToUnload), 0f, 0.5f);
             yield return DoAsyncOperationUntil(SceneManager.LoadSceneAsync(sceneToLoad, LoadSceneMode.Additive), 0.5f, 0.5f);
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneToLoad));
             _loadingScreen.SetActive(false);
             _loading = null;
         }
