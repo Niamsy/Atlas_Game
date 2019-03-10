@@ -1,4 +1,5 @@
-﻿using Menu;
+﻿using System.Collections.Generic;
+using Menu;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -20,7 +21,15 @@ namespace Tools.Editor
 
         private void Update()
         {
-            SceneLoader.ActualLoadedScene = SceneManager.GetActiveScene().name;
+            if (SceneLoader.ActualLoadedScenes == null)
+                SceneLoader.ActualLoadedScenes = new List<string>();
+
+            for (int x = 0; x < SceneManager.sceneCount; x++)
+            {
+                var scene = SceneManager.GetSceneAt(x).name;
+                if (scene != "Master Manager")
+                    SceneLoader.ActualLoadedScenes.Add(scene);
+            }
             EditorSceneManager.playModeStartScene = _masterScene;
         }
 

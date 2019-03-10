@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Boo.Lang;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,7 +10,7 @@ namespace Menu
     public class SceneLoader : MonoBehaviour
     {
         #if UNITY_EDITOR
-        public static string ActualLoadedScene;
+        public static System.Collections.Generic.List<string> ActualLoadedScenes;
         #endif
         [SerializeField] private SceneAsset _startUpScene;
         
@@ -47,16 +48,19 @@ namespace Menu
         private void Start()
         {
 #if UNITY_EDITOR
-            if (ActualLoadedScene == null || ActualLoadedScene == "Master Scene")
+            if (ActualLoadedScenes == null || ActualLoadedScenes.Count == 0)
             {
-                if (ActualLoadedScene == null)
+                if (ActualLoadedScenes == null)
                     Debug.LogError("Please open the ATLAS/Master scene windows");
 #endif
                 SceneManager.LoadScene(_startUpScene.name, LoadSceneMode.Additive);
 #if UNITY_EDITOR
             }
             else
-                SceneManager.LoadScene(ActualLoadedScene, LoadSceneMode.Additive);
+            {
+                foreach (var loadedScene in ActualLoadedScenes)
+                    SceneManager.LoadScene(loadedScene, LoadSceneMode.Additive);
+            }
 #endif
         }
 
