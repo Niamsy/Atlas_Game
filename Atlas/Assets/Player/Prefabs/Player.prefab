@@ -8,8 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1259858848}
+  - component: {fileID: 9164903237807046408}
   - component: {fileID: 1259858849}
+  - component: {fileID: 8921689198550511659}
   m_Layer: 0
   m_Name: LeftHand
   m_TagString: Untagged
@@ -17,20 +18,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1259858848
-Transform:
+--- !u!224 &9164903237807046408
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1259858847}
   m_LocalRotation: {x: -0, y: -0, z: 0.0000001872535, w: 1}
-  m_LocalPosition: {x: 0.000000029802322, y: -0.00000035762787, z: -0.00000010430813}
+  m_LocalPosition: {x: 0, y: 0, z: -0.00000010430813}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4069770388400094}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.000000029802322, y: -0.00000035762787}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1259858849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44,6 +50,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 4722314716208512}
+--- !u!223 &8921689198550511659
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1259858847}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1 &1759092918
 GameObject:
   m_ObjectHideFlags: 0
@@ -292,6 +319,7 @@ MonoBehaviour:
   _GroundCheckerPosition: {x: 0, y: 0, z: 0}
   _CurrentAcceleratedSpeed: {fileID: 11400000, guid: 043e83c7b2cec854f8f87ef45edf1ccf,
     type: 2}
+  plantPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &114171196635902840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -987,7 +1015,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.06666667, y: 0.06666667, z: 0.06666667}
   m_Children:
-  - {fileID: 1259858848}
+  - {fileID: 9164903237807046408}
   - {fileID: 1759092919}
   m_Father: {fileID: 4093741956441054}
   m_RootOrder: 2
