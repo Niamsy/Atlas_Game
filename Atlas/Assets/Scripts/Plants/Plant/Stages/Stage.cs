@@ -27,9 +27,13 @@ namespace Plants
         [Header("Miscellaneous")]
         private GameObject          _model;
         [SerializeField]
-        private Material[]            _materials;
+        private Material[]          _materials;
         [SerializeField]
         private AtlasAudio.Audio    _audio;
+        [SerializeField]
+        private GameObject          _growEffect;
+        [SerializeField]
+        private GameObject          _deathEffect;
 
         public SoilType Soils
         {
@@ -64,6 +68,16 @@ namespace Plants
         public Material[] Materials
         {
             get { return _materials; }
+        }
+
+        public GameObject GrowEffect
+        {
+            get { return _growEffect; }
+        }
+
+        public GameObject DeathEffect
+        {
+            get { return _deathEffect; }
         }
     }
 }
