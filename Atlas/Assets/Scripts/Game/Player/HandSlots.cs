@@ -1,4 +1,5 @@
 ﻿using Game.Inventory;
+using Game.Item;
 using Game.Item.PlantSeed;
 using Player;
 using UnityEngine;
@@ -14,7 +15,7 @@ namespace Game.Player
         public ItemStack LeftHandItem { get { return (_leftHandItem); } }
         private PlayerController _controller;
         private int             _handEquipToggle = 0;
-        private Seed            _plant;
+        private ItemAbstract        _object;
         private ItemStack       _itemStack;
         private Transform       _itemTransform;
 
@@ -36,27 +37,50 @@ namespace Game.Player
             GameControl.BeforeSaving += SaveData;
         }
 
+        private void InitHandUsing(ItemAbstract seed, ItemStack item, Transform transform)
+        {
+            _object = seed;
+            _itemStack = item;
+            _itemTransform = transform;
+        }
+
+        private void UsingItem()
+        {
+            bool canUse = _object.CanUse(_itemTransform);
+            if (_object is Seed)
+            {
+                _controller.CanSow = canUse;
+                _controller.IsCheckSowing = true;
+            }
+            if (_object != null && _itemStack != null && _itemStack.Quantity > 0)
+            {
+                if (_object is Seed)
+                {
+                    if (!_controller.CheckToSow())
+                        return ;
+                }
+                _object.Use();
+                _itemStack.ModifyQuantity(_itemStack.Quantity - 1);
+            }
+        }
+
         private void Update()
         {
             if ((_handEquipToggle = _controller.CheckForEquippedHandUsed()) > 0)
             {
-                if ((_handEquipToggle == 1 && RightHandItem.Content is Seed) ||
-                    (_handEquipToggle == 2 && LeftHandItem.Content is Seed))
+                if (_handEquipToggle == 1 && RightHandItem.Content)
                 {
-                    _plant = (_handEquipToggle == 1) ? RightHandItem.Content as Seed : LeftHandItem.Content as Seed;
-                    _itemStack = (_handEquipToggle == 1) ? RightHandItem : LeftHandItem;
-                    _itemTransform = (_handEquipToggle == 1) ? _rightHandTransform : _leftHandTransform;
-                    _controller.TrackToSow(_itemTransform);
-                    _controller.CheckForSowing(true);
-                    if (_plant != null && _itemStack != null && _itemStack.Quantity > 0 && _controller.CheckToSow())
-                    {
-                        _controller.SowPlant(_plant);
-                        _itemStack.ModifyQuantity(_itemStack.Quantity - 1);
-                    }
+                    InitHandUsing(RightHandItem.Content, RightHandItem, _rightHandTransform);
+                    UsingItem();
+                }
+                else if (_handEquipToggle == 2 && LeftHandItem.Content)
+                {
+                    InitHandUsing(LeftHandItem.Content, LeftHandItem, _leftHandTransform);
+                    UsingItem();
                 }
                 else
                 {
-                    _controller.CheckForSowing(false);
+                    _controller.IsCheckSowing = false;
                 }
             }
         }

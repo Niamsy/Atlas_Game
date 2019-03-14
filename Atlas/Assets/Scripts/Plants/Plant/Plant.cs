@@ -14,6 +14,7 @@ namespace Plants.Plant
 
         public override void Use()
         {
+            // TODO: USE
         }
 
         public bool IsSowed
@@ -24,6 +25,12 @@ namespace Plants.Plant
         public void Sow()
         {
             isSowed = true;
+        }
+
+        public override bool CanUse(Transform transform)
+        {
+            // TODO: Check to use
+            return false;
         }
     }
 }

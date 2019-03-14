@@ -52,6 +52,7 @@ namespace Player
 
         #region Sow Variables
 
+
         private bool _canSow = false;
         public bool CanSow
         {
@@ -195,6 +196,7 @@ namespace Player
         private void Start()
         {
             StateMachine.State<PlayerController>.Initialise(_Animator, this);
+
         }
         #endregion
 
@@ -429,14 +431,7 @@ namespace Player
                 if (IsGrounded)
                     lastCheckSow = 2;
             }
-            Debug.Log("Last check : " + lastCheckSow);
             return lastCheckSow;
-        }
-
-        public void CheckForSowing(bool isCheck)
-        {
-            IsCheckSowing = isCheck;
-            Debug.Log("Currently checking ...: " + IsCheckSowing);
         }
 
         public bool CheckToSow()
@@ -447,7 +442,6 @@ namespace Player
                 {
                     decay = 1f;
                     IsSowing = true;
-                    Debug.Log("SOW !!");
                 }
                 if (_Inputs.Sow.GetUp())
                 {
@@ -461,39 +455,6 @@ namespace Player
                 }
             }
             return IsGrounded && IsCheckSowing && IsSowing;
-        }
-
-        public void TrackToSow(Transform from)
-        {
-            if (IsCheckSowing)
-            {
-                Ray ray = new Ray(from.position, _Camera.transform.forward * 2000.0f);
-                Debug.DrawRay(ray.origin, ray.direction * 2000.0f, Color.red);
-                RaycastHit raycastHit;
-                if (Physics.Raycast(ray, out raycastHit, 2000.0f, _GroundLayers))
-                {
-                    if (raycastHit.collider.gameObject.layer == LayerMask.NameToLayer("Ground") && raycastHit.distance < 2.0f)
-                    {
-                        Debug.Log("You can SOW here :) !");
-                        CanSow = true;
-                        plantPosition = raycastHit.point;
-                    }
-                    else
-                    {
-                        Debug.Log("You cannot SOW here :/ !");
-                        CanSow = false;
-                    }
-                }
-            }
-        }
-
-        public void SowPlant(Seed plant)
-        {
-            /* PlantModel model = new PlantModel();
-            model.PlantItem = new PlantItem();
-            model.PlantItem.Sow();*/
-            GameObject plantModel = Instantiate(plant.PrefabDroppedGO, plantPosition, new Quaternion(0, 0, 0, 1));
-            //plantModel.GetComponent<PlantModel>().PlantItem.Sow();
         }
 
         public bool CheckForCrouchedInput()
