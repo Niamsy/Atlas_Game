@@ -27,7 +27,7 @@ namespace Plants
         [Header("Miscellaneous")]
         private GameObject          _model;
         [SerializeField]
-        private Material            _material;
+        private Material[]            _materials;
         [SerializeField]
         private AtlasAudio.Audio    _audio;
 
@@ -61,9 +61,9 @@ namespace Plants
             get { return _temperature; }
         }
 
-        public Material Material
+        public Material[] Materials
         {
-            get { return _material; }
+            get { return _materials; }
         }
     }
 }

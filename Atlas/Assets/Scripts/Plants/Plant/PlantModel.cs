@@ -52,7 +52,7 @@ namespace Plants.Plant
             ++current_stage;
             Destroy(_currentModel);
             _currentModel = Instantiate(PlantStatistics.Stages[current_stage].Model, transform);
-            _currentModel.GetComponent<MeshRenderer>().material = PlantStatistics.Stages[current_stage].Material;
+            _currentModel.GetComponent<MeshRenderer>().materials = PlantStatistics.Stages[current_stage].Materials;
             UpdateConsumers();
             if (current_stage == PlantStatistics.Stages.Count - 1)
             {
@@ -74,7 +74,7 @@ namespace Plants.Plant
             if (PlantStatistics.Stages != null && PlantStatistics.Stages.Count > 0)
             {
                 _currentModel = Instantiate(PlantStatistics.Stages[current_stage].Model, transform);
-                _currentModel.GetComponent<MeshRenderer>().material = PlantStatistics.Stages[current_stage].Material;
+                _currentModel.GetComponent<MeshRenderer>().materials = PlantStatistics.Stages[current_stage].Materials;
             }
 
             UpdateConsumers();
