@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using AtlasAudio;
+using AtlasEvents;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game.Inventory
@@ -6,6 +8,10 @@ namespace Game.Inventory
     public class BaseInventory : MonoBehaviour
     {
         [SerializeField] protected List<ItemStack> Slots;
+
+        [Header("Audio")] public Audio OnDropItemAudio;
+        public AudioEvent OnDropItemEvent;
+
         public int Size
         {
             get { return (Slots.Count); }
@@ -100,6 +106,8 @@ namespace Game.Inventory
                 var itemStackB = droppedObject.GetComponent<ItemStackBehaviour>();
                 itemStackB.Slot.SetItem(stack.Content, stack.Quantity);
                 stack.EmptyStack();
+                if (OnDropItemAudio && OnDropItemEvent)
+                    OnDropItemEvent.Raise(OnDropItemAudio, null);
             }
             Debug.Log("Drop ActualStack " + stack);
         }

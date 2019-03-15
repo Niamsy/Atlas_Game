@@ -5,14 +5,13 @@ namespace Menu.Main
 {
     public class ConnectionWidget : MainMenuWidget
     {
+        public string NextScene = "Atlas";
         [SerializeField] private InputField _username;
         [SerializeField] private InputField _password;
         
         [SerializeField] private Button     _connectionButton;
         [SerializeField] private Button     _registerButton;
         [SerializeField] private Button     _passwordLost;
-
-        [SerializeField] private SceneLoader _loader;
 
         #region Initialisation/Destruction
         protected override void InitialiseWidget()
@@ -61,7 +60,7 @@ namespace Menu.Main
             if (success)
             {
                 Debug.Log("CONNECTED");
-                _loader.Load();
+                SceneLoader.Instance.LoadScene(NextScene, "MainMenu");
             }
             else
                 ErrorText.text = message;
