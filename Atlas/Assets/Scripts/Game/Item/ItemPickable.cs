@@ -1,6 +1,4 @@
-﻿using AtlasAudio;
-using AtlasEvents;
-using Game.Inventory;
+﻿using Game.Inventory;
 using Plants.Plant;
 using Player;
 using UnityEngine;
@@ -9,9 +7,6 @@ public class ItemPickable : MonoBehaviour
 {
     private GameObject _Player;
     private PlantModel _ModelPlant;
-
-    [Header("Audio")] public Audio OnPickItemAudio;
-    public AudioEvent OnPickItemEvent;
 
     void Start()
     {
@@ -39,11 +34,6 @@ public class ItemPickable : MonoBehaviour
             else
             {
                 baseStack = leftStack;
-            }
-
-            if (OnPickItemAudio && OnPickItemEvent)
-            {
-                OnPickItemEvent.Raise(OnPickItemAudio, null);
             }
         }
     }

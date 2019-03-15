@@ -253,6 +253,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3542190157137659737, guid: 09fbbefcba9fd744dbc46d889e130b3d,
+        type: 3}
+      propertyPath: OnPickItemAudio
+      value: 
+      objectReference: {fileID: 11400000, guid: 6baf6aea1dab177449e75c13584df14d,
+        type: 2}
+    - target: {fileID: 3542190157137659737, guid: 09fbbefcba9fd744dbc46d889e130b3d,
+        type: 3}
+      propertyPath: OnPickItemEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 574abd74039cd5f40950fb2cf09f4dcb,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09fbbefcba9fd744dbc46d889e130b3d, type: 3}
 --- !u!1 &38248057 stripped
@@ -5718,6 +5730,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: ad72dfd5b0b90c749a78854fb6aeb2e4,
         type: 2}
+    - target: {fileID: 3542190157137659737, guid: 09fbbefcba9fd744dbc46d889e130b3d,
+        type: 3}
+      propertyPath: OnPickItemEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 574abd74039cd5f40950fb2cf09f4dcb,
+        type: 2}
+    - target: {fileID: 3542190157137659737, guid: 09fbbefcba9fd744dbc46d889e130b3d,
+        type: 3}
+      propertyPath: OnPickItemAudio
+      value: 
+      objectReference: {fileID: 11400000, guid: 6baf6aea1dab177449e75c13584df14d,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09fbbefcba9fd744dbc46d889e130b3d, type: 3}
 --- !u!1001 &1166862100
@@ -7025,6 +7049,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 114687969587722362, guid: e13aa2c6f7267b64288ae3cf3840f20e,
+        type: 3}
+      propertyPath: OnDropItemAudio
+      value: 
+      objectReference: {fileID: 11400000, guid: a7789f9b7ce045f40a48c85ff830b9e8,
+        type: 2}
+    - target: {fileID: 114687969587722362, guid: e13aa2c6f7267b64288ae3cf3840f20e,
+        type: 3}
+      propertyPath: OnDropItemEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 574abd74039cd5f40950fb2cf09f4dcb,
+        type: 2}
     - target: {fileID: 4093741956441054, guid: e13aa2c6f7267b64288ae3cf3840f20e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -39.774654
@@ -7094,6 +7130,27 @@ PrefabInstance:
       propertyPath: _SprintScale
       value: 1.3
       objectReference: {fileID: 0}
+    - target: {fileID: 1200721314774352556, guid: e13aa2c6f7267b64288ae3cf3840f20e,
+        type: 3}
+      propertyPath: sounds.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1200721314774352556, guid: e13aa2c6f7267b64288ae3cf3840f20e,
+        type: 3}
+      propertyPath: sounds.Array.data[3].tag
+      value: PickUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1200721314774352556, guid: e13aa2c6f7267b64288ae3cf3840f20e,
+        type: 3}
+      propertyPath: sounds.Array.data[3].source
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1200721314774352556, guid: e13aa2c6f7267b64288ae3cf3840f20e,
+        type: 3}
+      propertyPath: sounds.Array.data[3].audio
+      value: 
+      objectReference: {fileID: 11400000, guid: 6baf6aea1dab177449e75c13584df14d,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e13aa2c6f7267b64288ae3cf3840f20e, type: 3}
 --- !u!1 &1954104313 stripped
