@@ -43,6 +43,14 @@ namespace Plants.Plant
             set;
         }
 
+        public Stage CurrentStage
+        {
+            get
+            {
+                return PlantStatistics.Stages[current_stage];
+            }
+        }
+
         #endregion
 
 
@@ -51,8 +59,12 @@ namespace Plants.Plant
         {
             ++current_stage;
             Destroy(_currentModel);
-            _currentModel = Instantiate(PlantStatistics.Stages[current_stage].Model, transform);
-            _currentModel.GetComponent<MeshRenderer>().material = PlantStatistics.Stages[current_stage].Material;
+            if (CurrentStage.Model)
+            {
+                _currentModel = Instantiate(CurrentStage.Model, transform);
+                _currentModel.GetComponent<MeshRenderer>().materials = CurrentStage.Materials;
+            }
+            PlayEffect(CurrentStage.GrowEffect);
             UpdateConsumers();
             if (current_stage == PlantStatistics.Stages.Count - 1)
             {
@@ -62,9 +74,23 @@ namespace Plants.Plant
 
         public void DestroyPlant()
         {
+            PlayEffect(CurrentStage.DeathEffect);
             if (_currentModel)
                 Destroy(_currentModel);
             Destroy(gameObject);
+        }
+
+        public void PlayEffect(GameObject effectToPlay)
+        {
+            if (effectToPlay)
+            {
+                GameObject effect = Instantiate(effectToPlay, transform);
+                ParticleSystem system = effect.GetComponent<ParticleSystem>();
+                if (system)
+                {
+                    Destroy(effect, system.main.startLifetime.constantMax);
+                }
+            }
         }
 
         public void Start()
@@ -73,8 +99,16 @@ namespace Plants.Plant
 
             if (PlantStatistics.Stages != null && PlantStatistics.Stages.Count > 0)
             {
-                _currentModel = Instantiate(PlantStatistics.Stages[current_stage].Model, transform);
-                _currentModel.GetComponent<MeshRenderer>().material = PlantStatistics.Stages[current_stage].Material;
+                _currentModel = Instantiate(CurrentStage.Model, transform);
+                Tree tree = _currentModel.GetComponent<Tree>();
+                if (tree == null)
+                {
+                    _currentModel.GetComponent<MeshRenderer>().materials = CurrentStage.Materials;
+                }
+                else
+                {
+
+                }
             }
 
             UpdateConsumers();
@@ -106,7 +140,7 @@ namespace Plants.Plant
 
         private void UpdateConsumers()
         {
-            foreach (Stage.Need need in PlantStatistics.Stages[current_stage].Needs)
+            foreach (Stage.Need need in CurrentStage.Needs)
             {
                 if (!_consumers.ContainsKey(need.type))
                 {
@@ -126,7 +160,7 @@ namespace Plants.Plant
         {
             bool canEvolve = true;
 
-            foreach (Stage.Need need in PlantStatistics.Stages[current_stage].Needs)
+            foreach (Stage.Need need in CurrentStage.Needs)
             {
                 if (_consumers[need.type].Stock.GetCount() < need.quantity)
                 {
@@ -139,7 +173,7 @@ namespace Plants.Plant
 
         private bool isDead()
         {
-            foreach (Stage.Need need in PlantStatistics.Stages[current_stage].Needs)
+            foreach (Stage.Need need in CurrentStage.Needs)
             {
                 if (_consumers[need.type].Starved)
                 {
