@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -22,6 +23,8 @@ namespace Networking
 		public static string RegisterPath { get { return ("user/registration"); } }
 		public static string ResetPasswordPath { get { return ("user/resetPassword"); } }
 
+        public static string GetScannedPlantsPath { get { return ("user/plants"); } }
+
 		#endregion
 
 		#region API Token
@@ -35,10 +38,28 @@ namespace Networking
 		{
 			get { return (_actualOperation == null && _quiting == false); }
 		}
-		#endregion
-		
-		#region JSon body
-		[Serializable]
+        #endregion
+
+        #region JSon body
+
+        public class JsonHelper
+        {
+            public static T[] GetJsonArray<T>(string json)
+            {
+                string newJson = "{ \"array\": " + json + "}";
+                Wrapper<T> wrapper = JsonUtility.FromJson<Wrapper<T>>(newJson);
+                return wrapper.array;
+            }
+
+            [Serializable]
+            private class Wrapper<T>
+            {
+                public T[] array;
+            }
+        }
+
+
+        [Serializable]
 		private sealed class BodyReturnBase
 		{
 			public string message = "";
@@ -48,31 +69,38 @@ namespace Networking
 		private sealed class BodyReturnApiToken
 		{
 			public string message = "";
-			public string ApiToken = "";
+			public string api_token = "";
 		}
-		
-		[Serializable]
-		private sealed class BodySendData
-		{
-			public string username = "";
-			public string email = "";
-			public string password = "";
-		}
-		
-		
-		#endregion
 
-		public static RequestManager Instance
+        [Serializable]
+        private sealed class BodySendData
+        {
+            public string username = "";
+            public string email = "";
+            public string password = "";
+        }
+
+        [Serializable]
+        public sealed class ScannedPlant
+        {
+            public int id = 0;
+            public string scanned_at = "";
+        }
+
+        #endregion
+
+        public static RequestManager Instance
 		{
 			get;
 			private set;
 		}
 
 		public delegate void RequestFinishedDelegate(bool sucess, string message);
+        public delegate void GetScannedPlantsRequestFinishedDelegate(bool success, string message, List<ScannedPlant> scannedPlants);
 		private RequestErrorDictionnary _errorDictionnary;
 		#endregion
 
-		#region Initialisation
+		#region Initialization
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
 		private static void RuntimeInit()
 		{
@@ -164,8 +192,11 @@ namespace Networking
 
 			string errorMsg = "";
 			if (success)
-				_apiToken = bodyReturn.ApiToken;
-			else
+            {
+                _apiToken = bodyReturn.api_token;
+                Debug.Log("Connection api token : " + _apiToken);
+            }
+            else
 			{
 				Debug.Log("ERROR HTTP: " + postRequest.responseCode + ":" + postRequest.error + " : " + bodyReturn.message);
 				switch (postRequest.responseCode)
@@ -229,7 +260,7 @@ namespace Networking
 			string errorMsg = "";
 
 			if (success)
-				_apiToken = bodyReturn.ApiToken;
+				_apiToken = bodyReturn.api_token;
 			else
 			{
 				Debug.Log("ERROR HTTP: " + postRequest.responseCode + " : " + postRequest.error);
@@ -380,6 +411,64 @@ namespace Networking
 
 		public event RequestFinishedDelegate OnResetRequestFinished;
 
-		#endregion
-	}
+        #endregion
+
+        #region Get scanned plants
+
+        /// <summary>
+		/// Get last scanned plants
+		/// </summary>
+		/// <returns>Return true if the networkManager could process the request and false if another request was pending</returns>
+		public ScannedPlant[] GetScannedPlants()
+        {
+            ScannedPlant[] scannedPlants = null;
+
+            if (!CanReceiveANewRequest || !IsConnected())
+                return (scannedPlants);
+
+            _actualOperation = StartCoroutine(GetScannedPlantsCoroutine());
+
+            return (scannedPlants);
+        }
+
+        private IEnumerator GetScannedPlantsCoroutine()
+        {
+            List<ScannedPlant> scannedPlants = new List<ScannedPlant>();
+
+            UnityWebRequest getRequest = UnityWebRequest.Get(ApiAdress + GetScannedPlantsPath);
+            getRequest.method = UnityWebRequest.kHttpVerbGET;
+            getRequest.SetRequestHeader("api_token", _apiToken);
+            getRequest.SetRequestHeader("Content-Type", "application/json");
+            yield return getRequest.SendWebRequest();
+
+            string errorMsg = "";
+
+            bool success = (getRequest.responseCode == 200);
+            if (success)
+                scannedPlants.AddRange(JsonHelper.GetJsonArray<ScannedPlant>(getRequest.downloadHandler.text));
+            else
+            {
+                Debug.Log("ERROR HTTP: " + getRequest.responseCode + ":" + getRequest.error);
+                switch (getRequest.responseCode)
+                {
+                    case (500):
+                        errorMsg = _errorDictionnary.ApiError;
+                        break;
+                    case (0):
+                        errorMsg = _errorDictionnary.ApiUnreachable;
+                        break;
+                    default:
+                        errorMsg = _errorDictionnary.UnknowError;
+                        break;
+                }
+            }
+
+            CleanForNextRequest();
+            if (OnGetScannedPlantsRequestFinished != null)
+                OnGetScannedPlantsRequestFinished(success, errorMsg, scannedPlants);
+        }
+
+        public event GetScannedPlantsRequestFinishedDelegate OnGetScannedPlantsRequestFinished;
+        #endregion
+    }
 }

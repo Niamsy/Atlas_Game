@@ -7,7 +7,7 @@ namespace Plants
     {
         public Resources Create()
         {
-            return new Resources();
+            return CreateInstance<Resources>();
         }
     }
 }

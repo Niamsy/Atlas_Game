@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
-using Game;
 
 namespace Game.Inventory
 {

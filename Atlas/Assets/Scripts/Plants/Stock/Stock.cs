@@ -5,16 +5,9 @@ namespace Plants
 {
     public class Stock : MonoBehaviour
     {
-        private List<Resources>     objects;
-        private int                 count;
-        protected int               limit;
-
-        private void Awake()
-        {
-            objects = new List<Resources>();
-            count = 0;
-            limit = 10;
-        }
+        private List<Resources> objects = new List<Resources>();
+        private int                 count = 0;
+        protected int               limit = 60;
 
         public int GetCount()
         {
@@ -45,9 +38,9 @@ namespace Plants
         {
             foreach (Resources obj in quantity)
             {
-                if (objects.Count > limit)
-                    break;
                 objects.Add(obj);
+                if (objects.Count >= limit)
+                    break;
             }
             count = objects.Count;
             return objects;
@@ -55,17 +48,18 @@ namespace Plants
 
         public List<Resources> Remove(int quantity)
         {
-            if (quantity < count)
+            List<Resources> toRemove = new List<Resources>();
+            int i = 0;
+            
+            while (i < quantity && objects.Count > 0)
             {
-                objects.RemoveRange(0, quantity);
-                count = objects.Count;
+                toRemove.Add(objects[0]);
+                objects.RemoveAt(0);
+                ++i;
+                --count;
             }
-            else
-            {
-                objects.Clear();
-                count = 0;
-            }
-            return objects;
+
+            return toRemove;
         }
     }
 }

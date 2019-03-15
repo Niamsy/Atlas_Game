@@ -16,8 +16,9 @@ namespace InputManagement
         public InputKey Prone;
         public InputKey CameraLock;
         public InputKey Pick;
-        public InputKey NextStage;
-        public InputKey GiveWater;
-        public InputKey ConsumeWater;
+        public InputKey LeftHandUse;
+        public InputKey RightHandUse;
+        public InputKey Sow;
+        public InputKey Skip;
     }
 }

@@ -1,103 +1,154 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Game.Item.PlantSeed;
 using UnityEngine;
 
 namespace Plants.Plant
 {
-    [RequireComponent(typeof(MeshRenderer))]
     public class PlantModel : MonoBehaviour
     {
-        public Stock        stock;
-        private MeshRenderer meshRenderer;
-        public MeshRenderer MeshRender
-        {
-            get { return meshRenderer; }
-            set { meshRenderer = value; }
-        }
+        #region Public Properties
 
+        public PlantStatistics PlantStatistics;
         public PlantItem PlantItem;
 
-        public List<Stage> stages;
+        #endregion
+
+        #region Private & Protected Properties
+
         protected int current_stage = 0;
-        public SoilType ActualSoil;
+        private List<Producer> _producers = new List<Producer>();
+        private Dictionary<Resources, Consumer> _consumers = new Dictionary<Resources, Consumer>();
+        private GameObject _currentModel = null;
+        private bool _reachedFinalStage = false;
 
-        public List<Producer> Producer;
-        public List<Consumer> Consumer;
+        #endregion
 
-        #region Methods
+        #region Public Accessors
 
-        private void Awake()
+        public MeshRenderer MeshRender
         {
-            Animator animator = this.GetComponent<Animator>();
-            MeshRender = this.GetComponent<MeshRenderer>();
-            if (stages.Count > 0)
-            {
-                Instantiate(stages[current_stage].Model, transform);
-            }
-            if (stock && stock.GetCount() == 0)
-                animator.SetTrigger("FadeIn");
+            get;
+            set;
         }
 
-        public void GiveResource()
+        public List<Producer> Producers
         {
-            Debug.Log("GIVE");
-            Animator animator = this.GetComponent<Animator>();
-            List<Resources> rcs = new List<Resources>();
-            rcs.Add(new Resources());
-            stock.Put(rcs);
-            if (stock.GetCount() > 0)
-                animator.SetTrigger("FadeOut");
+            get;
+            set;
         }
 
-        public void ConsumeResource()
+        public List<Consumer> Consumers
         {
-            Debug.Log("CONSUME");
-            Animator animator = this.GetComponent<Animator>();
-            if (stock.GetCount() == 1)
-                animator.SetTrigger("FadeIn");
-            if (stock.GetCount() > 0)
-                stock.Remove(1);
+            get;
+            set;
         }
 
+        #endregion
+
+
+        #region Public Methods
         public void GoToNextStage()
         {
-            DestroyImmediate(stages[current_stage].Model);
             ++current_stage;
-            if (current_stage > stages.Count - 1)
+            Destroy(_currentModel);
+            _currentModel = Instantiate(PlantStatistics.Stages[current_stage].Model, transform);
+            _currentModel.GetComponent<MeshRenderer>().material = PlantStatistics.Stages[current_stage].Material;
+            UpdateConsumers();
+            if (current_stage == PlantStatistics.Stages.Count - 1)
             {
-                DestroyPlant();
-            }
-            else
-            {
-                Instantiate(stages[current_stage].Model, transform);
+                _reachedFinalStage = true;
             }
         }
 
         public void DestroyPlant()
         {
-            if (current_stage > 1)
-                DestroyImmediate(stages[current_stage - 1].Model);
-            Destroy(this.gameObject);
+            if (_currentModel)
+                Destroy(_currentModel);
+            Destroy(gameObject);
         }
 
-        public IEnumerator Start()
+        public void Start()
         {
-            while (true)
+            Animator animator = GetComponent<Animator>();
+
+            if (PlantStatistics.Stages != null && PlantStatistics.Stages.Count > 0)
             {
-                yield return new WaitForSeconds(1f);
-                UpdatePlantValue();
+                _currentModel = Instantiate(PlantStatistics.Stages[current_stage].Model, transform);
+                _currentModel.GetComponent<MeshRenderer>().material = PlantStatistics.Stages[current_stage].Material;
             }
+
+            UpdateConsumers();
+
+            InvokeRepeating("UpdatePlantValue", Random.Range(1f, 2f), 3f);
         }
 
         public void UpdatePlantValue()
         {
-            foreach (var material in MeshRender.materials)
+            if (isDead())
             {
-                // material.SetFloat("_Percentage", stages[current_stage].Needs[0].quantity);
-                material.SetFloat("_IsPlant", 1);
+                DestroyPlant();
+            }
+
+            if (!_reachedFinalStage && CanGoToNextStage())
+            {
+                GoToNextStage();
             }
         }
+
+        #endregion
+
+        #region Private Methods
+
+        private void Awake()
+        {
+            MeshRender = GetComponent<MeshRenderer>();
+        }
+
+        private void UpdateConsumers()
+        {
+            foreach (Stage.Need need in PlantStatistics.Stages[current_stage].Needs)
+            {
+                if (!_consumers.ContainsKey(need.type))
+                {
+                    Consumer c = gameObject.AddComponent<Consumer>();
+                    c.Initialize(PlantStatistics, need);
+                    _consumers.Add(need.type, c);
+                }
+                else
+                {
+                    _consumers[need.type].Initialize(PlantStatistics, need);
+                    _consumers[need.type].StartInvoking();
+                }
+            }
+        }
+
+        private bool CanGoToNextStage()
+        {
+            bool canEvolve = true;
+
+            foreach (Stage.Need need in PlantStatistics.Stages[current_stage].Needs)
+            {
+                if (_consumers[need.type].Stock.GetCount() < need.quantity)
+                {
+                    canEvolve = false;
+                    break;
+                }
+            }
+            return canEvolve;
+        }
+
+        private bool isDead()
+        {
+            foreach (Stage.Need need in PlantStatistics.Stages[current_stage].Needs)
+            {
+                if (_consumers[need.type].Starved)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         #endregion
     }
 }
