@@ -9,6 +9,11 @@ namespace Plants
         [SerializeField]
         protected Resources type;
         [SerializeField]
+        [Tooltip("Rate of resoources production")]
+        [MinMaxRange(.5f, 12000.0f)]
+        protected float produceRate = 3.0f;
+        [SerializeField]
+        [Tooltip("Quantity of resources produced per tick")]
         protected int rate;
         [SerializeField]
         protected int quantity;
@@ -16,6 +21,16 @@ namespace Plants
         protected bool starverd;
         [SerializeField]
         protected FloatReference range;
+
+        private void Awake()
+        {
+            stocks = gameObject.AddComponent<Stock>();
+        }
+
+        private void Start()
+        {
+            InvokeRepeating("Produce", Random.Range(0f, 2f), produceRate);
+        }
 
         public void Produce()
         {
