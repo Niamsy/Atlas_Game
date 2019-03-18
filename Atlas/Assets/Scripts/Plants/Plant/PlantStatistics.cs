@@ -36,7 +36,7 @@ namespace Plants.Plant
         Potted       = 2,    // 10
     }
     
-    [CreateAssetMenu(fileName = "Plant statistics", menuName = "Item/PlantStatistic", order = 1)]
+    [CreateAssetMenu(fileName = "Plant statistics", menuName = "Plant System/PlantStatistic", order = 1)]
     public class PlantStatistics : ScriptableObject
     {
         [Header("Size")]
