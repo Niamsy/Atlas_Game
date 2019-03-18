@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b711fd0b07d4dac4e9f32fbb9c981529, type: 3}
+  m_Name: 1000_Daisy_Statistics
+  m_EditorClassIdentifier: 
+  _maxHeight: 1
+  _growthRate: {fileID: 11400000, guid: b3109efbadc41074f8835a24597d9823, type: 2}
+  _growthDuration: 1
+  _reproduction: 0
+  _soilType: 0
+  _soilPh:
+    Min: 0
+    Max: 0
+  _soilHumidity:
+    Min: 0
+    Max: 0
+  _plantContainer: 0
+  _sunExposure:
+    Min: 0
+    Max: 0
+  _coldResistance:
+    Min: 0
+    Max: 0
+  _plantingPeriods: 000000000000000000000000
+  _floweringPeriods: 000000000000000000000000
+  _harvestPeriods: 000000000000000000000000
+  _cuttingPeriods: 000000000000000000000000
+  _stages:
+  - {fileID: 11400000, guid: da1c385cf0047ca469429fcc94532721, type: 2}
+  - {fileID: 11400000, guid: 546c1a006ae520547957b056da563899, type: 2}
+  - {fileID: 11400000, guid: 6375e7a8adcf04e4ab2be89ef55c8df5, type: 2}

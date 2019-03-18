@@ -7,6 +7,7 @@ public class ItemPickable : MonoBehaviour
 {
     private GameObject _Player;
     private PlantModel _ModelPlant;
+
     void Start()
     {
         _Player = null;

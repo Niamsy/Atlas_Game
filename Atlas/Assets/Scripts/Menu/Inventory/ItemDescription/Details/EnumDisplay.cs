@@ -18,6 +18,8 @@ namespace Menu.Inventory.ItemDescription.Details
 
         public override void UpdateDisplay()
         {
+            if (_entries == null)
+                Awake();
             for (int x = 0; x < _entries.Count; x++)
                 _entries[x].enabled = (StoredValue & (1 << x)) == 0;
         }

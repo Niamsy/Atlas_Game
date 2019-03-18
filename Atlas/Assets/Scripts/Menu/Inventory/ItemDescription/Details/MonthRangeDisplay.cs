@@ -19,6 +19,7 @@ namespace Menu.Inventory.ItemDescription.Details
         
         public override void UpdateDisplay()
         {
+            if (_entries == null) Awake();
             if (StoredValue != null)
             {
                 for (int x = 0; x < _entries.Length; x++)
