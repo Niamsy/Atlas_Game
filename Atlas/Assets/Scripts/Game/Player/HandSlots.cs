@@ -3,6 +3,7 @@ using Game.Item;
 using Game.Item.PlantSeed;
 using Player;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Game.Player
 {
@@ -44,12 +45,46 @@ namespace Game.Player
             _itemTransform = transform;
         }
 
+        private string HandUseToString()
+        {
+            return (_handEquipToggle == 1) ? "RightHand" : (_handEquipToggle == 2) ? "LeftHand" : "";
+        }
+
+        private void ResetUI()
+        {
+            GameObject canvasObject = GameObject.FindGameObjectWithTag("RightHand");
+            Transform textTr = canvasObject.transform.Find("UIHelp");
+            Text text = textTr.GetComponent<Text>();
+            text.enabled = false;
+            canvasObject = GameObject.FindGameObjectWithTag("LeftHand");
+            textTr = canvasObject.transform.Find("UIHelp");
+            text = textTr.GetComponent<Text>();
+            text.enabled = false;
+        }
+
         private void UsingItem()
         {
             bool canUse = _object.CanUse(_itemTransform);
             if (_object is Seed)
             {
                 _controller.CanSow = canUse;
+                if (canUse)
+                {
+                    string canvasName = HandUseToString();
+                    Debug.Log(canvasName);
+                    if (canvasName != "")
+                    {
+                        GameObject canvasObject = GameObject.FindGameObjectWithTag(canvasName);
+                        Transform textTr = canvasObject.transform.Find("UIHelp");
+                        Text text = textTr.GetComponent<Text>();
+                        text.enabled = true;
+                        text.text = "Click to sow";
+                    }
+                }
+                else
+                {
+                    ResetUI();
+                }
                 _controller.IsCheckSowing = true;
             }
             if (_object != null && _itemStack != null && _itemStack.Quantity > 0)
@@ -80,6 +115,7 @@ namespace Game.Player
                 }
                 else
                 {
+                    _handEquipToggle = 0;
                     _controller.IsCheckSowing = false;
                 }
             }
