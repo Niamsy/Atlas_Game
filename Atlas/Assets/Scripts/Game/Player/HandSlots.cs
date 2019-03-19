@@ -96,6 +96,8 @@ namespace Game.Player
                 }
                 _object.Use();
                 _itemStack.ModifyQuantity(_itemStack.Quantity - 1);
+                if (_itemStack.Quantity == 0)
+                    ResetUI();
             }
         }
 

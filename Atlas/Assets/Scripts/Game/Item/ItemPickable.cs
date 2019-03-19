@@ -22,7 +22,7 @@ public class ItemPickable : MonoBehaviour
     {
         if (_Player && _Player.GetComponent<PlayerController>().CheckForPickInput())
         {
-            if (_ModelPlant && _ModelPlant.PlantItem && _ModelPlant.PlantItem.IsSowed == true)
+            if (_ModelPlant && _ModelPlant && _ModelPlant.IsSowed == true)
                 return;
             PlayerInventory inventory = FindObjectOfType<PlayerInventory>();
             ItemStack baseStack = gameObject.GetComponent<ItemStackBehaviour>().Slot;
