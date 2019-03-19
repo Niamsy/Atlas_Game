@@ -9,7 +9,6 @@ namespace Plants.Plant
     [CreateAssetMenu(menuName = "Plant System/PlantItem")]
     public class PlantItem : ItemAbstract
     {
-        public PlantStatistics Statistics;
         protected bool isSowed = false;
 
         public override void Use()

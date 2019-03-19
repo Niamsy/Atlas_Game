@@ -9,7 +9,6 @@ namespace Plants.Plant
         #region Public Properties
 
         public PlantStatistics PlantStatistics;
-        public PlantItem PlantItem;
 
         #endregion
 
@@ -20,6 +19,7 @@ namespace Plants.Plant
         private Dictionary<Resources, Consumer> _consumers = new Dictionary<Resources, Consumer>();
         private GameObject _currentModel = null;
         private bool _reachedFinalStage = false;
+        private bool _isSowed = false;
 
         #endregion
 
@@ -51,6 +51,11 @@ namespace Plants.Plant
             }
         }
 
+        public bool IsSowed
+        {
+            get { return _isSowed; }
+        }
+
         #endregion
 
 
@@ -70,6 +75,11 @@ namespace Plants.Plant
             {
                 _reachedFinalStage = true;
             }
+        }
+
+        public void Sow()
+        {
+            _isSowed = true;
         }
 
         public void DestroyPlant()

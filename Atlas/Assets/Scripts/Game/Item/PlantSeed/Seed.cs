@@ -12,11 +12,9 @@ namespace Game.Item.PlantSeed
 
         public override void Use()
         {
-            /* PlantModel model = new PlantModel();
-            model.PlantItem = new PlantItem();
-            model.PlantItem.Sow();*/
-            GameObject plantModel = Instantiate(PrefabDroppedGO, _location, new Quaternion(0,0,0,1));
-            //plantModel.GetComponent<PlantModel>().PlantItem.Sow();       
+            GameObject plantModel = Instantiate(PrefabPlanted, _location, new Quaternion(0,0,0,1));
+            PlantStatistics = plantModel.GetComponent<PlantModel>().PlantStatistics;
+            plantModel.GetComponent<PlantModel>().Sow();       
         }
 
         public override bool CanUse(Transform transform)
@@ -29,13 +27,11 @@ namespace Game.Item.PlantSeed
             {
                 if (raycastHit.collider.gameObject.layer == LayerMask.NameToLayer("Ground") && raycastHit.distance < 2.0f)
                 {
-                    Debug.Log("You can SOW here :) !");
                     _location = raycastHit.point;
                     return true;
                 }
                 else
                 {
-                    Debug.Log("You cannot SOW here :/ !");
                     return false;
                 }
             }
@@ -53,7 +49,7 @@ namespace Game.Item.PlantSeed
         public PlantStatistics PlantStatistics
         {
             get { return (_plantStatistics); }
+            set { _plantStatistics = value; }
         }
-        
     }
 }
