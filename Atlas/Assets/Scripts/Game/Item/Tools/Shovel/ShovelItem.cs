@@ -1,18 +1,20 @@
 ﻿using System;
+using Game.Inventory;
+using Plants;
 using UnityEngine;
 
 namespace Game.Item.Tools
 {
 	[Serializable,
 	CreateAssetMenu(fileName = "Shovel", menuName = "Item/Tool/Shovel", order = 1)]
-	public class Shovel : Tool
+	public class ShovelItem : Tool<ShovelBehaviour>
 	{
         public override bool CanUse(Transform transform)
         {
-            return false;
+            return (true);
         }
 
-        public override void Use()
+        public override void Use(ItemStack stack)
 		{
 			// ToDo: Dig
 		}
