@@ -148,8 +148,6 @@ namespace Game.Player
                 LeftHandItem.SwapStack(newItem);
             else
                 RightHandItem.SwapStack(newItem);
-            
-            // ToDo: Display model in game in the hand
         }
 
         private void OnLeftHandUpdate(ItemStack updated)

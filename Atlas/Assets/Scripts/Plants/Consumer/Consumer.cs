@@ -165,25 +165,25 @@ namespace Plants
         private void DetectProducers()
         {
             Collider[] colliders = Physics.OverlapSphere(transform.position, Range, LayerMask.GetMask("Producer"));
-            Debug.Log("Current Consumer Range" + Range + ": \nCurrent colliders count = " + colliders.Length);
+            //Debug.Log("Current Consumer Range" + Range + ": \nCurrent colliders count = " + colliders.Length);
             int quantityRemaining = _quantity;
             foreach (Collider collider in colliders)
             {
                 Producer producer = collider.GetComponent<Producer>();
                 if (producer && producer.Type == Type)
                 {
-                    Debug.Log("Trying to find " + quantityRemaining + " amount");
+                    //Debug.Log("Trying to find " + quantityRemaining + " amount");
                     quantityRemaining -= Load(producer, quantityRemaining);
-                    Debug.Log("Took " + (_quantity - quantityRemaining) + " amount");
+                    //Debug.Log("Took " + (_quantity - quantityRemaining) + " amount");
                 }
                 if (quantityRemaining <= 0)
                 {
-                    Debug.Log("Took everything I could");
+                    //Debug.Log("Took everything I could");
                     break;
                 }
             }
 
-            Debug.Log("End of detection");
+//            Debug.Log("End of detection");
         }
         #endregion
     }
