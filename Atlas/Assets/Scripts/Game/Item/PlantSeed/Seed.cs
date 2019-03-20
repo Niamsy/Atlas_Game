@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Inventory;
 using Plants.Plant;
 using UnityEngine;
 
@@ -10,8 +11,9 @@ namespace Game.Item.PlantSeed
     {
         private Vector3 _location = new Vector3(0,0,0);
 
-        public override void Use()
+        public override void Use(ItemStack stack)
         {
+            stack.ModifyQuantity(stack.Quantity - 1);
             GameObject plantModel = Instantiate(PrefabPlanted, _location, new Quaternion(0,0,0,1));
             PlantStatistics = plantModel.GetComponent<PlantModel>().PlantStatistics;
             plantModel.GetComponent<PlantModel>().Sow();       

@@ -2,6 +2,7 @@
 
 namespace Misc
 {
+	[ExecuteInEditMode]
 	public class FollowUpdate : MonoBehaviour
 	{
 		public Transform Target;

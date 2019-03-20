@@ -10,44 +10,29 @@ namespace Game.Player
     [RequireComponent(typeof(BaseInventory))]
     public class HandSlots : MonoBehaviour
     {
-        [SerializeField] private ItemStack _leftHandItem;
-        private GameObject _leftHandGO;
-        private Transform _leftHandTransform;
-        public ItemStack LeftHandItem { get { return (_leftHandItem); } }
         private PlayerController _controller;
         private int             _handEquipToggle = 0;
-        private ItemAbstract        _object;
-        private ItemStack       _itemStack;
-        private Transform       _itemTransform;
 
-        [SerializeField] private ItemStack _rightHandItem;
-        private GameObject _rightHandGO;
-        private Transform _rightHandTransform;
-        public ItemStack RightHandItem { get { return (_rightHandItem); } }
+        [SerializeField] private ItemStack _equippedItemStack;
+        private ItemAbstract               _equippedItem;
+        private GameObject                 _equippedItemInstance;
+        private Transform                  _handTransform;
+        public ItemStack                   EquippedItemStack { get { return (_equippedItemStack); } }
 
         private void Awake()
         {
-            _leftHandItem.OnItemStackUpdated += OnLeftHandUpdate;
-            _rightHandItem.OnItemStackUpdated += OnRightHandUpdate;
+            _equippedItemStack.OnItemStackUpdated += OnEquippedUpdate;
 
-            _leftHandTransform = transform.Find("LeftHand");
-            _rightHandTransform = transform.Find("RightHand");
+            _handTransform = transform.Find("RightHand");
             _controller = FindObjectOfType<PlayerController>();
             LoadData();
 
             GameControl.BeforeSaving += SaveData;
         }
 
-        private void InitHandUsing(ItemAbstract seed, ItemStack item, Transform transform)
-        {
-            _object = seed;
-            _itemStack = item;
-            _itemTransform = transform;
-        }
-
         private string HandUseToString()
         {
-            return (_handEquipToggle == 1) ? "RightHand" : (_handEquipToggle == 2) ? "LeftHand" : "";
+            return (_handEquipToggle == 1) ? "RightHand" : "";
         }
 
         private void ResetUI()
@@ -56,16 +41,12 @@ namespace Game.Player
             Transform textTr = canvasObject.transform.Find("UIHelp");
             Text text = textTr.GetComponent<Text>();
             text.enabled = false;
-            canvasObject = GameObject.FindGameObjectWithTag("LeftHand");
-            textTr = canvasObject.transform.Find("UIHelp");
-            text = textTr.GetComponent<Text>();
-            text.enabled = false;
         }
 
         private void UsingItem()
         {
-            bool canUse = _object.CanUse(_itemTransform);
-            if (_object is Seed)
+            bool canUse = _equippedItem.CanUse(_handTransform);
+            if (_equippedItem is Seed)
             {
                 _controller.CanSow = canUse;
                 if (canUse)
@@ -87,16 +68,15 @@ namespace Game.Player
                 }
                 _controller.IsCheckSowing = true;
             }
-            if (_object != null && _itemStack != null && _itemStack.Quantity > 0)
+            if (_equippedItem != null && EquippedItemStack != null && EquippedItemStack.Quantity > 0)
             {
-                if (_object is Seed)
+                if (_equippedItem is Seed)
                 {
                     if (!_controller.CheckToSow())
                         return ;
                 }
-                _object.Use();
-                _itemStack.ModifyQuantity(_itemStack.Quantity - 1);
-                if (_itemStack.Quantity == 0)
+                _equippedItem.Use(EquippedItemStack);
+                if (EquippedItemStack.Quantity == 0)
                     ResetUI();
             }
         }
@@ -105,16 +85,8 @@ namespace Game.Player
         {
             if ((_handEquipToggle = _controller.CheckForEquippedHandUsed()) > 0)
             {
-                if (_handEquipToggle == 1 && RightHandItem.Content)
-                {
-                    InitHandUsing(RightHandItem.Content, RightHandItem, _rightHandTransform);
+                if (_handEquipToggle == 1 && EquippedItemStack.Content)
                     UsingItem();
-                }
-                else if (_handEquipToggle == 2 && LeftHandItem.Content)
-                {
-                    InitHandUsing(LeftHandItem.Content, LeftHandItem, _leftHandTransform);
-                    UsingItem();
-                }
                 else
                 {
                     _handEquipToggle = 0;
@@ -127,8 +99,7 @@ namespace Game.Player
         private void SaveData(GameControl gameControl)
         {
             GameData gameData = gameControl.gameData;
-            gameData.LeftHandItem.SetObject(_leftHandItem);
-            gameData.RightHandItem.SetObject(_rightHandItem);
+            gameData.RightHandItem.SetObject(_equippedItemStack);
         }
 
         private void LoadData()
@@ -137,38 +108,32 @@ namespace Game.Player
                 return;
             
             GameData gameData = GameControl.control.gameData;
-            LeftHandItem.SetFromGameData(gameData.LeftHandItem);
-            RightHandItem.SetFromGameData(gameData.RightHandItem);
+            EquippedItemStack.SetFromGameData(gameData.RightHandItem);
         }
         #endregion
         
         public void Equip(bool left, ItemStack newItem)
         {
-            if (left)
-                LeftHandItem.SwapStack(newItem);
-            else
-                RightHandItem.SwapStack(newItem);
+            EquippedItemStack.SwapStack(newItem);
         }
 
-        private void OnLeftHandUpdate(ItemStack updated)
+        private void OnEquippedUpdate(ItemStack updated)
         {
-            UpdateHand(ref _leftHandGO, updated, _leftHandTransform);
-        }
-
-        private void OnRightHandUpdate(ItemStack updated)
-        {
-            UpdateHand(ref _rightHandGO, updated, _rightHandTransform);
+            UpdateHand(ref _equippedItemInstance, updated, _handTransform);
         }
 
         private void UpdateHand(ref GameObject itemGo, ItemStack item, Transform position)
         {
-            if (itemGo != null)
-                Destroy(itemGo);
+            if (_equippedItem != null)
+                _equippedItem.UnEquip();
+
+            _equippedItem = null;
 
             if (item.IsEmpty)
                 return;
-
-            itemGo = Instantiate(item.Content.PrefabHoldedGO, position);
+            
+            _equippedItem = item.Content;
+            itemGo = _equippedItem.Equip(position);
         }
     }
 }
