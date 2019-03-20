@@ -42,6 +42,7 @@ public class ItemPickable : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Player"))
         {
+          
             _Player = col.gameObject;
         }
     }
