@@ -50,7 +50,6 @@ namespace Game.Item
 		}
 		
 		public abstract void Use();
-
         public abstract bool CanUse(Transform transform);
 	}
 }
