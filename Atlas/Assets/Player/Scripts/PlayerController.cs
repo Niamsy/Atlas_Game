@@ -421,15 +421,11 @@ namespace Player
             }
             if (decay < 0f)
                 decay = 0f;
-            if (_Inputs.RightHandUse.GetDown())
+            lastCheckSow = 0;
+            if (_Inputs.EquippedItemUse.GetDown())
             {
                 if (IsGrounded)
                     lastCheckSow = 1;
-            }
-            if (_Inputs.LeftHandUse.GetDown())
-            {
-                if (IsGrounded)
-                    lastCheckSow = 2;
             }
             return lastCheckSow;
         }

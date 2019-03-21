@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Inventory;
 using Localization;
 using UnityEngine;
 
@@ -20,6 +21,7 @@ namespace Game.Item
 			get { return (_prefabDroppedGO); }
 		}
 		
+		protected GameObject EquipedObject;
 		[SerializeField] private GameObject _prefabHoldedGO;
 		public GameObject PrefabHoldedGO
 		{
@@ -48,8 +50,20 @@ namespace Game.Item
 		{
 			get { return (_description); }
 		}
+
+		public virtual GameObject Equip(Transform parent)
+		{
+			EquipedObject = Instantiate(PrefabHoldedGO, parent);
+			return (EquipedObject);
+		}
+
+		public virtual void UnEquip()
+		{
+			if (EquipedObject != null)
+				Destroy(EquipedObject);
+		}
 		
-		public abstract void Use();
+		public abstract void Use(ItemStack stack);
         public abstract bool CanUse(Transform transform);
 	}
 }

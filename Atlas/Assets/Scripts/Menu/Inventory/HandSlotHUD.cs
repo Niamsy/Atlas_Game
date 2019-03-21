@@ -6,7 +6,6 @@ namespace Menu.Inventory
     public class HandSlotHUD : MonoBehaviour
     {
         private HandSlots _handSlot;
-        [SerializeField] private ItemStackHUD _leftHandHUD;
         [SerializeField] private ItemStackHUD _rightHandHUD;
 
         private void Awake()
@@ -16,8 +15,7 @@ namespace Menu.Inventory
         
         private void Start()
         {
-            _leftHandHUD.SetItemStack(_handSlot.LeftHandItem);
-            _rightHandHUD.SetItemStack(_handSlot.RightHandItem);
+            _rightHandHUD.SetItemStack(_handSlot.EquippedItemStack);
         }
     }
 }
