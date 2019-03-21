@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Game.Item.PlantSeed;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Plants.Plant
 {
@@ -18,6 +19,7 @@ namespace Plants.Plant
         private List<Producer> _producers = new List<Producer>();
         private Dictionary<Resources, Consumer> _consumers = new Dictionary<Resources, Consumer>();
         private GameObject _currentModel = null;
+        private Canvas _GuiCanvasName = null;
         private bool _reachedFinalStage = false;
         private bool _isSowed = false;
 
@@ -146,6 +148,10 @@ namespace Plants.Plant
         private void Awake()
         {
             MeshRender = GetComponent<MeshRenderer>();
+            _GuiCanvasName = gameObject.GetComponentInChildren<Canvas>();
+            Text name = _GuiCanvasName.gameObject.GetComponentInChildren<Text>();
+            name.text = gameObject.name;
+            _GuiCanvasName.gameObject.SetActive(false);
         }
 
         private void UpdateConsumers()
@@ -191,6 +197,21 @@ namespace Plants.Plant
                 }
             }
             return false;
+        }
+        private void OnTriggerEnter(Collider col)
+        {
+            if (col.gameObject.CompareTag("Player"))
+            {
+                _GuiCanvasName.gameObject.SetActive(true);
+            }
+        }
+
+        private void OnTriggerExit(Collider col)
+        {
+            if (col.gameObject.CompareTag("Player"))
+            {
+                _GuiCanvasName.gameObject.SetActive(false);
+            }
         }
 
         #endregion
