@@ -16,8 +16,7 @@ namespace InputManagement
         public InputKey Prone;
         public InputKey CameraLock;
         public InputKey Pick;
-        public InputKey LeftHandUse;
-        public InputKey RightHandUse;
+        public InputKey EquippedItemUse;
         public InputKey Sow;
         public InputKey Skip;
     }

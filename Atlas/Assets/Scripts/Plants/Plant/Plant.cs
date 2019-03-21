@@ -2,6 +2,7 @@
 using Plants.Plant;
 using System.Collections;
 using System.Collections.Generic;
+using Game.Inventory;
 using UnityEngine;
 
 namespace Plants.Plant
@@ -11,7 +12,7 @@ namespace Plants.Plant
     {
         protected bool isSowed = false;
 
-        public override void Use()
+        public override void Use(ItemStack stack)
         {
             // TODO: USE
         }
