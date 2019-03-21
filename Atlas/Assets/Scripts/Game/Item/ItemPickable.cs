@@ -7,6 +7,7 @@ public class ItemPickable : MonoBehaviour
 {
     private GameObject _Player;
     private PlantModel _ModelPlant;
+    private Canvas _GuiCanvas;
 
     void Start()
     {
@@ -16,6 +17,8 @@ public class ItemPickable : MonoBehaviour
     private void Awake()
     {
         _ModelPlant = gameObject.GetComponent<PlantModel>();
+        _GuiCanvas = gameObject.GetComponentInChildren<Canvas>();
+        _GuiCanvas.gameObject.SetActive(false);
     }
 
     void Update()
@@ -42,7 +45,7 @@ public class ItemPickable : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Player"))
         {
-          
+            _GuiCanvas.gameObject.SetActive(true);
             _Player = col.gameObject;
         }
     }
@@ -51,6 +54,7 @@ public class ItemPickable : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Player"))
         {
+            _GuiCanvas.gameObject.SetActive(false);
             _Player = null;
         }
     }
