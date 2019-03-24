@@ -13,9 +13,14 @@ MonoBehaviour:
   m_Name: 1002_RedMapple_Stage_01
   m_EditorClassIdentifier: 
   _soils: 0
-  _needs: []
+  _needs:
+  - type: {fileID: 11400000, guid: f1fecb0851582354a8fb522ebd715a14, type: 2}
+    quantity: 200
   _height: 0
   _temperature: 0
-  _model: {fileID: 8195337896177776199, guid: 9d729876fc8a1274990fbce1b2c84fcd, type: 3}
-  _materials: []
+  _model: {fileID: 8195337896177776199, guid: 435f1cb1f0d37864c9779b434bbdc4b5, type: 3}
+  _materials:
+  - {fileID: 2100000, guid: 89efb786ad7946348b7e0a1e71fbe7d9, type: 2}
   _audio: {fileID: 0}
+  _growEffect: {fileID: 0}
+  _deathEffect: {fileID: 0}
