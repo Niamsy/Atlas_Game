@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game.DayNight;
+using UnityEngine;
 
 public class DayNightCycle : MonoBehaviour {
 
