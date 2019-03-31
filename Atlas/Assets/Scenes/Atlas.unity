@@ -1186,13 +1186,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 628291634}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.6320754, g: 0.09838911, b: 0.09838911, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1201,7 +1201,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 20
+    m_FontSize: 32
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
@@ -7399,17 +7399,7 @@ PrefabInstance:
     - target: {fileID: 95622680924108468, guid: e13aa2c6f7267b64288ae3cf3840f20e,
         type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed by
-        Humanoid clips.\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:LeftFoot'\n\tTransform
-        'mixamorig:LeftHandThumb2'\n\tTransform 'mixamorig:LeftHandIndex1'\n\tTransform
-        'mixamorig:RightHandRing2'\n\tTransform 'mixamorig:Spine1'\n\tTransform 'mixamorig:LeftToeBase'\n\tTransform
-        'mixamorig:LeftHandThumb3'\n\tTransform 'mixamorig:RightArm'\n\tTransform
-        'mixamorig:LeftLeg'\n\tand more ...\n\tFrom animation clip 'Idle'\n\tFrom
-        animation clip 'Walk'\n\tFrom animation clip 'Walk'\n\tFrom animation clip
-        'Walk'\n\tFrom animation clip 'Walk'\n\tFrom animation clip 'Walk'\n\tFrom
-        animation clip 'Walk'\n\tFrom animation clip 'Walk'\n\tFrom animation clip
-        'Walk'\n\tFrom animation clip 'Jump'\n\tand more ..."
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 114388899323152888, guid: e13aa2c6f7267b64288ae3cf3840f20e,
         type: 3}
@@ -7418,24 +7408,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1200721314774352556, guid: e13aa2c6f7267b64288ae3cf3840f20e,
         type: 3}
-      propertyPath: sounds.Array.size
-      value: 4
+      propertyPath: sounds.Array.data[4].tag
+      value: sow
       objectReference: {fileID: 0}
     - target: {fileID: 1200721314774352556, guid: e13aa2c6f7267b64288ae3cf3840f20e,
         type: 3}
-      propertyPath: sounds.Array.data[3].tag
-      value: PickUp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1200721314774352556, guid: e13aa2c6f7267b64288ae3cf3840f20e,
-        type: 3}
-      propertyPath: sounds.Array.data[3].source
+      propertyPath: sounds.Array.data[4].audio
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1200721314774352556, guid: e13aa2c6f7267b64288ae3cf3840f20e,
-        type: 3}
-      propertyPath: sounds.Array.data[3].audio
-      value: 
-      objectReference: {fileID: 11400000, guid: 6baf6aea1dab177449e75c13584df14d,
+      objectReference: {fileID: 11400000, guid: 9c174afb0e6093d4aa2fa52f1fb9212e,
         type: 2}
     - target: {fileID: 1759092919, guid: e13aa2c6f7267b64288ae3cf3840f20e, type: 3}
       propertyPath: m_LocalPosition.x

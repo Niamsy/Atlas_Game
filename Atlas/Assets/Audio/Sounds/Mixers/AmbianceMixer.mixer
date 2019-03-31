@@ -26,6 +26,7 @@ AudioMixerController:
     - 33e355ea949e04747ad2bd7e4147852c
     - 523d24e438f3a13459546eaa83091656
     - d2fb91173578014449cabad8eef20b14
+    - cc53b0136ceb8f74084d2fb428a85874
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -90,6 +91,7 @@ AudioMixerGroupController:
   m_Children:
   - {fileID: 243300796815554458}
   - {fileID: 243263387172387046}
+  - {fileID: 243684087969328074}
   m_Volume: 7b59dd4382a8e424088a031bf6550d6a
   m_Pitch: 6075a8b1d0945b64b8cb62fb5dcfd67b
   m_Effects:
@@ -168,6 +170,24 @@ AudioMixerGroupController:
   m_Pitch: 9b3581601c07439419c1bd50b102a46d
   m_Effects:
   - {fileID: 244220425519977960}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!243 &243684087969328074
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Sow
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: cc53b0136ceb8f74084d2fb428a85874
+  m_Children: []
+  m_Volume: 4e177044d3fc7064b84994fe97933a48
+  m_Pitch: 3ce1c52e87abdee479c1ea5fa2f30c2b
+  m_Effects:
+  - {fileID: 244816356023370524}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -270,6 +290,20 @@ AudioMixerEffectController:
   m_EffectID: 1b9e08b4429e82f4397f47ad4e2da844
   m_EffectName: Attenuation
   m_MixLevel: f6c3bbf796ca45d42b2af3479b87ccc5
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!244 &244816356023370524
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: ce53d53107719d9458417ca9ebaf2c59
+  m_EffectName: Attenuation
+  m_MixLevel: 47fd72c308ba3c441a1606a0c6b6f63a
   m_Parameters: []
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
