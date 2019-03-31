@@ -102,16 +102,23 @@ namespace Player
             }
         }
 
+        private bool _isCheckSowing = false;
         public bool IsCheckSowing
         {
-            get { return _Animator.GetBool(_HashCheckSowing); }
-            set { _Animator.SetBool(_HashCheckSowing, value); }
+            get { return _isCheckSowing; }
+            set { _isCheckSowing = true; }
         }
 
+        private bool _isSowing = false;
         public bool IsSowing
         {
-            get { return _Animator.GetBool(_HashSowing); }
-            set { _Animator.SetBool(_HashSowing, value); }
+            get { return _isSowing; }
+            set
+            {
+                _isSowing = value;
+                if (_isSowing == true)
+                    _Animator.SetTrigger(_HashSowing);
+            }
         }
         
         private bool _isEquippedSlotUsed;
@@ -172,7 +179,6 @@ namespace Player
         private readonly int _HashCrouched = Animator.StringToHash("Crouched");
         private readonly int _HashProned = Animator.StringToHash("Proned");
         private readonly int _HashPicking = Animator.StringToHash("Picking");
-        private readonly int _HashCheckSowing = Animator.StringToHash("CheckingSow");
         private readonly int _HashSowing = Animator.StringToHash("Sowing");
 
         #endregion
@@ -421,7 +427,6 @@ namespace Player
             }
             if (decay < 0f)
                 decay = 0f;
-            lastCheckSow = 0;
             if (_Inputs.EquippedItemUse.GetDown())
             {
                 if (IsGrounded)

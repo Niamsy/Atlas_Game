@@ -68,13 +68,16 @@ namespace Game.Player
                 }
                 _controller.IsCheckSowing = true;
             }
+            Debug.Log("Ready to USE");
             if (_equippedItem != null && EquippedItemStack != null && EquippedItemStack.Quantity > 0)
             {
                 if (_equippedItem is Seed)
                 {
+                    Debug.Log("It's Seed");
                     if (!_controller.CheckToSow())
                         return ;
                 }
+                Debug.Log("USE");
                 _equippedItem.Use(EquippedItemStack);
                 if (EquippedItemStack.Quantity == 0)
                     ResetUI();
@@ -83,10 +86,15 @@ namespace Game.Player
 
         private void Update()
         {
+            Debug.Log("OUPS");
             if ((_handEquipToggle = _controller.CheckForEquippedHandUsed()) > 0)
             {
+                Debug.Log("Test");
                 if (_handEquipToggle == 1 && EquippedItemStack.Content)
+                {
+                    Debug.Log("Using Item");
                     UsingItem();
+                }
                 else
                 {
                     _handEquipToggle = 0;

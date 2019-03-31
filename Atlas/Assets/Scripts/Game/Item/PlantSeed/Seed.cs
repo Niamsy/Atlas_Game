@@ -15,6 +15,7 @@ namespace Game.Item.PlantSeed
         {
             stack.ModifyQuantity(stack.Quantity - 1);
             GameObject plantModel = Instantiate(PrefabPlanted, _location, new Quaternion(0,0,0,1));
+            Debug.Log(plantModel);
             PlantStatistics = plantModel.GetComponent<PlantModel>().PlantStatistics;
             plantModel.GetComponent<PlantModel>().Sow();       
         }

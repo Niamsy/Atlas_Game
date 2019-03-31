@@ -149,9 +149,13 @@ namespace Plants.Plant
         {
             MeshRender = GetComponent<MeshRenderer>();
             _GuiCanvasName = gameObject.GetComponentInChildren<Canvas>();
-            Text name = _GuiCanvasName.gameObject.GetComponentInChildren<Text>();
-            name.text = gameObject.name;
-            _GuiCanvasName.gameObject.SetActive(false);
+            if (_GuiCanvasName)
+            {
+                Text name = _GuiCanvasName.gameObject.GetComponentInChildren<Text>();
+                if (name)
+                    name.text = gameObject.name;
+                _GuiCanvasName.gameObject.SetActive(false);
+            }
         }
 
         private void UpdateConsumers()
