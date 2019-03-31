@@ -1,80 +1,95 @@
 ﻿using UnityEngine;
 
-public class CalendarManager : MonoBehaviour {
+namespace Game.DayNight
+{
+    public class CalendarManager : MonoBehaviour
+    {
+        public static CalendarManager Instance { private set; get; }
+    
+        #region Public Variables
+        [Range(0, 23)]
+        public int Hours = 0;
+        [Range(0, 59)]
+        public int Minutes = 0;
+        [Range(0, 59)]
+        public int Seconds = 0;
+        [Range(1, 31)]
+        public int Day = 1;
+        [Range(1, 12)]
+        public int Month = 1;    
+        public int Year = 0;
+        public bool IsReal = false;
 
-    #region Public Variables
-    [Range(0, 23)]
-    public int Hours = 0;
-    [Range(0, 59)]
-    public int Minutes = 0;
-    [Range(0, 59)]
-    public int Seconds = 0;
-    [Range(1, 31)]
-    public int Day = 1;
-    [Range(1, 12)]
-    public int Month = 1;    
-    public int Year = 0;
-    public bool IsReal = false;
+        #endregion
 
-    #endregion
+        #region Private Variables
 
-    #region Private Variables
+        #endregion
 
-    #endregion
-
-    // Use this for initialization
-    void Start () {
-        if (IsReal)
+        private void Awake()
         {
-            SetDateToCurrentTime();
+            Instance = this;
         }
-	}
-	
-    private void SetDateToCurrentTime()
-    {
-        System.DateTime date = System.DateTime.Now;
-        Day = date.Day;
-        Month = date.Month;
-        Year = date.Year;
-        Hours = date.Hour;
-        Minutes = date.Minute;
-        Seconds = date.Second;
-    }
 
-    public void NextDay()
-    {
-        ++Day;
-        if (Day > 30)
+        private void OnDestroy()
         {
-            Day = 1;
-            ++Month;
-            if (Month > 12)
+            Instance = null;
+        }
+
+        // Use this for initialization
+        void Start () {
+            if (IsReal)
             {
-                Month = 1;
-                ++Year;
+                SetDateToCurrentTime();
             }
         }
-    }
+	
+        private void SetDateToCurrentTime()
+        {
+            System.DateTime date = System.DateTime.Now;
+            Day = date.Day;
+            Month = date.Month;
+            Year = date.Year;
+            Hours = date.Hour;
+            Minutes = date.Minute;
+            Seconds = date.Second;
+        }
 
-    public int GetSeconds()
-    {
-        return Seconds;
-    }
+        public void NextDay()
+        {
+            ++Day;
+            if (Day > 30)
+            {
+                Day = 1;
+                ++Month;
+                if (Month > 12)
+                {
+                    Month = 1;
+                    ++Year;
+                }
+            }
+        }
 
-    public int GetMinutes()
-    {
-        return Minutes;
-    }
+        public int GetSeconds()
+        {
+            return Seconds;
+        }
 
-    public int GetHours()
-    {
-        return Hours;
-    }
+        public int GetMinutes()
+        {
+            return Minutes;
+        }
 
-    public void SetTime(int newTime)
-    {
-        Seconds = newTime % 60;
-        Minutes = (newTime / 60) % 60;
-        Hours = (newTime / 3600) % 24;
+        public int GetHours()
+        {
+            return Hours;
+        }
+
+        public void SetTime(int newTime)
+        {
+            Seconds = newTime % 60;
+            Minutes = (newTime / 60) % 60;
+            Hours = (newTime / 3600) % 24;
+        }
     }
 }
