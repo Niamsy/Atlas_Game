@@ -1,4 +1,5 @@
 ﻿using Game.DayNight;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,7 +7,7 @@ namespace Game.HUD
 {
     public class HoursDisplay : MonoBehaviour
     {
-        [SerializeField] private Text _text;
+        [SerializeField] private TextMeshProUGUI _text;
 
         private CalendarManager _calendar;
 

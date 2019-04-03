@@ -1,4 +1,5 @@
 ﻿using Game.DayNight;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,7 +7,7 @@ namespace Game.HUD
 {
     public class DateDisplay : MonoBehaviour
     {
-        [SerializeField] private Text _text;
+        [SerializeField] private TextMeshProUGUI _text;
         [SerializeField] private LocalizedTextArray _months;
         private CalendarManager _calendar;
 
@@ -17,7 +18,8 @@ namespace Game.HUD
 
         private void Update()
         {
-            _text.text = _calendar.Day.ToString("00") + " " + _months.Entries[_calendar.Month];
+            int day = _calendar.Day + 1;
+            _text.text = day.ToString("00") + " " + _months.Entries[_calendar.Month];
         }
     }
 }

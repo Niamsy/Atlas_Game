@@ -37,12 +37,11 @@ namespace Game.Player
 
         private void ResetUI()
         {
-            /*
             GameObject canvasObject = GameObject.FindGameObjectWithTag("RightHand");
             Transform textTr = canvasObject.transform.Find("UIHelp");
             Text text = textTr.GetComponent<Text>();
             text.enabled = false;
-            */
+            
         }
 
         private void UsingItem()
@@ -54,8 +53,6 @@ namespace Game.Player
                 if (canUse)
                 {
                     string canvasName = HandUseToString();
-                    /*
-                    Debug.Log(canvasName);
                     if (canvasName != "")
                     {
                         GameObject canvasObject = GameObject.FindGameObjectWithTag(canvasName);
@@ -64,7 +61,7 @@ namespace Game.Player
                         text.enabled = true;
                         text.text = "Click to sow";
                     }
-                     */
+                    
                 }
                 else
                 {
@@ -72,16 +69,13 @@ namespace Game.Player
                 }
                 _controller.IsCheckSowing = true;
             }
-            Debug.Log("Ready to USE");
             if (_equippedItem != null && EquippedItemStack != null && EquippedItemStack.Quantity > 0)
             {
                 if (_equippedItem is Seed)
                 {
-                    Debug.Log("It's Seed");
                     if (!_controller.CheckToSow())
                         return ;
                 }
-                Debug.Log("USE");
                 _equippedItem.Use(EquippedItemStack);
                 if (EquippedItemStack.Quantity == 0)
                     ResetUI();
@@ -90,13 +84,10 @@ namespace Game.Player
 
         private void Update()
         {
-            Debug.Log("OUPS");
             if ((_handEquipToggle = _controller.CheckForEquippedHandUsed()) > 0)
             {
-                Debug.Log("Test");
                 if (_handEquipToggle == 1 && EquippedItemStack.Content)
                 {
-                    Debug.Log("Using Item");
                     UsingItem();
                 }
                 else
