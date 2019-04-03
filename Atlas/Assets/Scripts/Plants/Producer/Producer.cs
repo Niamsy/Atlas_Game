@@ -42,6 +42,16 @@ namespace Plants
             stocks.Put(addToStock);
         }
 
+        public void Fill()
+        {
+            List<Resources> addToStock = new List<Resources>();
+            for (int i = 0; i < stocks.GetLimit(); ++i)
+            {
+                addToStock.Add(type.Create());
+            }
+            stocks.Put(addToStock);
+        }
+
         public List<Resources> Unload(int sub_quantity)
         {
             return stocks.Remove(sub_quantity);
