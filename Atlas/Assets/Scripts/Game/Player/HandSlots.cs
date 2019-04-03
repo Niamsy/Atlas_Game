@@ -37,10 +37,12 @@ namespace Game.Player
 
         private void ResetUI()
         {
+            /*
             GameObject canvasObject = GameObject.FindGameObjectWithTag("RightHand");
             Transform textTr = canvasObject.transform.Find("UIHelp");
             Text text = textTr.GetComponent<Text>();
             text.enabled = false;
+            */
         }
 
         private void UsingItem()
@@ -52,6 +54,7 @@ namespace Game.Player
                 if (canUse)
                 {
                     string canvasName = HandUseToString();
+                    /*
                     Debug.Log(canvasName);
                     if (canvasName != "")
                     {
@@ -61,6 +64,7 @@ namespace Game.Player
                         text.enabled = true;
                         text.text = "Click to sow";
                     }
+                     */
                 }
                 else
                 {
