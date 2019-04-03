@@ -327,7 +327,7 @@ Transform:
   - {fileID: 1855209380}
   - {fileID: 1207338440}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &307438529 stripped
 Transform:
@@ -474,8 +474,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1155868296}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -545,11 +545,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1295959030}
-  - {fileID: 1931088861}
-  m_Father: {fileID: 1155868296}
-  m_RootOrder: 6
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -585,8 +583,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 2043549619}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -629,85 +627,6 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 590318185}
-  m_CullTransparentMesh: 0
---- !u!1 &628291634
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 628291635}
-  - component: {fileID: 628291637}
-  - component: {fileID: 628291636}
-  m_Layer: 5
-  m_Name: UIHelp
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &628291635
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 628291634}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6515, y: 0.6515, z: 0.6515}
-  m_Children: []
-  m_Father: {fileID: 822825685}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 84.2}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &628291636
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 628291634}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.6320754, g: 0.09838911, b: 0.09838911, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 32
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 2
-    m_MaxSize: 40
-    m_Alignment: 4
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: 
---- !u!222 &628291637
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 628291634}
   m_CullTransparentMesh: 0
 --- !u!4 &653616808 stripped
 Transform:
@@ -768,7 +687,7 @@ PrefabInstance:
     - target: {fileID: 224121992111243718, guid: 5d9e75d3beb08454ea1fddd983f9ba8a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 224121992111243718, guid: 5d9e75d3beb08454ea1fddd983f9ba8a,
         type: 3}
@@ -4332,7 +4251,7 @@ PrefabInstance:
     - target: {fileID: 7515974254925309675, guid: 5c0a14272f26dfc48813d23b57c2281f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7515974254925309675, guid: 5c0a14272f26dfc48813d23b57c2281f,
         type: 3}
@@ -4659,6 +4578,39 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 255833056}
     m_Modifications:
+    - target: {fileID: 95622680924108468, guid: e13aa2c6f7267b64288ae3cf3840f20e,
+        type: 3}
+      propertyPath: m_WarningMessage
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114388899323152888, guid: e13aa2c6f7267b64288ae3cf3840f20e,
+        type: 3}
+      propertyPath: _SprintScale
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1200721314774352556, guid: e13aa2c6f7267b64288ae3cf3840f20e,
+        type: 3}
+      propertyPath: sounds.Array.data[4].tag
+      value: sow
+      objectReference: {fileID: 0}
+    - target: {fileID: 1200721314774352556, guid: e13aa2c6f7267b64288ae3cf3840f20e,
+        type: 3}
+      propertyPath: sounds.Array.data[4].audio
+      value: 
+      objectReference: {fileID: 11400000, guid: 9c174afb0e6093d4aa2fa52f1fb9212e,
+        type: 2}
+    - target: {fileID: 1759092919, guid: e13aa2c6f7267b64288ae3cf3840f20e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.35533524
+      objectReference: {fileID: 0}
+    - target: {fileID: 1759092919, guid: e13aa2c6f7267b64288ae3cf3840f20e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.2367754
+      objectReference: {fileID: 0}
+    - target: {fileID: 1759092919, guid: e13aa2c6f7267b64288ae3cf3840f20e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.30040932
+      objectReference: {fileID: 0}
     - target: {fileID: 8667239778635027452, guid: d8f2d45717bbea048a6ac65288a4b03c,
         type: 3}
       propertyPath: m_Name
@@ -4724,39 +4676,6 @@ PrefabInstance:
       propertyPath: m_Avatar
       value: 
       objectReference: {fileID: 9000000, guid: 9d3f2f4c96635794d9ad5580deb24875, type: 3}
-    - target: {fileID: 95622680924108468, guid: e13aa2c6f7267b64288ae3cf3840f20e,
-        type: 3}
-      propertyPath: m_WarningMessage
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114388899323152888, guid: e13aa2c6f7267b64288ae3cf3840f20e,
-        type: 3}
-      propertyPath: _SprintScale
-      value: 1.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1200721314774352556, guid: e13aa2c6f7267b64288ae3cf3840f20e,
-        type: 3}
-      propertyPath: sounds.Array.data[4].tag
-      value: sow
-      objectReference: {fileID: 0}
-    - target: {fileID: 1200721314774352556, guid: e13aa2c6f7267b64288ae3cf3840f20e,
-        type: 3}
-      propertyPath: sounds.Array.data[4].audio
-      value: 
-      objectReference: {fileID: 11400000, guid: 9c174afb0e6093d4aa2fa52f1fb9212e,
-        type: 2}
-    - target: {fileID: 1759092919, guid: e13aa2c6f7267b64288ae3cf3840f20e, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.35533524
-      objectReference: {fileID: 0}
-    - target: {fileID: 1759092919, guid: e13aa2c6f7267b64288ae3cf3840f20e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.2367754
-      objectReference: {fileID: 0}
-    - target: {fileID: 1759092919, guid: e13aa2c6f7267b64288ae3cf3840f20e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.30040932
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d8f2d45717bbea048a6ac65288a4b03c, type: 3}
 --- !u!4 &1855209380 stripped
@@ -4827,7 +4746,7 @@ PrefabInstance:
     - target: {fileID: 4904671795461632145, guid: fc4e73b4e7a0e5b4885b2e4a7b09105e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4904671795461632145, guid: fc4e73b4e7a0e5b4885b2e4a7b09105e,
         type: 3}
