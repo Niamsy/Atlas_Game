@@ -14,7 +14,8 @@ namespace Game.Item.Tools
         }
         
         public Producer Producer;
-
+        public GameObject ProducerParticle;
+        
         public Status State { get; private set; } 
         
         private void Awake()
@@ -29,6 +30,7 @@ namespace Game.Item.Tools
                 State = newState;
                 
                 Producer.gameObject.SetActive(State == Status.Watering);
+                ProducerParticle.gameObject.SetActive(State == Status.Watering && Producer.Quantity != 0);
             }
         }
 
