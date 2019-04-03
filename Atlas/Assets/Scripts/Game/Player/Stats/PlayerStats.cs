@@ -2,6 +2,7 @@
 
 public class PlayerStats : MonoBehaviour
 {
+    public Popup tmp;
     public StaminaConstraint playerStamina;
     public HydrationConstraint playerHydration;
     public SleepConstraint playerSleep;
@@ -27,5 +28,9 @@ public class PlayerStats : MonoBehaviour
         playerOxygen.Update(Time.deltaTime);
         playerHealth.Update(Time.deltaTime);//Temporary Here
         playerHunger.Update(Time.deltaTime);
+        if (playerHydration.isEmpty())
+        {
+            tmp.sendPopup("test lol");
+        }
     }
 }
