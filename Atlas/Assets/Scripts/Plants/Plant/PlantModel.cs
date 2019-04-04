@@ -19,7 +19,8 @@ namespace Plants.Plant
         [SerializeField]
         private PlantConsumer _consumer;
         private GameObject _currentModel = null;
-        private Canvas _GuiCanvasName = null;
+        [SerializeField]
+        private Canvas _GuiCanvasName;
         private bool _reachedFinalStage = false;
         private bool _isSowed = false;
 
@@ -124,7 +125,6 @@ namespace Plants.Plant
         private void Awake()
         {
             MeshRender = GetComponent<MeshRenderer>();
-            _GuiCanvasName = gameObject.GetComponentInChildren<Canvas>();
             if (_GuiCanvasName)
             {
                 Text name = _GuiCanvasName.gameObject.GetComponentInChildren<Text>();

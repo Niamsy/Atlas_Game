@@ -263,6 +263,7 @@ GameObject:
   - component: {fileID: 6206562519876059874}
   - component: {fileID: 6206562519876059868}
   - component: {fileID: 3117265421110278031}
+  - component: {fileID: 2509874160087443100}
   m_Layer: 0
   m_Name: Plant
   m_TagString: Untagged
@@ -337,6 +338,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlantStatistics: {fileID: 0}
   _consumer: {fileID: 4612267141163210265}
+  _GuiCanvasName: {fileID: 7894356186185704656}
 --- !u!114 &6206562519876059877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -479,6 +481,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!135 &2509874160087443100
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6206562519876059882}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8073323097795354555
 GameObject:
   m_ObjectHideFlags: 0
