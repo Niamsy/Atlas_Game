@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using Game.Item.PlantSeed;
+﻿using Game.ResourcesManagement.Consumer.Plant;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Plants.Plant
 {
+    [RequireComponent(typeof(PlantConsumer))]
     public class PlantModel : MonoBehaviour
     {
         #region Public Properties
@@ -16,8 +16,8 @@ namespace Plants.Plant
         #region Private & Protected Properties
 
         protected int current_stage = 0;
-        private List<Producer> _producers = new List<Producer>();
-        private Dictionary<Resources, Consumer> _consumers = new Dictionary<Resources, Consumer>();
+        [SerializeField]
+        private PlantConsumer _consumer;
         private GameObject _currentModel = null;
         private Canvas _GuiCanvasName = null;
         private bool _reachedFinalStage = false;
@@ -28,18 +28,6 @@ namespace Plants.Plant
         #region Public Accessors
 
         public MeshRenderer MeshRender
-        {
-            get;
-            set;
-        }
-
-        public List<Producer> Producers
-        {
-            get;
-            set;
-        }
-
-        public List<Consumer> Consumers
         {
             get;
             set;
@@ -107,20 +95,12 @@ namespace Plants.Plant
 
         public void Start()
         {
-            Animator animator = GetComponent<Animator>();
-
             if (PlantStatistics.Stages != null && PlantStatistics.Stages.Count > 0)
             {
                 _currentModel = Instantiate(CurrentStage.Model, transform);
-                Tree tree = _currentModel.GetComponent<Tree>();
+                var tree = _currentModel.GetComponent<Tree>();
                 if (tree == null)
-                {
                     _currentModel.GetComponent<MeshRenderer>().materials = CurrentStage.Materials;
-                }
-                else
-                {
-
-                }
             }
 
             UpdateConsumers();
@@ -130,15 +110,11 @@ namespace Plants.Plant
 
         public void UpdatePlantValue()
         {
-            if (isDead())
-            {
+            if (IsDead())
                 DestroyPlant();
-            }
 
             if (!_reachedFinalStage && CanGoToNextStage())
-            {
                 GoToNextStage();
-            }
         }
 
         #endregion
@@ -160,62 +136,36 @@ namespace Plants.Plant
 
         private void UpdateConsumers()
         {
-            foreach (Stage.Need need in CurrentStage.Needs)
-            {
-                if (!_consumers.ContainsKey(need.type))
-                {
-                    Consumer c = gameObject.AddComponent<Consumer>();
-                    c.Initialize(PlantStatistics, need);
-                    _consumers.Add(need.type, c);
-                }
-                else
-                {
-                    _consumers[need.type].Initialize(PlantStatistics, need);
-                    _consumers[need.type].StartInvoking();
-                }
-            }
+            _consumer.Initialize(PlantStatistics, CurrentStage.Needs);
+            _consumer.StartInvoking();
         }
 
         private bool CanGoToNextStage()
         {
-            bool canEvolve = true;
-
-            foreach (Stage.Need need in CurrentStage.Needs)
+            foreach (var stock in _consumer.ConsumedStocks )
             {
-                if (_consumers[need.type].Stock.GetCount() < need.quantity)
-                {
-                    canEvolve = false;
-                    break;
-                }
+                if (stock.Quantity < stock.Limit)
+                    return (false);
             }
-            return canEvolve;
+
+            return (true);
         }
 
-        private bool isDead()
+        private bool IsDead()
         {
-            foreach (Stage.Need need in CurrentStage.Needs)
-            {
-                if (_consumers[need.type].Starved)
-                {
-                    return true;
-                }
-            }
-            return false;
+            return (_consumer.Starved);
         }
+
         private void OnTriggerEnter(Collider col)
         {
             if (col.gameObject.CompareTag("Player"))
-            {
                 _GuiCanvasName.gameObject.SetActive(true);
-            }
         }
 
         private void OnTriggerExit(Collider col)
         {
             if (col.gameObject.CompareTag("Player"))
-            {
                 _GuiCanvasName.gameObject.SetActive(false);
-            }
         }
 
         #endregion

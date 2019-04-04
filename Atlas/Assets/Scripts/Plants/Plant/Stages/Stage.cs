@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Game.Item.PlantSeed;
+using Game.ResourcesManagement;
 using Plants.Plant;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ namespace Plants
         [System.Serializable]
         public struct Need
         {
-            public Resources       type;
+            public Resource       type;
             public int             quantity;
         }
         [Header("Gameplay")]
