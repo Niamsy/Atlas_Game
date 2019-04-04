@@ -6,11 +6,12 @@ using Variables;
 
 namespace Plants
 {
+    /// <summary>
+    /// TODO: To finish
+    /// </summary>
     public class PlantSaver : MonoBehaviour
     {
         public PlantModel plant;
-     /*   public Producer producer;
-        public Consumer consumer;*/
         private float _LastSavedTime = 0f;
         public int _SaveFrequency = 5;
 
@@ -34,7 +35,7 @@ namespace Plants
         [Serializable]
         public struct StockProd
         {
-            public List<Resources>      objects;
+            public List<Game.ResourcesManagement.Resource>      objects;
             public int                  count;
             public int                  limit;
         }
@@ -42,7 +43,7 @@ namespace Plants
         [Serializable]
         public struct StockCons
         {
-            public List<Resources>      objects;
+            public List<Game.ResourcesManagement.Resource>      objects;
             public int                  count;
             public int                  limit;
         }
@@ -96,85 +97,6 @@ namespace Plants
                 scale.z = transform.localScale.z;
             }
 
-            public void SetProdData(List<Producer> lproducers)
-            {
-                foreach (Producer lproducer in lproducers)
-                {
-                    SaveProd cpy = new SaveProd();
-
-                    cpy.quantity = lproducer.Quantity;
-                    cpy.rate = lproducer.Rate;
-                    cpy.starverd = lproducer.Starverd;
-                    cpy.stock.count = lproducer.Stocks.GetCount();
-                    cpy.stock.limit = lproducer.Stocks.GetLimit();
-                    foreach (Resources obj in lproducer.Stocks.GetObjects())
-                    {
-                        cpy.stock.objects.Add(obj);
-                    }
-                    cpy.range = lproducer.Range;
-                    prod.Add(cpy);
-                }
-            }
-
-            public void SetConsData(List<Consumer> lconsumers)
-            {
-                foreach (Consumer lconsumer in lconsumers)
-                {
-                    SaveCons cpy = new SaveCons();
-
-                    cpy.quantity = lconsumer.Quantity;
-                    cpy.rate = lconsumer.Rate;
-                    cpy.starved = lconsumer.Starved;
-                    cpy.starvationTimeLimit = lconsumer.StarvationTimeLimit;
-                    cpy.stock.count = lconsumer.Stock.GetCount();
-                    cpy.stock.limit = lconsumer.Stock.GetLimit();
-                    foreach (Resources obj in lconsumer.Stock.GetObjects())
-                    {
-                        cpy.stock.objects.Add(obj);
-                    }
-                    cpy.range = lconsumer.Range;
-                    cons.Add(cpy);
-                }
-            }
-
-            public List<Producer> GetProducers()
-            {
-                List<Producer> producers = new List<Producer>();
-
-                foreach (SaveProd pro in prod)
-                {
-                    Producer copy_producer = new Producer();
-                    copy_producer.Quantity = pro.quantity;
-                    copy_producer.Rate = pro.rate;
-                    copy_producer.Starverd = pro.starverd;
-                    copy_producer.Stocks.SetCount(pro.stock.count);
-                    copy_producer.Stocks.SetLimit(pro.stock.limit);
-                    copy_producer.Stocks.Put(pro.stock.objects);
-                    copy_producer.Range = pro.range;
-                    producers.Add(copy_producer);
-                }       
-                return producers;
-            }
-
-            public List<Consumer> GetConsumers()
-            {
-                List<Consumer> consumers = new List<Consumer>();
-
-                foreach (SaveCons con in cons)
-                {
-                    Consumer copy_consumer = new Consumer();
-                    copy_consumer.Quantity = con.quantity;
-                    copy_consumer.Rate = con.rate;
-                    copy_consumer.Starved = con.starved;
-                    copy_consumer.StarvationTimeLimit = con.starvationTimeLimit;
-                    copy_consumer.Stock.SetCount(con.stock.count);
-                    copy_consumer.Stock.SetLimit(con.stock.limit);
-                    copy_consumer.Stock.Put(con.stock.objects);
-                    copy_consumer.Range = con.range;
-                    consumers.Add(copy_consumer);
-                }
-                return consumers;
-            }
 
             public Vector3 GetPosition()
             {
@@ -195,8 +117,6 @@ namespace Plants
         public void Save()
         {
             GameControl.control.gameData.PlantData.SetFromTransform(plant.transform);
-            GameControl.control.gameData.PlantData.SetProdData(plant.Producers);
-            GameControl.control.gameData.PlantData.SetConsData(plant.Consumers);
         }
 
         private void Awake()
@@ -204,8 +124,6 @@ namespace Plants
             plant.transform.position = GameControl.control.gameData.PlantData.GetPosition();
             plant.transform.rotation = GameControl.control.gameData.PlantData.GetRotation();
             plant.transform.localScale = GameControl.control.gameData.PlantData.GetScale();
-            plant.Producers = GameControl.control.gameData.PlantData.GetProducers();
-            plant.Consumers = GameControl.control.gameData.PlantData.GetConsumers();
             _LastSavedTime = Time.time;
         }
 

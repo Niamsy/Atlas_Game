@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Game.ResourcesManagement.Producer;
 using Plants;
 using UnityEngine;
 
@@ -13,7 +14,7 @@ namespace Game.Item.Tools
             Watering
         }
         
-        public Producer Producer;
+        public BucketProducer Producer;
         public GameObject ProducerParticle;
         
         public Status State { get; private set; } 
@@ -30,7 +31,7 @@ namespace Game.Item.Tools
                 State = newState;
                 
                 Producer.gameObject.SetActive(State == Status.Watering);
-                ProducerParticle.gameObject.SetActive(State == Status.Watering && Producer.Quantity != 0);
+                ProducerParticle.gameObject.SetActive(State == Status.Watering);
             }
         }
 
