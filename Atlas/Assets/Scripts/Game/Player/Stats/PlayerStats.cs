@@ -29,3 +29,4 @@ public class PlayerStats : MonoBehaviour
         playerHunger.Update(Time.deltaTime);
     }
 }
+
