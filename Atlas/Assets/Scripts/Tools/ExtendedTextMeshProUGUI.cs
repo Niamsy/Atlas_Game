@@ -64,9 +64,12 @@ namespace ExtendedTMPro
                 return;
             }
 
-            for (int i = 0; i < fontMaterials.Length; i++)
+            if (fontMaterials != null && fontMaterials.Length > 0)
             {
-                UpdateVertexPositionsWarp(i);
+                for (int i = 0; i < fontMaterials.Length; i++)
+                {
+                    UpdateVertexPositionsWarp(i);
+                }
             }
         }
 
