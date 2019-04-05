@@ -11,9 +11,11 @@ namespace Game.HUD
         [SerializeField] private LocalizedTextArray _months;
         private CalendarManager _calendar;
 
-        private void Start()
+        private void Awake()
         {
             _calendar = CalendarManager.Instance;
+           /*int day = _calendar.Day + 1;
+            _text.text = day.ToString("00") + " " + _months.Entries[_calendar.Month];*/
         }
 
         private void Update()
