@@ -9,7 +9,7 @@
 
     public void Update(double deltaTime)
     {
-        consume((float)0.02);
+        consume((float)0.00);
         //Operate each frame on the value of the Current Constraint
     }
 

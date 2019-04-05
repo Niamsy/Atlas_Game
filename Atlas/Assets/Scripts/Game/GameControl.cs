@@ -48,9 +48,14 @@ public class GameControl : MonoBehaviour {
         
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/gameInfo.dat");
-
-        bf.Serialize(file, gameData);
-        file.Close();
+        if (File.Exists(Application.persistentDataPath + "/gameInfo.dat"))
+        {
+            bf.Serialize(file, gameData);
+            file.Close();
+        } else
+        {
+            Debug.LogError("/!\\ Impossible to save game Data /!\\");
+        }
     }
 
     public void Load()

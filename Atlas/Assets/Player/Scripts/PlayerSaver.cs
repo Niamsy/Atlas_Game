@@ -32,7 +32,7 @@ namespace Player {
 
             public void SetFromTransform(Transform transform)
             {
-                // Positiion;
+                // Position;
                 position.x = transform.position.x;
                 position.y = transform.position.y;
                 position.z = transform.position.z;
