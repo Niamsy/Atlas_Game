@@ -16,7 +16,8 @@ namespace Game.ResourcesManagement.Consumer
 
         public virtual void OnDestroy()
         {
-            foreach (var producer in _linkedProducers)
+            var linkedProducers = new List<IProducer>(_linkedProducers);
+            foreach (var producer in linkedProducers)
                 UnsubscribeToProducer(producer);
         }
 

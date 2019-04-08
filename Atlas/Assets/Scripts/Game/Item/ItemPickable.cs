@@ -30,6 +30,7 @@ public class ItemPickable : MonoBehaviour
                 return;
             PlayerInventory inventory = FindObjectOfType<PlayerInventory>();
             ItemStack baseStack = gameObject.GetComponent<ItemStackBehaviour>().Slot;
+            /*
             Debug.Log("[" + baseStack.Content.ToString() + "]");
             if (baseStack.Content.ToString().Contains("Tools"))
             {
@@ -38,15 +39,12 @@ public class ItemPickable : MonoBehaviour
             {
                 popupSender.sendPopup("You can plant your new seed by drag it into your hand slot to use it ! :)");
             }
+            */
             ItemStack leftStack = inventory.AddItemStack(baseStack);
             if (leftStack == null)
-            {
                 Destroy(gameObject);
-            }
             else
-            {
                 baseStack = leftStack;
-            }
         }
     }
 
