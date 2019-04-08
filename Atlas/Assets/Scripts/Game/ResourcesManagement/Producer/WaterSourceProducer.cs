@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Experimental.Rendering.HDPipeline;
 
 namespace Game.ResourcesManagement.Producer
 {
