@@ -17,9 +17,13 @@ public class ItemPickable : MonoBehaviour
 
     private void Awake()
     {
-        _ModelPlant = gameObject.GetComponent<PlantModel>();
-        _GuiCanvas = gameObject.GetComponentInChildren<Canvas>();
-        _GuiCanvas.gameObject.SetActive(false);
+        if (gameObject)
+        {
+            _ModelPlant = gameObject.GetComponent<PlantModel>();
+            _GuiCanvas = gameObject.GetComponentInChildren<Canvas>();
+            if (_GuiCanvas)
+                _GuiCanvas.gameObject.SetActive(false);
+        }
     }
 
     void Update()
@@ -37,7 +41,7 @@ public class ItemPickable : MonoBehaviour
                 popupSender.sendPopup("Open inventory and drag the tool into an hand slot to use it :)");
             } else if (baseStack.Content.ToString().Contains("Seed"))
             {
-                popupSender.sendPopup("You can plant your new seed by drag it into your hand slot to use it ! :)");
+                //popupSender.sendPopup("You can plant your new seed by drag it into your hand slot to use it ! :)");
             }
             */
             ItemStack leftStack = inventory.AddItemStack(baseStack);
@@ -52,8 +56,11 @@ public class ItemPickable : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Player"))
         {
-            _GuiCanvas.gameObject.SetActive(true);
-            _Player = col.gameObject;
+            if (_GuiCanvas && _GuiCanvas.gameObject)
+            {
+                _GuiCanvas.gameObject.SetActive(true);
+                _Player = col.gameObject;
+            }
         }
     }
 
@@ -61,7 +68,8 @@ public class ItemPickable : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Player"))
         {
-            _GuiCanvas.gameObject.SetActive(false);
+            if (_GuiCanvas)
+                _GuiCanvas.gameObject.SetActive(false);
             _Player = null;
         }
     }

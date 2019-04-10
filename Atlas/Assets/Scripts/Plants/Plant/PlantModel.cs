@@ -118,6 +118,18 @@ namespace Plants.Plant
                 GoToNextStage();
         }
 
+
+        public void SetPlantName(string name)
+        {
+            if (_GuiCanvasName)
+            {
+                Text canvas_name = _GuiCanvasName.gameObject.GetComponentInChildren<Text>();
+                if (canvas_name)
+                    canvas_name.text = name;
+                _GuiCanvasName.gameObject.SetActive(false);
+            }
+        }
+
         #endregion
 
         #region Private Methods
