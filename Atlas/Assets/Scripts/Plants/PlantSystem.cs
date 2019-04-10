@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Plants.Plant;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.HDPipeline;
 using UnityEngine.SceneManagement;
 
 namespace Plants
@@ -23,9 +24,9 @@ namespace Plants
 
         public void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
+            if (Input.GetKeyDown(KeyCode.N))
                 SetDisplayType(_first);
-            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            else if (Input.GetKeyDown(KeyCode.B))
                 SetDisplayType(_second);
         }
         

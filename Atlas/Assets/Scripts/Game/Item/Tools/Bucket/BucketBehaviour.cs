@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Game.ResourcesManagement;
 using Game.ResourcesManagement.Producer;
 using Plants;
 using UnityEngine;
@@ -15,23 +16,45 @@ namespace Game.Item.Tools
         }
         
         public BucketProducer Producer;
+        public BucketConsumer Consumer;
+
         public GameObject ProducerParticle;
+
+        public int StockSize = 500;
         
         public Status State { get; private set; } 
         
         private void Awake()
         {
+            Consumer.Initialize(StockSize);
             Producer.gameObject.SetActive(false);
+            Consumer.enabled = false;
+            Producer.enabled = false;
         }
         
         public void SetState(Status newState)
         {
             if (newState != State)
             {
+                Consumer.enabled = false;
+                Producer.enabled = false;
+
                 State = newState;
                 
                 Producer.gameObject.SetActive(State == Status.Watering);
                 ProducerParticle.gameObject.SetActive(State == Status.Watering);
+
+                if (State == Status.Watering)
+                {
+                    Producer.StockedResources = Consumer.LinkedStock;
+                    Producer.enabled = true;
+                    Producer.Produce();
+                }
+                else if (State == Status.Filling)
+                {
+                    Consumer.LinkedStock = Producer.StockedResources;
+                    Consumer.enabled = true;
+                }
             }
         }
 
