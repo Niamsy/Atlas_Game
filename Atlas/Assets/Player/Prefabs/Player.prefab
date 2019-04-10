@@ -124,6 +124,8 @@ GameObject:
   - component: {fileID: 114171196635902840}
   - component: {fileID: 1200721314774352556}
   - component: {fileID: 4085398136620064110}
+  - component: {fileID: 5275754672099454363}
+  - component: {fileID: 6887268937068909565}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -387,6 +389,58 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5275754672099454363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1041429536319508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7106dd4b185d00d43990086b929862c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Level: {fileID: 11400000, guid: 2bf20a12456bcbd4da2fc30dacbc05f4, type: 2}
+  _LevelFloor: {fileID: 11400000, guid: e40bc91f3c4f372489a22e60c4a47588, type: 2}
+  _LevelRoof: {fileID: 11400000, guid: 25c43e841d049cb45be4b1846ecf11c8, type: 2}
+  _CurrentXP: {fileID: 11400000, guid: 362506067643a9a45b86a863751e1246, type: 2}
+  _EGainXP: {fileID: 11400000, guid: 6cd67e715100c5b4a9645d04ef856c72, type: 2}
+  _EGainLevel: {fileID: 11400000, guid: bd82d90b4f4a37041a8c7409527435c7, type: 2}
+  _ECannotGainXP: {fileID: 11400000, guid: efdd9db49a51db648b43bd03c635aa21, type: 2}
+  _ELoseXP: {fileID: 11400000, guid: 615e442e68dfb374c93d0edfb8138202, type: 2}
+  _ELostLevel: {fileID: 11400000, guid: 35e081726af9bd64b9c4f8da9e7f6142, type: 2}
+  _CanGainXP: 1
+  _ResetExperience: 0
+--- !u!114 &6887268937068909565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1041429536319508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af91dee62d64fa54ba663d7808fd1fbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 65924e170003f0f42b67fa4e94e11a60, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5275754672099454363}
+        m_MethodName: Gain
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Leveling.LevelingEventListener+LevelingUnityEvent, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!1 &1049395840482046
 GameObject:
   m_ObjectHideFlags: 0
