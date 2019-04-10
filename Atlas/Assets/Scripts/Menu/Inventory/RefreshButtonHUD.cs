@@ -16,7 +16,8 @@ public class RefreshButtonHUD : MonoBehaviour
     {
         lastGetScannedPlant = GameControl.control.gameData.lastGetScannedPlant;
 
-        RequestManager.Instance.OnGetScannedPlantsRequestFinished += GetScannedPlantsFinished;
+        if (RequestManager.Instance)
+            RequestManager.Instance.OnGetScannedPlantsRequestFinished += GetScannedPlantsFinished;
         _button.onClick.AddListener(GetScannedPlants);  
     }
 
