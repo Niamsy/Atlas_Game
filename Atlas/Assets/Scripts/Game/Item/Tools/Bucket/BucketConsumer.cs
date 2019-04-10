@@ -1,18 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using Game.ResourcesManagement;
+using Game.ResourcesManagement.Consumer;
 
-public class BucketConsumer : MonoBehaviour
+public class BucketConsumer : IConsumer
 {
-    // Start is called before the first frame update
-    void Start()
+    public void Initialize(int stockSize)
     {
-        
+        ResourcesToConsume.RemoveAll(x => true);
+        ResourcesToConsume.Add(Resource.Water);
+        LinkedStock[Resource.Water].Limit = stockSize;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void ConsumeResource()
     {
-        
+        throw new System.NotImplementedException();
     }
+
 }
