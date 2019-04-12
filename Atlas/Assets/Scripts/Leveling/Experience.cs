@@ -81,6 +81,10 @@ namespace Leveling
             _CanGainXP = false;
         }
 
+        public void Gain(int XPValue)
+        {
+            Gain(XPValue, 1);
+        }
         public void Gain(int XPValue, int Modifier)
         {
             int value = XPValue * Modifier;
