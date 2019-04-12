@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Popup : Singleton<Popup>
 {
+    #region members
     private static Popup popupInstance = null;
     public const float popupFadeDuration = 2; // Millisecond;
     public const float popupDuration = 4; // Millisecond;
@@ -23,6 +24,7 @@ public class Popup : Singleton<Popup>
 
     private float CurrentTimer;
 
+    #endregion
 
     public void Start()
     {
