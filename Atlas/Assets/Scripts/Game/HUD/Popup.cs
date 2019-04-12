@@ -28,6 +28,7 @@ public class Popup : Singleton<Popup>
 
     public void Start()
     {
+        initpopup();
     }
 
     public void Update()
@@ -60,7 +61,6 @@ public class Popup : Singleton<Popup>
 
     public void sendPopup(string displayedText)
     {
-        initpopup();
         CurrentTimer = 0;
         currentMode = popupMode.Appear;
         popupText.text = displayedText;

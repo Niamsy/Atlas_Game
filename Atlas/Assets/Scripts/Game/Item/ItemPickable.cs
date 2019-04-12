@@ -6,6 +6,7 @@ using UnityEngine;
 #region ItemUsing
 using Game.Item.Tools.Bucket;
 using Game.Item.Tools;
+using Game.Item.PlantSeed;
 #endregion
 
 public class ItemPickable : MonoBehaviour
@@ -40,13 +41,16 @@ public class ItemPickable : MonoBehaviour
             ItemStack baseStack = gameObject.GetComponent<ItemStackBehaviour>().Slot;
             if (baseStack.Content is BucketItem)
             {
-                Popup.Instance.sendPopup("Open inventory and drag the bucket in your hand slot in order to use it :)");
+                AchievementManager.Instance.achieve(AchievementManager.AchievementId.PickupBucket);
             }
             if (baseStack.Content is ShovelItem)
             {
-                Popup.Instance.sendPopup("Open inventory and drag the Shovel in your hand slot in order to use it :)");
+                AchievementManager.Instance.achieve(AchievementManager.AchievementId.PickupShovel);
             }
-
+            if (baseStack.Content is Seed)
+            {
+                AchievementManager.Instance.achieve(AchievementManager.AchievementId.PickupFirstSeed);
+            }
             
             ItemStack leftStack = inventory.AddItemStack(baseStack);
             if (leftStack == null)
