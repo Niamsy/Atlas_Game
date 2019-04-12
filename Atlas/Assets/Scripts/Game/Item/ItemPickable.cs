@@ -3,9 +3,13 @@ using Plants.Plant;
 using Player;
 using UnityEngine;
 
+#region ItemUsing
+using Game.Item.Tools.Bucket;
+using Game.Item.Tools;
+#endregion
+
 public class ItemPickable : MonoBehaviour
 {
-    public Popup popupSender;
     private GameObject _Player;
     private PlantModel _ModelPlant;
     private Canvas _GuiCanvas;
@@ -34,16 +38,16 @@ public class ItemPickable : MonoBehaviour
                 return;
             PlayerInventory inventory = FindObjectOfType<PlayerInventory>();
             ItemStack baseStack = gameObject.GetComponent<ItemStackBehaviour>().Slot;
-            /*
-            Debug.Log("[" + baseStack.Content.ToString() + "]");
-            if (baseStack.Content.ToString().Contains("Tools"))
+            if (baseStack.Content is BucketItem)
             {
-                popupSender.sendPopup("Open inventory and drag the tool into an hand slot to use it :)");
-            } else if (baseStack.Content.ToString().Contains("Seed"))
-            {
-                //popupSender.sendPopup("You can plant your new seed by drag it into your hand slot to use it ! :)");
+                Popup.Instance.sendPopup("Open inventory and drag the bucket in your hand slot in order to use it :)");
             }
-            */
+            if (baseStack.Content is ShovelItem)
+            {
+                Popup.Instance.sendPopup("Open inventory and drag the Shovel in your hand slot in order to use it :)");
+            }
+
+            
             ItemStack leftStack = inventory.AddItemStack(baseStack);
             if (leftStack == null)
                 Destroy(gameObject);
