@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Popup : MonoBehaviour
+public class Popup : Singleton<Popup>
 {
+    #region members
+    private static Popup popupInstance = null;
     public const float popupFadeDuration = 2; // Millisecond;
     public const float popupDuration = 4; // Millisecond;
     Color currentColor;
@@ -22,11 +24,11 @@ public class Popup : MonoBehaviour
 
     private float CurrentTimer;
 
+    #endregion
+
     public void Start()
     {
-        currentColor = popupBackground.color;
-        currentColor.a = 0;
-        popupBackground.color = currentColor;
+        initpopup();
     }
 
     public void Update()
@@ -48,6 +50,13 @@ public class Popup : MonoBehaviour
             }
             popupBackground.color = currentColor;
         }
+    }
+
+    private void initpopup()
+    {
+        currentColor = popupBackground.color;
+        currentColor.a = 0;
+        popupBackground.color = currentColor;
     }
 
     public void sendPopup(string displayedText)

@@ -3,9 +3,14 @@ using Plants.Plant;
 using Player;
 using UnityEngine;
 
+#region ItemUsing
+using Game.Item.Tools.Bucket;
+using Game.Item.Tools;
+using Game.Item.PlantSeed;
+#endregion
+
 public class ItemPickable : MonoBehaviour
 {
-    public Popup popupSender;
     private GameObject _Player;
     private PlantModel _ModelPlant;
     private Canvas _GuiCanvas;
@@ -34,16 +39,19 @@ public class ItemPickable : MonoBehaviour
                 return;
             PlayerInventory inventory = FindObjectOfType<PlayerInventory>();
             ItemStack baseStack = gameObject.GetComponent<ItemStackBehaviour>().Slot;
-            /*
-            Debug.Log("[" + baseStack.Content.ToString() + "]");
-            if (baseStack.Content.ToString().Contains("Tools"))
+            if (baseStack.Content is BucketItem)
             {
-                popupSender.sendPopup("Open inventory and drag the tool into an hand slot to use it :)");
-            } else if (baseStack.Content.ToString().Contains("Seed"))
-            {
-                //popupSender.sendPopup("You can plant your new seed by drag it into your hand slot to use it ! :)");
+                AchievementManager.Instance.achieve(AchievementManager.AchievementId.PickupBucket);
             }
-            */
+            if (baseStack.Content is ShovelItem)
+            {
+                AchievementManager.Instance.achieve(AchievementManager.AchievementId.PickupShovel);
+            }
+            if (baseStack.Content is Seed)
+            {
+                AchievementManager.Instance.achieve(AchievementManager.AchievementId.PickupFirstSeed);
+            }
+            
             ItemStack leftStack = inventory.AddItemStack(baseStack);
             if (leftStack == null)
                 Destroy(gameObject);

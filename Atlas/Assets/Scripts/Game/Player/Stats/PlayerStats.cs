@@ -27,27 +27,27 @@ public class PlayerStats : MonoBehaviour
         playerHydration.Update(Time.deltaTime);
         if (playerHydration.getCurrent() <= playerHydration.getMax() / 2 && playerHydration.getCurrent() >= playerHydration.getMax() / 2 - 1)
         {
-            popupSender.sendPopup("Careful Hydration under 50 %  u should provide ur body regular source of hydration");
+            Popup.Instance.sendPopup("Careful Hydration under 50 %  u should provide ur body regular source of hydration");
         }
         playerSleep.Update(Time.deltaTime);
         if (playerSleep.getCurrent() <= playerSleep.getMax() / 2 && playerSleep.getCurrent() <= playerSleep.getMax() / 2 - 1)
         {
-            popupSender.sendPopup("Careful Character sleep under 50 %, take a nap");
+            Popup.Instance.sendPopup("Careful Character sleep under 50 %, take a nap");
         }
         playerOxygen.Update(Time.deltaTime);
         if (playerOxygen.getCurrent() <= playerOxygen.getMax() / 2 && playerOxygen.getCurrent() <= playerOxygen.getMax() / 2 - 1)
         {
-            popupSender.sendPopup("Careful Oxygen under 50 % find a air source quickly.");
+            Popup.Instance.sendPopup("Careful Oxygen under 50 % find a air source quickly.");
         }
         playerHealth.Update(Time.deltaTime);
         if (playerHealth.getCurrent() <= playerHealth.getMax() / 2 && playerHealth.getCurrent() <= playerHealth.getMax() / 2 - 1)
         {
-            popupSender.sendPopup("Careful health state is half critical, use bandage to heal yourself");
+            Popup.Instance.sendPopup("Careful health state is half critical, use bandage to heal yourself");
         }
         playerHunger.Update(Time.deltaTime);
         if (playerHunger.getCurrent() <= playerHunger.getMax() / 2 && playerHunger.getCurrent() <= playerHunger.getMax() / 2 - 1)
         {
-            popupSender.sendPopup("Careful player Hunger is under 50% you should find something to eat soon");
+            Popup.Instance.sendPopup("Careful player Hunger is under 50% you should find something to eat soon");
         }
     }
 }
