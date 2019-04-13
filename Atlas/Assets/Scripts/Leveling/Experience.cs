@@ -107,7 +107,7 @@ namespace Leveling
                         _EGainLevel.Raise(CurrentXP, value);
                     }
                     _Level.Value += 1;
-                    _CurrentXP.Value += value;
+                    _CurrentXP.Value += value;    
                     _LevelFloor.Value = _LevelRoof.Value;
                     _LevelRoof.Value = CalculateNextLevelXPNeeded(Level, LevelRoof);
                 }
