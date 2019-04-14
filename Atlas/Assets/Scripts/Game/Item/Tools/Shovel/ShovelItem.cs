@@ -1,5 +1,6 @@
 ﻿using System;
 using Game.Inventory;
+using InputManagement;
 using Plants;
 using UnityEngine;
 
@@ -14,7 +15,7 @@ namespace Game.Item.Tools
             return (true);
         }
 
-        public override void Use(ItemStack stack)
+        public override void Use(ItemStack selfStack, InputKeyStatus status)
 		{
 			// ToDo: Dig
 		}

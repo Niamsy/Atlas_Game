@@ -1,5 +1,6 @@
 ﻿using System;
 using Game.Inventory;
+using InputManagement;
 using UnityEngine;
 
 namespace Game.Item.Tools.Bucket
@@ -14,9 +15,12 @@ namespace Game.Item.Tools.Bucket
             return (true);
         }
 
-        public override void Use(ItemStack stack)
+        public override void Use(ItemStack selfStack, InputKeyStatus status)
         {
-	        Behaviour.Watering();
+	        if (status == InputKeyStatus.Holded)
+		        Behaviour.Watering();
+	        if (status == InputKeyStatus.Released)
+		        Behaviour.StopWatering();
         }
 	}
 }

@@ -2,6 +2,13 @@
 
 namespace InputManagement
 {
+    public enum InputKeyStatus
+    {
+        Nothing = 0,
+        Pressed = 1,
+        Holded = 2,
+        Released = 4
+    }
     [CreateAssetMenu(menuName="Inputs/Key")]
     public class InputKey : AInputKey<bool>
     {
@@ -28,6 +35,17 @@ namespace InputManagement
 
         override public bool GetUp() {
             return cInput.GetKeyUp(name);
+        }
+
+        public InputKeyStatus GetStatus()
+        {
+            if (cInput.GetKeyDown(name))
+                return (InputKeyStatus.Pressed);
+            if (cInput.GetKey(name))
+                return (InputKeyStatus.Holded);
+            if (cInput.GetKeyUp(name))
+                return (InputKeyStatus.Released);
+            return (InputKeyStatus.Nothing);
         }
     }
 }

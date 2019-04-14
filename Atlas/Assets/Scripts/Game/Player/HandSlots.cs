@@ -1,6 +1,7 @@
 ﻿using Game.Inventory;
 using Game.Item;
 using Game.Item.PlantSeed;
+using InputManagement;
 using Player;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,7 +12,6 @@ namespace Game.Player
     public class HandSlots : MonoBehaviour
     {
         private PlayerController _controller;
-        private int             _handEquipToggle = 0;
 
         [SerializeField] private ItemStack _equippedItemStack;
         private ItemAbstract               _equippedItem;
@@ -30,21 +30,15 @@ namespace Game.Player
             GameControl.BeforeSaving += SaveData;
         }
 
-        private string HandUseToString()
-        {
-            return (_handEquipToggle == 1) ? "RightHand" : "";
-        }
-
         private void ResetUI()
         {
             GameObject canvasObject = GameObject.FindGameObjectWithTag("RightHand");
             Transform textTr = canvasObject.transform.Find("UIHelp");
             Text text = textTr.GetComponent<Text>();
             text.enabled = false;
-            
         }
 
-        private void UsingItem()
+        private void UsingItem(InputKeyStatus status)
         {
             bool canUse = _equippedItem.CanUse(_handTransform);
             if (_equippedItem is Seed)
@@ -52,31 +46,24 @@ namespace Game.Player
                 _controller.CanSow = canUse;
                 if (canUse)
                 {
-                    string canvasName = HandUseToString();
-                    if (canvasName != "")
-                    {
-                        GameObject canvasObject = GameObject.FindGameObjectWithTag(canvasName);
-                        Transform textTr = canvasObject.transform.Find("UIHelp");
-                        Text text = textTr.GetComponent<Text>();
-                        text.enabled = true;
-                        text.text = "Click to sow";
-                    }
-                    
+                    GameObject canvasObject = GameObject.FindGameObjectWithTag("RightHand");
+                    Transform textTr = canvasObject.transform.Find("UIHelp");
+                    Text text = textTr.GetComponent<Text>();
+                    text.enabled = true;
+                    text.text = "Click to sow";
                 }
                 else
-                {
                     ResetUI();
-                }
+
                 _controller.IsCheckSowing = true;
             }
+
             if (_equippedItem != null && EquippedItemStack != null && EquippedItemStack.Quantity > 0)
             {
-                if (_equippedItem is Seed)
-                {
-                    if (!_controller.CheckToSow())
-                        return ;
-                }
-                _equippedItem.Use(EquippedItemStack);
+                // TODO: Someone remake that
+                // if (_equippedItem is Seed && !_controller.CheckToSow())
+                //    return;
+                _equippedItem.Use(EquippedItemStack, status);
                 if (EquippedItemStack.Quantity == 0)
                     ResetUI();
             }
@@ -84,18 +71,12 @@ namespace Game.Player
 
         private void Update()
         {
-            if ((_handEquipToggle = _controller.CheckForEquippedHandUsed()) > 0)
-            {
-                if (_handEquipToggle == 1 && EquippedItemStack.Content)
-                {
-                    UsingItem();
-                }
-                else
-                {
-                    _handEquipToggle = 0;
-                    _controller.IsCheckSowing = false;
-                }
-            }
+            InputKeyStatus status = _controller.GetUseInput();
+
+            if (EquippedItemStack.Content)
+                UsingItem(status);
+            else
+                _controller.IsCheckSowing = false;
         }
 
         #region Load/Saving Methods

@@ -13,6 +13,7 @@ namespace Player
     [RequireComponent(typeof(AtlasGravity))]
     public class PlayerController : MonoBehaviour
     {
+        #region Variables
         #region Public variables
         #region Inputs
         public PlayerInputs _Inputs;
@@ -165,9 +166,7 @@ namespace Player
         private BodyController _BodyController;
         private GameObject _GroundChecker;
         private AtlasGravity _Gravity;
-        private int lastCheckSow = 0;
         #endregion
-
 
         #region animator variables hashes
         private readonly int _HashIdle = Animator.StringToHash("Idle");
@@ -182,7 +181,8 @@ namespace Player
         private readonly int _HashSowing = Animator.StringToHash("Sowing");
 
         #endregion
-
+        #endregion
+        
         #region Initialization
         // Use this for initialization
         private void Awake()
@@ -418,21 +418,10 @@ namespace Player
             return IsGrounded && IsSprinting;
         }
 
-        public int CheckForEquippedHandUsed()
+        public InputKeyStatus GetUseInput()
         {
             IsSowing = false;
-            if (decay > 0f)
-            {
-                decay -= Time.deltaTime;
-            }
-            if (decay < 0f)
-                decay = 0f;
-            if (_Inputs.EquippedItemUse.GetDown())
-            {
-                if (IsGrounded)
-                    lastCheckSow = 1;
-            }
-            return lastCheckSow;
+            return _Inputs.EquippedItemUse.GetStatus();
         }
 
         public bool CheckToSow()
@@ -452,7 +441,6 @@ namespace Player
                 {
                     IsSowing = false;
                     IsCheckSowing = false;
-                    lastCheckSow = 0;
                 }
             }
             return IsGrounded && IsCheckSowing && IsSowing;
