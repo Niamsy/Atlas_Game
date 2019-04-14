@@ -1,18 +1,24 @@
 ﻿using Game.ResourcesManagement;
 using Game.ResourcesManagement.Consumer;
 
-public class BucketConsumer : IConsumer
+namespace Game.Item.Tools.Bucket
 {
-    public void Initialize(int stockSize)
+    public class BucketConsumer : IConsumer
     {
-        ResourcesToConsume.RemoveAll(x => true);
-        ResourcesToConsume.Add(Resource.Water);
-        LinkedStock[Resource.Water].Limit = stockSize;
-    }
+        public void Awake()
+        {
+            ResourcesToConsume.RemoveAll(x => true);
+            ResourcesToConsume.Add(Resource.Water);
+        }
 
-    public override void ConsumeResource()
-    {
-        throw new System.NotImplementedException();
-    }
+        private void OnDisable()
+        {
+            OnDestroy();
+        }
+    
+        public override void ConsumeResource()
+        {
+        }
 
+    }
 }

@@ -14,7 +14,12 @@ namespace Game.ResourcesManagement.Consumer
         
         public abstract void            ConsumeResource();
 
-        public virtual void OnDestroy()
+        #if UNITY_EDITOR
+        [Header("Debug"), SerializeField]
+        private bool _debugDisplay = false;
+        #endif
+        
+        protected virtual void OnDestroy()
         {
             var linkedProducers = new List<IProducer>(_linkedProducers);
             foreach (var producer in linkedProducers)
@@ -25,6 +30,10 @@ namespace Game.ResourcesManagement.Consumer
         {
             if (producer == null || _linkedProducers.Contains(producer))
                 return;
+           
+#if UNITY_EDITOR
+            if (_debugDisplay) Debug.Log(name + " subscribe " + producer.name);
+#endif
             
             var didAdd = false;
             foreach (var resources in ResourcesToConsume)
@@ -38,6 +47,10 @@ namespace Game.ResourcesManagement.Consumer
         {
             if (producer == null || !_linkedProducers.Contains(producer))
                 return;
+            
+#if UNITY_EDITOR
+            if (_debugDisplay) Debug.Log(name + " unsubscribe " + producer.name);
+#endif
             
             _linkedProducers.Remove(producer);
             foreach (var resources in ResourcesToConsume)

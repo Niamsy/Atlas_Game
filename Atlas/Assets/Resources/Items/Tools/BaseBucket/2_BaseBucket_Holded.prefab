@@ -87,6 +87,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4544017965700196}
   - component: {fileID: 6478248436988529710}
+  - component: {fileID: 2352312731682261971}
   m_Layer: 0
   m_Name: 2_BaseBucket_Holded
   m_TagString: Untagged
@@ -125,8 +126,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Producer: {fileID: 7764136279216697590}
   Consumer: {fileID: 3950838507459156615}
+  Stock: {fileID: 2352312731682261971}
   ProducerParticle: {fileID: 3868816538260051054}
-  StockSize: 500
+--- !u!114 &2352312731682261971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1771555055226790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43e8698d0207b7b4c99e9e7801956e2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _listOfStocks:
+  - Resource: 0
+    Quantity: 0
+    Limit: 500
 --- !u!1 &2531251082536335431
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,10 +154,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2531251082536335425}
   - component: {fileID: 7764136279216697590}
-  - component: {fileID: 4472942928242310157}
   - component: {fileID: 2531251082536335426}
   m_Layer: 11
-  m_Name: Producer
+  m_Name: BucketProd
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -176,25 +192,10 @@ MonoBehaviour:
   ProductionRate:
     TickRate: 0.2
     ResourcePerTick: 1
-  ResourceGivenPerTick: 1
-  StockedResources: {fileID: 4472942928242310157}
-  ProducedResources: 
---- !u!114 &4472942928242310157
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2531251082536335431}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43e8698d0207b7b4c99e9e7801956e2f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _listOfStocks:
-  - Resource: 0
-    Quantity: 0
-    Limit: 0
+  ResourceGivenPerTick: 2
+  StockedResources: {fileID: 2352312731682261971}
+  ProducedResources: 00000000
+  _debugDisplay: 0
 --- !u!65 &2531251082536335426
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -203,10 +204,10 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2531251082536335431}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 2, z: 0.5}
+  m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: -1, z: 0.3}
 --- !u!1 &5342109348244542766
 GameObject:
@@ -218,10 +219,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6241383006465125818}
   - component: {fileID: 3950838507459156615}
-  - component: {fileID: 4712333700970770541}
   - component: {fileID: 2392049935881049130}
-  m_Layer: 0
-  m_Name: Consumer
+  m_Layer: 12
+  m_Name: BucketConsumer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -234,13 +234,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5342109348244542766}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: 0.7071068, w: 0}
+  m_LocalPosition: {x: -0.25, y: 0.718, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4544017965700196}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90.00001, z: 180}
 --- !u!114 &3950838507459156615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,23 +257,8 @@ MonoBehaviour:
   ConsumptionRate:
     TickRate: 0.2
     ResourcePerTick: 2
-  LinkedStock: {fileID: 4712333700970770541}
---- !u!114 &4712333700970770541
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5342109348244542766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43e8698d0207b7b4c99e9e7801956e2f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _listOfStocks:
-  - Resource: 0
-    Quantity: 0
-    Limit: 0
+  LinkedStock: {fileID: 2352312731682261971}
+  _debugDisplay: 0
 --- !u!65 &2392049935881049130
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -285,7 +270,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 2, z: 0.5}
+  m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: -1, z: 0.3}
 --- !u!1001 &4480063487237671758
 PrefabInstance:
