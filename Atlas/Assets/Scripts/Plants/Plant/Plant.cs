@@ -3,6 +3,7 @@ using Plants.Plant;
 using System.Collections;
 using System.Collections.Generic;
 using Game.Inventory;
+using InputManagement;
 using UnityEngine;
 
 namespace Plants.Plant
@@ -12,7 +13,7 @@ namespace Plants.Plant
     {
         protected bool isSowed = false;
 
-        public override void Use(ItemStack stack)
+        public override void Use(ItemStack selfStack, InputKeyStatus status)
         {
             // TODO: USE
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using Game.Inventory;
+using InputManagement;
 using Localization;
 using UnityEngine;
 
@@ -63,7 +64,7 @@ namespace Game.Item
 				Destroy(EquipedObject);
 		}
 		
-		public abstract void Use(ItemStack stack);
+		public abstract void Use(ItemStack selfStack, InputKeyStatus status);
         public abstract bool CanUse(Transform transform);
 	}
 }

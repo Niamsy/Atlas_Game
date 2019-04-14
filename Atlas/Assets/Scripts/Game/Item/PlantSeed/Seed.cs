@@ -1,5 +1,6 @@
 ﻿using System;
 using Game.Inventory;
+using InputManagement;
 using Plants.Plant;
 using UnityEngine;
 
@@ -11,9 +12,13 @@ namespace Game.Item.PlantSeed
     {
         private Vector3 _location = new Vector3(0,0,0);
 
-        public override void Use(ItemStack stack)
+        public override void Use(ItemStack selfStack, InputKeyStatus status)
         {
-            stack.ModifyQuantity(stack.Quantity - 1);
+            Debug.Log("Plant ? ");
+            if (status != InputKeyStatus.Pressed)
+                return;
+            Debug.Log("Plant");
+            selfStack.ModifyQuantity(selfStack.Quantity - 1);
             GameObject plantModel = Instantiate(PrefabPlanted, _location, new Quaternion(0,0,0,1));
             Debug.Log(plantModel);
             PlantStatistics = plantModel.GetComponent<PlantModel>().PlantStatistics;
@@ -27,17 +32,12 @@ namespace Game.Item.PlantSeed
             Camera camera = Camera.main; 
             Ray ray = new Ray(transform.position, camera.transform.forward * 2000.0f);
             RaycastHit raycastHit;
-            if (Physics.Raycast(ray, out raycastHit, 2000.0f, layerMask))
+            if (Physics.Raycast(ray, out raycastHit, 2000.0f, layerMask) &&
+                raycastHit.collider.gameObject.layer == LayerMask.NameToLayer("Ground") &&
+                raycastHit.distance < 2.0f)
             {
-                if (raycastHit.collider.gameObject.layer == LayerMask.NameToLayer("Ground") && raycastHit.distance < 2.0f)
-                {
-                    _location = raycastHit.point;
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                _location = raycastHit.point;
+                return true;
             }
             return false;
         }

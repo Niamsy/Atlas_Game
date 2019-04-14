@@ -7,7 +7,6 @@ namespace Game.Item.Tools
     {
         public enum Status
         {
-            Default,
             Filling,
             Watering
         }
@@ -43,7 +42,6 @@ namespace Game.Item.Tools
 
                 if (State == Status.Watering)
                 {
-                    Debug.Log("Watering");
                     Producer.StockedResources = Consumer.LinkedStock;
                     Producer.enabled = true;
                     Producer.Produce();
@@ -56,24 +54,14 @@ namespace Game.Item.Tools
             }
         }
 
-        private readonly float _countdownStep = 0.1f;
-        private float _countDown = 0;
-        private IEnumerator WateringCoroutine()
-        {
-            SetState(Status.Watering);    
-            while (_countDown > 0)
-            {
-                yield return new WaitForSeconds(_countdownStep);
-                _countDown -= _countdownStep;
-            }
-            SetState(Status.Default);    
-        }
-
         public void Watering()
         {
-            _countDown = _countdownStep * 4f;
-            if (State != Status.Watering)
-                StartCoroutine(WateringCoroutine());
+                SetState(Status.Watering);    
+        }
+
+        public void StopWatering()
+        {
+                SetState(Status.Filling);    
         }
     }
 }
