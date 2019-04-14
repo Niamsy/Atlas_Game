@@ -18,9 +18,9 @@ namespace Game.Item.Tools.Bucket
         public override void Use(ItemStack selfStack, InputKeyStatus status)
         {
 	        if (status == InputKeyStatus.Holded)
-		        Behaviour.Watering();
+		        Behaviour.SetState(true);
 	        if (status == InputKeyStatus.Released)
-		        Behaviour.StopWatering();
+		        Behaviour.SetState(false);
         }
 	}
 }

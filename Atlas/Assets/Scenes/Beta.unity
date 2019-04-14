@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.06744362, g: 0.0889105, b: 0.13196887, a: 1}
+  m_IndirectSpecularColor: {r: 0.057705563, g: 0.08137821, b: 0.12832178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -217,7 +217,7 @@ PrefabInstance:
     - target: {fileID: 8926211240696649561, guid: 1dc0cadca4f1f5a46b957d15c6c429c7,
         type: 3}
       propertyPath: m_Name
-      value: SimpleWaterProducerExample
+      value: WaterSource
       objectReference: {fileID: 0}
     - target: {fileID: 8926211240696649561, guid: 1dc0cadca4f1f5a46b957d15c6c429c7,
         type: 3}
@@ -445,46 +445,6 @@ Material:
     - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
---- !u!1 &183863751 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100000, guid: 780611a67e8e941a2b3aa96e5915a793,
-    type: 3}
-  m_PrefabInstance: {fileID: 1599615185}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &183863755
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 183863751}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43e8698d0207b7b4c99e9e7801956e2f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _listOfStocks:
-  - Resource: 0
-    Quantity: 6000000
-    Limit: 6000000
---- !u!114 &183863756
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 183863751}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 458944003805dd141934b29d8fd9f36c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ProductionRate:
-    TickRate: 0.25
-    ResourcePerTick: 500
-  ResourceGivenPerTick: 500
-  StockedResources: {fileID: 183863755}
-  ProducedResources: 00000000
 --- !u!1 &204128966
 GameObject:
   m_ObjectHideFlags: 0
@@ -940,7 +900,7 @@ PrefabInstance:
     - target: {fileID: 8926211240696649561, guid: 1dc0cadca4f1f5a46b957d15c6c429c7,
         type: 3}
       propertyPath: m_Name
-      value: SimpleWaterProducerExample (3)
+      value: WaterSource
       objectReference: {fileID: 0}
     - target: {fileID: 8926211240696649567, guid: 1dc0cadca4f1f5a46b957d15c6c429c7,
         type: 3}
@@ -1917,7 +1877,7 @@ PrefabInstance:
     - target: {fileID: 8926211240696649561, guid: 1dc0cadca4f1f5a46b957d15c6c429c7,
         type: 3}
       propertyPath: m_Name
-      value: SimpleWaterProducerExample (2)
+      value: WaterSource
       objectReference: {fileID: 0}
     - target: {fileID: 8926211240696649567, guid: 1dc0cadca4f1f5a46b957d15c6c429c7,
         type: 3}
@@ -2164,7 +2124,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1222783974}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 95921373}
@@ -2490,7 +2450,7 @@ PrefabInstance:
     - target: {fileID: 4124576850948013375, guid: a84e525d27db1914b83c3be3724885b6,
         type: 3}
       propertyPath: m_Name
-      value: Red
+      value: Consumer
       objectReference: {fileID: 0}
     - target: {fileID: 2239810619340824673, guid: a84e525d27db1914b83c3be3724885b6,
         type: 3}
@@ -3218,7 +3178,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 780611a67e8e941a2b3aa96e5915a793, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 780611a67e8e941a2b3aa96e5915a793, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3233,20 +3193,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 780611a67e8e941a2b3aa96e5915a793, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 5247.3345
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 780611a67e8e941a2b3aa96e5915a793, type: 3}
       propertyPath: m_LocalScale.y
-      value: 327.9584
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 780611a67e8e941a2b3aa96e5915a793, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 5247.3345
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: 780611a67e8e941a2b3aa96e5915a793, type: 3}
-      propertyPath: waterMode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 780611a67e8e941a2b3aa96e5915a793, type: 3}
@@ -3260,7 +3208,7 @@ PrefabInstance:
     - target: {fileID: 8926211240696649561, guid: 1dc0cadca4f1f5a46b957d15c6c429c7,
         type: 3}
       propertyPath: m_Name
-      value: SimpleWaterProducerExample (1)
+      value: WaterSource
       objectReference: {fileID: 0}
     - target: {fileID: 8926211240696649567, guid: 1dc0cadca4f1f5a46b957d15c6c429c7,
         type: 3}
@@ -3589,7 +3537,7 @@ PrefabInstance:
     - target: {fileID: 114636355673813890, guid: e030d32b35e1d3a488774d9c76277ddd,
         type: 3}
       propertyPath: LoadData
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114636355673813890, guid: e030d32b35e1d3a488774d9c76277ddd,
         type: 3}
@@ -3960,7 +3908,7 @@ PrefabInstance:
     - target: {fileID: 1657452210841737735, guid: 09fbbefcba9fd744dbc46d889e130b3d,
         type: 3}
       propertyPath: m_Name
-      value: Pop
+      value: Consumer
       objectReference: {fileID: 0}
     - target: {fileID: 3542190157137659737, guid: 09fbbefcba9fd744dbc46d889e130b3d,
         type: 3}

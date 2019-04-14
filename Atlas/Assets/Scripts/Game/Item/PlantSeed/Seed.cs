@@ -14,10 +14,8 @@ namespace Game.Item.PlantSeed
 
         public override void Use(ItemStack selfStack, InputKeyStatus status)
         {
-            Debug.Log("Plant ? ");
             if (status != InputKeyStatus.Pressed)
                 return;
-            Debug.Log("Plant");
             selfStack.ModifyQuantity(selfStack.Quantity - 1);
             GameObject plantModel = Instantiate(PrefabPlanted, _location, new Quaternion(0,0,0,1));
             Debug.Log(plantModel);

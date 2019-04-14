@@ -26,9 +26,14 @@ namespace Game.ResourcesManagement.Producer
         
         private List<ConsumerListener> _allListeners = new List<ConsumerListener>();
 
+        #if UNITY_EDITOR
+        [Header("Debug"), SerializeField]
+        private bool _debugDisplay = false;
+        #endif
+        
         public abstract void Produce();
         
-        private void Awake()
+        protected virtual void Awake()
         {
             foreach (var res in ProducedResources)
                 _allListeners.Add(new ConsumerListener(res));
@@ -57,6 +62,16 @@ namespace Game.ResourcesManagement.Producer
                 listener.LinkedConsumers.Remove(consumer);
         }
 
+        public void ClearAllListener()
+        {
+            foreach (var listeners in _allListeners)
+            {
+                var cpyList = new List<IConsumer>(listeners.LinkedConsumers);
+                foreach (var listener in cpyList)
+                    listener.UnsubscribeToProducer(this);
+            }
+        }
+        
         protected void ShareResources()
         {
             foreach (var resourceListeners in _allListeners)
@@ -68,7 +83,12 @@ namespace Game.ResourcesManagement.Producer
 
                     var resourcesRemoved = StockedResources.RemoveResources(resourceListeners.Resource, ResourceGivenPerTick);
                     if (resourcesRemoved > 0)
+                    {
+                        #if UNITY_EDITOR
+                        if (_debugDisplay) Debug.Log(name + " give to " + listener.name + ": " + resourcesRemoved);
+                        #endif
                         listener.ReceiveResource(resourceListeners.Resource, resourcesRemoved);
+                    }
                     else
                         break;
                 }
