@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.06739743, g: 0.08884705, b: 0.13187651, a: 1}
+  m_IndirectSpecularColor: {r: 0.06744362, g: 0.0889105, b: 0.13196887, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -445,6 +445,46 @@ Material:
     - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+--- !u!1 &183863751 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 780611a67e8e941a2b3aa96e5915a793,
+    type: 3}
+  m_PrefabInstance: {fileID: 1599615185}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &183863755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 183863751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43e8698d0207b7b4c99e9e7801956e2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _listOfStocks:
+  - Resource: 0
+    Quantity: 6000000
+    Limit: 6000000
+--- !u!114 &183863756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 183863751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 458944003805dd141934b29d8fd9f36c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ProductionRate:
+    TickRate: 0.25
+    ResourcePerTick: 500
+  ResourceGivenPerTick: 500
+  StockedResources: {fileID: 183863755}
+  ProducedResources: 00000000
 --- !u!1 &204128966
 GameObject:
   m_ObjectHideFlags: 0
@@ -806,17 +846,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7209074388893711307, guid: be237de79ef95af48a01fecddd4eca7c,
+        type: 3}
+      propertyPath: m_Name
+      value: '--- Managers ---'
+      objectReference: {fileID: 0}
     - target: {fileID: 5825037864976274952, guid: be237de79ef95af48a01fecddd4eca7c,
         type: 3}
       propertyPath: m_Text
       value: 'ZOBZOBOBZOBZOBZOBZ
 
 '
-      objectReference: {fileID: 0}
-    - target: {fileID: 7209074388893711307, guid: be237de79ef95af48a01fecddd4eca7c,
-        type: 3}
-      propertyPath: m_Name
-      value: '--- Managers ---'
       objectReference: {fileID: 0}
     - target: {fileID: 7209074388893711306, guid: be237de79ef95af48a01fecddd4eca7c,
         type: 3}
