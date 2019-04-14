@@ -1,7 +1,4 @@
 ﻿using System.Collections;
-using Game.ResourcesManagement;
-using Game.ResourcesManagement.Producer;
-using Plants;
 using UnityEngine;
 
 namespace Game.Item.Tools
@@ -46,6 +43,7 @@ namespace Game.Item.Tools
 
                 if (State == Status.Watering)
                 {
+                    Debug.Log("Watering");
                     Producer.StockedResources = Consumer.LinkedStock;
                     Producer.enabled = true;
                     Producer.Produce();
