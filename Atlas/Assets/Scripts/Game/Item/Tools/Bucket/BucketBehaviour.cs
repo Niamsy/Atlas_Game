@@ -36,18 +36,24 @@ namespace Game.Item.Tools
                 Producer.enabled = false;
 
                 State = newState;
-                
-                Producer.gameObject.SetActive(State == Status.Watering);
-                ProducerParticle.gameObject.SetActive(State == Status.Watering);
 
                 if (State == Status.Watering)
                 {
-                    Producer.StockedResources = Consumer.LinkedStock;
+                    Producer.StockedResources[ResourcesManagement.Resource.Water].Quantity = Consumer.LinkedStock[ResourcesManagement.Resource.Water].Quantity;
+                    if (Producer.StockedResources[ResourcesManagement.Resource.Water].Quantity == 0)
+                        return;
+
+                    Producer.gameObject.SetActive(true);
+                    ProducerParticle.gameObject.SetActive(true);
+                    
                     Producer.enabled = true;
                     Producer.Produce();
                 }
                 else if (State == Status.Filling)
                 {
+                    Consumer.LinkedStock[ResourcesManagement.Resource.Water].Quantity = Producer.StockedResources[ResourcesManagement.Resource.Water].Quantity;
+                    Producer.gameObject.SetActive(false);
+                    ProducerParticle.gameObject.SetActive(false);
                     Consumer.LinkedStock = Producer.StockedResources;
                     Consumer.enabled = true;
                 }
