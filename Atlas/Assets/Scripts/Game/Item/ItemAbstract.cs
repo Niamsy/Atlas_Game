@@ -52,6 +52,12 @@ namespace Game.Item
 			get { return (_description); }
 		}
 
+		[SerializeField] private LocalizedText _usageText;
+		public string UsageText
+		{
+			get { return (_usageText); }
+		}
+
 		public virtual GameObject Equip(Transform parent)
 		{
 			EquipedObject = Instantiate(PrefabHoldedGO, parent);

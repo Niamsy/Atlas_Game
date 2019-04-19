@@ -1,13 +1,17 @@
-﻿using Game.Player;
+﻿using Game.Inventory;
+using Game.Player;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Menu.Inventory
 {
     public class HandSlotHUD : MonoBehaviour
     {
         private HandSlots _handSlot;
-        [SerializeField] private ItemStackHUD _rightHandHUD;
 
+        [SerializeField] private ItemStackHUD _handStackUI;
+        [SerializeField] private Text _useText;
+        
         private void Awake()
         {
             _handSlot = FindObjectOfType<HandSlots>();
@@ -15,7 +19,15 @@ namespace Menu.Inventory
         
         private void Start()
         {
-            _rightHandHUD.SetItemStack(_handSlot.EquippedItemStack);
+            _handStackUI.SetItemStack(_handSlot.EquippedItemStack);
+        }
+
+        private void Update()
+        {
+            if (_handSlot.EquippedItem && _handSlot.ObjectIsUsable)
+                _useText.text = _handSlot.EquippedItem.UsageText;
+            else
+                _useText.text = "";
         }
     }
 }
