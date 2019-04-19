@@ -5,6 +5,7 @@ using Game.Inventory;
 using Variables;
 using Plants.Plant;
 using Game.Item.PlantSeed;
+using Game.Player;
 
 namespace Player
 {
@@ -14,6 +15,8 @@ namespace Player
     public class PlayerController : MonoBehaviour
     {
         #region Variables
+
+        [SerializeField] private HandSlots _handSlots;
         #region Public variables
         #region Inputs
         public PlayerInputs _Inputs;
@@ -55,11 +58,6 @@ namespace Player
 
 
         private bool _canSow = false;
-        public bool CanSow
-        {
-            get { return _canSow; }
-            set { _canSow = value; }
-        }
 
         public Vector3 plantPosition = Vector3.zero;
 
@@ -104,11 +102,6 @@ namespace Player
         }
 
         private bool _isCheckSowing = false;
-        public bool IsCheckSowing
-        {
-            get { return _isCheckSowing; }
-            set { _isCheckSowing = true; }
-        }
 
         private bool _isSowing = false;
         public bool IsSowing
@@ -279,8 +272,10 @@ namespace Player
 
             _Move = transform.TransformDirection(_Move) * _CurrentAcceleratedSpeed.Value;
             _BodyController.Move(_Move * Time.fixedDeltaTime);
-        }
 
+            UseItem();
+        }
+        
         /// <summary>
         /// Check if the player is on the ground
         /// </summary>
@@ -426,9 +421,9 @@ namespace Player
 
         public bool CheckToSow()
         {
-            if (IsCheckSowing)
+            if (_isCheckSowing)
             {
-                if (_Inputs.Sow.GetDown() && CanSow && decay == 0f)
+                if (_Inputs.Sow.GetDown() && _canSow && decay == 0f)
                 {
                     decay = 1f;
                     IsSowing = true;
@@ -440,10 +435,10 @@ namespace Player
                 if (_Inputs.Skip.GetDown())
                 {
                     IsSowing = false;
-                    IsCheckSowing = false;
+                    _isCheckSowing = false;
                 }
             }
-            return IsGrounded && IsCheckSowing && IsSowing;
+            return IsGrounded && _isCheckSowing && IsSowing;
         }
 
         public bool CheckForCrouchedInput()
@@ -513,6 +508,25 @@ namespace Player
             }
         }
 
+        private void UseItem()
+        {
+            InputKeyStatus status = GetUseInput();
+
+            if (_handSlots.EquippedItem)
+            {
+                _handSlots.CheckIfItemUsable();
+                if (_handSlots.EquippedItem is Seed)
+                {
+                    _canSow = _handSlots.ObjectIsUsable;
+                    _isCheckSowing = true;
+                }
+                if (_handSlots.ObjectIsUsable)
+                    _handSlots.UseItem(status);
+            }
+            else
+                _isCheckSowing = false;
+        }
+        
         /// <summary>
         /// Rotate with controller right joystick
         /// </summary>

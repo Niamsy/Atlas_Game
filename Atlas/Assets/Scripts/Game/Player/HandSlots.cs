@@ -11,72 +11,36 @@ namespace Game.Player
     [RequireComponent(typeof(BaseInventory))]
     public class HandSlots : MonoBehaviour
     {
+        private bool _objectIsUsableLast;
+        public bool ObjectIsUsable { get { return (_objectIsUsableLast && EquippedItem != null && EquippedItemStack.Quantity > 0); } }
         private PlayerController _controller;
 
         [SerializeField] private ItemStack _equippedItemStack;
+        [SerializeField] private Transform _handTransform;
+
         private ItemAbstract               _equippedItem;
         private GameObject                 _equippedItemInstance;
-        private Transform                  _handTransform;
+        
         public ItemStack                   EquippedItemStack { get { return (_equippedItemStack); } }
-
+        public ItemAbstract                EquippedItem { get { return (_equippedItem); } }
+      
         private void Awake()
         {
             _equippedItemStack.OnItemStackUpdated += OnEquippedUpdate;
 
-            _handTransform = transform.Find("RightHand");
             _controller = FindObjectOfType<PlayerController>();
             LoadData();
 
             GameControl.BeforeSaving += SaveData;
         }
 
-        private void ResetUI()
+        public bool CheckIfItemUsable()
         {
-            GameObject canvasObject = GameObject.FindGameObjectWithTag("RightHand");
-            Transform textTr = canvasObject.transform.Find("UIHelp");
-            Text text = textTr.GetComponent<Text>();
-            text.enabled = false;
+            return (_objectIsUsableLast = _equippedItem.CanUse(_handTransform));
         }
-
-        private void UsingItem(InputKeyStatus status)
+        public void UseItem(InputKeyStatus status)
         {
-            bool canUse = _equippedItem.CanUse(_handTransform);
-            if (_equippedItem is Seed)
-            {
-                _controller.CanSow = canUse;
-                if (canUse)
-                {
-                    GameObject canvasObject = GameObject.FindGameObjectWithTag("RightHand");
-                    Transform textTr = canvasObject.transform.Find("UIHelp");
-                    Text text = textTr.GetComponent<Text>();
-                    text.enabled = true;
-                    text.text = "Click to sow";
-                }
-                else
-                    ResetUI();
-
-                _controller.IsCheckSowing = true;
-            }
-
-            if (_equippedItem != null && EquippedItemStack != null && EquippedItemStack.Quantity > 0)
-            {
-                // TODO: Someone remake that
-                // if (_equippedItem is Seed && !_controller.CheckToSow())
-                //    return;
-                _equippedItem.Use(EquippedItemStack, status);
-                if (EquippedItemStack.Quantity == 0)
-                    ResetUI();
-            }
-        }
-
-        private void Update()
-        {
-            InputKeyStatus status = _controller.GetUseInput();
-
-            if (EquippedItemStack.Content)
-                UsingItem(status);
-            else
-                _controller.IsCheckSowing = false;
+            _equippedItem.Use(EquippedItemStack, status);
         }
 
         #region Load/Saving Methods

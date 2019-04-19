@@ -1,5 +1,6 @@
 ﻿using System;
 using Game.Inventory;
+using Game.ResourcesManagement;
 using InputManagement;
 using UnityEngine;
 
@@ -12,7 +13,7 @@ namespace Game.Item.Tools.Bucket
 		
         public override bool CanUse(Transform transform)
         {
-            return (true);
+            return (Behaviour.Stock[Resource.Water].Quantity > 0);
         }
 
         public override void Use(ItemStack selfStack, InputKeyStatus status)
