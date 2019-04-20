@@ -126,7 +126,10 @@ namespace AtlasAudio {
                 if (audioSource.isPlaying)
                     audioSource.Stop();
             }
-            audio.Play(audioSource == null ? _AudioSources[currentAudioSource.Value] : audioSource);
+            if (audio)
+            {
+                audio.Play(audioSource ?? _AudioSources[currentAudioSource.Value]);
+            }
             currentAudioSource++;
         }
 

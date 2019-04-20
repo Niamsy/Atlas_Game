@@ -14,14 +14,15 @@ namespace Game.Item.PlantSeed
 
         public override void Use(ItemStack selfStack, InputKeyStatus status)
         {
+            Animation = null;
             if (status != InputKeyStatus.Pressed)
                 return;
             selfStack.ModifyQuantity(selfStack.Quantity - 1);
             GameObject plantModel = Instantiate(PrefabPlanted, _location, new Quaternion(0,0,0,1));
-            Debug.Log(plantModel);
             PlantStatistics = plantModel.GetComponent<PlantModel>().PlantStatistics;
             plantModel.GetComponent<PlantModel>().Sow();
             plantModel.GetComponent<PlantModel>().SetPlantName(PrefabPlanted.name);
+            Animation = "Sowing";
         }
 
         public override bool CanUse(Transform transform)
