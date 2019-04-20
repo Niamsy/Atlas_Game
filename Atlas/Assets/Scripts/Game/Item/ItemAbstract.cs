@@ -58,6 +58,13 @@ namespace Game.Item
 			get { return (_usageText); }
 		}
 
+        private string _animation;
+        public string Animation
+        {
+            get { return _animation; }
+            protected set { _animation = value; }
+        }
+
 		public virtual GameObject Equip(Transform parent)
 		{
 			EquipedObject = Instantiate(PrefabHoldedGO, parent);

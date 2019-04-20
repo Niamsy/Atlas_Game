@@ -215,6 +215,11 @@ namespace Player
             _Animator.SetFloat(_HashVerticalSpeed, newInput.z);
         }
 
+        public void PlayAnimation(string animation)
+        {
+            _Animator.SetTrigger(animation);
+        }
+
         private void Update()
         {
             if (_Inputs.CameraLock.Get())
