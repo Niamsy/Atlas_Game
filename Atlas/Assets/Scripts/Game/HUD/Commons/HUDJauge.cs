@@ -64,7 +64,7 @@ namespace Game.HUD.Commons
         {
             _targetValue = newValue;
             _prefill.fillAmount = ActualTargetPercentage01;
-            if (_targetValue != newValue)
+            if (_targetValue != _value)
             {
                 if (_XPFillAudio && _source)
                 {
@@ -84,12 +84,13 @@ namespace Game.HUD.Commons
                 else
                     UpdateValue(Mathf.MoveTowards(_value, _targetValue, (EmptyingSpeed * _maxValue) * Time.deltaTime));
                 UpdateText();
-                if (_targetValue == _value)
+            }
+
+            if (_targetValue == _value)
+            {
+                if (_XPFillAudio && _source)
                 {
-                    if (_XPFillAudio && _source)
-                    {
-                        _XPFillAudio.Stop(_source);
-                    }
+                    _XPFillAudio.Stop(_source);
                 }
             }
         }
