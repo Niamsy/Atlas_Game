@@ -26,6 +26,7 @@ namespace ExtendedTMPro
             vertexCurve.postWrapMode = WrapMode.Clamp;
         }
 
+        #if UNITY_EDITOR
         /// <summary>
         /// 
         /// </summary>
@@ -34,6 +35,7 @@ namespace ExtendedTMPro
             base.OnValidate();
             Rebuild(CanvasUpdate.PreRender);
         }
+        #endif
 
         /// <summary>
         /// 
