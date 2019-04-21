@@ -38,9 +38,14 @@ namespace Game.Player
         {
             return (_objectIsUsableLast = _equippedItem.CanUse(_handTransform));
         }
+
         public void UseItem(InputKeyStatus status)
         {
             _equippedItem.Use(EquippedItemStack, status);
+            if (_equippedItem.Animation != null)
+            {
+                _controller.PlayAnimation(_equippedItem.Animation);
+            }
         }
 
         #region Load/Saving Methods

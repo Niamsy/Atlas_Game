@@ -18,6 +18,8 @@ namespace Plants.Plant
         protected int current_stage = 0;
         [SerializeField]
         private PlantConsumer _consumer;
+        [SerializeField]
+        private PlantProducer _producer;
         private GameObject _currentModel = null;
         [SerializeField]
         private Canvas _GuiCanvasName;
@@ -61,6 +63,7 @@ namespace Plants.Plant
                 _currentModel.GetComponent<MeshRenderer>().materials = CurrentStage.Materials;
             }
             PlayEffect(CurrentStage.GrowEffect);
+            UpdateProducer();
             UpdateConsumers();
             if (current_stage == PlantStatistics.Stages.Count - 1)
             {
@@ -144,6 +147,11 @@ namespace Plants.Plant
                     name.text = gameObject.name;
                 _GuiCanvasName.gameObject.SetActive(false);
             }
+        }
+
+        private void UpdateProducer()
+        {
+            _producer.StockedResources[Game.ResourcesManagement.Resource.Oxygen].Limit += 100;
         }
 
         private void UpdateConsumers()

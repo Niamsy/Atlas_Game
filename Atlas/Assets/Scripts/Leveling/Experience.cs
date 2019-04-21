@@ -85,21 +85,13 @@ namespace Leveling
         {
             Gain(XPValue, 1);
         }
+
         public void Gain(int XPValue, int Modifier)
         {
             int value = XPValue * Modifier;
 
             if (_CanGainXP)
             {
-                if (value > 0 && _EGainXP)
-                {
-                    _EGainXP.Raise(CurrentXP, value);
-                }
-                else if (value < 0 && _ELoseXP)
-                {
-                    _ELoseXP.Raise(CurrentXP, value);
-                }
-
                 if (CurrentXP + value >= LevelRoof)
                 {
                     if (_EGainLevel)
@@ -111,7 +103,7 @@ namespace Leveling
                     _LevelFloor.Value = _LevelRoof.Value;
                     _LevelRoof.Value = CalculateNextLevelXPNeeded(Level, LevelRoof);
                 }
-                else if (CurrentXP + value < LevelFloor && LevelFloor > 0)
+                else if (CurrentXP + value < LevelFloor && LevelFloor > 1)
                 {
                     if (_ELostLevel)
                     {
@@ -123,6 +115,18 @@ namespace Leveling
                     _LevelRoof.Value = _LevelFloor.Value;
                     _LevelFloor.Value = CalculateNextLevelXPNeeded(Level, LevelRoof);
 
+                }
+                else
+                {
+                    _CurrentXP.Value += value;
+                }
+                if (value > 0 && _EGainXP)
+                {
+                    _EGainXP.Raise(CurrentXP, value);
+                }
+                else if (value < 0 && _ELoseXP)
+                {
+                    _ELoseXP.Raise(CurrentXP, value);
                 }
             }
             else

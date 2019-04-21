@@ -117,7 +117,15 @@ namespace AtlasAudio {
         }
         #endregion
         #endregion
-        
+
+        public void Play(Audio audio)
+        {
+            if (audio)
+            {
+                audio.Play(_AudioSources[currentAudioSource.Value]);
+                currentAudioSource++;
+            }
+        }
 
         public void Play(Audio audio, AudioSource audioSource)
         {
@@ -126,8 +134,11 @@ namespace AtlasAudio {
                 if (audioSource.isPlaying)
                     audioSource.Stop();
             }
-            audio.Play(audioSource == null ? _AudioSources[currentAudioSource.Value] : audioSource);
-            currentAudioSource++;
+            if (audio)
+            {
+                audio.Play(audioSource ?? _AudioSources[currentAudioSource.Value]);
+                currentAudioSource++;
+            }
         }
 
         public void Stop(Audio audio, AudioSource audioSource)
