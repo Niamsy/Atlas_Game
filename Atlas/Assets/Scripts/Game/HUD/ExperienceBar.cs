@@ -72,7 +72,8 @@ namespace Game.HUD
         {
             _timeBeforeFadeOut = DisplayLength;
             _isDisplaying = true;
-            _animator.SetBool(_hashDisplay, _isDisplaying);
+            if (_animator)
+                _animator.SetBool(_hashDisplay, _isDisplaying);
         }
         
         public void Hide()
