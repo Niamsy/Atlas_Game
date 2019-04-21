@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using AtlasAudio;
 
 namespace Game.HUD.Commons
 {
@@ -17,6 +18,10 @@ namespace Game.HUD.Commons
         public float EmptyingSpeed = 2f;
         [Tooltip("See string.Format function, {0} in the actual value, {1} is the max value, {2} is the percentage")]
         public string TextFormat = "{0:F2} / {1:F2}";
+
+        [Header("Sounds")]
+        [SerializeField] public SimpleAudio _XPFillAudio;
+        [SerializeField] public AudioSource _source;
         
         private float _targetValue;
         private float _value;
@@ -59,6 +64,14 @@ namespace Game.HUD.Commons
         {
             _targetValue = newValue;
             _prefill.fillAmount = ActualTargetPercentage01;
+            if (_targetValue != _value)
+            {
+                if (_XPFillAudio && _source)
+                {
+                    _source.loop = true;
+                    _XPFillAudio.Play(_source);
+                }
+            }
         }
         
         private void Update()
@@ -71,6 +84,14 @@ namespace Game.HUD.Commons
                 else
                     UpdateValue(Mathf.MoveTowards(_value, _targetValue, (EmptyingSpeed * _maxValue) * Time.deltaTime));
                 UpdateText();
+            }
+
+            if (_targetValue == _value)
+            {
+                if (_XPFillAudio && _source)
+                {
+                    _XPFillAudio.Stop(_source);
+                }
             }
         }
 
