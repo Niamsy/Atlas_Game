@@ -18,7 +18,8 @@ namespace Game.HUD
         
         private void Update()
         {
-            _text.text = _calendar.Hours.ToString("00") + ":" + _calendar.Minutes.ToString("00");
+            if (_text && _calendar)
+                _text.text = _calendar.Hours.ToString("00") + ":" + _calendar.Minutes.ToString("00");
         }
     }
 }
