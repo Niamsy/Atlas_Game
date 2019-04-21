@@ -95,6 +95,87 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7163c02522e115e47b0fefa0e2004ec0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1263178162197885333
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6030512320445974360}
+  - component: {fileID: 3964758700477677107}
+  - component: {fileID: 75853799741453164}
+  - component: {fileID: 539353680344262507}
+  m_Layer: 0
+  m_Name: Producer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6030512320445974360
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263178162197885333}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6206562519876059875}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3964758700477677107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263178162197885333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3764df9a44e2c74f9786c518170f0f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ProductionRate:
+    TickRate: 0.3
+    ResourcePerTick: 10
+  ResourceGivenPerTick: 10
+  StockedResources: {fileID: 75853799741453164}
+  ProducedResources: 02000000
+  _debugDisplay: 0
+--- !u!114 &75853799741453164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263178162197885333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43e8698d0207b7b4c99e9e7801956e2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _listOfStocks:
+  - Resource: 2
+    Quantity: 0
+    Limit: 0
+--- !u!135 &539353680344262507
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263178162197885333}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2434581482427970674
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,6 +365,7 @@ Transform:
   m_Children:
   - {fileID: 7234490844359043643}
   - {fileID: 6238969437981759423}
+  - {fileID: 6030512320445974360}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -338,6 +420,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlantStatistics: {fileID: 0}
   _consumer: {fileID: 4612267141163210265}
+  _producer: {fileID: 3964758700477677107}
   _GuiCanvasName: {fileID: 7894356186185704656}
 --- !u!114 &6206562519876059877
 MonoBehaviour:
@@ -544,6 +627,7 @@ MonoBehaviour:
     TickRate: 0.25
     ResourcePerTick: 0
   LinkedStock: {fileID: 94288088625762375}
+  _debugDisplay: 0
   _starvationTimeLimit: 25
   ConsumedStocks: []
 --- !u!114 &94288088625762375
