@@ -52,6 +52,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _handStackUI: {fileID: 8277945270316315796}
   _useText: {fileID: 2384788910272402270}
+--- !u!114 &4954350364628610159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6754375929190999797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 725bf5ddb878f09429d39010d9e2d59a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Component: {fileID: 8740985327257297202}
+  m_Property: text
+  m_LocalizedAsset: {fileID: 11400000, guid: d375f3dfa93ce2b4b888b991e5efcd4a, type: 2}
+  m_FormatArgs: []
 --- !u!1 &7445763045224183516
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,15 +222,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 2077558285575020672, guid: 1b09e132793e1cc499cece4679c7ae05,
-        type: 3}
-      propertyPath: m_Text
-      value: E
-      objectReference: {fileID: 0}
     - target: {fileID: 7495925723584912235, guid: 1b09e132793e1cc499cece4679c7ae05,
         type: 3}
       propertyPath: m_Text
-      value: Press to pickup
+      value: Pickup
       objectReference: {fileID: 0}
     - target: {fileID: 4093530302061669741, guid: 1b09e132793e1cc499cece4679c7ae05,
         type: 3}
@@ -222,6 +233,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: f63124cd9f9993d429152f9019553bd5,
         type: 2}
+    - target: {fileID: 2077558285575020672, guid: 1b09e132793e1cc499cece4679c7ae05,
+        type: 3}
+      propertyPath: m_Text
+      value: E
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b09e132793e1cc499cece4679c7ae05, type: 3}
 --- !u!224 &4065196493294108326 stripped
@@ -230,6 +246,24 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1245482159765944921}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6754375929190999797 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5545209271887568044, guid: 1b09e132793e1cc499cece4679c7ae05,
+    type: 3}
+  m_PrefabInstance: {fileID: 1245482159765944921}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8740985327257297202 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7495925723584912235, guid: 1b09e132793e1cc499cece4679c7ae05,
+    type: 3}
+  m_PrefabInstance: {fileID: 1245482159765944921}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6754375929190999797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2564997368912086352
 PrefabInstance:
   m_ObjectHideFlags: 0

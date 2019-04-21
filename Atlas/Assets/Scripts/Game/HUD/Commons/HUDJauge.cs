@@ -63,7 +63,8 @@ namespace Game.HUD.Commons
         private void UpdateTargetValue(float newValue)
         {
             _targetValue = newValue;
-            _prefill.fillAmount = ActualTargetPercentage01;
+            if (_prefill)
+                _prefill.fillAmount = ActualTargetPercentage01;
             if (_targetValue != _value)
             {
                 if (_XPFillAudio && _source)
