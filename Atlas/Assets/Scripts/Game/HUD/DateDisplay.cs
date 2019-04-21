@@ -18,8 +18,11 @@ namespace Game.HUD
 
         private void Update()
         {
-            int day = _calendar.Day + 1;
-            _text.text = day.ToString("00") + " " + _months.Entries[_calendar.Month];
+            if (_calendar && _text && _months)
+            {
+                int day = _calendar.Day + 1;
+                _text.text = day.ToString("00") + " " + _months.Entries[_calendar.Month];
+            }
         }
     }
 }
