@@ -13,7 +13,8 @@ namespace Game.Item.Tools.Bucket
 		
         public override bool CanUse(Transform transform)
         {
-            return (Behaviour.Stock[Resource.Water].Quantity > 0);
+            var canUse = Behaviour.Stock[Resource.Water].Quantity > 0;
+	        return (canUse);
         }
 
         public override void Use(ItemStack selfStack, InputKeyStatus status)
