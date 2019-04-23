@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 namespace Game.HUD
 {
-    [RequireComponent(typeof(Animator))]
     public class ExperienceBar : MonoBehaviour, ILevelingEventListener
     {
         #region Variables
@@ -18,7 +17,6 @@ namespace Game.HUD
         [SerializeField] private HUDJauge _jauge;
         [SerializeField] private Text _levelDisplay;
         [SerializeField] private LevelingEvent _gainXp;
-        private Animator _animator;
         #endregion
         
         #region Parameters
@@ -33,14 +31,12 @@ namespace Game.HUD
         private float _lastKnowLevel = 0;
         private float _timeBeforeFadeOut = 0;
         private bool _isDisplaying;
-        private readonly int _hashDisplay = Animator.StringToHash("Display");
         #endregion
         #endregion
 
         #region Methods
         private void Awake()
         {
-            _animator = GetComponent<Animator>();
             _gainXp.RegisterListener(this);
             // TODO: Can't access Max Exp per level now
             _jauge.Initialize(_experience.Value, _levelRoof.Value);
@@ -72,15 +68,12 @@ namespace Game.HUD
         {
             _timeBeforeFadeOut = DisplayLength;
             _isDisplaying = true;
-            if (_animator)
-                _animator.SetBool(_hashDisplay, _isDisplaying);
         }
         
         public void Hide()
         {
             _timeBeforeFadeOut = 0;
             _isDisplaying = false;
-            _animator.SetBool(_hashDisplay, _isDisplaying);
         }
         #endregion
     }
