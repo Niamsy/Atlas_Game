@@ -1798,6 +1798,10 @@ PrefabInstance:
       propertyPath: _ResetExperience
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 210453751, guid: fc4e73b4e7a0e5b4885b2e4a7b09105e, type: 3}
+      propertyPath: popupSender
+      value: 
+      objectReference: {fileID: 1467771249}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc4e73b4e7a0e5b4885b2e4a7b09105e, type: 3}
 --- !u!21 &1155451737
@@ -2511,6 +2515,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1414556972}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1467771249 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6280877646559154672, guid: 7258629a63c1c85419286c34a8683822,
+    type: 3}
+  m_PrefabInstance: {fileID: 17567070768245267}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c1a6b69a6778b14aa07324f34a80bfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!21 &1499202737
 Material:
   serializedVersion: 6
@@ -3939,54 +3955,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1870893830}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1951728275 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 633231820987127775, guid: fc4e73b4e7a0e5b4885b2e4a7b09105e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1098307224}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1951728283 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 633231820987127768, guid: fc4e73b4e7a0e5b4885b2e4a7b09105e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1098307224}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1951728275}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da90fde1c55062243a5d6d2d2aa98d41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1951728284
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1951728275}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af91dee62d64fa54ba663d7808fd1fbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: bd82d90b4f4a37041a8c7409527435c7, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1951728283}
-        m_MethodName: Play
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: d252ba5ec6e9fde4cba3f2670d7917f4,
-            type: 2}
-          m_ObjectArgumentAssemblyTypeName: AtlasAudio.Audio, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: Leveling.LevelingEventListener+LevelingUnityEvent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!1001 &2015229442
 PrefabInstance:
   m_ObjectHideFlags: 0

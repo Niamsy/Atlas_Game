@@ -24,9 +24,9 @@ namespace Game.HUD
 
         private void Update()
         {
-            CurrentHealthBar.SetValue(Stats.PlayerHealth.GetCurrent() / Stats.PlayerHealth.GetMax());
+            CurrentHealthBar.SetValue(Stats.PlayerHealth.GetCurrent());
             var oxygenStock = Stats._consumer.LinkedStock[Game.ResourcesManagement.Resource.Oxygen];
-            CurrentOxygenBar.SetValue((float)oxygenStock.Quantity / (float)oxygenStock.Limit);
+            CurrentOxygenBar.SetValue(oxygenStock.Quantity);
 
             /*
         ratio = stats.playerHunger.getCurrent() / stats.playerHunger.getMax();
