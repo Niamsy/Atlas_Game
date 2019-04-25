@@ -14,11 +14,12 @@ public class PlayerStatsUI : MonoBehaviour
     
     private void Update()
     {
-        updateBar();
+        UpdateBar();
     }
-    private void updateBar()
+
+    private void UpdateBar()
     {
-        float ratio = stats.playerHealth.getCurrent() / stats.playerHealth.getMax();
+        /*float ratio = stats.playerHealth.getCurrent() / stats.playerHealth.getMax();
 
         currentHealthBar.rectTransform.localScale = new Vector3(ratio, 1, 1);
 
@@ -26,16 +27,17 @@ public class PlayerStatsUI : MonoBehaviour
         currentHungerBar.rectTransform.localScale = new Vector3(ratio, 1, 1);
 
         ratio = stats.playerSleep.getCurrent() / stats.playerSleep.getMax();
-        currentSleepBar.rectTransform.localScale = new Vector3(ratio, 1, 1);
+        currentSleepBar.rectTransform.localScale = new Vector3(ratio, 1, 1);*/
 
-        ratio = stats.playerOxygen.getCurrent() / stats.playerOxygen.getMax();
+        var oxygenStock = stats._consumer.LinkedStock[Game.ResourcesManagement.Resource.Oxygen];
+        float ratio = (float)oxygenStock.Quantity / (float)oxygenStock.Limit;
         currentOxygenBar.rectTransform.localScale = new Vector3(ratio, 1, 1);
 
-        ratio = stats.playerStamina.getCurrent() / stats.playerStamina.getMax();
+       /* ratio = stats.playerStamina.getCurrent() / stats.playerStamina.getMax();
         currentStaminaBar.rectTransform.localScale = new Vector3(ratio, 1, 1);
 
         ratio = stats.playerHydration.getCurrent() / stats.playerHydration.getMax();
-        currentWaterBar.rectTransform.localScale = new Vector3(ratio, 1, 1);
+        currentWaterBar.rectTransform.localScale = new Vector3(ratio, 1, 1);*/
     }
     
 }

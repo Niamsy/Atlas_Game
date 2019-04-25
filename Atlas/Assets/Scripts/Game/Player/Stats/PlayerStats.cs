@@ -4,7 +4,7 @@
 public class PlayerStats : MonoBehaviour
 {
     [SerializeField]
-    private PlayerConsumer _consumer;
+    public PlayerConsumer _consumer;
 
     public Popup popupSender;
     public StaminaConstraint playerStamina;
@@ -25,7 +25,7 @@ public class PlayerStats : MonoBehaviour
 
     public void Update()
     {
-        playerStamina.Update(Time.deltaTime);
+       /* playerStamina.Update(Time.deltaTime);
         
         playerHydration.Update(Time.deltaTime);
         if (playerHydration.getCurrent() <= playerHydration.getMax() / 2 && playerHydration.getCurrent() >= playerHydration.getMax() / 2 - 1)
@@ -51,7 +51,7 @@ public class PlayerStats : MonoBehaviour
         if (playerHunger.getCurrent() <= playerHunger.getMax() / 2 && playerHunger.getCurrent() <= playerHunger.getMax() / 2 - 1)
         {
             Popup.Instance.sendPopup("Careful player Hunger is under 50% you should find something to eat soon");
-        }
+        }*/
     }
 }
 
