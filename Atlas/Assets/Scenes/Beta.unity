@@ -2769,7 +2769,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1543028349534790, guid: 5d9e75d3beb08454ea1fddd983f9ba8a, type: 3}
       propertyPath: m_Name
-      value: '--- Wolrd Menu ---'
+      value: '--- World Menu ---'
       objectReference: {fileID: 0}
     - target: {fileID: 224121992111243718, guid: 5d9e75d3beb08454ea1fddd983f9ba8a,
         type: 3}
@@ -3090,7 +3090,7 @@ PrefabInstance:
         type: 3}
       propertyPath: stats
       value: 
-      objectReference: {fileID: 1926805290}
+      objectReference: {fileID: 1849124756}
     - target: {fileID: 6959001593803297293, guid: 5d9e75d3beb08454ea1fddd983f9ba8a,
         type: 3}
       propertyPath: _actualBaseInventory
@@ -3752,6 +3752,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0647275d3a8b70743a68f60001ac1092, type: 3}
+--- !u!114 &1849124756 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 210453751, guid: fc4e73b4e7a0e5b4885b2e4a7b09105e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1098307224}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8535e56defced6140bf7c63e5cfa257a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1858885413
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3927,18 +3939,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1870893830}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1926805290 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4904671795951490526, guid: fc4e73b4e7a0e5b4885b2e4a7b09105e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1098307224}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8535e56defced6140bf7c63e5cfa257a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1951728275 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 633231820987127775, guid: fc4e73b4e7a0e5b4885b2e4a7b09105e,
@@ -4255,6 +4255,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6842305410649436671, guid: 7258629a63c1c85419286c34a8683822,
+        type: 3}
+      propertyPath: stats
+      value: 
+      objectReference: {fileID: 1849124756}
+    - target: {fileID: 5642553562454253780, guid: 7258629a63c1c85419286c34a8683822,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5642553562454253780, guid: 7258629a63c1c85419286c34a8683822,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5642553562454253780, guid: 7258629a63c1c85419286c34a8683822,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1083.9995
+      objectReference: {fileID: 0}
     - target: {fileID: 5981819572743812704, guid: 7258629a63c1c85419286c34a8683822,
         type: 3}
       propertyPath: m_Name
