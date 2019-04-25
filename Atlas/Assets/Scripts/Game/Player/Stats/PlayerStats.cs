@@ -1,21 +1,24 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(PlayerConsumer))]
 public class PlayerStats : MonoBehaviour
 {
+    [SerializeField]
+    private PlayerConsumer _consumer;
+
     public Popup popupSender;
     public StaminaConstraint playerStamina;
     public HydrationConstraint playerHydration;
     public SleepConstraint playerSleep;
-    public OxygenConstraint playerOxygen;
     public HealthConstraint playerHealth;
     public HungerConstraint playerHunger;
+    public OxygenConstraint playerOxygen;
 
     private void Start()
     {
         playerStamina = new StaminaConstraint();
         playerHydration = new HydrationConstraint();
         playerSleep = new SleepConstraint();
-        playerOxygen = new OxygenConstraint();
         playerHealth = new HealthConstraint();
         playerHunger = new HungerConstraint();
     }
