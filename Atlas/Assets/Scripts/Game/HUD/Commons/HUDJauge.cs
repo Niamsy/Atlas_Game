@@ -93,7 +93,8 @@ namespace Game.HUD.Commons
 
         private void UpdateText()
         {
-            _valueText.text = string.Format(TextFormat, _value, _maxValue, (_value / _maxValue) * 100f);
+            if (_valueText != null)
+                _valueText.text = string.Format(TextFormat, _value, _maxValue, (_value / _maxValue) * 100f);
         }
     }
 }
