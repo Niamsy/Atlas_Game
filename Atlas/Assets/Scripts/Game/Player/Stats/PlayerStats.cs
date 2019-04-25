@@ -7,20 +7,12 @@ public class PlayerStats : MonoBehaviour
     public PlayerConsumer _consumer;
 
     public Popup popupSender;
-    public StaminaConstraint playerStamina;
-    public HydrationConstraint playerHydration;
-    public SleepConstraint playerSleep;
-    public HealthConstraint playerHealth;
-    public HungerConstraint playerHunger;
-    public OxygenConstraint playerOxygen;
+    
+    public HealthConstraint PlayerHealth;
 
-    private void Start()
+    private void Awake()
     {
-        playerStamina = new StaminaConstraint();
-        playerHydration = new HydrationConstraint();
-        playerSleep = new SleepConstraint();
-        playerHealth = new HealthConstraint();
-        playerHunger = new HungerConstraint();
+        PlayerHealth = new HealthConstraint();
     }
 
     public void Update()
