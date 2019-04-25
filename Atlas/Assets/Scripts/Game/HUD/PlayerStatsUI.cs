@@ -15,17 +15,16 @@ namespace Game.HUD
 
         public PlayerStats Stats;
 
-
         private void Start()
         {
-            CurrentHealthBar.Initialize(Stats.playerHealth.getCurrent(), Stats.playerHealth.getMax());
+            CurrentHealthBar.Initialize(Stats.PlayerHealth.GetCurrent(), Stats.PlayerHealth.GetMax());
             var oxygenStock = Stats._consumer.LinkedStock[Game.ResourcesManagement.Resource.Oxygen];
             CurrentOxygenBar.Initialize(oxygenStock.Quantity, oxygenStock.Limit);
         }
 
         private void Update()
         {
-            CurrentHealthBar.SetValue(Stats.playerHealth.getCurrent() / Stats.playerHealth.getMax());
+            CurrentHealthBar.SetValue(Stats.PlayerHealth.GetCurrent() / Stats.PlayerHealth.GetMax());
             var oxygenStock = Stats._consumer.LinkedStock[Game.ResourcesManagement.Resource.Oxygen];
             CurrentOxygenBar.SetValue((float)oxygenStock.Quantity / (float)oxygenStock.Limit);
 
