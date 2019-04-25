@@ -2294,6 +2294,7 @@ GameObject:
   - component: {fileID: 5106689467820548454}
   - component: {fileID: 6713238541630125639}
   - component: {fileID: 737713155763966414}
+  - component: {fileID: 2814572122784449201}
   m_Layer: 12
   m_Name: OxygeneConsumer
   m_TagString: Untagged
@@ -2347,8 +2348,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _listOfStocks:
   - Resource: 2
-    Quantity: 0
+    Quantity: 500
     Limit: 500
+--- !u!135 &2814572122784449201
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3227923393757589890}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4904671795951490527
 GameObject:
   m_ObjectHideFlags: 0
