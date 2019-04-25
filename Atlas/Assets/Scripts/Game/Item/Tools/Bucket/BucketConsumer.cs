@@ -5,7 +5,7 @@ namespace Game.Item.Tools.Bucket
 {
     public class BucketConsumer : IConsumer
     {
-        public void Awake()
+        protected override void Awake()
         {
             ResourcesToConsume.RemoveAll(x => true);
             ResourcesToConsume.Add(Resource.Water);
