@@ -3,8 +3,8 @@
 
     public OxygenConstraint()
     {
-        max = 100;
-        current = max;
+        Max = 100;
+        Current = Max;
     }
 
     public void Update(double deltaTime)
@@ -15,20 +15,20 @@
 
     public void give(float qte)
     {
-        current += qte;
+        Current += qte;
     }
 
     public bool consume(float qteToConsume)
     {
-        if (current > 0)
+        if (Current > 0)
         {
-            current -= qteToConsume;
+            Current -= qteToConsume;
         }
         return isEmpty();
     }
     public bool isEmpty()
     {
-        if (current <= 0)
+        if (Current <= 0)
         {
             return true;
         }

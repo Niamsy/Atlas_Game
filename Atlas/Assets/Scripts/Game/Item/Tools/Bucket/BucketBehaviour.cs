@@ -12,7 +12,7 @@ namespace Game.Item.Tools.Bucket
         
         public GameObject ProducerParticle;
 
-        private bool isWatering = false;
+        private bool _isWatering = false;
         
         private void Awake()
         {
@@ -29,16 +29,20 @@ namespace Game.Item.Tools.Bucket
 
         private void Update()
         {
-            if (isWatering)
-                ProducerParticle.gameObject.SetActive(Producer.StockedResources[Resource.Water].Quantity != 0);
+            if (_isWatering && Producer.StockedResources[Resource.Water].Quantity == 0)
+                SetState(false);
         }
 
         public void SetState(bool newState)
         {
-            isWatering = newState;
+            if (newState == _isWatering)
+                return;
+            
+            _isWatering = newState;
 
-            Producer.gameObject.SetActive(isWatering);
-            Consumer.gameObject.SetActive(!isWatering);
+            Producer.gameObject.SetActive(_isWatering);
+            Consumer.gameObject.SetActive(!_isWatering);
+            ProducerParticle.gameObject.SetActive(_isWatering);
         }
     }
 }

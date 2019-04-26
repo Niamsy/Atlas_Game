@@ -2,31 +2,31 @@
 {
     public HealthConstraint()
     {
-        max = 200;
-        current = max;
+        Max = 200;
+        Current = Max;
     }
 
     public void Update(double deltaTime)
     {
-        consume((float)0.00);
+        Consume((float)0.00);
     }
 
-    public void give(float qte)
+    public void Give(float qte)
     {
-        current += qte;
+        Current += qte;
     }
 
-    public bool consume(float qteToConsume)
+    public bool Consume(float qteToConsume)
     {
-        if (current > 0)
+        if (Current > 0)
         {
-            current -= qteToConsume;
+            Current -= qteToConsume;
         }
-        return isEmpty();
+        return IsEmpty();
     }
-    public bool isEmpty()
+    public bool IsEmpty()
     {
-        if (current <= 0)
+        if (Current <= 0)
         {
             return true;
         }

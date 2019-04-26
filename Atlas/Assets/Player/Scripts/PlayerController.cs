@@ -217,6 +217,7 @@ namespace Player
 
         public void PlayAnimation(string animation)
         {
+            if (animation != "")
             _Animator.SetTrigger(animation);
         }
 
@@ -237,27 +238,17 @@ namespace Player
         private void UpdateScaledInputs()
         {
             if (_Input.z > 0 && _CurrentAcceleratedSpeed.Value < _CurrentSpeed)
-            {
                 _CurrentAcceleratedSpeed.Value += _Acceleration * Time.fixedDeltaTime;
-            }
             else if (_Input.z < 0 && -_CurrentAcceleratedSpeed.Value > -_CurrentSpeed)
-            {
                 _CurrentAcceleratedSpeed.Value += _Acceleration * Time.fixedDeltaTime;
-            }
             else if (_Input.z == 0)
             {
                 if (_CurrentAcceleratedSpeed.Value > _Deceleration * Time.fixedDeltaTime)
-                {
                     _CurrentAcceleratedSpeed.Value -= _Deceleration * Time.fixedDeltaTime;
-                }
                 else if (_CurrentAcceleratedSpeed.Value < -_Deceleration * Time.fixedDeltaTime)
-                {
                     _CurrentAcceleratedSpeed.Value += _Deceleration + Time.fixedDeltaTime;
-                }
                 else
-                {
                     _CurrentAcceleratedSpeed.Value = 0f;
-                }
             }
             _Animator.SetFloat(_HashVerticalSpeed, _CurrentAcceleratedSpeed.Value / _CurrentSpeed);
         }
@@ -268,12 +259,8 @@ namespace Player
             _Animator.SetFloat(_HashHorizontalSpeed, _Input.x);
             _Move = new Vector3((_Inputs.CameraLock.Get() ? _Inputs.HorizontalAxis.Get() : 0), 0, _Inputs.VerticalAxis.Get());
 
-            if (_Inputs.CameraLock.Get() &&
-                (_Inputs.HorizontalAxis.Get() > 0f ||
-                _Inputs.VerticalAxis.Get() > 0f))
-            {
+            if (_Inputs.CameraLock.Get() && (_Inputs.HorizontalAxis.Get() > 0f || _Inputs.VerticalAxis.Get() > 0f))
                 _Move *= 0.7f;
-            }
 
             _Move = transform.TransformDirection(_Move) * _CurrentAcceleratedSpeed.Value;
             _BodyController.Move(_Move * Time.fixedDeltaTime);
@@ -301,13 +288,9 @@ namespace Player
         public void GoToIdleState(bool state)
         {
             if (state)
-            {
                 _Animator.SetTrigger(_HashIdle);
-            }
             else
-            {
                 _Animator.ResetTrigger(_HashIdle);
-            }
         }
 
         /// <summary>
@@ -408,13 +391,9 @@ namespace Player
         public bool CheckForSprintInput()
         {
             if (_Inputs.Sprint.GetDown())
-            {
                 IsSprinting = true;
-            }
             if (_Inputs.Sprint.GetUp())
-            {
                 IsSprinting = false;
-            }
             return IsGrounded && IsSprinting;
         }
 
@@ -434,9 +413,7 @@ namespace Player
                     IsSowing = true;
                 }
                 if (_Inputs.Sow.GetUp())
-                {
                     IsSowing = false;
-                }
                 if (_Inputs.Skip.GetDown())
                 {
                     IsSowing = false;
@@ -464,9 +441,7 @@ namespace Player
                 _CurrentAcceleratedSpeed.Value = 0f;
             }
             else if (IsPicking == true)
-            {
                 IsPicking = false;
-            }
             return IsGrounded && IsPicking;
         }
 
@@ -504,13 +479,9 @@ namespace Player
         private void CameraAim()
         {
             if (_Inputs.CameraLock.Get())
-            {
                 transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
-            }
             else
-            {
                 transform.Rotate(0, _Inputs.HorizontalAxis.Get() * _RotationSpeed * Time.deltaTime, 0);
-            }
         }
 
         private void UseItem()

@@ -1,26 +1,26 @@
 ﻿public class Constraint<T>
 {
-    protected T max;
-    protected  T current;
+    protected T Max;
+    protected  T Current;
 
-    public T getMax()
+    public T GetMax()
     {
-        return max;
+        return Max;
     }
 
-    public T getCurrent()
+    public T GetCurrent()
     {
-        return current;
+        return Current;
     }
 
-    public void setCurrent(T newCurrent)
+    public void SetCurrent(T newCurrent)
     {
-        current = newCurrent;
+        Current = newCurrent;
     }
 
-    public void setMax(T newMax)
+    public void SetMax(T newMax)
     {
-        max = newMax;
+        Max = newMax;
     }
 
 }
