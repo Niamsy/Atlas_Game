@@ -10,8 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8749975201328141300}
   - component: {fileID: 4827896392716058331}
-  - component: {fileID: 7132962707147665962}
-  - component: {fileID: 2318032765533304346}
   m_Layer: 5
   m_Name: ExperienceHUD
   m_TagString: Untagged
@@ -60,37 +58,6 @@ MonoBehaviour:
   _gainXp: {fileID: 11400000, guid: 6cd67e715100c5b4a9645d04ef856c72, type: 2}
   DisplayLength: 5
   LevelDisplayFormat: Lv. {0}
---- !u!225 &7132962707147665962
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 942954623714102591}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 0
-  m_IgnoreParentGroups: 0
---- !u!95 &2318032765533304346
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 942954623714102591}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 70fed771a2c40c5488821c900fb42ca8, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1156158219350118297
 GameObject:
   m_ObjectHideFlags: 0

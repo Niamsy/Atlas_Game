@@ -20,8 +20,8 @@ namespace Game.HUD.Commons
         public string TextFormat = "{0:F2} / {1:F2}";
 
         [Header("Sounds")]
-        [SerializeField] public SimpleAudio _XPFillAudio;
-        [SerializeField] public AudioSource _source;
+        [SerializeField] private SimpleAudio _fillAudio;
+        [SerializeField] private AudioSource _source;
         
         private float _targetValue;
         private float _value;
@@ -41,6 +41,12 @@ namespace Game.HUD.Commons
             get { return (_value != _targetValue); }
         }
 
+        protected virtual void Awake()
+        {
+            if (_source)
+                _source.loop = true;
+        }
+        
         public void Initialize(float value, float maxValue)
         {
             UpdateTargetValue(value);
@@ -65,14 +71,8 @@ namespace Game.HUD.Commons
             _targetValue = newValue;
             if (_prefill)
                 _prefill.fillAmount = ActualTargetPercentage01;
-            if (_targetValue != _value)
-            {
-                if (_XPFillAudio && _source)
-                {
-                    _source.loop = true;
-                    _XPFillAudio.Play(_source);
-                }
-            }
+            if (_targetValue != _value && _fillAudio && _source)
+                _fillAudio.Play(_source);
         }
         
         private void Update()
@@ -87,18 +87,14 @@ namespace Game.HUD.Commons
                 UpdateText();
             }
 
-            if (_targetValue == _value)
-            {
-                if (_XPFillAudio && _source)
-                {
-                    _XPFillAudio.Stop(_source);
-                }
-            }
+            if (_targetValue == _value && _fillAudio && _source)
+                _fillAudio.Stop(_source);
         }
 
         private void UpdateText()
         {
-            _valueText.text = string.Format(TextFormat, _value, _maxValue, (_value / _maxValue) * 100f);
+            if (_valueText != null)
+                _valueText.text = string.Format(TextFormat, _value, _maxValue, (_value / _maxValue) * 100f);
         }
     }
 }

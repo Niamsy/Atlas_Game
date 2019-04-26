@@ -239,6 +239,36 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!114 &4042827792028553672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5537551770844881117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af91dee62d64fa54ba663d7808fd1fbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: bd82d90b4f4a37041a8c7409527435c7, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5537551770844881114}
+        m_MethodName: Play
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: d252ba5ec6e9fde4cba3f2670d7917f4,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: AtlasAudio.Audio, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Leveling.LevelingEventListener+LevelingUnityEvent, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!1001 &1559579914079605352
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -343,6 +373,12 @@ PrefabInstance:
       objectReference: {fileID: 5537551770844881114}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae35e4dfd1c4ef24ea5e8cbf42dd4d1c, type: 3}
+--- !u!1 &5537551770844881117 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6448565689661256373, guid: ae35e4dfd1c4ef24ea5e8cbf42dd4d1c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1559579914079605352}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5537551770844881115 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6448565689661256371, guid: ae35e4dfd1c4ef24ea5e8cbf42dd4d1c,
@@ -355,7 +391,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1559579914079605352}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 5537551770844881117}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da90fde1c55062243a5d6d2d2aa98d41, type: 3}

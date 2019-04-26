@@ -17,8 +17,22 @@ namespace Game.ResourcesManagement.Consumer
         #if UNITY_EDITOR
         [Header("Debug"), SerializeField]
         private bool _debugDisplay = false;
+        private readonly string LayerName = "Consumer";
+
+        private void Reset()
+        {
+            gameObject.layer = LayerMask.NameToLayer(LayerName);
+        }
         #endif
-        
+
+        protected virtual void Awake()
+        {
+            
+#if UNITY_EDITOR
+            if (LayerMask.LayerToName(gameObject.layer) != LayerName)
+                Debug.LogError("The gameObject " + name + "'s composant " + GetType() + " is invalid because it's on the wrong layer. Actual :" + LayerMask.LayerToName(gameObject.layer) + ". Layer needed : " + LayerName);
+#endif
+        }
         protected virtual void OnDestroy()
         {
             var linkedProducers = new List<IProducer>(_linkedProducers);

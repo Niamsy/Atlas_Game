@@ -1,28 +1,23 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(PlayerConsumer))]
 public class PlayerStats : MonoBehaviour
 {
-    public Popup popupSender;
-    public StaminaConstraint playerStamina;
-    public HydrationConstraint playerHydration;
-    public SleepConstraint playerSleep;
-    public OxygenConstraint playerOxygen;
-    public HealthConstraint playerHealth;
-    public HungerConstraint playerHunger;
+    [SerializeField]
+    public PlayerConsumer _consumer;
 
-    private void Start()
+    public Popup popupSender;
+    
+    public HealthConstraint PlayerHealth;
+
+    private void Awake()
     {
-        playerStamina = new StaminaConstraint();
-        playerHydration = new HydrationConstraint();
-        playerSleep = new SleepConstraint();
-        playerOxygen = new OxygenConstraint();
-        playerHealth = new HealthConstraint();
-        playerHunger = new HungerConstraint();
+        PlayerHealth = new HealthConstraint();
     }
 
     public void Update()
     {
-        playerStamina.Update(Time.deltaTime);
+       /* playerStamina.Update(Time.deltaTime);
         
         playerHydration.Update(Time.deltaTime);
         if (playerHydration.getCurrent() <= playerHydration.getMax() / 2 && playerHydration.getCurrent() >= playerHydration.getMax() / 2 - 1)
@@ -48,7 +43,7 @@ public class PlayerStats : MonoBehaviour
         if (playerHunger.getCurrent() <= playerHunger.getMax() / 2 && playerHunger.getCurrent() <= playerHunger.getMax() / 2 - 1)
         {
             Popup.Instance.sendPopup("Careful player Hunger is under 50% you should find something to eat soon");
-        }
+        }*/
     }
 }
 

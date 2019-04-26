@@ -13,8 +13,6 @@ namespace Game.ResourcesManagement.Consumer.Plant
         [SerializeField]
         protected int _starvationTimeLimit;
         protected bool _starved;
-
-        private float _consumeRate;
         #endregion
 
         #region Properties Accessors

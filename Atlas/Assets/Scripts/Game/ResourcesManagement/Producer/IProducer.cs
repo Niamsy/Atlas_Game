@@ -29,12 +29,22 @@ namespace Game.ResourcesManagement.Producer
         #if UNITY_EDITOR
         [Header("Debug"), SerializeField]
         private bool _debugDisplay = false;
+
+        private readonly string LayerName = "Producer";
+        private void Reset()
+        {
+            gameObject.layer = LayerMask.NameToLayer(LayerName);
+        }
         #endif
         
         public abstract void Produce();
         
         protected virtual void Awake()
         {
+#if UNITY_EDITOR
+            if (LayerMask.LayerToName(gameObject.layer) != LayerName)
+                Debug.LogError("The gameObject " + name + "'s composant " + GetType() + " is invalid because it's on the wrong layer. Actual :" + LayerMask.LayerToName(gameObject.layer) + ". Layer needed : " + LayerName);
+#endif
             foreach (var res in ProducedResources)
                 _allListeners.Add(new ConsumerListener(res));
         }
