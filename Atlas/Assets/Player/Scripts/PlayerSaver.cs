@@ -5,6 +5,7 @@ namespace Player {
     public class PlayerSaver : MonoBehaviour {
         [Tooltip("Save the player data every X seconds")]
         public int _SaveFrequency = 5;
+        public bool _ResetPosition = false;
 
         [Serializable]
         public struct SaveVector
@@ -69,7 +70,10 @@ namespace Player {
 
         public void Save()
         {
-            GameControl.control.gameData.PlayerData.SetFromTransform(transform);
+            if (!_ResetPosition)
+            {
+                GameControl.control.gameData.PlayerData.SetFromTransform(transform);
+            }
         }
 
         private void Awake()
