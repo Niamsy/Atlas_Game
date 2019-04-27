@@ -6,13 +6,15 @@ namespace Player {
     public class PlayerSaver : MonoBehaviour {
         [Tooltip("Save the player data every X seconds")]
         public int _SaveFrequency = 5;
+        public bool _ResetPosition = false;
 
 
         private float _LastSavedTime = 0f;
 
         public void Save()
         {
-            GameControl.Control.GameData.TransformData.SetFromTransform(transform);
+            if (!_ResetPosition)
+                GameControl.Control.GameData.TransformData.SetFromTransform(transform);
         }
 
         private void Awake()
