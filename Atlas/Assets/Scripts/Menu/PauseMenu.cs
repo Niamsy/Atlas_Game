@@ -1,6 +1,7 @@
 ﻿using System;
 using Game;
 using Menu.Settings;
+using SceneManagement;
 using UnityEngine;
 
 namespace Menu
@@ -40,7 +41,7 @@ namespace Menu
 
 		public void QuitTheGame()
 		{
-			Application.Quit();
+			SceneLoader.Instance.QuitTheGame();
 		}
 		
 	}

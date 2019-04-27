@@ -13,9 +13,15 @@ namespace Networking
         #region API Adress & Request adress
 		
 		#if UNITY_EDITOR
-			public static string ApiAdress { get { return (AtlasFileSystem.Instance.getConfigValue("APIDevAddr")); } }
+		/// <summary>
+		/// Equals to http://163.5.84.246:3001/
+		/// </summary>
+		public static string ApiAdress { get { return (AtlasFileSystem.Instance.getConfigValue("APIDevAddr")); } }
 		#else
-			public static string ApiAdress { get { return (AtlasFileSystem.Instance.getConfigValue("APIRelAddr")); } }
+		/// <summary>
+		/// Equals to http://163.5.84.246:3000/
+		/// </summary>
+		public static string ApiAdress { get { return (AtlasFileSystem.Instance.getConfigValue("APIRelAddr")); } }
 		#endif
 
 		public static string ConnectionPath { get { return ("user/authentication"); } }

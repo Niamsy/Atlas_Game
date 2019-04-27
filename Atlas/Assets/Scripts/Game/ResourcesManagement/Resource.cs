@@ -7,5 +7,6 @@ namespace Game.ResourcesManagement
         Water = 0,
         Light = 1,
         Oxygen = 2
+        
     }
 }

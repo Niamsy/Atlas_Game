@@ -8,8 +8,9 @@ namespace SceneManagement
     {
         #if UNITY_EDITOR
         public static System.Collections.Generic.List<string> ActualLoadedScenes;
+        public static int ActiveLoadedScenes;
         #endif
-        [SerializeField] private string _startUpScene;
+        [SerializeField] private int _startUpSceneIndex = 1;
         
         private static SceneLoader _instance = null;
         public static SceneLoader Instance
@@ -26,6 +27,11 @@ namespace SceneManagement
             }
             
         }
+
+        public delegate void SceneLoadingEvent(int sceneIndex);
+
+        public static event SceneLoadingEvent OnSceneLoading;
+        public static event SceneLoadingEvent OnSceneUnloading;
         
         [SerializeField] private GameObject _loadingScreen;
         private float _loadingProgress;
@@ -42,39 +48,49 @@ namespace SceneManagement
             Instance = this;
         }
 
-        private void Start()
+        private IEnumerator Start()
         {
-#if UNITY_EDITOR
+            #if UNITY_EDITOR
             if (ActualLoadedScenes == null || ActualLoadedScenes.Count == 0)
             {
                 if (ActualLoadedScenes == null)
                     Debug.LogError("Please open the ATLAS/Master scene windows");
-#endif
-                SceneManager.LoadScene(_startUpScene, LoadSceneMode.Additive);
-#if UNITY_EDITOR
+            #endif
+                SceneManager.LoadScene(_startUpSceneIndex, LoadSceneMode.Additive);
+            #if UNITY_EDITOR
             }
             else
             {
                 foreach (var loadedScene in ActualLoadedScenes)
                     SceneManager.LoadScene(loadedScene, LoadSceneMode.Additive);
+                _startUpSceneIndex = ActiveLoadedScenes;
             }
-#endif
+            #endif
+            yield return null;
+            SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(_startUpSceneIndex));
+            if (OnSceneLoading != null)
+                OnSceneLoading(_startUpSceneIndex);
         }
 
-        public void LoadScene(string sceneToLoad, string sceneToUnload)
+        public void LoadScene(int sceneToLoad, int sceneToUnload)
         {
             if (_loading == null)
                 _loading = StartCoroutine(FullReloadOfNewScene(sceneToLoad, sceneToUnload));
         }
 
         public float Progress = 0f;
-        private IEnumerator FullReloadOfNewScene(string sceneToLoad, string sceneToUnload)
+        private IEnumerator FullReloadOfNewScene(int sceneToLoad, int sceneToUnload)
         {
-            Debug.Log("LOG: " + sceneToLoad + "/" + sceneToUnload);
             Progress = 0f;
             _loadingScreen.SetActive(true);
+            if (OnSceneUnloading != null)
+                OnSceneUnloading(sceneToUnload);
             yield return DoAsyncOperationUntil(SceneManager.UnloadSceneAsync(sceneToUnload), 0f, 0.5f);
             yield return DoAsyncOperationUntil(SceneManager.LoadSceneAsync(sceneToLoad, LoadSceneMode.Additive), 0.5f, 0.5f);
+            yield return null;
+            SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(sceneToLoad));
+            if (OnSceneLoading != null)
+                OnSceneLoading(sceneToLoad);
             _loadingScreen.SetActive(false);
             _loading = null;
         }
@@ -86,6 +102,22 @@ namespace SceneManagement
                 yield return null;
                 Progress = startProgress + operation.progress * percentageOfTotalProgress;
             }
+        }
+
+        public void QuitTheGame()
+        {
+            Debug.Log("Start saveing");
+            for (int x = 0; x < SceneManager.sceneCount; x++)
+            {
+                if (OnSceneUnloading != null)
+                    OnSceneUnloading(SceneManager.GetSceneAt(x).buildIndex);
+            }
+            Debug.Log("Everything saved");
+
+            Application.Quit();
+            #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+            #endif
         }
     }
 

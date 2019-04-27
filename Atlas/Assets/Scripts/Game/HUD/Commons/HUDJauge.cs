@@ -79,7 +79,6 @@ namespace Game.HUD.Commons
         {
             if (IsMoving)
             {
-                float val;
                 if (_targetValue > _value)
                     UpdateValue(Mathf.MoveTowards(_value, _targetValue, (FillingSpeed * _maxValue) * Time.deltaTime));
                 else

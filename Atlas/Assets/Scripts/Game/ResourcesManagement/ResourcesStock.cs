@@ -20,8 +20,8 @@ namespace Game.ResourcesManagement
         /// </summary>
         [SerializeField]
         private List<Stock>         _listOfStocks = new List<Stock>();
-
-        public Stock this[Resource resource]
+        public List<Stock>          ListOfStocks { get { return (_listOfStocks); } }
+        public Stock                this[Resource resource]
         {
             get
             {

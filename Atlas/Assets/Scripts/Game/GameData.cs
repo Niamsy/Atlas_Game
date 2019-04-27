@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Game.Inventory;
-using Player;
-using Plants;
 
 namespace Game
 {
     [Serializable]
-	public class GameData
+	public class GameData : SaveData
 	{
 		[Serializable]
 		public class ItemSaveData
@@ -27,15 +25,11 @@ namespace Game
 				Quantity = item.Quantity;
 			}
 		}
-
-        public DateTime lastGetScannedPlant;
-
-		public List<ItemSaveData> Inventory;
 		
-		public ItemSaveData LeftHandItem;
-		public ItemSaveData RightHandItem;
-        public PlayerSaver.PlayerData PlayerData;
-        public DayNightSaver.CalendarData CalendarData;
-        public PlantSaver.PlantData PlantData;
+        public DateTime						LastGetScannedPlant;
+		public List<ItemSaveData>			Inventory;
+		public ItemSaveData					EquippedHand;
+        public TransformSaveData			TransformData;
+        public DayNightSaver.CalendarData	CalendarData;
 	}
 }

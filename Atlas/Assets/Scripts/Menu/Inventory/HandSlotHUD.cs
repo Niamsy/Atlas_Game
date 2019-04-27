@@ -1,5 +1,4 @@
-﻿using Game.Inventory;
-using Game.Player;
+﻿using Game.Player;
 using UnityEngine;
 using UnityEngine.UI;
 

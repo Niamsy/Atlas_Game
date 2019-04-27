@@ -18,10 +18,9 @@ namespace Game.Item.PlantSeed
             if (status != InputKeyStatus.Pressed)
                 return;
             selfStack.ModifyQuantity(selfStack.Quantity - 1);
-            GameObject plantModel = Instantiate(PrefabPlanted, _location, new Quaternion(0,0,0,1));
-            PlantStatistics = plantModel.GetComponent<PlantModel>().PlantStatistics;
+            GameObject plantModel = Instantiate(PlantStatistics.Prefab, _location, new Quaternion(0,0,0,1));
             plantModel.GetComponent<PlantModel>().Sow();
-            plantModel.GetComponent<PlantModel>().SetPlantName(PrefabPlanted.name);
+            plantModel.GetComponent<PlantModel>().SetPlantName();
             Animation = "Sowing";
         }
 
@@ -42,12 +41,6 @@ namespace Game.Item.PlantSeed
         }
 
         [Header("Seed variables")]
-        [SerializeField] private GameObject _prefabPlanted;
-        public GameObject PrefabPlanted
-        {
-            get { return (_prefabPlanted); }
-        }
-        
         [SerializeField] private PlantStatistics _plantStatistics;
         public PlantStatistics PlantStatistics
         {

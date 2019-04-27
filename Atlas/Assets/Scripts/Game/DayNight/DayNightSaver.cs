@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using Game;
 using Game.DayNight;
 
 public class DayNightSaver : MonoBehaviour {
@@ -42,17 +43,17 @@ public class DayNightSaver : MonoBehaviour {
 
     public void Save()
     {
-        GameControl.control.gameData.CalendarData.SetFromDate(calendar.Seconds, calendar.Minutes, calendar.Hours, calendar.Day, calendar.Month, calendar.Year);
+        GameControl.Control.GameData.CalendarData.SetFromDate(calendar.Seconds, calendar.Minutes, calendar.Hours, calendar.Day, calendar.Month, calendar.Year);
     }
 
     private void Awake()
     {
-        calendar.Seconds = GameControl.control.gameData.CalendarData.GetDate().seconds;
-        calendar.Minutes = GameControl.control.gameData.CalendarData.GetDate().minutes;
-        calendar.Hours = GameControl.control.gameData.CalendarData.GetDate().hours;
-        calendar.Day = GameControl.control.gameData.CalendarData.GetDate().days;
-        calendar.Month = GameControl.control.gameData.CalendarData.GetDate().months;
-        calendar.Year = GameControl.control.gameData.CalendarData.GetDate().years;
+        calendar.Seconds = GameControl.Control.GameData.CalendarData.GetDate().seconds;
+        calendar.Minutes = GameControl.Control.GameData.CalendarData.GetDate().minutes;
+        calendar.Hours = GameControl.Control.GameData.CalendarData.GetDate().hours;
+        calendar.Day = GameControl.Control.GameData.CalendarData.GetDate().days;
+        calendar.Month = GameControl.Control.GameData.CalendarData.GetDate().months;
+        calendar.Year = GameControl.Control.GameData.CalendarData.GetDate().years;
         _LastSavedTime = Time.time;
     }
 

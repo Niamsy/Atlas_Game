@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Localization;
 using Tools;
 using UnityEngine;
 using Plants.GrowerSystem;
@@ -39,6 +40,15 @@ namespace Plants.Plant
     [CreateAssetMenu(fileName = "Plant statistics", menuName = "Plant System/PlantStatistic", order = 1)]
     public class PlantStatistics : ScriptableObject
     {
+        [Header("Main")]
+        [SerializeField] private LocalizedText     _name;
+        public string                              Name { get { return (_name.Value); } }
+        public LocalizedText                       NameAsset { get { return (_name); } }
+        [SerializeField] private int               _ID;
+        public int                                 ID { get { return (_ID); } }
+        [SerializeField] private GameObject        _prefab;
+        public GameObject                          Prefab { get { return (_prefab); } }
+
         [Header("Size")]
         [SerializeField] private float             _maxHeight = 1f;
         public float                               MaxHeight { get { return (_maxHeight); } }

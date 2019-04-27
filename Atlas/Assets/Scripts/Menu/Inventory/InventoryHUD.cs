@@ -5,6 +5,7 @@ using InputManagement;
 using AtlasEvents;
 using AtlasAudio;
 using Menu.Inventory.ItemDescription;
+using SceneManagement;
 
 public class InventoryHUD : MenuWidget
 {
@@ -39,6 +40,6 @@ public class InventoryHUD : MenuWidget
 
 	public void QuitTheGame()
 	{
-		Application.Quit();
+		SceneLoader.Instance.QuitTheGame();
 	}
 }
