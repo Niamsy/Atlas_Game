@@ -1,4 +1,6 @@
-﻿using Game.ResourcesManagement.Consumer.Plant;
+﻿using Game.ResourcesManagement;
+using Game.ResourcesManagement.Consumer;
+using Localization;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,9 +10,8 @@ namespace Plants.Plant
     public class PlantModel : MonoBehaviour
     {
         #region Public Properties
-
         public PlantStatistics PlantStatistics;
-
+        public ResourcesStock  RessourceStock;
         #endregion
 
         #region Private & Protected Properties
@@ -36,6 +37,7 @@ namespace Plants.Plant
             set;
         }
 
+        public int CurrentStageInt { get { return (current_stage); } }
         public Stage CurrentStage
         {
             get
@@ -51,26 +53,29 @@ namespace Plants.Plant
 
         #endregion
 
-
         #region Public Methods
         public void GoToNextStage()
         {
-            ++current_stage;
+            GoToStage(current_stage + 1);
+        }
+
+        public void GoToStage(int value, bool playEffect = true)
+        {
+            current_stage = value;
             Destroy(_currentModel);
             if (CurrentStage.Model)
             {
                 _currentModel = Instantiate(CurrentStage.Model, transform);
                 _currentModel.GetComponent<MeshRenderer>().materials = CurrentStage.Materials;
             }
-            PlayEffect(CurrentStage.GrowEffect);
+            if (playEffect)
+                PlayEffect(CurrentStage.GrowEffect);
             UpdateProducer();
             UpdateConsumers();
             if (current_stage == PlantStatistics.Stages.Count - 1)
-            {
                 _reachedFinalStage = true;
-            }
         }
-
+        
         public void Sow()
         {
             _isSowed = true;
@@ -110,8 +115,9 @@ namespace Plants.Plant
             UpdateConsumers();
 
             InvokeRepeating("UpdatePlantValue", Random.Range(1f, 2f), 3f);
-        }
 
+        }
+        
         public void UpdatePlantValue()
         {
             if (IsDead())
@@ -121,14 +127,13 @@ namespace Plants.Plant
                 GoToNextStage();
         }
 
-
-        public void SetPlantName(string name)
+        public void SetPlantName()
         {
             if (_GuiCanvasName)
             {
-                Text canvas_name = _GuiCanvasName.gameObject.GetComponentInChildren<Text>();
-                if (canvas_name)
-                    canvas_name.text = name;
+                var name = _GuiCanvasName.gameObject.GetComponentInChildren<LocalizedTextBehaviour>();
+                if (name)
+                    name.LocalizedAsset = PlantStatistics.NameAsset;
                 _GuiCanvasName.gameObject.SetActive(false);
             }
         }
@@ -140,18 +145,18 @@ namespace Plants.Plant
         private void Awake()
         {
             MeshRender = GetComponent<MeshRenderer>();
-            if (_GuiCanvasName)
-            {
-                Text name = _GuiCanvasName.gameObject.GetComponentInChildren<Text>();
-                if (name)
-                    name.text = gameObject.name;
-                _GuiCanvasName.gameObject.SetActive(false);
-            }
+            SetPlantName();
+            PlantSystem.Instance.AddPlantToTheMap(this);
         }
 
+        private void OnDestroy()
+        {
+            if (PlantSystem.Instance != null)
+                PlantSystem.Instance.RemovePlantFromTheMap(this);
+        }
         private void UpdateProducer()
         {
-            _producer.StockedResources[Game.ResourcesManagement.Resource.Oxygen].Limit += 100;
+            _producer.StockedResources[Resource.Oxygen].Limit = current_stage * 100;
         }
 
         private void UpdateConsumers()
@@ -181,13 +186,11 @@ namespace Plants.Plant
             if (col.gameObject.CompareTag("Player"))
                 _GuiCanvasName.gameObject.SetActive(true);
         }
-
         private void OnTriggerExit(Collider col)
         {
             if (col.gameObject.CompareTag("Player"))
                 _GuiCanvasName.gameObject.SetActive(false);
         }
-
         #endregion
     }
 }

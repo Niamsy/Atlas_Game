@@ -31,8 +31,14 @@ namespace Game.Player
             _controller = FindObjectOfType<PlayerController>();
             LoadData();
 
-            GameControl.BeforeSaving += SaveData;
+            GameControl.BeforeSavingPlayer += SaveData;
         }
+
+        private void OnDestroy()
+        {
+            GameControl.BeforeSavingPlayer -= SaveData;
+        }
+        
 
         public bool CheckIfItemUsable()
         {
@@ -51,17 +57,17 @@ namespace Game.Player
         #region Load/Saving Methods
         private void SaveData(GameControl gameControl)
         {
-            GameData gameData = gameControl.gameData;
-            gameData.RightHandItem.SetObject(_equippedItemStack);
+            GameData gameData = gameControl.GameData;
+            gameData.EquippedHand.SetObject(_equippedItemStack);
         }
 
         private void LoadData()
         {
-            if (GameControl.control == null)
+            if (GameControl.Control == null)
                 return;
             
-            GameData gameData = GameControl.control.gameData;
-            EquippedItemStack.SetFromGameData(gameData.RightHandItem);
+            GameData gameData = GameControl.Control.GameData;
+            EquippedItemStack.SetFromGameData(gameData.EquippedHand);
         }
         #endregion
         

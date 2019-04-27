@@ -1,75 +1,131 @@
-﻿using UnityEngine;
+﻿using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using Game;
+using UnityEngine;
 
-public class GameControl : MonoBehaviour {
-
-    public static GameControl control;
-    public GameData gameData;
-
-    public delegate void GameControlDelegate(GameControl gameControl);
-    
-    public static event GameControlDelegate BeforeSaving;
-    public static event GameControlDelegate UponLoading;
-    
-    public bool LoadData = false;
-    public bool SaveData = false;
-
-    void OnEnable()
+namespace Game
+{
+    public class GameControl : MonoBehaviour
     {
-        if (LoadData)
-            Load();
-    }
+        public static GameControl Control;
+        public GameData GameData;
+        public MapData MapData;
 
-    void Awake()
-    {
-        if (control == null)
+        public delegate void GameControlDelegate(GameControl gameControl);
+    
+        public static event GameControlDelegate BeforeSavingPlayer;
+        public static event GameControlDelegate BeforeSavingData;
+        public static event GameControlDelegate UponLoadingPlayerData;
+        public static event GameControlDelegate UponLoadingMapData;
+
+        public bool LoadData = false;
+        public bool SaveData = false;
+
+        private static readonly string FileExtension = ".dat";
+        private static readonly string FileName = "gameInfo" + FileExtension;
+        private static string FullPath() { return(Application.persistentDataPath + "/" + FileName); }
+        private static string FullMapPath(int levelIndex) { return (Application.persistentDataPath + "/level_" + levelIndex + FileExtension); }
+
+        void Awake()
         {
-            DontDestroyOnLoad(gameObject);
-            control = this;
-        } 
-        else if (control != this)
-        {
-            Destroy(gameObject);
+            if (Control == null)
+            {
+                DontDestroyOnLoad(gameObject);
+                Control = this;
+            } 
+            else if (Control != this)
+                Destroy(gameObject);
         }
-    }
 
-    void OnDisable()
-    {
-        if (SaveData)
-            Save();
-    }
-
-    public void Save()
-    {
-        if (BeforeSaving != null)
-            BeforeSaving(this);
+        void OnEnable()
+        {
+            if (LoadData)
+                LoadPlayerData();
+        }
         
-        BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(Application.persistentDataPath + "/gameInfo.dat");
-        if (File.Exists(Application.persistentDataPath + "/gameInfo.dat"))
+        void OnDestroy()
         {
-            bf.Serialize(file, gameData);
-            file.Close();
-        } else
+            if (SaveData)
+                SavePlayerData();
+        }
+
+        #region Save
+        /// <summary>
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="data"></param>
+        /// <returns>Sucess or failure</returns>
+        private static bool SaveInFile(string path, object data)
         {
+            try
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                FileStream file = File.Create(path);
+                if (File.Exists(path))
+                {
+                    bf.Serialize(file, data);
+                    file.Close();
+                    return (true);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("Exception:" + e);
+            }
+
             Debug.LogError("/!\\ Impossible to save game Data /!\\");
-        }
-    }
-
-    public void Load()
-    {
-        if (File.Exists(Application.persistentDataPath + "/gameInfo.dat"))
-        {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/gameInfo.dat", FileMode.Open);
-
-            gameData = (GameData)bf.Deserialize(file);
-            file.Close();
+            return (false);
         }
         
-        if (UponLoading != null)
-            UponLoading(this);
+        public void SavePlayerData()
+        {
+            if (BeforeSavingPlayer != null)
+                BeforeSavingPlayer(this);
+            SaveInFile(FullPath(), GameData);
+        }
+
+        public void SaveMapData(int sceneIndex)
+        {
+            if (BeforeSavingData != null)
+                BeforeSavingData(this);
+            SaveInFile(FullMapPath(sceneIndex), MapData);
+            Debug.Log("Saved Map data " + sceneIndex);
+        }
+        #endregion
+        
+        #region Load
+        /// <summary>
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="data"></param>
+        /// <returns>Sucess or failure</returns>
+        private static bool LoadFromFile<T>(string path, ref T data)
+        {
+            if (File.Exists(path))
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                FileStream file = File.Open(path, FileMode.Open);
+                data = (T)bf.Deserialize(file);
+                file.Close();
+                return (true);
+            }
+
+            return (false);
+        }
+        
+        public void LoadPlayerData()
+        {
+            LoadFromFile(FullPath(), ref GameData);
+            if (UponLoadingPlayerData != null)
+                UponLoadingPlayerData(this);
+        }
+
+        public void LoadMapData(int sceneIndex)
+        {
+            LoadFromFile(FullMapPath(sceneIndex), ref MapData);
+            if (UponLoadingMapData != null)
+                UponLoadingMapData(this);
+        }
+        #endregion
     }
 }

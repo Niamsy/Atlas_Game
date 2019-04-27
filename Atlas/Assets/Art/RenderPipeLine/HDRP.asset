@@ -150,7 +150,7 @@ MonoBehaviour:
   renderPipelineSettings:
     supportShadowMask: 1
     supportSSR: 0
-    supportSSAO: 1
+    supportSSAO: 0
     supportSubsurfaceScattering: 1
     increaseSssSampleCount: 0
     supportVolumetrics: 1
@@ -160,8 +160,8 @@ MonoBehaviour:
     supportTransparentBackface: 1
     supportTransparentDepthPrepass: 1
     supportTransparentDepthPostpass: 1
-    supportedLitShaderMode: 2
-    supportDecals: 1
+    supportedLitShaderMode: 1
+    supportDecals: 0
     msaaSampleCount: 1
     supportMotionVectors: 1
     supportRuntimeDebugDisplay: 1
@@ -189,15 +189,15 @@ MonoBehaviour:
       maxEnvLightsOnScreen: 64
       maxDecalsOnScreen: 512
     hdShadowInitParams:
-      shadowAtlasResolution: 4096
+      shadowAtlasResolution: 2048
       maxShadowRequests: 128
       shadowMapsDepthBits: 32
       useDynamicViewportRescale: 1
       shadowQuality: 0
     decalSettings:
       drawDistance: 1000
-      atlasWidth: 4096
-      atlasHeight: 4096
+      atlasWidth: 2048
+      atlasHeight: 2048
       perChannelMask: 0
   allowShaderVariantStripping: 1
   enableSRPBatcher: 0

@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using Plants;
 using Plants.GrowerSystem;
 using Plants.Plant;
 using UnityEngine;
 
-namespace Game.ResourcesManagement.Consumer.Plant
+namespace Game.ResourcesManagement.Consumer
 {
     public class PlantConsumer : IConsumer
     {
@@ -30,8 +31,8 @@ namespace Game.ResourcesManagement.Consumer.Plant
             set { _starvationTimeLimit = value; }
         }
 
-        private PlantStatistics PlantStats;
-        private List<Stage.Need> _needs;
+        //private PlantStatistics _plantStats;
+        //private List<Stage.Need> _needs;
         [HideInInspector]
         public List<Stock> ConsumedStocks;
 
@@ -43,8 +44,8 @@ namespace Game.ResourcesManagement.Consumer.Plant
             if (IsInvoking("ConsumeResource"))
                 CancelInvoke("ConsumeResource");
 
-            PlantStats = statistics;
-            _needs = needs;
+            //_plantStats = statistics;
+            //_needs = needs;
             GrowthRate rates = statistics.GrowthRate;
 
             ResourcesToConsume.RemoveAll(x => true);

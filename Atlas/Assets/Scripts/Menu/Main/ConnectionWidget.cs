@@ -6,7 +6,9 @@ namespace Menu.Main
 {
     public class ConnectionWidget : MainMenuWidget
     {
-        public string NextScene = "Atlas";
+        public int NextSceneIndex = 2;
+        public int MainMenuSceneIndex = 1;
+        
         [SerializeField] private InputField _username;
         [SerializeField] private InputField _password;
         
@@ -61,7 +63,7 @@ namespace Menu.Main
             if (success)
             {
                 Debug.Log("CONNECTED");
-                SceneLoader.Instance.LoadScene(NextScene, "MainMenu");
+                SceneLoader.Instance.LoadScene(NextSceneIndex, MainMenuSceneIndex);
             }
             else
                 ErrorText.text = message;

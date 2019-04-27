@@ -10,14 +10,19 @@ namespace Game.Inventory
 		{
             if (!LoadData())
                 InitMapWithSize(_inventorySize);
-		     GameControl.BeforeSaving += SaveData;
+		     GameControl.BeforeSavingPlayer += SaveData;
 		}
 
+		protected override void DestroyInventory()
+		{
+			GameControl.BeforeSavingPlayer -= SaveData;
+		}
+		
 		#region Load/Saving Methods
 		
 		private void SaveData(GameControl gameControl)
 		{
-			GameData gameData = gameControl.gameData;
+			GameData gameData = gameControl.GameData;
 			gameData.Inventory = new List<GameData.ItemSaveData>(Size);
 			for (int x = 0; x < Size; x++)
 				gameData.Inventory.Add(new GameData.ItemSaveData(Slots[x]));
@@ -25,10 +30,10 @@ namespace Game.Inventory
 
 		private bool LoadData()
 		{
-			if (GameControl.control == null)
+			if (GameControl.Control == null)
 				return (false);
 
-			GameData gameData = GameControl.control.gameData;
+			GameData gameData = GameControl.Control.GameData;
 
 			InitMapWithSize(_inventorySize);
 

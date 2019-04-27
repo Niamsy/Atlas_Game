@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game.Player.Stats;
+using UnityEngine;
 
 [RequireComponent(typeof(PlayerConsumer))]
 public class PlayerStats : MonoBehaviour
