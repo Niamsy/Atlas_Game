@@ -112,18 +112,20 @@ namespace Game
             return (false);
         }
         
-        public void LoadPlayerData()
+        public bool LoadPlayerData()
         {
-            LoadFromFile(FullPath(), ref GameData);
-            if (UponLoadingPlayerData != null)
+            bool ret = LoadFromFile(FullPath(), ref GameData);
+            if (ret && UponLoadingPlayerData != null)
                 UponLoadingPlayerData(this);
+            return (ret);
         }
 
-        public void LoadMapData(int sceneIndex)
+        public bool LoadMapData(int sceneIndex)
         {
-            LoadFromFile(FullMapPath(sceneIndex), ref MapData);
-            if (UponLoadingMapData != null)
+            bool ret = LoadFromFile(FullMapPath(sceneIndex), ref MapData);
+            if (ret && UponLoadingMapData != null)
                 UponLoadingMapData(this);
+            return (ret);
         }
         #endregion
     }
