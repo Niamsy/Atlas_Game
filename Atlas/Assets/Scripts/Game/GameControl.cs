@@ -89,7 +89,6 @@ namespace Game
             if (BeforeSavingData != null)
                 BeforeSavingData(this);
             SaveInFile(FullMapPath(sceneIndex), MapData);
-            Debug.Log("Saved Map data " + sceneIndex);
         }
         #endregion
         

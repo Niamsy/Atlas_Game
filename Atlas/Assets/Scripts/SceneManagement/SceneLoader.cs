@@ -106,13 +106,11 @@ namespace SceneManagement
 
         public void QuitTheGame()
         {
-            Debug.Log("Start saveing");
             for (int x = 0; x < SceneManager.sceneCount; x++)
             {
                 if (OnSceneUnloading != null)
                     OnSceneUnloading(SceneManager.GetSceneAt(x).buildIndex);
             }
-            Debug.Log("Everything saved");
 
             Application.Quit();
             #if UNITY_EDITOR
