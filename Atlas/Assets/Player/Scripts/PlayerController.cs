@@ -163,7 +163,7 @@ namespace Player
 
         #region animator variables hashes
         private readonly int _HashIdle = Animator.StringToHash("Idle");
-        private readonly int _HashJumpSpeed = Animator.StringToHash("JumpSpeed");
+        private readonly int _HashJump = Animator.StringToHash("Jump");
         private readonly int _HashHorizontalSpeed = Animator.StringToHash("HorizontalSpeed");
         private readonly int _HashVerticalSpeed = Animator.StringToHash("VerticalSpeed");
         private readonly int _HashGrounded = Animator.StringToHash("Grounded");
@@ -381,7 +381,7 @@ namespace Player
         public void Jump()
         {
             _Body.AddForce(Vector3.up * Mathf.Sqrt(_JumpHeight * -2f * Physics.gravity.y), ForceMode.Impulse);
-            _Animator.SetFloat(_HashJumpSpeed, Body.velocity.y);
+            _Animator.SetTrigger(_HashJump);
         }
 
         /// <summary>
