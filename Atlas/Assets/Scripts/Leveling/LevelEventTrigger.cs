@@ -9,10 +9,28 @@ namespace Leveling
         public LevelingEvent _LevelingEvent;
         public int _XPQuantity = 0;
         public int _Factor = 1;
+        public bool _TriggerOnStart = false;
+        public bool _TriggerOnDestroy = true;
 
         private void OnDestroy()
         {
-            _LevelingEvent.Raise(_XPQuantity, _Factor);
+            if (_TriggerOnDestroy)
+            {
+                Trigger(_XPQuantity);
+            }
+        }
+
+        private void Start()
+        {
+            if (_TriggerOnStart)
+            {
+                Trigger(_XPQuantity);
+            }
+        }
+
+        public void Trigger(int quantity)
+        {
+            _LevelingEvent.Raise(quantity, _Factor);
         }
     }
 }

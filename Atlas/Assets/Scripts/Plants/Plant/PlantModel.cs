@@ -3,12 +3,18 @@ using Game.ResourcesManagement.Consumer;
 using Localization;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 namespace Plants.Plant
 {
     [RequireComponent(typeof(PlantConsumer))]
     public class PlantModel : MonoBehaviour
     {
+        #region Custom Events
+        public UnityEvent OnLevelUp;
+        public UnityEvent OnDeath;
+        #endregion
+
         #region Public Properties
         public PlantStatistics PlantStatistics;
         public ResourcesStock  RessourceStock;
@@ -56,6 +62,7 @@ namespace Plants.Plant
         #region Public Methods
         public void GoToNextStage()
         {
+            OnLevelUp.Invoke();
             GoToStage(current_stage + 1);
         }
 
@@ -83,6 +90,7 @@ namespace Plants.Plant
 
         public void DestroyPlant()
         {
+            OnDeath.Invoke();
             PlayEffect(CurrentStage.DeathEffect);
             if (_currentModel)
                 Destroy(_currentModel);
