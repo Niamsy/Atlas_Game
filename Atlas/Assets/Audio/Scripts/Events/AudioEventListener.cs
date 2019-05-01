@@ -9,20 +9,25 @@ namespace AtlasEvents
         [System.Serializable]
         public class AudioUnityEvent : UnityEvent<AtlasAudio.Audio, AudioSource> { }
 
-        [Tooltip("Event to register with.")]
-        public AudioEvent Event;
+        [Tooltip("Events to register to.")]
+        public AudioEvent[] Events;
 
         [Tooltip("Response to invoke when Event is raised.")]
         public AudioUnityEvent Response;
 
         private void OnEnable()
         {
-            Event.RegisterListener(this);
+            foreach (AudioEvent _event in Events) {
+                _event.RegisterListener(this);
+            }
         }
 
         private void OnDisable()
         {
-            Event.UnregisterListener(this);
+            foreach (AudioEvent _event in Events)
+            {
+                _event.UnregisterListener(this);
+            }
         }
 
         public void OnEventRaised(AtlasAudio.Audio audio, AudioSource source)

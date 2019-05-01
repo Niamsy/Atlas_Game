@@ -345,6 +345,8 @@ GameObject:
   - component: {fileID: 6206562519876059868}
   - component: {fileID: 3117265421110278031}
   - component: {fileID: 2509874160087443100}
+  - component: {fileID: 9056329131130810084}
+  - component: {fileID: 5724419444383438822}
   m_Layer: 0
   m_Name: Plant
   m_TagString: Untagged
@@ -381,6 +383,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b69228655da07144ca7d1db2e3477127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnLevelUp:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9056329131130810084}
+        m_MethodName: Trigger
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 50
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5724419444383438822}
+        m_MethodName: OnSoundEvent
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Grow
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5724419444383438822}
+        m_MethodName: OnSoundEvent
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Death
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   PlantStatistics: {fileID: 0}
   RessourceStock: {fileID: 61835651470404897}
   _consumer: {fileID: 4612267141163210265}
@@ -560,6 +605,43 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &9056329131130810084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6206562519876059882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35a61081c3726ff48aa8883c33ec4608, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _LevelingEvent: {fileID: 11400000, guid: 65924e170003f0f42b67fa4e94e11a60, type: 2}
+  _XPQuantity: 0
+  _Factor: 1
+  _TriggerOnStart: 0
+  _TriggerOnDestroy: 0
+--- !u!114 &5724419444383438822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6206562519876059882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a110b03fe3292e542b763d198c3c25b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - tag: Death
+    source: {fileID: 3117265421110278031}
+    audio: {fileID: 11400000, guid: 629d0695ffa8d1d47b604030fe225581, type: 2}
+  - tag: Grow
+    source: {fileID: 3117265421110278031}
+    audio: {fileID: 11400000, guid: 427461d895982cf45b7b6e66dfb1c06b, type: 2}
+  Event: {fileID: 11400000, guid: ea0225512934b70478d2da2c1c2b85ab, type: 2}
 --- !u!1 &8073323097795354555
 GameObject:
   m_ObjectHideFlags: 0
