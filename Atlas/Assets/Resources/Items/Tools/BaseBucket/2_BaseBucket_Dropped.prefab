@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!135 &6936450124484863871
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5971774499539682470}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.3
+  m_Center: {x: 0, y: 0.1, z: 0}
 --- !u!1001 &8709267761333613974
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12,6 +25,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: 2_BaseBucket_Dropped
       objectReference: {fileID: 0}
+    - target: {fileID: 1194459000201073533, guid: d05bd250cf0b4964cab6a090e3f31bd8,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194459000201073533, guid: d05bd250cf0b4964cab6a090e3f31bd8,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1033152538115866503, guid: d05bd250cf0b4964cab6a090e3f31bd8,
         type: 3}
       propertyPath: Slot._content
@@ -23,6 +46,11 @@ PrefabInstance:
       propertyPath: Slot._quantity
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5637279397292017660, guid: d05bd250cf0b4964cab6a090e3f31bd8,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: b86d72c8e4d2dfd4099d257589635beb, type: 3}
     - target: {fileID: 5161105207029433510, guid: d05bd250cf0b4964cab6a090e3f31bd8,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -115,6 +143,12 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 790f6f81b83dbb14fb4787c32ca5f69d, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d05bd250cf0b4964cab6a090e3f31bd8, type: 3}
+--- !u!1 &5971774499539682470 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3043740272916803888, guid: d05bd250cf0b4964cab6a090e3f31bd8,
+    type: 3}
+  m_PrefabInstance: {fileID: 8709267761333613974}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1414629604140116225 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7745152062413397143, guid: d05bd250cf0b4964cab6a090e3f31bd8,

@@ -4,6 +4,7 @@ using Atlas_Physics;
 using Variables;
 using Game.Item.PlantSeed;
 using Game.Player;
+using Game.Inventory;
 
 namespace Player
 {
@@ -457,9 +458,11 @@ namespace Player
 
         public bool CheckForDeath()
         {
-            if (_PlayerStats._consumer.LinkedStock[Game.ResourcesManagement.Resource.Oxygen].Quantity <= 0)
+            if (!IsDead && _PlayerStats._consumer.LinkedStock[Game.ResourcesManagement.Resource.Oxygen].Quantity <= 0)
             {
                 IsDead = true;
+                var inventory  = gameObject.GetComponentInChildren<PlayerInventory>();
+                inventory.DropAll();
                 _CurrentAcceleratedSpeed.Value = 0f;
             }
             return IsDead;
