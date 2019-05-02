@@ -84,7 +84,9 @@ namespace Game.Player
 
         public void Drop()
         {
-            GameObject droppedObject = Instantiate(EquippedItemStack.Content.PrefabDroppedGO);
+            if (EquippedItem == null)
+                return;
+            GameObject droppedObject = Instantiate(EquippedItem.PrefabDroppedGO);
             droppedObject.transform.position = transform.position + transform.forward + Vector3.up;
             var itemStackB = droppedObject.GetComponent<ItemStackBehaviour>();
             itemStackB.Slot.SetItem(EquippedItemStack.Content, EquippedItemStack.Quantity);

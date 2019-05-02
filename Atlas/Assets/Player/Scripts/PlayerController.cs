@@ -461,9 +461,8 @@ namespace Player
             if (!IsDead && _PlayerStats._consumer.LinkedStock[Game.ResourcesManagement.Resource.Oxygen].Quantity <= 0)
             {
                 IsDead = true;
+                _handSlots.Drop();
                 var inventory  = gameObject.GetComponentInChildren<PlayerInventory>();
-                var handSlot = gameObject.GetComponentInChildren<HandSlots>();
-                handSlot.Drop();
                 inventory.DropAll();
                 _CurrentAcceleratedSpeed.Value = 0f;
             }
