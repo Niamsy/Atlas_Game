@@ -97,7 +97,6 @@ namespace Game.HUD.Commons
                 UpdateText();
             }
             float percentageValue = ((_value * 100) / _maxValue) / 100;
-            Debug.Log(percentageValue);
             if (percentageValue <= ThresholdCriticalValue && OnCriticalJaugeValue != null && _isValueCritical == false)
             {
                 OnCriticalJaugeValue.Invoke();

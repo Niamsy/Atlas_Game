@@ -23,6 +23,8 @@ namespace Player {
         private void DoLogic()
         {
             _Actor.CheckForGrounded();
+            if (_Actor.CheckForDeath())
+                return;
             _Actor.GetInput();
             _Actor.RotateAim();
             _Actor.CheckForPickInput();
