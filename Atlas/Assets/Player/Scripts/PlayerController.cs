@@ -462,6 +462,8 @@ namespace Player
             {
                 IsDead = true;
                 var inventory  = gameObject.GetComponentInChildren<PlayerInventory>();
+                var handSlot = gameObject.GetComponentInChildren<HandSlots>();
+                handSlot.Drop();
                 inventory.DropAll();
                 _CurrentAcceleratedSpeed.Value = 0f;
             }
