@@ -58,7 +58,8 @@ namespace Game.Player
         private void SaveData(GameControl gameControl)
         {
             GameData gameData = gameControl.GameData;
-            gameData.EquippedHand.SetObject(_equippedItemStack);
+            if (gameData.EquippedHand != null)
+                gameData.EquippedHand.SetObject(_equippedItemStack);
         }
 
         private void LoadData()

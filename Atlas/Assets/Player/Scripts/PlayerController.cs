@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
 using InputManagement;
 using Atlas_Physics;
-using Game.Inventory;
 using Variables;
-using Plants.Plant;
 using Game.Item.PlantSeed;
 using Game.Player;
 
@@ -92,6 +90,15 @@ namespace Player
             }
         }
 
+        public bool IsDead
+        {
+            get { return _Animator.GetBool(_HashDead); }
+            set
+            {
+                _Animator.SetBool(_HashDead, value);
+            }
+        }
+
         public bool IsPicking
         {
             get { return _Animator.GetBool(_HashPicking); }
@@ -159,6 +166,7 @@ namespace Player
         private BodyController _BodyController;
         private GameObject _GroundChecker;
         private AtlasGravity _Gravity;
+        private PlayerStats _PlayerStats;
         #endregion
 
         #region animator variables hashes
@@ -172,6 +180,7 @@ namespace Player
         private readonly int _HashProned = Animator.StringToHash("Proned");
         private readonly int _HashPicking = Animator.StringToHash("Picking");
         private readonly int _HashSowing = Animator.StringToHash("Sowing");
+        private readonly int _HashDead = Animator.StringToHash("Dead");
 
         #endregion
         #endregion
@@ -190,6 +199,7 @@ namespace Player
             _Gravity = GetComponent<AtlasGravity>();
             _CurrentSpeed = _BaseSpeed;
             _CurrentAcceleratedSpeed.Value = 0f;
+            _PlayerStats = gameObject.GetComponentInChildren<PlayerStats>(); ;
         }
 
         private void Start()
@@ -443,6 +453,16 @@ namespace Player
             else if (IsPicking == true)
                 IsPicking = false;
             return IsGrounded && IsPicking;
+        }
+
+        public bool CheckForDeath()
+        {
+            if (_PlayerStats._consumer.LinkedStock[Game.ResourcesManagement.Resource.Oxygen].Quantity <= 0)
+            {
+                IsDead = true;
+                _CurrentAcceleratedSpeed.Value = 0f;
+            }
+            return IsDead;
         }
 
         public void ToggleCrouchedState()
