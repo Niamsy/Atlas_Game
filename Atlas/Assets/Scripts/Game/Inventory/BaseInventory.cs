@@ -1,6 +1,5 @@
 ﻿using AtlasAudio;
 using AtlasEvents;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -99,6 +98,11 @@ namespace Game.Inventory
 
         public void Drop(ItemStack stack)
         {
+            Drop(stack, transform.forward);
+        }
+        
+        public void Drop(ItemStack stack, Vector3 dir)
+        {
             if (stack.IsEmpty)
                 return;
 
@@ -109,9 +113,11 @@ namespace Game.Inventory
             }
             else
             {
-                GameObject droppedObject = Instantiate(stack.Content.PrefabDroppedGO);
-                droppedObject.transform.position = transform.position + transform.forward + Vector3.up;
+                var position = transform.position + Vector3.up + dir.normalized;
+                GameObject droppedObject = Instantiate(stack.Content.PrefabDroppedGO, position, Quaternion.identity);
                 var itemStackB = droppedObject.GetComponent<ItemStackBehaviour>();
+                var rb = droppedObject.GetComponent<Rigidbody>();
+                rb.AddForce(dir.normalized * 0.1f);
                 itemStackB.Slot.SetItem(stack.Content, stack.Quantity);
                 stack.EmptyStack();
                 if (OnDropItemAudio && OnDropItemEvent)
@@ -121,10 +127,17 @@ namespace Game.Inventory
 
         public void DropAll()
         {
+            int totalObj = 0;
             foreach (var stack in Slots)
-            {
-                Drop(stack);
-            }
+                if (!stack.IsEmpty)
+                    totalObj += 1;
+
+            if (totalObj < 0)
+                return;
+            
+            float anglePerObj = 360f / totalObj;
+            for (int x = 0; x < Slots.Count; x++)
+                Drop(Slots[x], Quaternion.Euler(0, x * anglePerObj, 0) * transform.forward);
         }
     }
 }
