@@ -82,6 +82,15 @@ namespace Game.Player
             UpdateHand(ref _equippedItemInstance, updated, _handTransform);
         }
 
+        public void Drop()
+        {
+            GameObject droppedObject = Instantiate(EquippedItemStack.Content.PrefabDroppedGO);
+            droppedObject.transform.position = transform.position + transform.forward + Vector3.up;
+            var itemStackB = droppedObject.GetComponent<ItemStackBehaviour>();
+            itemStackB.Slot.SetItem(EquippedItemStack.Content, EquippedItemStack.Quantity);
+            EquippedItemStack.EmptyStack();
+        }
+
         private void UpdateHand(ref GameObject itemGo, ItemStack item, Transform position)
         {
             if (_equippedItem != null)
