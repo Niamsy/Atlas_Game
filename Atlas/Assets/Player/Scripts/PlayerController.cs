@@ -457,10 +457,14 @@ namespace Player
 
         public bool CheckForDeath()
         {
-            if (_PlayerStats._consumer.LinkedStock[Game.ResourcesManagement.Resource.Oxygen].Quantity <= 0)
+            if (IsDead == false && _PlayerStats._consumer.LinkedStock[Game.ResourcesManagement.Resource.Oxygen].Quantity <= 0)
             {
                 IsDead = true;
                 _CurrentAcceleratedSpeed.Value = 0f;
+            }
+            else if (IsDead == true && _PlayerStats._consumer.LinkedStock[Game.ResourcesManagement.Resource.Oxygen].Quantity > 0)
+            {
+                IsDead = false;
             }
             return IsDead;
         }

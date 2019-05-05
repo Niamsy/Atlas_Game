@@ -10,7 +10,7 @@ namespace Menu
 	{
 		[Header("Pause specifics")]
 		[SerializeField] private SettingsMenu _settings;
-
+        
 		protected override void InitialiseWidget()
 		{
 			_settings.OnShow += ExitSetting;
