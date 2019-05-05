@@ -21,7 +21,6 @@ namespace Player {
         {
             transform.position = GameControl.Control.GameData.TransformData.Position.Value;
             transform.rotation = GameControl.Control.GameData.TransformData.Rotation.Value;
-            transform.localScale = GameControl.Control.GameData.TransformData.Scale.Value;
             _LastSavedTime = Time.time;
         }
 

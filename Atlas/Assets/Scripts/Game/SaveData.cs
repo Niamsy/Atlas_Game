@@ -45,20 +45,17 @@ namespace Game
         {
             public SaveVector       Position;
             public SaveQuaternion   Rotation;
-            public SaveVector       Scale;
 
             public TransformSaveData(Transform transform)
             {
                 Position = new SaveVector(transform.position);
                 Rotation = new SaveQuaternion(transform.rotation);
-                Scale = new SaveVector(transform.localScale);
             }
             
             public void SetFromTransform(Transform transform)
             {
                 Position = new SaveVector(transform.position);
                 Rotation = new SaveQuaternion(transform.rotation);
-                Scale = new SaveVector(transform.localScale);
             }
         }
     }
