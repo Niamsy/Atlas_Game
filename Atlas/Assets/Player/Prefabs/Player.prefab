@@ -126,6 +126,7 @@ GameObject:
   - component: {fileID: 4085398136620064110}
   - component: {fileID: 5275754672099454363}
   - component: {fileID: 6887268937068909565}
+  - component: {fileID: 8170986844154361431}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -266,6 +267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _SaveFrequency: 5
+  _ResetPosition: 0
 --- !u!114 &1200721314774352556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -440,6 +442,18 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: Leveling.LevelingEventListener+LevelingUnityEvent, Assembly-CSharp,
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+--- !u!114 &8170986844154361431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1041429536319508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57075f8503fa15c40a4cde1672943202, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1049395840482046
 GameObject:
   m_ObjectHideFlags: 0
