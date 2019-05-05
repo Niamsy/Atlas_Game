@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.06739743, g: 0.08884705, b: 0.13187651, a: 1}
+  m_IndirectSpecularColor: {r: 0.06744362, g: 0.0889105, b: 0.13196887, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5098,6 +5098,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4904671795461632238, guid: fc4e73b4e7a0e5b4885b2e4a7b09105e,
+        type: 3}
+      propertyPath: m_Name
+      value: '--- Characters ---'
+      objectReference: {fileID: 0}
     - target: {fileID: 8300889084248383708, guid: fc4e73b4e7a0e5b4885b2e4a7b09105e,
         type: 3}
       propertyPath: pos.x
@@ -5112,11 +5117,6 @@ PrefabInstance:
         type: 3}
       propertyPath: pos.z
       value: -307
-      objectReference: {fileID: 0}
-    - target: {fileID: 4904671795461632238, guid: fc4e73b4e7a0e5b4885b2e4a7b09105e,
-        type: 3}
-      propertyPath: m_Name
-      value: '--- Characters ---'
       objectReference: {fileID: 0}
     - target: {fileID: 4904671795461632145, guid: fc4e73b4e7a0e5b4885b2e4a7b09105e,
         type: 3}
@@ -5191,17 +5191,17 @@ PrefabInstance:
     - target: {fileID: 4904671796558705054, guid: fc4e73b4e7a0e5b4885b2e4a7b09105e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.6170845
+      value: 0.6170948
       objectReference: {fileID: 0}
     - target: {fileID: 4904671796558705054, guid: fc4e73b4e7a0e5b4885b2e4a7b09105e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.2890844
+      value: 1.2890854
       objectReference: {fileID: 0}
     - target: {fileID: 4904671796558705054, guid: fc4e73b4e7a0e5b4885b2e4a7b09105e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.023046494
+      value: -0.023068607
       objectReference: {fileID: 0}
     - target: {fileID: 4904671796558705054, guid: fc4e73b4e7a0e5b4885b2e4a7b09105e,
         type: 3}
@@ -5212,6 +5212,71 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: OxygenConsumer
+      objectReference: {fileID: 0}
+    - target: {fileID: 4908481863796273911, guid: fc4e73b4e7a0e5b4885b2e4a7b09105e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4908481863796273911, guid: fc4e73b4e7a0e5b4885b2e4a7b09105e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.782588
+      objectReference: {fileID: 0}
+    - target: {fileID: 4908481863796273911, guid: fc4e73b4e7a0e5b4885b2e4a7b09105e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4908481863796273911, guid: fc4e73b4e7a0e5b4885b2e4a7b09105e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.62253994
+      objectReference: {fileID: 0}
+    - target: {fileID: 4908481863796273911, guid: fc4e73b4e7a0e5b4885b2e4a7b09105e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1165.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 4908481863796273911, guid: fc4e73b4e7a0e5b4885b2e4a7b09105e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 106.751
+      objectReference: {fileID: 0}
+    - target: {fileID: 4908481863796273911, guid: fc4e73b4e7a0e5b4885b2e4a7b09105e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -308.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 4908481863796273911, guid: fc4e73b4e7a0e5b4885b2e4a7b09105e,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4908481863796273911, guid: fc4e73b4e7a0e5b4885b2e4a7b09105e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4908481863796273911, guid: fc4e73b4e7a0e5b4885b2e4a7b09105e,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4908481863796273911, guid: fc4e73b4e7a0e5b4885b2e4a7b09105e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4908481863796273911, guid: fc4e73b4e7a0e5b4885b2e4a7b09105e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 102.996
+      objectReference: {fileID: 0}
+    - target: {fileID: 4908481863796273911, guid: fc4e73b4e7a0e5b4885b2e4a7b09105e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc4e73b4e7a0e5b4885b2e4a7b09105e, type: 3}
@@ -9756,10 +9821,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 771584898}
     m_Modifications:
+    - target: {fileID: 1657452210841737735, guid: 09fbbefcba9fd744dbc46d889e130b3d,
+        type: 3}
+      propertyPath: m_Name
+      value: Consumer
+      objectReference: {fileID: 0}
     - target: {fileID: 3542190157137659734, guid: 09fbbefcba9fd744dbc46d889e130b3d,
         type: 3}
       propertyPath: m_Name
       value: Poppy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3542190157137659737, guid: 09fbbefcba9fd744dbc46d889e130b3d,
+        type: 3}
+      propertyPath: popupSender
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3542190157137659743, guid: 09fbbefcba9fd744dbc46d889e130b3d,
         type: 3}
@@ -9815,16 +9890,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3542190157137659737, guid: 09fbbefcba9fd744dbc46d889e130b3d,
-        type: 3}
-      propertyPath: popupSender
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1657452210841737735, guid: 09fbbefcba9fd744dbc46d889e130b3d,
-        type: 3}
-      propertyPath: m_Name
-      value: Consumer
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09fbbefcba9fd744dbc46d889e130b3d, type: 3}
