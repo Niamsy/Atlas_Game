@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using SceneManagement;
 using Player;
+using Player.Scripts;
 
 namespace Menu
 {
@@ -48,12 +49,6 @@ namespace Menu
             _spawner.Spawn();
             _isAlreadyDead = false;
             Show(false);
-        }
-
-        public override void Show(bool display, bool force = false)
-        {
-            Debug.Log(display);
-            base.Show(display, force);
         }
     }
 }

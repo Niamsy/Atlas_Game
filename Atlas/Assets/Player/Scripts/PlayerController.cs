@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using InputManagement;
 using Atlas_Physics;
 using Variables;
 using Game.Item.PlantSeed;
 using Game.Player;
 using Game.Inventory;
+using Player.Scripts;
 
 namespace Player
 {
@@ -226,10 +228,23 @@ namespace Player
             _Animator.SetFloat(_HashVerticalSpeed, newInput.z);
         }
 
-        public void PlayAnimation(string animation)
+        public void PlayAnimation(InputKeyStatus status, PlayerAnimationData animationData)
         {
-            if (animation != "")
-            _Animator.SetTrigger(animation);
+            if (!animationData.Enabled)
+                return;
+            
+            switch (animationData.Type)
+            {
+                case PlayerAnimationData.AnimationType.Trigger:
+                    if (status == InputKeyStatus.Pressed)
+                        _Animator.SetTrigger(animationData.Hash);
+                    break;
+                case PlayerAnimationData.AnimationType.Holded:
+                    _Animator.SetBool(animationData.Hash, status == InputKeyStatus.Pressed || status == InputKeyStatus.Holded);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         private void Update()

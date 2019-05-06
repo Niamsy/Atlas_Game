@@ -1,28 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-[RequireComponent(typeof(Vector3))]
-
-public class Spawner : MonoBehaviour
+namespace Player.Scripts
 {
-    public Vector3 pos;
-
-    // Start is called before the first frame update
-    void Start()
+    public class Spawner : MonoBehaviour
     {
-        
-    }
+        public Vector3 pos;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void Spawn()
-    {
-        Debug.Log("Spawn");
-        gameObject.transform.position = pos;
+        public void Spawn()
+        {
+            Debug.Log("Spawn");
+            gameObject.transform.position = pos;
+        }
     }
 }
