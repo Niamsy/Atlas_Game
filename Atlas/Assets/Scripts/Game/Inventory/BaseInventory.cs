@@ -132,7 +132,7 @@ namespace Game.Inventory
                 if (!stack.IsEmpty)
                     totalObj += 1;
 
-            if (totalObj < 0)
+            if (totalObj <= 0)
                 return;
             
             float anglePerObj = 360f / totalObj;

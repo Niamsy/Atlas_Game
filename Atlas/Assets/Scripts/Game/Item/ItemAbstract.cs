@@ -2,6 +2,7 @@
 using Game.Inventory;
 using InputManagement;
 using Localization;
+using Player.Scripts;
 using UnityEngine;
 
 namespace Game.Item
@@ -11,64 +12,36 @@ namespace Game.Item
 	{
 		[Header("Base item variables")]
 		[SerializeField] private int _id;
-		public int Id
-		{
-			get { return (_id); }
-		}
+		public int Id => _id;
 
 		[SerializeField] private GameObject _prefabDroppedGO;
-		public GameObject PrefabDroppedGO
-		{
-			get { return (_prefabDroppedGO); }
-		}
-		
+		public GameObject PrefabDroppedGO => _prefabDroppedGO;
+
 		protected GameObject EquipedObject;
 		[SerializeField] private GameObject _prefabHoldedGO;
-		public GameObject PrefabHoldedGO
-		{
-			get { return (_prefabHoldedGO); }
-		}
+		public GameObject PrefabHoldedGO => _prefabHoldedGO;
 
-		public virtual int MaxStackSize
-		{
-			get { return (100); }
-		}
+		public virtual int MaxStackSize => 100;
 
 		[SerializeField] private Sprite _sprite;
-		public Sprite Sprite
-		{
-			get { return (_sprite); }
-		}
-		
+		public Sprite Sprite => _sprite;
+
 		[SerializeField] private LocalizedText _name;
-		public string Name
-		{
-			get { return (_name); }
-		}
-		
+		public string Name => _name;
+
 		[SerializeField] private LocalizedText _description;
-		public string Description
-		{
-			get { return (_description); }
-		}
+		public string Description => _description;
 
 		[SerializeField] private LocalizedText _usageText;
-		public string UsageText
-		{
-			get { return (_usageText); }
-		}
+		public string UsageText => _usageText;
 
-        private string _animation;
-        public string Animation
-        {
-            get { return _animation; }
-            protected set { _animation = value; }
-        }
+		[SerializeField] private PlayerAnimationData _animation;
+        public PlayerAnimationData Animation => _animation;
 
 		public virtual GameObject Equip(Transform parent)
 		{
 			EquipedObject = Instantiate(PrefabHoldedGO, parent);
-			return (EquipedObject);
+			return EquipedObject;
 		}
 
 		public virtual void UnEquip()

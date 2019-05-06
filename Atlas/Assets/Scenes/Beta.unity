@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.06744362, g: 0.0889105, b: 0.13196887, a: 1}
+  m_IndirectSpecularColor: {r: 0.05957519, g: 0.08304036, b: 0.12658614, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5278,6 +5278,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4990935416642742173, guid: fc4e73b4e7a0e5b4885b2e4a7b09105e,
+        type: 3}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed by
+        Humanoid clips.\n\tTransform 'Bip001'\n\tTransform 'Bip001 L Finger4'\n\tTransform
+        'Bip001 L Finger0'\n\tTransform 'Bip001 R Foot'\n\tTransform 'Bip001 R Forearm'\n\tTransform
+        'Bip001 R Finger2'\n\tTransform 'Bip001 L Hand'\n\tTransform 'Bip001 R Finger21'\n\tTransform
+        'Bip001 Spine1'\n\tTransform 'Bip001 L Finger21'\n\tand more ...\n\tFrom animation
+        clip 'Idle'\n\tFrom animation clip 'Walking'\n\tFrom animation clip 'Walking'\n\tFrom
+        animation clip 'Walking'\n\tFrom animation clip 'Walking'\n\tFrom animation
+        clip 'Walking'\n\tFrom animation clip 'Walking'\n\tFrom animation clip 'Walking'\n\tFrom
+        animation clip 'Walking'\n\tFrom animation clip 'Jump'\n\tand more ..."
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc4e73b4e7a0e5b4885b2e4a7b09105e, type: 3}
 --- !u!21 &1155451737
@@ -8777,7 +8791,7 @@ PrefabInstance:
     - target: {fileID: 114636355673813890, guid: e030d32b35e1d3a488774d9c76277ddd,
         type: 3}
       propertyPath: LoadData
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114636355673813890, guid: e030d32b35e1d3a488774d9c76277ddd,
         type: 3}
@@ -9821,15 +9835,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 771584898}
     m_Modifications:
-    - target: {fileID: 1657452210841737735, guid: 09fbbefcba9fd744dbc46d889e130b3d,
-        type: 3}
-      propertyPath: m_Name
-      value: Consumer
-      objectReference: {fileID: 0}
     - target: {fileID: 3542190157137659734, guid: 09fbbefcba9fd744dbc46d889e130b3d,
         type: 3}
       propertyPath: m_Name
       value: Poppy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1657452210841737735, guid: 09fbbefcba9fd744dbc46d889e130b3d,
+        type: 3}
+      propertyPath: m_Name
+      value: Consumer
       objectReference: {fileID: 0}
     - target: {fileID: 3542190157137659737, guid: 09fbbefcba9fd744dbc46d889e130b3d,
         type: 3}
