@@ -48,7 +48,8 @@ namespace Game.Player
         public void UseItem(InputKeyStatus status)
         {
             _equippedItem.Use(EquippedItemStack, status);
-            _controller.PlayAnimation(status, _equippedItem.Animation);
+            if (_controller && _equippedItem)
+                _controller.PlayAnimation(status, _equippedItem.Animation);
         }
 
         #region Load/Saving Methods
