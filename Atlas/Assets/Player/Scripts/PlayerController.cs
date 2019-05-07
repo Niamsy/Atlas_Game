@@ -539,8 +539,10 @@ namespace Player
                     _canSow = _handSlots.ObjectIsUsable;
                     _isCheckSowing = true;
                 }
-                if (_handSlots.ObjectIsUsable)
+                if (_handSlots.ObjectIsUsable && !_Animator.GetCurrentAnimatorStateInfo(0).IsName("Sow"))
+                {
                     _handSlots.UseItem(status);
+                }
             }
             else
                 _isCheckSowing = false;

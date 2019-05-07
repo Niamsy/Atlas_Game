@@ -16,7 +16,6 @@ namespace Game.Item.PlantSeed
         {
             if (status != InputKeyStatus.Pressed)
                 return;
-            Debug.Log("Use");
             selfStack.ModifyQuantity(selfStack.Quantity - 1);
             GameObject plantModel = Instantiate(PlantStatistics.Prefab, _location, new Quaternion(0,0,0,1));
             plantModel.GetComponent<PlantModel>().Sow();
