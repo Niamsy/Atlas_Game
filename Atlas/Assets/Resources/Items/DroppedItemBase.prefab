@@ -4813,7 +4813,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1194459000201073533}
   - component: {fileID: 1033152538115866503}
-  - component: {fileID: 7107937488382144640}
+  - component: {fileID: 5421218116067924496}
   - component: {fileID: 978145606030212351}
   - component: {fileID: 1152320567969827066}
   m_Layer: 0
@@ -4855,7 +4855,7 @@ MonoBehaviour:
   Slot:
     _content: {fileID: 0}
     _quantity: 0
---- !u!114 &7107937488382144640
+--- !u!114 &5421218116067924496
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4864,9 +4864,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3043740272916803888}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297947c4f6fdd064e85f656b1a310f42, type: 3}
+  m_Script: {fileID: 11500000, guid: 8e921fd61759bcd48b4a97a4b6c9cb52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BaseStack: {fileID: 1033152538115866503}
 --- !u!54 &978145606030212351
 Rigidbody:
   m_ObjectHideFlags: 0
