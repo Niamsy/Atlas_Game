@@ -1,5 +1,6 @@
 ﻿using System;
 using Game.Item;
+using Game.SavingSystem;
 using UnityEngine;
 
 namespace Game.Inventory
@@ -74,7 +75,7 @@ namespace Game.Inventory
             FireEvent();
         }
      
-        public void SetFromGameData(GameData.ItemSaveData other)
+        public void SetFromGameData(ItemBaseData other)
         {
             if (other == null)
                 return;

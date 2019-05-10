@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using Game.ResourcesManagement;
 using Plants.Plant;
 
-namespace Game
+namespace Game.SavingSystem
 {
     [Serializable]
-    public class MapData : SaveData
+    public class MapData
     {
         [Serializable]
         public struct ResourceSaveData
@@ -42,5 +41,6 @@ namespace Game
         }
 
         public PlantSaveData[] Plants;
+        public ItemDroppedsData[] DroppedItems;
     }
 }

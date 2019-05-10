@@ -1,14 +1,25 @@
-﻿using SceneManagement;
+﻿using System.Collections.Generic;
+using Game.Item;
+using Plants;
+using SceneManagement;
 using UnityEngine;
 
-namespace Game
+namespace Game.Map
 {
     public class MapManager : MonoBehaviour
     {
         public static MapManager Instance { get; private set; }
+        public static PlantSystem PlantsSystem => Instance != null ? Instance._plantsSystem : null;
+        public static DroppedItemManager DroppedItemManager => Instance != null ? Instance._droppedItemManager : null;
+        
+        #region Variables
+        [SerializeField] private PlantSystem _plantsSystem;
+        [SerializeField] private DroppedItemManager _droppedItemManager;
         
         private int _sceneIndex;
+        #endregion
         
+        #region Methods
         private void Awake()
         {
             Instance = this;
@@ -33,5 +44,6 @@ namespace Game
                 Instance = null;
             }
         }
+        #endregion
     }
 }

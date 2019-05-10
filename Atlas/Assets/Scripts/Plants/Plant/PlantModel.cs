@@ -1,4 +1,5 @@
-﻿using Game.ResourcesManagement;
+﻿using Game.Map;
+using Game.ResourcesManagement;
 using Game.ResourcesManagement.Consumer;
 using Localization;
 using UnityEngine;
@@ -154,13 +155,13 @@ namespace Plants.Plant
         {
             MeshRender = GetComponent<MeshRenderer>();
             SetPlantName();
-            PlantSystem.Instance.AddPlantToTheMap(this);
+            MapManager.PlantsSystem.AddPlantToTheMap(this);
         }
 
         private void OnDestroy()
         {
-            if (PlantSystem.Instance != null)
-                PlantSystem.Instance.RemovePlantFromTheMap(this);
+            if (MapManager.PlantsSystem != null)
+                MapManager.PlantsSystem.RemovePlantFromTheMap(this);
         }
         private void UpdateProducer()
         {
