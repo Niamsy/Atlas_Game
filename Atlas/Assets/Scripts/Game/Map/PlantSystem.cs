@@ -75,14 +75,8 @@ namespace Plants
             gameControl.MapData.Plants = plantSaveDatas;
         }
 
-        #if UNITY_EDITOR
-        public bool InstantiateNewPlant = true;
-        #endif
         public void Loading(GameControl gameControl)
         {
-            #if UNITY_EDITOR
-            if (!InstantiateNewPlant) return;
-            #endif
             foreach (var plant in _models)
                 Destroy(plant.gameObject);
             foreach (var plant in gameControl.MapData.Plants)
