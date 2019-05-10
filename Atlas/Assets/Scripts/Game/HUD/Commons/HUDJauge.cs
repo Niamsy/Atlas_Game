@@ -100,10 +100,9 @@ namespace Game.HUD.Commons
             if (percentageValue <= ThresholdCriticalValue && OnCriticalJaugeValue != null && _isValueCritical == false)
             {
                 OnCriticalJaugeValue.Invoke();
-                Debug.Log("SOUND");
                 _isValueCritical = true;
             }
-            else if (percentageValue > ThresholdCriticalValue && OnCriticalJaugeValue != null && _isValueCritical == true)
+            else if ((percentageValue > ThresholdCriticalValue && OnCriticalJaugeValue != null && _isValueCritical == true) || percentageValue <= 0)
             {
                 OnStableJaugeValue.Invoke();
                 _isValueCritical = false;
