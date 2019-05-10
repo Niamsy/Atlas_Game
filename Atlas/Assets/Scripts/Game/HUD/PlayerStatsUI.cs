@@ -17,9 +17,9 @@ namespace Game.HUD
 
         private void Start()
         {
-            CurrentHealthBar.Initialize(Stats.PlayerHealth.GetCurrent(), Stats.PlayerHealth.GetMax());
+            CurrentHealthBar.Initialize(Stats.PlayerHealth.GetCurrent(), 0, Stats.PlayerHealth.GetMax());
             var oxygenStock = Stats._consumer.LinkedStock[Game.ResourcesManagement.Resource.Oxygen];
-            CurrentOxygenBar.Initialize(oxygenStock.Quantity, oxygenStock.Limit);
+            CurrentOxygenBar.Initialize(oxygenStock.Quantity, 0, oxygenStock.Limit);
         }
 
         private void Update()
