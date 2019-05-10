@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Game.SavingSystem;
 
 namespace Game.Inventory
 {
@@ -23,9 +24,9 @@ namespace Game.Inventory
 		private void SaveData(GameControl gameControl)
 		{
 			GameData gameData = gameControl.GameData;
-			gameData.Inventory = new List<GameData.ItemSaveData>(Size);
+			gameData.Inventory = new List<ItemBaseData>(Size);
 			for (int x = 0; x < Size; x++)
-				gameData.Inventory.Add(new GameData.ItemSaveData(Slots[x]));
+				gameData.Inventory.Add(new ItemBaseData(Slots[x]));
 		}
 
 		private bool LoadData()

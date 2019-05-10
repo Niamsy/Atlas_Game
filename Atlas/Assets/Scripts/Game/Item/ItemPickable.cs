@@ -1,84 +1,84 @@
 ﻿using Game.Inventory;
+using Game.Item.PlantSeed;
+using Game.Item.Tools;
+using Game.Item.Tools.Bucket;
 using Plants.Plant;
 using Player;
 using UnityEngine;
 
-#region ItemUsing
-using Game.Item.Tools.Bucket;
-using Game.Item.Tools;
-using Game.Item.PlantSeed;
-#endregion
-
-public class ItemPickable : MonoBehaviour
+namespace Game.Item
 {
-    private GameObject _Player;
-    private PlantModel _ModelPlant;
-    private Canvas _GuiCanvas;
-
-    void Start()
+    public class ItemPickable : MonoBehaviour
     {
-        _Player = null;
-    }
-
-    private void Awake()
-    {
-        if (gameObject)
+        public ItemStackBehaviour BaseStack;
+        
+        private GameObject _player;
+        private PlantModel _modelPlant;
+        private Canvas _guiCanvas;
+        void Start()
         {
-            _ModelPlant = gameObject.GetComponent<PlantModel>();
-            _GuiCanvas = gameObject.GetComponentInChildren<Canvas>();
-            if (_GuiCanvas)
-                _GuiCanvas.gameObject.SetActive(false);
+            _player = null;
         }
-    }
 
-    void Update()
-    {
-        if (_Player && _Player.GetComponent<PlayerController>().CheckForPickInput())
+        protected virtual void Awake()
         {
-            if (_ModelPlant && _ModelPlant && _ModelPlant.IsSowed == true)
-                return;
-            PlayerInventory inventory = FindObjectOfType<PlayerInventory>();
-            ItemStack baseStack = gameObject.GetComponent<ItemStackBehaviour>().Slot;
-            if (baseStack.Content is BucketItem)
+            if (gameObject)
             {
-                AchievementManager.Instance.achieve(AchievementManager.AchievementId.PickupBucket);
+                _modelPlant = gameObject.GetComponent<PlantModel>();
+                _guiCanvas = gameObject.GetComponentInChildren<Canvas>();
+                if (_guiCanvas)
+                    _guiCanvas.gameObject.SetActive(false);
             }
-            if (baseStack.Content is ShovelItem)
+        }
+
+        void Update()
+        {
+            if (_player && _player.GetComponent<PlayerController>().CheckForPickInput())
             {
-                AchievementManager.Instance.achieve(AchievementManager.AchievementId.PickupShovel);
-            }
-            if (baseStack.Content is Seed)
-            {
-                AchievementManager.Instance.achieve(AchievementManager.AchievementId.PickupFirstSeed);
-            }
+                if (_modelPlant && _modelPlant && _modelPlant.IsSowed == true)
+                    return;
+                PlayerInventory inventory = FindObjectOfType<PlayerInventory>();
+                if (BaseStack.Slot.Content is BucketItem)
+                {
+                    AchievementManager.Instance.achieve(AchievementManager.AchievementId.PickupBucket);
+                }
+                if (BaseStack.Slot.Content is ShovelItem)
+                {
+                    AchievementManager.Instance.achieve(AchievementManager.AchievementId.PickupShovel);
+                }
+                if (BaseStack.Slot.Content is Seed)
+                {
+                    AchievementManager.Instance.achieve(AchievementManager.AchievementId.PickupFirstSeed);
+                }
             
-            ItemStack leftStack = inventory.AddItemStack(baseStack);
-            if (leftStack == null)
-                Destroy(gameObject);
-            else
-                baseStack = leftStack;
-        }
-    }
-
-    void OnTriggerEnter(Collider col)
-    {
-        if (col.gameObject.CompareTag("Player"))
-        {
-            if (_GuiCanvas && _GuiCanvas.gameObject)
-            {
-                _GuiCanvas.gameObject.SetActive(true);
-                _Player = col.gameObject;
+                ItemStack leftStack = inventory.AddItemStack(BaseStack.Slot);
+                if (leftStack == null)
+                    Destroy(gameObject);
+                else
+                    BaseStack.Slot = leftStack;
             }
         }
-    }
 
-    void OnTriggerExit(Collider col)
-    {
-        if (col.gameObject.CompareTag("Player"))
+        void OnTriggerEnter(Collider col)
         {
-            if (_GuiCanvas)
-                _GuiCanvas.gameObject.SetActive(false);
-            _Player = null;
+            if (col.gameObject.CompareTag("Player"))
+            {
+                if (_guiCanvas && _guiCanvas.gameObject)
+                {
+                    _guiCanvas.gameObject.SetActive(true);
+                    _player = col.gameObject;
+                }
+            }
+        }
+
+        void OnTriggerExit(Collider col)
+        {
+            if (col.gameObject.CompareTag("Player"))
+            {
+                if (_guiCanvas)
+                    _guiCanvas.gameObject.SetActive(false);
+                _player = null;
+            }
         }
     }
 }

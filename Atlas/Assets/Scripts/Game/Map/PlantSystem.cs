@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Game;
+using Game.SavingSystem;
 using Plants.Plant;
 using UnityEngine;
 
@@ -7,15 +8,12 @@ namespace Plants
 {
     public class PlantSystem : MonoBehaviour
     {
-        public static PlantSystem Instance;
-
         private List<PlantModel> _models = new List<PlantModel>();
 
         #region Methods
 
         private void Awake()
         {
-            Instance = this;
             GameControl.BeforeSavingData += Save;
             GameControl.UponLoadingMapData += Loading;
         }
@@ -24,8 +22,6 @@ namespace Plants
         {
             GameControl.BeforeSavingData -= Save;
             GameControl.UponLoadingMapData -= Loading;
-            if (Instance == this)
-                Instance = null;
         }
 
         public void Update()
