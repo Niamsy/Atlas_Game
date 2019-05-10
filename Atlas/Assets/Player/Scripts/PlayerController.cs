@@ -29,10 +29,6 @@ namespace Player
         [Range(1f, 3f)]
         [Tooltip("Multiply the Movement speed by this scale to obtain the sprint speed")]
         public float _SprintScale = 1.3f;
-        [Range(0f, 1f)]
-        public float _CrouchScale = .4f;
-        [Range(0f, 1f)]
-        public float _ProneScale = 0f;
         public float _Acceleration = 100f;
         public float _Deceleration = 100f;
         public float _RotationSpeed = 150f;
@@ -86,10 +82,10 @@ namespace Player
             set
             {
                 _Animator.SetBool(_HashSprinting, value);
-                _CurrentSpeed = value && !(IsCrouched || IsProned) ? _BaseSpeed * _SprintScale : _CurrentSpeed;
-                _CurrentSpeed = !value && !(IsCrouched || IsProned) ? _BaseSpeed : _CurrentSpeed;
-                _CurrentAcceleratedSpeed.Value = value && !(IsCrouched || IsProned) ? _CurrentAcceleratedSpeed.Value * _SprintScale : _CurrentAcceleratedSpeed.Value;
-                _CurrentAcceleratedSpeed.Value = !value && !(IsCrouched || IsProned) ? _CurrentAcceleratedSpeed.Value * .5f : _CurrentAcceleratedSpeed.Value;
+                _CurrentSpeed = value ? _BaseSpeed * _SprintScale : _CurrentSpeed;
+                _CurrentSpeed = !value ? _BaseSpeed : _CurrentSpeed;
+                _CurrentAcceleratedSpeed.Value = value ? _CurrentAcceleratedSpeed.Value * _SprintScale : _CurrentAcceleratedSpeed.Value;
+                _CurrentAcceleratedSpeed.Value = !value ? _CurrentAcceleratedSpeed.Value * .5f : _CurrentAcceleratedSpeed.Value;
             }
         }
 
@@ -131,31 +127,7 @@ namespace Player
             get { return _isEquippedSlotUsed; }
             set { _isEquippedSlotUsed = value; }
         }
-
-        public bool IsCrouched
-        {
-            get { return _Animator.GetBool(_HashCrouched); }
-            set
-            {
-                _Animator.SetBool(_HashCrouched, value);
-                if (value && IsProned)
-                {
-                    IsProned = false;
-                }
-            }
-        }
-        public bool IsProned
-        {
-            get { return _Animator.GetBool(_HashProned); }
-            set
-            {
-                _Animator.SetBool(_HashProned, value);
-                if (value && IsCrouched)
-                {
-                    IsCrouched = false;
-                }
-            }
-        }
+    
         #endregion
 
         #region private variables
@@ -179,8 +151,6 @@ namespace Player
         private readonly int _HashVerticalSpeed = Animator.StringToHash("VerticalSpeed");
         private readonly int _HashGrounded = Animator.StringToHash("Grounded");
         private readonly int _HashSprinting = Animator.StringToHash("Sprinting");
-        private readonly int _HashCrouched = Animator.StringToHash("Crouched");
-        private readonly int _HashProned = Animator.StringToHash("Proned");
         private readonly int _HashPicking = Animator.StringToHash("Picking");
         private readonly int _HashSowing = Animator.StringToHash("Sowing");
         private readonly int _HashDead = Animator.StringToHash("Dead");
@@ -340,16 +310,6 @@ namespace Player
             GroundedHorizontalMovement(true, IsSprinting ? _SprintScale : 1f);
         }
 
-        public void Crouch()
-        {
-            GroundedHorizontalMovement(true, _CrouchScale);
-        }
-
-        public void Prone()
-        {
-            GroundedHorizontalMovement(true, _ProneScale);
-        }
-
         private void GroundedHorizontalMovement(bool useInput, float speedScale = 1f)
         {
             Vector3 input = _Input.normalized;
@@ -449,16 +409,6 @@ namespace Player
             return IsGrounded && _isCheckSowing && IsSowing;
         }
 
-        public bool CheckForCrouchedInput()
-        {
-            return IsGrounded && _Inputs.Crouch.GetDown();
-        }
-
-        public bool CheckForPronedInput()
-        {
-            return IsGrounded && _Inputs.Prone.GetDown();
-        }
-
         public bool CheckForPickInput()
         {
             if (_Inputs.Pick.GetDown())
@@ -486,16 +436,6 @@ namespace Player
                 IsDead = false;
             }
             return IsDead;
-        }
-
-        public void ToggleCrouchedState()
-        {
-            IsCrouched = !IsCrouched;
-        }
-
-        public void TogglePronedState()
-        {
-            IsProned = !IsProned;
         }
 
         /// <summary>

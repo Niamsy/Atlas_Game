@@ -12,10 +12,6 @@ namespace Player
             //_Actor.Walk();
             _Actor.CheckForSprintInput();
             _Actor.RotateAim();
-            if (_Actor.CheckForCrouchedInput())
-            {
-                _Actor.ToggleCrouchedState();
-            }
             if (_Actor.CheckForJumpInput())
                 _Actor.Jump();
         }

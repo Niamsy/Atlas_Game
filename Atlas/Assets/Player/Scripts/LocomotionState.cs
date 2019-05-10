@@ -31,14 +31,8 @@ namespace Player {
             _Actor.CheckForSprintInput();
             //_Actor.Walk();
             _Actor.GoToIdleState(_Actor.CheckForIdle());
-            if (_Actor.CheckForCrouchedInput())
-            {
-                _Actor.ToggleCrouchedState();
-            } 
             if (_Actor.CheckForJumpInput())
-            {
                 _Actor.Jump();
-            }
         }
     }
 }

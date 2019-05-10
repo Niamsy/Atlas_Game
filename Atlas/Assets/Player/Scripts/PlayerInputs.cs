@@ -12,8 +12,6 @@ namespace InputManagement
         [Header("Keys")]
         public InputKey Sprint;
         public InputKey Jump;
-        public InputKey Crouch;
-        public InputKey Prone;
         public InputKey CameraLock;
         public InputKey Pick;
         public InputKey EquippedItemUse;
