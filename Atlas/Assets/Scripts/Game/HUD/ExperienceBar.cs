@@ -12,6 +12,7 @@ namespace Game.HUD
         [Header("Float value")]
         [SerializeField] private Variables.FloatVariable _experience;
         [SerializeField] private Variables.FloatVariable _level;
+        [SerializeField] private Variables.FloatVariable _levelFloor;
         [SerializeField] private Variables.FloatVariable _levelRoof;
         [Header("Objects references")]
         [SerializeField] private HUDJauge _jauge;
@@ -39,7 +40,7 @@ namespace Game.HUD
         {
             _gainXp.RegisterListener(this);
             // TODO: Can't access Max Exp per level now
-            _jauge.Initialize(_experience.Value, _levelRoof.Value);
+            _jauge.Initialize(_experience.Value, _levelFloor.Value, _levelRoof.Value);
             _lastKnowLevel = _level.Value;
             _levelDisplay.text = string.Format(LevelDisplayFormat, _level.Value);
         }
@@ -47,7 +48,7 @@ namespace Game.HUD
         public void OnEventRaised(int currentXp, int xpGain)
         {
             if (_level.Value != _lastKnowLevel)
-                _jauge.Initialize(_experience.Value, _levelRoof.Value);
+                _jauge.Initialize(_experience.Value, _levelFloor.Value, _levelRoof.Value);
             else
                 _jauge.SetValue(_experience.Value);
             _levelDisplay.text = string.Format(LevelDisplayFormat, _level.Value);

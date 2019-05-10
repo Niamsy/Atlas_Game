@@ -36,7 +36,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1000, y: 64}
+  m_SizeDelta: {x: 1000, y: 32}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &4827896392716058331
 MonoBehaviour:
@@ -52,6 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _experience: {fileID: 11400000, guid: 362506067643a9a45b86a863751e1246, type: 2}
   _level: {fileID: 11400000, guid: 2bf20a12456bcbd4da2fc30dacbc05f4, type: 2}
+  _levelFloor: {fileID: 11400000, guid: e40bc91f3c4f372489a22e60c4a47588, type: 2}
   _levelRoof: {fileID: 11400000, guid: 25c43e841d049cb45be4b1846ecf11c8, type: 2}
   _jauge: {fileID: 8336583088262775980}
   _levelDisplay: {fileID: 8057495207116156458}
@@ -416,13 +417,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e861fa54b7cbc404c94a7435b671ad0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnCriticalJaugeValue:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnStableJaugeValue:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   _fill: {fileID: 291200529283579721}
   _prefill: {fileID: 1661086760408605682}
   _valueText: {fileID: 345331300396472517}
   FillingSpeed: 0.1
   EmptyingSpeed: 2
   TextFormat: '{0:F} / {1:F}'
-  _XPFillAudio: {fileID: 11400000, guid: 61ff82624482cf1468f18ba2d3b55dfb, type: 2}
+  ThresholdCriticalValue: 0.5
+  _fillAudio: {fileID: 0}
   _source: {fileID: 7263172392424891341}
 --- !u!82 &7263172392424891341
 AudioSource:

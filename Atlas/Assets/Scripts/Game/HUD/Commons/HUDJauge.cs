@@ -34,17 +34,18 @@ namespace Game.HUD.Commons
         
         private float _targetValue;
         private float _value;
+        private float _minValue = 0;
         private float _maxValue;
         private bool _isValueCritical;
         
         private float ActualPercentage01
         {
-            get { return (_value / _maxValue); }
+            get { return ((_value - _minValue) / (_maxValue - _minValue)); }
         }
         
         private float ActualTargetPercentage01
         {
-            get { return (_targetValue / _maxValue); }
+            get { return ((_targetValue - _minValue) / (_maxValue - _minValue)); }
         }
         public bool IsMoving
         {
@@ -58,11 +59,12 @@ namespace Game.HUD.Commons
             _isValueCritical = false;
         }
         
-        public void Initialize(float value, float maxValue)
+        public void Initialize(float value, float minValue, float maxValue)
         {
+            _minValue = minValue;
+            _maxValue = maxValue;
             UpdateTargetValue(value);
             UpdateValue(value);
-            _maxValue = maxValue;
             UpdateText();
         }
         
