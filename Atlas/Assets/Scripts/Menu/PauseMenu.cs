@@ -30,6 +30,7 @@ namespace Menu
 
 		public void ShowSettings()
 		{
+			_settings.gameObject.SetActive(true);
 			_settings.Open();
 		}
 		
