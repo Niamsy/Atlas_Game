@@ -2,10 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AAchievement
+[CreateAssetMenu(menuName = "Achievement/Achievement")]
+public class AAchievement : ScriptableObject
 {
-    protected string onSuccess;
+    [SerializeField]
+    protected Localization.LocalizedText onSuccess;
+    [SerializeField]
+    protected bool _SaveState = false;
+
     protected bool __isAchieve = false;
+
+    private void Awake()
+    {
+        if (!_SaveState)
+        {
+            __isAchieve = false;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (!_SaveState)
+        {
+            __isAchieve = false;
+        }
+    }
 
     public bool isAchieve()
     {
@@ -14,7 +35,7 @@ public class AAchievement
 
     public string getAchievementSuccessString()
     {
-        return onSuccess;
+        return onSuccess.Value;
     }
 
     public void Achieve()

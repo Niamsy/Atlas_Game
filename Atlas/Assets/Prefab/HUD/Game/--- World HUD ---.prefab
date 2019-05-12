@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1151558356801519143}
   - component: {fileID: 4129880275321375086}
-  - component: {fileID: 7025621306042803979}
+  - component: {fileID: 854531492108967147}
   m_Layer: 5
   m_Name: PopupBackGround
   m_TagString: Untagged
@@ -45,7 +45,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3192999928491209818}
   m_CullTransparentMesh: 0
---- !u!114 &7025621306042803979
+--- !u!114 &854531492108967147
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -58,15 +58,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3301887, g: 0.3068263, b: 0.3068263, a: 0.76862746}
+  m_Color: {r: 0.122641504, g: 0.122641504, b: 0.122641504, a: 0.88235295}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1a6b69a6778b14aa07324f34a80bfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popupBackground: {fileID: 7025621306042803979}
+  popupBackground: {fileID: 0}
   popupText: {fileID: 1972696551188159529}
 --- !u!1 &5981819572743812704
 GameObject:
@@ -555,11 +555,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2073125256269984486, guid: 212bfb3406646eb4a8cc172302e8a58b,
-        type: 3}
-      propertyPath: _source
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 1890975944691382802, guid: 212bfb3406646eb4a8cc172302e8a58b,
         type: 3}
       propertyPath: m_SizeDelta.y
@@ -569,6 +564,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2073125256269984486, guid: 212bfb3406646eb4a8cc172302e8a58b,
+        type: 3}
+      propertyPath: _source
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 212bfb3406646eb4a8cc172302e8a58b, type: 3}

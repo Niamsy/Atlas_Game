@@ -7,11 +7,12 @@ public class Popup : Singleton<Popup>
 {
     #region members
     private static Popup popupInstance = null;
-    public const float popupFadeDuration = 2; // Millisecond;
+    public const float popupFadeDuration = 4; // Millisecond;
     public const float popupDuration = 4; // Millisecond;
     Color currentColor;
     public Image popupBackground;
     public Text popupText;
+    public float backgroundTransparency = 120;
     private enum popupMode
     {
         None,
@@ -23,7 +24,6 @@ public class Popup : Singleton<Popup>
     popupMode currentMode;
 
     private float CurrentTimer;
-
     #endregion
 
     public void Start()
@@ -70,12 +70,12 @@ public class Popup : Singleton<Popup>
     {
         if (CurrentTimer > popupFadeDuration)
         {
-            currentColor.a = 196;
+            currentColor.a = backgroundTransparency;
             currentMode = popupMode.Still;
         }
-        if (currentColor.a < 196)
+        if (currentColor.a < backgroundTransparency)
         {
-            currentColor.a += (196 / (popupFadeDuration / 1000)); // 196 = Maximum Transparency value;
+            currentColor.a += (backgroundTransparency / (popupFadeDuration / 1000.0f)); 
         }
     }
 
@@ -96,7 +96,7 @@ public class Popup : Singleton<Popup>
         }
         if (currentColor.a > 0)
         {
-            currentColor.a -= (196 / (popupFadeDuration / 1000));
+            currentColor.a -= (backgroundTransparency / (popupFadeDuration / 1000.0f));
             popupText.text = "";
         }
     }
