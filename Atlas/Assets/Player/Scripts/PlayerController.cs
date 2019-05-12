@@ -480,9 +480,11 @@ namespace Player
                     _isCheckSowing = true;
                 }
                 if (_handSlots.ObjectIsUsable && !_Animator.GetCurrentAnimatorStateInfo(0).IsName("Sow"))
-                {
                     _handSlots.UseItem(status);
-                }
+                if (!_handSlots.ObjectIsUsable)
+                    status = InputKeyStatus.Nothing;
+                if (_handSlots.EquippedItem)
+                    PlayAnimation(status, _handSlots.EquippedItem.Animation);
             }
             else
                 _isCheckSowing = false;
