@@ -47,7 +47,7 @@ namespace Game.ResourcesManagement.Consumer
             //_plantStats = statistics;
             //_needs = needs;
             GrowthRate rates = statistics.GrowthRate;
-
+            
             ResourcesToConsume.RemoveAll(x => true);
             ConsumedStocks.RemoveAll(x => true);
             foreach (var need in needs)
@@ -56,8 +56,8 @@ namespace Game.ResourcesManagement.Consumer
                 LinkedStock[need.type].Limit = need.quantity * 2;
                 ConsumedStocks.Add(new Stock() { Resource = need.type, Limit = need.quantity, Quantity = 0});
             }
-
-            ConsumptionRate.ResourcePerTick = (int)rates.ConsumationRate;
+            ConsumptionRate.TickRate = rates.ConsumationRate;
+            ConsumptionRate.ResourcePerTick = rates.QuantityConsumed;
             _starved = false;
 
         }
