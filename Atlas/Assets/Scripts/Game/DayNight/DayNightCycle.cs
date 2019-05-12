@@ -25,7 +25,8 @@ public class DayNightCycle : MonoBehaviour {
     private float _sunDown = 0.73f;
     private float _latitude = 90;
     private float _longitude = 170;
-    private float _OldXRotation = 0;
+    private double _OldXRotation = 0;
+    private EulerRuntime _SunEulers;
     #endregion
 
     // Use this for initialization
@@ -33,8 +34,8 @@ public class DayNightCycle : MonoBehaviour {
         _sunInitialIntensity = sun.intensity;
         currentTime = (((Calendar.GetHours() * 3600 + Calendar.GetMinutes() * 60 + Calendar.GetSeconds()) * 100) / SECOND_IN_DAYS) / 100f;
         sun.transform.localRotation = Quaternion.Euler((currentTime * 360f) - _latitude, _longitude, 0);
-        Vector3 position = UnityEditor.TransformUtils.GetInspectorRotation(sun.transform);
-        if (SunHide && position.x <= 0f)
+        _SunEulers = sun.GetComponent<EulerRuntime>();
+        if (SunHide && _SunEulers.GetUnityEulerAngles()[0] <= 0f)
         {
             SunHide.Raise();
         }
@@ -60,18 +61,20 @@ public class DayNightCycle : MonoBehaviour {
     void UpdateSun()
     {
         sun.transform.localRotation = Quaternion.Euler((currentTime * 360f) - _latitude, _longitude, 0);
-        Vector3 position = UnityEditor.TransformUtils.GetInspectorRotation(sun.transform);
-        if (SunHide && _OldXRotation > 0f && position.x <= 0f)
+        double[] angles = _SunEulers.GetUnityEulerAngles();
+        Debug.Log("SUN POS : x =" + angles[0] + ", y = " + angles[1] + ", z = " + angles[2]);
+
+        if (SunHide && _OldXRotation > 0f && angles[0] <= 0f)
         {
             SunHide.Raise();
         }
-        if (SunShow && _OldXRotation < 0f && position.x >= 0f)
+        if (SunShow && _OldXRotation < 0f && angles[0] >= 0f)
         {
             SunShow.Raise();
         }
 
 
-        _OldXRotation = position.x;
+        _OldXRotation = angles[0];
         float intensityMultiplayer = 1f;
 
         if (currentTime <= 0.23f || currentTime >= 0.75)
