@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Localization;
 using UnityEngine;
 
@@ -6,20 +7,19 @@ namespace Menu.Settings.Content.Dropdown
 {
     public class LanguageDropdown : SettingsEntryDropdown
     {
-        private SystemLanguage[]  _languages;
-        private SystemLanguage    _actualLanguage;
-
-        public override void Initialization()
+        [Serializable]
+        public class Language
         {
-            _languages = LocalizationSettings.Instance.AvailableLanguages.ToArray();
-            base.Initialization();
+            public SystemLanguage SystemLanguage;
+            public string Text;
         }
-
+        [SerializeField] private Language[]  _languages;
+        private SystemLanguage    _actualLanguage;
         protected override List<string> GetOptions()
         {
             List<string> options = new List<string>();
-            foreach (SystemLanguage language in _languages)
-                options.Add(language.ToString());
+            foreach (var language in _languages)
+                options.Add(language.Text);
             return (options);
         }
 
@@ -28,7 +28,7 @@ namespace Menu.Settings.Content.Dropdown
             _actualLanguage = LocalizationManager.Instance.CurrentLanguage;
             for (int x = 0; x < _languages.Length; x++)
             {
-                if (_actualLanguage == _languages[x])
+                if (_actualLanguage == _languages[x].SystemLanguage)
                 {
                     CurrentIndex = x;
                     Dropdown.value = CurrentIndex;
@@ -43,7 +43,7 @@ namespace Menu.Settings.Content.Dropdown
 
         protected override void OnValueDidChanged()
         {
-            LocalizationManager.Instance.CurrentLanguage = _languages[Dropdown.value];
+            LocalizationManager.Instance.CurrentLanguage = _languages[Dropdown.value].SystemLanguage;
         }
     }
 }

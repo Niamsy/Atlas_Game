@@ -1,4 +1,5 @@
-﻿using Menu.Settings.Content;
+﻿using Localization;
+using Menu.Settings.Content;
 using Menu.Settings.Content.Dropdown;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,7 +19,23 @@ namespace Menu.Settings
         
         private SettingEntry[] _settings;
         #endregion
-        
+
+        protected override void Awake()
+        {
+            base.Awake();
+            LocalizationManager.Instance.LocaleChanged += ReloadDataForNewLanguage;
+        }
+
+        private void OnDestroy()
+        {
+            LocalizationManager.Instance.LocaleChanged -= ReloadDataForNewLanguage;
+        }
+
+        private void ReloadDataForNewLanguage(object sender, LocaleChangedEventArgs e)
+        {
+            InitialiseWidget();
+        }
+
         protected override void InitialiseWidget()
         {
             _settings = GetComponentsInChildren<SettingEntry>();

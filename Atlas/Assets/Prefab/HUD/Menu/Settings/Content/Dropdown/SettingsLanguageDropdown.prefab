@@ -13,6 +13,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Dropdown: {fileID: 9151444815689012328}
+  _languages:
+  - SystemLanguage: 14
+    Text: "Fran\xE7ais"
+  - SystemLanguage: 10
+    Text: English
 --- !u!1001 &6322023666116630402
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -130,17 +135,17 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6208128794371523038, guid: 4185dbcfb02f4d442872ae18d7655452,
+        type: 3}
+      propertyPath: m_Text
+      value: Language
+      objectReference: {fileID: 0}
     - target: {fileID: 6802805309788048356, guid: 4185dbcfb02f4d442872ae18d7655452,
         type: 3}
       propertyPath: m_LocalizedAsset
       value: 
       objectReference: {fileID: 11400000, guid: 1167f06ff95d4d04094c50c5d490105f,
         type: 2}
-    - target: {fileID: 6208128794371523038, guid: 4185dbcfb02f4d442872ae18d7655452,
-        type: 3}
-      propertyPath: m_Text
-      value: Language
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4185dbcfb02f4d442872ae18d7655452, type: 3}
 --- !u!1 &6154011437286761625 stripped
