@@ -4,50 +4,26 @@ using UnityEngine.UI;
 
 namespace Menu
 {
-    [RequireComponent(typeof(Animator))]
-    ///ToDo: Should use MenuWidget and remove copy of code
-    public abstract class MainMenuWidget : MonoBehaviour
+    public abstract class MainMenuWidget : MenuWidget
     {
-        protected RequestManager        ActualRequestManager;
-        private Selectable[]          _childSelectables;
-        [SerializeField] protected Text ErrorText;
+        protected RequestManager          ActualRequestManager;
+        private Selectable[]              _childSelectables;
+        [SerializeField] protected Text   ErrorText;
 
-        #region Displayed
-        [SerializeField] private bool   _displayed;
-        public bool                     Displayed
+        protected override void Awake()
         {
-            get { return (_displayed); }
-        }
-        #endregion
-        
-        #region Animator Variables
-        private Animator    _animator;
-        private int         _hashShowed = Animator.StringToHash("Showed");
-        #endregion
-        
-        private void Awake()
-        {
-            _animator = GetComponent<Animator>();
             _childSelectables = GetComponentsInChildren<Selectable>();
-            
             ActualRequestManager = RequestManager.Instance;
-        
             if (ActualRequestManager == null)
                 Debug.LogError("ERROR: No RequestManager found.");
-
-            InitialiseWidget();
-            
-            Show(Displayed);
+            base.Awake();
         }
-
-        protected abstract void InitialiseWidget();
         
-        public void Show(bool display)
+        public override void Show(bool display, bool force = false)
         {
-            _animator.SetBool(_hashShowed, display);
-            _displayed = display;
             if (ErrorText != null)
                 ErrorText.text = "";
+            base.Show(display, force);
 
             UpdateButtonState();
         }

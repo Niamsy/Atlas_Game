@@ -8,10 +8,8 @@ namespace Menu
     {
         #region Displayed
         [SerializeField] private bool   _displayed;
-        public bool                     Displayed
-        {
-            get { return (_displayed); }
-        }
+        public bool                     Displayed => _displayed;
+
         #endregion
         
         #region Animator Variables
@@ -19,7 +17,7 @@ namespace Menu
         private int         _hashShowed = Animator.StringToHash("Showed");
         #endregion
 
-        private void Awake()
+        protected virtual void Awake()
         {
             _animator = GetComponent<Animator>();
 

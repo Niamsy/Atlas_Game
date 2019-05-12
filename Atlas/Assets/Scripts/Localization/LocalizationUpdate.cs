@@ -15,7 +15,7 @@ namespace Localization
             else
                 newLanguage = SystemLanguage.French;
 
-            Localization.LocalizationManager.Instance.CurrentLanguage = newLanguage;
+            LocalizationManager.Instance.CurrentLanguage = newLanguage;
             fs.setConfigFileValue("Default", "Lang", ((int)newLanguage).ToString());
             fs.saveConfig();
             IsFrench = !IsFrench;
