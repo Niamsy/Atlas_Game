@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Localization;
-using Menu.Settings.Content.Dropdown;
 using UnityEngine;
 
-namespace Menu.Settings
+namespace Menu.Settings.Content.Dropdown
 {
     public class FullscreenDropdown : SettingsEntryDropdown
     {
