@@ -8,7 +8,6 @@ namespace Player.Scripts
 
         public void Spawn()
         {
-            Debug.Log("Spawn");
             gameObject.transform.position = pos;
         }
     }
