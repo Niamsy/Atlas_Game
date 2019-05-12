@@ -66,10 +66,13 @@ namespace AtlasAudio
 
         public override void Stop(Music music)
         {
-            Stopping = true;
-            fadeInterpolater = 0f;
-            targetVolume = 0f;
-            onFadeStartVolume = Volume;
+            if (!Stopping)
+            {
+                Stopping = true;
+                fadeInterpolater = 0f;
+                targetVolume = 0f;
+                onFadeStartVolume = Volume;
+            }
         }
 
         private float tempFadeSeconds = -1f;
@@ -83,7 +86,7 @@ namespace AtlasAudio
             {
                 float fadeValue;
                 fadeInterpolater += Time.unscaledDeltaTime;
-                fadeValue = tempFadeSeconds != -1f ? tempFadeSeconds : Volume > targetVolume ? FadeOutSeconds * 1000 : FadeInSeconds * 1000;
+                fadeValue = tempFadeSeconds != -1f ? tempFadeSeconds : Volume > targetVolume ? FadeOutSeconds * 100 : FadeInSeconds * 100;
                 source.volume = Mathf.Lerp(source.volume, targetVolume, fadeInterpolater / fadeValue);
             }
             else if (tempFadeSeconds != -1f)
@@ -92,8 +95,7 @@ namespace AtlasAudio
             }
 
             IsPlaying = source.isPlaying;
-
-            if (Volume < 0.005f && Stopping)
+            if (source.volume < 0.05f && Stopping)
             {
                 source.Stop();
                 Stopping = false;
