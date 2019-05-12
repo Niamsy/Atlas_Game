@@ -12,22 +12,27 @@ public class AchievementManager : Singleton<AchievementManager>
         PickupFirstSeed,
     }
 
-    Dictionary<AchievementId, AAchievement> achievementData = new Dictionary<AchievementId, AAchievement>();
-    #endregion
+    [System.Serializable]
+    public struct Achievement {
+        public AchievementId id;
+        public AAchievement achievement;
+    }
 
+    public Achievement[] achievementData;
+    #endregion
     AchievementManager()
     {
-        achievementData[AchievementId.PickupBucket] = new BucketAchievement();
-        achievementData[AchievementId.PickupShovel] = new ShovelAchievement();
-        achievementData[AchievementId.PickupFirstSeed] = new FirstSeedAchievement();
     }
 
     public void achieve(AchievementId id)
     {
-        if (!achievementData[id].isAchieve())
+        foreach (Achievement achievement in achievementData)
         {
-            achievementData[id].Achieve();
-            Popup.Instance.sendPopup(achievementData[id].getAchievementSuccessString());
+            if (achievement.id == id && !achievement.achievement.isAchieve())
+            {
+                achievement.achievement.Achieve();
+                Popup.Instance.sendPopup(achievement.achievement.getAchievementSuccessString());
+            }
         }
     }
 }
