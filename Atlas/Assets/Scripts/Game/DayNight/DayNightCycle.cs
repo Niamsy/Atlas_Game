@@ -32,10 +32,20 @@ public class DayNightCycle : MonoBehaviour {
     void Start () {
         _sunInitialIntensity = sun.intensity;
         currentTime = (((Calendar.GetHours() * 3600 + Calendar.GetMinutes() * 60 + Calendar.GetSeconds()) * 100) / SECOND_IN_DAYS) / 100f;
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        sun.transform.localRotation = Quaternion.Euler((currentTime * 360f) - _latitude, _longitude, 0);
+        Vector3 position = UnityEditor.TransformUtils.GetInspectorRotation(sun.transform);
+        if (SunHide && position.x <= 0f)
+        {
+            SunHide.Raise();
+        }
+        else if (SunShow)
+        {
+            SunShow.Raise();
+        }
+    }
+
+    // Update is called once per frame
+    void Update () {
         UpdateSun();
 
         currentTime += (Time.deltaTime / secondsInFullDay) * timeMultiplayer;
@@ -50,17 +60,18 @@ public class DayNightCycle : MonoBehaviour {
     void UpdateSun()
     {
         sun.transform.localRotation = Quaternion.Euler((currentTime * 360f) - _latitude, _longitude, 0);
-        if (SunHide && _OldXRotation > 0f && sun.transform.localRotation.x <= 0f)
+        Vector3 position = UnityEditor.TransformUtils.GetInspectorRotation(sun.transform);
+        if (SunHide && _OldXRotation > 0f && position.x <= 0f)
         {
             SunHide.Raise();
         }
-        if (SunShow && _OldXRotation < 0f && sun.transform.localRotation.x >= 0f)
+        if (SunShow && _OldXRotation < 0f && position.x >= 0f)
         {
             SunShow.Raise();
         }
 
 
-        _OldXRotation = sun.transform.localRotation.x;
+        _OldXRotation = position.x;
         float intensityMultiplayer = 1f;
 
         if (currentTime <= 0.23f || currentTime >= 0.75)

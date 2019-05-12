@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Audio;
+using System;
 
 namespace AtlasAudio {
     public enum AudioGroup
@@ -16,12 +17,14 @@ namespace AtlasAudio {
         [MinMaxRange(2, 10)]
         public int MusicPoolSize = 4;
 
+        [SerializeField]
+        private bool _SHOW_SOUND_DEBUG = false;
+
         private List<AudioSource> _AudioSources = new List<AudioSource>();
-        private List<AudioSource> _MusicSources = new List<AudioSource>();
-        private Music[] musics = new Music[10];
+        private Dictionary<string, AudioSource> _MusicSources = new Dictionary<string, AudioSource>();
+        private List<string> _MusicSourcesInUse = new List<string>();
+        private Dictionary<string, KeyValuePair<string, Music>> musics = new Dictionary<string, KeyValuePair<string, Music>>();
         private ClampedInteger currentAudioSource;
-        private ClampedInteger currentMusicSource;
-        private ClampedInteger currentMusic;
 
         #region Volumes
         private readonly Dictionary<AudioGroup, float> _groupsVolume = new Dictionary<AudioGroup, float> { { AudioGroup.Effect, 0}, { AudioGroup.Music, 0} };
@@ -31,9 +34,14 @@ namespace AtlasAudio {
 
         public AudioMixer Mixer;
         #endregion
-            
-        // Use this for initialization
-        void Start()
+
+        #region Initialization
+        private string GenerateId()
+        {
+            return Guid.NewGuid().ToString();
+        }
+
+        void Awake()
         {
             LoadMasterVolume();
             LoadGroupsVolume();
@@ -42,25 +50,38 @@ namespace AtlasAudio {
             while (i < AudioPoolSize)
             {
                 _AudioSources.Add(gameObject.AddComponent<AudioSource>());
-                _MusicSources.Add(gameObject.AddComponent<AudioSource>());
+                _MusicSources.Add(GenerateId(), gameObject.AddComponent<AudioSource>());
                 ++i;
             }
 
             currentAudioSource = new ClampedInteger(AudioPoolSize);
-            currentMusicSource = new ClampedInteger(MusicPoolSize);
-            currentMusic = new ClampedInteger(MusicPoolSize);
         }
         
         // Update is called once per frame
         void Update() {
-            foreach (Music music in musics)
-            {
-                if (music && music.IsPlaying)
+            List<string> toRemove = new List<string>();
+
+            foreach (KeyValuePair<string, KeyValuePair<string, Music>> music in musics)
+            { 
+                if (music.Value.Value.IsPlaying)
                 {
-                    music.Update();
+                    music.Value.Value.Update();
                 }
-            }     
+                else
+                {
+                    _MusicSourcesInUse.Remove(music.Value.Key);
+                    toRemove.Add(music.Key);
+                }
+
+            }
+
+            foreach (string removed in toRemove)
+            {
+                if (_SHOW_SOUND_DEBUG) Debug.Log("Stopped " + removed);
+                musics.Remove(removed);
+            }
         }
+        #endregion
 
         #region Volume control
         #region MasterVolume
@@ -118,6 +139,7 @@ namespace AtlasAudio {
         #endregion
         #endregion
 
+        #region AudioPlayer methods
         public void Play(Audio audio)
         {
             if (audio)
@@ -149,32 +171,61 @@ namespace AtlasAudio {
             }
         }
 
+        private string GetFirstFreeMusicAudioSource()
+        {
+            foreach (var musicSource in _MusicSources)
+            {
+                if (!_MusicSourcesInUse.Contains(musicSource.Key))
+                {
+                    return musicSource.Key;
+                }
+            }
+            return null;
+        }
+
         public void PlayMusic(Music music)
         {
-            if (_MusicSources.Count == 0) return;
-
-            if (musics[currentMusic.Value] != null && musics[currentMusic.Value].IsPlaying)
+            if (_SHOW_SOUND_DEBUG) Debug.Log("Trying to Play " + music.name);
+            if (_MusicSources.Count == 0)
             {
-                musics[currentMusic.Value].Stop(music);
+                if (_SHOW_SOUND_DEBUG) Debug.Log("AudioPlayer not initialized Yet");
+                return;
             }
-                        
-            music.Play(_MusicSources[currentMusicSource.Value]);
-            currentMusicSource++;
-            currentMusic++;
 
-            musics[currentMusic.Value] = music;
+            if (!musics.ContainsKey(music.name))
+            {
+                string nextAudioID = GetFirstFreeMusicAudioSource();
+
+                if (nextAudioID != null)
+                {
+                    music.Play(_MusicSources[nextAudioID]);
+                    _MusicSourcesInUse.Add(nextAudioID);
+                    musics.Add(music.name, new KeyValuePair<string, Music>(nextAudioID, music));
+                    if (_SHOW_SOUND_DEBUG) Debug.Log("Played " + music.name);
+                }
+                else
+                {
+                    if (_SHOW_SOUND_DEBUG) Debug.LogWarning("Not enough Music source, current size : " + _MusicSources.Count);
+                }
+
+            } 
+            else
+            {
+                if (_SHOW_SOUND_DEBUG) Debug.Log("Music " + music.name + " already playing");
+            }
         }
 
         public void StopMusic(Music music)
         {
-            if (musics[currentMusic.Value].IsPlaying)
+            if (_SHOW_SOUND_DEBUG) Debug.Log("Trying to Stop " + music.name);
+            if (musics.ContainsKey(music.name))
             {
-                musics[currentMusic.Value].Stop(music);
+                musics[music.name].Value.Stop(music);
             }
-            currentMusic++; 
         }
+        #endregion
 
-
+        #region ClampedInteger
         class ClampedInteger
         {
             int value = 0;
@@ -198,5 +249,6 @@ namespace AtlasAudio {
                 return a;
             }
         }
+        #endregion
     }
 }
