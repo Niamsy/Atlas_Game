@@ -1,108 +1,101 @@
-﻿using Game.DayNight;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Experimental.Rendering.HDPipeline;
+using UnityEngine.Rendering;
 
-public class DayNightCycle : MonoBehaviour {
-
-    #region Public Variables
-
-    public Light sun;
-    public float secondsInFullDay = 120f;
-    [Range(0, 1)]
-    public float currentTime = 0;
-    [HideInInspector]
-    public float timeMultiplayer = 1f;
-    public CalendarManager Calendar;
-
-    public AtlasEvents.Event SunShow;
-    public AtlasEvents.Event SunHide;
-    #endregion
-
-    #region Private Variables
-
-    private const int SECOND_IN_DAYS = 86400;
-    private float _sunInitialIntensity;
-    private float _sunUp = 0.23f;
-    private float _sunDown = 0.73f;
-    private float _latitude = 90;
-    private float _longitude = 170;
-    private double _OldXRotation = 0;
-    private EulerRuntime _SunEulers;
-    #endregion
-
-    // Use this for initialization
-    void Start () {
-        _sunInitialIntensity = sun.intensity;
-        currentTime = (((Calendar.GetHours() * 3600 + Calendar.GetMinutes() * 60 + Calendar.GetSeconds()) * 100) / SECOND_IN_DAYS) / 100f;
-        sun.transform.localRotation = Quaternion.Euler((currentTime * 360f) - _latitude, _longitude, 0);
-        _SunEulers = sun.GetComponent<EulerRuntime>();
-        if (SunHide && _SunEulers.GetUnityEulerAngles()[0] <= 0f)
-        {
-            SunHide.Raise();
-        }
-        else if (SunShow)
-        {
-            SunShow.Raise();
-        }
-    }
-
-    // Update is called once per frame
-    void Update () {
-        UpdateSun();
-
-        currentTime += (Time.deltaTime / secondsInFullDay) * timeMultiplayer;
-        if (currentTime >= 1)
-        {
-            currentTime = 0;
-            Calendar.NextDay();
-        }
-        Calendar.SetTime(Mathf.RoundToInt((currentTime * 100 * SECOND_IN_DAYS) / 100));
-    }
-
-    void UpdateSun()
+namespace Game.DayNight
+{
+   
+#if UNITY_EDITOR
+    [ExecuteInEditMode]
+#endif
+    public class DayNightCycle : MonoBehaviour
     {
-        sun.transform.localRotation = Quaternion.Euler((currentTime * 360f) - _latitude, _longitude, 0);
-        double[] angles = _SunEulers.GetUnityEulerAngles();
-        Debug.Log("SUN POS : x =" + angles[0] + ", y = " + angles[1] + ", z = " + angles[2]);
+#if UNITY_EDITOR
+        public bool PreviewInEditor = true;
+#endif
+        
+        #region Public Variables
 
-        if (SunHide && _OldXRotation > 0f && angles[0] <= 0f)
+        [Header("Scene Ambiance")]
+        public Volume DayVolume;
+        public Volume NightVolume;
+        public AnimationCurve DayBlendOverDay = AnimationCurve.Linear(0, 0, 24, 0);
+
+        [Header("Sun")]
+        public Light Sun;
+        public AnimationCurve SunPosition = AnimationCurve.Linear(0, 180, 24, 360);
+        public AnimationCurve SunIntensity = AnimationCurve.Linear(0, 0, 24, 0);
+        public Gradient SunColor = new Gradient();
+        
+        [Header("Moon")]
+        public Light Moon;
+        public AnimationCurve MoonPosition = AnimationCurve.Linear(0, 180, 24, 360);
+        public AnimationCurve MoonIntensity = AnimationCurve.Linear(0, 0, 24, 0);
+        public Gradient MoonColor = new Gradient();
+        #endregion
+
+        #region Private Variables
+        [SerializeField]
+        private CalendarManager _calendar;
+        private float _latitude = 90;
+        private float _longitude = 170;
+        #endregion
+
+
+        private void Start()
         {
-            SunHide.Raise();
-        }
-        if (SunShow && _OldXRotation < 0f && angles[0] >= 0f)
-        {
-            SunShow.Raise();
+            
+#if UNITY_EDITOR
+            if (Application.isPlaying)
+#endif
+            _calendar = CalendarManager.Instance;
         }
 
+        private void Update ()
+        {
+            
+#if UNITY_EDITOR
+            if (!PreviewInEditor && !Application.isPlaying)
+                return;
+#endif
+            UpdateScene(_calendar.ActualDate);
+        }
 
-        _OldXRotation = angles[0];
-        float intensityMultiplayer = 1f;
+        void UpdateScene(Date date)
+        {
+            var dayAdvancement = date.DayAdvancement;
+            var dayAdvancement01 = date.DayAdvancement / Date.HourPerDay;
 
-        if (currentTime <= 0.23f || currentTime >= 0.75)
-            intensityMultiplayer = 0;
-        else if (currentTime <= 0.25f)
-            intensityMultiplayer = Mathf.Clamp01((currentTime - _sunUp) * (1 / 0.02f));
-        else if (currentTime >= 0.73f)
-            intensityMultiplayer = Mathf.Clamp01(1 - ((currentTime - _sunDown) * (1 / 0.02f)));
-        sun.intensity = _sunInitialIntensity * intensityMultiplayer;
-    }
+            Sun.intensity = SunIntensity.Evaluate(dayAdvancement);
+            Sun.enabled = (Sun.intensity > 0);
+            if (Sun.enabled)
+            {
+                Sun.transform.localRotation =
+                    Quaternion.Euler(SunPosition.Evaluate(dayAdvancement) - _latitude, _longitude, 0);
+                Sun.color = SunColor.Evaluate(dayAdvancement01);
+            }
 
-    public void SetSunUp(float value)
-    {
-        _sunUp = value;
-    }
+            Moon.intensity = MoonIntensity.Evaluate(dayAdvancement);
+            Moon.enabled = (Moon.intensity > 0);
+            if (Moon.enabled)
+            {
+                Moon.transform.localRotation =
+                    Quaternion.Euler(MoonPosition.Evaluate(dayAdvancement) - _latitude, _longitude, 0);
+                Moon.color = MoonColor.Evaluate(dayAdvancement01);
+            }
 
-    public void SetSunDowm(float value)
-    {
-        _sunDown = value;
-    }
+            DayVolume.weight = DayBlendOverDay.Evaluate(dayAdvancement);
+            NightVolume.weight = 1-DayBlendOverDay.Evaluate(dayAdvancement);
+        }
 
-    private void SetLatitude(float value)
-    {
-        _latitude = value;
-    }
+        private void SetLatitude(float value)
+        {
+            _latitude = value;
+        }
 
-    public void SetLongitude(float value)
-    {
-        _longitude = value; 
+        public void SetLongitude(float value)
+        {
+            _longitude = value; 
+        }
     }
 }

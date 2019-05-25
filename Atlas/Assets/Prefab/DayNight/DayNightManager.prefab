@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4075578086158978}
-  - component: {fileID: 114638519614609606}
+  - component: {fileID: 4100903504019945932}
+  - component: {fileID: 8038351194343617074}
   m_Layer: 0
   m_Name: DayNightManager
   m_TagString: Untagged
@@ -31,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114638519614609606
+--- !u!114 &4100903504019945932
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,13 +41,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 1419169448135134}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd483be9b940fdb4e9e29c6399f9013f, type: 3}
+  m_Script: {fileID: 11500000, guid: 9c64095ace21e5240b8417491b121cdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sun: {fileID: 0}
-  secondsInFullDay: 300
-  currentTime: 0
-  timeMultiplayer: 1
-  Calendar: {fileID: 0}
-  SunShow: {fileID: 11400000, guid: ef54106364d01134981926269ea0497c, type: 2}
-  SunHide: {fileID: 11400000, guid: b479b177fdc806f46b109f58950bd806, type: 2}
+--- !u!114 &8038351194343617074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1419169448135134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00a1386a3605a624a8c83e96a3f109a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActualDate:
+    Hours: 0
+    Minutes: 0
+    Seconds: 0
+    Day: 1
+    Month: 1
+    Year: 0
+  IsReal: 0
+  DeltaTimeMultiplier: 60
+  TimeMultiplier: 1
