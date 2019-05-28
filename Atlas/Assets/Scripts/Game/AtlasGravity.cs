@@ -5,12 +5,7 @@ namespace Atlas_Physics
     [RequireComponent(typeof(Rigidbody))]
     public class AtlasGravity : MonoBehaviour
     {
-        private float _GravityScale = 1.0f;
-
-        public float GravityScale {
-            get { return _GravityScale; }
-            set { }
-        }
+        public float GravityScale { get; private set; } = 1.0f;
 
         // Global Gravity doesn't appear in the inspector. Modify it here in the code
         // (or via scripting) to define a different default gravity for all objects.
@@ -20,12 +15,12 @@ namespace Atlas_Physics
 
         public void SetScale(float scale)
         {
-            _GravityScale = scale;
+            GravityScale = scale;
         }
 
         public void IncrementScale(float percent)
         {
-            _GravityScale *= percent;
+            GravityScale *= percent;
         }
 
         void OnEnable()
@@ -36,7 +31,7 @@ namespace Atlas_Physics
 
         void FixedUpdate()
         {
-            Vector3 gravity = GLOBAL_GRAVITY * _GravityScale * Vector3.up;
+            Vector3 gravity = GLOBAL_GRAVITY * GravityScale * Vector3.up;
             _Body.AddForce(gravity, ForceMode.Acceleration);
         }
     }

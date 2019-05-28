@@ -13,19 +13,20 @@ namespace Game.HUD
         public HUDJauge CurrentStaminaBar;
         public HUDJauge CurrentWaterBar;
 
-        public PlayerStats Stats;
+        private PlayerStats m_Stats;
 
         private void Start()
         {
-            CurrentHealthBar.Initialize(Stats.PlayerHealth.GetCurrent(), 0, Stats.PlayerHealth.GetMax());
-            var oxygenStock = Stats._consumer.LinkedStock[Game.ResourcesManagement.Resource.Oxygen];
+            m_Stats = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerStats>();
+            CurrentHealthBar.Initialize(m_Stats.PlayerHealth.GetCurrent(), 0, m_Stats.PlayerHealth.GetMax());
+            var oxygenStock = m_Stats._consumer.LinkedStock[Game.ResourcesManagement.Resource.Oxygen];
             CurrentOxygenBar.Initialize(oxygenStock.Quantity, 0, oxygenStock.Limit);
         }
 
         private void Update()
         {
-            CurrentHealthBar.SetValue(Stats.PlayerHealth.GetCurrent());
-            var oxygenStock = Stats._consumer.LinkedStock[Game.ResourcesManagement.Resource.Oxygen];
+            CurrentHealthBar.SetValue(m_Stats.PlayerHealth.GetCurrent());
+            var oxygenStock = m_Stats._consumer.LinkedStock[Game.ResourcesManagement.Resource.Oxygen];
             CurrentOxygenBar.SetValue(oxygenStock.Quantity);
 
             /*

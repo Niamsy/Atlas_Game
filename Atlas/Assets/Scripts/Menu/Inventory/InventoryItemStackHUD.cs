@@ -22,7 +22,6 @@ namespace Menu.Inventory
 			HideDescription();
 		}
 		
-		
 		public override void OnPointerEnter(PointerEventData eventData)
 		{
 			DisplayDescription();

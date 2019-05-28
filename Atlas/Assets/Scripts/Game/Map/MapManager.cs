@@ -30,8 +30,8 @@ namespace Game.Map
 
         private void OnSceneLoading(int sceneIndex)
         {
-            if (sceneIndex == _sceneIndex && GameControl.Control.LoadData)
-                GameControl.Control.LoadMapData(_sceneIndex);
+            if (sceneIndex == _sceneIndex && GameControl.Instance.LoadData)
+                GameControl.Instance.LoadMapData(_sceneIndex);
         }
         
         private void OnSceneUnloading(int sceneIndex)
@@ -40,8 +40,8 @@ namespace Game.Map
             {
                 SceneLoader.OnSceneUnloading -= OnSceneUnloading;
                 SceneLoader.OnSceneLoading -= OnSceneLoading;
-                if (GameControl.Control.SaveData)
-                    GameControl.Control.SaveMapData(_sceneIndex);
+                if (GameControl.Instance.SaveData)
+                    GameControl.Instance.SaveMapData(_sceneIndex);
                 Instance = null;
             }
         }

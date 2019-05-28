@@ -8,7 +8,7 @@ namespace Menu
     [RequireComponent(typeof(PlayerController))]
     public class GameOverMenu : MenuWidget
     {
-        public PlayerController _playerController;
+        private PlayerController _playerController;
         private PlayerStats      _playerStats;
         private Canvas           _canvas;
         private Spawner          _spawner;
@@ -22,6 +22,7 @@ namespace Menu
         void Start()
         {
             _canvas = GetComponent<Canvas>();
+            _playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
             _playerStats = _playerController.GetComponentInChildren<PlayerStats>();
             _spawner = _playerController.GetComponentInChildren<Spawner>();
             Show(false);

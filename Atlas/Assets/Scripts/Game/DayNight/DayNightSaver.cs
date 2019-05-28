@@ -43,17 +43,17 @@ public class DayNightSaver : MonoBehaviour {
 
     public void Save()
     {
-        GameControl.Control.GameData.CalendarData.SetFromDate(calendar.Seconds, calendar.Minutes, calendar.Hours, calendar.Day, calendar.Month, calendar.Year);
+        GameControl.Instance.GameData.CalendarData.SetFromDate(calendar.Seconds, calendar.Minutes, calendar.Hours, calendar.Day, calendar.Month, calendar.Year);
     }
 
     private void Awake()
     {
-        calendar.Seconds = GameControl.Control.GameData.CalendarData.GetDate().seconds;
-        calendar.Minutes = GameControl.Control.GameData.CalendarData.GetDate().minutes;
-        calendar.Hours = GameControl.Control.GameData.CalendarData.GetDate().hours;
-        calendar.Day = GameControl.Control.GameData.CalendarData.GetDate().days;
-        calendar.Month = GameControl.Control.GameData.CalendarData.GetDate().months;
-        calendar.Year = GameControl.Control.GameData.CalendarData.GetDate().years;
+        calendar.Seconds = GameControl.Instance.GameData.CalendarData.GetDate().seconds;
+        calendar.Minutes = GameControl.Instance.GameData.CalendarData.GetDate().minutes;
+        calendar.Hours = GameControl.Instance.GameData.CalendarData.GetDate().hours;
+        calendar.Day = GameControl.Instance.GameData.CalendarData.GetDate().days;
+        calendar.Month = GameControl.Instance.GameData.CalendarData.GetDate().months;
+        calendar.Year = GameControl.Instance.GameData.CalendarData.GetDate().years;
         _LastSavedTime = Time.time;
     }
 

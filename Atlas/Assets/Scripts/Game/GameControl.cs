@@ -8,7 +8,8 @@ namespace Game
 {
     public class GameControl : MonoBehaviour
     {
-        public static GameControl Control;
+      
+        public static GameControl Instance;
         public GameData GameData;
         public MapData MapData;
 
@@ -22,6 +23,8 @@ namespace Game
         public bool LoadData = false;
         public bool SaveData = false;
 
+        public InputControls InputControls { get; set; }
+
         private static readonly string FileExtension = ".dat";
         private static readonly string FileName = "gameInfo" + FileExtension;
         private static string FullPath() { return(Application.persistentDataPath + "/" + FileName); }
@@ -29,13 +32,19 @@ namespace Game
 
         void Awake()
         {
-            if (Control == null)
+            if (Instance == null)
             {
                 DontDestroyOnLoad(gameObject);
-                Control = this;
+                Instance = this;
+                Init();
             } 
-            else if (Control != this)
+            else if (Instance != this)
                 Destroy(gameObject);
+        }
+
+        private void Init()
+        {
+           InputControls = new InputControls();
         }
 
         void OnEnable()
