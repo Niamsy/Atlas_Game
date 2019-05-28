@@ -1,69 +1,32 @@
-﻿using UnityEngine;
-using System;
-using Game;
-using Game.DayNight;
+using UnityEngine;
 
-public class DayNightSaver : MonoBehaviour {
-
-    public CalendarManager calendar;
-
-    private float _LastSavedTime = 0f;
-
-    [Serializable]
-    public struct SaveDate
+namespace Game.DayNight
+{
+    [RequireComponent(typeof(CalendarManager))]
+    public class DayNightSaver : MonoBehaviour
     {
-        public int seconds;
-        public int minutes;
-        public int hours;
-        public int days;
-        public int months;
-        public int years;
-    }
+        private CalendarManager _calendar;
+        private float _lastSavedTime = 0f;
 
-    [Serializable]
-    public struct CalendarData
-    {
-        private SaveDate date;
-
-        public void SetFromDate(int seconds, int minutes, int hours, int days, int months, int years)
+        public void Save()
         {
-            date.seconds = seconds;
-            date.minutes = minutes;
-            date.hours = hours;
-            date.days = days;
-            date.months = months;
-            date.years = years;
+            GameControl.Instance.GameData.CalendarData = _calendar.ActualDate;
         }
 
-        public SaveDate GetDate()
+        private void Awake()
         {
-            return date;
+            _calendar = GetComponent<CalendarManager>();
+            _calendar.ActualDate = GameControl.Instance.GameData.CalendarData;
+            _lastSavedTime = Time.time;
         }
-    }
 
-    public void Save()
-    {
-        GameControl.Instance.GameData.CalendarData.SetFromDate(calendar.Seconds, calendar.Minutes, calendar.Hours, calendar.Day, calendar.Month, calendar.Year);
-    }
-
-    private void Awake()
-    {
-        calendar.Seconds = GameControl.Instance.GameData.CalendarData.GetDate().seconds;
-        calendar.Minutes = GameControl.Instance.GameData.CalendarData.GetDate().minutes;
-        calendar.Hours = GameControl.Instance.GameData.CalendarData.GetDate().hours;
-        calendar.Day = GameControl.Instance.GameData.CalendarData.GetDate().days;
-        calendar.Month = GameControl.Instance.GameData.CalendarData.GetDate().months;
-        calendar.Year = GameControl.Instance.GameData.CalendarData.GetDate().years;
-        _LastSavedTime = Time.time;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Time.time - _LastSavedTime > 1.0f)
+        void Update()
         {
-            Save();
-            _LastSavedTime = Time.time;
+            if (Time.time - _lastSavedTime > 1.0f)
+            {
+                Save();
+                _lastSavedTime = Time.time;
+            }
         }
     }
 }

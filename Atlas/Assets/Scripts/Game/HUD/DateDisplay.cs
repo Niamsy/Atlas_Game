@@ -20,8 +20,8 @@ namespace Game.HUD
         {
             if (_calendar && _text && _months)
             {
-                int day = _calendar.Day + 1;
-                _text.text = day.ToString("00") + " " + _months.Entries[_calendar.Month];
+                int day = _calendar.ActualDate.Day + 1;
+                _text.text = day.ToString("00") + " " + _months.Entries[_calendar.ActualDate.Month];
             }
         }
     }
