@@ -61,10 +61,10 @@ namespace Game.Player
 
         private void LoadData()
         {
-            if (GameControl.Control == null)
+            if (GameControl.Instance == null)
                 return;
             
-            GameData gameData = GameControl.Control.GameData;
+            GameData gameData = GameControl.Instance.GameData;
             EquippedItemStack.SetFromGameData(gameData.EquippedHand);
         }
         #endregion

@@ -31,10 +31,10 @@ namespace Game.Inventory
 
 		private bool LoadData()
 		{
-			if (GameControl.Control == null)
+			if (GameControl.Instance == null)
 				return (false);
 
-			GameData gameData = GameControl.Control.GameData;
+			GameData gameData = GameControl.Instance.GameData;
 
 			InitMapWithSize(_inventorySize);
 

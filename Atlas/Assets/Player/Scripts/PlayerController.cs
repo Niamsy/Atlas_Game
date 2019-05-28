@@ -1,110 +1,116 @@
 ﻿using System;
 using UnityEngine;
 using InputManagement;
-using Atlas_Physics;
-using Variables;
+using Game;
 using Game.Item.PlantSeed;
 using Game.Player;
 using Game.Inventory;
 using Player.Scripts;
+using System.Collections;
 
 namespace Player
 {
+    [RequireComponent(typeof(CharacterController))]
     [RequireComponent(typeof(Animator))]
-    [RequireComponent(typeof(BodyController))]
-    [RequireComponent(typeof(AtlasGravity))]
     public class PlayerController : MonoBehaviour
     {
         #region Variables
 
         [SerializeField] private HandSlots _handSlots;
         #region Public variables
+
         #region Inputs
         public PlayerInputs _Inputs;
         #endregion
+
         #region Movement configuration
-        // TODO: Update using float variables maybe
         [Header("Movement")]
-        public float _BaseSpeed = 5f;
-        [Range(1f, 3f)]
-        [Tooltip("Multiply the Movement speed by this scale to obtain the sprint speed")]
-        public float _SprintScale = 1.3f;
-        public float _Acceleration = 100f;
-        public float _Deceleration = 100f;
-        public float _RotationSpeed = 150f;
+        public float baseSpeed = 10f;
+        //[Range(1f, 3f)]
+        //[Tooltip("Multiply the Movement speed by this scale to obtain the sprint speed")]
+        public float desiredRotationSpeed = 0.1f;
+        public float allowPlayerRotation = 0.1f;
+        public bool blockRotationPlayer;
+
         [Header("Jump")]
-        [Range(0f, 4f)]
-        public float _JumpHeight = 0f;
+        public float gravity = -30f;
+        public float jumpHeight = 10f;
+
+        [Header("Animation Movement Smoothing")]
+        [Range(0, 1f)]
+        public float horizontalAnimSmoothTime = 0.2f;
+        [Range(0, 1f)]
+        public float verticalAnimTime = 0.2f;
+        [Range(0, 1f)]
+        public float startAnimTime = 0.3f;
+        [Range(0, 1f)]
+        public float stopAnimTime = 0.15f;
+
+        [Header("Interaction")]
+        public float interactDistance = 0.5f;
+        public LayerMask interactLayerMask;
         #endregion
+
         #region Ground checking
+        [Header("GroundCheck")]
         [Tooltip("Every object with those layers will be used as a ground for various movement computations")]
-        public LayerMask _GroundLayers;
+        public LayerMask groundLayers;
         [Tooltip("Define at which distance from the ground the player is consisered \"Grounded\"")]
-        public float _GroundDistance = 2f;
-        public Vector3 _GroundCheckerPosition;
+        public float groundDistance = 2f;
         #endregion
+
         #endregion
 
         #region FloatVariables
-        [Header("Shared States")]
-        [SerializeField]
-        private FloatVariable _CurrentAcceleratedSpeed;
+        //[Header("Shared States")]
+        //[SerializeField]
+        //private FloatVariable _CurrentAcceleratedSpeed;
         #endregion
 
         #region Sow Variables
-
-
-        private bool _canSow = false;
-
         public Vector3 plantPosition = Vector3.zero;
-
+        private bool _canSow = false;
         private float decay = 0f;
         #endregion
-        
-        #region accessible properties
-        public Rigidbody Body
-        {
-            get { return _Body; }
-        }
 
+        #region accessible properties
         public bool IsGrounded
         {
-            get { return _Animator.GetBool(_HashGrounded); }
-            set
-            {
-                _Animator.SetBool(_HashGrounded, value);
-                _Gravity.SetScale(value ? 1f : 10f);
-            }
+            get { return m_Animator.GetBool(_HashGrounded); }
+            set { m_Animator.SetBool(_HashGrounded, value); }
         }
+
         public bool IsSprinting
         {
-            get { return _Animator.GetBool(_HashSprinting); }
+            get { return m_Animator.GetBool(_HashSprinting); }
             set
             {
-                _Animator.SetBool(_HashSprinting, value);
-                _CurrentSpeed = value ? _BaseSpeed * _SprintScale : _CurrentSpeed;
-                _CurrentSpeed = !value ? _BaseSpeed : _CurrentSpeed;
-                _CurrentAcceleratedSpeed.Value = value ? _CurrentAcceleratedSpeed.Value * _SprintScale : _CurrentAcceleratedSpeed.Value;
-                _CurrentAcceleratedSpeed.Value = !value ? _CurrentAcceleratedSpeed.Value * .5f : _CurrentAcceleratedSpeed.Value;
+                m_Animator.SetBool(_HashSprinting, value);
+                //_CurrentSpeed = value ? _BaseSpeed * _SprintScale : _CurrentSpeed;
+                //_CurrentSpeed = !value ? _BaseSpeed : _CurrentSpeed;
+                //_CurrentAcceleratedSpeed.Value = value ? _CurrentAcceleratedSpeed.Value * _SprintScale : _CurrentAcceleratedSpeed.Value;
+                //_CurrentAcceleratedSpeed.Value = !value ? _CurrentAcceleratedSpeed.Value * .5f : _CurrentAcceleratedSpeed.Value;
             }
+        }
+
+        public bool IsInteracting { get => InteractValue > 0; }
+
+        public int InteractValue
+        {
+            get { return m_Animator.GetInteger(_HashInteract); }
+            set { m_Animator.SetInteger(_HashInteract, value); }
         }
 
         public bool IsDead
         {
-            get { return _Animator.GetBool(_HashDead); }
-            set
-            {
-                _Animator.SetBool(_HashDead, value);
-            }
+            get { return m_Animator.GetBool(_HashDead); }
+            set { m_Animator.SetBool(_HashDead, value); }
         }
 
         public bool IsPicking
         {
-            get { return _Animator.GetBool(_HashPicking); }
-            set
-            {
-                _Animator.SetBool(_HashPicking, value);
-            }
+            get { return m_Animator.GetBool(_HashPicking); }
+            set{ m_Animator.SetBool(_HashPicking, value); }
         }
 
         private bool _isCheckSowing = false;
@@ -117,31 +123,32 @@ namespace Player
             {
                 _isSowing = value;
                 if (_isSowing == true)
-                    _Animator.SetTrigger(_HashSowing);
+                    m_Animator.SetTrigger(_HashSowing);
             }
         }
-        
+
         private bool _isEquippedSlotUsed;
         public bool IsEquippedSlotUsed
         {
             get { return _isEquippedSlotUsed; }
             set { _isEquippedSlotUsed = value; }
         }
-    
+
         #endregion
 
         #region private variables
-        private Vector3 _Input;
-        private Vector3 _Move;
-        private Vector3 _CurrentDirection;
-        private Camera _Camera;
-        private float _CurrentSpeed;
-        private Rigidbody _Body;
-        private Animator _Animator;
-        private BodyController _BodyController;
-        private GameObject _GroundChecker;
-        private AtlasGravity _Gravity;
-        private PlayerStats _PlayerStats;
+        private Camera m_Camera;
+        private Animator m_Animator;
+        private GameObject m_GroundChecker;
+        private PlayerStats m_PlayerStats;
+        private float m_InputX;
+        private float m_InputZ;
+        private float m_InputMagnitude;
+        private Vector3 m_DesiredMoveDirection;
+        private Vector3 m_MoveVector;
+        private float m_VerticalVelocity;
+        private InputControls m_InputControls;
+        private CharacterController m_CharacterController;
         #endregion
 
         #region animator variables hashes
@@ -154,122 +161,163 @@ namespace Player
         private readonly int _HashPicking = Animator.StringToHash("Picking");
         private readonly int _HashSowing = Animator.StringToHash("Sowing");
         private readonly int _HashDead = Animator.StringToHash("Dead");
+        private readonly int _HashInputX = Animator.StringToHash("InputX");
+        private readonly int _HashInputZ = Animator.StringToHash("InputZ");
+        private readonly int _HashInputMagnitude = Animator.StringToHash("InputMagnitude");
+        private readonly int _HashInteract = Animator.StringToHash("Interact");
 
         #endregion
+
         #endregion
-        
+
+
         #region Initialization
-        // Use this for initialization
         private void Awake()
         {
-            _Camera = Camera.main;
-            _Body = GetComponent<Rigidbody>();
-            _Animator = GetComponent<Animator>();
-            _BodyController = GetComponent<BodyController>();
-            _GroundChecker = new GameObject("GroundChecker");
-            _GroundChecker.transform.SetParent(transform);
-            _GroundChecker.transform.localPosition = _GroundCheckerPosition;
-            _Gravity = GetComponent<AtlasGravity>();
-            _CurrentSpeed = _BaseSpeed;
-            _CurrentAcceleratedSpeed.Value = 0f;
-            _PlayerStats = gameObject.GetComponentInChildren<PlayerStats>(); ;
+            m_Camera = Camera.main;
+            m_Animator = GetComponent<Animator>();
+            m_GroundChecker = transform.Find("GroundChecker").gameObject;
+            m_CharacterController = GetComponent<CharacterController>();
+            m_PlayerStats = GetComponentInChildren<PlayerStats>();
+            StateMachine.State<PlayerController>.Initialise(m_Animator, this);
         }
 
-        private void Start()
+        private void OnEnable()
         {
-            StateMachine.State<PlayerController>.Initialise(_Animator, this);
+            GameControl.Instance.InputControls.Player.Movement.performed += ctx => GetMovementIput(ctx.ReadValue<Vector2>());
+            GameControl.Instance.InputControls.Player.Movement.canceled += ctx => ResetMovementInput(ctx.ReadValue<Vector2>());
+            GameControl.Instance.InputControls.Player.Movement.Enable();
+            GameControl.Instance.InputControls.Player.Jump.performed += ctx => Jump();
+            GameControl.Instance.InputControls.Player.Jump.Enable();
+            GameControl.Instance.InputControls.Player.Interact.performed += ctx => Interact();
+            GameControl.Instance.InputControls.Player.Interact.Enable();
+        }
 
+        private void OnDisable()
+        {
+            GameControl.Instance.InputControls.Player.Movement.performed -= ctx => GetMovementIput(ctx.ReadValue<Vector2>());
+            GameControl.Instance.InputControls.Player.Movement.canceled -= ctx => ResetMovementInput(ctx.ReadValue<Vector2>());
+            GameControl.Instance.InputControls.Player.Movement.Disable();
+            GameControl.Instance.InputControls.Player.Jump.performed -= ctx => Jump();
+            GameControl.Instance.InputControls.Player.Jump.Disable();
+            GameControl.Instance.InputControls.Player.Interact.performed -= ctx => Interact();
+            GameControl.Instance.InputControls.Player.Interact.Disable();
         }
         #endregion
+
+        public void GetMovementIput(Vector2 input)
+        {
+            m_InputX = input.x;
+            m_InputZ = input.y;
+        }
+
+        private void ResetMovementInput(Vector2 vector2)
+        {
+            m_InputX = 0;
+            m_InputZ = 0;
+        }
+
+        void GetInputMagnitude()
+        {
+            m_Animator.SetFloat(_HashInputX, m_InputX, horizontalAnimSmoothTime, Time.deltaTime * 2f);
+            m_Animator.SetFloat(_HashInputZ, m_InputZ, verticalAnimTime, Time.deltaTime * 2f);
+            m_InputMagnitude = new Vector2(m_InputX, m_InputZ).sqrMagnitude;
+            if (m_InputMagnitude > allowPlayerRotation)
+            {
+                m_Animator.SetFloat(_HashInputMagnitude, m_InputMagnitude, startAnimTime, Time.deltaTime);
+                RotatePlayerAndGetMoveDirection();
+            }
+            else if (m_InputMagnitude < allowPlayerRotation)
+            {
+                m_Animator.SetFloat(_HashInputMagnitude, m_InputMagnitude, stopAnimTime, Time.deltaTime);
+            }
+        }
+
+        void Update()
+        {
+            //CheckForGrounded();
+            IsGrounded = m_CharacterController.isGrounded;
+            
+            if (m_CharacterController.isGrounded
+                && !IsInteracting)
+            {
+                GetInputMagnitude();
+            }
+            
+            m_MoveVector = m_DesiredMoveDirection * baseSpeed * m_InputMagnitude;
+            m_VerticalVelocity -= gravity * Time.deltaTime;
+            m_MoveVector.y = m_VerticalVelocity;
+            m_CharacterController.Move(m_MoveVector * Time.deltaTime);
+        }
+
+        void RotatePlayerAndGetMoveDirection()
+        {
+            var forward = m_Camera.transform.forward;
+            var right = m_Camera.transform.right;
+
+            forward.y = 0f;
+            right.y = 0f;
+
+            forward.Normalize();
+            right.Normalize();
+
+            m_DesiredMoveDirection = forward * m_InputZ + right * m_InputX;
+            m_MoveVector = m_DesiredMoveDirection;
+            if (blockRotationPlayer == false)
+            {
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(m_DesiredMoveDirection), desiredRotationSpeed);
+            }
+        }
 
         /// <summary>
         /// Transform the player input so the correct animation is played relative to the player rotation
         /// </summary>
-        private void TransformInputRelativelyToCamera()
-        {
-            Vector3 CameraPos = _Camera.transform.position;
-            Vector3 localPos = transform.TransformPoint(CameraPos).normalized;
-            localPos.y = 0;
-            // Get the angle we should rotate the input. This angle is equal to zero wen the player is facing top
-            float refAngle = Vector3.SignedAngle(Vector3.back, localPos, Vector3.up);
-            //Multiply the input vector by the refAngle 
-            Vector3 newInput = Quaternion.Euler(0, refAngle, 0) * _Input;
-            _Animator.SetFloat(_HashHorizontalSpeed, newInput.x);
-            _Animator.SetFloat(_HashVerticalSpeed, newInput.z);
-        }
+        //private void TransformInputRelativelyToCamera()
+        //{
+        //    Vector3 CameraPos = _Camera.transform.position;
+        //    Vector3 localPos = transform.TransformPoint(CameraPos).normalized;
+        //    localPos.y = 0;
+        //    // Get the angle we should rotate the input. This angle is equal to zero wen the player is facing top
+        //    float refAngle = Vector3.SignedAngle(Vector3.back, localPos, Vector3.up);
+        //    //Multiply the input vector by the refAngle 
+        //    Vector3 newInput = Quaternion.Euler(0, refAngle, 0) * m_Input;
+        //    _Animator.SetFloat(_HashHorizontalSpeed, newInput.x);
+        //    _Animator.SetFloat(_HashVerticalSpeed, newInput.z);
+        //}
 
         public void PlayAnimation(InputKeyStatus status, PlayerAnimationData animationData)
         {
             if (!animationData.Enabled)
                 return;
-            
+
             switch (animationData.Type)
             {
                 case PlayerAnimationData.AnimationType.Trigger:
                     if (status == InputKeyStatus.Pressed)
-                        _Animator.SetTrigger(animationData.Hash);
+                        m_Animator.SetTrigger(animationData.Hash);
                     break;
                 case PlayerAnimationData.AnimationType.Holded:
-                    _Animator.SetBool(animationData.Hash, status == InputKeyStatus.Pressed || status == InputKeyStatus.Holded);
+                    m_Animator.SetBool(animationData.Hash, status == InputKeyStatus.Pressed || status == InputKeyStatus.Holded);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
 
-        private void Update()
+        private void ResetSpeed()
         {
-            if (_Inputs.CameraLock.Get())
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-            }
+            m_MoveVector = m_DesiredMoveDirection = Vector3.zero;
+            m_InputMagnitude = 0;
+            m_VerticalVelocity = 0;
+            m_Animator.SetFloat(_HashInputMagnitude, m_InputMagnitude, stopAnimTime, Time.deltaTime);
         }
 
-        private void UpdateScaledInputs()
-        {
-            if (_Input.z > 0 && _CurrentAcceleratedSpeed.Value < _CurrentSpeed)
-                _CurrentAcceleratedSpeed.Value += _Acceleration * Time.fixedDeltaTime;
-            else if (_Input.z < 0 && -_CurrentAcceleratedSpeed.Value > -_CurrentSpeed)
-                _CurrentAcceleratedSpeed.Value += _Acceleration * Time.fixedDeltaTime;
-            else if (_Input.z == 0)
-            {
-                if (_CurrentAcceleratedSpeed.Value > _Deceleration * Time.fixedDeltaTime)
-                    _CurrentAcceleratedSpeed.Value -= _Deceleration * Time.fixedDeltaTime;
-                else if (_CurrentAcceleratedSpeed.Value < -_Deceleration * Time.fixedDeltaTime)
-                    _CurrentAcceleratedSpeed.Value += _Deceleration + Time.fixedDeltaTime;
-                else
-                    _CurrentAcceleratedSpeed.Value = 0f;
-            }
-            _Animator.SetFloat(_HashVerticalSpeed, _CurrentAcceleratedSpeed.Value / _CurrentSpeed);
-        }
-
-        private void FixedUpdate()
-        {
-            UpdateScaledInputs();
-            _Animator.SetFloat(_HashHorizontalSpeed, _Input.x);
-            _Move = new Vector3((_Inputs.CameraLock.Get() ? _Inputs.HorizontalAxis.Get() : 0), 0, _Inputs.VerticalAxis.Get());
-
-            if (_Inputs.CameraLock.Get() && (_Inputs.HorizontalAxis.Get() > 0f || _Inputs.VerticalAxis.Get() > 0f))
-                _Move *= 0.7f;
-
-            _Move = transform.TransformDirection(_Move) * _CurrentAcceleratedSpeed.Value;
-            _BodyController.Move(_Move * Time.fixedDeltaTime);
-
-            UseItem();
-        }
-        
         /// <summary>
         /// Check if the player is on the ground
         /// </summary>
         public void CheckForGrounded()
         {
-            IsGrounded = Physics.CheckSphere(_GroundChecker.transform.position, _GroundDistance, _GroundLayers);
+            IsGrounded = Physics.CheckSphere(m_GroundChecker.transform.position, groundDistance, groundLayers);
         }
 
         /// <summary>
@@ -278,96 +326,25 @@ namespace Player
         /// <returns></returns>
         public bool CheckForIdle()
         {
-            return _Input.x == 0 && _Input.z == 0;
+            return m_InputX == 0 && m_InputZ == 0;
         }
 
         public void GoToIdleState(bool state)
         {
             if (state)
-                _Animator.SetTrigger(_HashIdle);
+                m_Animator.SetTrigger(_HashIdle);
             else
-                _Animator.ResetTrigger(_HashIdle);
+                m_Animator.ResetTrigger(_HashIdle);
         }
 
-        /// <summary>
-        /// input based on Horizontal(q, d, <, >) and Vertical(z, s, ^, v) keys
-        /// </summary>
-        public void GetInput()
-        {
-            _Input.x = _Inputs.HorizontalAxis.Get();
-            _Input.y = 0;
-            _Input.z = _Inputs.VerticalAxis.Get();
-        }
-
-        public void SetSpeedScale(float Scale)
-        {
-            _CurrentSpeed = _BaseSpeed * Scale;
-            _CurrentAcceleratedSpeed.Value = _CurrentAcceleratedSpeed.Value * Scale;
-        }
-
-        public void Walk()
-        {
-            GroundedHorizontalMovement(true, IsSprinting ? _SprintScale : 1f);
-        }
-
-        private void GroundedHorizontalMovement(bool useInput, float speedScale = 1f)
-        {
-            Vector3 input = _Input.normalized;
-            float desiredSpeedH = useInput ? input.x * _BaseSpeed * speedScale : 0f;
-            float desiredSpeedV = useInput ? input.z * _BaseSpeed * speedScale : 0f;
-            float accelerationH = useInput && input.x != 0 ? _Acceleration : _Deceleration;
-            float accelerationV = useInput && input.z != 0 ? _Acceleration : _Deceleration;
-            _Move.x = Mathf.MoveTowards(_Move.x, desiredSpeedH, accelerationH * Time.deltaTime);
-            _Move.z = Mathf.MoveTowards(_Move.z, desiredSpeedV, accelerationV * Time.deltaTime);
-        }
-
-        // Public functions - called mostly by StateMachineBehaviours in the character's Animator Controller but also by Events.
-        public void SetMoveVector(Vector3 newMoveVector)
-        {
-            _Move = newMoveVector;
-        }
-
-        public void SetHorizontalMovement(float newHorizontalMovement)
-        {
-            _Move.x = newHorizontalMovement;
-        }
-
-        public void SetVerticalMovement(float newVerticalMovement)
-        {
-            _Move.z = newVerticalMovement;
-        }
-
-        public void IncrementMovement(Vector3 additionalMovement)
-        {
-            _Move += additionalMovement;
-        }
-
-        public void IncrementHorizontalMovement(float additionalHorizontalMovement)
-        {
-            _Move.x += additionalHorizontalMovement;
-        }
-
-        public void IncrementVerticalMovement(float additionalVerticalMovement)
-        {
-            _Move.z += additionalVerticalMovement;
-        }
-
-        /// <summary>
-        /// Check for jump input 
-        /// </summary>
-        /// <returns></returns>
-        public bool CheckForJumpInput()
-        {
-            return IsGrounded && _Inputs.Jump.GetDown();
-        }
 
         /// <summary>
         /// The player jump
         /// </summary>
         public void Jump()
         {
-            _Body.AddForce(Vector3.up * Mathf.Sqrt(_JumpHeight * -2f * Physics.gravity.y), ForceMode.Impulse);
-            _Animator.SetTrigger(_HashJump);
+            m_VerticalVelocity = jumpHeight;
+            m_Animator.SetTrigger(_HashJump);
         }
 
         /// <summary>
@@ -409,29 +386,37 @@ namespace Player
             return IsGrounded && _isCheckSowing && IsSowing;
         }
 
-        public bool CheckForPickInput()
+        private void Interact()
         {
-            if (_Inputs.Pick.GetDown())
+            if (!IsGrounded || IsInteracting)
+                return;
+            ResetSpeed();
+            Vector3 p1 = transform.position + m_CharacterController.center + Vector3.up * -m_CharacterController.height * 0.5F;
+            Vector3 p2 = p1 + Vector3.up * m_CharacterController.height;
+            // Cast character controller shape forward to see if it is about to hit anything.
+            RaycastHit[] hits = Physics.CapsuleCastAll(p1, p2, m_CharacterController.radius, transform.forward, interactDistance, interactLayerMask, QueryTriggerInteraction.Collide);
+
+            foreach (RaycastHit hit in hits)
             {
-                IsPicking = true;
-                _CurrentAcceleratedSpeed.Value = 0f;
+                Debug.DrawLine(p1, hit.transform.position);
+                AInteractable interactable = hit.transform.GetComponent<AInteractable>();
+                if (interactable != null)
+                    interactable.Interact(this);
             }
-            else if (IsPicking == true)
-                IsPicking = false;
-            return IsGrounded && IsPicking;
         }
 
         public bool CheckForDeath()
         {
-            if (!IsDead && _PlayerStats._consumer.LinkedStock[Game.ResourcesManagement.Resource.Oxygen].Quantity <= 0)
+            if (!IsDead && m_PlayerStats._consumer.LinkedStock[Game.ResourcesManagement.Resource.Oxygen].Quantity <= 0)
             {
                 IsDead = true;
                 _handSlots.Drop();
-                var inventory  = gameObject.GetComponentInChildren<PlayerInventory>();
+                var inventory = gameObject.GetComponentInChildren<PlayerInventory>();
                 inventory.DropAll();
-                _CurrentAcceleratedSpeed.Value = 0f;
+                ResetSpeed();
+                //_CurrentAcceleratedSpeed.Value = 0f;
             }
-            else if (IsDead == true && _PlayerStats._consumer.LinkedStock[Game.ResourcesManagement.Resource.Oxygen].Quantity > 0)
+            else if (IsDead == true && m_PlayerStats._consumer.LinkedStock[Game.ResourcesManagement.Resource.Oxygen].Quantity > 0)
             {
                 IsDead = false;
             }
@@ -443,7 +428,7 @@ namespace Player
         /// </summary>
         private void MouseAim()
         {
-            Ray cameraRay = _Camera.ScreenPointToRay(Input.mousePosition);
+            Ray cameraRay = m_Camera.ScreenPointToRay(Input.mousePosition);
             Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
             float rayLength;
 
@@ -454,17 +439,6 @@ namespace Player
 
                 transform.LookAt(new Vector3(lookAtPoint.x, transform.position.y, lookAtPoint.z));
             }
-        }
-
-        /// <summary>
-        /// Rotate player with mouse
-        /// </summary>
-        private void CameraAim()
-        {
-            if (_Inputs.CameraLock.Get())
-                transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
-            else
-                transform.Rotate(0, _Inputs.HorizontalAxis.Get() * _RotationSpeed * Time.deltaTime, 0);
         }
 
         private void UseItem()
@@ -479,7 +453,7 @@ namespace Player
                     _canSow = _handSlots.ObjectIsUsable;
                     _isCheckSowing = true;
                 }
-                if (_handSlots.ObjectIsUsable && !_Animator.GetCurrentAnimatorStateInfo(0).IsName("Sow"))
+                if (_handSlots.ObjectIsUsable && !m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Sow"))
                     _handSlots.UseItem(status);
                 if (!_handSlots.ObjectIsUsable)
                     status = InputKeyStatus.Nothing;
@@ -488,36 +462,6 @@ namespace Player
             }
             else
                 _isCheckSowing = false;
-        }
-        
-        /// <summary>
-        /// Rotate with controller right joystick
-        /// </summary>
-        private void RJoystickAim()
-        {
-            //Vector3 direction = Vector3.right * cInput.GetAxisRaw(InputManager.R_AXIS_HORIZONTAL) + Vector3.forward * cInput.GetAxisRaw(InputManager.R_AXIS_VERTICAL);
-            //if (direction.sqrMagnitude > 0f)
-            //{
-            //    transform.rotation = Quaternion.LookRotation(direction);
-            //}
-        }
-
-        /// <summary>
-        /// Choose the way the layer will rotate according to controls
-        /// </summary>
-        public void RotateAim()
-        {
-            CameraAim();
-            RJoystickAim();
-        }
-
-        /// <summary>
-        /// Rotate the player in the choosen direction
-        /// </summary>
-        /// <param name="aimDirection"></param>
-        public void RotateAim(Vector3 aimDirection)
-        {
-            transform.rotation = Quaternion.LookRotation(aimDirection);
         }
     }
 }

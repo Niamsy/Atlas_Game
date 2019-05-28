@@ -14,13 +14,13 @@ namespace Player {
         public void Save()
         {
             if (!_ResetPosition)
-                GameControl.Control.GameData.TransformData.SetFromTransform(transform);
+                GameControl.Instance.GameData.TransformData.SetFromTransform(transform);
         }
 
         private void Awake()
         {
-            transform.position = GameControl.Control.GameData.TransformData.Position.Value;
-            transform.rotation = GameControl.Control.GameData.TransformData.Rotation.Value;
+            transform.position = GameControl.Instance.GameData.TransformData.Position.Value;
+            transform.rotation = GameControl.Instance.GameData.TransformData.Rotation.Value;
             _LastSavedTime = Time.time;
         }
 

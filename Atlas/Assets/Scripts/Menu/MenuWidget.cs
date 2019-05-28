@@ -32,6 +32,7 @@ namespace Menu
         
         public virtual void Show(bool display, bool force = false)
         {
+            Cursor.lockState = display ? CursorLockMode.None : CursorLockMode.Locked;
             if (OnShow != null && !force)
                 OnShow(display);
             _animator.SetBool(_hashShowed, display);

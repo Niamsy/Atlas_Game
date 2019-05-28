@@ -15,7 +15,7 @@ public class RefreshButtonHUD : MonoBehaviour
 
     void Start()
     {
-        lastGetScannedPlant = GameControl.Control.GameData.LastGetScannedPlant;
+        lastGetScannedPlant = GameControl.Instance.GameData.LastGetScannedPlant;
 
         if (RequestManager.Instance)
             RequestManager.Instance.OnGetScannedPlantsRequestFinished += GetScannedPlantsFinished;
@@ -49,7 +49,7 @@ public class RefreshButtonHUD : MonoBehaviour
             }
 
             lastGetScannedPlant = scannedPlants.Max(x => DateTime.Parse(x.scanned_at));
-            GameControl.Control.GameData.LastGetScannedPlant = lastGetScannedPlant;
+            GameControl.Instance.GameData.LastGetScannedPlant = lastGetScannedPlant;
 
             inventory.AddItemStacks(seeds);
         }

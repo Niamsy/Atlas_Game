@@ -8,17 +8,12 @@ using UnityEngine;
 
 namespace Game.Item
 {
-    public class ItemPickable : MonoBehaviour
+    public class ItemPickable : AInteractable
     {
         public ItemStackBehaviour BaseStack;
-        
-        private GameObject _player;
+
         private PlantModel _modelPlant;
         private Canvas _guiCanvas;
-        void Start()
-        {
-            _player = null;
-        }
 
         protected virtual void Awake()
         {
@@ -31,32 +26,31 @@ namespace Game.Item
             }
         }
 
-        void Update()
+        public override void Interact(PlayerController playerController)
         {
-            if (_player && _player.GetComponent<PlayerController>().CheckForPickInput())
+            if (_modelPlant && _modelPlant && _modelPlant.IsSowed == true)
+                return;
+            PlayerInventory inventory = FindObjectOfType<PlayerInventory>();
+            if (BaseStack.Slot.Content is BucketItem)
             {
-                if (_modelPlant && _modelPlant && _modelPlant.IsSowed == true)
-                    return;
-                PlayerInventory inventory = FindObjectOfType<PlayerInventory>();
-                if (BaseStack.Slot.Content is BucketItem)
-                {
-                    AchievementManager.Instance.achieve(AchievementManager.AchievementId.PickupBucket);
-                }
-                if (BaseStack.Slot.Content is ShovelItem)
-                {
-                    AchievementManager.Instance.achieve(AchievementManager.AchievementId.PickupShovel);
-                }
-                if (BaseStack.Slot.Content is Seed)
-                {
-                    AchievementManager.Instance.achieve(AchievementManager.AchievementId.PickupFirstSeed);
-                }
-            
-                ItemStack leftStack = inventory.AddItemStack(BaseStack.Slot);
-                if (leftStack == null)
-                    Destroy(gameObject);
-                else
-                    BaseStack.Slot = leftStack;
+                AchievementManager.Instance.achieve(AchievementManager.AchievementId.PickupBucket);
             }
+            if (BaseStack.Slot.Content is ShovelItem)
+            {
+                AchievementManager.Instance.achieve(AchievementManager.AchievementId.PickupShovel);
+            }
+            if (BaseStack.Slot.Content is Seed)
+            {
+                AchievementManager.Instance.achieve(AchievementManager.AchievementId.PickupFirstSeed);
+            }
+
+            if (!playerController.IsInteracting)
+                playerController.InteractValue = (int)InteractType.pick;
+            ItemStack leftStack = inventory.AddItemStack(BaseStack.Slot);
+            if (leftStack == null)
+                Destroy(gameObject);
+            else
+                BaseStack.Slot = leftStack;
         }
 
         void OnTriggerEnter(Collider col)
@@ -66,7 +60,6 @@ namespace Game.Item
                 if (_guiCanvas && _guiCanvas.gameObject)
                 {
                     _guiCanvas.gameObject.SetActive(true);
-                    _player = col.gameObject;
                 }
             }
         }
@@ -77,7 +70,6 @@ namespace Game.Item
             {
                 if (_guiCanvas)
                     _guiCanvas.gameObject.SetActive(false);
-                _player = null;
             }
         }
     }

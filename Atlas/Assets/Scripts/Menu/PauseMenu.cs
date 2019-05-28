@@ -3,6 +3,7 @@ using Game;
 using Menu.Settings;
 using SceneManagement;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Menu
 {
@@ -16,16 +17,27 @@ namespace Menu
 			_settings.OnShow += ExitSetting;
 		}
 
-		private void ExitSetting(bool settingsShowing)
+        private void OnEnable()
+        {
+            GameControl.Instance.InputControls.Player.Menu.performed += ctx => OpenCloseMenu(ctx);
+            GameControl.Instance.InputControls.Player.Menu.Enable();
+        }
+
+        private void OnDisable()
+        {
+            GameControl.Instance.InputControls.Player.Menu.performed -= ctx => OpenCloseMenu(ctx);
+            GameControl.Instance.InputControls.Player.Menu.Disable();
+        }
+
+        private void OpenCloseMenu(InputAction.CallbackContext ctx)
+        {
+            Show(!Displayed);
+        }
+
+        private void ExitSetting(bool settingsShowing)
 		{
-			if (!settingsShowing)
+            if (!settingsShowing)
 				Open();
-		}
-		
-		private void Update()
-		{
-			if (Input.GetKeyDown(KeyCode.P))
-				Show(!Displayed);
 		}
 
 		public void ShowSettings()
