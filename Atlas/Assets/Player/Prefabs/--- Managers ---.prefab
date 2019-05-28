@@ -77,20 +77,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _first: {fileID: 11400000, guid: 08cb358d08423854da2a4b33f7d9de95, type: 2}
   _second: {fileID: 11400000, guid: 90d4324a42f2c82458a54e192a259b9e, type: 2}
-  InstantiateNewPlant: 1
---- !u!114 &7209074390262943580
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7209924682106838541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c64095ace21e5240b8417491b121cdb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  calendar: {fileID: 0}
 --- !u!1 &8628178528775642161
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,6 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0edcc9002a9d3c4ca17eedadfdb742b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  achievementData: []
 --- !u!1001 &7209074389685999571
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -143,7 +130,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1419169448135134, guid: fee06cd36cafa954cbfde5795d7af0e5, type: 3}
       propertyPath: m_Name
-      value: DayNightManager
+      value: Calendar
       objectReference: {fileID: 0}
     - target: {fileID: 4075578086158978, guid: fee06cd36cafa954cbfde5795d7af0e5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -189,19 +176,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114638519614609606, guid: fee06cd36cafa954cbfde5795d7af0e5,
-        type: 3}
-      propertyPath: secondsInFullDay
-      value: 60
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fee06cd36cafa954cbfde5795d7af0e5, type: 3}
---- !u!1 &7209924682106838541 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1419169448135134, guid: fee06cd36cafa954cbfde5795d7af0e5,
-    type: 3}
-  m_PrefabInstance: {fileID: 7209074389685999571}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7207373766916957521 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4075578086158978, guid: fee06cd36cafa954cbfde5795d7af0e5,

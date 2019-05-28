@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Game.DayNight;
 
 namespace Game.SavingSystem
 {
@@ -10,6 +11,6 @@ namespace Game.SavingSystem
 		public List<ItemBaseData>			Inventory;
 		public ItemBaseData					EquippedHand;
         public TransformSaveData			TransformData;
-        public DayNightSaver.CalendarData	CalendarData;
+        public Date							CalendarData;
 	}
 }
