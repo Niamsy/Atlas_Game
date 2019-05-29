@@ -39,18 +39,18 @@
                     "bindings": []
                 },
                 {
-                    "name": "Inventory",
+                    "name": "UseItem",
                     "id": "ee93d372-a58f-4478-9cde-734215d6b83b",
                     "expectedControlLayout": "Button",
                     "continuous": false,
                     "passThrough": false,
                     "initialStateCheck": false,
                     "processors": "",
-                    "interactions": "Press",
+                    "interactions": "",
                     "bindings": []
                 },
                 {
-                    "name": "Menu",
+                    "name": "Inventory",
                     "id": "8190cf5f-9d3f-4c28-9036-db1fcd6bbbfb",
                     "expectedControlLayout": "Button",
                     "continuous": false,
@@ -61,18 +61,18 @@
                     "bindings": []
                 },
                 {
-                    "name": "CameraMovement",
+                    "name": "Menu",
                     "id": "4408c49f-9cff-420c-b70f-a373b4239fbb",
-                    "expectedControlLayout": "Vector2",
+                    "expectedControlLayout": "Button",
                     "continuous": false,
                     "passThrough": false,
                     "initialStateCheck": false,
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press",
                     "bindings": []
                 },
                 {
-                    "name": "CameraZoom",
+                    "name": "CameraMovement",
                     "id": "9f0098dd-027f-428c-8579-77e3c214f1b7",
                     "expectedControlLayout": "Vector2",
                     "continuous": false,
@@ -83,8 +83,19 @@
                     "bindings": []
                 },
                 {
-                    "name": "CameraClick",
+                    "name": "CameraZoom",
                     "id": "2c5bf3db-8da8-48b9-af03-6a685369120f",
+                    "expectedControlLayout": "Vector2",
+                    "continuous": false,
+                    "passThrough": false,
+                    "initialStateCheck": false,
+                    "processors": "",
+                    "interactions": "",
+                    "bindings": []
+                },
+                {
+                    "name": "CameraClick",
+                    "id": "971fdad3-e326-4f38-b07b-e5f6ace2acde",
                     "expectedControlLayout": "Button",
                     "continuous": false,
                     "passThrough": false,
@@ -95,7 +106,7 @@
                 },
                 {
                     "name": "RecenterCamera",
-                    "id": "971fdad3-e326-4f38-b07b-e5f6ace2acde",
+                    "id": "03f5ec0c-509d-4a33-a432-32adc7f770b3",
                     "expectedControlLayout": "Button",
                     "continuous": false,
                     "passThrough": false,
@@ -438,6 +449,30 @@
                     "processors": "",
                     "groups": ";Gamepad",
                     "action": "RecenterCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false,
+                    "modifiers": ""
+                },
+                {
+                    "name": "",
+                    "id": "3fe6cab6-472b-429e-95eb-7cfdb636febd",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";KeyboardAndMouse",
+                    "action": "UseItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false,
+                    "modifiers": ""
+                },
+                {
+                    "name": "",
+                    "id": "c4cc8991-6c0b-4a36-b1f7-94d6d9edf3f9",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "UseItem",
                     "isComposite": false,
                     "isPartOfComposite": false,
                     "modifiers": ""

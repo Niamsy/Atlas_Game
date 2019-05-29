@@ -104,6 +104,5 @@ namespace Game.ResourcesManagement.Producer
                 }
             }
         }
-
     }
 }

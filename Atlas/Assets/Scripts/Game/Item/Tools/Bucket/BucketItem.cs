@@ -10,19 +10,27 @@ namespace Game.Item.Tools.Bucket
 	CreateAssetMenu(fileName = "Bucket", menuName = "Item/Tool/Bucket", order = 1)]
 	public class BucketItem : Tool<BucketBehaviour>
 	{
-		
         public override bool CanUse(Transform transform)
         {
             var canUse = Behaviour.Stock[Resource.Water].Quantity > 0;
 	        return (canUse);
         }
 
-        public override void Use(ItemStack selfStack, InputKeyStatus status)
+        public override void Use(ItemStack selfStack)
         {
-	        if (status == InputKeyStatus.Holded)
-		        Behaviour.SetState(true);
-	        if (status == InputKeyStatus.Released)
-		        Behaviour.SetState(false);
+            Debug.Log("Watering...");
+            Behaviour.SetState(true);
+            //if (status == InputKeyStatus.Holded)
+            // Behaviour.SetState(true);
+            //if (status == InputKeyStatus.Released)
+            // Behaviour.SetState(false);
         }
-	}
+
+        public override bool CancelUse(ItemStack selfStack)
+        {
+            Debug.Log("Stop watering...");
+            Behaviour.SetState(false);
+            return true;
+        }
+    }
 }

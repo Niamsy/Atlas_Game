@@ -6,27 +6,13 @@ namespace Player.Scripts
     [Serializable]
     public class PlayerAnimationData
     {
-        public bool Enabled = true;
-    
-        public enum AnimationType
+        public enum ItemAnim
         {
-            Trigger,
-            Holded
+            none = 0,
+            sow = 1,
+            useBukect = 2
         }
-    
-        public string        HashString;
-        private int          _hash = -1;
 
-        public int Hash
-        {
-            get
-            {
-                if (_hash == -1)
-                    _hash = Animator.StringToHash(HashString);
-                return (_hash);
-                
-            }
-        }    
-        public AnimationType Type = AnimationType.Trigger;
+        public ItemAnim anim;
     }
 }

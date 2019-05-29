@@ -12,8 +12,13 @@ namespace Game.Player
     [RequireComponent(typeof(BaseInventory))]
     public class HandSlots : MonoBehaviour
     {
-        private bool _objectIsUsableLast;
-        public bool ObjectIsUsable { get { return (_objectIsUsableLast && EquippedItem != null && EquippedItemStack.Quantity > 0); } }
+        public bool IsObjectUsable
+        {
+            get
+            {
+                return (EquippedItem != null && EquippedItemStack.Quantity > 0) && _equippedItem.CanUse(_handTransform);
+            }
+        }
         private PlayerController _controller;
 
         [SerializeField] private ItemStack _equippedItemStack;
@@ -39,16 +44,15 @@ namespace Game.Player
         {
             GameControl.BeforeSavingPlayer -= SaveData;
         }
-        
 
-        public bool CheckIfItemUsable()
+        public void UseItem()
         {
-            return (_objectIsUsableLast = _equippedItem.CanUse(_handTransform));
+            _equippedItem.Use(EquippedItemStack);
         }
 
-        public void UseItem(InputKeyStatus status)
+        public bool CancelUse()
         {
-            _equippedItem.Use(EquippedItemStack, status);
+           return _equippedItem.CancelUse(EquippedItemStack);
         }
 
         #region Load/Saving Methods
