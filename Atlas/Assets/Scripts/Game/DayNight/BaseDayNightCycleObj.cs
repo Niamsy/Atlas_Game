@@ -15,7 +15,7 @@ namespace Game.DayNight
 #endif
         #region Private Variables
         [SerializeField]
-        private CalendarManager _calendar;
+        private CalendarManager m_Calendar;
         #endregion
 
 
@@ -25,7 +25,7 @@ namespace Game.DayNight
 #if UNITY_EDITOR
             if (Application.isPlaying)
 #endif
-            _calendar = CalendarManager.Instance;
+            m_Calendar = CalendarManager.Instance;
         }
 
         private void Update ()
@@ -35,7 +35,7 @@ namespace Game.DayNight
             if (!PreviewInEditor && !Application.isPlaying)
                 return;
 #endif
-            Date date = _calendar.ActualDate;
+            Date date = m_Calendar.ActualDate;
             var dayAdvancement = date.DayAdvancement;
             var dayAdvancement01 = date.DayAdvancement / Date.HourPerDay;
             UpdateScene(date, dayAdvancement, dayAdvancement01);
