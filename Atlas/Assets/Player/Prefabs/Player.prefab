@@ -134,7 +134,7 @@ MonoBehaviour:
   _handSlots: {fileID: 114326128495563644}
   _Inputs: {fileID: 11400000, guid: b082a3b08f45acc4ea37fd0b948a8496, type: 2}
   baseSpeed: 10
-  desiredRotationSpeed: 0.2
+  desiredRotationSpeed: 0.3
   allowPlayerRotation: 0.1
   blockRotationPlayer: 0
   gravity: 30
@@ -143,11 +143,14 @@ MonoBehaviour:
   verticalAnimTime: 0.2
   startAnimTime: 0.3
   stopAnimTime: 0.15
+  interactDistance: 0.5
+  interactLayerMask:
+    serializedVersion: 2
+    m_Bits: 8192
   groundLayers:
     serializedVersion: 2
     m_Bits: 512
   groundDistance: 0.5
-  _canSow: 0
   plantPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &114171196635902840
 MonoBehaviour:

@@ -17,6 +17,7 @@ namespace Game.Item
 
         protected virtual void Awake()
         {
+            anim = InteractAnim.pick;
             if (gameObject)
             {
                 _modelPlant = gameObject.GetComponent<PlantModel>();
@@ -30,6 +31,9 @@ namespace Game.Item
         {
             if (_modelPlant && _modelPlant && _modelPlant.IsSowed == true)
                 return;
+            if (!playerController.IsInteracting)
+                playerController.InteractValue = anim.ToInt();
+
             PlayerInventory inventory = FindObjectOfType<PlayerInventory>();
             if (BaseStack.Slot.Content is BucketItem)
             {
@@ -44,8 +48,6 @@ namespace Game.Item
                 AchievementManager.Instance.achieve(AchievementManager.AchievementId.PickupFirstSeed);
             }
 
-            if (!playerController.IsInteracting)
-                playerController.InteractValue = (int)InteractType.pick;
             ItemStack leftStack = inventory.AddItemStack(BaseStack.Slot);
             if (leftStack == null)
                 Destroy(gameObject);

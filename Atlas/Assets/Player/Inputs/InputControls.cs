@@ -53,18 +53,18 @@ public class InputControls : IInputActionCollection
                     ""bindings"": []
                 },
                 {
-                    ""name"": ""Inventory"",
+                    ""name"": ""UseItem"",
                     ""id"": ""ee93d372-a58f-4478-9cde-734215d6b83b"",
                     ""expectedControlLayout"": ""Button"",
                     ""continuous"": false,
                     ""passThrough"": false,
                     ""initialStateCheck"": false,
                     ""processors"": """",
-                    ""interactions"": ""Press"",
+                    ""interactions"": """",
                     ""bindings"": []
                 },
                 {
-                    ""name"": ""Menu"",
+                    ""name"": ""Inventory"",
                     ""id"": ""8190cf5f-9d3f-4c28-9036-db1fcd6bbbfb"",
                     ""expectedControlLayout"": ""Button"",
                     ""continuous"": false,
@@ -75,18 +75,18 @@ public class InputControls : IInputActionCollection
                     ""bindings"": []
                 },
                 {
-                    ""name"": ""CameraMovement"",
+                    ""name"": ""Menu"",
                     ""id"": ""4408c49f-9cff-420c-b70f-a373b4239fbb"",
-                    ""expectedControlLayout"": ""Vector2"",
+                    ""expectedControlLayout"": ""Button"",
                     ""continuous"": false,
                     ""passThrough"": false,
                     ""initialStateCheck"": false,
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Press"",
                     ""bindings"": []
                 },
                 {
-                    ""name"": ""CameraZoom"",
+                    ""name"": ""CameraMovement"",
                     ""id"": ""9f0098dd-027f-428c-8579-77e3c214f1b7"",
                     ""expectedControlLayout"": ""Vector2"",
                     ""continuous"": false,
@@ -97,8 +97,19 @@ public class InputControls : IInputActionCollection
                     ""bindings"": []
                 },
                 {
-                    ""name"": ""CameraClick"",
+                    ""name"": ""CameraZoom"",
                     ""id"": ""2c5bf3db-8da8-48b9-af03-6a685369120f"",
+                    ""expectedControlLayout"": ""Vector2"",
+                    ""continuous"": false,
+                    ""passThrough"": false,
+                    ""initialStateCheck"": false,
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""bindings"": []
+                },
+                {
+                    ""name"": ""CameraClick"",
+                    ""id"": ""971fdad3-e326-4f38-b07b-e5f6ace2acde"",
                     ""expectedControlLayout"": ""Button"",
                     ""continuous"": false,
                     ""passThrough"": false,
@@ -109,7 +120,7 @@ public class InputControls : IInputActionCollection
                 },
                 {
                     ""name"": ""RecenterCamera"",
-                    ""id"": ""971fdad3-e326-4f38-b07b-e5f6ace2acde"",
+                    ""id"": ""03f5ec0c-509d-4a33-a432-32adc7f770b3"",
                     ""expectedControlLayout"": ""Button"",
                     ""continuous"": false,
                     ""passThrough"": false,
@@ -455,6 +466,30 @@ public class InputControls : IInputActionCollection
                     ""isComposite"": false,
                     ""isPartOfComposite"": false,
                     ""modifiers"": """"
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3fe6cab6-472b-429e-95eb-7cfdb636febd"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardAndMouse"",
+                    ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false,
+                    ""modifiers"": """"
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c4cc8991-6c0b-4a36-b1f7-94d6d9edf3f9"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false,
+                    ""modifiers"": """"
                 }
             ]
         }
@@ -496,6 +531,7 @@ public class InputControls : IInputActionCollection
         m_Player_Movement = m_Player.GetAction("Movement");
         m_Player_Jump = m_Player.GetAction("Jump");
         m_Player_Interact = m_Player.GetAction("Interact");
+        m_Player_UseItem = m_Player.GetAction("UseItem");
         m_Player_Inventory = m_Player.GetAction("Inventory");
         m_Player_Menu = m_Player.GetAction("Menu");
         m_Player_CameraMovement = m_Player.GetAction("CameraMovement");
@@ -557,6 +593,7 @@ public class InputControls : IInputActionCollection
     private InputAction m_Player_Movement;
     private InputAction m_Player_Jump;
     private InputAction m_Player_Interact;
+    private InputAction m_Player_UseItem;
     private InputAction m_Player_Inventory;
     private InputAction m_Player_Menu;
     private InputAction m_Player_CameraMovement;
@@ -570,6 +607,7 @@ public class InputControls : IInputActionCollection
         public InputAction @Movement { get { return m_Wrapper.m_Player_Movement; } }
         public InputAction @Jump { get { return m_Wrapper.m_Player_Jump; } }
         public InputAction @Interact { get { return m_Wrapper.m_Player_Interact; } }
+        public InputAction @UseItem { get { return m_Wrapper.m_Player_UseItem; } }
         public InputAction @Inventory { get { return m_Wrapper.m_Player_Inventory; } }
         public InputAction @Menu { get { return m_Wrapper.m_Player_Menu; } }
         public InputAction @CameraMovement { get { return m_Wrapper.m_Player_CameraMovement; } }
@@ -595,6 +633,9 @@ public class InputControls : IInputActionCollection
                 Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                UseItem.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem;
+                UseItem.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem;
+                UseItem.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem;
                 Inventory.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventory;
                 Inventory.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventory;
                 Inventory.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventory;
@@ -626,6 +667,9 @@ public class InputControls : IInputActionCollection
                 Interact.started += instance.OnInteract;
                 Interact.performed += instance.OnInteract;
                 Interact.canceled += instance.OnInteract;
+                UseItem.started += instance.OnUseItem;
+                UseItem.performed += instance.OnUseItem;
+                UseItem.canceled += instance.OnUseItem;
                 Inventory.started += instance.OnInventory;
                 Inventory.performed += instance.OnInventory;
                 Inventory.canceled += instance.OnInventory;
@@ -677,6 +721,7 @@ public class InputControls : IInputActionCollection
         void OnMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnUseItem(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
         void OnCameraMovement(InputAction.CallbackContext context);

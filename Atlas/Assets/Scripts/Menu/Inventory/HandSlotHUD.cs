@@ -23,7 +23,7 @@ namespace Menu.Inventory
 
         private void Update()
         {
-            if (_handSlot.EquippedItem && _handSlot.ObjectIsUsable)
+            if (_handSlot.EquippedItem && _handSlot.IsObjectUsable)
                 _useText.text = _handSlot.EquippedItem.UsageText;
             else
                 _useText.text = "";

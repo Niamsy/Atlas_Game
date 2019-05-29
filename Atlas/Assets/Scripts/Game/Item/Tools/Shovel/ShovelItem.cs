@@ -15,7 +15,7 @@ namespace Game.Item.Tools
             return (true);
         }
 
-        public override void Use(ItemStack selfStack, InputKeyStatus status)
+        public override void Use(ItemStack selfStack)
 		{
 			// ToDo: Dig
 		}

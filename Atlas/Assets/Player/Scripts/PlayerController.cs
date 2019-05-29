@@ -2,11 +2,9 @@
 using UnityEngine;
 using InputManagement;
 using Game;
-using Game.Item.PlantSeed;
 using Game.Player;
 using Game.Inventory;
 using Player.Scripts;
-using System.Collections;
 
 namespace Player
 {
@@ -86,14 +84,10 @@ namespace Player
             set
             {
                 m_Animator.SetBool(_HashSprinting, value);
-                //_CurrentSpeed = value ? _BaseSpeed * _SprintScale : _CurrentSpeed;
-                //_CurrentSpeed = !value ? _BaseSpeed : _CurrentSpeed;
-                //_CurrentAcceleratedSpeed.Value = value ? _CurrentAcceleratedSpeed.Value * _SprintScale : _CurrentAcceleratedSpeed.Value;
-                //_CurrentAcceleratedSpeed.Value = !value ? _CurrentAcceleratedSpeed.Value * .5f : _CurrentAcceleratedSpeed.Value;
             }
         }
 
-        public bool IsInteracting { get => InteractValue > 0; }
+        public bool IsInteracting { get => InteractValue != 0; }
 
         public int InteractValue
         {
@@ -101,30 +95,33 @@ namespace Player
             set { m_Animator.SetInteger(_HashInteract, value); }
         }
 
+        public bool IsPicking
+        {
+            get { return InteractValue == AInteractable.InteractAnim.pick.ToInt(); }
+        }
+
+        public bool IsUsingItem { get => UseItemValue != 0; }
+
+        public int UseItemValue
+        {
+            get { return m_Animator.GetInteger(_HashUseItem); }
+            set { m_Animator.SetInteger(_HashUseItem, value); }
+        }
+
+        public bool IsSowing
+        {
+            get { return UseItemValue == PlayerAnimationData.ItemAnim.sow.ToInt(); }
+        }
+
+        public bool IsWatering
+        {
+            get { return UseItemValue == PlayerAnimationData.ItemAnim.useBukect.ToInt(); }
+        }
+
         public bool IsDead
         {
             get { return m_Animator.GetBool(_HashDead); }
             set { m_Animator.SetBool(_HashDead, value); }
-        }
-
-        public bool IsPicking
-        {
-            get { return m_Animator.GetBool(_HashPicking); }
-            set{ m_Animator.SetBool(_HashPicking, value); }
-        }
-
-        private bool _isCheckSowing = false;
-
-        private bool _isSowing = false;
-        public bool IsSowing
-        {
-            get { return _isSowing; }
-            set
-            {
-                _isSowing = value;
-                if (_isSowing == true)
-                    m_Animator.SetTrigger(_HashSowing);
-            }
         }
 
         private bool _isEquippedSlotUsed;
@@ -152,24 +149,18 @@ namespace Player
         #endregion
 
         #region animator variables hashes
-        private readonly int _HashIdle = Animator.StringToHash("Idle");
         private readonly int _HashJump = Animator.StringToHash("Jump");
-        private readonly int _HashHorizontalSpeed = Animator.StringToHash("HorizontalSpeed");
-        private readonly int _HashVerticalSpeed = Animator.StringToHash("VerticalSpeed");
         private readonly int _HashGrounded = Animator.StringToHash("Grounded");
         private readonly int _HashSprinting = Animator.StringToHash("Sprinting");
-        private readonly int _HashPicking = Animator.StringToHash("Picking");
-        private readonly int _HashSowing = Animator.StringToHash("Sowing");
         private readonly int _HashDead = Animator.StringToHash("Dead");
         private readonly int _HashInputX = Animator.StringToHash("InputX");
         private readonly int _HashInputZ = Animator.StringToHash("InputZ");
         private readonly int _HashInputMagnitude = Animator.StringToHash("InputMagnitude");
         private readonly int _HashInteract = Animator.StringToHash("Interact");
-
+        private readonly int _HashUseItem = Animator.StringToHash("UseItem");
         #endregion
 
         #endregion
-
 
         #region Initialization
         private void Awake()
@@ -191,6 +182,9 @@ namespace Player
             GameControl.Instance.InputControls.Player.Jump.Enable();
             GameControl.Instance.InputControls.Player.Interact.performed += ctx => Interact();
             GameControl.Instance.InputControls.Player.Interact.Enable();
+            GameControl.Instance.InputControls.Player.UseItem.performed += ctx => UseItem();
+            GameControl.Instance.InputControls.Player.UseItem.canceled += ctx => CancelUseItem();
+            GameControl.Instance.InputControls.Player.UseItem.Enable();
         }
 
         private void OnDisable()
@@ -202,6 +196,9 @@ namespace Player
             GameControl.Instance.InputControls.Player.Jump.Disable();
             GameControl.Instance.InputControls.Player.Interact.performed -= ctx => Interact();
             GameControl.Instance.InputControls.Player.Interact.Disable();
+            GameControl.Instance.InputControls.Player.UseItem.performed -= ctx => UseItem();
+            GameControl.Instance.InputControls.Player.UseItem.canceled -= ctx => CancelUseItem();
+            GameControl.Instance.InputControls.Player.UseItem.Disable();
         }
         #endregion
 
@@ -237,13 +234,13 @@ namespace Player
         {
             //CheckForGrounded();
             IsGrounded = m_CharacterController.isGrounded;
-            
-            if (m_CharacterController.isGrounded
-                && !IsInteracting)
+
+            if (m_CharacterController.isGrounded && 
+                !IsInteracting && !IsUsingItem)
             {
                 GetInputMagnitude();
             }
-            
+
             m_MoveVector = m_DesiredMoveDirection * baseSpeed * m_InputMagnitude;
             m_VerticalVelocity -= gravity * Time.deltaTime;
             m_MoveVector.y = m_VerticalVelocity;
@@ -269,47 +266,12 @@ namespace Player
             }
         }
 
-        /// <summary>
-        /// Transform the player input so the correct animation is played relative to the player rotation
-        /// </summary>
-        //private void TransformInputRelativelyToCamera()
-        //{
-        //    Vector3 CameraPos = _Camera.transform.position;
-        //    Vector3 localPos = transform.TransformPoint(CameraPos).normalized;
-        //    localPos.y = 0;
-        //    // Get the angle we should rotate the input. This angle is equal to zero wen the player is facing top
-        //    float refAngle = Vector3.SignedAngle(Vector3.back, localPos, Vector3.up);
-        //    //Multiply the input vector by the refAngle 
-        //    Vector3 newInput = Quaternion.Euler(0, refAngle, 0) * m_Input;
-        //    _Animator.SetFloat(_HashHorizontalSpeed, newInput.x);
-        //    _Animator.SetFloat(_HashVerticalSpeed, newInput.z);
-        //}
-
-        public void PlayAnimation(InputKeyStatus status, PlayerAnimationData animationData)
-        {
-            if (!animationData.Enabled)
-                return;
-
-            switch (animationData.Type)
-            {
-                case PlayerAnimationData.AnimationType.Trigger:
-                    if (status == InputKeyStatus.Pressed)
-                        m_Animator.SetTrigger(animationData.Hash);
-                    break;
-                case PlayerAnimationData.AnimationType.Holded:
-                    m_Animator.SetBool(animationData.Hash, status == InputKeyStatus.Pressed || status == InputKeyStatus.Holded);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-
         private void ResetSpeed()
         {
             m_MoveVector = m_DesiredMoveDirection = Vector3.zero;
             m_InputMagnitude = 0;
             m_VerticalVelocity = 0;
-            m_Animator.SetFloat(_HashInputMagnitude, m_InputMagnitude, stopAnimTime, Time.deltaTime);
+            m_Animator.SetFloat(_HashInputMagnitude, m_InputMagnitude);
         }
 
         /// <summary>
@@ -321,69 +283,12 @@ namespace Player
         }
 
         /// <summary>
-        /// Check if the player is idle
-        /// </summary>
-        /// <returns></returns>
-        public bool CheckForIdle()
-        {
-            return m_InputX == 0 && m_InputZ == 0;
-        }
-
-        public void GoToIdleState(bool state)
-        {
-            if (state)
-                m_Animator.SetTrigger(_HashIdle);
-            else
-                m_Animator.ResetTrigger(_HashIdle);
-        }
-
-
-        /// <summary>
         /// The player jump
         /// </summary>
         public void Jump()
         {
             m_VerticalVelocity = jumpHeight;
             m_Animator.SetTrigger(_HashJump);
-        }
-
-        /// <summary>
-        /// Check for Sprint input 
-        /// </summary>
-        /// <returns></returns>
-        public bool CheckForSprintInput()
-        {
-            if (_Inputs.Sprint.GetDown())
-                IsSprinting = true;
-            if (_Inputs.Sprint.GetUp())
-                IsSprinting = false;
-            return IsGrounded && IsSprinting;
-        }
-
-        public InputKeyStatus GetUseInput()
-        {
-            IsSowing = false;
-            return _Inputs.EquippedItemUse.GetStatus();
-        }
-
-        public bool CheckToSow()
-        {
-            if (_isCheckSowing)
-            {
-                if (_Inputs.Sow.GetDown() && _canSow && decay == 0f)
-                {
-                    decay = 1f;
-                    IsSowing = true;
-                }
-                if (_Inputs.Sow.GetUp())
-                    IsSowing = false;
-                if (_Inputs.Skip.GetDown())
-                {
-                    IsSowing = false;
-                    _isCheckSowing = false;
-                }
-            }
-            return IsGrounded && _isCheckSowing && IsSowing;
         }
 
         private void Interact()
@@ -398,7 +303,6 @@ namespace Player
 
             foreach (RaycastHit hit in hits)
             {
-                Debug.DrawLine(p1, hit.transform.position);
                 AInteractable interactable = hit.transform.GetComponent<AInteractable>();
                 if (interactable != null)
                     interactable.Interact(this);
@@ -414,7 +318,6 @@ namespace Player
                 var inventory = gameObject.GetComponentInChildren<PlayerInventory>();
                 inventory.DropAll();
                 ResetSpeed();
-                //_CurrentAcceleratedSpeed.Value = 0f;
             }
             else if (IsDead == true && m_PlayerStats._consumer.LinkedStock[Game.ResourcesManagement.Resource.Oxygen].Quantity > 0)
             {
@@ -443,25 +346,25 @@ namespace Player
 
         private void UseItem()
         {
-            InputKeyStatus status = GetUseInput();
-
-            if (_handSlots.EquippedItem)
+            Debug.Log("Try use item...");
+            if (IsGrounded && !IsInteracting && _handSlots.IsObjectUsable)
             {
-                _handSlots.CheckIfItemUsable();
-                if (_handSlots.EquippedItem is Seed)
-                {
-                    _canSow = _handSlots.ObjectIsUsable;
-                    _isCheckSowing = true;
-                }
-                if (_handSlots.ObjectIsUsable && !m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Sow"))
-                    _handSlots.UseItem(status);
-                if (!_handSlots.ObjectIsUsable)
-                    status = InputKeyStatus.Nothing;
-                if (_handSlots.EquippedItem)
-                    PlayAnimation(status, _handSlots.EquippedItem.Animation);
+                Debug.Log("Use...");
+                ResetSpeed();
+                UseItemValue = _handSlots.EquippedItem.Animation.anim.ToInt();
+                _handSlots.UseItem();
             }
-            else
-                _isCheckSowing = false;
         }
+
+        private void CancelUseItem()
+        {
+            if (IsUsingItem && _handSlots.EquippedItem != null)
+            {
+                Debug.Log("Cancel Use...");
+                if (_handSlots.CancelUse())
+                    UseItemValue = -1;
+            }
+        }
+
     }
 }

@@ -12,14 +12,15 @@ namespace Game.Item.PlantSeed
     {
         private Vector3 _location = new Vector3(0,0,0);
 
-        public override void Use(ItemStack selfStack, InputKeyStatus status)
+        public override void Use(ItemStack selfStack)
         {
-            if (status != InputKeyStatus.Pressed)
-                return;
+            Debug.Log("Use Seed");
+            //if (status != InputKeyStatus.Pressed)
+            //    return;
             selfStack.ModifyQuantity(selfStack.Quantity - 1);
-            GameObject plantModel = Instantiate(PlantStatistics.Prefab, _location, new Quaternion(0,0,0,1));
-            plantModel.GetComponent<PlantModel>().Sow();
-            plantModel.GetComponent<PlantModel>().SetPlantName();
+            PlantModel plantModel = Instantiate(PlantStatistics.Prefab, _location, new Quaternion(0,0,0,1)).GetComponent<PlantModel>();
+            plantModel.Sow();
+            plantModel.SetPlantName();
         }
 
         public override bool CanUse(Transform transform)
@@ -27,10 +28,7 @@ namespace Game.Item.PlantSeed
             LayerMask layerMask = LayerMask.GetMask("Ground");
             Camera camera = Camera.main; 
             Ray ray = new Ray(transform.position, camera.transform.forward * 2000.0f);
-            RaycastHit raycastHit;
-            if (Physics.Raycast(ray, out raycastHit, 2000.0f, layerMask) &&
-                raycastHit.collider.gameObject.layer == LayerMask.NameToLayer("Ground") &&
-                raycastHit.distance < 2.0f)
+            if (Physics.Raycast(ray, out RaycastHit raycastHit, 2.0f, layerMask))
             {
                 _location = raycastHit.point;
                 return true;

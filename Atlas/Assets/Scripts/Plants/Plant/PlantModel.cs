@@ -3,7 +3,6 @@ using Game.ResourcesManagement;
 using Game.ResourcesManagement.Consumer;
 using Localization;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Events;
 
 namespace Plants.Plant
