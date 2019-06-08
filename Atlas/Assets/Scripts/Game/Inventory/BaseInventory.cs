@@ -82,17 +82,13 @@ namespace Game.Inventory
             foreach (ItemStack itemStack in Slots)
             {
                 if (itemStack.FuseStack(newItem) && newItem.IsEmpty)
-                {
-                    Debug.LogWarning("Fuse stack");
                     return (null);
-                }
             }
 
             foreach (ItemStack itemStack in Slots)
             {
                 if (itemStack.IsEmpty)
                 {
-                    Debug.LogWarning("Swap stack");
                     itemStack.SwapStack(newItem);
                     return (null);
                 }

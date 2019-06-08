@@ -5,6 +5,7 @@ using Game;
 using Game.Player;
 using Game.Inventory;
 using Player.Scripts;
+using UnityEngine.InputSystem;
 
 namespace Player
 {
@@ -178,7 +179,7 @@ namespace Player
             GameControl.Instance.InputControls.Player.Movement.performed += ctx => GetMovementIput(ctx.ReadValue<Vector2>());
             GameControl.Instance.InputControls.Player.Movement.canceled += ctx => ResetMovementInput(ctx.ReadValue<Vector2>());
             GameControl.Instance.InputControls.Player.Movement.Enable();
-            GameControl.Instance.InputControls.Player.Jump.performed += ctx => Jump();
+            GameControl.Instance.InputControls.Player.Jump.performed += Jump;
             GameControl.Instance.InputControls.Player.Jump.Enable();
             GameControl.Instance.InputControls.Player.Interact.performed += ctx => Interact();
             GameControl.Instance.InputControls.Player.Interact.Enable();
@@ -192,7 +193,7 @@ namespace Player
             GameControl.Instance.InputControls.Player.Movement.performed -= ctx => GetMovementIput(ctx.ReadValue<Vector2>());
             GameControl.Instance.InputControls.Player.Movement.canceled -= ctx => ResetMovementInput(ctx.ReadValue<Vector2>());
             GameControl.Instance.InputControls.Player.Movement.Disable();
-            GameControl.Instance.InputControls.Player.Jump.performed -= ctx => Jump();
+            GameControl.Instance.InputControls.Player.Jump.performed -= Jump;
             GameControl.Instance.InputControls.Player.Jump.Disable();
             GameControl.Instance.InputControls.Player.Interact.performed -= ctx => Interact();
             GameControl.Instance.InputControls.Player.Interact.Disable();
@@ -285,10 +286,13 @@ namespace Player
         /// <summary>
         /// The player jump
         /// </summary>
-        public void Jump()
+        public void Jump(InputAction.CallbackContext ctx)
         {
-            m_VerticalVelocity = jumpHeight;
-            m_Animator.SetTrigger(_HashJump);
+            if (IsGrounded)
+            {
+                m_VerticalVelocity = jumpHeight;
+                m_Animator.SetTrigger(_HashJump);
+            }
         }
 
         private void Interact()
