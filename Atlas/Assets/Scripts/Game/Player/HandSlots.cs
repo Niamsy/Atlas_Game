@@ -2,6 +2,7 @@
 using Game.Item;
 using Game.Item.PlantSeed;
 using Game.SavingSystem;
+using Game.SavingSystem.Datas;
 using InputManagement;
 using Player;
 using UnityEngine;
@@ -10,7 +11,7 @@ using UnityEngine.UI;
 namespace Game.Player
 {
     [RequireComponent(typeof(BaseInventory))]
-    public class HandSlots : MonoBehaviour
+    public class HandSlots : MapSavingBehaviour
     {
         public bool IsObjectUsable
         {
@@ -19,7 +20,6 @@ namespace Game.Player
                 return (EquippedItem != null && EquippedItemStack.Quantity > 0) && _equippedItem.CanUse(_handTransform);
             }
         }
-        private PlayerController _controller;
 
         [SerializeField] private ItemStack _equippedItemStack;
         [SerializeField] private Transform _handTransform;
@@ -29,20 +29,12 @@ namespace Game.Player
         
         public ItemStack                   EquippedItemStack { get { return (_equippedItemStack); } }
         public ItemAbstract                EquippedItem { get { return (_equippedItem); } }
-      
-        private void Awake()
+
+        protected override void Awake()
         {
+            base.Awake();
+
             _equippedItemStack.OnItemStackUpdated += OnEquippedUpdate;
-
-            _controller = FindObjectOfType<PlayerController>();
-            LoadData();
-
-            GameControl.BeforeSavingPlayer += SaveData;
-        }
-
-        private void OnDestroy()
-        {
-            GameControl.BeforeSavingPlayer -= SaveData;
         }
 
         public void UseItem()
@@ -56,20 +48,15 @@ namespace Game.Player
         }
 
         #region Load/Saving Methods
-        private void SaveData(GameControl gameControl)
+        protected override void SavingMapData(MapData data)
         {
-            GameData gameData = gameControl.GameData;
-            if (gameData.EquippedHand != null)
-                gameData.EquippedHand.SetObject(_equippedItemStack);
+            if (data.EquippedHand != null)
+                data.EquippedHand.SetObject(_equippedItemStack);
         }
-
-        private void LoadData()
+        
+        protected override void LoadingMapData(MapData data)
         {
-            if (GameControl.Instance == null)
-                return;
-            
-            GameData gameData = GameControl.Instance.GameData;
-            EquippedItemStack.SetFromGameData(gameData.EquippedHand);
+            EquippedItemStack.SetFromGameData(data.EquippedHand);
         }
         #endregion
         

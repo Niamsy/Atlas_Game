@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Game.SavingSystem
+namespace Game.SavingSystem.Datas
 {
     [Serializable]
     public struct TransformSaveData

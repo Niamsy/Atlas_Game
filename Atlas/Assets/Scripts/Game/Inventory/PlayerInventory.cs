@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Game.SavingSystem;
+using Game.SavingSystem.Datas;
 
 namespace Game.Inventory
 {
@@ -7,44 +8,36 @@ namespace Game.Inventory
 	{
 		private readonly int _inventorySize = 84;
 
-        protected override void InitializeInventory()
+        protected void Awake()
 		{
-            if (!LoadData())
-                InitMapWithSize(_inventorySize);
-		     GameControl.BeforeSavingPlayer += SaveData;
+			InitMapWithSize(_inventorySize);
+			SaveManager.BeforeSavingMapData += SaveData;
+			SaveManager.UponLoadingMapData += LoadData;
 		}
 
-		protected override void DestroyInventory()
+		protected void OnDestroy()
 		{
-			GameControl.BeforeSavingPlayer -= SaveData;
+			SaveManager.BeforeSavingMapData -= SaveData;
+			SaveManager.UponLoadingMapData -= LoadData;
 		}
 		
 		#region Load/Saving Methods
 		
-		private void SaveData(GameControl gameControl)
+		private void SaveData(MapData data)
 		{
-			GameData gameData = gameControl.GameData;
-			gameData.Inventory = new List<ItemBaseData>(Size);
+			data.Inventory = new List<ItemBaseData>(Size);
 			for (int x = 0; x < Size; x++)
-				gameData.Inventory.Add(new ItemBaseData(Slots[x]));
+				data.Inventory.Add(new ItemBaseData(Slots[x]));
 		}
 
-		private bool LoadData()
+		private void LoadData(MapData data)
 		{
-			if (GameControl.Instance == null)
-				return (false);
-
-			GameData gameData = GameControl.Instance.GameData;
-
 			InitMapWithSize(_inventorySize);
-
-			for (int x = 0; x < Size && x < gameData.Inventory.Count; x++)
+			for (int x = 0; x < Size && x < data.Inventory.Count; x++)
 			{
-				var savedItem = gameData.Inventory[x];
+				var savedItem = data.Inventory[x];
 				Slots[x].SetFromGameData(savedItem);
 			}
-
-			return (true);
 		}
 		#endregion
 	}

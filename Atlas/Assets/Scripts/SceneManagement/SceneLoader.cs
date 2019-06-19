@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -63,6 +64,7 @@ namespace SceneManagement
             {
                 foreach (var loadedScene in ActualLoadedScenes)
                     SceneManager.LoadScene(loadedScene, LoadSceneMode.Additive);
+
                 _startUpSceneIndex = ActiveLoadedScenes;
             }
             #endif

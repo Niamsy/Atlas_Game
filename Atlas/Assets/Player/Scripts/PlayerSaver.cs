@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using Game;
+using Game.SavingSystem;
 
 namespace Player {
     public class PlayerSaver : MonoBehaviour {
@@ -8,19 +9,19 @@ namespace Player {
         public int _SaveFrequency = 5;
         public bool _ResetPosition = false;
 
-
         private float _LastSavedTime = 0f;
 
         public void Save()
         {
             if (!_ResetPosition)
-                GameControl.Instance.GameData.TransformData.SetFromTransform(transform);
+                SaveManager.Instance.MapData.TransformData.SetFromTransform(transform);
         }
 
         private void Awake()
         {
-            transform.position = GameControl.Instance.GameData.TransformData.Position.Value;
-            transform.rotation = GameControl.Instance.GameData.TransformData.Rotation.Value;
+            SaveManager.Instance.
+            transform.position = SaveManager.Instance.MapData.TransformData.Position.Value;
+            transform.rotation = SaveManager.Instance.MapData.TransformData.Rotation.Value;
             _LastSavedTime = Time.time;
         }
 

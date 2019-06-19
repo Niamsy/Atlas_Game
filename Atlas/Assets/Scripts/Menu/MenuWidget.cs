@@ -7,6 +7,8 @@ namespace Menu
     public abstract class MenuWidget : MonoBehaviour
     {
         #region Displayed
+
+        [SerializeField] private bool _enableCursorOnDisplay = false;
         [SerializeField] private bool   _displayed;
         public bool                     Displayed => _displayed;
 
@@ -32,7 +34,8 @@ namespace Menu
         
         public virtual void Show(bool display, bool force = false)
         {
-            Cursor.lockState = display ? CursorLockMode.None : CursorLockMode.Locked;
+            if (_enableCursorOnDisplay)
+                Cursor.lockState = display ? CursorLockMode.None : CursorLockMode.Locked;
             if (OnShow != null && !force)
                 OnShow(display);
             _animator.SetBool(_hashShowed, display);

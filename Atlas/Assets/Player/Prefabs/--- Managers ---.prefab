@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6790260187323759373}
   - component: {fileID: 8435871627945785566}
   - component: {fileID: 2924533693654465018}
+  - component: {fileID: 4815621337056629615}
   m_Layer: 0
   m_Name: '--- Managers ---'
   m_TagString: Untagged
@@ -49,6 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9707e012f8e9ac84d986b1b008956ec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LoadAndSave: 1
   _plantsSystem: {fileID: 2924533693654465018}
   _droppedItemManager: {fileID: 8435871627945785566}
 --- !u!114 &8435871627945785566
@@ -77,6 +79,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _first: {fileID: 11400000, guid: 08cb358d08423854da2a4b33f7d9de95, type: 2}
   _second: {fileID: 11400000, guid: 90d4324a42f2c82458a54e192a259b9e, type: 2}
+--- !u!114 &4815621337056629615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7209074388893711307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4068d61b1bbfb2d41974d6505218ab7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DelayBetweenSave: 60
 --- !u!1 &8628178528775642161
 GameObject:
   m_ObjectHideFlags: 0

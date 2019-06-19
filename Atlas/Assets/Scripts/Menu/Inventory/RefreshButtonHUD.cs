@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Game;
+using Game.SavingSystem;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,7 +16,7 @@ public class RefreshButtonHUD : MonoBehaviour
 
     void Start()
     {
-        lastGetScannedPlant = GameControl.Instance.GameData.LastGetScannedPlant;
+        lastGetScannedPlant = SaveManager.Instance.AccountData.LastGetScannedPlant;
 
         if (RequestManager.Instance)
             RequestManager.Instance.OnGetScannedPlantsRequestFinished += GetScannedPlantsFinished;
@@ -49,7 +50,7 @@ public class RefreshButtonHUD : MonoBehaviour
             }
 
             lastGetScannedPlant = scannedPlants.Max(x => DateTime.Parse(x.scanned_at));
-            GameControl.Instance.GameData.LastGetScannedPlant = lastGetScannedPlant;
+            SaveManager.Instance.AccountData.LastGetScannedPlant = lastGetScannedPlant;
 
             inventory.AddItemStacks(seeds);
         }

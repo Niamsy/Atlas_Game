@@ -10,11 +10,12 @@ namespace Menu.Settings.Content.Dropdown
         [Serializable]
         public class Language
         {
-            public SystemLanguage SystemLanguage;
-            public string Text;
+            public SystemLanguage SystemLanguage = SystemLanguage.English;
+            public string Text = "English";
         }
-        [SerializeField] private Language[]  _languages;
-        private SystemLanguage    _actualLanguage;
+        
+        [SerializeField] private Language[]  _languages = null;
+        private SystemLanguage    _actualLanguage = SystemLanguage.English;
         protected override List<string> GetOptions()
         {
             List<string> options = new List<string>();

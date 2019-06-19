@@ -7,13 +7,13 @@ namespace Game.Item
         protected override void Awake()
         {
             base.Awake();
-            MapManager.DroppedItemManager.AddItemDropped(this);
+            LevelManager.DroppedItemManager.AddItemDropped(this);
         }
 
         private void OnDestroy()
         {
-            if (MapManager.DroppedItemManager != null)
-                MapManager.DroppedItemManager.RemoveItemDropped(this);
+            if (LevelManager.DroppedItemManager != null)
+                LevelManager.DroppedItemManager.RemoveItemDropped(this);
         }
     }
 }
