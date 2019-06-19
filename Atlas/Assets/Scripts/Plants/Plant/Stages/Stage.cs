@@ -21,64 +21,37 @@ namespace Plants
         [SerializeField]
         private List<Need>          _needs;
         [SerializeField]
-        private float               _height;
+        private float               _height = 0;
         [SerializeField]
-        private float               _temperature;
+        private float               _temperature = 0;
         [SerializeField]
         [Header("Miscellaneous")]
-        private GameObject          _model;
+        private GameObject          _model = null;
         [SerializeField]
-        private Material[]          _materials;
+        private Material[]          _materials = null;
         [SerializeField]
-        private AtlasAudio.Audio    _audio;
+        private AtlasAudio.Audio    _audio = null;
         [SerializeField]
-        private GameObject          _growEffect;
+        private GameObject          _growEffect = null;
         [SerializeField]
-        private GameObject          _deathEffect;
+        private GameObject          _deathEffect = null;
 
-        public SoilType Soils
-        {
-            get { return _soils; }
-        }
+        public SoilType Soils => _soils;
 
-        public List<Need> Needs
-        {
-            get { return _needs; }
-        }
+        public List<Need> Needs => _needs;
 
-        public GameObject Model
-        {
-            get { return _model; }
-        }
+        public GameObject Model => _model;
 
-        public AtlasAudio.Audio Audio
-        {
-            get { return _audio; }
-        }
+        public AtlasAudio.Audio Audio => _audio;
 
-        public float Height
-        {
-            get { return _height; }
-        }
+        public float Height => _height;
 
-        public float Temperature
-        {
-            get { return _temperature; }
-        }
+        public float Temperature => _temperature;
 
-        public Material[] Materials
-        {
-            get { return _materials; }
-        }
+        public Material[] Materials => _materials;
 
-        public GameObject GrowEffect
-        {
-            get { return _growEffect; }
-        }
+        public GameObject GrowEffect => _growEffect;
 
-        public GameObject DeathEffect
-        {
-            get { return _deathEffect; }
-        }
+        public GameObject DeathEffect => _deathEffect;
     }
 }

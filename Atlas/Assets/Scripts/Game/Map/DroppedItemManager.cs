@@ -2,35 +2,24 @@
 using Game.Inventory;
 using Game.Item;
 using Game.SavingSystem;
+using Game.SavingSystem.Datas;
 using UnityEngine;
 
 namespace Game.Map
 {
-    public class DroppedItemManager : MonoBehaviour
+    public class DroppedItemManager : MapSavingBehaviour
     {
         private List<ItemDropped> _itemsDropped = new List<ItemDropped>();
-
-        private void Awake()
-        {
-            GameControl.UponLoadingMapData += LoadingItems;
-            GameControl.BeforeSavingData += SavingItems;
-        }
-
-        private void OnDestroy()
-        {
-            GameControl.UponLoadingMapData -= LoadingItems;
-            GameControl.BeforeSavingData -= SavingItems;
-        }
         
         #region Load/Save
-        private void LoadingItems(GameControl gameControl)
+        protected override void LoadingMapData(MapData data)
         {
-            if (gameControl.MapData.DroppedItems == null)
+            if (data.DroppedItems == null)
                 return;
     
             foreach (var itemDropped in _itemsDropped)
                 Destroy(itemDropped.gameObject);
-            foreach (var itemDroppedsData in gameControl.MapData.DroppedItems)
+            foreach (var itemDroppedsData in data.DroppedItems)
             {
                 var itemAbstract = ItemFactory.GetItemForId(itemDroppedsData.ID);
                 if (itemAbstract)
@@ -43,12 +32,12 @@ namespace Game.Map
             }
         }
 
-        private void SavingItems(GameControl gameControl)
+        protected override void SavingMapData(MapData data)
         {
             ItemDroppedsData[] droppedItem = new ItemDroppedsData[_itemsDropped.Count];
             for (int x = 0; x < _itemsDropped.Count; x++)
                 droppedItem[x] = new ItemDroppedsData(_itemsDropped[x]);
-            gameControl.MapData.DroppedItems = droppedItem;
+            data.DroppedItems = droppedItem;
         }
         #endregion
 

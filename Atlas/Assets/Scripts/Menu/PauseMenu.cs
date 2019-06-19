@@ -1,5 +1,6 @@
 ﻿using System;
 using Game;
+using Game.SavingSystem;
 using Menu.Settings;
 using SceneManagement;
 using UnityEngine;
@@ -19,14 +20,14 @@ namespace Menu
 
         private void OnEnable()
         {
-            GameControl.Instance.InputControls.Player.Menu.performed += ctx => OpenCloseMenu(ctx);
-            GameControl.Instance.InputControls.Player.Menu.Enable();
+            SaveManager.Instance.InputControls.Player.Menu.performed += ctx => OpenCloseMenu(ctx);
+            SaveManager.Instance.InputControls.Player.Menu.Enable();
         }
 
         private void OnDisable()
         {
-            GameControl.Instance.InputControls.Player.Menu.performed -= ctx => OpenCloseMenu(ctx);
-            GameControl.Instance.InputControls.Player.Menu.Disable();
+            SaveManager.Instance.InputControls.Player.Menu.performed -= ctx => OpenCloseMenu(ctx);
+            SaveManager.Instance.InputControls.Player.Menu.Disable();
         }
 
         private void OpenCloseMenu(InputAction.CallbackContext ctx)

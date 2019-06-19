@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using Game.DayNight;
 using Game.ResourcesManagement;
 using Plants.Plant;
 
-namespace Game.SavingSystem
+namespace Game.SavingSystem.Datas
 {
     [Serializable]
     public class MapData
@@ -40,7 +42,11 @@ namespace Game.SavingSystem
             }
         }
 
-        public PlantSaveData[] Plants;
-        public ItemDroppedsData[] DroppedItems;
+        public PlantSaveData[]      Plants;
+        public ItemDroppedsData[]   DroppedItems;
+        public List<ItemBaseData>	Inventory;
+        public ItemBaseData			EquippedHand;
+        public TransformSaveData	TransformData;
+        public Date					CalendarData;
     }
 }

@@ -8,9 +8,5 @@ namespace Game.SavingSystem
 	public class GameData
 	{
         public DateTime						LastGetScannedPlant;
-		public List<ItemBaseData>			Inventory;
-		public ItemBaseData					EquippedHand;
-        public TransformSaveData			TransformData;
-        public Date							CalendarData;
 	}
 }

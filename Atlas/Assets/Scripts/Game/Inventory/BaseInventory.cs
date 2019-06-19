@@ -18,19 +18,6 @@ namespace Game.Inventory
         }
 
         #region Initialisation / Destruction
-        /// <summary>
-        /// ""Constructor""
-        /// </summary>
-        private void Awake()
-        {
-            InitializeInventory();
-        }
-
-        private void OnDestroy()
-        {
-            DestroyInventory();
-        }
-
         protected void InitMapWithSize(int size)
         {
             Slots = new List<ItemStack>();
@@ -38,9 +25,6 @@ namespace Game.Inventory
             for (int x = 0; x < size; x++)
                 Slots.Add(new ItemStack());
         }
-
-        protected virtual void InitializeInventory() { }
-        protected virtual void DestroyInventory() { }
         #endregion
 
         public ItemStack this[int index]

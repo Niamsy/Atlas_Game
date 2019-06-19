@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Game.SavingSystem;
+using Game.SavingSystem.Datas;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -189,6 +191,7 @@ namespace Networking
 			if (success)
             {
                 _apiToken = bodyReturn.api_token;
+	            SaveManager.Instance.LoadAccountDataByID(0);
 #if UNITY_EDITOR
                 Debug.Log("Connection api token : " + _apiToken);
 #endif
