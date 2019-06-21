@@ -44,15 +44,20 @@ namespace Game.Editor
         private void DisplayProfilDetails(SaveManager target)
         {
             EditorGUILayout.BeginVertical("Box");
+            EditorGUILayout.BeginHorizontal();
             if (target.AccountData != null)
+            {
                 GUILayout.Label("Account loaded ID:" + target.AccountData.ID + ".");
+                if (GUILayout.Button("Unload"))
+                    target.RemoveAccountData();
+            }
             else
                 GUILayout.Label("No Account actually loaded.", AtlasEditor.LabelColored(Color.red));
-            
+            EditorGUILayout.EndHorizontal();
             AccountToLoad = EditorGUILayout.IntField("Account to load", AccountToLoad);
             if (GUILayout.Button("Reload account data"))
                 ReloadProfils(target, AccountToLoad);
-            EditorGUILayout.EndHorizontal();
+            EditorGUILayout.EndVertical();
 
             EditorGUILayout.BeginVertical("Box");
             GUILayout.Label("List of profils");

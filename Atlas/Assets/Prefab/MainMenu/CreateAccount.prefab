@@ -28,18 +28,18 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1349865273663419988}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1272030098292948648}
   - {fileID: 1271910152258473440}
   m_Father: {fileID: 1271607209146632934}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -56}
-  m_SizeDelta: {x: 350, y: 45}
+  m_AnchoredPosition: {x: 0, y: -72}
+  m_SizeDelta: {x: 450, y: 48}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1273905023783434546
 CanvasRenderer:
@@ -91,9 +91,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnDown: {fileID: 1382568495098629680}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -101,17 +101,20 @@ MonoBehaviour:
     m_NormalColor: {r: 0.29411766, g: 0.29411766, b: 0.29411766, a: 1}
     m_HighlightedColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
     m_PressedColor: {r: 0.4509804, g: 0.4509804, b: 0.4509804, a: 1}
+    m_SelectedColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
     m_DisabledColor: {r: 0.29411766, g: 0.29411766, b: 0.29411766, a: 0.78431374}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.25
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
+    m_SelectedTrigger: Highlighted
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 1381795556609275456}
@@ -172,7 +175,6 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  delegates: []
 --- !u!1 &1349912261897870046
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,13 +304,13 @@ RectTransform:
   m_Children:
   - {fileID: 1271307450261096980}
   m_Father: {fileID: 1271607209146632934}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 75, y: -300}
-  m_SizeDelta: {x: 100, y: 30}
-  m_Pivot: {x: 0, y: 1}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -25, y: -312}
+  m_SizeDelta: {x: 200, y: 48}
+  m_Pivot: {x: 1, y: 1}
 --- !u!222 &1274370230919469290
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -359,27 +361,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
-    m_SelectOnUp: {fileID: 0}
+    m_Mode: 4
+    m_SelectOnUp: {fileID: 1382063116529674904}
     m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnLeft: {fileID: 1382279146221400772}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0.29411766, g: 0.29411766, b: 0.29411766, a: 1}
     m_HighlightedColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
     m_PressedColor: {r: 0.4509804, g: 0.4509804, b: 0.4509804, a: 1}
+    m_SelectedColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
     m_DisabledColor: {r: 0.29411766, g: 0.29411766, b: 0.29411766, a: 0.78431374}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.25
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
+    m_SelectedTrigger: Highlighted
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 1378301151901411152}
@@ -429,7 +434,6 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  delegates: []
 --- !u!1 &1349953417768594582
 GameObject:
   m_ObjectHideFlags: 0
@@ -458,18 +462,18 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1349953417768594582}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1271790120145514436}
   - {fileID: 1271870797010496672}
   m_Father: {fileID: 1271607209146632934}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -178}
-  m_SizeDelta: {x: 350, y: 45}
+  m_AnchoredPosition: {x: 0, y: -184}
+  m_SizeDelta: {x: 450, y: 48}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1273535470236348398
 CanvasRenderer:
@@ -521,9 +525,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_Mode: 4
+    m_SelectOnUp: {fileID: 1382568495098629680}
+    m_SelectOnDown: {fileID: 1382063116529674904}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -531,17 +535,20 @@ MonoBehaviour:
     m_NormalColor: {r: 0.29411766, g: 0.29411766, b: 0.29411766, a: 1}
     m_HighlightedColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
     m_PressedColor: {r: 0.4509804, g: 0.4509804, b: 0.4509804, a: 1}
+    m_SelectedColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
     m_DisabledColor: {r: 0.29411766, g: 0.29411766, b: 0.29411766, a: 0.78431374}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.25
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
+    m_SelectedTrigger: Highlighted
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 1381856581739825266}
@@ -602,7 +609,6 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  delegates: []
 --- !u!1 &1350025341524150524
 GameObject:
   m_ObjectHideFlags: 0
@@ -710,18 +716,18 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1350030824414670206}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1271416844865622704}
   - {fileID: 1271837417495674306}
   m_Father: {fileID: 1271607209146632934}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -239}
-  m_SizeDelta: {x: 350, y: 45}
+  m_AnchoredPosition: {x: 0, y: -240}
+  m_SizeDelta: {x: 450, y: 48}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1273662294690372514
 CanvasRenderer:
@@ -773,9 +779,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_Mode: 4
+    m_SelectOnUp: {fileID: 1382565736608501980}
+    m_SelectOnDown: {fileID: 1378209000132888350}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -783,17 +789,20 @@ MonoBehaviour:
     m_NormalColor: {r: 0.29411766, g: 0.29411766, b: 0.29411766, a: 1}
     m_HighlightedColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
     m_PressedColor: {r: 0.4509804, g: 0.4509804, b: 0.4509804, a: 1}
+    m_SelectedColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
     m_DisabledColor: {r: 0.29411766, g: 0.29411766, b: 0.29411766, a: 0.78431374}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.25
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
+    m_SelectedTrigger: Highlighted
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 1382087544875806998}
@@ -854,7 +863,6 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  delegates: []
 --- !u!1 &1350050434160124484
 GameObject:
   m_ObjectHideFlags: 0
@@ -886,14 +894,14 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1271607209146632934}
-  m_RootOrder: 1
+  m_Father: {fileID: 1271679979870665622}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -8}
-  m_SizeDelta: {x: -32, y: 30}
-  m_Pivot: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -150, y: -16}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1274511195397793858
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1091,14 +1099,15 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1271322643064237926}
   m_Father: {fileID: 1271607209146632934}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -8}
-  m_SizeDelta: {x: -128, y: 30}
+  m_SizeDelta: {x: 640, y: 48}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1273902995885281654
 CanvasRenderer:
@@ -1165,18 +1174,18 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1350127540030244296}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1271190148396618526}
   - {fileID: 1271879565647469384}
   m_Father: {fileID: 1271607209146632934}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -117}
-  m_SizeDelta: {x: 350, y: 45}
+  m_AnchoredPosition: {x: 0, y: -128}
+  m_SizeDelta: {x: 450, y: 48}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1274273036775173330
 CanvasRenderer:
@@ -1228,9 +1237,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_Mode: 4
+    m_SelectOnUp: {fileID: 1382155547150465598}
+    m_SelectOnDown: {fileID: 1382565736608501980}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -1238,17 +1247,20 @@ MonoBehaviour:
     m_NormalColor: {r: 0.29411766, g: 0.29411766, b: 0.29411766, a: 1}
     m_HighlightedColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
     m_PressedColor: {r: 0.4509804, g: 0.4509804, b: 0.4509804, a: 1}
+    m_SelectedColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
     m_DisabledColor: {r: 0.29411766, g: 0.29411766, b: 0.29411766, a: 0.78431374}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.25
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
+    m_SelectedTrigger: Highlighted
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 1382479793940834380}
@@ -1309,7 +1321,6 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  delegates: []
 --- !u!1 &1350132278796106666
 GameObject:
   m_ObjectHideFlags: 0
@@ -1498,7 +1509,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1271679979870665622}
-  - {fileID: 1271322643064237926}
   - {fileID: 1271278987409472886}
   - {fileID: 1271987907007089890}
   - {fileID: 1272037686128958738}
@@ -1545,6 +1555,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f23907f89fb29034d9a5ecd25537fa30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enableCursorOnDisplay: 0
   _displayed: 0
   ErrorText: {fileID: 1382406569809828406}
   _username: {fileID: 1382155547150465598}
@@ -1583,12 +1594,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1271607209146632934}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -346}
-  m_SizeDelta: {x: -32, y: 120}
+  m_SizeDelta: {x: 450, y: 120}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1274080156706592518
 CanvasRenderer:
@@ -1612,7 +1623,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.764151, g: 0.21266466, b: 0.21266466, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1665,13 +1676,13 @@ RectTransform:
   m_Children:
   - {fileID: 1271692904904379914}
   m_Father: {fileID: 1271607209146632934}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -75, y: -300}
-  m_SizeDelta: {x: 100, y: 30}
-  m_Pivot: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 25, y: -312}
+  m_SizeDelta: {x: 200, y: 48}
+  m_Pivot: {x: 0, y: 1}
 --- !u!222 &1270071749849432528
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1722,27 +1733,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
-    m_SelectOnUp: {fileID: 0}
+    m_Mode: 4
+    m_SelectOnUp: {fileID: 1382063116529674904}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnRight: {fileID: 1378209000132888350}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0.29411766, g: 0.29411766, b: 0.29411766, a: 1}
     m_HighlightedColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
     m_PressedColor: {r: 0.4509804, g: 0.4509804, b: 0.4509804, a: 1}
+    m_SelectedColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
     m_DisabledColor: {r: 0.29411766, g: 0.29411766, b: 0.29411766, a: 0.78431374}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.25
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
+    m_SelectedTrigger: Highlighted
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 1382404871442442572}
@@ -1814,7 +1828,6 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  delegates: []
 --- !u!1 &1350423480741699188
 GameObject:
   m_ObjectHideFlags: 0

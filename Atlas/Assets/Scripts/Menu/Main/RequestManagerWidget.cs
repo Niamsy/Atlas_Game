@@ -2,9 +2,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Menu
+namespace Menu.Main
 {
-    public abstract class MainMenuWidget : MenuWidget
+    public abstract class RequestManagerWidget : MenuWidget
     {
         protected RequestManager          ActualRequestManager;
         private Selectable[]              _childSelectables;

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Menu.Main
 {
-    public class RetreivePasswordSucessWidget : MainMenuWidget
+    public class RetreivePasswordSucessWidget : RequestManagerWidget
     {
         [SerializeField] private LocalizedTextBehaviour _text;
         

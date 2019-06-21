@@ -271,12 +271,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1154630901297721653, guid: e030d32b35e1d3a488774d9c76277ddd,
         type: 3}
-      propertyPath: _accountData.Profils.Array.data[0].Name
-      value: Test
-      objectReference: {fileID: 0}
-    - target: {fileID: 1154630901297721653, guid: e030d32b35e1d3a488774d9c76277ddd,
-        type: 3}
-      propertyPath: _accountData.Profils.Array.data[0].Used
+      propertyPath: _selectedProfil
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1154630901297721653, guid: e030d32b35e1d3a488774d9c76277ddd,
@@ -286,23 +281,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1154630901297721653, guid: e030d32b35e1d3a488774d9c76277ddd,
         type: 3}
-      propertyPath: _accountData.Profils.Array.data[1].Name
-      value: Editor Profil 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1154630901297721653, guid: e030d32b35e1d3a488774d9c76277ddd,
-        type: 3}
-      propertyPath: _accountData.Profils.Array.data[1].Used
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1154630901297721653, guid: e030d32b35e1d3a488774d9c76277ddd,
-        type: 3}
       propertyPath: _accountData.Profils.Array.data[2].ID
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1154630901297721653, guid: e030d32b35e1d3a488774d9c76277ddd,
-        type: 3}
-      propertyPath: _accountData.Profils.Array.data[2].Name
-      value: Editor Profil 2
       objectReference: {fileID: 0}
     - target: {fileID: 1154630901297721653, guid: e030d32b35e1d3a488774d9c76277ddd,
         type: 3}
@@ -316,8 +296,48 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1154630901297721653, guid: e030d32b35e1d3a488774d9c76277ddd,
         type: 3}
-      propertyPath: _selectedProfil
+      propertyPath: _accountData.Profils.Array.data[0].Name
+      value: Editor Profil 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1154630901297721653, guid: e030d32b35e1d3a488774d9c76277ddd,
+        type: 3}
+      propertyPath: _accountData.Profils.Array.data[0].Used
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1154630901297721653, guid: e030d32b35e1d3a488774d9c76277ddd,
+        type: 3}
+      propertyPath: _accountLoaded
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1154630901297721653, guid: e030d32b35e1d3a488774d9c76277ddd,
+        type: 3}
+      propertyPath: _accountData.Profils.Array.data[2].Name
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1154630901297721653, guid: e030d32b35e1d3a488774d9c76277ddd,
+        type: 3}
+      propertyPath: _accountData.Profils.Array.data[2].Used
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1154630901297721653, guid: e030d32b35e1d3a488774d9c76277ddd,
+        type: 3}
+      propertyPath: _accountData.Profils.Array.data[3].Name
+      value: Editor Profil 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1154630901297721653, guid: e030d32b35e1d3a488774d9c76277ddd,
+        type: 3}
+      propertyPath: _accountData.Profils.Array.data[3].Used
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1154630901297721653, guid: e030d32b35e1d3a488774d9c76277ddd,
+        type: 3}
+      propertyPath: _accountData.Profils.Array.data[1].Name
+      value: Editor Profil 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1154630901297721653, guid: e030d32b35e1d3a488774d9c76277ddd,
+        type: 3}
+      propertyPath: _accountData.Profils.Array.data[1].Used
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4322043825907476, guid: e030d32b35e1d3a488774d9c76277ddd, type: 3}
       propertyPath: m_LocalPosition.x
