@@ -191,14 +191,14 @@ namespace Networking
 			if (success)
             {
                 _apiToken = bodyReturn.api_token;
-	            SaveManager.Instance.LoadAccountDataByID(0);
-#if UNITY_EDITOR
+#if ATLAS_DEBUG
                 Debug.Log("Connection api token : " + _apiToken);
 #endif
+	            SaveManager.Instance.LoadAccountDataByID(0);
             }
             else
 			{
-#if UNITY_EDITOR
+#if ATLAS_DEBUG
 				Debug.Log("ERROR HTTP: " + postRequest.responseCode + ":" + postRequest.error);
 #endif
 				switch (postRequest.responseCode)
@@ -265,7 +265,7 @@ namespace Networking
 				_apiToken = bodyReturn.api_token;
 			else
 			{
-#if UNITY_EDITOR
+#if ATLAS_DEBUG
 				Debug.Log("ERROR HTTP: " + postRequest.responseCode + " : " + postRequest.error);
 #endif
 				switch (postRequest.responseCode)
@@ -332,7 +332,7 @@ namespace Networking
 
 			if (!success)
 			{
-#if UNITY_EDITOR
+#if ATLAS_DEBUG
 				Debug.Log("ERROR HTTP: " + postRequest.responseCode + ":" + postRequest.error);
 #endif
 				switch (postRequest.responseCode)
@@ -392,7 +392,7 @@ namespace Networking
 			string errorMsg = "";
 			if (!success)
 			{
-#if UNITY_EDITOR
+#if ATLAS_DEBUG
 				Debug.Log("ERROR HTTP: " + postRequest.responseCode + ":" + postRequest.error);
 #endif
 				switch (postRequest.responseCode)
@@ -456,7 +456,7 @@ namespace Networking
                 scannedPlants.AddRange(JsonHelper.GetJsonArray<ScannedPlant>(getRequest.downloadHandler.text));
             else
             {
-#if UNITY_EDITOR
+#if ATLAS_DEBUG
 	            Debug.Log("ERROR HTTP: " + getRequest.responseCode + ":" + getRequest.error);
 #endif
 	            switch (getRequest.responseCode)

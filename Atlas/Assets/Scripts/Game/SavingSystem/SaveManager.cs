@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using Game.SavingSystem.Datas;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Game.SavingSystem
@@ -11,11 +13,16 @@ namespace Game.SavingSystem
         public static SaveManager Instance;
 
         [SerializeField]
+        private bool _accountLoaded = false;
+        [SerializeField, CanBeNull]
         private AccountData _accountData = null;
-        public AccountData AccountData => _accountData;
+        public AccountData AccountData => _accountLoaded ? _accountData : null;
+        
         [SerializeField]
+        private bool _mapLoaded = false;
+        [SerializeField, CanBeNull]
         private MapData _mapData = null;
-        public MapData MapData => _mapData;
+        public MapData MapData => _mapLoaded ? _mapData : null;
 
         [SerializeField]
         private int _selectedProfil = -1;
@@ -61,12 +68,8 @@ namespace Game.SavingSystem
             if (AccountData != null)
             {
                 LoadAccountDataByID(AccountData.ID);
-                if (AccountData == null)
-                    Debug.LogError("Couldn't Load the Account in the memory.");
-                else if (SelectedProfil != null)
+                if (SelectedProfil != null)
                     SelectProfilToUseForSave(SelectedProfil);
-                else
-                    Debug.Log("Profil: " + SelectedProfil + " loaded.");
             }
 #endif
         }
@@ -88,13 +91,21 @@ namespace Game.SavingSystem
             }
             else
             {
-
 #if ATLAS_DEBUG
                 Debug.Log("Removed the profil selected.");
 #endif
                 _selectedProfil = -1;
             }
+        }
 
+        public void RemoveAccountData()
+        {
+            SaveAccountData();
+            SelectProfilToUseForSave(null);
+            _mapLoaded = false;
+            _mapData = null;
+            _accountLoaded = false;
+            _accountData = null;
         }
 
         public bool SaveAccountData()
@@ -111,14 +122,17 @@ namespace Game.SavingSystem
         public void LoadAccountDataByID(int id)
         {
             _accountData = GetAccountData(id);
+            _accountLoaded = (_accountData != null);
+            if (_accountLoaded && UponLoadingAccountData != null)
+                UponLoadingAccountData(_accountData);
         }
         
         public bool ReloadAccountData()
         {
-            bool ret = LoadFromFile(AccountFile_Path(AccountData.ID), ref _accountData);
-            if (ret && UponLoadingAccountData != null)
-                UponLoadingAccountData(AccountData);
-            return (ret);
+            _accountLoaded = LoadFromFile(AccountFile_Path(AccountData.ID), ref _accountData);
+            if (_accountLoaded && UponLoadingAccountData != null)
+                UponLoadingAccountData(_accountData);
+            return (_accountLoaded);
         }
         #endregion
       
@@ -126,19 +140,27 @@ namespace Game.SavingSystem
         public bool SaveMapData(int sceneIndex)
         {
             if (BeforeSavingMapData != null)
-                BeforeSavingMapData(MapData);
-            
-            return (SaveInFile(MapFile_Path(sceneIndex, SelectedProfil.ID, AccountData.ID), MapData));
+                BeforeSavingMapData(_mapData);
+#if ATLAS_DEBUG
+            Debug.Log("Saving map data of the scene " + sceneIndex);
+#endif  
+            return (SaveInFile(MapFile_Path(sceneIndex, SelectedProfil.ID, AccountData.ID), _mapData));
         }
 
         public bool LoadMapData(int sceneIndex)
         {
-            bool ret = LoadFromFile(MapFile_Path(sceneIndex, SelectedProfil.ID, AccountData.ID), ref _mapData);
-            if (!ret)
+#if ATLAS_DEBUG
+            Debug.Log("Loading map data of the scene " + sceneIndex);
+#endif  
+            _mapLoaded = LoadFromFile(MapFile_Path(sceneIndex, SelectedProfil.ID, AccountData.ID), ref _mapData);
+            if (_mapLoaded && UponLoadingMapData != null)
+                UponLoadingMapData(_mapData);
+            if (_mapData == null)
+            {
                 _mapData = new MapData();
-            else if (UponLoadingMapData != null)
-                UponLoadingMapData(MapData);
-            return (ret);
+                _mapLoaded = true;
+            }
+            return (_mapLoaded);
         }
         
         /// <summary>
@@ -185,9 +207,11 @@ namespace Game.SavingSystem
                 Debug.Log("Save in file: " + path);
                 #endif
             }
-            catch (Exception e)
+            catch (SerializationException e)
             {
-                Debug.LogError("Exception:" + e);
+#if ATLAS_DEBUG
+                Debug.LogError("Serialization error on save:" + path + ".\nType " + data?.GetType() + ".\nException caught: " + e);
+#endif
             }
 
 #if ATLAS_DEBUG
@@ -202,13 +226,28 @@ namespace Game.SavingSystem
         /// <returns>Sucess or failure</returns>
         private static bool LoadFromFile<T>(string path, ref T data)
         {
-            if (File.Exists(path))
+            try
             {
-                BinaryFormatter bf = new BinaryFormatter();
-                FileStream file = File.Open(path, FileMode.Open);
-                data = (T)bf.Deserialize(file);
-                file.Close();
-                return (true);
+                if (File.Exists(path))
+                {
+                    BinaryFormatter bf = new BinaryFormatter();
+                    FileStream file = File.Open(path, FileMode.Open);
+                    data = (T)bf.Deserialize(file);
+                    file.Close();
+                    return (true);
+                }
+                else
+                {
+#if ATLAS_DEBUG
+                    Debug.Log("File:" + path + ". Doesn't exist\n");
+#endif
+                }
+            }
+            catch (SerializationException e)
+            {
+#if ATLAS_DEBUG
+                Debug.LogError("Serialization error on load:" + path + ".\nType " + typeof(T) + ".\nException caught: " + e);
+#endif
             }
             data = default(T);
             return (false);
@@ -313,6 +352,5 @@ namespace Game.SavingSystem
         }
         
         #endregion
-   
     }
 }

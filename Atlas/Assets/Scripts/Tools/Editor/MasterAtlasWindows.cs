@@ -59,7 +59,6 @@ namespace Tools.Editor
         {
             if (Application.isPlaying)
                 return;
-            Debug.Log("Update value");
 
             SceneLoader.ActualLoadedScenes = new List<string>();
             _loadedScenes = new Scene[SceneManager.sceneCount];
@@ -104,10 +103,7 @@ namespace Tools.Editor
             foreach (var loadedScene in _loadedScenes)
                 WriteSceneName(loadedScene, AtlasEditor.LabelColored(Color.red));
             if (GUILayout.Button("Add the masterScene to the scenes"))
-            {
-                var scene = EditorSceneManager.OpenScene(_masterScenePath, OpenSceneMode.Additive);
-                SceneManager.SetActiveScene(scene);
-            }
+                EditorSceneManager.OpenScene(_masterScenePath, OpenSceneMode.Additive);
             EditorGUI.indentLevel--;
             EditorGUILayout.EndVertical();
         }

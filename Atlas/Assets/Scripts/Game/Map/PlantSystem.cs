@@ -64,6 +64,8 @@ namespace Plants
 
         protected override void LoadingMapData(MapData data)
         {
+            if (data.Plants == null)
+                return;
             foreach (var plant in _models)
                 Destroy(plant.gameObject);
             foreach (var plant in data.Plants)
