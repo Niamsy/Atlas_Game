@@ -103,7 +103,10 @@ namespace Tools.Editor
             foreach (var loadedScene in _loadedScenes)
                 WriteSceneName(loadedScene, AtlasEditor.LabelColored(Color.red));
             if (GUILayout.Button("Add the masterScene to the scenes"))
+            {
                 EditorSceneManager.OpenScene(_masterScenePath, OpenSceneMode.Additive);
+                UpdateValues();
+            }
             EditorGUI.indentLevel--;
             EditorGUILayout.EndVertical();
         }
