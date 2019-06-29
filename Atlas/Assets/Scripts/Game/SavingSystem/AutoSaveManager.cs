@@ -7,6 +7,7 @@ namespace Game.SavingSystem
 {
     public class AutoSaveManager : MonoBehaviour
     {
+        [SerializeField] private GameObject _autoSaveEffect;
         private bool _finishedLoading = false;
         /// <summary>
         /// Delay between auto save in seconds
@@ -53,13 +54,24 @@ namespace Game.SavingSystem
             {
                 yield return new WaitForSecondsRealtime(DelayBetweenSave);
                 _saving = true;
-                Debug.Log("Auto Save Start");
-                yield return new WaitForSecondsRealtime(0.5f);
-                LevelManager.Instance.SaveData();
-                yield return new WaitForSecondsRealtime(0.5f);
-                Debug.Log("Auto Save End");
+                yield return Save();
                 _saving = false;
             }
+        }
+
+        private IEnumerator Save()
+        {
+#if ATLAS_DEBUG
+            Debug.Log("Auto Save - Starting");
+#endif  
+            _autoSaveEffect.SetActive(true);
+            yield return new WaitForSecondsRealtime(0.5f);
+            LevelManager.Instance.SaveData();
+            yield return new WaitForSecondsRealtime(0.5f);
+            _autoSaveEffect.SetActive(false);
+#if ATLAS_DEBUG
+            Debug.Log("Auto Save - Finished");
+#endif  
         }
     }
 }

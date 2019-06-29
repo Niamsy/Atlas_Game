@@ -177,7 +177,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 0
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -1365,6 +1365,31 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 8005249596451471615, guid: 4daf79f93c82d3541b91d9ba76ebd526,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8005249596451471615, guid: 4daf79f93c82d3541b91d9ba76ebd526,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8005249596451471615, guid: 4daf79f93c82d3541b91d9ba76ebd526,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6773461439840680875, guid: 4daf79f93c82d3541b91d9ba76ebd526,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6773461439840680875, guid: 4daf79f93c82d3541b91d9ba76ebd526,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3935232942549982018, guid: 4daf79f93c82d3541b91d9ba76ebd526,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -1390,21 +1415,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8005249596451471615, guid: 4daf79f93c82d3541b91d9ba76ebd526,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8005249596451471615, guid: 4daf79f93c82d3541b91d9ba76ebd526,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8005249596451471615, guid: 4daf79f93c82d3541b91d9ba76ebd526,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8738127467413000584, guid: 4daf79f93c82d3541b91d9ba76ebd526,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -1426,16 +1436,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5214156751131798236, guid: 4daf79f93c82d3541b91d9ba76ebd526,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6773461439840680875, guid: 4daf79f93c82d3541b91d9ba76ebd526,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6773461439840680875, guid: 4daf79f93c82d3541b91d9ba76ebd526,
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

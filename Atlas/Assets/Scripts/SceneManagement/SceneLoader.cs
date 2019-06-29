@@ -104,6 +104,7 @@ namespace SceneManagement
                 yield return null;
                 Progress = startProgress + operation.progress * percentageOfTotalProgress;
             }
+            
         }
 
         public void QuitTheGame()
