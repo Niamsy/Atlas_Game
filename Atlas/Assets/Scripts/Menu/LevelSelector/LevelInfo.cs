@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Menu.LevelSelector
 {
+    [CreateAssetMenu(fileName = "LevelInfo", menuName = "Menu/LevelInfo", order = 1)]
     public class LevelInfo : ScriptableObject
     {
         [Header("LevelInfo")]

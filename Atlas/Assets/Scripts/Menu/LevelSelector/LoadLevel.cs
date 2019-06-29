@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LoadLevel : MonoBehaviour
 {
@@ -8,6 +9,12 @@ public class LoadLevel : MonoBehaviour
     void Start()
     {
         
+    }
+
+    public void LoadSceneIndex(int index)
+    {
+        Debug.Log("sceneBuildIndex to load: " + index);
+        SceneManager.LoadScene(index);
     }
 
     // Update is called once per frame
