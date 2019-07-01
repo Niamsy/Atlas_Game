@@ -245,6 +245,7 @@ namespace Player
             m_VerticalVelocity -= gravity * Time.deltaTime;
             m_MoveVector.y = m_VerticalVelocity;
             m_CharacterController.Move(m_MoveVector * Time.deltaTime);
+            CheckForDeath();
         }
 
         void RotatePlayerAndGetMoveDirection()
