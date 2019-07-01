@@ -4,7 +4,9 @@ using InputManagement;
 using Game;
 using Game.Player;
 using Game.Inventory;
+using Game.SavingSystem;
 using Player.Scripts;
+using UnityEngine.InputSystem;
 
 namespace Player
 {
@@ -67,8 +69,6 @@ namespace Player
 
         #region Sow Variables
         public Vector3 plantPosition = Vector3.zero;
-        private bool _canSow = false;
-        private float decay = 0f;
         #endregion
 
         #region accessible properties
@@ -87,7 +87,7 @@ namespace Player
             }
         }
 
-        public bool IsInteracting { get => InteractValue != 0; }
+        public bool IsInteracting => InteractValue != 0;
 
         public int InteractValue
         {
@@ -100,7 +100,7 @@ namespace Player
             get { return InteractValue == AInteractable.InteractAnim.pick.ToInt(); }
         }
 
-        public bool IsUsingItem { get => UseItemValue != 0; }
+        public bool IsUsingItem => UseItemValue != 0;
 
         public int UseItemValue
         {
@@ -175,30 +175,30 @@ namespace Player
 
         private void OnEnable()
         {
-            GameControl.Instance.InputControls.Player.Movement.performed += ctx => GetMovementIput(ctx.ReadValue<Vector2>());
-            GameControl.Instance.InputControls.Player.Movement.canceled += ctx => ResetMovementInput(ctx.ReadValue<Vector2>());
-            GameControl.Instance.InputControls.Player.Movement.Enable();
-            GameControl.Instance.InputControls.Player.Jump.performed += ctx => Jump();
-            GameControl.Instance.InputControls.Player.Jump.Enable();
-            GameControl.Instance.InputControls.Player.Interact.performed += ctx => Interact();
-            GameControl.Instance.InputControls.Player.Interact.Enable();
-            GameControl.Instance.InputControls.Player.UseItem.performed += ctx => UseItem();
-            GameControl.Instance.InputControls.Player.UseItem.canceled += ctx => CancelUseItem();
-            GameControl.Instance.InputControls.Player.UseItem.Enable();
+            SaveManager.Instance.InputControls.Player.Movement.performed += ctx => GetMovementIput(ctx.ReadValue<Vector2>());
+            SaveManager.Instance.InputControls.Player.Movement.canceled += ctx => ResetMovementInput(ctx.ReadValue<Vector2>());
+            SaveManager.Instance.InputControls.Player.Movement.Enable();
+            SaveManager.Instance.InputControls.Player.Jump.performed += Jump;
+            SaveManager.Instance.InputControls.Player.Jump.Enable();
+            SaveManager.Instance.InputControls.Player.Interact.performed += ctx => Interact();
+            SaveManager.Instance.InputControls.Player.Interact.Enable();
+            SaveManager.Instance.InputControls.Player.UseItem.performed += ctx => UseItem();
+            SaveManager.Instance.InputControls.Player.UseItem.canceled += ctx => CancelUseItem();
+            SaveManager.Instance.InputControls.Player.UseItem.Enable();
         }
 
         private void OnDisable()
         {
-            GameControl.Instance.InputControls.Player.Movement.performed -= ctx => GetMovementIput(ctx.ReadValue<Vector2>());
-            GameControl.Instance.InputControls.Player.Movement.canceled -= ctx => ResetMovementInput(ctx.ReadValue<Vector2>());
-            GameControl.Instance.InputControls.Player.Movement.Disable();
-            GameControl.Instance.InputControls.Player.Jump.performed -= ctx => Jump();
-            GameControl.Instance.InputControls.Player.Jump.Disable();
-            GameControl.Instance.InputControls.Player.Interact.performed -= ctx => Interact();
-            GameControl.Instance.InputControls.Player.Interact.Disable();
-            GameControl.Instance.InputControls.Player.UseItem.performed -= ctx => UseItem();
-            GameControl.Instance.InputControls.Player.UseItem.canceled -= ctx => CancelUseItem();
-            GameControl.Instance.InputControls.Player.UseItem.Disable();
+            SaveManager.Instance.InputControls.Player.Movement.performed -= ctx => GetMovementIput(ctx.ReadValue<Vector2>());
+            SaveManager.Instance.InputControls.Player.Movement.canceled -= ctx => ResetMovementInput(ctx.ReadValue<Vector2>());
+            SaveManager.Instance.InputControls.Player.Movement.Disable();
+            SaveManager.Instance.InputControls.Player.Jump.performed -= Jump;
+            SaveManager.Instance.InputControls.Player.Jump.Disable();
+            SaveManager.Instance.InputControls.Player.Interact.performed -= ctx => Interact();
+            SaveManager.Instance.InputControls.Player.Interact.Disable();
+            SaveManager.Instance.InputControls.Player.UseItem.performed -= ctx => UseItem();
+            SaveManager.Instance.InputControls.Player.UseItem.canceled -= ctx => CancelUseItem();
+            SaveManager.Instance.InputControls.Player.UseItem.Disable();
         }
         #endregion
 
@@ -286,10 +286,13 @@ namespace Player
         /// <summary>
         /// The player jump
         /// </summary>
-        public void Jump()
+        public void Jump(InputAction.CallbackContext ctx)
         {
-            m_VerticalVelocity = jumpHeight;
-            m_Animator.SetTrigger(_HashJump);
+            if (IsGrounded)
+            {
+                m_VerticalVelocity = jumpHeight;
+                m_Animator.SetTrigger(_HashJump);
+            }
         }
 
         private void Interact()

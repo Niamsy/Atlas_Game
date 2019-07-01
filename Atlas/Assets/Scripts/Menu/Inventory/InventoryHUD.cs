@@ -7,6 +7,7 @@ using AtlasAudio;
 using Menu.Inventory.ItemDescription;
 using SceneManagement;
 using System;
+using Game.SavingSystem;
 using UnityEngine.InputSystem;
 
 public class InventoryHUD : MenuWidget
@@ -24,14 +25,14 @@ public class InventoryHUD : MenuWidget
 
     private void OnEnable()
     {
-        GameControl.Instance.InputControls.Player.Inventory.performed += ctx => OpenCloseInventory(ctx);
-        GameControl.Instance.InputControls.Player.Inventory.Enable();
+        SaveManager.Instance.InputControls.Player.Inventory.performed += OpenCloseInventory;
+        SaveManager.Instance.InputControls.Player.Inventory.Enable();
     }
 
     private void OnDisable()
     {
-        GameControl.Instance.InputControls.Player.Inventory.performed -= ctx => OpenCloseInventory(ctx);
-        GameControl.Instance.InputControls.Player.Inventory.Disable();
+        SaveManager.Instance.InputControls.Player.Inventory.performed -= OpenCloseInventory;
+        SaveManager.Instance.InputControls.Player.Inventory.Disable();
     }
 
     private void OpenCloseInventory(InputAction.CallbackContext obj)

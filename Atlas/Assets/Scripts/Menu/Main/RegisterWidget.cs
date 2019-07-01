@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace Menu.Main
 {
-    public class RegisterWidget : MainMenuWidget
+    public class RegisterWidget : RequestManagerWidget
     {
         [SerializeField] private InputField _username;
         [SerializeField] private InputField _emailAddress;

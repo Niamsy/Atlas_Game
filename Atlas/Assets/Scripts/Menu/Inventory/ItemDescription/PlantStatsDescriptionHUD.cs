@@ -7,22 +7,22 @@ namespace Menu.Inventory.ItemDescription
 {
     public class PlantStatsDescriptionHUD : ASubItemDescriptionHUD
     {
-        [SerializeField] private FloatDisplay _maxHeight;
-        [SerializeField] private FloatDisplay _growthDuration;
+        [SerializeField] private FloatDisplay _maxHeight = null;
+        [SerializeField] private FloatDisplay _growthDuration = null;
 
-        [SerializeField] private RangeFloatDisplay _soilPh;
-        [SerializeField] private RangeFloatDisplay _soilHumidity;
-        [SerializeField] private RangeFloatDisplay _sunExposure;
-        [SerializeField] private RangeFloatDisplay _coldResistance;
+        [SerializeField] private RangeFloatDisplay _soilPh = null;
+        [SerializeField] private RangeFloatDisplay _soilHumidity = null;
+        [SerializeField] private RangeFloatDisplay _sunExposure = null;
+        [SerializeField] private RangeFloatDisplay _coldResistance = null;
         
-        [SerializeField] private EnumDisplay _reproductions;
-        [SerializeField] private EnumDisplay _soilType;
-        [SerializeField] private EnumDisplay _plantContainers;
+        [SerializeField] private EnumDisplay _reproductions = null;
+        [SerializeField] private EnumDisplay _soilType = null;
+        [SerializeField] private EnumDisplay _plantContainers = null;
 
-        [SerializeField] private MonthRangeDisplay _plantingPeriods;
-        [SerializeField] private MonthRangeDisplay _floweringPeriods;
-        [SerializeField] private MonthRangeDisplay _harvestPeriods;
-        [SerializeField] private MonthRangeDisplay _cuttingPeriods;
+        [SerializeField] private MonthRangeDisplay _plantingPeriods = null;
+        [SerializeField] private MonthRangeDisplay _floweringPeriods = null;
+        [SerializeField] private MonthRangeDisplay _harvestPeriods = null;
+        [SerializeField] private MonthRangeDisplay _cuttingPeriods = null;
         /*
         [SerializeField] private GrowthRate GrowthRate;
         */

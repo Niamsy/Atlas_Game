@@ -1,32 +1,23 @@
+using Game.SavingSystem;
+using Game.SavingSystem.Datas;
 using UnityEngine;
 
 namespace Game.DayNight
 {
     [RequireComponent(typeof(CalendarManager))]
-    public class DayNightSaver : MonoBehaviour
+    public class DayNightSaver : MapSavingBehaviour
     {
         private CalendarManager _calendar;
-        private float _lastSavedTime = 0f;
 
-        public void Save()
+        protected override void SavingMapData(MapData data)
         {
-            GameControl.Instance.GameData.CalendarData = _calendar.ActualDate;
+            data.CalendarData = _calendar.ActualDate;
         }
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             _calendar = GetComponent<CalendarManager>();
-            _calendar.ActualDate = GameControl.Instance.GameData.CalendarData;
-            _lastSavedTime = Time.time;
-        }
-
-        void Update()
-        {
-            if (Time.time - _lastSavedTime > 1.0f)
-            {
-                Save();
-                _lastSavedTime = Time.time;
-            }
         }
     }
 }

@@ -14,11 +14,11 @@ namespace Game.Item
         [SerializeField] private int _id;
         public int Id => _id;
 
-        [SerializeField] private GameObject _prefabDroppedGO;
+        [SerializeField] private GameObject _prefabDroppedGO = null;
         public GameObject PrefabDroppedGO => _prefabDroppedGO;
 
         protected GameObject EquipedObject;
-        [SerializeField] private GameObject _prefabHoldedGO;
+        [SerializeField] private GameObject _prefabHoldedGO = null;
         public GameObject PrefabHoldedGO => _prefabHoldedGO;
 
         public virtual int MaxStackSize => 100;
