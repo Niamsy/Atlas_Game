@@ -4,11 +4,8 @@ using UnityEngine.UI;
 
 namespace Menu.Main
 {
-    public class ConnectionWidget : MainMenuWidget
+    public class ConnectionWidget : RequestManagerWidget
     {
-        public int NextSceneIndex = 2;
-        public int MainMenuSceneIndex = 1;
-        
         [SerializeField] private InputField _username;
         [SerializeField] private InputField _password;
         
@@ -16,6 +13,7 @@ namespace Menu.Main
         [SerializeField] private Button     _registerButton;
         [SerializeField] private Button     _passwordLost;
 
+        [SerializeField] private MenuWidget _nextWidget;
         #region Initialisation/Destruction
         protected override void InitialiseWidget()
         {
@@ -53,7 +51,8 @@ namespace Menu.Main
         /// </summary>
         public void Connect()
         {
-            ActualRequestManager.Connect(_username.text, _password.text);
+            Debug.Log("Connection " +
+                      ActualRequestManager.Connect(_username.text, _password.text));
             UpdateButtonState();
         }
         private void ConnectionFinished(bool success, string message)
@@ -62,8 +61,8 @@ namespace Menu.Main
 
             if (success)
             {
-                Debug.Log("CONNECTED");
-                SceneLoader.Instance.LoadScene(NextSceneIndex, MainMenuSceneIndex);
+                Close();
+                _nextWidget.Open();
             }
             else
                 ErrorText.text = message;

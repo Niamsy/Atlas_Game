@@ -154,13 +154,13 @@ namespace Plants.Plant
         {
             MeshRender = GetComponent<MeshRenderer>();
             SetPlantName();
-            MapManager.PlantsSystem.AddPlantToTheMap(this);
+            LevelManager.PlantsSystem.AddPlantToTheMap(this);
         }
 
         private void OnDestroy()
         {
-            if (MapManager.PlantsSystem != null)
-                MapManager.PlantsSystem.RemovePlantFromTheMap(this);
+            if (LevelManager.PlantsSystem != null)
+                LevelManager.PlantsSystem.RemovePlantFromTheMap(this);
         }
         private void UpdateProducer()
         {

@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4322043825907476}
-  - component: {fileID: 114636355673813890}
+  - component: {fileID: 1154630901297721653}
   m_Layer: 0
-  m_Name: GameControl
+  m_Name: SaveManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114636355673813890
+--- !u!114 &1154630901297721653
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,23 +43,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccf6c6bd3c6f7a147bf136963a3ef4f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameData:
+  _accountData:
+    Profils: []
+    ID: 0
+  _mapData:
+    Plants: []
+    DroppedItems: []
     Inventory: []
     EquippedHand:
       ID: 0
       Quantity: 0
     TransformData:
       Position:
-        x: -1133.5
-        y: 109.648
-        z: -316.73
+        x: 0
+        y: 0
+        z: 0
       Rotation:
         w: 0
         x: 0
         y: 0
         z: 0
-  MapData:
-    Plants: []
-    DroppedItems: []
-  LoadData: 1
-  SaveData: 1
+    CalendarData:
+      Hours: 0
+      Minutes: 0
+      Seconds: 0
+      Day: 1
+      Month: 1
+      Year: 0
+  _selectedProfil: -1

@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace Menu.Main
 {
-    public class RetreivePasswordWidget : MainMenuWidget
+    public class RetreivePasswordWidget : RequestManagerWidget
     {
         [SerializeField] private InputField _email;
 

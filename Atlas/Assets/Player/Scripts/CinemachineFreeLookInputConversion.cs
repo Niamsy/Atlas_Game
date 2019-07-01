@@ -1,6 +1,7 @@
 ﻿using System;
 using Cinemachine;
 using Game;
+using Game.SavingSystem;
 using UnityEngine;
 
 [RequireComponent(typeof(CinemachineFreeLook))]
@@ -24,36 +25,36 @@ public class CinemachineFreeLookInputConversion : MonoBehaviour
 
     private void OnEnable()
     {
-        GameControl.Instance.InputControls.Player.CameraMovement.performed += ctx => CameraMovement(ctx.ReadValue<Vector2>());
-        GameControl.Instance.InputControls.Player.CameraMovement.canceled += ctx => CancelCameraMovement(ctx.ReadValue<Vector2>());
-        GameControl.Instance.InputControls.Player.CameraMovement.Enable();
+        SaveManager.Instance.InputControls.Player.CameraMovement.performed += ctx => CameraMovement(ctx.ReadValue<Vector2>());
+        SaveManager.Instance.InputControls.Player.CameraMovement.canceled += ctx => CancelCameraMovement(ctx.ReadValue<Vector2>());
+        SaveManager.Instance.InputControls.Player.CameraMovement.Enable();
 
         //BUG ? new input system trigger scroll wheel Input when mouse move
-        GameControl.Instance.InputControls.Player.CameraZoom.performed += ctx => CameraZoom(ctx.ReadValue<Vector2>());
-        GameControl.Instance.InputControls.Player.CameraZoom.canceled += ctx => CancelCameraZoom(ctx.ReadValue<Vector2>());
-        GameControl.Instance.InputControls.Player.CameraZoom.Enable();
+        SaveManager.Instance.InputControls.Player.CameraZoom.performed += ctx => CameraZoom(ctx.ReadValue<Vector2>());
+        SaveManager.Instance.InputControls.Player.CameraZoom.canceled += ctx => CancelCameraZoom(ctx.ReadValue<Vector2>());
+        SaveManager.Instance.InputControls.Player.CameraZoom.Enable();
 
-        GameControl.Instance.InputControls.Player.CameraClick.performed += ctx => CameraClick();
-        GameControl.Instance.InputControls.Player.CameraClick.canceled += ctx => CancelCameraClick();
-        GameControl.Instance.InputControls.Player.CameraClick.Enable();
+        SaveManager.Instance.InputControls.Player.CameraClick.performed += ctx => CameraClick();
+        SaveManager.Instance.InputControls.Player.CameraClick.canceled += ctx => CancelCameraClick();
+        SaveManager.Instance.InputControls.Player.CameraClick.Enable();
 
-        GameControl.Instance.InputControls.Player.RecenterCamera.performed += ctx => RecenterCamera();
-        GameControl.Instance.InputControls.Player.RecenterCamera.Enable();
+        SaveManager.Instance.InputControls.Player.RecenterCamera.performed += ctx => RecenterCamera();
+        SaveManager.Instance.InputControls.Player.RecenterCamera.Enable();
     }
 
     private void OnDisable()
     {
-        GameControl.Instance.InputControls.Player.CameraMovement.performed -= ctx => CameraMovement(ctx.ReadValue<Vector2>());
-        GameControl.Instance.InputControls.Player.CameraMovement.canceled -= ctx => CancelCameraMovement(ctx.ReadValue<Vector2>());
-        GameControl.Instance.InputControls.Player.CameraMovement.Disable();
-        GameControl.Instance.InputControls.Player.CameraZoom.performed -= ctx => CameraZoom(ctx.ReadValue<Vector2>());
-        GameControl.Instance.InputControls.Player.CameraZoom.canceled -= ctx => CancelCameraZoom(ctx.ReadValue<Vector2>());
-        GameControl.Instance.InputControls.Player.CameraZoom.Disable();
-        GameControl.Instance.InputControls.Player.CameraClick.performed -= ctx => CameraClick();
-        GameControl.Instance.InputControls.Player.CameraClick.canceled -= ctx => CancelCameraClick();
-        GameControl.Instance.InputControls.Player.CameraClick.Disable();
-        GameControl.Instance.InputControls.Player.RecenterCamera.performed -= ctx => RecenterCamera();
-        GameControl.Instance.InputControls.Player.RecenterCamera.Disable();
+        SaveManager.Instance.InputControls.Player.CameraMovement.performed -= ctx => CameraMovement(ctx.ReadValue<Vector2>());
+        SaveManager.Instance.InputControls.Player.CameraMovement.canceled -= ctx => CancelCameraMovement(ctx.ReadValue<Vector2>());
+        SaveManager.Instance.InputControls.Player.CameraMovement.Disable();
+        SaveManager.Instance.InputControls.Player.CameraZoom.performed -= ctx => CameraZoom(ctx.ReadValue<Vector2>());
+        SaveManager.Instance.InputControls.Player.CameraZoom.canceled -= ctx => CancelCameraZoom(ctx.ReadValue<Vector2>());
+        SaveManager.Instance.InputControls.Player.CameraZoom.Disable();
+        SaveManager.Instance.InputControls.Player.CameraClick.performed -= ctx => CameraClick();
+        SaveManager.Instance.InputControls.Player.CameraClick.canceled -= ctx => CancelCameraClick();
+        SaveManager.Instance.InputControls.Player.CameraClick.Disable();
+        SaveManager.Instance.InputControls.Player.RecenterCamera.performed -= ctx => RecenterCamera();
+        SaveManager.Instance.InputControls.Player.RecenterCamera.Disable();
     }
 
     private float GetAxisCustom(string axisName)

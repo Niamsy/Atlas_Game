@@ -1,29 +1,17 @@
 ﻿using System.Collections.Generic;
 using Game;
 using Game.SavingSystem;
+using Game.SavingSystem.Datas;
 using Plants.Plant;
 using UnityEngine;
 
 namespace Plants
 {
-    public class PlantSystem : MonoBehaviour
+    public class PlantSystem : MapSavingBehaviour
     {
         private List<PlantModel> _models = new List<PlantModel>();
 
         #region Methods
-
-        private void Awake()
-        {
-            GameControl.BeforeSavingData += Save;
-            GameControl.UponLoadingMapData += Loading;
-        }
-
-        private void OnDestroy()
-        {
-            GameControl.BeforeSavingData -= Save;
-            GameControl.UponLoadingMapData -= Loading;
-        }
-
         public void Update()
         {
             if (Input.GetKeyDown(KeyCode.N))
@@ -66,20 +54,21 @@ namespace Plants
         #endregion
 
         #region Load/Save
-
-        public void Save(GameControl gameControl)
+        protected override void SavingMapData(MapData data)
         {
             MapData.PlantSaveData[] plantSaveDatas = new MapData.PlantSaveData[_models.Count];
             for (int x = 0; x < _models.Count; x++)
                 plantSaveDatas[x] = new MapData.PlantSaveData(_models[x]);
-            gameControl.MapData.Plants = plantSaveDatas;
+            data.Plants = plantSaveDatas;
         }
 
-        public void Loading(GameControl gameControl)
+        protected override void LoadingMapData(MapData data)
         {
+            if (data.Plants == null)
+                return;
             foreach (var plant in _models)
                 Destroy(plant.gameObject);
-            foreach (var plant in gameControl.MapData.Plants)
+            foreach (var plant in data.Plants)
             {
                 var plantStats = GetPlantForID(plant.ID);
                 if (plantStats)

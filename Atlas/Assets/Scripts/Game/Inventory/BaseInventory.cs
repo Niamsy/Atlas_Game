@@ -18,19 +18,6 @@ namespace Game.Inventory
         }
 
         #region Initialisation / Destruction
-        /// <summary>
-        /// ""Constructor""
-        /// </summary>
-        private void Awake()
-        {
-            InitializeInventory();
-        }
-
-        private void OnDestroy()
-        {
-            DestroyInventory();
-        }
-
         protected void InitMapWithSize(int size)
         {
             Slots = new List<ItemStack>();
@@ -38,9 +25,6 @@ namespace Game.Inventory
             for (int x = 0; x < size; x++)
                 Slots.Add(new ItemStack());
         }
-
-        protected virtual void InitializeInventory() { }
-        protected virtual void DestroyInventory() { }
         #endregion
 
         public ItemStack this[int index]
@@ -82,17 +66,13 @@ namespace Game.Inventory
             foreach (ItemStack itemStack in Slots)
             {
                 if (itemStack.FuseStack(newItem) && newItem.IsEmpty)
-                {
-                    Debug.LogWarning("Fuse stack");
                     return (null);
-                }
             }
 
             foreach (ItemStack itemStack in Slots)
             {
                 if (itemStack.IsEmpty)
                 {
-                    Debug.LogWarning("Swap stack");
                     itemStack.SwapStack(newItem);
                     return (null);
                 }
@@ -144,6 +124,46 @@ namespace Game.Inventory
             float anglePerObj = 360f / totalObj;
             for (int x = 0; x < Slots.Count; x++)
                 Drop(Slots[x], Quaternion.Euler(0, x * anglePerObj, 0) * transform.forward);
+        }
+
+        public int CountItems(Item.ItemAbstract item)
+        {
+            int total = 0;
+
+            foreach (ItemStack itemStack in Slots)
+            {
+                if (itemStack.Content.Id == item.Id)
+                {
+                    total += itemStack.Quantity;
+                }
+            }
+
+            return total;
+        }
+
+        // Be sure to check the presence of required items with CountItems before
+        // Destroy the first items encountered in the inventory until the required quantity 
+        // is reached or all items are destroyed
+        public void DestroyFirsts(Item.ItemAbstract itemToDestroy, int quantity)
+        {
+            foreach (ItemStack itemStack in Slots)
+            {
+                if (itemStack.Content.Id == itemToDestroy.Id)
+                {
+                    if (itemStack.Quantity <= quantity)
+                    {
+                        quantity -= itemStack.Quantity;
+                        itemStack.EmptyStack();
+                    }
+                    else
+                    {
+                        itemStack.ModifyQuantity(itemStack.Quantity - quantity);
+                        quantity = 0;
+                    }
+                }
+
+                if (quantity <= 0) break;
+            }
         }
     }
 }
