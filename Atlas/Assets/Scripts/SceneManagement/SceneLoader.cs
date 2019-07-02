@@ -34,9 +34,8 @@ namespace SceneManagement
         public static event SceneLoadingEvent OnSceneLoading;
         public static event SceneLoadingEvent OnSceneUnloading;
         
-        [SerializeField] private GameObject _loadingScreen;
-        private float _loadingProgress;
-        private Coroutine _loading;
+        [SerializeField] private GameObject _loadingScreen = null;
+        private Coroutine _loading = null;
         
         private void Awake()
         {

@@ -10,14 +10,14 @@ namespace Menu.Settings
     {
         #region Variables
         [Header("Specials settings")]
-        [SerializeField] private ResolutionDropdown _resolution;
-        [SerializeField] private FullscreenDropdown _fullscreen;
+        [SerializeField] private ResolutionDropdown _resolution = null;
+        [SerializeField] private FullscreenDropdown _fullscreen = null;
         
         [Header("Exits buttons")]
-        [SerializeField] private Button             _saveClose;
-        [SerializeField] private Button             _close;
+        [SerializeField] private Button             _saveClose = null;
+        [SerializeField] private Button             _close = null;
         
-        private SettingEntry[] _settings;
+        private SettingEntry[] _settings = null;
         #endregion
 
         protected override void Awake()

@@ -55,11 +55,11 @@ namespace Game
             #region Private Properties
             [Header("Recipe properties")]
             [SerializeField]
-            private Ingredient[] _Ingredients;
+            private Ingredient[] _Ingredients = null;
             [SerializeField]
-            private Product[] _Products;
+            private Product[] _Products = null;
             [SerializeField]
-            private RecipeCategory _Category;
+            private RecipeCategory _Category = null;
             #endregion
 
             #region Public Methods

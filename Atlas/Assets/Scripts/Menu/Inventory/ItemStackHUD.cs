@@ -12,20 +12,17 @@ namespace Menu.Inventory
     {
         #region Variables
 
-        [SerializeField] private Image     _sprite;
-        [SerializeField] private Text      _quantity;
-        [SerializeField] private GameObject _dropHint;
+        [SerializeField] private Image     _sprite = null;
+        [SerializeField] private Text      _quantity = null;
+        [SerializeField] private GameObject _dropHint = null;
 
-        protected Button        Button;
-        protected ItemStack     ActualStack;
+        protected Button        Button = null;
+        protected ItemStack     ActualStack = null;
 
-        private RectTransform    _rectTransform;
-        private Canvas          _rootCanvas;
-        private bool _mouseOver;
-        private bool ShouldBeDisplayed
-        {
-            get { return ((ActualStack != null) && (!ActualStack.IsEmpty)); }
-        }
+        private RectTransform    _rectTransform = null;
+        private Canvas          _rootCanvas = null;
+        private bool _mouseOver = false;
+        private bool ShouldBeDisplayed => ((ActualStack != null) && (!ActualStack.IsEmpty));
 
         private Action<ItemStack> OnDrop;
         #endregion

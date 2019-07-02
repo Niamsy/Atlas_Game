@@ -6,7 +6,7 @@ namespace Menu.Inventory
 {
     public class InventoryGridHUD : MonoBehaviour
     {
-        [SerializeField] private BaseInventory _actualBaseInventory;
+        [SerializeField] private BaseInventory _actualBaseInventory = null;
         private List<ItemStackHUD> _slots = new List<ItemStackHUD>();
 
         private void OnEnable()

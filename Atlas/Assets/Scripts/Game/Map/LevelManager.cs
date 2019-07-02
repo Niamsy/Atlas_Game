@@ -17,10 +17,10 @@ namespace Game.Map
         #region Variables
         public bool LoadAndSave = true;
 
-        [SerializeField] private PlantSystem _plantsSystem;
-        [SerializeField] private DroppedItemManager _droppedItemManager;
-        private SaveManager _saveManager;
-        private int _sceneIndex;
+        [SerializeField] private PlantSystem _plantsSystem = null;
+        [SerializeField] private DroppedItemManager _droppedItemManager = null;
+        private SaveManager _saveManager = null;
+        private int _sceneIndex = 0;
         #endregion
         
         #region Methods

@@ -17,9 +17,9 @@ namespace Plants
         }
         [Header("Gameplay")]
         [SerializeField]
-        private SoilType            _soils;
+        private SoilType            _soils = 0;
         [SerializeField]
-        private List<Need>          _needs;
+        private List<Need>          _needs = null;
         [SerializeField]
         private float               _height = 0;
         [SerializeField]

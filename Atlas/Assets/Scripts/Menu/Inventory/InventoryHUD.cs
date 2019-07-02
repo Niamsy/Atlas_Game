@@ -1,58 +1,59 @@
-﻿using Game;
-using Menu;
-using UnityEngine;
-using InputManagement;
+﻿using AtlasAudio;
 using AtlasEvents;
-using AtlasAudio;
+using Game;
+using Game.SavingSystem;
+using InputManagement;
 using Menu.Inventory.ItemDescription;
 using SceneManagement;
-using System;
-using Game.SavingSystem;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InventoryHUD : MenuWidget
+namespace Menu.Inventory
 {
-    protected override void InitialiseWidget()
+    public class InventoryHUD : MenuWidget
     {
-    }
-
-    [Header("Audio")] public Audio OnToggleGUIAudio;
-    public AudioEvent OnToggleGUIEvent;
-
-    [Header("Inventory Keys")] public InputKey _Inventory;
-
-    [SerializeField] private ItemDescriptionHUD _description;
-
-    private void OnEnable()
-    {
-        SaveManager.Instance.InputControls.Player.Inventory.performed += OpenCloseInventory;
-        SaveManager.Instance.InputControls.Player.Inventory.Enable();
-    }
-
-    private void OnDisable()
-    {
-        SaveManager.Instance.InputControls.Player.Inventory.performed -= OpenCloseInventory;
-        SaveManager.Instance.InputControls.Player.Inventory.Disable();
-    }
-
-    private void OpenCloseInventory(InputAction.CallbackContext obj)
-    {
-        Show(!Displayed);
-        if (OnToggleGUIAudio && OnToggleGUIEvent)
+        protected override void InitialiseWidget()
         {
-            OnToggleGUIEvent.Raise(OnToggleGUIAudio, null);
         }
-    }
 
-    public override void Show(bool display, bool force = false)
-    {
-        TimeManager.Instance.PauseGame(display);
-        base.Show(display, force);
-        _description.Reset();
-    }
+        [Header("Audio")] public Audio OnToggleGUIAudio = null;
+        public AudioEvent OnToggleGUIEvent = null;
 
-    public void QuitTheGame()
-    {
-        SceneLoader.Instance.QuitTheGame();
+        [Header("Inventory Keys")] public InputKey _Inventory = null;
+
+        [SerializeField] private ItemDescriptionHUD _description = null;
+
+        private void OnEnable()
+        {
+            SaveManager.Instance.InputControls.Player.Inventory.performed += OpenCloseInventory;
+            SaveManager.Instance.InputControls.Player.Inventory.Enable();
+        }
+
+        private void OnDisable()
+        {
+            SaveManager.Instance.InputControls.Player.Inventory.performed -= OpenCloseInventory;
+            SaveManager.Instance.InputControls.Player.Inventory.Disable();
+        }
+
+        private void OpenCloseInventory(InputAction.CallbackContext obj)
+        {
+            Show(!Displayed);
+            if (OnToggleGUIAudio && OnToggleGUIEvent)
+            {
+                OnToggleGUIEvent.Raise(OnToggleGUIAudio, null);
+            }
+        }
+
+        public override void Show(bool display, bool force = false)
+        {
+            TimeManager.Instance.PauseGame(display);
+            base.Show(display, force);
+            _description.Reset();
+        }
+
+        public void QuitTheGame()
+        {
+            SceneLoader.Instance.QuitTheGame();
+        }
     }
 }
