@@ -51,8 +51,7 @@ namespace Menu.Main
         /// </summary>
         public void Connect()
         {
-            Debug.Log("Connection " +
-                      ActualRequestManager.Connect(_username.text, _password.text));
+            ActualRequestManager.Connect(_username.text, _password.text);
             UpdateButtonState();
         }
         private void ConnectionFinished(bool success, string message)
