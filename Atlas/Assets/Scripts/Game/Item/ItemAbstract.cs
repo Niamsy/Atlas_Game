@@ -11,7 +11,7 @@ namespace Game.Item
     public abstract class ItemAbstract : ScriptableObject
     {
         [Header("Base item variables")]
-        [SerializeField] private int _id;
+        [SerializeField] private int _id = 0;
         public int Id => _id;
 
         [SerializeField] private GameObject _prefabDroppedGO = null;
@@ -23,19 +23,19 @@ namespace Game.Item
 
         public virtual int MaxStackSize => 100;
 
-        [SerializeField] private Sprite _sprite;
+        [SerializeField] private Sprite _sprite = null;
         public Sprite Sprite => _sprite;
 
-        [SerializeField] private LocalizedText _name;
+        [SerializeField] private LocalizedText _name = null;
         public string Name => _name;
 
-        [SerializeField] private LocalizedText _description;
+        [SerializeField] private LocalizedText _description = null;
         public string Description => _description;
 
-        [SerializeField] private LocalizedText _usageText;
+        [SerializeField] private LocalizedText _usageText = null;
         public string UsageText => _usageText;
 
-        [SerializeField] private PlayerAnimationData _animation;
+        [SerializeField] private PlayerAnimationData _animation = null;
         public PlayerAnimationData Animation => _animation;
 
         public virtual GameObject Equip(Transform parent)

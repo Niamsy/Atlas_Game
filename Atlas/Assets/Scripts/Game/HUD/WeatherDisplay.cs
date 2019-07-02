@@ -13,9 +13,9 @@ namespace Game.HUD
     
     public class WeatherDisplay : MonoBehaviour
     {
-        [SerializeField] private Weather _displayedValue;
+        [SerializeField] private Weather _displayedValue = 0;
 
-        [SerializeField] private Image[] _icons;
+        [SerializeField] private Image[] _icons = null;
 
         private void Start()
         {

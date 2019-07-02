@@ -5,7 +5,7 @@ namespace Menu.Main
 {
     public class RetreivePasswordSucessWidget : RequestManagerWidget
     {
-        [SerializeField] private LocalizedTextBehaviour _text;
+        [SerializeField] private LocalizedTextBehaviour _text = null;
         
         #region Initialisation/Destruction
         protected override void InitialiseWidget() {}

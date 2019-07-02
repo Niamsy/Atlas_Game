@@ -9,7 +9,7 @@ namespace Menu.Inventory
 	/// </summary>
 	public class InventoryItemStackHUD : ItemStackHUD
 	{
-		[SerializeField] private ItemDescriptionHUD _description;
+		[SerializeField] private ItemDescriptionHUD _description = null;
 
 		#region OnSelect/Deselect
 		public void OnSelected(BaseEventData eventData)

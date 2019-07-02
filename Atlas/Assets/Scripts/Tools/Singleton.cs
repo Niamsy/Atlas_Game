@@ -1,57 +1,58 @@
 ﻿using UnityEngine;
 
-public class Singleton<T> : MonoBehaviour where T : Singleton<T>
+namespace Tools
 {
-    #region Properties
-    /// <summary>
-    /// Returns the instance of this singleton.
-    /// </summary>
-    public static T Instance
+    public class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {
-        get
+        #region Properties
+        /// <summary>
+        /// Returns the instance of this singleton.
+        /// </summary>
+        public static T Instance
         {
-            if (instance == null)
+            get
             {
-                instance = (T)FindObjectOfType(typeof(T));
                 if (instance == null)
                 {
-                    Debug.LogError("An instance of " + typeof(T) + " is needed in the scene, but there is none.");
+                    instance = (T)FindObjectOfType(typeof(T));
+                    if (instance == null)
+                        Debug.LogError("An instance of " + typeof(T) + " is needed in the scene, but there is none.");
                 }
+                return instance;
             }
-            return instance;
         }
-    }
-    #endregion
+        #endregion
 
-    #region Methods
-    protected void Awake()
-    {
-        if (GetType() != typeof(T))
-            DestroySelf();
-
-        if (instance == null)
+        #region Methods
+        protected virtual void Awake()
         {
-            instance = this as T;
-            if (transform.parent == null)
-                DontDestroyOnLoad(gameObject);
+            if (GetType() != typeof(T))
+                DestroySelf();
+
+            if (instance == null)
+            {
+                instance = this as T;
+                if (transform.parent == null)
+                    DontDestroyOnLoad(gameObject);
+            }
+            else if (instance != this)
+                DestroySelf();
+
+            OnAwake();
         }
-        else if (instance != this)
-            DestroySelf();
 
-        OnAwake();
+        private void DestroySelf()
+        {
+            if (Application.isPlaying)
+                Destroy(this);
+            else
+                DestroyImmediate(this);
+        }
+        #endregion
+
+        protected virtual void OnAwake() { }
+
+        protected static T instance;
     }
-
-    private void DestroySelf()
-    {
-        if (Application.isPlaying)
-            Destroy(this);
-        else
-            DestroyImmediate(this);
-    }
-    #endregion
-
-    protected virtual void OnAwake() { }
-
-    protected static T instance;
 }
 

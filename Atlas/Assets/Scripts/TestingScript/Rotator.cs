@@ -4,7 +4,7 @@ namespace TestingScript
 {
 	public class Rotator : MonoBehaviour
 	{
-		[SerializeField] private float _degreesPerSecondes;
+		[SerializeField] private float _degreesPerSecondes = 45f;
 	
 		void Update ()
 		{

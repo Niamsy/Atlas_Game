@@ -7,7 +7,7 @@ namespace Game.SavingSystem
 {
     public class AutoSaveManager : MonoBehaviour
     {
-        [SerializeField] private GameObject _autoSaveEffect;
+        [SerializeField] private GameObject _autoSaveEffect = null;
         private bool _finishedLoading = false;
         /// <summary>
         /// Delay between auto save in seconds

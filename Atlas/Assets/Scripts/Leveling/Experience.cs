@@ -34,23 +34,23 @@ namespace Leveling
 
         #region Private Members
         [SerializeField]
-        private Variables.FloatVariable _Level;
+        private Variables.FloatVariable _Level = null;
         [SerializeField]
-        private Variables.FloatVariable _LevelFloor;
+        private Variables.FloatVariable _LevelFloor = null;
         [SerializeField]
-        private Variables.FloatVariable _LevelRoof;
+        private Variables.FloatVariable _LevelRoof = null;
         [SerializeField]
-        private Variables.FloatVariable _CurrentXP;
+        private Variables.FloatVariable _CurrentXP = null;
         [SerializeField]
-        private LevelingEvent _EGainXP;
+        private LevelingEvent _EGainXP = null;
         [SerializeField]
-        private LevelingEvent _EGainLevel;
+        private LevelingEvent _EGainLevel = null;
         [SerializeField]
-        private LevelingEvent _ECannotGainXP;
+        private LevelingEvent _ECannotGainXP = null;
         [SerializeField]
-        private LevelingEvent _ELoseXP;
+        private LevelingEvent _ELoseXP = null;
         [SerializeField]
-        private LevelingEvent _ELostLevel;
+        private LevelingEvent _ELostLevel = null;
         [SerializeField]
 
         private bool _CanGainXP = true;

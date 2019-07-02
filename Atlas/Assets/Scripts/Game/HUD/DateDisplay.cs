@@ -7,9 +7,9 @@ namespace Game.HUD
 {
     public class DateDisplay : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI _text;
-        [SerializeField] private LocalizedTextArray _months;
-        private CalendarManager _calendar;
+        [SerializeField] private TextMeshProUGUI _text = null;
+        [SerializeField] private LocalizedTextArray _months = null;
+        private CalendarManager _calendar = null;
 
         private void Start()
         {

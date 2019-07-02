@@ -16,11 +16,11 @@ namespace Player
     {
         #region Variables
 
-        [SerializeField] private HandSlots _handSlots;
+        [SerializeField] private HandSlots _handSlots = null;
         #region Public variables
 
         #region Inputs
-        public PlayerInputs _Inputs;
+        public PlayerInputs _Inputs = null;
         #endregion
 
         #region Movement configuration
@@ -30,7 +30,7 @@ namespace Player
         //[Tooltip("Multiply the Movement speed by this scale to obtain the sprint speed")]
         public float desiredRotationSpeed = 0.1f;
         public float allowPlayerRotation = 0.1f;
-        public bool blockRotationPlayer;
+        public bool blockRotationPlayer = false;
 
         [Header("Jump")]
         public float gravity = -30f;

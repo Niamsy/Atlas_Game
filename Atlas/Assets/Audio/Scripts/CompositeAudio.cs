@@ -14,7 +14,7 @@ namespace AtlasAudio
             public float Weight;
         }
 
-        public CompositeEntry[] Entries;
+        public CompositeEntry[] Entries = null;
 
         public override void Play(AudioSource source)
         {
