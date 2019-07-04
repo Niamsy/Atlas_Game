@@ -17,7 +17,10 @@ namespace Menu.Inventory
 
         void Start()
         {
-            _lastGetScannedPlant = SaveManager.Instance.AccountData.LastGetScannedPlant;
+            if (SaveManager.Instance.AccountData != null)
+                _lastGetScannedPlant = SaveManager.Instance.AccountData.LastGetScannedPlant;
+            else
+                _lastGetScannedPlant = DateTime.Now;
 
             if (RequestManager.Instance)
                 RequestManager.Instance.OnGetScannedPlantsRequestFinished += GetScannedPlantsFinished;

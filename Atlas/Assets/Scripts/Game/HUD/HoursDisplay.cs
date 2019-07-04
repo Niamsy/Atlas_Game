@@ -7,7 +7,7 @@ namespace Game.HUD
 {
     public class HoursDisplay : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI _text = null;
+        [SerializeField] private TextMeshProUGUI _text;
 
         private CalendarManager _calendar = null;
 
