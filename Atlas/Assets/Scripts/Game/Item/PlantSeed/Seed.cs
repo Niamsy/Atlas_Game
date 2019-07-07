@@ -14,7 +14,6 @@ namespace Game.Item.PlantSeed
 
         public override void Use(ItemStack selfStack)
         {
-            Debug.Log("Use Seed");
             //if (status != InputKeyStatus.Pressed)
             //    return;
             selfStack.ModifyQuantity(selfStack.Quantity - 1);
