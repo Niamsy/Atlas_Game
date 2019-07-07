@@ -31,10 +31,13 @@ namespace Game.DayNight
         #endregion
 
         #region Private Variables
-        [SerializeField]
-        private CalendarManager _calendar;
+        [SerializeField] private CalendarManager _calendar;
         private float _latitude = 90;
         private float _longitude = 170;
+
+        [Header("Events")]
+        [SerializeField] private AtlasEvents.Event _sunHide;
+        [SerializeField] private AtlasEvents.Event _sunShow;
         #endregion
 
         protected override void UpdateScene(Date date, float dayAdvancement, float dayAdvancement01)
@@ -47,6 +50,7 @@ namespace Game.DayNight
             
             if (Sun.enabled)
             {
+                if (_sunShow) _sunShow.Raise();
                 Sun.transform.localRotation =
                     Quaternion.Euler(SunPosition.Evaluate(dayAdvancement) - _latitude, _longitude, 0);
                 Sun.color = SunColor.Evaluate(dayAdvancement01);
@@ -54,6 +58,7 @@ namespace Game.DayNight
 
             if (Moon.enabled)
             {
+                if (_sunHide) _sunHide.Raise();
                 Moon.transform.localRotation =
                     Quaternion.Euler(MoonPosition.Evaluate(dayAdvancement) - _latitude, _longitude, 0);
                 Moon.color = MoonColor.Evaluate(dayAdvancement01);

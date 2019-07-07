@@ -45,7 +45,8 @@ namespace Game.SavingSystem
 
         private void OnDisable()
         {
-            StopCoroutine(_autoSaveCoroutine);
+            if (_autoSaveCoroutine != null)
+                StopCoroutine(_autoSaveCoroutine);
         }
 
         private IEnumerator AutoSave()
