@@ -18,7 +18,6 @@ namespace Game.Item.Tools.Bucket
 
         public override void Use(ItemStack selfStack)
         {
-            Debug.Log("Watering...");
             Behaviour.SetState(true);
             //if (status == InputKeyStatus.Holded)
             // Behaviour.SetState(true);
@@ -28,7 +27,6 @@ namespace Game.Item.Tools.Bucket
 
         public override bool CancelUse(ItemStack selfStack)
         {
-            Debug.Log("Stop watering...");
             Behaviour.SetState(false);
             return true;
         }

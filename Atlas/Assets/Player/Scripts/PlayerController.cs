@@ -350,10 +350,8 @@ namespace Player
 
         private void UseItem()
         {
-            Debug.Log("Try use item...");
             if (IsGrounded && !IsInteracting && _handSlots.IsObjectUsable)
             {
-                Debug.Log("Use...");
                 ResetSpeed();
                 UseItemValue = _handSlots.EquippedItem.Animation.anim.ToInt();
                 _handSlots.UseItem();
@@ -364,7 +362,6 @@ namespace Player
         {
             if (IsUsingItem && _handSlots.EquippedItem != null)
             {
-                Debug.Log("Cancel Use...");
                 if (_handSlots.CancelUse())
                     UseItemValue = -1;
             }
