@@ -351,6 +351,7 @@ GameObject:
   - component: {fileID: 4131723413893460861}
   - component: {fileID: 4131723413893460863}
   - component: {fileID: 4131723413893460860}
+  - component: {fileID: 755730739}
   m_Layer: 31
   m_Name: FullLoading
   m_TagString: Untagged
@@ -398,7 +399,7 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 35f862b3b7092ea4c8a5033e07b294d1, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
@@ -415,6 +416,20 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &755730739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4131723413893460858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaeddc6d3bfe2614c803c374c96b29d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PropertyName: _Cutoff
+  Value: 0
 --- !u!1 &5040744105532049612
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,6 +441,7 @@ GameObject:
   - component: {fileID: 2225182518607617588}
   - component: {fileID: 7604145282011057036}
   - component: {fileID: 7436013297556079070}
+  - component: {fileID: 7928682314202721546}
   m_Layer: 31
   m_Name: Text
   m_TagString: Untagged
@@ -494,6 +510,22 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Breath else you will die.
+--- !u!114 &7928682314202721546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5040744105532049612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 725bf5ddb878f09429d39010d9e2d59a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Component: {fileID: 7436013297556079070}
+  m_Property: text
+  m_LocalizedAsset: {fileID: 11400000, guid: bb6ec9fd46ed73d4b81a226ae892cb77, type: 2}
+  m_FormatArgs: []
 --- !u!1 &6793993065343940285
 GameObject:
   m_ObjectHideFlags: 0
@@ -560,7 +592,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 405b74612f112c4418d99ec760ee8aa4, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -594,6 +626,7 @@ GameObject:
   - component: {fileID: 7742699096588123411}
   - component: {fileID: 3554711195917771237}
   - component: {fileID: 5256365101916129245}
+  - component: {fileID: 4214715626335116877}
   m_Layer: 31
   m_Name: Title
   m_TagString: Untagged
@@ -662,6 +695,22 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'Tips:'
+--- !u!114 &4214715626335116877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7621172353083007755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 725bf5ddb878f09429d39010d9e2d59a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Component: {fileID: 5256365101916129245}
+  m_Property: text
+  m_LocalizedAsset: {fileID: 11400000, guid: 2e5eb3110aee85547942e218dd2fdb88, type: 2}
+  m_FormatArgs: []
 --- !u!1 &7758555480911846007
 GameObject:
   m_ObjectHideFlags: 0
