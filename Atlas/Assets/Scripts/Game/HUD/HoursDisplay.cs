@@ -9,7 +9,7 @@ namespace Game.HUD
     {
         [SerializeField] private TextMeshProUGUI _text;
 
-        private CalendarManager _calendar;
+        private CalendarManager _calendar = null;
 
         private void Start()
         {

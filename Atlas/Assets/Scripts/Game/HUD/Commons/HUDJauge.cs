@@ -13,9 +13,9 @@ namespace Game.HUD.Commons
         #endregion
 
         [Header("Objects references")]
-        [SerializeField] private Image _fill;
-        [SerializeField] private Image _prefill;
-        [SerializeField] private Text _valueText;
+        [SerializeField] private Image _fill = null;
+        [SerializeField] private Image _prefill = null;
+        [SerializeField] private Text _valueText = null;
         
         [Header("Parameters variables")]
         [Tooltip("The speed at which the fill try to reach the prefill when filling")]
@@ -29,28 +29,20 @@ namespace Game.HUD.Commons
         public float ThresholdCriticalValue = 0.5f;
 
         [Header("Sounds")]
-        [SerializeField] private SimpleAudio _fillAudio;
-        [SerializeField] private AudioSource _source;
+        [SerializeField] private SimpleAudio _fillAudio = null;
+        [SerializeField] private AudioSource _source = null;
         
-        private float _targetValue;
-        private float _value;
+        private float _targetValue = 0;
+        private float _value = 0;
         private float _minValue = 0;
-        private float _maxValue;
-        private bool _isValueCritical;
+        private float _maxValue = 0;
+        private bool _isValueCritical = false;
         
-        private float ActualPercentage01
-        {
-            get { return ((_value - _minValue) / (_maxValue - _minValue)); }
-        }
-        
-        private float ActualTargetPercentage01
-        {
-            get { return ((_targetValue - _minValue) / (_maxValue - _minValue)); }
-        }
-        public bool IsMoving
-        {
-            get { return (_value != _targetValue); }
-        }
+        private float ActualPercentage01 => ((_value - _minValue) / (_maxValue - _minValue));
+
+        private float ActualTargetPercentage01 => ((_targetValue - _minValue) / (_maxValue - _minValue));
+
+        public bool IsMoving => (_value != _targetValue);
 
         protected virtual void Awake()
         {

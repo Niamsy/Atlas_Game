@@ -5,12 +5,12 @@ namespace Menu.Main
 {
     public class RetreivePasswordWidget : RequestManagerWidget
     {
-        [SerializeField] private InputField _email;
+        [SerializeField] private InputField _email = null;
 
-        [SerializeField] private Button     _acceptButton;
-        [SerializeField] private Button     _returnButton;
+        [SerializeField] private Button     _acceptButton = null;
+        [SerializeField] private Button     _returnButton = null;
         
-        [SerializeField] private RetreivePasswordSucessWidget     _retreivePasswordSucess;
+        [SerializeField] private RetreivePasswordSucessWidget     _retreivePasswordSucess = null;
     
         #region Initialisation/Destruction
         protected override void InitialiseWidget()

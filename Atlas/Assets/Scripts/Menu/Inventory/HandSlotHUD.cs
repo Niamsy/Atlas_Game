@@ -6,10 +6,10 @@ namespace Menu.Inventory
 {
     public class HandSlotHUD : MonoBehaviour
     {
-        private HandSlots _handSlot;
+        private HandSlots _handSlot = null;
 
-        [SerializeField] private ItemStackHUD _handStackUI;
-        [SerializeField] private Text _useText;
+        [SerializeField] private ItemStackHUD _handStackUI = null;
+        [SerializeField] private Text _useText = null;
         
         private void Awake()
         {

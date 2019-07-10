@@ -6,14 +6,14 @@ namespace Menu.Main
 {
     public class ConnectionWidget : RequestManagerWidget
     {
-        [SerializeField] private InputField _username;
-        [SerializeField] private InputField _password;
+        [SerializeField] private InputField _username = null;
+        [SerializeField] private InputField _password = null;
         
-        [SerializeField] private Button     _connectionButton;
-        [SerializeField] private Button     _registerButton;
-        [SerializeField] private Button     _passwordLost;
+        [SerializeField] private Button     _connectionButton = null;
+        [SerializeField] private Button     _registerButton = null;
+        [SerializeField] private Button     _passwordLost = null;
 
-        [SerializeField] private MenuWidget _nextWidget;
+        [SerializeField] private MenuWidget _nextWidget = null;
         #region Initialisation/Destruction
         protected override void InitialiseWidget()
         {
@@ -51,8 +51,7 @@ namespace Menu.Main
         /// </summary>
         public void Connect()
         {
-            Debug.Log("Connection " +
-                      ActualRequestManager.Connect(_username.text, _password.text));
+            ActualRequestManager.Connect(_username.text, _password.text);
             UpdateButtonState();
         }
         private void ConnectionFinished(bool success, string message)
