@@ -5,7 +5,7 @@ namespace Menu.Inventory.ItemDescription.Details
 {
     public class FloatDisplay : StatisticDisplay<float>
     {
-        [SerializeField] private Text _text;
+        [SerializeField] private Text _text = null;
         
         public override void UpdateDisplay()
         {

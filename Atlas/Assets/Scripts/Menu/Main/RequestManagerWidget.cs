@@ -6,9 +6,9 @@ namespace Menu.Main
 {
     public abstract class RequestManagerWidget : MenuWidget
     {
-        protected RequestManager          ActualRequestManager;
-        private Selectable[]              _childSelectables;
-        [SerializeField] protected Text   ErrorText;
+        protected RequestManager          ActualRequestManager = null;
+        private Selectable[]              _childSelectables = null;
+        [SerializeField] protected Text   ErrorText = null;
 
         protected override void Awake()
         {

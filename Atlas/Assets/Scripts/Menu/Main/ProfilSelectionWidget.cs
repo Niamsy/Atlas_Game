@@ -33,9 +33,9 @@ namespace Menu.Main
 
         protected void SelectProfil(ProfilData data)
         {
-            if (false) //Delete
-                SaveManager.DestroyProfile(_saveManager.AccountData, data);
-            else if (data.Used == false) //Create
+            //if (false) //Delete
+            //    SaveManager.DestroyProfile(_saveManager.AccountData, data);
+            if (data.Used == false) //Create
                     SaveManager.InstantiateProfilToUse(_saveManager.AccountData, data, "Game Profil " + data.ID);
             else //Select Profil
             {

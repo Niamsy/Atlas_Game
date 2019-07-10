@@ -6,8 +6,8 @@ namespace Menu.Inventory.ItemDescription.Details
 {
     public class RangeFloatDisplay : StatisticDisplay<RangeFloat>
     {
-        [SerializeField] private Text _maxValue;
-        [SerializeField] private Text _minValue;
+        [SerializeField] private Text _maxValue = null;
+        [SerializeField] private Text _minValue = null;
         
         public override void UpdateDisplay()
         {

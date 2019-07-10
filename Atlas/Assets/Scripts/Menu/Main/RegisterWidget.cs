@@ -5,13 +5,13 @@ namespace Menu.Main
 {
     public class RegisterWidget : RequestManagerWidget
     {
-        [SerializeField] private InputField _username;
-        [SerializeField] private InputField _emailAddress;
-        [SerializeField] private InputField _password;
-        [SerializeField] private InputField _passwordConfirmation;
+        [SerializeField] private InputField _username = null;
+        [SerializeField] private InputField _emailAddress = null;
+        [SerializeField] private InputField _password = null;
+        [SerializeField] private InputField _passwordConfirmation = null;
         
-        [SerializeField] private Button     _registerButton;
-        [SerializeField] private Button     _returnButton;
+        [SerializeField] private Button     _registerButton = null;
+        [SerializeField] private Button     _returnButton = null;
     
         #region Initialisation/Destruction
         protected override void InitialiseWidget()

@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Tools;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Popup : Singleton<Popup>
 {
     #region members
+#pragma warning disable 414
     private static Popup popupInstance = null;
+#pragma warning restore 414
     public const float popupFadeDuration = 4; // Millisecond;
     public const float popupDuration = 4; // Millisecond;
     Color currentColor;

@@ -24,12 +24,12 @@ namespace Plants.Plant
 
         protected int current_stage = 0;
         [SerializeField]
-        private PlantConsumer _consumer;
+        private PlantConsumer _consumer = null;
         [SerializeField]
-        private PlantProducer _producer;
+        private PlantProducer _producer = null;
         private GameObject _currentModel = null;
         [SerializeField]
-        private Canvas _GuiCanvasName;
+        private Canvas _GuiCanvasName = null;
         private bool _reachedFinalStage = false;
         private bool _isSowed = false;
 

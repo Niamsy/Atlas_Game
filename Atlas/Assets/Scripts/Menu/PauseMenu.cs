@@ -11,7 +11,7 @@ namespace Menu
 	public class PauseMenu : MenuWidget
 	{
 		[Header("Pause specifics")]
-		[SerializeField] private SettingsMenu _settings;
+		[SerializeField] private SettingsMenu _settings = null;
         
 		protected override void InitialiseWidget()
 		{

@@ -10,14 +10,14 @@ namespace Game.HUD
         #region Variables
         #region ObjReferences
         [Header("Float value")]
-        [SerializeField] private Variables.FloatVariable _experience;
-        [SerializeField] private Variables.FloatVariable _level;
-        [SerializeField] private Variables.FloatVariable _levelFloor;
-        [SerializeField] private Variables.FloatVariable _levelRoof;
+        [SerializeField] private Variables.FloatVariable _experience = null;
+        [SerializeField] private Variables.FloatVariable _level = null;
+        [SerializeField] private Variables.FloatVariable _levelFloor = null;
+        [SerializeField] private Variables.FloatVariable _levelRoof = null;
         [Header("Objects references")]
-        [SerializeField] private HUDJauge _jauge;
-        [SerializeField] private Text _levelDisplay;
-        [SerializeField] private LevelingEvent _gainXp;
+        [SerializeField] private HUDJauge _jauge = null;
+        [SerializeField] private Text _levelDisplay = null;
+        [SerializeField] private LevelingEvent _gainXp = null;
         #endregion
         
         #region Parameters

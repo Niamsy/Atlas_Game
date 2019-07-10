@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.Audio;
 using System;
+using Tools;
 
 namespace AtlasAudio {
     public enum AudioGroup
@@ -41,8 +42,10 @@ namespace AtlasAudio {
             return Guid.NewGuid().ToString();
         }
 
-        void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+            
             LoadMasterVolume();
             LoadGroupsVolume();
             
@@ -64,9 +67,7 @@ namespace AtlasAudio {
             foreach (KeyValuePair<string, KeyValuePair<string, Music>> music in musics)
             { 
                 if (music.Value.Value.IsPlaying)
-                {
                     music.Value.Value.Update();
-                }
                 else
                 {
                     _MusicSourcesInUse.Remove(music.Value.Key);

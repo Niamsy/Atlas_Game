@@ -14,21 +14,21 @@ namespace Game.Crafting
         {
             [Range(0, 1000)]
             [SerializeField]
-            private int _RequiredLevel;
+            private int _RequiredLevel = 0;
 
             [SerializeField]
-            private Recipe[] _Recipes;
+            private Recipe[] _Recipes = null;
 
-            public int RequiredLevel { get => _RequiredLevel; private set { } }
-            public Recipe[] Recipes { get => _Recipes; private set { } }
+            public int RequiredLevel => _RequiredLevel;
+            public Recipe[] Recipes => _Recipes;
         }
         #endregion
 
         [SerializeField]
-        private List<Chapter> _Chapters;
+        private List<Chapter> _Chapters = null;
 
-        public List<Chapter> Chapters { get => _Chapters; private set { } }
-
+        public List<Chapter> Chapters => _Chapters;
+        
         public List<Recipe> GetAvailableRecipes(int level)
         {
             return GetRecipesFromPred(currentLevel => currentLevel <= level);

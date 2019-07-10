@@ -21,14 +21,14 @@ namespace Game.Player
             }
         }
 
-        [SerializeField] private ItemStack _equippedItemStack;
-        [SerializeField] private Transform _handTransform;
+        [SerializeField] private ItemStack _equippedItemStack = null;
+        [SerializeField] private Transform _handTransform = null;
 
-        private ItemAbstract               _equippedItem;
-        private GameObject                 _equippedItemInstance;
+        private ItemAbstract               _equippedItem = null;
+        private GameObject                 _equippedItemInstance = null;
         
-        public ItemStack                   EquippedItemStack { get { return (_equippedItemStack); } }
-        public ItemAbstract                EquippedItem { get { return (_equippedItem); } }
+        public ItemStack                   EquippedItemStack => _equippedItemStack;
+        public ItemAbstract                EquippedItem => _equippedItem;
 
         protected override void Awake()
         {

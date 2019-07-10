@@ -13,15 +13,12 @@ namespace Menu.Inventory.ItemDescription
 	public class ItemDescriptionHUD : MonoBehaviour
 	{
 		#region Variables
-		[SerializeField] private Image		_sprite;
-		[SerializeField] private Text		_name;
-		[SerializeField] private Text		_description;
-		private ItemAbstract				_item;
-		public ItemAbstract DisplayedItem
-		{
-			get { return (_item); }
-		}
-		private ASubItemDescriptionHUD[]	_subDescriptionHUD;
+		[SerializeField] private Image		_sprite = null;
+		[SerializeField] private Text		_name = null;
+		[SerializeField] private Text		_description = null;
+		private ItemAbstract				_item = null;
+		public ItemAbstract DisplayedItem => (_item);
+		private ASubItemDescriptionHUD[]	_subDescriptionHUD = null;
 		#endregion
 		
 		#region Methods

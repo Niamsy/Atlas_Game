@@ -9,7 +9,7 @@ namespace Game.Crafting
     public class RecipeCategory : ScriptableObject
     {
         [SerializeField]
-        private LocalizedText _Name;
+        private LocalizedText _Name = null;
 
         public string Name
         {
@@ -20,8 +20,6 @@ namespace Game.Crafting
                 }
                 return null;
             }
-
-            private set { }
         }
     }
 }
