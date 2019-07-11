@@ -42,11 +42,21 @@ namespace Game.SavingSystem.Datas
             }
         }
 
+        [Serializable]
+        public struct XPSaveData
+        {
+            public float PlayerXP;
+            public float RoofLevel;
+            public float FloorLevel;
+            public float PlayerLevel;
+        }
+
         public PlantSaveData[]      Plants;
         public ItemDroppedsData[]   DroppedItems;
         public List<ItemBaseData>	Inventory;
         public ItemBaseData			EquippedHand;
         public TransformSaveData	TransformData;
         public Date					CalendarData;
+        public XPSaveData           XPData;
     }
 }

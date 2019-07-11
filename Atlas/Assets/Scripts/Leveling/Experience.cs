@@ -1,6 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Game.SavingSystem;
+using Game.SavingSystem.Datas;
 
 namespace Leveling
 {
@@ -10,24 +10,36 @@ namespace Leveling
         public int Level
         {
             get { return (int)_Level.Value; }
-            private set { }
+            set { _Level.Value = value; }
         }
 
         public int CurrentXP
         {
             get { return (int)_CurrentXP.Value; }
-            private set { }
+            set { _CurrentXP.Value = value; }
         }
 
         public int LevelFloor
         {
             get { return (int)_LevelFloor.Value; }
-            private set { }
+            set { _LevelFloor.Value = value; }
         }
 
         public int LevelRoof
         {
             get { return (int)_LevelRoof.Value; }
+            set { _LevelRoof.Value = value; }
+        }
+
+        public bool CanGainXP
+        {
+            get { return _CanGainXP; }
+            private set { }
+        }
+
+        public bool Reset
+        {
+            get { return _ResetExperience; }
             private set { }
         }
         #endregion
@@ -101,7 +113,7 @@ namespace Leveling
                     _Level.Value += 1;
                     _CurrentXP.Value += value;    
                     _LevelFloor.Value = _LevelRoof.Value;
-                    _LevelRoof.Value = CalculateNextLevelXPNeeded(Level, LevelRoof);
+                    _LevelRoof.Value = CalculateNextLevelXPNeeded(Level + 1, LevelRoof);
                 }
                 else if (CurrentXP + value < LevelFloor && LevelFloor > 1)
                 {
