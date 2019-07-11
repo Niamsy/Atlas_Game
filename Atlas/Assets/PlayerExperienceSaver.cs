@@ -22,19 +22,14 @@ namespace Game.SavingSystem
             data.XPData.PlayerLevel = _PlayerExperience.Level;
             data.XPData.RoofLevel = _PlayerExperience.LevelRoof;
             data.XPData.FloorLevel = _PlayerExperience.LevelFloor;
-            Debug.Log("SAVING DATA");
         }
 
         protected override void LoadingMapData(MapData data)
         {
-            if (!_PlayerExperience.Reset)
-            {
-                _PlayerExperience.CurrentXP = (int)data.XPData.PlayerXP;
-                _PlayerExperience.LevelFloor = (int)data.XPData.FloorLevel;
-                _PlayerExperience.LevelRoof = (int)data.XPData.RoofLevel;
-                _PlayerExperience.Level = (int)data.XPData.PlayerLevel;
-                Debug.Log("loading DATA");
-            }
+            _PlayerExperience.CurrentXP = (int)data.XPData.PlayerXP;
+            _PlayerExperience.LevelFloor = (int)data.XPData.FloorLevel;
+            _PlayerExperience.LevelRoof = (int)data.XPData.RoofLevel;
+            _PlayerExperience.Level = (int)data.XPData.PlayerLevel;
         }
     }
 }

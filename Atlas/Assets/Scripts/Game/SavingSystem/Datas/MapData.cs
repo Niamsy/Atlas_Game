@@ -49,6 +49,7 @@ namespace Game.SavingSystem.Datas
             public float RoofLevel;
             public float FloorLevel;
             public float PlayerLevel;
+            public bool NotFirstTime;
         }
 
         public PlantSaveData[]      Plants;
