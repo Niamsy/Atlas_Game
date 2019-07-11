@@ -13,13 +13,7 @@ namespace Game.Player
     [RequireComponent(typeof(BaseInventory))]
     public class HandSlots : MapSavingBehaviour
     {
-        public bool IsObjectUsable
-        {
-            get
-            {
-                return (EquippedItem != null && EquippedItemStack.Quantity > 0) && _equippedItem.CanUse(_handTransform);
-            }
-        }
+        public bool IsObjectUsable => (EquippedItem != null && EquippedItemStack.Quantity > 0) && _equippedItem.CanUse(_handTransform);
 
         [SerializeField] private ItemStack _equippedItemStack = null;
         [SerializeField] private Transform _handTransform = null;

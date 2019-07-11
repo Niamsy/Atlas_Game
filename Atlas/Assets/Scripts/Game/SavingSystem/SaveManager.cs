@@ -72,6 +72,9 @@ namespace Game.SavingSystem
                     SelectProfilToUseForSave(SelectedProfil);
             }
 #endif
+#if !UNITY_EDITOR
+            _accountData = null;
+#endif
         }
         
         #region Profil gestion
