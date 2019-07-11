@@ -63,11 +63,19 @@ namespace Game.Inventory
 
         public ItemStack AddItemStack(ItemStack newItem)
         {
+            if (newItem.IsEmpty)
+                return (null);
+            
             foreach (ItemStack itemStack in Slots)
             {
                 if (itemStack.FuseStack(newItem) && newItem.IsEmpty)
+                {
+                    Debug.Log("Fuse " + newItem.Content.Id);
+                    Debug.Log("Fuse " + itemStack.Content.Id);
                     return (null);
+                }
             }
+            
 
             foreach (ItemStack itemStack in Slots)
             {
@@ -78,7 +86,9 @@ namespace Game.Inventory
                 }
             }
 
-            Debug.LogWarning("Rest stack");
+            #if UNITY_EDITOR
+            Debug.LogWarning("No room in the inventory for the excess item");
+            #endif
             return (newItem);
         }
 
@@ -133,9 +143,7 @@ namespace Game.Inventory
             foreach (ItemStack itemStack in Slots)
             {
                 if (itemStack.Content.Id == item.Id)
-                {
                     total += itemStack.Quantity;
-                }
             }
 
             return total;
