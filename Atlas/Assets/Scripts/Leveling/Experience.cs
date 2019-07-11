@@ -4,7 +4,7 @@ using Game.SavingSystem.Datas;
 
 namespace Leveling
 {
-    public abstract class Experience : MonoBehaviour
+    public abstract class Experience : MapSavingBehaviour
     {
         #region Public Accessors
         public int Level
@@ -68,18 +68,32 @@ namespace Leveling
         private bool _CanGainXP = true;
         [SerializeField]
         private bool _ResetExperience = false;
+        [SerializeField]
+        private bool RESET_IN_EDITOR = true;
         #endregion
 
         #region Public Methods
-        public void Start()
+        protected override void SavingMapData(MapData data)
         {
-            if (_ResetExperience)
+            data.XPData.PlayerXP = CurrentXP;
+            data.XPData.PlayerLevel = Level;
+            data.XPData.RoofLevel = LevelRoof;
+            data.XPData.FloorLevel = LevelFloor;
+            data.XPData.NotFirstTime = !Reset;
+        }
+
+        protected override void LoadingMapData(MapData data)
+        {
+            if (data.XPData.NotFirstTime)
             {
-                _CurrentXP.Value = 0;
-                _LevelFloor.Value = 0;
-                _LevelRoof.Value = CalculateNextLevelXPNeeded(2, 0);
-                _Level.Value = 1;
-                _ResetExperience = false;
+                CurrentXP = (int)data.XPData.PlayerXP;
+                LevelFloor = (int)data.XPData.FloorLevel;
+                LevelRoof = (int)data.XPData.RoofLevel;
+                Level = (int)data.XPData.PlayerLevel;
+            }
+            else
+            {
+                ResetXP();
             }
         }
 
@@ -111,7 +125,7 @@ namespace Leveling
                         _EGainLevel.Raise(CurrentXP, value);
                     }
                     _Level.Value += 1;
-                    _CurrentXP.Value += value;    
+                    _CurrentXP.Value += value;
                     _LevelFloor.Value = _LevelRoof.Value;
                     _LevelRoof.Value = CalculateNextLevelXPNeeded(Level + 1, LevelRoof);
                 }
@@ -153,6 +167,31 @@ namespace Leveling
 
         #region Protected and Private methods
         protected abstract int CalculateNextLevelXPNeeded(int NextLevel, int CurrentXPNeed);
+
+        private void ResetXP()
+        {
+            _CurrentXP.Value = 0;
+            _LevelFloor.Value = 0;
+            _LevelRoof.Value = CalculateNextLevelXPNeeded(2, 0);
+            _Level.Value = 1;
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+
+#if UNITY_EDITOR
+            if (RESET_IN_EDITOR)
+            {
+                ResetXP();
+            }
+#else
+            if (Reset)
+            {
+                ResetXP();
+            }         
+#endif
+        }
         #endregion
     }
 

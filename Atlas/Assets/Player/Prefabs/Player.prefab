@@ -75,7 +75,6 @@ GameObject:
   - component: {fileID: 6887268937068909565}
   - component: {fileID: 3972821003126534645}
   - component: {fileID: 769718256}
-  - component: {fileID: 6779140054395264506}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -312,7 +311,8 @@ MonoBehaviour:
   _ELoseXP: {fileID: 11400000, guid: 615e442e68dfb374c93d0edfb8138202, type: 2}
   _ELostLevel: {fileID: 11400000, guid: 35e081726af9bd64b9c4f8da9e7f6142, type: 2}
   _CanGainXP: 1
-  _ResetExperience: 1
+  _ResetExperience: 0
+  RESET_IN_EDITOR: 1
 --- !u!114 &6887268937068909565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -373,18 +373,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1.2, z: 0}
---- !u!114 &6779140054395264506
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1041429536319508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8df5c3653079aac449fad889734bd0c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1266824893386620
 GameObject:
   m_ObjectHideFlags: 0
@@ -821,6 +809,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4093741956441054}
     m_Modifications:
+    - target: {fileID: 100002, guid: 7086c3b19ea19aa4bbb0388cbafb9b4c, type: 3}
+      propertyPath: m_Name
+      value: Atlas_Character
+      objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 7086c3b19ea19aa4bbb0388cbafb9b4c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -865,10 +857,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 100002, guid: 7086c3b19ea19aa4bbb0388cbafb9b4c, type: 3}
-      propertyPath: m_Name
-      value: Atlas_Character
-      objectReference: {fileID: 0}
+    - target: {fileID: 13700006, guid: 7086c3b19ea19aa4bbb0388cbafb9b4c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 61d9b15343f0c52498a79bccd35e1bd5, type: 2}
     - target: {fileID: 400004, guid: 7086c3b19ea19aa4bbb0388cbafb9b4c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -897,10 +889,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 3c0bb46ee4e763e48a570837ffbb94ae, type: 2}
-    - target: {fileID: 13700006, guid: 7086c3b19ea19aa4bbb0388cbafb9b4c, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 61d9b15343f0c52498a79bccd35e1bd5, type: 2}
     - target: {fileID: 13700004, guid: 7086c3b19ea19aa4bbb0388cbafb9b4c, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
