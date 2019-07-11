@@ -36,12 +36,9 @@ namespace Menu.Main
             //if (false) //Delete
             //    SaveManager.DestroyProfile(_saveManager.AccountData, data);
             if (data.Used == false) //Create
-                    SaveManager.InstantiateProfilToUse(_saveManager.AccountData, data, "Game Profil " + data.ID);
-            else //Select Profil
-            {
-                _saveManager.SelectProfilToUseForSave(data);
-                SceneLoader.Instance.LoadScene(NextSceneIndex, MainMenuSceneIndex);
-            }
+                SaveManager.InstantiateProfilToUse(_saveManager.AccountData, data, "Game Profil " + data.ID);
+            _saveManager.SelectProfilToUseForSave(data);
+            SceneLoader.Instance.LoadScene(NextSceneIndex, MainMenuSceneIndex);
         }
     }
 }
