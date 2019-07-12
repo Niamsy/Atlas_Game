@@ -44,7 +44,9 @@ namespace Game.Player
         #region Load/Saving Methods
         protected override void SavingMapData(MapData data)
         {
-            if (data.EquippedHand != null)
+            if (data.EquippedHand == null)
+                data.EquippedHand = new ItemBaseData(_equippedItemStack);
+            else
                 data.EquippedHand.SetObject(_equippedItemStack);
         }
         
