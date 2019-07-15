@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game.Player.Stats;
+using UnityEngine;
 using SceneManagement;
 using Player;
 using Player.Scripts;
@@ -51,7 +52,7 @@ namespace Menu
 
         public void ContinueGame()
         {
-            _playerStats._consumer.LinkedStock[Game.ResourcesManagement.Resource.Oxygen].Quantity = _playerStats._consumer.LinkedStock[Game.ResourcesManagement.Resource.Oxygen].Limit;
+            _playerStats.Resources[Game.ResourcesManagement.Resource.Oxygen].Quantity = _playerStats.Resources[Game.ResourcesManagement.Resource.Oxygen].Limit;
             _playerController.CheckForDeath();
             _spawner.Spawn();
             _isAlreadyDead = false;

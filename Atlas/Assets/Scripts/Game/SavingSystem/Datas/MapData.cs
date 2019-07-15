@@ -59,5 +59,6 @@ namespace Game.SavingSystem.Datas
         public TransformSaveData	TransformData;
         public Date					CalendarData;
         public XPSaveData           XPData;
+        public List<Stock>          PlayerResource;
     }
 }
