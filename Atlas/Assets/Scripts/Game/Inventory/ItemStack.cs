@@ -1,0 +1,138 @@
+﻿using System;
+using Game.Item;
+using Game.SavingSystem;
+using UnityEngine;
+
+namespace Game.Inventory
+{
+    [Serializable]
+    public class ItemStack
+    {
+        public delegate void ItemStackUpdate(ItemStack item);
+        public event ItemStackUpdate OnItemStackUpdated;
+        
+        #region Content
+        [SerializeField] private ItemAbstract _content;
+        public ItemAbstract Content
+        {
+            get { return (_content); }
+            private set { _content = value; }
+        }
+        #endregion
+    
+        #region Quantity
+        [SerializeField] private int _quantity;
+        public int Quantity
+        {
+            get { return (_quantity); }
+            private set
+            {
+                if (_content == null || value <= 0)
+                {
+                    _quantity = 0;
+                    _content = null;
+                }
+                else
+                    _quantity = Mathf.Clamp(value, 0, _content.MaxStackSize);
+            }
+        }
+        
+        public bool IsEmpty
+        {
+            get { return(_quantity == 0); }
+        }
+        
+        #endregion
+
+        #region Slot content modification
+        private void FireEvent()
+        {
+            if (OnItemStackUpdated != null)
+                OnItemStackUpdated(this);
+        }
+        
+        public void SetItem(ItemAbstract newItem, int quantity)
+        {
+            if (quantity == 0)
+                newItem = null;
+            if (newItem == null)
+                quantity = 0;
+
+            Content = newItem;
+            Quantity = quantity;
+
+            FireEvent();
+        }
+        
+        public void CopyStack(ItemStack other)
+        {
+            if (other == null)
+                return;
+            
+            Content = other.Content;
+            Quantity = other.Quantity;
+            
+            FireEvent();
+        }
+     
+        public void SetFromGameData(ItemBaseData other)
+        {
+            if (other == null)
+                return;
+            
+            Content = (other.Quantity == 0) ? (null) : (ItemFactory.GetItemForId(other.ID));
+            Quantity = other.Quantity;
+            
+            FireEvent();
+        }
+
+        public void ModifyQuantity(int newQuatity)
+        {
+            Quantity = newQuatity;
+
+            FireEvent();
+        }
+        
+        public void EmptyStack()
+        {
+            Quantity = 0;
+            Content = null;
+        
+            FireEvent();
+        }
+
+        #region Fuse/Swap
+
+        public void SwapStack(ItemStack other)
+        {
+            ItemAbstract otherContent = other.Content;
+            int otherQuantity = other.Quantity;
+            
+            other.SetItem(Content, Quantity);
+            SetItem(otherContent, otherQuantity);
+        }
+
+
+        public bool CanBeFusedWith(ItemStack other)
+        {
+            return (!IsEmpty && !other.IsEmpty && other.Content.Id == Content.Id);
+        }
+
+        public bool FuseStack(ItemStack other)
+        {
+            if (!IsEmpty && !other.IsEmpty && CanBeFusedWith(other))
+            {
+                int totalQuantity = other.Quantity + Quantity;
+                int fusedStackSize = Mathf.Clamp(totalQuantity, 0, Content.MaxStackSize);
+                int restStackItem = Mathf.Clamp(totalQuantity - fusedStackSize, 0, Content.MaxStackSize);    
+                
+                SetItem(other.Content, fusedStackSize);
+                other.ModifyQuantity(restStackItem);
+                return (true);
+            }
+            return (false);
+        }
+        #endregion
+        #endregion
+    }
+}
