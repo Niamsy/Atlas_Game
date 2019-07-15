@@ -11,6 +11,7 @@ namespace Menu.Main
         
         [SerializeField] private Text _index = null;
         [SerializeField] private Text _profilName = null;
+        [SerializeField] private Text _emptyProfil = null;
         private Button _button;
 
         public delegate void ProfilSelected(ProfilData data);
@@ -33,10 +34,10 @@ namespace Menu.Main
         {
             _data = data;
             _index.text = data.ID.ToString();
+            _profilName.gameObject.SetActive(data.Used);
+            _emptyProfil.gameObject.SetActive(!data.Used);
             if (data.Used)
                 _profilName.text = data.Name;
-            else
-                _profilName.text = "Empty";
         }
     }
 }

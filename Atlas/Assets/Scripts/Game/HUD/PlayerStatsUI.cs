@@ -1,4 +1,5 @@
 ﻿using Game.HUD.Commons;
+using Game.Player.Stats;
 using UnityEngine;
 
 namespace Game.HUD
@@ -19,14 +20,14 @@ namespace Game.HUD
         {
             m_Stats = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerStats>();
             CurrentHealthBar.Initialize(m_Stats.PlayerHealth.GetCurrent(), 0, m_Stats.PlayerHealth.GetMax());
-            var oxygenStock = m_Stats._consumer.LinkedStock[Game.ResourcesManagement.Resource.Oxygen];
+            var oxygenStock = m_Stats.Resources[Game.ResourcesManagement.Resource.Oxygen];
             CurrentOxygenBar.Initialize(oxygenStock.Quantity, 0, oxygenStock.Limit);
         }
 
         private void Update()
         {
             CurrentHealthBar.SetValue(m_Stats.PlayerHealth.GetCurrent());
-            var oxygenStock = m_Stats._consumer.LinkedStock[Game.ResourcesManagement.Resource.Oxygen];
+            var oxygenStock = m_Stats.Resources[Game.ResourcesManagement.Resource.Oxygen];
             CurrentOxygenBar.SetValue(oxygenStock.Quantity);
 
             /*

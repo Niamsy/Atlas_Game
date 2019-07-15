@@ -31,13 +31,12 @@ namespace Game.DayNight
         #endregion
 
         #region Private Variables
-        [SerializeField] private CalendarManager _calendar;
         private float _latitude = 90;
         private float _longitude = 170;
 
         [Header("Events")]
-        [SerializeField] private AtlasEvents.Event _sunHide;
-        [SerializeField] private AtlasEvents.Event _sunShow;
+        [SerializeField] private AtlasEvents.Event _sunHide = null;
+        [SerializeField] private AtlasEvents.Event _sunShow = null;
         #endregion
 
         protected override void UpdateScene(Date date, float dayAdvancement, float dayAdvancement01)
