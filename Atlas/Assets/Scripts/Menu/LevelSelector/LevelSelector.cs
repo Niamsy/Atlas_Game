@@ -88,14 +88,18 @@ namespace Menu.LevelSelector
                         else if (ui.name == "PanelLocked")
                         {
                             // TODO Make General Data for this game. Like Number Challenge complete. Change this condition
-                            Debug.Log(Levels[i].ChallengeOnThisLevelComplete);
-
                             if (Levels[i].ChallengeOnThisLevelComplete >= 0)
                             {
                                 GameObject panel = ui.GetComponent<GameObject>();
                                 if (panel)
                                     panel.SetActive(false);
                             }
+                        }
+                        else if (ui.name == "LaunchLevelButton")
+                        {
+                            Button btn = ui.GetComponent<Button>();
+                            LoadLevel ll = new LoadLevel();
+                            btn.onClick.AddListener(delegate { ll.LoadSceneIndex(((i + 2) > 2) ? 2 : i + 2); });
                         }
                     }
                 }
