@@ -31,29 +31,38 @@ namespace Menu.LevelSelector
                 foreach (Transform ui in child.GetComponentsInChildren<Transform>())
                 {
                     Debug.Log(ui.name);
-                    if (ui && ui.name == "LevelTitle")
+                    if (ui)
                     {
-                        Text levelTitle = ui.GetComponent<Text>();
-                        levelTitle.text = Levels[i].LevelTitle;
-                    }
-                    else if (ui && ui.name == "LevelDescription")
-                    {
-                        Text levelDesc = ui.GetComponent<Text>();
-                        levelDesc.text = Levels[i].LevelDescription;
-                    }
-                    else if (ui && ui.name == "PlayTime")
-                    {
-                        Text timePlayed = ui.GetComponent<Text>();
-                        timePlayed.text = Levels[i].TimePlayed;
-                    }
-                    else if (ui && ui.name == "PanelLocked")
-                    {
-                        // TODO Make General Data for this game. Like Number Challenge complete. Change this condition
-                        if (Levels[i].ChallengeOnThisLevelComplete > 0)
+ 
+                        if (ui.name == "LevelTitle")
                         {
-                            GameObject panel = ui.GetComponent<GameObject>();
-                            if (panel)
-                                panel.SetActive(false);
+                            Text levelTitle = ui.GetComponent<Text>();
+                            levelTitle.text = Levels[i].LevelTitle;
+                        }
+                        else if (ui.name == "LevelDescription")
+                        {
+                            Text levelDesc = ui.GetComponent<Text>();
+                            levelDesc.text = Levels[i].LevelDescription;
+                        }
+                        else if (ui.name == "PlayTime")
+                        {
+                            Text timePlayed = ui.GetComponent<Text>();
+                            timePlayed.text = Levels[i].TimePlayed;
+                        }
+                        else if (ui.name == "LevelImage")
+                        {
+                            Image img = ui.GetComponent<Image>();
+                            img.sprite = Levels[i].LevelImage;
+                        }
+                        else if (ui.name == "PanelLocked")
+                        {
+                            // TODO Make General Data for this game. Like Number Challenge complete. Change this condition
+                            if (Levels[i].ChallengeOnThisLevelComplete >= 0)
+                            {
+                                GameObject panel = ui.GetComponent<GameObject>();
+                                if (panel)
+                                    panel.SetActive(false);
+                            }
                         }
                     }
                 }

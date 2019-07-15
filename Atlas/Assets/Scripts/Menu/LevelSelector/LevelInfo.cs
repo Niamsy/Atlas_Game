@@ -15,6 +15,8 @@ namespace Menu.LevelSelector
         public string                           TimePlayed => (_timePlayed);
         [SerializeField] private LocalizedText  _levelDescription = null;
         public string LevelDescription => (_levelDescription.name);
+        [SerializeField] private Sprite _levelImage = null;
+        public Sprite LevelImage => (_levelImage);
 
         [Header("Level")]
         [SerializeField] private int            _challengeOnThisLevelComplete = 0;
