@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -30,33 +31,65 @@ namespace Menu.LevelSelector
                 GameObject child = level.transform.Find("Level").gameObject;
                 foreach (Transform ui in child.GetComponentsInChildren<Transform>())
                 {
-                    Debug.Log(ui.name);
                     if (ui)
                     {
  
                         if (ui.name == "LevelTitle")
                         {
-                            Text levelTitle = ui.GetComponent<Text>();
+                            TextMeshProUGUI levelTitle = ui.GetComponent<TextMeshProUGUI>();
                             levelTitle.text = Levels[i].LevelTitle;
                         }
                         else if (ui.name == "LevelDescription")
                         {
-                            Text levelDesc = ui.GetComponent<Text>();
+                            TextMeshProUGUI levelDesc = ui.GetComponent<TextMeshProUGUI>();
                             levelDesc.text = Levels[i].LevelDescription;
                         }
                         else if (ui.name == "PlayTime")
                         {
-                            Text timePlayed = ui.GetComponent<Text>();
-                            timePlayed.text = Levels[i].TimePlayed;
+                            TextMeshProUGUI timePlayed = ui.GetComponent<TextMeshProUGUI>();
+                            if (Levels[i].TimePlayed.Length > 0)
+                                timePlayed.text = Levels[i].TimePlayed;
                         }
                         else if (ui.name == "LevelImage")
                         {
                             Image img = ui.GetComponent<Image>();
                             img.sprite = Levels[i].LevelImage;
                         }
+                        else if (ui.name == "Challenge1")
+                        {
+                            if (!Levels[i].ChallengeOneComplete)
+                            {
+                                Image img = ui.GetComponent<Image>();
+                                var tempColor = img.color;
+                                tempColor.a = 0.5f;
+                                img.color = tempColor;
+                            }
+                        }
+                        else if (ui.name == "Challenge2")
+                        {
+                            if (!Levels[i].ChallengeTwoComplete)
+                            {
+                                Image img = ui.GetComponent<Image>();
+                                var tempColor = img.color;
+                                tempColor.a = 0.5f;
+                                img.color = tempColor;
+                            }
+                        }
+                        else if (ui.name == "Challenge3")
+                        {
+                            if (!Levels[i].ChallengeThreeComplete)
+                            {
+                                Image img = ui.GetComponent<Image>();
+                                var tempColor = img.color;
+                                tempColor.a = 0.5f;
+                                img.color = tempColor;
+                            }
+                        }
                         else if (ui.name == "PanelLocked")
                         {
                             // TODO Make General Data for this game. Like Number Challenge complete. Change this condition
+                            Debug.Log(Levels[i].ChallengeOnThisLevelComplete);
+
                             if (Levels[i].ChallengeOnThisLevelComplete >= 0)
                             {
                                 GameObject panel = ui.GetComponent<GameObject>();
