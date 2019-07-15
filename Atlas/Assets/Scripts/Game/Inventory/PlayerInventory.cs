@@ -32,6 +32,7 @@ namespace Game.Inventory
 
 		private void LoadData(MapData data)
 		{
+			
 			InitMapWithSize(_inventorySize);
 			if (data.Inventory != null)
 			for (int x = 0; x < Size && x < data.Inventory.Count; x++)

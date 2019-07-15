@@ -115,12 +115,12 @@ namespace Game.Inventory
 
         public bool CanBeFusedWith(ItemStack other)
         {
-            return (IsEmpty || other.IsEmpty || other.Content.Id == Content.Id);
+            return (!IsEmpty && !other.IsEmpty && other.Content.Id == Content.Id);
         }
 
         public bool FuseStack(ItemStack other)
         {
-            if (!IsEmpty && CanBeFusedWith(other))
+            if (!IsEmpty && !other.IsEmpty && CanBeFusedWith(other))
             {
                 int totalQuantity = other.Quantity + Quantity;
                 int fusedStackSize = Mathf.Clamp(totalQuantity, 0, Content.MaxStackSize);

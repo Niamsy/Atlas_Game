@@ -199,7 +199,7 @@ namespace Networking
             else
 			{
 #if ATLAS_DEBUG
-				Debug.Log("ERROR HTTP: " + postRequest.responseCode + ":" + postRequest.error);
+				Debug.Log("ERROR HTTP " + postRequest.url + ": " + postRequest.responseCode + ":" + postRequest.error);
 #endif
 				switch (postRequest.responseCode)
 				{
@@ -266,7 +266,7 @@ namespace Networking
 			else
 			{
 #if ATLAS_DEBUG
-				Debug.Log("ERROR HTTP: " + postRequest.responseCode + " : " + postRequest.error);
+				Debug.Log("ERROR HTTP " + postRequest.url + ": " + postRequest.responseCode + ":" + postRequest.error);
 #endif
 				switch (postRequest.responseCode)
 				{
@@ -333,7 +333,7 @@ namespace Networking
 			if (!success)
 			{
 #if ATLAS_DEBUG
-				Debug.Log("ERROR HTTP: " + postRequest.responseCode + ":" + postRequest.error);
+				Debug.Log("ERROR HTTP " + postRequest.url + ": " + postRequest.responseCode + ":" + postRequest.error);
 #endif
 				switch (postRequest.responseCode)
 				{
@@ -393,7 +393,7 @@ namespace Networking
 			if (!success)
 			{
 #if ATLAS_DEBUG
-				Debug.Log("ERROR HTTP: " + postRequest.responseCode + ":" + postRequest.error);
+				Debug.Log("ERROR HTTP " + postRequest.url + ": " + postRequest.responseCode + ":" + postRequest.error);
 #endif
 				switch (postRequest.responseCode)
 				{
@@ -457,7 +457,7 @@ namespace Networking
             else
             {
 #if ATLAS_DEBUG
-	            Debug.Log("ERROR HTTP: " + getRequest.responseCode + ":" + getRequest.error);
+	            Debug.Log("ERROR HTTP " + getRequest.url + ": " + getRequest.responseCode + ":" + getRequest.error);
 #endif
 	            switch (getRequest.responseCode)
                 {

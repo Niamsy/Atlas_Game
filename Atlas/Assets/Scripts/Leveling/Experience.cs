@@ -1,33 +1,45 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Game.SavingSystem;
+using Game.SavingSystem.Datas;
 
 namespace Leveling
 {
-    public abstract class Experience : MonoBehaviour
+    public abstract class Experience : MapSavingBehaviour
     {
         #region Public Accessors
         public int Level
         {
             get { return (int)_Level.Value; }
-            private set { }
+            set { _Level.Value = value; }
         }
 
         public int CurrentXP
         {
             get { return (int)_CurrentXP.Value; }
-            private set { }
+            set { _CurrentXP.Value = value; }
         }
 
         public int LevelFloor
         {
             get { return (int)_LevelFloor.Value; }
-            private set { }
+            set { _LevelFloor.Value = value; }
         }
 
         public int LevelRoof
         {
             get { return (int)_LevelRoof.Value; }
+            set { _LevelRoof.Value = value; }
+        }
+
+        public bool CanGainXP
+        {
+            get { return _CanGainXP; }
+            private set { }
+        }
+
+        public bool Reset
+        {
+            get { return _ResetExperience; }
             private set { }
         }
         #endregion
@@ -56,18 +68,32 @@ namespace Leveling
         private bool _CanGainXP = true;
         [SerializeField]
         private bool _ResetExperience = false;
+        [SerializeField]
+        private bool RESET_IN_EDITOR = true;
         #endregion
 
         #region Public Methods
-        public void Start()
+        protected override void SavingMapData(MapData data)
         {
-            if (_ResetExperience)
+            data.XPData.PlayerXP = CurrentXP;
+            data.XPData.PlayerLevel = Level;
+            data.XPData.RoofLevel = LevelRoof;
+            data.XPData.FloorLevel = LevelFloor;
+            data.XPData.NotFirstTime = !Reset;
+        }
+
+        protected override void LoadingMapData(MapData data)
+        {
+            if (data.XPData.NotFirstTime)
             {
-                _CurrentXP.Value = 0;
-                _LevelFloor.Value = 0;
-                _LevelRoof.Value = CalculateNextLevelXPNeeded(2, 0);
-                _Level.Value = 1;
-                _ResetExperience = false;
+                CurrentXP = (int)data.XPData.PlayerXP;
+                LevelFloor = (int)data.XPData.FloorLevel;
+                LevelRoof = (int)data.XPData.RoofLevel;
+                Level = (int)data.XPData.PlayerLevel;
+            }
+            else
+            {
+                ResetXP();
             }
         }
 
@@ -99,9 +125,9 @@ namespace Leveling
                         _EGainLevel.Raise(CurrentXP, value);
                     }
                     _Level.Value += 1;
-                    _CurrentXP.Value += value;    
+                    _CurrentXP.Value += value;
                     _LevelFloor.Value = _LevelRoof.Value;
-                    _LevelRoof.Value = CalculateNextLevelXPNeeded(Level, LevelRoof);
+                    _LevelRoof.Value = CalculateNextLevelXPNeeded(Level + 1, LevelRoof);
                 }
                 else if (CurrentXP + value < LevelFloor && LevelFloor > 1)
                 {
@@ -141,6 +167,31 @@ namespace Leveling
 
         #region Protected and Private methods
         protected abstract int CalculateNextLevelXPNeeded(int NextLevel, int CurrentXPNeed);
+
+        private void ResetXP()
+        {
+            _CurrentXP.Value = 0;
+            _LevelFloor.Value = 0;
+            _LevelRoof.Value = CalculateNextLevelXPNeeded(2, 0);
+            _Level.Value = 1;
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+
+#if UNITY_EDITOR
+            if (RESET_IN_EDITOR)
+            {
+                ResetXP();
+            }
+#else
+            if (Reset)
+            {
+                ResetXP();
+            }         
+#endif
+        }
         #endregion
     }
 

@@ -311,7 +311,8 @@ MonoBehaviour:
   _ELoseXP: {fileID: 11400000, guid: 615e442e68dfb374c93d0edfb8138202, type: 2}
   _ELostLevel: {fileID: 11400000, guid: 35e081726af9bd64b9c4f8da9e7f6142, type: 2}
   _CanGainXP: 1
-  _ResetExperience: 1
+  _ResetExperience: 0
+  RESET_IN_EDITOR: 1
 --- !u!114 &6887268937068909565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -856,6 +857,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 13700006, guid: 7086c3b19ea19aa4bbb0388cbafb9b4c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 61d9b15343f0c52498a79bccd35e1bd5, type: 2}
     - target: {fileID: 400004, guid: 7086c3b19ea19aa4bbb0388cbafb9b4c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -884,10 +889,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 3c0bb46ee4e763e48a570837ffbb94ae, type: 2}
-    - target: {fileID: 13700006, guid: 7086c3b19ea19aa4bbb0388cbafb9b4c, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 61d9b15343f0c52498a79bccd35e1bd5, type: 2}
     - target: {fileID: 13700004, guid: 7086c3b19ea19aa4bbb0388cbafb9b4c, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
