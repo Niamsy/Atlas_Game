@@ -72,6 +72,9 @@ namespace Game.SavingSystem
                     SelectProfilToUseForSave(SelectedProfil);
             }
 #endif
+#if !UNITY_EDITOR
+            _accountData = null;
+#endif
         }
         
         #region Profil gestion
@@ -147,7 +150,7 @@ namespace Game.SavingSystem
             CheckSaveDirectory(SaveDirectory_Path());
             CheckSaveDirectory(AccountDirectory_Path(AccountData.ID));
             CheckSaveDirectory(ProfilDirectory_Path(SelectedProfil.ID, AccountData.ID));
-            
+
             return (SaveInFile(MapFile_Path(sceneIndex, SelectedProfil.ID, AccountData.ID), _mapData));
         }
 

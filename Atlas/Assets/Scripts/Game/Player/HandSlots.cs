@@ -13,13 +13,7 @@ namespace Game.Player
     [RequireComponent(typeof(BaseInventory))]
     public class HandSlots : MapSavingBehaviour
     {
-        public bool IsObjectUsable
-        {
-            get
-            {
-                return (EquippedItem != null && EquippedItemStack.Quantity > 0) && _equippedItem.CanUse(_handTransform);
-            }
-        }
+        public bool IsObjectUsable => (EquippedItem != null && EquippedItemStack.Quantity > 0) && _equippedItem.CanUse(_handTransform);
 
         [SerializeField] private ItemStack _equippedItemStack = null;
         [SerializeField] private Transform _handTransform = null;
@@ -50,7 +44,9 @@ namespace Game.Player
         #region Load/Saving Methods
         protected override void SavingMapData(MapData data)
         {
-            if (data.EquippedHand != null)
+            if (data.EquippedHand == null)
+                data.EquippedHand = new ItemBaseData(_equippedItemStack);
+            else
                 data.EquippedHand.SetObject(_equippedItemStack);
         }
         

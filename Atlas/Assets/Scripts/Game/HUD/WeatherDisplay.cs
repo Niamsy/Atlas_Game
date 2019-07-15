@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 namespace Game.HUD
 {
@@ -19,17 +20,17 @@ namespace Game.HUD
 
         private void Start()
         {
-            SetWeather(_displayedValue);
+            ChangeWeather((int)_displayedValue);
         }
 
-        private void SetWeather(Weather weather)
+        public void ChangeWeather(int weather)
         {
-            _displayedValue = weather;
+            _displayedValue = (Weather)weather;
 
             int x = 0;
             foreach (var icon in _icons)
             {
-                icon.gameObject.SetActive(x == (int)weather);
+                icon.gameObject.SetActive(x == weather);
                 x++;
             }
         }

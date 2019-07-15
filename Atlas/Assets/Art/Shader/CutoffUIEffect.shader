@@ -5,6 +5,7 @@ Shader "UI/CutoffUIEffect"
     Properties
     {
         [NoScaleOffset] _MainTex("Texture", 2D) = "white" {}
+        [NoScaleOffset] _CutoffTex("Cutoff Texture", 2D) = "white" {}
         _Color("DisplayColor", Color) = (1,1,1,1)
         _CutoffRange("Cutoff Range", Float) = 1
         _Cutoff("Cutoff", Float) = 0.5
@@ -51,6 +52,8 @@ Shader "UI/CutoffUIEffect"
          
             sampler2D _MainTex;
             float4 _MainTex_ST;
+            sampler2D _CutoffTex;
+            float4 _CutoffTex_ST;
          
             float4 _Color;
             float _CutoffRange;
@@ -61,12 +64,6 @@ Shader "UI/CutoffUIEffect"
                 return saturate((channel - ((((range * 2) + 1) * cutoff) - range)) * (1 / range));
             }
 
-            fixed4 oldfrag (v2f i) : SV_Target
-            {
-                fixed4 col = tex2D(_MainTex, i.texcoord);
-                fixed channel = GetChannel(col.r, _Cutoff, _CutoffRange);
-            }
-            
             v2f vert(appdata IN)
             {
                 v2f OUT;
@@ -82,9 +79,12 @@ Shader "UI/CutoffUIEffect"
             fixed4 frag(v2f IN) : SV_Target
             {
                 half4 color = tex2D(_MainTex, IN.texcoord);
-                fixed channel = GetChannel(color.r, _Cutoff, _CutoffRange);
-                clip (channel * color.a);
-                return (channel, channel, channel, channel * color.a);
+                half4 cutoffChannel = tex2D(_CutoffTex, IN.texcoord);
+                fixed channel = GetChannel(cutoffChannel.r, _Cutoff, _CutoffRange);
+                clip (channel * cutoffChannel.a);
+                color.a = channel * cutoffChannel.a;
+                color *= channel;
+                return (color);
             }
             ENDCG
         }

@@ -180,7 +180,7 @@ namespace Player
             SaveManager.Instance.InputControls.Player.Movement.Enable();
             SaveManager.Instance.InputControls.Player.Jump.performed += Jump;
             SaveManager.Instance.InputControls.Player.Jump.Enable();
-            SaveManager.Instance.InputControls.Player.Interact.performed += ctx => Interact();
+            SaveManager.Instance.InputControls.Player.Interact.performed += Interact;
             SaveManager.Instance.InputControls.Player.Interact.Enable();
             SaveManager.Instance.InputControls.Player.UseItem.performed += ctx => UseItem();
             SaveManager.Instance.InputControls.Player.UseItem.canceled += ctx => CancelUseItem();
@@ -194,7 +194,7 @@ namespace Player
             SaveManager.Instance.InputControls.Player.Movement.Disable();
             SaveManager.Instance.InputControls.Player.Jump.performed -= Jump;
             SaveManager.Instance.InputControls.Player.Jump.Disable();
-            SaveManager.Instance.InputControls.Player.Interact.performed -= ctx => Interact();
+            SaveManager.Instance.InputControls.Player.Interact.performed -= Interact;
             SaveManager.Instance.InputControls.Player.Interact.Disable();
             SaveManager.Instance.InputControls.Player.UseItem.performed -= ctx => UseItem();
             SaveManager.Instance.InputControls.Player.UseItem.canceled -= ctx => CancelUseItem();
@@ -295,7 +295,7 @@ namespace Player
             }
         }
 
-        private void Interact()
+        private void Interact(InputAction.CallbackContext ctx)
         {
             if (!IsGrounded || IsInteracting)
                 return;
