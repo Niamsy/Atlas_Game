@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - RightHand
+  - LeftHand
   layers:
   - Default
   - TransparentFX
@@ -14,6 +16,11 @@ TagManager:
   - 
   - 
   - PostProcessing
+  - Ground
+  - HideGui
+  - Producer
+  - Consumer
+  - Interactable
   - 
   - 
   - 
@@ -31,13 +38,17 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - LoadingScreen
   m_SortingLayers:
+  - name: LoadingScreen
+    uniqueID: 1347453917
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Menu
+    uniqueID: 3704160095
+    locked: 0
+  - name: HUD
+    uniqueID: 1582118195
     locked: 0
