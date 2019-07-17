@@ -1262,6 +1262,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300000, guid: 642c02111c0133f4893308cf0343b366, type: 3}
+--- !u!114 &194098215 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6962137080707440251, guid: 5d9e75d3beb08454ea1fddd983f9ba8a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1546302197}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6fb25fc0fda8494989aa3d1cb4c49c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &196062568
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6529,7 +6541,7 @@ PrefabInstance:
     - target: {fileID: 2129954561539160453, guid: fc4e73b4e7a0e5b4885b2e4a7b09105e,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.051918488
+      value: -0.05191848
       objectReference: {fileID: 0}
     - target: {fileID: 2129954561539160453, guid: fc4e73b4e7a0e5b4885b2e4a7b09105e,
         type: 3}
@@ -6539,7 +6551,7 @@ PrefabInstance:
     - target: {fileID: 2129954561539160453, guid: fc4e73b4e7a0e5b4885b2e4a7b09105e,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0033453342
+      value: 0.0033453337
       objectReference: {fileID: 0}
     - target: {fileID: 2129954561539160453, guid: fc4e73b4e7a0e5b4885b2e4a7b09105e,
         type: 3}
@@ -20120,35 +20132,25 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8071368292063714196, guid: 5d9e75d3beb08454ea1fddd983f9ba8a,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8071368292063714196, guid: 5d9e75d3beb08454ea1fddd983f9ba8a,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a8c2d5a030d1ca4458d05eb95606b9ef,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d9e75d3beb08454ea1fddd983f9ba8a, type: 3}
---- !u!1 &1546302198 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2311519801449541881, guid: 5d9e75d3beb08454ea1fddd983f9ba8a,
-    type: 3}
-  m_PrefabInstance: {fileID: 1546302197}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1546302199 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3390096662647142855, guid: 5d9e75d3beb08454ea1fddd983f9ba8a,
     type: 3}
   m_PrefabInstance: {fileID: 1546302197}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1546302200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1546302198}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35e4c62c596cef74f83438c1f8ea16a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _sprite: {fileID: 0}
-  _quantity: {fileID: 0}
-  _dropHint: {fileID: 0}
 --- !u!114 &1546302201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20163,9 +20165,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enableCursorOnDisplay: 1
   _displayed: 0
-  OnToggleGUIAudio: {fileID: 0}
-  OnToggleGUIEvent: {fileID: 0}
-  _description: {fileID: 0}
+  OnToggleGUIAudio: {fileID: 11400000, guid: 54927784f6ef72e4aa4bac66586cc3eb, type: 2}
+  OnToggleGUIEvent: {fileID: 11400000, guid: 574abd74039cd5f40950fb2cf09f4dcb, type: 2}
+  _description: {fileID: 194098215}
 --- !u!114 &1561388517 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 854531492108967147, guid: 7258629a63c1c85419286c34a8683822,
