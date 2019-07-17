@@ -50,16 +50,26 @@ namespace Game
                 get { return _Category; }
                 private set { }
             }
+
+            public bool isUnlocked
+            {
+                get { return _Unlocked; }
+                private set { }
+            }
+            #endregion
+
+            #region Public Properties
+            public delegate void RecipeUpdate(Recipe recipe);
+            public event RecipeUpdate OnRecipeUpdate;
             #endregion
 
             #region Private Properties
             [Header("Recipe properties")]
-            [SerializeField]
-            private Ingredient[] _Ingredients = null;
-            [SerializeField]
-            private Product[] _Products = null;
-            [SerializeField]
-            private RecipeCategory _Category = null;
+            [SerializeField] private RecipeCategory _Category = null;
+            [Space(10)][SerializeField] private Ingredient[] _Ingredients = null;
+            [Space(10)][SerializeField] private Product[] _Products = null;
+            private bool _Unlocked = false;
+
             #endregion
 
             #region Public Methods
@@ -70,7 +80,20 @@ namespace Game
 
             public override void Use(ItemStack selfStack)
             {
-                Debug.Log("RECIP : " + this.Name + " LEARNED.");
+                Debug.Log("RECIPE : " + this.Name + " LEARNED.");
+            }
+
+            public void Unlock(bool shouldUnlock)
+            {
+                _Unlocked = shouldUnlock;
+                FireEvent();
+            }
+            #endregion
+
+            #region Private Methods
+            private void FireEvent()
+            {
+                OnRecipeUpdate?.Invoke(this);
             }
             #endregion
         }
