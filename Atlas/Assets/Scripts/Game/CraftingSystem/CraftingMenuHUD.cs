@@ -18,22 +18,21 @@ public class CraftingMenuHUD : Menu.MenuWidget
     public Audio OnToggleGUIAudio = null;
     public AudioEvent OnToggleGUIEvent = null;
 
-
     [SerializeField] private ItemDescriptionHUD _description = null;
 
     private void OnEnable()
     {
-        SaveManager.Instance.InputControls.Player.Inventory.performed += OpenCloseInventory;
-        SaveManager.Instance.InputControls.Player.Inventory.Enable();
+        SaveManager.Instance.InputControls.Player.Crafting.performed += OpenCloseCraftingMenu;
+        SaveManager.Instance.InputControls.Player.Crafting.Enable();
     }
 
     private void OnDisable()
     {
-        SaveManager.Instance.InputControls.Player.Inventory.performed -= OpenCloseInventory;
-        SaveManager.Instance.InputControls.Player.Inventory.Disable();
+        SaveManager.Instance.InputControls.Player.Crafting.performed -= OpenCloseCraftingMenu;
+        SaveManager.Instance.InputControls.Player.Crafting.Disable();
     }
 
-    private void OpenCloseInventory(InputAction.CallbackContext obj)
+    private void OpenCloseCraftingMenu(InputAction.CallbackContext obj)
     {
         Show(!Displayed);
         if (OnToggleGUIAudio && OnToggleGUIEvent)

@@ -14,7 +14,7 @@ namespace Menu.Crafting
     {
         #region Variables
 
-        [SerializeField] private Image _sprite = null;
+        [SerializeField] private Image _image = null;
 
         protected Button Button = null;
         protected Recipe Recipe = null;
@@ -22,7 +22,7 @@ namespace Menu.Crafting
         private Canvas _rootCanvas = null;
         private bool _mouseOver = false;
         private LockableSlot _lockableSlot = null;
-        private bool ShouldBeLocked => ((Recipe != null) && (!Recipe.isUnlocked));
+        private bool GetLockState => ((Recipe != null) && (Recipe.isUnlocked));
         #endregion
 
         protected virtual void Awake()
@@ -32,35 +32,79 @@ namespace Menu.Crafting
             Button = GetComponent<Button>();
         }
 
-        public void SetRecipe(Recipe recipe)
+        public void SetRecipe(Recipe recipe, bool shouldBeUnlocked)
         {
             if (Recipe != null)
                 Recipe.OnRecipeUpdate -= UpdateContent;
             Recipe = recipe;
             if (Recipe != null)
                 Recipe.OnRecipeUpdate += UpdateContent;
-
-            UpdateContent(recipe);
+            recipe?.Unlock(shouldBeUnlocked);
         }
 
         public void UpdateContent(Recipe recipe)
         {
-            _sprite.enabled = ShouldBeLocked;
+            if (_image)
+            {
+                _image.sprite = recipe.Sprite;
+                _image.enabled = !GetLockState;
+                Debug.Log("Changing color of the image");
+                //_image.color = GetLockState ? Color.gray : Color.white;
+            }
+
             if (_lockableSlot)
             {
-                _lockableSlot.isLocked = ShouldBeLocked;
+                _lockableSlot.isUnlocked = GetLockState;
             }
-            _sprite.sprite = recipe.Sprite;
         }
 
         public virtual void OnPointerEnter(PointerEventData eventData)
         {
+            DisplayDescription();
             _mouseOver = true;
         }
 
         public virtual void OnPointerExit(PointerEventData eventData)
         {
+            HideDescription();
             _mouseOver = false;
         }
+
+        [SerializeField] private RecipeDescriptionHUD _description = null;
+
+        #region OnSelect/Deselect
+        public void OnSelected(BaseEventData eventData)
+        {
+            // show right panel
+        }
+
+        public void OnDeselected(BaseEventData eventData)
+        {
+            // hide right panel
+        }
+
+        private void DisplayDescription()
+        {
+            if (_description != null && Recipe != null)
+                _description.SetRecipe(Recipe);
+        }
+
+        private void HideDescription()
+        {
+            if (_description != null && Recipe != null &&
+                _description.Recipe.Id == Recipe.Id)
+                _description.SetRecipe(null);
+        }
+
+        private void DisplayRecipe()
+        {
+
+        }
+
+        private void HideRecipe()
+        {
+
+        }
+        #endregion
     }
 }

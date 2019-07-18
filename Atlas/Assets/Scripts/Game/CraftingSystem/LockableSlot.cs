@@ -5,48 +5,32 @@ using UnityEngine.UI;
 
 namespace Game.Crafting
 {
+    [RequireComponent(typeof(Image))]
     [RequireComponent(typeof(RectTransform))]
     public class LockableSlot : MonoBehaviour
     {
-        public Image LockImagePrefab;
-        public bool isLocked
+        public bool isUnlocked
         {
-            get { return _isLocked; }
+            get { return _isUnlocked; }
             set
             {
-                _isLocked = value;
-                if (!_isLocked)
-                {
-                    _lockImage.enabled = false;
-                }
-                else
-                {
-                    _lockImage.enabled = true;
-                }
+                if (_lockImage) _lockImage.enabled = !value;
+                _isUnlocked = value;
             }
         }
 
-        [SerializeField] private bool _isLocked = false;
+        [SerializeField] private bool _isUnlocked = false;
+        [SerializeField] private Image _lockImage;
         private RectTransform _transform;
-        private Image _lockImage;
+
         // Start is called before the first frame update
-        void Start()
+        private void OnEnable()
         {
             _transform = GetComponent<RectTransform>();
 
-            if (LockImagePrefab != null)
+            if (!isUnlocked)
             {
-                _lockImage = Instantiate(LockImagePrefab);
-                _lockImage.rectTransform.SetParent(_transform);
-                _lockImage.rectTransform.SetPositionAndRotation(new Vector3(), new Quaternion());
-                _lockImage.rectTransform.anchorMax = new Vector2(1, 1);
-                _lockImage.rectTransform.anchorMin = new Vector2(0, 0);
-                _lockImage.rectTransform.localPosition = new Vector3();
-                _lockImage.rectTransform.localScale = new Vector3(1, 1, 1);
-                if (!isLocked)
-                {
-                    _lockImage.enabled = false;
-                }
+                if (_lockImage) _lockImage.enabled = false;
             }
         }
     }
