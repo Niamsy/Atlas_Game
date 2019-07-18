@@ -61,9 +61,19 @@ namespace Game.SavingSystem
                 Destroy(gameObject);
         }
 
+        private void OnApplicationFocus(bool hasFocus)
+        {
+            if (hasFocus)
+                InputControls.Player.Enable();
+            else
+                InputControls.Player.Disable();
+        }
+        
         private void Init()
         {
             InputControls = new InputControls();
+            InputControls.Player.Enable();
+
 #if UNITY_EDITOR
             if (AccountData != null)
             {

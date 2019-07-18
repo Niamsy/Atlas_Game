@@ -1,50 +1,42 @@
-﻿using Game.Player.Stats;
+﻿using System.Collections.Generic;
+using Game.ResourcesManagement;
+using Game.SavingSystem;
+using Game.SavingSystem.Datas;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerConsumer))]
-public class PlayerStats : MonoBehaviour
+namespace Game.Player.Stats
 {
-    [SerializeField]
-    public PlayerConsumer _consumer;
-
-    public Popup popupSender;
+    [RequireComponent(typeof(PlayerConsumer))]
+    public class PlayerStats : MapSavingBehaviour
+    {
+        public ResourcesStock Resources;
     
-    public HealthConstraint PlayerHealth;
+        public HealthConstraint PlayerHealth;
 
-    private void Awake()
-    {
-        PlayerHealth = new HealthConstraint();
-    }
+        protected override void Awake()
+        {
+            base.Awake();
 
-    public void Update()
-    {
-       /* playerStamina.Update(Time.deltaTime);
-        
-        playerHydration.Update(Time.deltaTime);
-        if (playerHydration.getCurrent() <= playerHydration.getMax() / 2 && playerHydration.getCurrent() >= playerHydration.getMax() / 2 - 1)
-        {
-            Popup.Instance.sendPopup("Careful Hydration under 50 %  u should provide ur body regular source of hydration");
+            PlayerHealth = new HealthConstraint();
         }
-        playerSleep.Update(Time.deltaTime);
-        if (playerSleep.getCurrent() <= playerSleep.getMax() / 2 && playerSleep.getCurrent() <= playerSleep.getMax() / 2 - 1)
+
+        protected override void SavingMapData(MapData data)
         {
-            Popup.Instance.sendPopup("Careful Character sleep under 50 %, take a nap");
+            if (data.PlayerResource == null)
+                data.PlayerResource = new List<Stock>();
+            else
+                data.PlayerResource.Clear();
+            data.PlayerResource.AddRange(Resources.ListOfStocks);
         }
-        playerOxygen.Update(Time.deltaTime);
-        if (playerOxygen.getCurrent() <= playerOxygen.getMax() / 2 && playerOxygen.getCurrent() <= playerOxygen.getMax() / 2 - 1)
+
+        protected override void LoadingMapData(MapData data)
         {
-            Popup.Instance.sendPopup("Careful Oxygen under 50 % find a air source quickly.");
+            if (data.PlayerResource != null)
+            {
+                Resources.ListOfStocks.Clear();
+                Resources.ListOfStocks.AddRange(data.PlayerResource);
+            }
         }
-        playerHealth.Update(Time.deltaTime);
-        if (playerHealth.getCurrent() <= playerHealth.getMax() / 2 && playerHealth.getCurrent() <= playerHealth.getMax() / 2 - 1)
-        {
-            Popup.Instance.sendPopup("Careful health state is half critical, use bandage to heal yourself");
-        }
-        playerHunger.Update(Time.deltaTime);
-        if (playerHunger.getCurrent() <= playerHunger.getMax() / 2 && playerHunger.getCurrent() <= playerHunger.getMax() / 2 - 1)
-        {
-            Popup.Instance.sendPopup("Careful player Hunger is under 50% you should find something to eat soon");
-        }*/
     }
 }
 

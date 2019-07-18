@@ -4,6 +4,7 @@ using InputManagement;
 using Game;
 using Game.Player;
 using Game.Inventory;
+using Game.Player.Stats;
 using Game.SavingSystem;
 using Player.Scripts;
 using UnityEngine.InputSystem;
@@ -18,11 +19,6 @@ namespace Player
 
         [SerializeField] private HandSlots _handSlots = null;
         #region Public variables
-
-        #region Inputs
-        public PlayerInputs _Inputs = null;
-        #endregion
-
         #region Movement configuration
         [Header("Movement")]
         public float baseSpeed = 10f;
@@ -175,40 +171,43 @@ namespace Player
 
         private void OnEnable()
         {
-            SaveManager.Instance.InputControls.Player.Movement.performed += ctx => GetMovementIput(ctx.ReadValue<Vector2>());
-            SaveManager.Instance.InputControls.Player.Movement.canceled += ctx => ResetMovementInput(ctx.ReadValue<Vector2>());
-            SaveManager.Instance.InputControls.Player.Movement.Enable();
+            SaveManager.Instance.InputControls.Player.Movement.performed += GetMovementIput;
+            SaveManager.Instance.InputControls.Player.Movement.canceled += ResetMovementInput;
             SaveManager.Instance.InputControls.Player.Jump.performed += Jump;
-            SaveManager.Instance.InputControls.Player.Jump.Enable();
             SaveManager.Instance.InputControls.Player.Interact.performed += Interact;
+            SaveManager.Instance.InputControls.Player.UseItem.performed += UseItem;
+            SaveManager.Instance.InputControls.Player.UseItem.canceled += CancelUseItem;
+            
+            SaveManager.Instance.InputControls.Player.Movement.Enable();
+            SaveManager.Instance.InputControls.Player.Jump.Enable();
             SaveManager.Instance.InputControls.Player.Interact.Enable();
-            SaveManager.Instance.InputControls.Player.UseItem.performed += ctx => UseItem();
-            SaveManager.Instance.InputControls.Player.UseItem.canceled += ctx => CancelUseItem();
             SaveManager.Instance.InputControls.Player.UseItem.Enable();
         }
 
         private void OnDisable()
         {
-            SaveManager.Instance.InputControls.Player.Movement.performed -= ctx => GetMovementIput(ctx.ReadValue<Vector2>());
-            SaveManager.Instance.InputControls.Player.Movement.canceled -= ctx => ResetMovementInput(ctx.ReadValue<Vector2>());
-            SaveManager.Instance.InputControls.Player.Movement.Disable();
-            SaveManager.Instance.InputControls.Player.Jump.performed -= Jump;
-            SaveManager.Instance.InputControls.Player.Jump.Disable();
+            SaveManager.Instance.InputControls.Player.Movement.performed -= GetMovementIput;
+            SaveManager.Instance.InputControls.Player.Movement.canceled -= ResetMovementInput;
             SaveManager.Instance.InputControls.Player.Interact.performed -= Interact;
+            SaveManager.Instance.InputControls.Player.UseItem.performed -= UseItem;
+            SaveManager.Instance.InputControls.Player.UseItem.canceled -= CancelUseItem;
+            SaveManager.Instance.InputControls.Player.Jump.performed -= Jump;
+            
+            SaveManager.Instance.InputControls.Player.Movement.Disable();
+            SaveManager.Instance.InputControls.Player.Jump.Disable();
             SaveManager.Instance.InputControls.Player.Interact.Disable();
-            SaveManager.Instance.InputControls.Player.UseItem.performed -= ctx => UseItem();
-            SaveManager.Instance.InputControls.Player.UseItem.canceled -= ctx => CancelUseItem();
             SaveManager.Instance.InputControls.Player.UseItem.Disable();
         }
         #endregion
 
-        public void GetMovementIput(Vector2 input)
+        public void GetMovementIput(InputAction.CallbackContext ctx)
         {
+            Vector2 input = ctx.ReadValue<Vector2>();
             m_InputX = input.x;
             m_InputZ = input.y;
         }
 
-        private void ResetMovementInput(Vector2 vector2)
+        private void ResetMovementInput(InputAction.CallbackContext ctx)
         {
             m_InputX = 0;
             m_InputZ = 0;
@@ -315,7 +314,7 @@ namespace Player
 
         public bool CheckForDeath()
         {
-            if (!IsDead && m_PlayerStats._consumer.LinkedStock[Game.ResourcesManagement.Resource.Oxygen].Quantity <= 0)
+            if (!IsDead && m_PlayerStats.Resources[Game.ResourcesManagement.Resource.Oxygen].Quantity <= 0)
             {
                 IsDead = true;
                 _handSlots.Drop();
@@ -323,7 +322,7 @@ namespace Player
                 inventory.DropAll();
                 ResetSpeed();
             }
-            else if (IsDead == true && m_PlayerStats._consumer.LinkedStock[Game.ResourcesManagement.Resource.Oxygen].Quantity > 0)
+            else if (IsDead == true && m_PlayerStats.Resources[Game.ResourcesManagement.Resource.Oxygen].Quantity > 0)
             {
                 IsDead = false;
             }
@@ -348,7 +347,7 @@ namespace Player
             }
         }
 
-        private void UseItem()
+        private void UseItem(InputAction.CallbackContext ctx)
         {
             if (IsGrounded && !IsInteracting && _handSlots.IsObjectUsable)
             {
@@ -358,7 +357,7 @@ namespace Player
             }
         }
 
-        private void CancelUseItem()
+        private void CancelUseItem(InputAction.CallbackContext ctx)
         {
             if (IsUsingItem && _handSlots.EquippedItem != null)
             {
