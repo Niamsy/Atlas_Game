@@ -17,7 +17,7 @@ namespace DigitalRuby.RainMaker
         public float RainForwardOffset = -7.0f;
 
         [Tooltip("The top y value of the mist particles")]
-        public float RainMistHeight = 3.0f;
+        private float RainMistHeight = 3.0f;
 
         private void UpdateRain()
         {
