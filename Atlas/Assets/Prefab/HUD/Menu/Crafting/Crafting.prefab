@@ -6381,6 +6381,8 @@ GameObject:
   - component: {fileID: 8662492192331396534}
   - component: {fileID: 8662492192331396535}
   - component: {fileID: 822809987562663667}
+  - component: {fileID: 5192956295617146159}
+  - component: {fileID: 5374447700628027249}
   m_Layer: 5
   m_Name: Crafting
   m_TagString: Untagged
@@ -6488,6 +6490,35 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5192956295617146159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8662492192331396533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12edbd8b87d0b7a449204cf85c8f6cac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enableCursorOnDisplay: 1
+  _displayed: 0
+  OnToggleGUIAudio: {fileID: 11400000, guid: 54927784f6ef72e4aa4bac66586cc3eb, type: 2}
+  OnToggleGUIEvent: {fileID: 11400000, guid: 574abd74039cd5f40950fb2cf09f4dcb, type: 2}
+  _description: {fileID: 0}
+--- !u!225 &5374447700628027249
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8662492192331396533}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &8662492192335939321
 GameObject:
   m_ObjectHideFlags: 0
@@ -9225,6 +9256,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (29)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9330,11 +9366,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (29)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &3533397684966945504 stripped
@@ -9350,6 +9381,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (69)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9455,11 +9491,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (69)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &3816680092042701929 stripped
@@ -9475,6 +9506,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (48)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9580,11 +9616,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (48)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &3885355226092038592 stripped
@@ -9600,6 +9631,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (5)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9705,11 +9741,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (5)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &4056415579553334577 stripped
@@ -9725,6 +9756,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (73)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9830,11 +9866,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (73)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &4184047229084229284 stripped
@@ -9850,6 +9881,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (59)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9955,11 +9991,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (59)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &4313635846770209564 stripped
@@ -9975,6 +10006,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10080,11 +10116,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (1)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &4465824171589854978 stripped
@@ -10100,6 +10131,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (79)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10205,11 +10241,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (79)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &2436260922540652964 stripped
@@ -10225,6 +10256,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (62)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10330,11 +10366,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (62)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &2393365447060059507 stripped
@@ -10350,6 +10381,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (14)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10455,11 +10491,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (14)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &2593107629269960334 stripped
@@ -10475,6 +10506,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (19)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10580,11 +10616,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (19)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &2608587724144971775 stripped
@@ -10600,6 +10631,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (32)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10705,11 +10741,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (32)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &2603440779311396700 stripped
@@ -10725,6 +10756,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (44)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10830,11 +10866,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (44)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &2628506459534325628 stripped
@@ -10850,6 +10881,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (18)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10955,11 +10991,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (18)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &2721321961381835945 stripped
@@ -10975,6 +11006,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (60)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11080,11 +11116,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (60)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &2776434386148483413 stripped
@@ -11100,6 +11131,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (77)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11205,11 +11241,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (77)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &2933413564293462051 stripped
@@ -11225,6 +11256,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (36)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11330,11 +11366,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (36)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &3104806567237268929 stripped
@@ -11350,6 +11381,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (7)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11455,11 +11491,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (7)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &3174234309661171374 stripped
@@ -11475,6 +11506,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (53)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11580,11 +11616,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (53)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &3408232296912098299 stripped
@@ -11600,6 +11631,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (28)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11705,11 +11741,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (28)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &1266455538726559284 stripped
@@ -11725,6 +11756,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (16)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11830,11 +11866,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (16)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &1239827597273887047 stripped
@@ -11850,6 +11881,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (31)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11955,11 +11991,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (31)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &1246999145107272798 stripped
@@ -11975,6 +12006,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (33)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12080,11 +12116,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (33)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &1301010459969610685 stripped
@@ -12100,6 +12131,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (49)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12205,11 +12241,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (49)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &1491911357189062945 stripped
@@ -12225,6 +12256,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (15)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12330,11 +12366,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (15)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &1479734529637050533 stripped
@@ -12350,6 +12381,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (6)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12455,11 +12491,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (6)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &1716821833843846315 stripped
@@ -12475,6 +12506,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (40)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12580,11 +12616,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (40)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &1773868298471607220 stripped
@@ -12600,6 +12631,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (13)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12705,11 +12741,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (13)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &1817133768917097262 stripped
@@ -12725,6 +12756,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (55)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12830,11 +12866,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (55)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &1926789780320758535 stripped
@@ -12850,6 +12881,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (56)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12955,11 +12991,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (56)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &111635316891446183 stripped
@@ -12975,6 +13006,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (45)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13080,11 +13116,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (45)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &89353691901641911 stripped
@@ -13100,6 +13131,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (81)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13205,11 +13241,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (81)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &162894826526657718 stripped
@@ -13225,6 +13256,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (3)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13330,11 +13366,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (3)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &290208241444798354 stripped
@@ -13350,6 +13381,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (76)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13455,11 +13491,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (76)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &434184943505892630 stripped
@@ -13475,6 +13506,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13580,11 +13616,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (2)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &584807004103143566 stripped
@@ -13600,6 +13631,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (74)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13705,11 +13741,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (74)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &787501149391980279 stripped
@@ -13725,6 +13756,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (24)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13830,11 +13866,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (24)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &853924836534513261 stripped
@@ -13850,6 +13881,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (25)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13955,11 +13991,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (25)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &880042164990902588 stripped
@@ -13975,6 +14006,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (17)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14080,11 +14116,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (17)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &872475169277708821 stripped
@@ -14100,6 +14131,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (52)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14205,11 +14241,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (52)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &946734815615841525 stripped
@@ -14225,6 +14256,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (71)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14330,11 +14366,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (71)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &946840799136510358 stripped
@@ -14350,6 +14381,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (67)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14455,11 +14491,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (67)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &1024573574907285669 stripped
@@ -14475,6 +14506,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (37)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14580,11 +14616,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (37)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &8170105691382274722 stripped
@@ -14600,6 +14631,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (9)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14705,11 +14741,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (9)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &8225543331691432022 stripped
@@ -14725,6 +14756,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (72)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14830,11 +14866,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (72)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &8392359166572913630 stripped
@@ -14850,6 +14881,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14955,11 +14991,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &8446918973726506081 stripped
@@ -14975,6 +15006,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (23)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15080,11 +15116,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (23)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &8759842827640289469 stripped
@@ -15100,6 +15131,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (20)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15205,11 +15241,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (20)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &8980743696440015478 stripped
@@ -15225,6 +15256,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (70)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15330,11 +15366,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (70)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &9107122219586492325 stripped
@@ -15350,6 +15381,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (30)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15455,11 +15491,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (30)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &7138152889581277288 stripped
@@ -15475,6 +15506,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (68)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15580,11 +15616,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (68)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &7235689516169101853 stripped
@@ -15600,6 +15631,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (12)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15705,11 +15741,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (12)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &7347626274309958296 stripped
@@ -15725,6 +15756,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (63)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15830,11 +15866,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (63)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &7467722316069303366 stripped
@@ -15850,6 +15881,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (4)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15955,11 +15991,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (4)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &7557198239357056041 stripped
@@ -15975,6 +16006,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (39)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -16080,11 +16116,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (39)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &7725662449259377638 stripped
@@ -16100,6 +16131,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (75)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -16205,11 +16241,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (75)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &7833668943549568850 stripped
@@ -16225,6 +16256,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (83)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -16330,11 +16366,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (83)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &7904630884630590828 stripped
@@ -16350,6 +16381,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (22)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -16455,11 +16491,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (22)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &7913574986909913275 stripped
@@ -16475,6 +16506,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (38)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -16580,11 +16616,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (38)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &7979777247039841779 stripped
@@ -16600,6 +16631,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (54)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -16705,11 +16741,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (54)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &5905646951752493555 stripped
@@ -16725,6 +16756,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (51)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -16830,11 +16866,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (51)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &6050019308132665903 stripped
@@ -16850,6 +16881,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (10)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -16955,11 +16991,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (10)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &5996733007719389645 stripped
@@ -16975,6 +17006,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (47)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17080,11 +17116,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (47)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &6007406954896637331 stripped
@@ -17100,6 +17131,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (80)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17205,11 +17241,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (80)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &6105843469119575044 stripped
@@ -17225,6 +17256,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (11)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17330,11 +17366,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (11)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &6115299472928474442 stripped
@@ -17350,6 +17381,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (27)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17455,11 +17491,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (27)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &6070785677121444810 stripped
@@ -17475,6 +17506,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (8)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17580,11 +17616,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (8)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &6083950648242305194 stripped
@@ -17600,6 +17631,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (82)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17705,11 +17741,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (82)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &6246928271577914612 stripped
@@ -17725,6 +17756,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (50)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17830,11 +17866,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (50)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &6208930657095847965 stripped
@@ -17850,6 +17881,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (58)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17955,11 +17991,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (58)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &6317946233071481305 stripped
@@ -17975,6 +18006,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (78)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -18080,11 +18116,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (78)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &6598519520178565442 stripped
@@ -18100,6 +18131,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (26)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -18205,11 +18241,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (26)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &6691647432261580394 stripped
@@ -18225,6 +18256,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (65)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -18330,11 +18366,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (65)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &6914980706732560980 stripped
@@ -18350,6 +18381,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (66)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -18455,11 +18491,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (66)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &6858950781653187595 stripped
@@ -18475,6 +18506,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (57)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -18580,11 +18616,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (57)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &4677621446300574913 stripped
@@ -18600,6 +18631,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (35)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -18705,11 +18741,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (35)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &4750390001274587770 stripped
@@ -18725,6 +18756,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (46)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -18830,11 +18866,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (46)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &4748109002074459988 stripped
@@ -18850,6 +18881,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (64)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -18955,11 +18991,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (64)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &4818810107669183870 stripped
@@ -18975,6 +19006,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (43)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -19080,11 +19116,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (43)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &4785060991458962310 stripped
@@ -19100,6 +19131,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (21)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -19205,11 +19241,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (21)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &4849041283687974594 stripped
@@ -19225,6 +19256,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (34)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -19330,11 +19366,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (34)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &5465830410377732292 stripped
@@ -19350,6 +19381,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (41)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -19455,11 +19491,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (41)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &5598348434765996118 stripped
@@ -19475,6 +19506,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (61)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -19580,11 +19616,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (61)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}
 --- !u!224 &5584945283328711074 stripped
@@ -19600,6 +19631,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8662492192335939320}
     m_Modifications:
+    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
+        type: 3}
+      propertyPath: m_Name
+      value: CraftingButton (42)
+      objectReference: {fileID: 0}
     - target: {fileID: 3512586165659795138, guid: 97254d8f616ec104787b83d48eba9da4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -19704,11 +19740,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3650503654976110120, guid: 97254d8f616ec104787b83d48eba9da4,
-        type: 3}
-      propertyPath: m_Name
-      value: CraftingButton (42)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97254d8f616ec104787b83d48eba9da4, type: 3}

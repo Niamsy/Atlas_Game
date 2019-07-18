@@ -34,9 +34,7 @@ namespace Menu.Crafting
                     slot.gameObject.SetActive(currentSlot < listSize);
                     if (currentSlot < listSize)
                     {
-                        slot.SetRecipe(recipe);
-                        // not sure if this can be done here, maybe move this in an update loop, or an event trigger to player level up
-                        recipe.Unlock(chapter.RequiredLevel <= (int)_PlayerLevel.Value);
+                        slot.SetRecipe(recipe, (int)_PlayerLevel.Value >= chapter.RequiredLevel);
                         ++currentSlot;
                     }
                     else
