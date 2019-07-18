@@ -104,6 +104,7 @@ namespace Menu.LevelSelector
                     }
                 }
             }
+            this.gameObject.SetActive(false);
         }
 
         // Start is called before the first frame update
