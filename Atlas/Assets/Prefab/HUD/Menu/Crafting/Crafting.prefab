@@ -6256,6 +6256,8 @@ GameObject:
   - component: {fileID: 8662492191555070495}
   - component: {fileID: 8662492191555070492}
   - component: {fileID: 8662492191555070493}
+  - component: {fileID: 6930628955843171726}
+  - component: {fileID: 9163776485753867681}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -6344,6 +6346,37 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!225 &6930628955843171726
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8662492191555070491}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!95 &9163776485753867681
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8662492191555070491}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3c53b2df6409ffc4db0fb62fe3a23a32, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8662492191811799622
 GameObject:
   m_ObjectHideFlags: 0
@@ -7177,7 +7210,7 @@ MonoBehaviour:
   _displayed: 0
   OnToggleGUIAudio: {fileID: 11400000, guid: 54927784f6ef72e4aa4bac66586cc3eb, type: 2}
   OnToggleGUIEvent: {fileID: 11400000, guid: 574abd74039cd5f40950fb2cf09f4dcb, type: 2}
-  _description: {fileID: 0}
+  _descriptionGameObject: {fileID: 1056897328226979578}
 --- !u!225 &5374447700628027249
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -7423,6 +7456,8 @@ GameObject:
   - component: {fileID: 8662492192344755425}
   - component: {fileID: 8662492192344755427}
   - component: {fileID: 8662492192344755424}
+  - component: {fileID: 3824415672905251814}
+  - component: {fileID: 254321995171739220}
   m_Layer: 5
   m_Name: BlueprintDetailsPanel
   m_TagString: Untagged
@@ -7488,6 +7523,33 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &3824415672905251814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8662492192344755422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5b60f437b9155c47b5d3893e82a0d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _blueprintImage: {fileID: 8662492192900092092}
+  _blueprintName: {fileID: 8662492192172956772}
+  _blueprintDescription: {fileID: 8662492191459340387}
+--- !u!225 &254321995171739220
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8662492192344755422}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &8662492192371247509
 GameObject:
   m_ObjectHideFlags: 0
@@ -8179,10 +8241,10 @@ RectTransform:
   m_Father: {fileID: 8662492192427524693}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.037801806, y: 0.254}
-  m_AnchorMax: {x: 0.9626036, y: 0.5328532}
+  m_AnchorMin: {x: 0.012594596, y: 0.254}
+  m_AnchorMax: {x: 0.9752162, y: 0.5252197}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -8, y: -8}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8662492192980265559
 CanvasRenderer:
