@@ -15,6 +15,7 @@ namespace Menu.Crafting
         #region Variables
 
         [SerializeField] private Image _image = null;
+        [SerializeField] private RecipeDescriptionHUD _description = null;
 
         protected Button Button = null;
         protected Recipe Recipe = null;
@@ -22,6 +23,7 @@ namespace Menu.Crafting
         private Canvas _rootCanvas = null;
         private bool _mouseOver = false;
         private LockableSlot _lockableSlot = null;
+
         private bool GetLockState => ((Recipe != null) && (Recipe.isUnlocked));
         #endregion
 
@@ -44,11 +46,11 @@ namespace Menu.Crafting
 
         public void UpdateContent(Recipe recipe)
         {
+            _image.enabled = recipe.Sprite != null;
+
             if (_image)
             {
                 _image.sprite = recipe.Sprite;
-                _image.enabled = !GetLockState;
-                Debug.Log("Changing color of the image");
                 //_image.color = GetLockState ? Color.gray : Color.white;
             }
 
@@ -70,7 +72,6 @@ namespace Menu.Crafting
             _mouseOver = false;
         }
 
-        [SerializeField] private RecipeDescriptionHUD _description = null;
 
         #region OnSelect/Deselect
         public void OnSelected(BaseEventData eventData)
@@ -86,14 +87,14 @@ namespace Menu.Crafting
         private void DisplayDescription()
         {
             if (_description != null && Recipe != null)
-                _description.SetRecipe(Recipe);
+                _description.SetRecipe(transform, Recipe);
         }
 
         private void HideDescription()
         {
             if (_description != null && Recipe != null &&
                 _description.Recipe.Id == Recipe.Id)
-                _description.SetRecipe(null);
+                _description.Reset();
         }
 
         private void DisplayRecipe()

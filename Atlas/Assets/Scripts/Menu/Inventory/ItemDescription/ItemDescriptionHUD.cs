@@ -24,10 +24,10 @@ namespace Menu.Inventory.ItemDescription
 		#region Methods
 		private void Awake()
 		{
-			if (_subDescriptionHUD == null)
-				Init();
-				UpdateDisplay();
-		}
+            if (_subDescriptionHUD == null)
+                Init();
+            UpdateDisplay();
+        }
 
 		private void Init()
 		{
