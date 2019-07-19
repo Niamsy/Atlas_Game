@@ -17,19 +17,12 @@ namespace Menu.Crafting
         [SerializeField] private Localization.LocalizedText _unavailableLocalizedText;
         [SerializeField] private Color _availableLocalizedTextColor;
         [SerializeField] private Color _unavailableLocalizedTextColor;
-        // Update is called once per frame
 
         private Recipe _currentRecipe = null;
 
         public Recipe Recipe {
             get { return _currentRecipe; }
             private set { }
-        }
-
-
-        void Update()
-        {
-
         }
 
         public void Reset()

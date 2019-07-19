@@ -18,10 +18,15 @@ public class CraftingMenuHUD : Menu.MenuWidget
     public Audio OnToggleGUIAudio = null;
     public AudioEvent OnToggleGUIEvent = null;
 
-    [SerializeField] private ItemDescriptionHUD _description = null;
+    [SerializeField] private GameObject _descriptionGameObject = null;
+    private ItemDescriptionHUD _description = null;
 
     private void OnEnable()
     {
+        if (_descriptionGameObject)
+        {
+            _description = _descriptionGameObject.GetComponent<ItemDescriptionHUD>();
+        }
         SaveManager.Instance.InputControls.Player.Crafting.performed += OpenCloseCraftingMenu;
         SaveManager.Instance.InputControls.Player.Crafting.Enable();
     }
@@ -45,7 +50,7 @@ public class CraftingMenuHUD : Menu.MenuWidget
     {
         TimeManager.Instance.PauseGame(display);
         base.Show(display, force);
-        _description.Reset();
+        if (_description) _description.Reset();
     }
 
     public void QuitTheGame()

@@ -10,27 +10,32 @@ namespace Menu.Crafting
 {
     [RequireComponent(typeof(Button))]
     [RequireComponent(typeof(LockableSlot))]
-    public class RecipeHUD : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public class RecipeHUD : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
     {
         #region Variables
 
         [SerializeField] private Image _image = null;
         [SerializeField] private RecipeDescriptionHUD _description = null;
+        [SerializeField] private BlueprintDescriptionHUD _blueprint = null;
+        [SerializeField] private Animator _blueprintAnimator;
+
+        private int _hashShowed = Animator.StringToHash("Showed");
 
         protected Button Button = null;
         protected Recipe Recipe = null;
 
-        private Canvas _rootCanvas = null;
-        private bool _mouseOver = false;
         private LockableSlot _lockableSlot = null;
 
         private bool GetLockState => ((Recipe != null) && (Recipe.isUnlocked));
         #endregion
 
+        private void OnEnable()
+        {
+            _lockableSlot = GetComponent<LockableSlot>();
+        }
+
         protected virtual void Awake()
         {
-            _rootCanvas = GetComponentInParent<Canvas>();
-            _lockableSlot = GetComponent<LockableSlot>();
             Button = GetComponent<Button>();
         }
 
@@ -51,8 +56,10 @@ namespace Menu.Crafting
             if (_image)
             {
                 _image.sprite = recipe.Sprite;
-                //_image.color = GetLockState ? Color.gray : Color.white;
+                _image.color = !GetLockState ? Color.gray : Color.white;
             }
+
+            if (!_lockableSlot) _lockableSlot = GetComponent<LockableSlot>();
 
             if (_lockableSlot)
             {
@@ -63,25 +70,28 @@ namespace Menu.Crafting
         public virtual void OnPointerEnter(PointerEventData eventData)
         {
             DisplayDescription();
-            _mouseOver = true;
         }
 
         public virtual void OnPointerExit(PointerEventData eventData)
         {
             HideDescription();
-            _mouseOver = false;
         }
 
 
         #region OnSelect/Deselect
-        public void OnSelected(BaseEventData eventData)
+        public void OnSelected()
         {
-            // show right panel
+            Debug.Log("Recipe : " + Recipe + ", Blueprint : " + _blueprint + ", Animator : " + _blueprintAnimator);
+            _blueprint?.SetRecipe(Recipe);
+            _blueprintAnimator?.SetBool(_hashShowed, Recipe != null);
         }
 
-        public void OnDeselected(BaseEventData eventData)
+        public void OnDeselected()
         {
-            // hide right panel
+            if (_description != null && Recipe != null &&
+                _blueprint.Recipe.Id == Recipe.Id)
+                _blueprint.Reset();
+            _blueprintAnimator?.SetBool(_hashShowed, false);
         }
 
         private void DisplayDescription()
@@ -105,6 +115,11 @@ namespace Menu.Crafting
         private void HideRecipe()
         {
 
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            OnSelected();
         }
         #endregion
     }
