@@ -11,10 +11,10 @@ public class LoadLevel : MonoBehaviour
         
     }
 
-    public void LoadSceneIndex(int index)
+    public void LoadSceneIndex(string name)
     {
-        Debug.Log("sceneBuildIndex to load: " + index);
-        SceneManager.LoadScene(index, LoadSceneMode.Single);
+        Debug.Log("sceneBuildIndex to load: " + name);
+        SceneManager.LoadScene(name, LoadSceneMode.Single);
     }
 
     // Update is called once per frame
