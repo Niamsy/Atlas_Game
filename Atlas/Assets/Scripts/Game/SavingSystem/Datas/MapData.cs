@@ -52,13 +52,13 @@ namespace Game.SavingSystem.Datas
             public bool NotFirstTime;
         }
 
-        public PlantSaveData[]      Plants;
-        public ItemDroppedsData[]   DroppedItems;
-        public List<ItemBaseData>	Inventory;
-        public ItemBaseData			EquippedHand;
-        public TransformSaveData	TransformData;
-        public Date					CalendarData;
-        public XPSaveData           XPData;
-        public List<Stock>          PlayerResource;
+        public PlantSaveData[]          Plants;
+        public ItemDroppedsData[]       DroppedItems;
+        public List<ItemBaseData>	    Inventory;
+        public ItemBaseData			    EquippedHand;
+        public TransformSaveData	    TransformData;
+        public Date					    CalendarData;
+        public XPSaveData               XPData;
+        public List<Stock>              PlayerResource;
     }
 }

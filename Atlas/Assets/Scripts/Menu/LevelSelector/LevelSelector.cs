@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Game.Player.Stats;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -17,16 +18,21 @@ namespace Menu.LevelSelector
         [SerializeField]
         public List<LevelInfo>  Levels;
 
+        [SerializeField]
+        public CharacterDataInfo CharacterInfo;
+
         protected override void InitialiseWidget()
         {
             if (Levels.Count > 0)
             {
                 _currentLevel = Levels[0];
             }
+            bool disableLaunch = false;
             for (int i = 0; i < Levels.Count; ++i)
             {
+                disableLaunch = false;
                 GameObject level = Instantiate(PrefabLevel, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
-                level.transform.parent = GameObject.Find("ListLevels").transform;
+                level.transform.SetParent(GameObject.Find("ListLevels").transform, false);
                 level.name = "Level " + i;
                 GameObject child = level.transform.Find("Level").gameObject;
                 foreach (Transform ui in child.GetComponentsInChildren<Transform>())
@@ -47,8 +53,7 @@ namespace Menu.LevelSelector
                         else if (ui.name == "PlayTime")
                         {
                             TextMeshProUGUI timePlayed = ui.GetComponent<TextMeshProUGUI>();
-                            if (Levels[i].TimePlayed.Length > 0)
-                                timePlayed.text = Levels[i].TimePlayed;
+                            timePlayed.text = CharacterInfo.GetTimePlayedToString();
                         }
                         else if (ui.name == "LevelImage")
                         {
@@ -88,18 +93,48 @@ namespace Menu.LevelSelector
                         else if (ui.name == "PanelLocked")
                         {
                             // TODO Make General Data for this game. Like Number Challenge complete. Change this condition
-                            if (Levels[i].ChallengeOnThisLevelComplete >= 0)
+                            if (CharacterInfo.PlayerChallengeOwned >= Levels[i].ChallengeOnThisLevelToUnlockComplete)
                             {
-                                GameObject panel = ui.GetComponent<GameObject>();
+                                CanvasGroup panel = ui.GetComponent<CanvasGroup>();
                                 if (panel)
-                                    panel.SetActive(false);
+                                {
+                                    Debug.Log("hola " + i);
+                                    panel.alpha = 0;
+                                    panel.interactable = false;
+                                    disableLaunch = true;
+                                }
+                            }
+                            else
+                            {
+                                foreach (Transform uipanel in ui.GetComponentsInChildren<Transform>())
+                                {
+                                    if (ui.name == "NumberChallengeComplete")
+                                    {
+                                        TextMeshProUGUI challengeComplete = ui.GetComponent<TextMeshProUGUI>();
+                                        challengeComplete.text = Levels[i].NumberChallengeComplete().ToString();
+                                    }
+                                    if (ui.name == "NumberChallengeAsking")
+                                    {
+                                        TextMeshProUGUI challengeAsking = ui.GetComponent<TextMeshProUGUI>();
+                                        challengeAsking.text = Levels[i].ChallengeOnThisLevelToUnlockComplete.ToString();
+                                    }
+                                }
                             }
                         }
                         else if (ui.name == "LaunchLevelButton")
                         {
                             Button btn = ui.GetComponent<Button>();
+                            if (!disableLaunch)
+                            {
+                                Debug.Log("holo " + i);
+                                btn.enabled = false;
+                                break;
+                            }
                             LoadLevel ll = new LoadLevel();
-                            btn.onClick.AddListener(delegate { ll.LoadSceneIndex(((i + 2) > 2) ? 2 : i + 2); });
+                            string sceneName = Levels[i].LevelSceneName;
+                            btn.onClick.AddListener(delegate {
+                                ll.LoadSceneIndex(sceneName);
+                            });
                         }
                     }
                 }

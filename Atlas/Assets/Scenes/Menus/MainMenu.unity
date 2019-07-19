@@ -446,8 +446,8 @@ MonoBehaviour:
     m_Bottom: 0
   m_ChildAlignment: 0
   m_Spacing: 200
-  m_ChildForceExpandWidth: 0
-  m_ChildForceExpandHeight: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
@@ -1475,6 +1475,7 @@ GameObject:
   - component: {fileID: 687016420}
   - component: {fileID: 687016419}
   - component: {fileID: 687016418}
+  - component: {fileID: 687016421}
   m_Layer: 5
   m_Name: LevelMenu
   m_TagString: Untagged
@@ -1559,10 +1560,22 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &687016421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 687016416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b7388e4d0c9f8c4bbabb0cefcea11ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &987434567 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8295438640213581167, guid: 12ad80aed3eeedb409437ccfd08aaafc,
@@ -2246,7 +2259,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1977747656}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99999994
+  m_Size: 1
   m_NumberOfSteps: 1
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2487,6 +2500,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0adcdf26c19928c4aac82b8a78f167e0, type: 2}
   - {fileID: 11400000, guid: 2523f0c443eb31a43ab1d392b9882097, type: 2}
   - {fileID: 11400000, guid: e19195f2e02e42f44a573fb665bc3ad5, type: 2}
+  CharacterInfo: {fileID: 687016421}
 --- !u!95 &1693540969
 Animator:
   serializedVersion: 3
