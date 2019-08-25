@@ -19,7 +19,7 @@ namespace Game
             public class Ingredient
             {
                 public ItemAbstract Item;
-                [Range(1, 1000)]
+                [Range(1, 999)]
                 public int RequiredQuantity;
             }
 
@@ -27,7 +27,7 @@ namespace Game
             public class Product
             {
                 public ItemAbstract Item;
-                [Range(1, 1000)]
+                [Range(1, 999)]
                 public int ProducedQuantity;
             }
             #endregion

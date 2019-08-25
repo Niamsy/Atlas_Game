@@ -20,24 +20,21 @@ namespace Menu.Crafting
 
         private Recipe _currentRecipe = null;
 
-        public Recipe Recipe {
-            get { return _currentRecipe; }
-            private set { }
-        }
+        public Recipe Recipe => _currentRecipe;
 
         public void Reset()
         {
             SetRecipe();
         }
 
-        public void SetRecipe(Transform recipTransform = null, Recipe recipe = null)
+        public void SetRecipe(Transform recipeTransform = null, Recipe recipe = null)
         {
             _currentRecipe = recipe;
 
-            UpdateDescription(recipTransform);
+            UpdateDescription(recipeTransform);
         }
 
-        public void UpdateDescription(Transform recipTransform)
+        public void UpdateDescription(Transform recipeTransform)
         {
             gameObject.SetActive(_currentRecipe != null);
 
@@ -49,8 +46,10 @@ namespace Menu.Crafting
             _recipeAvailability.text = _currentRecipe.isUnlocked ? _availableLocalizedText : _unavailableLocalizedText;
             _recipeAvailability.color = _currentRecipe.isUnlocked ? _availableLocalizedTextColor : _unavailableLocalizedTextColor;
 
-            if (recipTransform)
-                transform.SetPositionAndRotation(new Vector3(recipTransform.position.x + 32, recipTransform.position.y - 10) , recipTransform.rotation);
+            if (!recipeTransform) return;
+            
+            var position = recipeTransform.position;
+            transform.SetPositionAndRotation(new Vector3(position.x + 32, position.y - 10) , recipeTransform.rotation);
         }
     }
 }
