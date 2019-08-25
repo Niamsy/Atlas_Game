@@ -128,17 +128,6 @@ public class InputControls : IInputActionCollection
                     ""processors"": """",
                     ""interactions"": ""Press"",
                     ""bindings"": []
-                },
-                {
-                    ""name"": ""Crafting"",
-                    ""id"": ""052769a6-6f82-4d1b-a167-78898affd880"",
-                    ""expectedControlLayout"": ""Button"",
-                    ""continuous"": false,
-                    ""passThrough"": false,
-                    ""initialStateCheck"": false,
-                    ""processors"": """",
-                    ""interactions"": ""Press"",
-                    ""bindings"": []
                 }
             ],
             ""bindings"": [
@@ -501,30 +490,6 @@ public class InputControls : IInputActionCollection
                     ""isComposite"": false,
                     ""isPartOfComposite"": false,
                     ""modifiers"": """"
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""cca2ff51-8e8d-466d-9963-151617b4c63a"",
-                    ""path"": ""<Keyboard>/#(C)"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Crafting"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false,
-                    ""modifiers"": """"
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""57560b74-e9bd-41ab-b358-78aae78e50ae"",
-                    ""path"": ""<Gamepad>/leftStickPress"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Crafting"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false,
-                    ""modifiers"": """"
                 }
             ]
         }
@@ -573,7 +538,6 @@ public class InputControls : IInputActionCollection
         m_Player_CameraZoom = m_Player.GetAction("CameraZoom");
         m_Player_CameraClick = m_Player.GetAction("CameraClick");
         m_Player_RecenterCamera = m_Player.GetAction("RecenterCamera");
-        m_Player_Crafting = m_Player.GetAction("Crafting");
     }
 
     ~InputControls()
@@ -636,7 +600,6 @@ public class InputControls : IInputActionCollection
     private InputAction m_Player_CameraZoom;
     private InputAction m_Player_CameraClick;
     private InputAction m_Player_RecenterCamera;
-    private InputAction m_Player_Crafting;
     public struct PlayerActions
     {
         private InputControls m_Wrapper;
@@ -651,7 +614,6 @@ public class InputControls : IInputActionCollection
         public InputAction @CameraZoom { get { return m_Wrapper.m_Player_CameraZoom; } }
         public InputAction @CameraClick { get { return m_Wrapper.m_Player_CameraClick; } }
         public InputAction @RecenterCamera { get { return m_Wrapper.m_Player_RecenterCamera; } }
-        public InputAction @Crafting { get { return m_Wrapper.m_Player_Crafting; } }
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -692,9 +654,6 @@ public class InputControls : IInputActionCollection
                 RecenterCamera.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRecenterCamera;
                 RecenterCamera.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRecenterCamera;
                 RecenterCamera.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRecenterCamera;
-                Crafting.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrafting;
-                Crafting.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrafting;
-                Crafting.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrafting;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -729,9 +688,6 @@ public class InputControls : IInputActionCollection
                 RecenterCamera.started += instance.OnRecenterCamera;
                 RecenterCamera.performed += instance.OnRecenterCamera;
                 RecenterCamera.canceled += instance.OnRecenterCamera;
-                Crafting.started += instance.OnCrafting;
-                Crafting.performed += instance.OnCrafting;
-                Crafting.canceled += instance.OnCrafting;
             }
         }
     }
@@ -772,6 +728,5 @@ public class InputControls : IInputActionCollection
         void OnCameraZoom(InputAction.CallbackContext context);
         void OnCameraClick(InputAction.CallbackContext context);
         void OnRecenterCamera(InputAction.CallbackContext context);
-        void OnCrafting(InputAction.CallbackContext context);
     }
 }

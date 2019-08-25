@@ -27,14 +27,11 @@ public class CraftingMenuHUD : Menu.MenuWidget
         {
             _description = _descriptionGameObject.GetComponent<ItemDescriptionHUD>();
         }
-        SaveManager.Instance.InputControls.Player.Crafting.performed += OpenCloseCraftingMenu;
-        SaveManager.Instance.InputControls.Player.Crafting.Enable();
     }
 
     private void OnDisable()
     {
-        SaveManager.Instance.InputControls.Player.Crafting.performed -= OpenCloseCraftingMenu;
-        SaveManager.Instance.InputControls.Player.Crafting.Disable();
+        SaveManager.Instance.InputControls.Player.Interact.performed -= OpenCloseCraftingMenu;
     }
 
     private void OpenCloseCraftingMenu(InputAction.CallbackContext obj)
@@ -51,6 +48,14 @@ public class CraftingMenuHUD : Menu.MenuWidget
         TimeManager.Instance.PauseGame(display);
         base.Show(display, force);
         if (_description) _description.Reset();
+        if (display)
+        {
+            SaveManager.Instance.InputControls.Player.Interact.performed += OpenCloseCraftingMenu;
+        }
+        else
+        {
+            SaveManager.Instance.InputControls.Player.Interact.performed -= OpenCloseCraftingMenu;
+        }
     }
 
     public void QuitTheGame()
