@@ -12,6 +12,8 @@ namespace Menu.Crafting
         private Text quantityText = null;
         [SerializeField] private Image _image = null;
         private Recipe.Ingredient _ingredient = null;
+        [SerializeField] private IngredientDescriptionSimpleHUD _description = null;
+
         
         // Start is called before the first frame update
         void Start()
@@ -41,10 +43,15 @@ namespace Menu.Crafting
 
         public void OnPointerEnter(PointerEventData eventData)
         {
+            if (_description != null && _ingredient != null)
+                _description.SetItem(transform, _ingredient);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
+            if (_description != null && _ingredient != null &&
+                _description.Item.Item.Id == _ingredient.Item.Id)
+                _description.Reset();
         }
     }
 }
