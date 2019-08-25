@@ -24,9 +24,12 @@ MonoBehaviour:
   _animation:
     anim: 0
   _Category: {fileID: 11400000, guid: d980723dd009b6549acbeec1915054f4, type: 2}
+  CraftingDuration: 0
   _Ingredients:
   - Item: {fileID: 11400000, guid: eabb78ffc63b0f645bd421998e6940cf, type: 2}
     RequiredQuantity: 2
   - Item: {fileID: 11400000, guid: 119462f9cc32a404c902c9bd94f835a3, type: 2}
     RequiredQuantity: 3
-  _Products: []
+  _Product:
+    Item: {fileID: 11400000, guid: 119462f9cc32a404c902c9bd94f835a3, type: 2}
+    ProducedQuantity: 1
