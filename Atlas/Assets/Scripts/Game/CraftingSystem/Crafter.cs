@@ -53,5 +53,10 @@ namespace Game.Crafting
                     _guiCanvas.gameObject.SetActive(false);
             }
         }
+
+        void Produce(Recipe recipe)
+        {
+            
+        }
     }
 }
