@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Game.Inventory;
+﻿using Game.Inventory;
 using Game.Item;
 using UnityEngine;
 using System;
@@ -19,7 +17,7 @@ namespace Game
             public class Ingredient
             {
                 public ItemAbstract Item;
-                [Range(1, 999)]
+                [UnityEngine.Range(1, 999)]
                 public int RequiredQuantity;
             }
 
@@ -27,7 +25,7 @@ namespace Game
             public class Product
             {
                 public ItemAbstract Item;
-                [Range(1, 999)]
+                [UnityEngine.Range(1, 999)]
                 public int ProducedQuantity;
             }
             #endregion
@@ -39,9 +37,9 @@ namespace Game
                 private set { }
             }
 
-            public Product[] Products
+            public Product Produced
             {
-                get { return _Products; }
+                get { return _Product; }
                 private set { }
             }
 
@@ -66,8 +64,9 @@ namespace Game
             #region Private Properties
             [Header("Recipe properties")]
             [SerializeField] private RecipeCategory _Category = null;
+            [SerializeField][Tooltip("Duration in seconds for the crafting of the products")] private int CraftingDuration = 0;
             [Space(10)][SerializeField] private Ingredient[] _Ingredients = null;
-            [Space(10)][SerializeField] private Product[] _Products = null;
+            [Space(10)][SerializeField] private Product _Product = null;
             private bool _Unlocked = false;
 
             #endregion
