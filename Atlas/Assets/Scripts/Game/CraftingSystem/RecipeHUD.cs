@@ -46,7 +46,8 @@ namespace Menu.Crafting
             Recipe = recipe;
             if (Recipe != null)
                 Recipe.OnRecipeUpdate += UpdateContent;
-            recipe?.Unlock(shouldBeUnlocked);
+            if (!recipe) return;
+            recipe.Unlock(shouldBeUnlocked);
         }
 
         public void UpdateContent(Recipe recipe)
@@ -79,11 +80,18 @@ namespace Menu.Crafting
 
 
         #region OnSelect/Deselect
+
         public void OnSelected()
         {
             Debug.Log("Recipe : " + Recipe + ", Blueprint : " + _blueprint + ", Animator : " + _blueprintAnimator);
-            _blueprint?.SetRecipe(Recipe);
-            _blueprintAnimator?.SetBool(_hashShowed, Recipe != null);
+            if (_blueprint)
+            {
+                _blueprint.SetRecipe(Recipe);
+                if (_blueprintAnimator)
+                {
+                    _blueprintAnimator.SetBool(_hashShowed, Recipe != null);
+                }                
+            }
         }
 
         public void OnDeselected()
@@ -91,7 +99,8 @@ namespace Menu.Crafting
             if (_description != null && Recipe != null &&
                 _blueprint.Recipe.Id == Recipe.Id)
                 _blueprint.Reset();
-            _blueprintAnimator?.SetBool(_hashShowed, false);
+            if (!_blueprintAnimator) return;
+            _blueprintAnimator.SetBool(_hashShowed, false);
         }
 
         private void DisplayDescription()
