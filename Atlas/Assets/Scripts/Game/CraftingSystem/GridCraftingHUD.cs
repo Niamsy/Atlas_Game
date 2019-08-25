@@ -10,19 +10,19 @@ namespace Menu.Crafting
     {
         [SerializeField] private RecipeBook _RecipeBook = null;
         [SerializeField] private FloatVariable _PlayerLevel;
-        private List<RecipeHUD> _Slots = new List<RecipeHUD>();
+        private List<RecipeHUD> _slots = new List<RecipeHUD>();
         
 
         private void OnEnable()
         {
-            _Slots = new List<RecipeHUD>(GetComponentsInChildren<RecipeHUD>(true));
+            _slots = new List<RecipeHUD>(GetComponentsInChildren<RecipeHUD>(true));
             if (_RecipeBook != null)
                 LoadThisBook(_RecipeBook);
         }
 
         public void LoadThisBook(RecipeBook book)
         {
-            int listSize = _Slots.Count;
+            int listSize = _slots.Count;
             int currentSlot = 0;
 
             foreach (RecipeBook.Chapter chapter in book.Chapters)
@@ -30,7 +30,7 @@ namespace Menu.Crafting
                 
                 foreach (Recipe recipe in chapter.Recipes)
                 {
-                    RecipeHUD slot = _Slots[currentSlot];
+                    RecipeHUD slot = _slots[currentSlot];
                     slot.gameObject.SetActive(currentSlot < listSize);
                     if (currentSlot < listSize)
                     {
