@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Quest
-{
+
     public enum ObjType
     {
         PICKUP,
@@ -20,7 +19,7 @@ namespace Quest
         private int finalCount { get; }
 
 
-        public Objective(ObjType t, string comp, int fc = 1)
+        public Objective(ObjType t, string comp, int fc = 1) //fc == final count
         {
             type = t;
             comparedId = comp;
@@ -50,4 +49,3 @@ namespace Quest
             return false;
         }
     }
-}

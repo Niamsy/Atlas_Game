@@ -4,16 +4,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace Quest
-{
-    public class Quest : MonoBehaviour
+    public class Quest
     {
-        public Quest(Func<GameObject, GameObject> reward, string desc)
+        public Quest(string Name, string desc, List<Objective> obj, Func<GameObject, GameObject> reward)
         {
+            questName = Name;
             rewarder = reward;
             questDescription = desc;
+            __questObjs = new List<Objective>(obj);
         }
 
+        private string questName;
         private List<Objective> __questObjs;
         private string questDescription { get; }
         private System.Func<GameObject, GameObject> rewarder;
@@ -30,7 +31,7 @@ namespace Quest
             return true;
         }
 
-        public void UpdateQuest(ObjType type, string Id)
+        public bool UpdateQuest(ObjType type, string Id)
         {
             foreach (Objective obj in __questObjs)
             {
@@ -39,6 +40,7 @@ namespace Quest
                     obj.compare(Id);
                 }
             }
+        return isComplete();
         }
 
         public bool ApplyReward(GameObject player)
@@ -54,4 +56,3 @@ namespace Quest
             return true;
         }
     }
-}
