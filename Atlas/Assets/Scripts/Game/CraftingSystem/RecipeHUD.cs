@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Game.Inventory;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Game.Crafting;
+using UnityEngine.Events;
 
 namespace Menu.Crafting
 {
@@ -14,13 +12,14 @@ namespace Menu.Crafting
     {
         #region Variables
 
-        [SerializeField] private Image _image = null;
-        [SerializeField] private RecipeDescriptionHUD _description = null;
-        [SerializeField] private BlueprintDescriptionHUD _blueprint = null;
-        [SerializeField] private Animator _blueprintAnimator;
+        [SerializeField] private Image image = null;
+        [SerializeField] private RecipeDescriptionHUD description = null;
+        [SerializeField] private BlueprintDescriptionHUD blueprint = null;
+        [SerializeField] private Animator blueprintAnimator;
 
         private int _hashShowed = Animator.StringToHash("Showed");
-
+        private UnityAction<Recipe> _onSelectedCb;
+        
         protected Button Button = null;
         protected Recipe Recipe = null;
 
@@ -39,25 +38,27 @@ namespace Menu.Crafting
             Button = GetComponent<Button>();
         }
 
-        public void SetRecipe(Recipe recipe, bool shouldBeUnlocked)
+        public void SetRecipe(Recipe recipe, bool shouldBeUnlocked, UnityAction<Recipe> onSelected)
         {
             if (Recipe != null)
                 Recipe.OnRecipeUpdate -= UpdateContent;
             Recipe = recipe;
             if (Recipe != null)
                 Recipe.OnRecipeUpdate += UpdateContent;
-            if (!recipe) return;
+            _onSelectedCb = null;
+            if (recipe == null) return;
+            _onSelectedCb = onSelected;
             recipe.Unlock(shouldBeUnlocked);
         }
 
         public void UpdateContent(Recipe recipe)
         {
-            _image.enabled = recipe.Sprite != null;
+            image.enabled = recipe.Sprite != null;
 
-            if (_image)
+            if (image)
             {
-                _image.sprite = recipe.Sprite;
-                _image.color = !GetLockState ? Color.gray : Color.white;
+                image.sprite = recipe.Sprite;
+                image.color = !GetLockState ? Color.gray : Color.white;
             }
 
             if (!_lockableSlot) _lockableSlot = GetComponent<LockableSlot>();
@@ -83,47 +84,37 @@ namespace Menu.Crafting
 
         public void OnSelected()
         {
-            Debug.Log("Recipe : " + Recipe + ", Blueprint : " + _blueprint + ", Animator : " + _blueprintAnimator);
-            if (_blueprint)
+            _onSelectedCb?.Invoke(Recipe);
+            if (blueprint)
             {
-                _blueprint.SetRecipe(Recipe);
-                if (_blueprintAnimator)
+                blueprint.SetRecipe(Recipe);
+                if (blueprintAnimator)
                 {
-                    _blueprintAnimator.SetBool(_hashShowed, Recipe != null);
+                    blueprintAnimator.SetBool(_hashShowed, Recipe != null);
                 }                
             }
         }
 
         public void OnDeselected()
         {
-            if (_description != null && Recipe != null &&
-                _blueprint.Recipe.Id == Recipe.Id)
-                _blueprint.Reset();
-            if (!_blueprintAnimator) return;
-            _blueprintAnimator.SetBool(_hashShowed, false);
+            if (description != null && Recipe != null &&
+                blueprint.Recipe.Id == Recipe.Id)
+                blueprint.Reset();
+            if (!blueprintAnimator) return;
+            blueprintAnimator.SetBool(_hashShowed, false);
         }
 
         private void DisplayDescription()
         {
-            if (_description != null && Recipe != null)
-                _description.SetRecipe(transform, Recipe);
+            if (description != null && Recipe != null)
+                description.SetRecipe(transform, Recipe);
         }
 
         private void HideDescription()
         {
-            if (_description != null && Recipe != null &&
-                _description.Recipe.Id == Recipe.Id)
-                _description.Reset();
-        }
-
-        private void DisplayRecipe()
-        {
-
-        }
-
-        private void HideRecipe()
-        {
-
+            if (description != null && Recipe != null &&
+                description.Recipe.Id == Recipe.Id)
+                description.Reset();
         }
 
         public void OnPointerClick(PointerEventData eventData)

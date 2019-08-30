@@ -23,13 +23,11 @@ MonoBehaviour:
   _usageText: {fileID: 11400000, guid: 715e0cbd98d213f4b8f4dcfc94ff23a8, type: 2}
   _animation:
     anim: 0
-  _Category: {fileID: 11400000, guid: d980723dd009b6549acbeec1915054f4, type: 2}
-  CraftingDuration: 5
-  _Ingredients:
-  - Item: {fileID: 11400000, guid: eabb78ffc63b0f645bd421998e6940cf, type: 2}
-    RequiredQuantity: 2
-  - Item: {fileID: 11400000, guid: 119462f9cc32a404c902c9bd94f835a3, type: 2}
-    RequiredQuantity: 3
-  _Product:
-    Item: {fileID: 11400000, guid: 119462f9cc32a404c902c9bd94f835a3, type: 2}
+  category: {fileID: 11400000, guid: d980723dd009b6549acbeec1915054f4, type: 2}
+  craftingDuration: 70
+  ingredients:
+  - Item: {fileID: 11400000, guid: 2c3017438ff73b844a3693826f00500f, type: 2}
+    RequiredQuantity: 1
+  product:
+    Item: {fileID: 11400000}
     ProducedQuantity: 1

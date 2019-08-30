@@ -13,21 +13,25 @@ MonoBehaviour:
   m_Name: 903_WaterSpiter_Recipe
   m_EditorClassIdentifier: 
   _id: 0
-  _prefabDroppedGO: {fileID: 0}
-  _prefabHoldedGO: {fileID: 0}
+  _prefabDroppedGO: {fileID: 5971774499539682470, guid: 5c0a14272f26dfc48813d23b57c2281f,
+    type: 3}
+  _prefabHoldedGO: {fileID: 1771555055226790, guid: 79d1d9fa07756604b9227460e8813ebb,
+    type: 3}
   _sprite: {fileID: 21300000, guid: 3111c9cf225e31c4ebeb3d793ec964a5, type: 3}
   _name: {fileID: 11400000, guid: 084e91d468d237f4b82d3616dc23b3fb, type: 2}
   _description: {fileID: 11400000, guid: e7794f9d60624be40ade1e7e3c2f9e2b, type: 2}
   _usageText: {fileID: 11400000, guid: 6f3053681941a1e4c8ba0c725820c6ff, type: 2}
   _animation:
     anim: 0
-  _Category: {fileID: 11400000, guid: 5861ba67b5aaa514f934d89fb92402b8, type: 2}
-  CraftingDuration: 5
-  _Ingredients:
-  - Item: {fileID: 11400000, guid: 1bbe0c572130e8c46b5ba5305f522551, type: 2}
-    RequiredQuantity: 4
+  category: {fileID: 11400000, guid: 5861ba67b5aaa514f934d89fb92402b8, type: 2}
+  craftingDuration: 15
+  ingredients:
   - Item: {fileID: 11400000, guid: 8b5338a7d62c7cb4390aee788fa8e191, type: 2}
     RequiredQuantity: 2
-  _Product:
-    Item: {fileID: 11400000, guid: 2c3017438ff73b844a3693826f00500f, type: 2}
+  - Item: {fileID: 11400000, guid: 1bbe0c572130e8c46b5ba5305f522551, type: 2}
+    RequiredQuantity: 3
+  - Item: {fileID: 11400000, guid: 119462f9cc32a404c902c9bd94f835a3, type: 2}
+    RequiredQuantity: 2
+  product:
+    Item: {fileID: 11400000, guid: eabb78ffc63b0f645bd421998e6940cf, type: 2}
     ProducedQuantity: 3

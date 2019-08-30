@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Xml;
+﻿using System.Collections.Generic;
 using Game.Crafting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GridProducingHUD : MonoBehaviour
 {
     private List<ProductHUD> _products = new List<ProductHUD>();
+    private UnityAction<Recipe.Product, int> _cb;
     
     // Start is called before the first frame update
     private void OnEnable()
@@ -15,18 +14,26 @@ public class GridProducingHUD : MonoBehaviour
         _products = new List<ProductHUD>(GetComponentsInChildren<ProductHUD>());
     }
 
-    public void Set(List<Recipe.Product> products)
+    public void SetClickCb(UnityAction<Recipe.Product, int> cb)
     {
-        
+        _cb = cb;
     }
 
-    public void push(Recipe.Product product, int slot)
+    public void SetProducts(List<Recipe.Product> products)
     {
-        
-    }
+        int pos = 0;
+        int size = _products.Count;
 
-    public void remove(Recipe.Product product, int slot)
-    {
+        foreach (var hud in _products)
+        {
+            hud.Reset();
+        }
         
+        foreach (var product in products)
+        {
+            _products[pos].SetProduct(product, pos, _cb);
+            ++pos;
+            if (pos >= size) break;
+        }
     }
 }
