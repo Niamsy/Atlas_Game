@@ -5,6 +5,7 @@ using System;
 using UnityEngine.Events;
 using UnityEngine.Experimental.Rendering.HDPipeline;
 using UnityEngine.UIElements;
+using Object = UnityEngine.Object;
 
 namespace Game
 {
@@ -28,7 +29,7 @@ namespace Game
             public class Product
             {
                 public ItemAbstract Item;
-                [UnityEngine.Range(1, 999)]
+                [Range(1, 999)]
                 public int ProducedQuantity;
 
                 [Serializable]
@@ -36,40 +37,49 @@ namespace Game
                 {
                 }
                 
-                private int _timeRemaining;
-                private float _lastTime;
                 private readonly UnityEvent<Product> _onEnd = new ProductEvent(); 
-                public int TimeRemaining => _timeRemaining;
-                public bool IsFinished => _timeRemaining == 0;
-
-                public void AddListenerOnEnd(UnityAction<Product> OnEndAction)
+                
+                public Product GetClone(int duration)
                 {
-                    _onEnd.AddListener(OnEndAction);
+                    var clone = new Product();
+                    clone.Item = Item; // TODO: check if deep cloning here could be required
+                    clone.Position = Position;
+                    clone.ProducedQuantity = ProducedQuantity;
+                    clone.TimeRemaining = duration;
+                    return clone;
                 }
                 
-                public void Start(Recipe recipe)
+                public float TimeRemaining { get; private set; }
+
+                public bool IsFinished => TimeRemaining <= 0;
+
+                public int Position { get; set; }
+
+                public void Start(Recipe recipe, int position)
                 {
-                    _timeRemaining = recipe.Duration;
-                    _lastTime = Time.time;
+                    TimeRemaining = recipe.Duration;
+                    Position = position;
                 }
 
                 public void Update()
                 {
-                    if (_timeRemaining <= 0) return;
-                    _timeRemaining -= (int) (Time.time - _lastTime);
-                    _lastTime = Time.time;
-                    if (_timeRemaining <= 0)
-                        _onEnd.Invoke(this);
+                    if (TimeRemaining <= 0) return;
+                    TimeRemaining -= Time.deltaTime;
+                }
+
+                public void ClearListeners()
+                {
+                    _onEnd.RemoveAllListeners();
                 }
             }
             #endregion
 
             #region Public Accessors
-            public Ingredient[] Ingredients => _Ingredients;
-            public Product Produced => _Product;
-            public RecipeCategory Category => _Category;
-            public bool isUnlocked => _Unlocked;
-            public int Duration => CraftingDuration;
+            public Ingredient[] Ingredients => ingredients;
+            public Product Produced => product;
+            public RecipeCategory Category => category;
+            public bool isUnlocked => _unlocked;
+            public int Duration => craftingDuration;
             #endregion
 
             #region Public Properties
@@ -79,11 +89,11 @@ namespace Game
 
             #region Private Properties
             [Header("Recipe properties")]
-            [SerializeField] private RecipeCategory _Category = null;
-            [SerializeField][Tooltip("Duration in seconds for the crafting of the products")] private int CraftingDuration = 0;
-            [Space(10)][SerializeField] private Ingredient[] _Ingredients = null;
-            [Space(10)][SerializeField] private Product _Product = null;
-            private bool _Unlocked = false;
+            [SerializeField] private RecipeCategory category;
+            [SerializeField][Tooltip("Duration in seconds for the crafting of the products")] private int craftingDuration;
+            [Space(10)][SerializeField] private Ingredient[] ingredients;
+            [Space(10)][SerializeField] private Product product;
+            private bool _unlocked = false;
 
             #endregion
 
@@ -95,12 +105,12 @@ namespace Game
 
             public override void Use(ItemStack selfStack)
             {
-                Debug.Log("RECIPE : " + this.Name + " LEARNED.");
+                Debug.Log("RECIPE : " + Name + " LEARNED.");
             }
 
             public void Unlock(bool shouldUnlock)
             {
-                _Unlocked = shouldUnlock;
+                _unlocked = shouldUnlock;
                 FireEvent();
             }
             #endregion

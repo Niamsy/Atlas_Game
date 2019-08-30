@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using Game.Crafting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
-using UnityEngine.Experimental.Rendering.HDPipeline;
+using UnityEngine.UI;
 
 public class ProductHUD : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
@@ -13,11 +11,8 @@ public class ProductHUD : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     private Recipe.Product _product;
     private int _position;
-    private bool _canBeTaken = false;
-    private UnityAction<Recipe.Product, int> _onEnd;
     private UnityAction<Recipe.Product, int> _onClick;
-    
-    public bool CanBeTaken => _canBeTaken;
+    [SerializeField] private Image _image;
 
     public void OnEnable()
     {
@@ -25,21 +20,37 @@ public class ProductHUD : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void SetProduct(Recipe.Product product, 
         int position, 
-        UnityAction<Recipe.Product, int> onEnd,
         UnityAction<Recipe.Product, int> onClick)
     {
         _product = product;
         _position = position;
-        _canBeTaken = product.IsFinished;
-        _product.AddListenerOnEnd(OnProductEnd);
-        _onEnd = onEnd;
         _onClick = onClick;
+        UpdateContent(_product);
     }
 
-    public void OnProductEnd(Recipe.Product product)
+    public void Reset()
     {
-        _onEnd.Invoke(_product, _position);
-    }    
+        _product = null;
+        _position = 0;
+        _onClick = null;
+        UpdateContent(null);
+    }
+
+    private void Update()
+    {
+        // TODO update time here
+    }
+    
+    public void UpdateContent(Recipe.Product product)
+    {
+        _image.enabled = product != null;
+        _image.color = product != null ? Color.white : Color.clear;   
+        
+        if (!_image || product == null) return;
+        
+        _image.preserveAspect = true;
+        _image.sprite = product.Item.Sprite;
+    }
     
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -53,6 +64,6 @@ public class ProductHUD : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        _onClick.Invoke(_product, _position);
+        _onClick?.Invoke(_product, _position);
     }
 }
