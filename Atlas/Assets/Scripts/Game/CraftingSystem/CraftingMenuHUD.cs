@@ -94,7 +94,7 @@ public class CraftingMenuHUD : Menu.MenuWidget
         if (_selectedRecipe && _crafter.CanProduce(_selectedRecipe, _crafter.Inventory))
         {
             _crafter.Produce(_selectedRecipe, _crafter.Inventory);
-            onGoingProducingHud.SetProducts(_crafter.ProductsOngoing);
+            onGoingProducingHud.SetProducts(_selectedRecipe, _crafter.ProductsOngoing);
         }
     }
 
@@ -113,8 +113,8 @@ public class CraftingMenuHUD : Menu.MenuWidget
         _crafter = crafter;
         _crafting.LoadThisBook(crafter.RecipeBook, OnRecipeSelected);
         _crafter.SetOnProductFinishedCb(OnProductFinished);
-        onGoingProducingHud.SetProducts(_crafter.ProductsOngoing);
-        finishedProducingHud.SetProducts(_crafter.ProductsFinished);
+        onGoingProducingHud.SetProducts(_selectedRecipe, _crafter.ProductsOngoing);
+        finishedProducingHud.SetProducts(_selectedRecipe, _crafter.ProductsFinished);
     }
 
     public void UnsetCrafter(Crafter crafter)
@@ -126,20 +126,20 @@ public class CraftingMenuHUD : Menu.MenuWidget
 
     public void OnProductFinished(Recipe.Product product, int position)
     {
-        onGoingProducingHud.SetProducts(_crafter.ProductsOngoing);
-        finishedProducingHud.SetProducts(_crafter.ProductsFinished);
+        onGoingProducingHud.SetProducts(_selectedRecipe, _crafter.ProductsOngoing);
+        finishedProducingHud.SetProducts(_selectedRecipe, _crafter.ProductsFinished);
     }
 
     public void OnProductionCancel(Recipe.Product product, int position)
     {
         _crafter.CancelProduction(position);
-        onGoingProducingHud.SetProducts(_crafter.ProductsOngoing);
+        onGoingProducingHud.SetProducts(_selectedRecipe, _crafter.ProductsOngoing);
     }
 
     public void OnProductFinishedRetrieve(Recipe.Product product, int position)
     {
         var prod = _crafter.GetFinishedProduct(position); // we are forced to call this method, think of some encapsulation
-        finishedProducingHud.SetProducts(_crafter.ProductsFinished);
+        finishedProducingHud.SetProducts(_selectedRecipe, _crafter.ProductsFinished);
 
         var itemStack = new ItemStack();
         itemStack.SetItem(prod.Item, product.ProducedQuantity);
@@ -156,9 +156,9 @@ public class CraftingMenuHUD : Menu.MenuWidget
         {
             SaveManager.Instance.InputControls.Player.Interact.performed += OpenCloseCraftingMenu;
             if (onGoingProducingHud) 
-                onGoingProducingHud.SetProducts(_crafter.ProductsOngoing);
+                onGoingProducingHud.SetProducts(_selectedRecipe, _crafter.ProductsOngoing);
             if (finishedProducingHud)
-                finishedProducingHud.SetProducts(_crafter.ProductsFinished);
+                finishedProducingHud.SetProducts(_selectedRecipe, _crafter.ProductsFinished);
         }
         else
         {
