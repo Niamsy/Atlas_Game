@@ -1,5 +1,6 @@
 ﻿using System;
 using Game.Crafting;
+using Menu.Crafting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -12,19 +13,25 @@ public class ProductHUD : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     private Recipe.Product _product;
     private int _position;
     private UnityAction<Recipe.Product, int> _onClick;
-    [SerializeField] private Image _image;
+    private float _originalDuration;
+    [SerializeField] private Image image;
+    [SerializeField] private Image cooldown;
+    [SerializeField] private ProductDescriptionHUD description;
 
     public void OnEnable()
     {
     }
 
-    public void SetProduct(Recipe.Product product, 
+    public void SetProduct(Recipe recipe,
+        Recipe.Product product, 
         int position, 
         UnityAction<Recipe.Product, int> onClick)
     {
         _product = product;
         _position = position;
         _onClick = onClick;
+        cooldown.fillAmount = 1;
+        _originalDuration = recipe != null ? recipe.Duration : 0;
         UpdateContent(_product);
     }
 
@@ -38,28 +45,43 @@ public class ProductHUD : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     private void Update()
     {
-        // TODO update time here
+        if (_product == null) return;
+        cooldown.fillAmount = _product.TimeRemaining / _originalDuration;
     }
     
     public void UpdateContent(Recipe.Product product)
     {
-        _image.enabled = product != null;
-        _image.color = product != null ? Color.white : Color.clear;   
+        image.enabled = product != null;
+        cooldown.enabled = product != null && !product.IsFinished;
+        image.color = product != null ? Color.white : Color.clear;   
         
-        if (!_image || product == null) return;
+        if (!image || product == null) return;
         
-        _image.preserveAspect = true;
-        _image.sprite = product.Item.Sprite;
+        image.preserveAspect = true;
+        image.sprite = product.Item.Sprite;
     }
     
     public void OnPointerEnter(PointerEventData eventData)
     {
-        
+        DisplayDescription();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        
+        HideDescription();
+    }
+    
+    private void DisplayDescription()
+    {
+        if (description != null && _product != null)
+            description.SetItem(transform, _product);
+    }
+
+    private void HideDescription()
+    {
+        if (description != null && _product != null &&
+            description.Item.Position == _position)
+            description.Reset();
     }
 
     public void OnPointerClick(PointerEventData eventData)

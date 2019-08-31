@@ -46,6 +46,8 @@ namespace Game
                     clone.Position = Position;
                     clone.ProducedQuantity = ProducedQuantity;
                     clone.TimeRemaining = duration;
+                    clone.Item.PrefabDroppedGO = Item.PrefabDroppedGO;
+                    clone.Item.PrefabHoldedGO = Item.PrefabHoldedGO;
                     return clone;
                 }
                 

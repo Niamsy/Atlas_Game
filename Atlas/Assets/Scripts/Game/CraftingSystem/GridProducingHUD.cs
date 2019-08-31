@@ -19,7 +19,7 @@ public class GridProducingHUD : MonoBehaviour
         _cb = cb;
     }
 
-    public void SetProducts(List<Recipe.Product> products)
+    public void SetProducts(Recipe recipe, List<Recipe.Product> products)
     {
         int pos = 0;
         int size = _products.Count;
@@ -31,7 +31,7 @@ public class GridProducingHUD : MonoBehaviour
         
         foreach (var product in products)
         {
-            _products[pos].SetProduct(product, pos, _cb);
+            _products[pos].SetProduct(recipe, product, pos, _cb);
             ++pos;
             if (pos >= size) break;
         }
