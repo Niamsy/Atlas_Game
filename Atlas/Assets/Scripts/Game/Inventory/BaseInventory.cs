@@ -142,17 +142,22 @@ namespace Game.Inventory
 
             foreach (ItemStack itemStack in Slots)
             {
-                if (itemStack.Content.Id == item.Id)
+                if (itemStack.Content && itemStack.Content.Id == item.Id)
                     total += itemStack.Quantity;
             }
 
             return total;
         }
 
+        public bool HasEnoughItems(Item.ItemAbstract item, int quantity)
+        {
+            return CountItems(item) >= quantity;
+        }
+
         // Be sure to check the presence of required items with CountItems before
         // Destroy the first items encountered in the inventory until the required quantity 
         // is reached or all items are destroyed
-        public void DestroyFirsts(Item.ItemAbstract itemToDestroy, int quantity)
+        public bool DestroyFirsts(Item.ItemAbstract itemToDestroy, int quantity)
         {
             foreach (ItemStack itemStack in Slots)
             {
@@ -172,6 +177,7 @@ namespace Game.Inventory
 
                 if (quantity <= 0) break;
             }
+            return true;
         }
     }
 }
