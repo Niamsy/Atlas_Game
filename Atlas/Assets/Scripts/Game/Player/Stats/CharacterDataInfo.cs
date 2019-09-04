@@ -25,7 +25,13 @@ namespace Game.Player.Stats
                     return 0;
                 return (int)_playerTimePlayed.Value;
             }
-            set { _playerTimePlayed.Value = value; }
+            set {
+                if (_playerTimePlayed == null)
+                {
+                    _playerTimePlayed = new FloatVariable();
+                }
+                _playerTimePlayed.Value = value;
+            }
         }
 
         #endregion
@@ -41,14 +47,25 @@ namespace Game.Player.Stats
         #region Public Methods
         protected override void SavingAccountData(AccountData data)
         {
-            data.CharacterGlobalInfo.PlayerChallengeOwned = PlayerChallengeOwned;
-            data.CharacterGlobalInfo.PlayerTimePlayed = PlayerTimePlayed;
+            if (data != null)
+            {
+                data.CharacterGlobalInfo.PlayerChallengeOwned = PlayerChallengeOwned;
+                data.CharacterGlobalInfo.PlayerTimePlayed = PlayerTimePlayed;
+            }
         }
 
         protected override void LoadingAccountData(AccountData data)
         {
-            PlayerTimePlayed = data.CharacterGlobalInfo.PlayerTimePlayed;
-            PlayerChallengeOwned = data.CharacterGlobalInfo.PlayerChallengeOwned;
+            if (data != null && data.CharacterGlobalInfo != null)
+            {
+                PlayerTimePlayed = data.CharacterGlobalInfo.PlayerTimePlayed;
+                PlayerChallengeOwned = data.CharacterGlobalInfo.PlayerChallengeOwned;
+            }
+            else
+            {
+                PlayerTimePlayed = 0;
+                PlayerChallengeOwned = 0;
+            }
         }
 
         public void NewChallengeSucceed()

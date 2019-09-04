@@ -17,7 +17,7 @@ namespace Game.SavingSystem.Datas
 	    public ProfilData[]					Profils = new ProfilData[MaxNumberOfProfils];
 	    public DateTime						LastGetScannedPlant;
 	    public int 							ID = 0;
-        public CharacterGlobalInfoData      CharacterGlobalInfo;
+        public CharacterGlobalInfoData      CharacterGlobalInfo = new CharacterGlobalInfoData();
 
         public AccountData(int id)
 	    {
