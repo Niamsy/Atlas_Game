@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Game.Inventory;
+using Game.SavingSystem.Datas;
 using Player;
 using UnityEngine;
 using UnityEngine.Events;
@@ -162,6 +163,11 @@ namespace Game.Crafting
             _productsOngoing.Add(product);
             product.Start(recipe, _productsOngoing.Count - 1);
             return true;
+        }
+
+        public void LoadFromSavedData(MapData.CraftingSaveData data)
+        {
+            // TODO load
         }
     }
 }
