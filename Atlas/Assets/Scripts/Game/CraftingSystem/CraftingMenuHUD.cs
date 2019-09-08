@@ -95,9 +95,11 @@ public class CraftingMenuHUD : Menu.MenuWidget
         {
             _crafter.Produce(_selectedRecipe, _crafter.Inventory);
             onGoingProducingHud.SetProducts(_selectedRecipe, _crafter.ProductsOngoing);
+            OnRecipeSelected(_selectedRecipe);
         }
     }
 
+    
     public void OnRecipeSelected(Recipe recipe)
     {
         var canProduce = recipe && recipe.isUnlocked && _crafter.CanProduce(recipe, _crafter.Inventory);
@@ -145,6 +147,7 @@ public class CraftingMenuHUD : Menu.MenuWidget
         itemStack.SetItem(prod.Item, product.ProducedQuantity);
 
         _crafter.Inventory.AddItemStack(itemStack);
+        
     }
 
     public override void Show(bool display, bool force = false)

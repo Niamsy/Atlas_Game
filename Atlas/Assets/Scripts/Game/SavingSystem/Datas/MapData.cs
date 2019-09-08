@@ -4,6 +4,7 @@ using Game.Crafting;
 using Game.DayNight;
 using Game.ResourcesManagement;
 using Plants.Plant;
+using UnityEngine;
 
 namespace Game.SavingSystem.Datas
 {
@@ -53,18 +54,22 @@ namespace Game.SavingSystem.Datas
             public bool NotFirstTime;
         }
 
+        [Serializable]
         public struct ProductSaveData
         {
             public int Id;
             public float TimeRemaining;
-
+            public float OriginalTiming;
+            
             public void SetFromProduct(Recipe.Product product)
             {
                 Id = product.Item.Id;
                 TimeRemaining = product.TimeRemaining;
+                OriginalTiming = product.OriginalDuration;
             }
         }
 
+        [Serializable]
         public struct CraftingSaveData
         {
             public ProductSaveData[] OnGoingProducts;
