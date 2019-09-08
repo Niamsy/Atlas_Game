@@ -1,4 +1,5 @@
-﻿using Game.Map;
+﻿using Game.DayNight;
+using Game.Map;
 using Game.ResourcesManagement;
 using Game.ResourcesManagement.Consumer;
 using Localization;
