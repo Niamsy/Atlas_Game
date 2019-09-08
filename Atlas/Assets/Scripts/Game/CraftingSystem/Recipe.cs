@@ -32,6 +32,14 @@ namespace Game
                 [Range(1, 999)]
                 public int ProducedQuantity;
 
+                private float _originalDuration;
+                
+                public float OriginalDuration
+                {
+                    get => _originalDuration;
+                    set => _originalDuration = value;
+                }
+
                 [Serializable]
                 public class ProductEvent : UnityEvent<Product>
                 {
@@ -42,10 +50,11 @@ namespace Game
                 public Product GetClone(int duration)
                 {
                     var clone = new Product();
-                    clone.Item = Item; // TODO: check if deep cloning here could be required
+                    clone.Item = Item;
                     clone.Position = Position;
                     clone.ProducedQuantity = ProducedQuantity;
                     clone.TimeRemaining = duration;
+                    clone.OriginalDuration = OriginalDuration;
                     clone.Item.PrefabDroppedGO = Item.PrefabDroppedGO;
                     clone.Item.PrefabHoldedGO = Item.PrefabHoldedGO;
                     return clone;
@@ -57,9 +66,10 @@ namespace Game
 
                 public int Position { get; set; }
 
-                public void Start(Recipe recipe, int position)
+                public void Start(float duration, float originalDuration, int position)
                 {
-                    TimeRemaining = recipe.Duration;
+                    TimeRemaining = duration;
+                    OriginalDuration = originalDuration;
                     Position = position;
                 }
 
