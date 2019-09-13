@@ -98,7 +98,7 @@ namespace Game.SavingSystem.Datas
         public List<ItemBaseData>	Inventory;
         public ItemBaseData			EquippedHand;
         public TransformSaveData	TransformData;
-        public Date					CalendarData;
+        public DateData				CalendarData;
         public XPSaveData           XPData;
         public List<Stock>          PlayerResource;
     }

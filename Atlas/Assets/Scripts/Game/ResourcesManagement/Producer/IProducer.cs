@@ -6,7 +6,7 @@ namespace Game.ResourcesManagement.Producer
 {
     public abstract class IProducer : MonoBehaviour
     {
-        private class ConsumerListener
+        protected class ConsumerListener
         {
             public Resource Resource;
             public List<IConsumer> LinkedConsumers;
@@ -24,9 +24,9 @@ namespace Game.ResourcesManagement.Producer
 
         public List<Resource> ProducedResources;
         
-        private List<ConsumerListener> _allListeners = new List<ConsumerListener>();
+        protected readonly List<ConsumerListener> AllListeners = new List<ConsumerListener>();
 
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         [Header("Debug"), SerializeField]
         private bool _debugDisplay = false;
 
@@ -46,7 +46,7 @@ namespace Game.ResourcesManagement.Producer
                 Debug.LogError("The gameObject " + name + "'s composant " + GetType() + " is invalid because it's on the wrong layer. Actual :" + LayerMask.LayerToName(gameObject.layer) + ". Layer needed : " + LayerName);
 #endif
             foreach (var res in ProducedResources)
-                _allListeners.Add(new ConsumerListener(res));
+                AllListeners.Add(new ConsumerListener(res));
         }
         
         public bool AddConsumer(IConsumer consumer, Resource resource)
@@ -54,7 +54,7 @@ namespace Game.ResourcesManagement.Producer
             if (consumer == null)
                 return false;
             
-            var listener = _allListeners.Find(oneListener => oneListener.Resource == resource);
+            var listener = AllListeners.Find(oneListener => oneListener.Resource == resource);
             
             if (listener != null && !listener.LinkedConsumers.Contains(consumer))
                 listener.LinkedConsumers.Add(consumer);
@@ -66,7 +66,7 @@ namespace Game.ResourcesManagement.Producer
             if (consumer == null)
                 return;
             
-            var listener = _allListeners.Find(oneListener => oneListener.Resource == resource);
+            var listener = AllListeners.Find(oneListener => oneListener.Resource == resource);
             
             if (listener != null && listener.LinkedConsumers.Contains(consumer))
                 listener.LinkedConsumers.Remove(consumer);
@@ -74,7 +74,7 @@ namespace Game.ResourcesManagement.Producer
 
         public void ClearAllListener()
         {
-            foreach (var listeners in _allListeners)
+            foreach (var listeners in AllListeners)
             {
                 var cpyList = new List<IConsumer>(listeners.LinkedConsumers);
                 foreach (var listener in cpyList)
@@ -84,7 +84,7 @@ namespace Game.ResourcesManagement.Producer
         
         protected void ShareResources()
         {
-            foreach (var resourceListeners in _allListeners)
+            foreach (var resourceListeners in AllListeners)
             {
                 foreach (var listener in resourceListeners.LinkedConsumers)
                 {

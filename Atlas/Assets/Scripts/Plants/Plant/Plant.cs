@@ -1,9 +1,5 @@
 ﻿using Game.Item;
-using Plants.Plant;
-using System.Collections;
-using System.Collections.Generic;
 using Game.Inventory;
-using InputManagement;
 using UnityEngine;
 
 namespace Plants.Plant
