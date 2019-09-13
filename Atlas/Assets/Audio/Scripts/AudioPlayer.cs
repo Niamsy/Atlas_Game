@@ -86,9 +86,17 @@ namespace AtlasAudio {
 
         #region Volume control
         #region MasterVolume
+
+        public static float TryGetPreferences(string key, float defaultValue)
+        {
+            if (PlayerPrefs.HasKey(key))
+                return (PlayerPrefs.GetFloat(key));
+            return(defaultValue);
+        }
+        
         private void LoadMasterVolume()
         {
-            MasterVolume = PlayerPrefs.GetFloat("Main Volume");
+            MasterVolume = TryGetPreferences("Main Volume", 0.5f);
             AudioListener.volume = MasterVolume;
         }
 
@@ -115,7 +123,7 @@ namespace AtlasAudio {
         private void LoadGroupVolume(AudioGroup audioGroup)
         {
             string key = audioGroup + _volumeSuffix;
-            _groupsVolume[audioGroup] = PlayerPrefs.GetFloat(key);
+            _groupsVolume[audioGroup] = TryGetPreferences(key, 0.5f);
             SetMixerVolume0To1(Mixer, key, _groupsVolume[audioGroup]);
         }
         
