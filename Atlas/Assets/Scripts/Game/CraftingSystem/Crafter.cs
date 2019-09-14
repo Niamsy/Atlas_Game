@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Game.Inventory;
+using Game.SavingSystem;
+using Game.SavingSystem.Datas;
 using Player;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,6 +10,7 @@ using UnityEngine.Events;
 namespace Game.Crafting
 {
     [RequireComponent(typeof(Collider))]
+    [RequireComponent(typeof(CraftingSaver))]
     public class Crafter : AInteractable
     {
         [SerializeField] private RecipeBook _Book;
@@ -160,7 +163,7 @@ namespace Game.Crafting
 
             var product = recipe.Produced.GetClone(recipe.Duration);
             _productsOngoing.Add(product);
-            product.Start(recipe, _productsOngoing.Count - 1);
+            product.Start(recipe.Duration, recipe.Duration,_productsOngoing.Count - 1);
             return true;
         }
     }

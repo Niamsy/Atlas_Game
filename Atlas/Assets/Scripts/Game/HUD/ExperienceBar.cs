@@ -51,7 +51,8 @@ namespace Game.HUD
                 _jauge.Initialize(_experience.Value, _levelFloor.Value, _levelRoof.Value);
             else
                 _jauge.SetValue(_experience.Value);
-            _levelDisplay.text = string.Format(LevelDisplayFormat, _level.Value);
+            if (_levelDisplay != null)
+                _levelDisplay.text = string.Format(LevelDisplayFormat, _level.Value);
             Display();
         }
 

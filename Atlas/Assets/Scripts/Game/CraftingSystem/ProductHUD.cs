@@ -31,10 +31,18 @@ public class ProductHUD : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         _position = position;
         _onClick = onClick;
         cooldown.fillAmount = 1;
-        _originalDuration = recipe != null ? recipe.Duration : 0;
+        _originalDuration = product.OriginalDuration;
         UpdateContent(_product);
     }
 
+    public void SetProduct(Recipe.Product product, int position, UnityAction<Recipe.Product, int> onClick)
+    {
+        _product = product;
+        _position = position;
+        _onClick = onClick;
+        _originalDuration = product.OriginalDuration;
+    }
+    
     public void Reset()
     {
         _product = null;
@@ -86,6 +94,7 @@ public class ProductHUD : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        HideDescription();
         _onClick?.Invoke(_product, _position);
     }
 }
