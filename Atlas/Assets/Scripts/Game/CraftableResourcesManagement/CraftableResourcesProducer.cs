@@ -15,12 +15,14 @@ namespace Plants.Plant
         protected virtual void Awake()
         {
             _plant = gameObject.GetComponentInParent<PlantModel>();
+            _plant.OnDeath.AddListener(ProduceDeathResources);
             CalendarManager.Instance.ActualDate.OnDayChanged += ProduceResources;
         }
 
         protected virtual void OnDestroy()
         {
-            ProduceDeathResources();
+            if (_plant)
+                _plant.OnDeath.RemoveListener(ProduceDeathResources);
             CalendarManager.Instance.ActualDate.OnDayChanged -= ProduceResources;
         }
 
@@ -43,6 +45,8 @@ namespace Plants.Plant
 
         protected virtual void ProduceDeathResources()
         {
+            Debug.Log("DEATH");
+            _plant.OnDeath.RemoveListener(ProduceDeathResources);
             var stage = _plant.CurrentStageInt;
             List<PeriodToCreate> resourcesToGenerate = new List<PeriodToCreate>();
 
