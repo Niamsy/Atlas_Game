@@ -203,6 +203,7 @@ GameObject:
   - component: {fileID: 8350349416994340886}
   - component: {fileID: 8350349416994340891}
   - component: {fileID: 8350349416994340888}
+  - component: {fileID: -7483413364732662402}
   m_Layer: 13
   m_Name: 102_Fiber_Dropped
   m_TagString: Untagged
@@ -298,5 +299,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e921fd61759bcd48b4a97a4b6c9cb52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: 0
+  anim: 1
   BaseStack: {fileID: 8350349416994340891}
+--- !u!135 &-7483413364732662402
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8350349416994340885}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
