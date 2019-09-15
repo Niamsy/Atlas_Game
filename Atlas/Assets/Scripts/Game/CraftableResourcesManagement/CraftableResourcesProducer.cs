@@ -15,12 +15,14 @@ namespace Plants.Plant
         protected virtual void Awake()
         {
             _plant = gameObject.GetComponentInParent<PlantModel>();
+            _plant.OnDeath.AddListener(ProduceDeathResources);
             CalendarManager.Instance.ActualDate.OnDayChanged += ProduceResources;
         }
 
         protected virtual void OnDestroy()
         {
-            ProduceDeathResources();
+            if (_plant)
+                _plant.OnDeath.RemoveListener(ProduceDeathResources);
             CalendarManager.Instance.ActualDate.OnDayChanged -= ProduceResources;
         }
 
@@ -28,11 +30,11 @@ namespace Plants.Plant
         {
             if (IsHarvestPeriod() && _plant.CurrentStageInt == 2)
             {
-                List<ResourceToCreate> resourcesToGenerate = new List<ResourceToCreate>();
+                List<PeriodToCreate> resourcesToGenerate = new List<PeriodToCreate>();
 
                 foreach (var resources in CraftableResources)
                 {
-                    var harvestResources = resources.ResourcesToCreate.Where(resource => resource.Period == CraftablePeriod.HarvestPeriod);
+                    var harvestResources = resources.PeriodsToCreate.Where(resource => resource.Period == CraftablePeriod.HarvestPeriod);
                     if (harvestResources.Count() > 0)
                     {
                         GenerateGameObject(resources.Resource, harvestResources.First());
@@ -43,12 +45,14 @@ namespace Plants.Plant
 
         protected virtual void ProduceDeathResources()
         {
+            Debug.Log("DEATH");
+            _plant.OnDeath.RemoveListener(ProduceDeathResources);
             var stage = _plant.CurrentStageInt;
-            List<ResourceToCreate> resourcesToGenerate = new List<ResourceToCreate>();
+            List<PeriodToCreate> resourcesToGenerate = new List<PeriodToCreate>();
 
             foreach (var resources in CraftableResources)
             {
-                var harvestResources = resources.ResourcesToCreate.Where(resource => (int)resource.Period == stage);
+                var harvestResources = resources.PeriodsToCreate.Where(resource => (int)resource.Period == stage);
                 if (harvestResources.Count() > 0)
                 {
                     GenerateGameObject(resources.Resource, harvestResources.First());
@@ -56,13 +60,16 @@ namespace Plants.Plant
             }
         }
 
-        protected virtual void GenerateGameObject(GameObject obj, ResourceToCreate resources)
+        protected virtual void GenerateGameObject(GameObject obj, PeriodToCreate resources)
         {
 
             var position = transform.position + Vector3.up + transform.forward.normalized;
             GameObject droppedObject = Instantiate(obj, position, Quaternion.identity);
             var itemStack = droppedObject.GetComponent<ItemStackBehaviour>();
-            itemStack.Slot.ModifyQuantity(resources.Quantity);
+            if (resources.Quantity != 1)
+            {
+                itemStack.Slot.ModifyQuantity(Random.Range(resources.Quantity, resources.Quantity * 2));
+            }
             var rb = droppedObject.GetComponent<Rigidbody>();
             rb.AddForce(transform.forward.normalized * 0.1f);
         }
