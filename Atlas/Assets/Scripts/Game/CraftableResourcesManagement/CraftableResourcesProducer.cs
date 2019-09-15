@@ -1,4 +1,5 @@
 ﻿using Game.DayNight;
+using Game.Inventory;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -57,13 +58,13 @@ namespace Plants.Plant
 
         protected virtual void GenerateGameObject(GameObject obj, ResourceToCreate resources)
         {
-            for (var i = 0; i < resources.Quantity; i++)
-            {
-                var position = transform.position + Vector3.up + transform.forward.normalized;
-                GameObject droppedObject = Instantiate(obj, position, Quaternion.identity);
-                var rb = droppedObject.GetComponent<Rigidbody>();
-                rb.AddForce(transform.forward.normalized * 0.1f);
-            }
+
+            var position = transform.position + Vector3.up + transform.forward.normalized;
+            GameObject droppedObject = Instantiate(obj, position, Quaternion.identity);
+            var itemStack = droppedObject.GetComponent<ItemStackBehaviour>();
+            itemStack.Slot.ModifyQuantity(resources.Quantity);
+            var rb = droppedObject.GetComponent<Rigidbody>();
+            rb.AddForce(transform.forward.normalized * 0.1f);
         }
 
         protected virtual bool IsHarvestPeriod()
