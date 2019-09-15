@@ -1,7 +1,5 @@
 ﻿using System;
 using Game.Inventory;
-using InputManagement;
-using Plants;
 using UnityEngine;
 
 namespace Game.Item.Tools
