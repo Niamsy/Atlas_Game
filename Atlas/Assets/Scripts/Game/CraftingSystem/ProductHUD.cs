@@ -14,9 +14,9 @@ public class ProductHUD : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     private int _position;
     private UnityAction<Recipe.Product, int> _onClick;
     private float _originalDuration;
-    [SerializeField] private Image image;
-    [SerializeField] private Image cooldown;
-    [SerializeField] private ProductDescriptionHUD description;
+    [SerializeField] private Image image = null;
+    [SerializeField] private Image cooldown = null;
+    [SerializeField] private ProductDescriptionHUD description = null;
 
     public void OnEnable()
     {

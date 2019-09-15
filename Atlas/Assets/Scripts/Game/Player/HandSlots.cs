@@ -1,12 +1,8 @@
 ﻿using Game.Inventory;
 using Game.Item;
-using Game.Item.PlantSeed;
 using Game.SavingSystem;
 using Game.SavingSystem.Datas;
-using InputManagement;
-using Player;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Game.Player
 {

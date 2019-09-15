@@ -9,7 +9,7 @@ namespace Menu.Crafting
 {
     public class GridCraftingHUD : MonoBehaviour
     {
-        [SerializeField] private FloatVariable _PlayerLevel;
+        [SerializeField] private FloatVariable _PlayerLevel = null;
         private List<RecipeHUD> _slots = new List<RecipeHUD>();
         
 

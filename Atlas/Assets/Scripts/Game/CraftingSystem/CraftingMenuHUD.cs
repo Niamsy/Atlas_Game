@@ -16,21 +16,21 @@ using UnityEngine.UI;
 public class CraftingMenuHUD : Menu.MenuWidget
 {
     [Header("Crafting")] 
-    [SerializeField] private GridProducingHUD onGoingProducingHud;
-    [SerializeField] private GridProducingHUD finishedProducingHud;
+    [SerializeField] private GridProducingHUD onGoingProducingHud = null;
+    [SerializeField] private GridProducingHUD finishedProducingHud = null;
     
     [Header("Production button")]
-    [SerializeField] private Button produceButton;
-    [SerializeField] private Color enabledButton;
-    [SerializeField] private Color disabledButton;
+    [SerializeField] private Button produceButton = null;
+    [SerializeField] private Color enabledButton = Color.green;
+    [SerializeField] private Color disabledButton = Color.gray;
     
     [Header("Audio")] 
-    public Audio onToggleGuiAudio;
-    public AudioEvent onToggleGuiEvent;
+    public Audio onToggleGuiAudio = null;
+    public AudioEvent onToggleGuiEvent = null;
 
     [Header("Descriptions")] 
-    [SerializeField] private GameObject recipeDescription;
-    [SerializeField] private GameObject ingredientDescription;
+    [SerializeField] private GameObject recipeDescription = null;
+    [SerializeField] private GameObject ingredientDescription = null;
 
     private RecipeDescriptionHUD _description;
     private IngredientDescriptionSimpleHUD _ingredientDesc;

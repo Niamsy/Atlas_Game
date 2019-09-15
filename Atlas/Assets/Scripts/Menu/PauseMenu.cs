@@ -55,7 +55,11 @@ namespace Menu
 
 		public void QuitTheGame()
 		{
+#if UNITY_EDITOR
+			UnityEditor.EditorApplication.isPlaying = false;
+#else
 			SceneLoader.Instance.QuitTheGame();
+#endif
 		}
 		
 	}
