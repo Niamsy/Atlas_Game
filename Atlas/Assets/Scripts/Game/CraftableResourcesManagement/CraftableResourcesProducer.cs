@@ -36,16 +36,16 @@ namespace Plants.Plant
                 {
                     var harvestResources = resources.PeriodsToCreate.Where(resource => resource.Period == CraftablePeriod.HarvestPeriod);
                     if (harvestResources.Count() > 0)
-                    {
                         GenerateGameObject(resources.Resource, harvestResources.First());
-                    }
                 }
             }
         }
 
         protected virtual void ProduceDeathResources()
         {
+            #if ATLAS_DEBUG
             Debug.Log("DEATH");
+            #endif
             _plant.OnDeath.RemoveListener(ProduceDeathResources);
             var stage = _plant.CurrentStageInt;
             List<PeriodToCreate> resourcesToGenerate = new List<PeriodToCreate>();
@@ -54,22 +54,18 @@ namespace Plants.Plant
             {
                 var harvestResources = resources.PeriodsToCreate.Where(resource => (int)resource.Period == stage);
                 if (harvestResources.Count() > 0)
-                {
                     GenerateGameObject(resources.Resource, harvestResources.First());
-                }
             }
         }
 
-        protected virtual void GenerateGameObject(GameObject obj, PeriodToCreate resources)
+        protected virtual void GenerateGameObject(ProducedResource item, PeriodToCreate resources)
         {
 
             var position = transform.position + Vector3.up + transform.forward.normalized;
-            GameObject droppedObject = Instantiate(obj, position, Quaternion.identity);
+            GameObject droppedObject = Instantiate(item.PrefabDroppedGO, position, Quaternion.identity);
             var itemStack = droppedObject.GetComponent<ItemStackBehaviour>();
             if (resources.Quantity != 1)
-            {
-                itemStack.Slot.ModifyQuantity(Random.Range(resources.Quantity, resources.Quantity * 2));
-            }
+                itemStack.Slot.SetItem(item, Random.Range(resources.Quantity, resources.Quantity * 2));
             var rb = droppedObject.GetComponent<Rigidbody>();
             rb.AddForce(transform.forward.normalized * 0.1f);
         }
