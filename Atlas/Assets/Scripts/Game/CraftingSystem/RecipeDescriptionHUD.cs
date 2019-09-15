@@ -7,16 +7,16 @@ namespace Menu.Crafting
 {
     public class RecipeDescriptionHUD : MonoBehaviour
     {
-        [SerializeField] private Image _recipeImage;
-        [SerializeField] private TextMeshProUGUI _recipeName;
-        [SerializeField] private TextMeshProUGUI _recipeDescription;
-        [SerializeField] private TextMeshProUGUI _recipeAvailability;
+        [SerializeField] private Image _recipeImage = null;
+        [SerializeField] private TextMeshProUGUI _recipeName = null;
+        [SerializeField] private TextMeshProUGUI _recipeDescription = null;
+        [SerializeField] private TextMeshProUGUI _recipeAvailability = null;
 
         [Header("Availability Info")]
-        [SerializeField] private Localization.LocalizedText _availableLocalizedText;
-        [SerializeField] private Localization.LocalizedText _unavailableLocalizedText;
-        [SerializeField] private Color _availableLocalizedTextColor;
-        [SerializeField] private Color _unavailableLocalizedTextColor;
+        [SerializeField] private Localization.LocalizedText _availableLocalizedText = null;
+        [SerializeField] private Localization.LocalizedText _unavailableLocalizedText = null;
+        [SerializeField] private Color _availableLocalizedTextColor = Color.green;
+        [SerializeField] private Color _unavailableLocalizedTextColor = Color.red;
 
         private Recipe _currentRecipe = null;
 

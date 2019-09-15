@@ -13,8 +13,8 @@ namespace Game.Crafting
     [RequireComponent(typeof(CraftingSaver))]
     public class Crafter : AInteractable
     {
-        [SerializeField] private RecipeBook _Book;
-        [SerializeField] private CraftingMenuHUD _craftingHUD;
+        [SerializeField] private RecipeBook _Book = null;
+        [SerializeField] private CraftingMenuHUD _craftingHUD = null;
 
         private Collider _collider;
         private Canvas _guiCanvas;
@@ -22,7 +22,7 @@ namespace Game.Crafting
         private List<Recipe.Product> _productsFinished = new List<Recipe.Product>();
         private BaseInventory _inventory;
         private UnityAction<Recipe.Product, int> _productFinishedCB;
-        [SerializeField] private CinemachineFreeLookInputConversion _camera;
+        [SerializeField] private CinemachineFreeLookInputConversion _camera = null;
         private bool isShown;
         
         public RecipeBook RecipeBook => _Book;

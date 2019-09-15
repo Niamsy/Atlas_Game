@@ -101,10 +101,10 @@ namespace Game
 
             #region Private Properties
             [Header("Recipe properties")]
-            [SerializeField] private RecipeCategory category;
-            [SerializeField][Tooltip("Duration in seconds for the crafting of the products")] private int craftingDuration;
-            [Space(10)][SerializeField] private Ingredient[] ingredients;
-            [Space(10)][SerializeField] private Product product;
+            [SerializeField] private RecipeCategory category = null;
+            [SerializeField][Tooltip("Duration in seconds for the crafting of the products")] private int craftingDuration = 5;
+            [Space(10)][SerializeField] private Ingredient[] ingredients = Array.Empty<Ingredient>();
+            [Space(10)][SerializeField] private Product product = null;
             private bool _unlocked = false;
 
             #endregion
