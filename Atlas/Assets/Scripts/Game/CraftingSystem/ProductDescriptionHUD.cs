@@ -13,11 +13,11 @@ namespace Menu.Crafting
 {
     public class ProductDescriptionHUD : MonoBehaviour
     {
-        [SerializeField] private Image itemImage;
-        [SerializeField] private TextMeshProUGUI itemName;
-        [SerializeField] private TextMeshProUGUI itemDescription;
-        [SerializeField] private TextMeshProUGUI itemQuantity;
-        [SerializeField] private LocalizedText over;
+        [SerializeField] private Image itemImage = null;
+        [SerializeField] private TextMeshProUGUI itemName = null;
+        [SerializeField] private TextMeshProUGUI itemDescription = null;
+        [SerializeField] private TextMeshProUGUI itemQuantity = null;
+        [SerializeField] private LocalizedText over = null;
         
         private Recipe.Product _currentItem = null;
 

@@ -20,7 +20,7 @@ namespace Game.Crafting
         }
 
         [SerializeField] private bool _isUnlocked = false;
-        [SerializeField] private Image _lockImage;
+        [SerializeField] private Image _lockImage = null;
         private RectTransform _transform;
 
         // Start is called before the first frame update
