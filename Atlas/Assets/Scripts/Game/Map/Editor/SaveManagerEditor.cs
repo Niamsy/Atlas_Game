@@ -10,16 +10,15 @@ using UnityEngine;
 namespace Game.Editor
 {
     [CustomEditor(typeof(SaveManager))]
-    [CanEditMultipleObjects]
     public class SaveManagerEditor : UnityEditor.Editor
     {
         public int SceneIndex = 2;
 
-        public void Start()
+        private void Start()
         {
             SceneIndex = LevelManager.Instance.gameObject.scene.buildIndex;
         }
-        
+
         public override void OnInspectorGUI()
         {
             SaveManager myTarget = (SaveManager) target;
@@ -30,11 +29,20 @@ namespace Game.Editor
             {
                 GUILayout.Label("Map data: Scene Index " + SceneLoader.ActiveLoadedScenes);
                 GUILayout.BeginHorizontal();
+                
                 if (GUILayout.Button("Reload Map data"))
                     myTarget.LoadMapData(SceneLoader.ActiveLoadedScenes);
                 if (GUILayout.Button("Force save Map data"))
                     myTarget.SaveMapData(SceneLoader.ActiveLoadedScenes);
+                
                 GUILayout.EndHorizontal();
+
+                if (myTarget.MapData != null)
+                {
+                    EditorGUILayout.BeginVertical("Box");
+                    EditorGUILayout.SelectableLabel("Map data");
+                    EditorGUILayout.EndVertical();
+                }
             }
         }
         

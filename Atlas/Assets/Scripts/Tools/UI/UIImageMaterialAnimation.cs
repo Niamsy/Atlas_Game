@@ -17,6 +17,7 @@ namespace Tools.UI
         {
             _image = GetComponent<Image>();
             _hashProperty = Shader.PropertyToID(PropertyName);
+            _image.material.enableInstancing = true;
         }
 
         private void Update()
