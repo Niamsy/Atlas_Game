@@ -8,7 +8,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4069533631535441573}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 3
@@ -45,12 +45,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ProductionRate:
-    TickRate: 0
+    TickRate: 1
     ResourcePerTick: 0
-  ResourceGivenPerTick: 100
+  ResourceGivenPerTick: 50
   StockedResources: {fileID: 6799700545041263973}
   ProducedResources: 
   _debugDisplay: 0
+  _animator: {fileID: 4161111596451891346}
 --- !u!114 &6799700545041263973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,11 +79,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WaterSource (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 836735107402981152, guid: 4712d345d73178f4c8401d889b41b158,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5041642562817095367, guid: 4712d345d73178f4c8401d889b41b158,
         type: 3}
@@ -239,6 +235,11 @@ PrefabInstance:
       propertyPath: EmissionModule.m_BurstCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 64406164863459113, guid: 4712d345d73178f4c8401d889b41b158,
+        type: 3}
+      propertyPath: CollisionModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4993375153691146392, guid: 4712d345d73178f4c8401d889b41b158,
         type: 3}
       propertyPath: InitialModule.startSpeed.minScalar
@@ -253,6 +254,11 @@ PrefabInstance:
         type: 3}
       propertyPath: ShapeModule.m_Rotation.x
       value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4993375153691146392, guid: 4712d345d73178f4c8401d889b41b158,
+        type: 3}
+      propertyPath: CollisionModule.enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1998739639838258217, guid: 4712d345d73178f4c8401d889b41b158,
         type: 3}
@@ -274,6 +280,11 @@ PrefabInstance:
       propertyPath: ShapeModule.m_Rotation.x
       value: -15
       objectReference: {fileID: 0}
+    - target: {fileID: 1998739639838258217, guid: 4712d345d73178f4c8401d889b41b158,
+        type: 3}
+      propertyPath: CollisionModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4712d345d73178f4c8401d889b41b158, type: 3}
 --- !u!1001 &1690185631246911654
@@ -287,11 +298,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WaterSource
-      objectReference: {fileID: 0}
-    - target: {fileID: 836735107402981152, guid: 4712d345d73178f4c8401d889b41b158,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5041642562817095367, guid: 4712d345d73178f4c8401d889b41b158,
         type: 3}
@@ -448,6 +454,11 @@ PrefabInstance:
       propertyPath: EmissionModule.m_BurstCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 64406164863459113, guid: 4712d345d73178f4c8401d889b41b158,
+        type: 3}
+      propertyPath: CollisionModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4993375153691146392, guid: 4712d345d73178f4c8401d889b41b158,
         type: 3}
       propertyPath: InitialModule.startSpeed.minScalar
@@ -462,6 +473,11 @@ PrefabInstance:
         type: 3}
       propertyPath: ShapeModule.m_Rotation.x
       value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4993375153691146392, guid: 4712d345d73178f4c8401d889b41b158,
+        type: 3}
+      propertyPath: CollisionModule.enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1998739639838258217, guid: 4712d345d73178f4c8401d889b41b158,
         type: 3}
@@ -483,6 +499,11 @@ PrefabInstance:
       propertyPath: ShapeModule.m_Rotation.x
       value: -15
       objectReference: {fileID: 0}
+    - target: {fileID: 1998739639838258217, guid: 4712d345d73178f4c8401d889b41b158,
+        type: 3}
+      propertyPath: CollisionModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4712d345d73178f4c8401d889b41b158, type: 3}
 --- !u!1001 &2339919420178761875
@@ -496,11 +517,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WaterSource (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 836735107402981152, guid: 4712d345d73178f4c8401d889b41b158,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5041642562817095367, guid: 4712d345d73178f4c8401d889b41b158,
         type: 3}
@@ -657,6 +673,11 @@ PrefabInstance:
       propertyPath: EmissionModule.m_BurstCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 64406164863459113, guid: 4712d345d73178f4c8401d889b41b158,
+        type: 3}
+      propertyPath: CollisionModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4993375153691146392, guid: 4712d345d73178f4c8401d889b41b158,
         type: 3}
       propertyPath: InitialModule.startSpeed.minScalar
@@ -671,6 +692,11 @@ PrefabInstance:
         type: 3}
       propertyPath: ShapeModule.m_Rotation.x
       value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4993375153691146392, guid: 4712d345d73178f4c8401d889b41b158,
+        type: 3}
+      propertyPath: CollisionModule.enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1998739639838258217, guid: 4712d345d73178f4c8401d889b41b158,
         type: 3}
@@ -692,6 +718,11 @@ PrefabInstance:
       propertyPath: ShapeModule.m_Rotation.x
       value: -15
       objectReference: {fileID: 0}
+    - target: {fileID: 1998739639838258217, guid: 4712d345d73178f4c8401d889b41b158,
+        type: 3}
+      propertyPath: CollisionModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4712d345d73178f4c8401d889b41b158, type: 3}
 --- !u!1001 &4107118519791873252
@@ -705,11 +736,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WaterSource (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 836735107402981152, guid: 4712d345d73178f4c8401d889b41b158,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5041642562817095367, guid: 4712d345d73178f4c8401d889b41b158,
         type: 3}
@@ -866,6 +892,11 @@ PrefabInstance:
       propertyPath: EmissionModule.m_BurstCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 64406164863459113, guid: 4712d345d73178f4c8401d889b41b158,
+        type: 3}
+      propertyPath: CollisionModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4993375153691146392, guid: 4712d345d73178f4c8401d889b41b158,
         type: 3}
       propertyPath: InitialModule.startSpeed.minScalar
@@ -880,6 +911,11 @@ PrefabInstance:
         type: 3}
       propertyPath: ShapeModule.m_Rotation.x
       value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4993375153691146392, guid: 4712d345d73178f4c8401d889b41b158,
+        type: 3}
+      propertyPath: CollisionModule.enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1998739639838258217, guid: 4712d345d73178f4c8401d889b41b158,
         type: 3}
@@ -900,6 +936,11 @@ PrefabInstance:
         type: 3}
       propertyPath: ShapeModule.m_Rotation.x
       value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998739639838258217, guid: 4712d345d73178f4c8401d889b41b158,
+        type: 3}
+      propertyPath: CollisionModule.enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4712d345d73178f4c8401d889b41b158, type: 3}
