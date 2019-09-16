@@ -21,6 +21,9 @@ namespace Menu.LevelSelector
         [SerializeField]
         public CharacterDataInfo CharacterInfo;
 
+        [SerializeField]
+        public LoadLevel load;
+
         protected override void InitialiseWidget()
         {
             if (Levels.Count > 0)
@@ -92,7 +95,6 @@ namespace Menu.LevelSelector
                         }
                         else if (ui.name == "PanelLocked")
                         {
-                            // TODO Make General Data for this game. Like Number Challenge complete. Change this condition
                             if (CharacterInfo.PlayerChallengeOwned >= Levels[i].ChallengeOnThisLevelToUnlockComplete)
                             {
                                 CanvasGroup panel = ui.GetComponent<CanvasGroup>();
@@ -130,11 +132,13 @@ namespace Menu.LevelSelector
                                 btn.enabled = false;
                                 break;
                             }
-                            LoadLevel ll = new LoadLevel();
+                            if (btn.enabled == true)
+                            {
+                                Debug.Log("I can launch scene : " + i);
+                            }
                             string sceneName = Levels[i].LevelSceneName;
-                            btn.onClick.AddListener(delegate {
-                                ll.LoadSceneIndex(sceneName);
-                            });
+                            Debug.Log("Scene name launched: " + sceneName);
+                            btn.onClick.AddListener(() => load.LoadSceneIndex(sceneName));
                         }
                     }
                 }
