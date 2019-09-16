@@ -8,6 +8,7 @@ using Game.Player.Stats;
 using Game.SavingSystem;
 using Player.Scripts;
 using UnityEngine.InputSystem;
+using Game.ResourcesManagement;
 
 namespace Player
 {
@@ -45,6 +46,8 @@ namespace Player
         [Header("Interaction")]
         public float interactDistance = 0.5f;
         public LayerMask interactLayerMask;
+
+        public int criticalEnergy = 0;
         #endregion
 
         #region Ground checking
@@ -134,6 +137,7 @@ namespace Player
         private Animator m_Animator;
         private GameObject m_GroundChecker;
         private PlayerStats m_PlayerStats;
+        public PlayerStats GetPlayerStats() { return m_PlayerStats; }
         private float m_InputX;
         private float m_InputZ;
         private float m_InputMagnitude;
@@ -215,9 +219,17 @@ namespace Player
 
         void GetInputMagnitude()
         {
-            m_Animator.SetFloat(_HashInputX, m_InputX, horizontalAnimSmoothTime, Time.deltaTime * 2f);
-            m_Animator.SetFloat(_HashInputZ, m_InputZ, verticalAnimTime, Time.deltaTime * 2f);
-            m_InputMagnitude = new Vector2(m_InputX, m_InputZ).sqrMagnitude;
+            var InputX = m_InputX;
+            var InputZ = m_InputZ;
+            if (m_PlayerStats.Resources[Resource.Energy].Quantity <= criticalEnergy)
+            {
+                InputX /= 2f;
+                InputZ /= 2f;
+            }
+            m_Animator.SetFloat(_HashInputX, InputX, horizontalAnimSmoothTime, Time.deltaTime * 2f);
+            m_Animator.SetFloat(_HashInputZ, InputZ, verticalAnimTime, Time.deltaTime * 2f);
+
+            m_InputMagnitude = new Vector2(InputX, InputZ).sqrMagnitude;
             if (m_InputMagnitude > allowPlayerRotation)
             {
                 m_Animator.SetFloat(_HashInputMagnitude, m_InputMagnitude, startAnimTime, Time.deltaTime);
@@ -328,7 +340,6 @@ namespace Player
             }
             return IsDead;
         }
-
         /// <summary>
         /// Rotate player with mouse
         /// </summary>
