@@ -15,7 +15,7 @@ namespace Menu.Crafting
         [SerializeField] private Image image = null;
         [SerializeField] private RecipeDescriptionHUD description = null;
         [SerializeField] private BlueprintDescriptionHUD blueprint = null;
-        [SerializeField] private Animator blueprintAnimator;
+        [SerializeField] private Animator blueprintAnimator = null;
 
         private int _hashShowed = Animator.StringToHash("Showed");
         private UnityAction<Recipe> _onSelectedCb;

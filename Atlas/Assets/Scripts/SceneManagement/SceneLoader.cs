@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -107,15 +109,26 @@ namespace SceneManagement
 
         public void QuitTheGame()
         {
-            for (int x = 0; x < SceneManager.sceneCount; x++)
+            try
             {
-                if (OnSceneUnloading != null)
-                    OnSceneUnloading(SceneManager.GetSceneAt(x).buildIndex);
-            }
+                for (int x = 0; x < SceneManager.sceneCount; x++)
+                {
+                    if (OnSceneUnloading != null)
+                        OnSceneUnloading(SceneManager.GetSceneAt(x).buildIndex);
+                }
 
-            Application.Quit();
+                throw new Exception();
+            }
+            catch (Exception e)
+            {
+                #if ATLAS_DEBUG
+                Debug.LogException(e);
+                #endif
+            }
             #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
+            #else
+            Application.Quit();
             #endif
         }
     }

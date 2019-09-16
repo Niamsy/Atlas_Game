@@ -10,11 +10,11 @@ namespace Menu.Crafting
 {
     public class IngredientDescriptionSimpleHUD : MonoBehaviour
     {
-        [SerializeField] private Image _itemImage;
-        [SerializeField] private TextMeshProUGUI _itemName;
-        [SerializeField] private TextMeshProUGUI _itemDescription;
-        [SerializeField] private TextMeshProUGUI _itemQuantity;
-        [SerializeField] private Localization.LocalizedText _required;
+        [SerializeField] private Image _itemImage = null;
+        [SerializeField] private TextMeshProUGUI _itemName = null;
+        [SerializeField] private TextMeshProUGUI _itemDescription = null;
+        [SerializeField] private TextMeshProUGUI _itemQuantity = null;
+        [SerializeField] private Localization.LocalizedText _required = null;
         
         private Recipe.Ingredient _currentItem = null;
 

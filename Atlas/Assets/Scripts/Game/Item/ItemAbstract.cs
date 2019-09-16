@@ -1,6 +1,5 @@
 ﻿using System;
 using Game.Inventory;
-using InputManagement;
 using Localization;
 using Player.Scripts;
 using UnityEngine;
