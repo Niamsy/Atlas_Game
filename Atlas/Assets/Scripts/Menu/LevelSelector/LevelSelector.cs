@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Menu.LevelSelector
@@ -137,13 +138,13 @@ namespace Menu.LevelSelector
                                 Debug.Log("I can launch scene : " + i);
                             }
                             string sceneName = Levels[i].LevelSceneName;
+                            Debug.Log("Btn name: " + btn.name);
                             Debug.Log("Scene name launched: " + sceneName);
                             btn.onClick.AddListener(() => load.LoadSceneIndex(sceneName));
                         }
                     }
                 }
             }
-            this.gameObject.SetActive(false);
         }
 
         // Start is called before the first frame update
