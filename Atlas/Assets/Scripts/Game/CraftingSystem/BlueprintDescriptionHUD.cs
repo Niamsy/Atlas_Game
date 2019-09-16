@@ -7,10 +7,10 @@ namespace Menu.Crafting
 {
     public class BlueprintDescriptionHUD : MonoBehaviour
     {
-        [SerializeField] private Image _blueprintImage;
-        [SerializeField] private Text _blueprintName;
-        [SerializeField] private Text _blueprintDescription;
-        [SerializeField] private Text _blueprintDuration;
+        [SerializeField] private Image _blueprintImage = null;
+        [SerializeField] private Text _blueprintName = null;
+        [SerializeField] private Text _blueprintDescription = null;
+        [SerializeField] private Text _blueprintDuration = null;
         private GridIngredientHUD _ingredients;
         
         private Recipe _currentRecipe = null;

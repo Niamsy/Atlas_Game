@@ -15,7 +15,7 @@ namespace Plants.Plant
     }
 
     [Serializable]
-    public struct ResourceToCreate
+    public struct PeriodToCreate
     {
         [SerializeField]
         public CraftablePeriod  Period;
@@ -25,8 +25,8 @@ namespace Plants.Plant
     [Serializable]
     public struct CraftableResource
     {
-        public GameObject                   Resource;
-        public List<ResourceToCreate>       ResourcesToCreate;
+        public ProducedResource             Resource;
+        public List<PeriodToCreate>         PeriodsToCreate;
     }
 }
 

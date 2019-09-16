@@ -2,7 +2,6 @@
 using AtlasEvents;
 using Game;
 using Game.SavingSystem;
-using InputManagement;
 using Menu.Inventory.ItemDescription;
 using SceneManagement;
 using UnityEngine;
@@ -18,9 +17,7 @@ namespace Menu.Inventory
 
         [Header("Audio")] public Audio OnToggleGUIAudio = null;
         public AudioEvent OnToggleGUIEvent = null;
-
-        [Header("Inventory Keys")] public InputKey _Inventory = null;
-
+        
         [SerializeField] private ItemDescriptionHUD _description = null;
 
         private void OnEnable()
