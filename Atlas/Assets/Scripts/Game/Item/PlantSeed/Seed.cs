@@ -32,7 +32,7 @@ namespace Game.Item.PlantSeed
                 return true;
             }
             return false;
-        }
+        } 
 
         [Header("Seed variables")]
         [SerializeField] private PlantStatistics _plantStatistics;
