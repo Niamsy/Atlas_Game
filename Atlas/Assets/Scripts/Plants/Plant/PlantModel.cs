@@ -24,6 +24,9 @@ namespace Plants.Plant
         #region Private & Protected Properties
 
         protected int current_stage = 0;
+
+        protected int last_stage = 0;
+
         [SerializeField]
         private PlantConsumer _consumer = null;
         [SerializeField]
@@ -50,6 +53,15 @@ namespace Plants.Plant
             get
             {
                 return PlantStatistics.Stages[current_stage];
+            }
+        }
+
+        public int LastStageInt { get { return (last_stage); } }
+        public Stage LastStage
+        {
+            get
+            {
+                return PlantStatistics.Stages[last_stage];
             }
         }
 
@@ -120,6 +132,7 @@ namespace Plants.Plant
             if (PlantStatistics.Stages != null && PlantStatistics.Stages.Count > 0)
             {
                 _currentModel = Instantiate(CurrentStage.Model, transform);
+                last_stage = PlantStatistics.Stages.Count - 1;
                 var tree = _currentModel.GetComponent<Tree>();
                 if (tree == null)
                 {
