@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 6206562519876059882, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
         type: 3}
       propertyPath: m_Name
-      value: Daisy
+      value: 1000_Daisy
       objectReference: {fileID: 0}
     - target: {fileID: 6206562519876059875, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
         type: 3}
@@ -83,6 +83,77 @@ PrefabInstance:
         type: 3}
       propertyPath: Slot._quantity
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6057376587732904097, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: CraftableResources.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6057376587732904097, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: CraftableResources.Array.data[0].ResourcesToCreate.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6057376587732904097, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: CraftableResources.Array.data[0].PeriodsToCreate.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6057376587732904097, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: CraftableResources.Array.data[0].ResourcesToCreate.Array.data[0].Quantity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6057376587732904097, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: CraftableResources.Array.data[0].ResourcesToCreate.Array.data[1].Period
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6057376587732904097, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: CraftableResources.Array.data[0].ResourcesToCreate.Array.data[1].Quantity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6057376587732904097, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: CraftableResources.Array.data[0].ResourcesToCreate.Array.data[2].Period
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6057376587732904097, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: CraftableResources.Array.data[0].ResourcesToCreate.Array.data[2].Quantity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6057376587732904097, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: CraftableResources.Array.data[0].Resource
+      value: 
+      objectReference: {fileID: 11400000, guid: 4824eeff7dc4ef448bba42e327ba88eb,
+        type: 2}
+    - target: {fileID: 6057376587732904097, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: CraftableResources.Array.data[0].PeriodsToCreate.Array.data[0].Quantity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6057376587732904097, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: CraftableResources.Array.data[0].PeriodsToCreate.Array.data[1].Period
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6057376587732904097, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: CraftableResources.Array.data[0].PeriodsToCreate.Array.data[1].Quantity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6057376587732904097, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: CraftableResources.Array.data[0].PeriodsToCreate.Array.data[2].Period
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6057376587732904097, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: CraftableResources.Array.data[0].PeriodsToCreate.Array.data[2].Quantity
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c3218684e4ac9a4aa60b424b4122b7d, type: 3}

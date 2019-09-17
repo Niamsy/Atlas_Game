@@ -1,7 +1,6 @@
 ﻿using System;
 using Game.Inventory;
 using Game.ResourcesManagement;
-using InputManagement;
 using UnityEngine;
 
 namespace Game.Item.Tools.Bucket

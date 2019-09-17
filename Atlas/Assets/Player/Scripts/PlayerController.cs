@@ -1,7 +1,4 @@
-﻿using System;
-using UnityEngine;
-using InputManagement;
-using Game;
+﻿using UnityEngine;
 using Game.Player;
 using Game.Inventory;
 using Game.Player.Stats;
@@ -77,6 +74,8 @@ namespace Player
             set { m_Animator.SetBool(_HashGrounded, value); }
         }
 
+        public PlayerInventory Inventory => m_Inventory;
+
         public bool IsSprinting
         {
             get { return m_Animator.GetBool(_HashSprinting); }
@@ -130,9 +129,13 @@ namespace Player
             set { _isEquippedSlotUsed = value; }
         }
 
+        public Camera Camera => m_Camera;
+        
         #endregion
 
         #region private variables
+
+        private PlayerInventory m_Inventory;
         private Camera m_Camera;
         private Animator m_Animator;
         private GameObject m_GroundChecker;
@@ -165,6 +168,7 @@ namespace Player
         #region Initialization
         private void Awake()
         {
+            m_Inventory = GetComponentInChildren<PlayerInventory>();
             m_Camera = Camera.main;
             m_Animator = GetComponent<Animator>();
             m_GroundChecker = transform.Find("GroundChecker").gameObject;
@@ -274,7 +278,8 @@ namespace Player
             m_MoveVector = m_DesiredMoveDirection;
             if (blockRotationPlayer == false)
             {
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(m_DesiredMoveDirection), desiredRotationSpeed);
+                transform.rotation = Quaternion.Slerp(transform.rotation,
+                    Quaternion.LookRotation(m_DesiredMoveDirection), desiredRotationSpeed);
             }
         }
 
@@ -330,8 +335,7 @@ namespace Player
             {
                 IsDead = true;
                 _handSlots.Drop();
-                var inventory = gameObject.GetComponentInChildren<PlayerInventory>();
-                inventory.DropAll();
+                m_Inventory.DropAll();
                 ResetSpeed();
             }
             else if (IsDead == true && m_PlayerStats.Resources[Game.ResourcesManagement.Resource.Oxygen].Quantity > 0)

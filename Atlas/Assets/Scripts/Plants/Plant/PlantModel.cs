@@ -1,4 +1,5 @@
-﻿using Game.Map;
+﻿using Game.DayNight;
+using Game.Map;
 using Game.ResourcesManagement;
 using Game.ResourcesManagement.Consumer;
 using Localization;
@@ -73,7 +74,11 @@ namespace Plants.Plant
             if (CurrentStage.Model)
             {
                 _currentModel = Instantiate(CurrentStage.Model, transform);
-                _currentModel.GetComponent<MeshRenderer>().materials = CurrentStage.Materials;
+                var mesh = _currentModel.GetComponent<MeshRenderer>();
+                if (mesh)
+                {
+                    mesh.materials = CurrentStage.Materials;
+                }
             }
             if (playEffect)
                 PlayEffect(CurrentStage.GrowEffect);
@@ -117,7 +122,13 @@ namespace Plants.Plant
                 _currentModel = Instantiate(CurrentStage.Model, transform);
                 var tree = _currentModel.GetComponent<Tree>();
                 if (tree == null)
-                    _currentModel.GetComponent<MeshRenderer>().materials = CurrentStage.Materials;
+                {
+                    var mesh = _currentModel.GetComponent<MeshRenderer>();
+                    if (mesh)
+                    {
+                        mesh.materials = CurrentStage.Materials;
+                    }
+                }
             }
 
             UpdateConsumers();
