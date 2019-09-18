@@ -63,10 +63,13 @@ namespace Game.SavingSystem
 
         private void OnApplicationFocus(bool hasFocus)
         {
-            if (hasFocus)
-                InputControls.Player.Enable();
-            else
-                InputControls.Player.Disable();
+            if (InputControls != null)
+            {
+                if (hasFocus)
+                    InputControls.Player.Enable();
+                else
+                    InputControls.Player.Disable();
+            }
         }
         
         private void Init()

@@ -12,7 +12,7 @@ namespace Game.HUD.Commons
         
         private void Awake()
         {
-            if (KeyListened != null)
+            if (KeyListened != "")
             {
                 Keyboard_TextDisplay.text = SaveManager.Instance.InputControls.Player.Get().GetAction(KeyListened).controls[0].name.ToUpper();
             }
