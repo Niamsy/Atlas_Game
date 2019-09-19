@@ -30,7 +30,7 @@ public class QuestManager : Singleton<QuestManager>
 
     public void UpdateQuestsWith(ObjType objectiveType, string Id, GameObject Player)
     {
-        callFwdorUpdate = true;
+        callForUpdate = true;
         foreach (Quest q in __activeQuests)
         {
             q.UpdateQuest(objectiveType, Id);
