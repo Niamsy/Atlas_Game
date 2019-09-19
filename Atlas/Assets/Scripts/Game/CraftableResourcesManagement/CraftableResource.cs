@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Game.Item;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,8 @@ namespace Plants.Plant
         DeathStageOne = 0,
         DeathStageTwo,
         DeathStageThree,
+        DeathStageFour,
+        DeathStageFive,
         HarvestPeriod
     }
 
@@ -20,13 +23,14 @@ namespace Plants.Plant
         [SerializeField]
         public CraftablePeriod  Period;
         public int              Quantity;
+        public bool             harvestAllStage;
     }
 
     [Serializable]
     public struct CraftableResource
     {
-        public ProducedResource             Resource;
-        public List<PeriodToCreate>         PeriodsToCreate;
+        public ItemAbstract             Resource;
+        public List<PeriodToCreate>     PeriodsToCreate;
     }
 }
 

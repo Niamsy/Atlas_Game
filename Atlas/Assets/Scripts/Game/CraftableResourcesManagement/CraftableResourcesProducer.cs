@@ -1,5 +1,7 @@
 ﻿using Game.DayNight;
 using Game.Inventory;
+using Game.Item;
+using Game.Item.PlantSeed;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -10,7 +12,7 @@ namespace Plants.Plant
     {
         [SerializeField]
         public List<CraftableResource> CraftableResources;
-        private PlantModel _plant;
+        protected PlantModel _plant;
 
         protected virtual void Awake()
         {
@@ -21,20 +23,20 @@ namespace Plants.Plant
 
         protected virtual void OnDestroy()
         {
-            if (_plant)
-                _plant.OnDeath.RemoveListener(ProduceDeathResources);
-            CalendarManager.Instance.ActualDate.OnDayChanged -= ProduceResources;
+            _plant.OnDeath.RemoveListener(ProduceDeathResources);
+            if (CalendarManager.Instance)
+                CalendarManager.Instance.ActualDate.OnDayChanged -= ProduceResources;
         }
 
         protected virtual void ProduceResources()
         {
-            if (IsHarvestPeriod() && _plant.CurrentStageInt == 2)
+            if (IsHarvestPeriod())
             {
                 List<PeriodToCreate> resourcesToGenerate = new List<PeriodToCreate>();
 
                 foreach (var resources in CraftableResources)
                 {
-                    var harvestResources = resources.PeriodsToCreate.Where(resource => resource.Period == CraftablePeriod.HarvestPeriod);
+                    var harvestResources = resources.PeriodsToCreate.Where(resource => resource.Period == CraftablePeriod.HarvestPeriod && (_plant.CurrentStageInt == _plant.LastStageInt) || (resource.harvestAllStage == true));
                     if (harvestResources.Count() > 0)
                         GenerateGameObject(resources.Resource, harvestResources.First());
                 }
@@ -58,9 +60,31 @@ namespace Plants.Plant
             }
         }
 
+        protected virtual void GenerateGameObject(ItemAbstract item, PeriodToCreate resources)
+        {
+            if (item is Seed)
+                GenerateGameObject(item as Seed, resources);
+            else
+                GenerateGameObject(item as ProducedResource, resources);
+        }
+
+
+        protected virtual void GenerateGameObject(Seed item, PeriodToCreate resources)
+        {
+            var position = transform.position + Vector3.up + transform.forward.normalized;
+            int quantity = Random.Range(resources.Quantity, resources.Quantity * 2);
+            ItemStackBehaviour iStack = item.PrefabDroppedGO.GetComponent<ItemStackBehaviour>();
+            iStack.Slot.SetItem(item, quantity);
+            ItemDropped iDropped = item.PrefabDroppedGO.GetComponent<ItemDropped>();
+            iDropped.anim = AInteractable.InteractAnim.pick;
+            iDropped.BaseStack = iStack;
+            GameObject droppedObject = Instantiate(item.PrefabDroppedGO, position, Quaternion.identity);
+            var rb = droppedObject.GetComponent<Rigidbody>();
+            rb.AddForce(transform.forward.normalized * 0.1f);
+        }
+
         protected virtual void GenerateGameObject(ProducedResource item, PeriodToCreate resources)
         {
-
             var position = transform.position + Vector3.up + transform.forward.normalized;
             GameObject droppedObject = Instantiate(item.PrefabDroppedGO, position, Quaternion.identity);
             var itemStack = droppedObject.GetComponent<ItemStackBehaviour>();

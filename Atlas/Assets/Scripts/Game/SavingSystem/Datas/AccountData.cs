@@ -17,15 +17,23 @@ namespace Game.SavingSystem.Datas
 	    public ProfilData[]					Profils = new ProfilData[MaxNumberOfProfils];
 	    public DateTime						LastGetScannedPlant;
 	    public int 							ID = 0;
+        public CharacterGlobalInfoData      CharacterGlobalInfo = new CharacterGlobalInfoData();
 
-	    public AccountData(int id)
+        public AccountData(int id)
 	    {
 		    ID = id;
 	    }
 	    
     }
 
-	[Serializable]
+    [Serializable]
+    public class CharacterGlobalInfoData
+    {
+        public int      PlayerChallengeOwned = 0;
+        public int    PlayerTimePlayed = 0;
+    }
+
+    [Serializable]
 	public class ProfilData
 	{
 		public int 							ID = 0;

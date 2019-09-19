@@ -24,6 +24,9 @@ namespace Plants.Plant
         #region Private & Protected Properties
 
         protected int current_stage = 0;
+
+        protected int last_stage = 0;
+
         [SerializeField]
         private PlantConsumer _consumer = null;
         [SerializeField]
@@ -53,6 +56,15 @@ namespace Plants.Plant
             }
         }
 
+        public int LastStageInt { get { return (last_stage); } }
+        public Stage LastStage
+        {
+            get
+            {
+                return PlantStatistics.Stages[last_stage];
+            }
+        }
+
         public bool IsSowed
         {
             get { return _isSowed; }
@@ -74,7 +86,11 @@ namespace Plants.Plant
             if (CurrentStage.Model)
             {
                 _currentModel = Instantiate(CurrentStage.Model, transform);
-                _currentModel.GetComponent<MeshRenderer>().materials = CurrentStage.Materials;
+                var mesh = _currentModel.GetComponent<MeshRenderer>();
+                if (mesh)
+                {
+                    mesh.materials = CurrentStage.Materials;
+                }
             }
             if (playEffect)
                 PlayEffect(CurrentStage.GrowEffect);
@@ -116,9 +132,16 @@ namespace Plants.Plant
             if (PlantStatistics.Stages != null && PlantStatistics.Stages.Count > 0)
             {
                 _currentModel = Instantiate(CurrentStage.Model, transform);
+                last_stage = PlantStatistics.Stages.Count - 1;
                 var tree = _currentModel.GetComponent<Tree>();
                 if (tree == null)
-                    _currentModel.GetComponent<MeshRenderer>().materials = CurrentStage.Materials;
+                {
+                    var mesh = _currentModel.GetComponent<MeshRenderer>();
+                    if (mesh)
+                    {
+                        mesh.materials = CurrentStage.Materials;
+                    }
+                }
             }
 
             UpdateConsumers();
