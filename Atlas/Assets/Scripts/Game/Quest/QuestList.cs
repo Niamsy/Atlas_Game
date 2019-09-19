@@ -25,13 +25,13 @@ public class QuestList
 
     private void __questOne()
     {
-        string name = "one";
-        string desc = "a description";
-        Objective obj = new Objective(ObjType.PICKUP, "test", 1);
+        string name = "Quest One";
+        string desc = "I am the quest One description";
+        Objective obj = new Objective(ObjType.PICKUP, "ITEM", "Whatever Object", 1);
         List<Objective> objs = new List<Objective>();
         objs.Add(obj);
         Quest one = new Quest(name, desc, objs, (GameObject player) => {
-            Debug.LogError("JE SUIS UNE RECOMPENSE");
+            Debug.LogError("JE SUIS UNE RECOMPENSE de quete, vous savez maintenant comment rammasser un item :)");
             return null;
         });
         __availableQuest.Add(one);
