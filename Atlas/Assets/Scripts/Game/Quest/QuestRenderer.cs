@@ -135,6 +135,12 @@ public class QuestRenderer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Panel.GetComponent<Animator>().GetBool("Display") && Singleton<QuestManager>.Instance.callForUpdate)
+        {
+            updateQuestPanel();
+            Singleton<QuestManager>.Instance.callForUpdate = false;
+        }
+
         if (Input.GetKeyDown("j") && i > 15)
         {
             OnOffQuestMenu();

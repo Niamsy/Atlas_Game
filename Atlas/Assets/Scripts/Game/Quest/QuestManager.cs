@@ -7,9 +7,11 @@ using UnityEngine;
 
 public class QuestManager : Singleton<QuestManager>
 {
+    public bool callForUpdate;
    private QuestList qlist;
    public QuestManager()
     {
+        callForUpdate = false;
         qlist = new QuestList();
         __activeQuests = new List<Quest>();
         __availableQuests = qlist.getQuestList();
@@ -28,6 +30,7 @@ public class QuestManager : Singleton<QuestManager>
 
     public void UpdateQuestsWith(ObjType objectiveType, string Id, GameObject Player)
     {
+        callForUpdate = true;
         foreach (Quest q in __activeQuests)
         {
             q.UpdateQuest(objectiveType, Id);
