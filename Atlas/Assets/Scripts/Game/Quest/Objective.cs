@@ -19,11 +19,17 @@ using UnityEngine;
         private int finalCount { get; }
 
 
-        public Objective(ObjType t, string comp, int fc = 1) //fc == final count
+        public Objective(ObjType t, string comp,string descriptionn, int fc = 1) //fc == final count
         {
+            description = descriptionn;
             type = t;
             comparedId = comp;
             finalCount = fc;
+        }
+
+        public string getObjDesc()
+        {
+            return description;
         }
 
         public ObjType getObjType()

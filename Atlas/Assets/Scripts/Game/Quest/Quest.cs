@@ -19,6 +19,21 @@ using UnityEngine;
         private string questDescription { get; }
         private System.Func<GameObject, GameObject> rewarder;
         
+        public List<Objective> getQuestObjs()
+        {
+            return __questObjs;
+        }
+
+        public string getQuestName()
+        {
+            return questName;
+        }
+
+        public string getQuestDesc()
+        {
+            return questDescription;
+        }
+        
         public bool isComplete()
         {
             foreach (Objective obj in __questObjs)

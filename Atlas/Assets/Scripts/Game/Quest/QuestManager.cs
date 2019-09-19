@@ -8,7 +8,7 @@ using UnityEngine;
 public class QuestManager : Singleton<QuestManager>
 {
    private QuestList qlist;
-   QuestManager()
+   public QuestManager()
     {
         qlist = new QuestList();
         __activeQuests = new List<Quest>();
@@ -16,19 +16,21 @@ public class QuestManager : Singleton<QuestManager>
         __activeQuests.Add(__availableQuests[0]);
     }
 
+    public Quest getQuestData(int idx)
+    {
+        return __activeQuests[idx];
+    }
+
+    public int getActiveQuestQte()
+    {
+        return __activeQuests.Count;
+    }
+
     public void UpdateQuestsWith(ObjType objectiveType, string Id, GameObject Player)
     {
-        bool flag = false;
         foreach (Quest q in __activeQuests)
         {
-            if (q.UpdateQuest(objectiveType, Id))
-            {
-                flag = true;
-            }
-        }
-        if (flag)
-        {
-            applyRewards(Player);
+            q.UpdateQuest(objectiveType, Id);
         }
     }
 
@@ -36,6 +38,17 @@ public class QuestManager : Singleton<QuestManager>
    {
          __activeQuests.Add(q);
    } 
+
+    public bool applyRewardIdx(GameObject Player, int QuestIdx)
+    {
+            if (__activeQuests[QuestIdx].isComplete())
+            {
+                __activeQuests[QuestIdx].ApplyReward(Player);
+                __activeQuests.RemoveAt(QuestIdx);
+                return true;
+            }
+        return false;
+    }
 
    public void applyRewards(GameObject player)
    {
