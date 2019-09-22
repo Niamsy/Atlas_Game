@@ -26,8 +26,10 @@ namespace Game.SavingSystem
         {
             var recipes = Resources.FindObjectsOfTypeAll<Recipe>();
 
-            FillProductList(recipes, _crafter.ProductsOngoing, data.Crafting.OnGoingProducts, true);
-            FillProductList(recipes, _crafter.ProductsFinished, data.Crafting.FinishedProducts, false);
+            if ( data.Crafting.OnGoingProducts != null)
+                FillProductList(recipes, _crafter.ProductsOngoing, data.Crafting.OnGoingProducts, true);
+            if ( data.Crafting.FinishedProducts != null)
+                FillProductList(recipes, _crafter.ProductsFinished, data.Crafting.FinishedProducts, false);
         }
 
         private void FillProductList(Recipe[] recipes, List<Recipe.Product> list, MapData.ProductSaveData[] from, bool start)
