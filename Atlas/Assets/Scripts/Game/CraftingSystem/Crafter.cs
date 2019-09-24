@@ -2,7 +2,6 @@
 using System.Linq;
 using Game.Inventory;
 using Game.SavingSystem;
-using Game.SavingSystem.Datas;
 using Player;
 using UnityEngine;
 using UnityEngine.Events;
@@ -51,15 +50,14 @@ namespace Game.Crafting
                 _camera.lockCamera = true;
                 _inventory = playerController.Inventory;
                 _craftingHUD.SetCrafter(this);
-                _craftingHUD.Show(isShown);
             }
             else
             {
                 _camera.lockCamera = false;
                 _inventory = null;
                 _craftingHUD.UnsetCrafter(this);
-                _craftingHUD.Show(isShown);
             }
+            _craftingHUD.Show(isShown, true);
         }
 
         public void SetOnProductFinishedCb(UnityAction<Recipe.Product, int> cb)
@@ -93,6 +91,7 @@ namespace Game.Crafting
             {
                 _guiCanvas.gameObject.SetActive(true);
             }
+            //SaveManager.Instance.InputControls.Player.Interact.performed += _craftingHUD.OpenCloseCraftingMenu;
         }
 
         private void OnTriggerExit(Collider col)
@@ -105,6 +104,7 @@ namespace Game.Crafting
                 _camera.lockCamera = false;
                 _guiCanvas.gameObject.SetActive(false);
             }
+            //SaveManager.Instance.InputControls.Player.Interact.performed += _craftingHUD.OpenCloseCraftingMenu;
         }
 
         
@@ -158,6 +158,7 @@ namespace Game.Crafting
         
         public bool Produce(Recipe recipe, BaseInventory inventory)
         {
+            
             if (!recipe.Ingredients.All(ingredient =>
                     inventory.DestroyFirsts(ingredient.Item, ingredient.RequiredQuantity))) return false;
 
