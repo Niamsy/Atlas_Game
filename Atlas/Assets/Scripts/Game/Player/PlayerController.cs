@@ -247,10 +247,12 @@ namespace Player
 
         void Update()
         {
+            if (CheckForDeath())
+                return;
             //CheckForGrounded();
             IsGrounded = m_CharacterController.isGrounded;
 
-            if (m_CharacterController.isGrounded && 
+            if (m_CharacterController.isGrounded &&     
                 !IsInteracting && !IsUsingItem)
             {
                 GetInputMagnitude();
@@ -260,7 +262,6 @@ namespace Player
             m_VerticalVelocity -= gravity * Time.deltaTime;
             m_MoveVector.y = m_VerticalVelocity;
             m_CharacterController.Move(m_MoveVector * Time.deltaTime);
-            CheckForDeath();
         }
 
         void RotatePlayerAndGetMoveDirection()
@@ -304,7 +305,7 @@ namespace Player
         /// </summary>
         public void Jump(InputAction.CallbackContext ctx)
         {
-            if (IsGrounded)
+            if (IsGrounded && !IsDead)
             {
                 m_VerticalVelocity = jumpHeight;
                 m_Animator.SetTrigger(_HashJump);
@@ -313,7 +314,7 @@ namespace Player
 
         private void Interact(InputAction.CallbackContext ctx)
         {
-            if (!IsGrounded || IsInteracting)
+            if (!IsGrounded || IsInteracting || IsDead)
                 return;
             ResetSpeed();
             Vector3 p1 = transform.position + m_CharacterController.center + Vector3.up * -m_CharacterController.height * 0.5F;
@@ -331,19 +332,22 @@ namespace Player
 
         public bool CheckForDeath()
         {
-            if (!IsDead && m_PlayerStats.Resources[Game.ResourcesManagement.Resource.Oxygen].Quantity <= 0)
+            if (!IsDead && m_PlayerStats.Resources[Resource.Oxygen].Quantity <= 0)
             {
                 IsDead = true;
                 _handSlots.Drop();
                 m_Inventory.DropAll();
                 ResetSpeed();
             }
-            else if (IsDead == true && m_PlayerStats.Resources[Game.ResourcesManagement.Resource.Oxygen].Quantity > 0)
-            {
-                IsDead = false;
-            }
             return IsDead;
         }
+
+        public void Respawn()
+        {
+            m_PlayerStats.Resources[Resource.Oxygen].Quantity = m_PlayerStats.Resources[Resource.Oxygen].Limit;
+            IsDead = false;
+        }
+        
         /// <summary>
         /// Rotate player with mouse
         /// </summary>
@@ -364,7 +368,7 @@ namespace Player
 
         private void UseItem(InputAction.CallbackContext ctx)
         {
-            if (IsGrounded && !IsInteracting && _handSlots.IsObjectUsable)
+            if (IsGrounded && !IsInteracting && _handSlots.IsObjectUsable && !IsDead)
             {
                 ResetSpeed();
                 UseItemValue = _handSlots.EquippedItem.Animation.anim.ToInt();
@@ -374,7 +378,7 @@ namespace Player
 
         private void CancelUseItem(InputAction.CallbackContext ctx)
         {
-            if (IsUsingItem && _handSlots.EquippedItem != null)
+            if (IsUsingItem && _handSlots.EquippedItem != null && !IsDead)
             {
                 if (_handSlots.CancelUse())
                     UseItemValue = -1;
