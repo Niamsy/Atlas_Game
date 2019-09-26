@@ -55,7 +55,7 @@ ParentConstraint:
   m_IsContraintActive: 1
   m_IsLocked: 1
   m_Sources:
-  - sourceTransform: {fileID: 0}
+  - sourceTransform: {fileID: 1733113599827702938}
     weight: 1
 --- !u!1 &1041429536319508
 GameObject:
@@ -340,8 +340,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: Leveling.LevelingEventListener+LevelingUnityEvent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!114 &3972821003126534645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -835,6 +833,12 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 3c0bb46ee4e763e48a570837ffbb94ae, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b34983420347d643a7c4d8568bb4ccb, type: 3}
+--- !u!4 &1733113599827702938 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -286160635979990050, guid: 9b34983420347d643a7c4d8568bb4ccb,
+    type: 3}
+  m_PrefabInstance: {fileID: 7208604699746275140}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2409618243482231902 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 9b34983420347d643a7c4d8568bb4ccb,
