@@ -159,14 +159,17 @@ namespace Game.Inventory
         // is reached or all items are destroyed
         public bool DestroyFirsts(Item.ItemAbstract itemToDestroy, int quantity)
         {
-            foreach (ItemStack itemStack in Slots)
+            var stacksToEmpty = new List<ItemStack>();
+            
+            for (var i = 0; i < Slots.Capacity; i++)
             {
-                if (itemStack.Content.Id == itemToDestroy.Id)
+                var itemStack = Slots[i];
+                if (itemStack.IsEmpty == false)
                 {
-                    if (itemStack.Quantity <= quantity)
+                    if (itemStack.Content.Id == itemToDestroy.Id)
                     {
                         quantity -= itemStack.Quantity;
-                        itemStack.EmptyStack();
+                        stacksToEmpty.Add(itemStack);
                     }
                     else
                     {
@@ -177,6 +180,8 @@ namespace Game.Inventory
 
                 if (quantity <= 0) break;
             }
+            
+            stacksToEmpty.ForEach(stack => stack.EmptyStack());
             return true;
         }
     }

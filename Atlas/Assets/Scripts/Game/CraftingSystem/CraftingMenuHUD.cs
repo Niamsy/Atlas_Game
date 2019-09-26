@@ -1,14 +1,8 @@
-﻿using System;
-using AtlasAudio;
+﻿using AtlasAudio;
 using AtlasEvents;
-using Game;
 using Game.Crafting;
 using Game.Inventory;
-using Game.Item;
-using Game.SavingSystem;
 using Menu.Crafting;
-using Menu.Inventory.ItemDescription;
-using Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -75,12 +69,7 @@ public class CraftingMenuHUD : Menu.MenuWidget
         }
     }
 
-    private void OnDisable()
-    {
-        SaveManager.Instance.InputControls.Player.Interact.performed -= OpenCloseCraftingMenu;
-    }
-
-    private void OpenCloseCraftingMenu(InputAction.CallbackContext obj)
+    public void OpenCloseCraftingMenu(InputAction.CallbackContext obj)
     {
         Show(!Displayed);
         if (onToggleGuiAudio && onToggleGuiEvent)
@@ -155,18 +144,12 @@ public class CraftingMenuHUD : Menu.MenuWidget
         base.Show(display, force);
         if (_description) _description.Reset();
         if (_ingredientDesc) _ingredientDesc.Reset();
-        if (display)
-        {
-            SaveManager.Instance.InputControls.Player.Interact.performed += OpenCloseCraftingMenu;
-            if (onGoingProducingHud) 
-                onGoingProducingHud.SetProducts(_selectedRecipe, _crafter.ProductsOngoing);
-            if (finishedProducingHud)
-                finishedProducingHud.SetProducts(_selectedRecipe, _crafter.ProductsFinished);
-        }
-        else
-        {
-            SaveManager.Instance.InputControls.Player.Interact.performed -= OpenCloseCraftingMenu;
-        }
+        if (!display) return;
+        
+        if (onGoingProducingHud) 
+            onGoingProducingHud.SetProducts(_selectedRecipe, _crafter.ProductsOngoing);
+        if (finishedProducingHud)
+            finishedProducingHud.SetProducts(_selectedRecipe, _crafter.ProductsFinished);
     }
     
     protected override void InitialiseWidget()
