@@ -46,8 +46,7 @@ namespace Menu
 
         public void ContinueGame()
         {
-            _playerStats.Resources[Game.ResourcesManagement.Resource.Oxygen].Quantity = _playerStats.Resources[Game.ResourcesManagement.Resource.Oxygen].Limit;
-            _playerController.CheckForDeath();
+            _playerController.Respawn();
             _spawner.Spawn();
             _isAlreadyDead = false;
             Show(false);
