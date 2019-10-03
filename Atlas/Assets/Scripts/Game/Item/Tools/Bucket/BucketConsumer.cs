@@ -15,10 +15,5 @@ namespace Game.Item.Tools.Bucket
         {
             OnDestroy();
         }
-    
-        public override void ConsumeResource()
-        {
-        }
-
     }
 }

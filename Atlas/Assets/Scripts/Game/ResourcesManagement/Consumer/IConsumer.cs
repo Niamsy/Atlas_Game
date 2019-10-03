@@ -12,8 +12,6 @@ namespace Game.ResourcesManagement.Consumer
 
         private List<IProducer>         _linkedProducers = new List<IProducer>();
         
-        public abstract void            ConsumeResource();
-
         #if UNITY_EDITOR
         [Header("Debug"), SerializeField]
         private bool _debugDisplay = false;
@@ -38,6 +36,12 @@ namespace Game.ResourcesManagement.Consumer
             var linkedProducers = new List<IProducer>(_linkedProducers);
             foreach (var producer in linkedProducers)
                 UnsubscribeToProducer(producer);
+        }
+
+        public virtual void ConsumeResource()
+        {
+            foreach (var resource in ResourcesToConsume)
+                LinkedStock.RemoveResources(resource, ConsumptionRate.ResourcePerTick);
         }
 
         public void SubscribeToProducer(IProducer producer)

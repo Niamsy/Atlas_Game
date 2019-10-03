@@ -63,7 +63,7 @@ MonoBehaviour:
     TickRate: 1
     ResourcePerTick: 100
   LinkedStock: {fileID: 6799700545041263973}
-  _debugDisplay: 1
+  _debugDisplay: 0
 --- !u!54 &7932818000114772676
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -130,7 +130,7 @@ MonoBehaviour:
   ResourceGivenPerTick: 50
   StockedResources: {fileID: 6799700545041263973}
   ProducedResources: 
-  _debugDisplay: 1
+  _debugDisplay: 0
   _animator: {fileID: 4161111596451891346}
 --- !u!135 &1754067844990662546
 SphereCollider:
@@ -178,8 +178,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _listOfStocks:
   - Resource: 0
-    Quantity: 1000
-    Limit: 1000
+    Quantity: 3500
+    Limit: 3500
 --- !u!1001 &1244709168348931521
 PrefabInstance:
   m_ObjectHideFlags: 0

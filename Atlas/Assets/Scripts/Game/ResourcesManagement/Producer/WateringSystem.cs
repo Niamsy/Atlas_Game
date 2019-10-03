@@ -14,8 +14,6 @@ namespace Game.ResourcesManagement.Producer
             ProducedResources.Add(Resource.Water);
             
             base.Awake();
-            
-            _animator = GetComponent<Animator>();
         }
         
         private void Start()
