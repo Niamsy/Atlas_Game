@@ -114,7 +114,9 @@ namespace Game.Inventory
                 var itemStackB = droppedObject.GetComponent<ItemStackBehaviour>();
                 var rb = droppedObject.GetComponent<Rigidbody>();
                 rb.AddForce(dir.normalized * 0.1f);
-                itemStackB.Slot.SetItem(stack.Content, stack.Quantity);
+                if (itemStackB)
+                    itemStackB.Slot.SetItem(stack.Content, stack.Quantity);
+
                 stack.EmptyStack();
                 if (OnDropItemAudio && OnDropItemEvent)
                     OnDropItemEvent.Raise(OnDropItemAudio, null);

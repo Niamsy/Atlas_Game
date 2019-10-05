@@ -27,7 +27,8 @@ namespace Game.Map
                     var trans = itemDroppedsData.WorldPos;
                     GameObject droppedObject = Instantiate(itemAbstract.PrefabDroppedGO, trans.Position.Value, trans.Rotation.Value);
                     var itemStackB = droppedObject.GetComponent<ItemStackBehaviour>();
-                    itemStackB.Slot.SetItem(itemAbstract, itemDroppedsData.Quantity);
+                    if (itemStackB)
+                        itemStackB.Slot.SetItem(itemAbstract, itemDroppedsData.Quantity);
                 }
             }
         }
