@@ -18,7 +18,8 @@ namespace Plants.Plant
         {
             _plant = gameObject.GetComponentInParent<PlantModel>();
             _plant.OnDeath.AddListener(ProduceDeathResources);
-            CalendarManager.Instance.ActualDate.OnDayChanged += ProduceResources;
+            if (CalendarManager.Instance)
+                CalendarManager.Instance.ActualDate.OnDayChanged += ProduceResources;
         }
 
         protected virtual void OnDestroy()
@@ -45,9 +46,9 @@ namespace Plants.Plant
 
         protected virtual void ProduceDeathResources()
         {
-            #if ATLAS_DEBUG
+#if ATLAS_DEBUG
             Debug.Log("DEATH");
-            #endif
+#endif
             _plant.OnDeath.RemoveListener(ProduceDeathResources);
             var stage = _plant.CurrentStageInt;
             List<PeriodToCreate> resourcesToGenerate = new List<PeriodToCreate>();
