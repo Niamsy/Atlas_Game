@@ -5,7 +5,7 @@ namespace Game.ResourcesManagement.Producer
     [RequireComponent(typeof(Animator))]
     public class WateringSystem : IProducer
     {
-        [SerializeField] private Animator _animator;
+        [SerializeField] private Animator _animator = null;
         private readonly int _hashEnabled = Animator.StringToHash("Enabled");
 
         protected override void Awake()
