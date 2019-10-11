@@ -55,26 +55,21 @@ public class RainManager : MonoBehaviour
 
     void GiveWater()
     {
-        Debug.Log("x: " + WorldGrid.gridWorldSize.x + " y: " + WorldGrid.gridWorldSize.y);
-        for (var x = 0; x < WorldGrid.gridWorldSize.x; x++)
+        Debug.Log("Give Water begins");
+
+        foreach (Node cell in WorldGrid.Grid)
         {
-            for (var y = 0; y < WorldGrid.gridWorldSize.y; y++)
+            var plant = cell.Plant;
+            if (plant == null)
+                continue;
+
+            var consumer = plant.GetComponent<PlantConsumer>();
+            if (consumer != null)
             {
-                if (WorldGrid.Grid[x, y] == null)
-                    continue;
-
-                var plant = WorldGrid.Grid[x, y].Plant;
-                if (plant == null)
-                    continue;
-
-                var consumer = WorldGrid.Grid[x, y].Plant.GetComponent<PlantConsumer>();
-                if (consumer != null)
-                {
-                    Debug.Log("Consumer not null, give to " + WorldGrid.Grid[x, y].Plant.name);
-                    consumer.ReceiveResource(Game.ResourcesManagement.Resource.Water, (int)(rainScript.RainIntensity * 10));
-                }
+                Debug.Log("Consumer not null, give to " + plant.name);
+                consumer.ReceiveResource(Game.ResourcesManagement.Resource.Water, (int)(rainScript.RainIntensity * 10));
             }
         }
-        
+        Debug.Log("Give Water done");
     }
 }
