@@ -47,7 +47,7 @@ namespace Game.DayNight
 
         public Date() {}
         
-        public Date(int day, int month, int year, int hour, int minutes, int seconds)
+        public Date(int day, int month, int year, int hour, int minutes, float seconds)
         {
             Day = day;
             Month = month;
