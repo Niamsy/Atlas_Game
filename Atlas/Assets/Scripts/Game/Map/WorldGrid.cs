@@ -39,7 +39,7 @@ namespace Game.Grid
 
         private void Start()
         {
-            //InitGrid();
+            InitGrid();
         }
 
         private void OnEnable()
@@ -47,7 +47,7 @@ namespace Game.Grid
 #if UNITY_EDITOR
             if (!Application.isPlaying)
             {
-                InitGrid();
+               //InitGrid();
                 SpawnPlant();
             }
 #endif
@@ -61,6 +61,7 @@ namespace Game.Grid
             gridSizeY = Mathf.RoundToInt(gridWorldSize.y / m_NodeDiameter);
             CreateGrid();
             inversePlantGrowthLayers = ~plantGrowthLayers.value;
+            Debug.Log("Grid init");
         }
 
         private void CreateGrid()
