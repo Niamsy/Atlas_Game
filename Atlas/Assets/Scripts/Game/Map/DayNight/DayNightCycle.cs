@@ -1,5 +1,6 @@
 ﻿using Game.Map.DayNight;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 namespace Game.DayNight
 {
@@ -8,24 +9,25 @@ namespace Game.DayNight
         #region Public Variables
 
         [Header("Scene Ambiance")]
-       // public Volume            DayVolume;
-       // public Volume            NightVolume;
-        public AnimationCurve    DayBlendOverDay = AnimationCurve.Linear(0, 0, 24, 0);
+        public PostProcessVolume   DayVolume;
+        public PostProcessVolume   NightVolume;
+        public AnimationCurve      DayBlendOverDay = AnimationCurve.Linear(0, 0, 24, 0);
+        public Gradient            AmbientColor = new Gradient();
+        public AnimationCurve      SkyExposure = AnimationCurve.Linear(0, 0, 24, 0);
+        public AnimationCurve      SkyThickness = AnimationCurve.Linear(0, 0, 24, 0);
+        public Material            Skybox;
 
         [Header("Sun")]
-        public Light            Sun;
-        public AnimationCurve   SunPosition = AnimationCurve.Linear(0, 180, 24, 360);
-        public AnimationCurve   SunIntensity = AnimationCurve.Linear(0, 0, 24, 0);
-        public Gradient         SunColor = new Gradient();
-        
-        [Header("Moon")]
-        public Light            Moon;
-        public AnimationCurve   MoonPosition = AnimationCurve.Linear(0, 180, 24, 360);
-        public AnimationCurve   MoonIntensity = AnimationCurve.Linear(0, 0, 24, 0);
-        public Gradient         MoonColor = new Gradient();
+        public Light               Sun;
+        public AnimationCurve      SunPosition = AnimationCurve.Linear(0, 180, 24, 360);
+        public AnimationCurve      SunIntensity = AnimationCurve.Linear(0, 0, 24, 0);
 
-        //public VisualEffect     Stars;
-        private readonly int    _starsDisplay = Shader.PropertyToID("Display");
+        [Header("Moon")]
+        public Light               Moon;
+        public AnimationCurve      MoonPosition = AnimationCurve.Linear(0, 180, 24, 360);
+        public AnimationCurve      MoonIntensity = AnimationCurve.Linear(0, 0, 24, 0);
+
+        public ParticleSystem      Stars;
         #endregion
 
         #region Private Variables
@@ -44,13 +46,14 @@ namespace Game.DayNight
             
             Sun.enabled = (Sun.intensity > Moon.intensity);
             Moon.enabled = (Moon.intensity > Sun.intensity);
-            
+
+            RenderSettings.ambientSkyColor = AmbientColor.Evaluate(dayAdvancement01);
             if (Sun.enabled)
             {
                 if (_sunShow) _sunShow.Raise();
                 Sun.transform.localRotation =
                     Quaternion.Euler(SunPosition.Evaluate(dayAdvancement) - _latitude, _longitude, 0);
-                Sun.color = SunColor.Evaluate(dayAdvancement01);
+                
             }
 
             if (Moon.enabled)
@@ -58,12 +61,16 @@ namespace Game.DayNight
                 if (_sunHide) _sunHide.Raise();
                 Moon.transform.localRotation =
                     Quaternion.Euler(MoonPosition.Evaluate(dayAdvancement) - _latitude, _longitude, 0);
-                Moon.color = MoonColor.Evaluate(dayAdvancement01);
             }
-           // Stars.SetBool(_starsDisplay, Moon.enabled);
+            if (Stars.isPlaying && !Moon.enabled)
+                Stars.Stop();
+            if (!Stars.isPlaying && Moon.enabled)
+                Stars.Play();
 
-            //DayVolume.weight = DayBlendOverDay.Evaluate(dayAdvancement);
-            //NightVolume.weight = 1-DayBlendOverDay.Evaluate(dayAdvancement);
+            Skybox.SetFloat("_AtmosphereThickness", SkyThickness.Evaluate(dayAdvancement));
+            Skybox.SetFloat("_Exposure", SkyExposure.Evaluate(dayAdvancement));
+            DayVolume.weight = DayBlendOverDay.Evaluate(dayAdvancement);
+            NightVolume.weight = 1-DayBlendOverDay.Evaluate(dayAdvancement);
         }
     }
 }

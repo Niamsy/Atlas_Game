@@ -452,7 +452,7 @@ public class InputControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/f3"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";KeyboardAndMouse;Gamepad"",
+                    ""groups"": ""Gamepad;KeyboardAndMouse"",
                     ""action"": ""SpeedUpTime"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
