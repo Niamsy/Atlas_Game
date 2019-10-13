@@ -17,6 +17,12 @@ namespace Game.DayNight
                 data.CalendarData.Save(_calendar.ActualDate);
         }
 
+        protected override void LoadingMapData(MapData data)
+        {
+//        public Date(int day, int month, int year, int hour, int minutes, int seconds)
+            _calendar.ActualDate = new Date(data.CalendarData.Day, data.CalendarData.Month, data.CalendarData.Year, data.CalendarData.Hours, data.CalendarData.Minutes, data.CalendarData.Seconds);
+        }
+
         protected override void Awake()
         {
             base.Awake();
