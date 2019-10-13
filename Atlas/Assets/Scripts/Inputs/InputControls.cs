@@ -3,11 +3,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public class InputControls : IInputActionCollection
+public class InputControls : IInputActionCollection, IDisposable
 {
     private InputActionAsset asset;
     public InputControls()
@@ -21,113 +20,83 @@ public class InputControls : IInputActionCollection
             ""actions"": [
                 {
                     ""name"": ""Movement"",
+                    ""type"": ""Value"",
                     ""id"": ""fe7457d8-d5e6-4337-b627-d4cc530250c2"",
-                    ""expectedControlLayout"": ""Vector2"",
-                    ""continuous"": true,
-                    ""passThrough"": false,
-                    ""initialStateCheck"": false,
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
-                    ""interactions"": """",
-                    ""bindings"": []
+                    ""interactions"": """"
                 },
                 {
                     ""name"": ""Jump"",
+                    ""type"": ""Value"",
                     ""id"": ""d8aa1f5b-f498-491b-b704-2cb991054936"",
-                    ""expectedControlLayout"": """",
-                    ""continuous"": false,
-                    ""passThrough"": false,
-                    ""initialStateCheck"": false,
+                    ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": ""Press"",
-                    ""bindings"": []
+                    ""interactions"": ""Press""
                 },
                 {
                     ""name"": ""Interact"",
+                    ""type"": ""Button"",
                     ""id"": ""e18c04b3-2bbd-4ccf-9c12-a32fa767e0e9"",
-                    ""expectedControlLayout"": ""Button"",
-                    ""continuous"": false,
-                    ""passThrough"": false,
-                    ""initialStateCheck"": false,
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press"",
-                    ""bindings"": []
+                    ""interactions"": ""Press""
                 },
                 {
                     ""name"": ""UseItem"",
+                    ""type"": ""Button"",
                     ""id"": ""ee93d372-a58f-4478-9cde-734215d6b83b"",
-                    ""expectedControlLayout"": ""Button"",
-                    ""continuous"": false,
-                    ""passThrough"": false,
-                    ""initialStateCheck"": false,
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
-                    ""bindings"": []
+                    ""interactions"": """"
                 },
                 {
                     ""name"": ""Inventory"",
+                    ""type"": ""Button"",
                     ""id"": ""8190cf5f-9d3f-4c28-9036-db1fcd6bbbfb"",
-                    ""expectedControlLayout"": ""Button"",
-                    ""continuous"": false,
-                    ""passThrough"": false,
-                    ""initialStateCheck"": false,
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press"",
-                    ""bindings"": []
+                    ""interactions"": ""Press""
                 },
                 {
                     ""name"": ""Menu"",
+                    ""type"": ""Button"",
                     ""id"": ""4408c49f-9cff-420c-b70f-a373b4239fbb"",
-                    ""expectedControlLayout"": ""Button"",
-                    ""continuous"": false,
-                    ""passThrough"": false,
-                    ""initialStateCheck"": false,
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press"",
-                    ""bindings"": []
+                    ""interactions"": ""Press""
                 },
                 {
                     ""name"": ""CameraMovement"",
+                    ""type"": ""Value"",
                     ""id"": ""9f0098dd-027f-428c-8579-77e3c214f1b7"",
-                    ""expectedControlLayout"": ""Vector2"",
-                    ""continuous"": false,
-                    ""passThrough"": false,
-                    ""initialStateCheck"": false,
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
-                    ""interactions"": """",
-                    ""bindings"": []
+                    ""interactions"": """"
                 },
                 {
                     ""name"": ""CameraZoom"",
+                    ""type"": ""Value"",
                     ""id"": ""2c5bf3db-8da8-48b9-af03-6a685369120f"",
-                    ""expectedControlLayout"": ""Vector2"",
-                    ""continuous"": false,
-                    ""passThrough"": false,
-                    ""initialStateCheck"": false,
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
-                    ""interactions"": """",
-                    ""bindings"": []
+                    ""interactions"": """"
                 },
                 {
                     ""name"": ""CameraClick"",
+                    ""type"": ""Button"",
                     ""id"": ""971fdad3-e326-4f38-b07b-e5f6ace2acde"",
-                    ""expectedControlLayout"": ""Button"",
-                    ""continuous"": false,
-                    ""passThrough"": false,
-                    ""initialStateCheck"": false,
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
-                    ""bindings"": []
+                    ""interactions"": """"
                 },
                 {
                     ""name"": ""RecenterCamera"",
+                    ""type"": ""Button"",
                     ""id"": ""03f5ec0c-509d-4a33-a432-32adc7f770b3"",
-                    ""expectedControlLayout"": ""Button"",
-                    ""continuous"": false,
-                    ""passThrough"": false,
-                    ""initialStateCheck"": false,
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press"",
-                    ""bindings"": []
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -140,8 +109,7 @@ public class InputControls : IInputActionCollection
                     ""groups"": """",
                     ""action"": ""Movement"",
                     ""isComposite"": true,
-                    ""isPartOfComposite"": false,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": ""up"",
@@ -152,8 +120,7 @@ public class InputControls : IInputActionCollection
                     ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": true,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""down"",
@@ -164,8 +131,7 @@ public class InputControls : IInputActionCollection
                     ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": true,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""left"",
@@ -176,8 +142,7 @@ public class InputControls : IInputActionCollection
                     ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": true,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""right"",
@@ -188,8 +153,7 @@ public class InputControls : IInputActionCollection
                     ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": true,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""Arrow"",
@@ -200,8 +164,7 @@ public class InputControls : IInputActionCollection
                     ""groups"": """",
                     ""action"": ""Movement"",
                     ""isComposite"": true,
-                    ""isPartOfComposite"": false,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": ""up"",
@@ -212,8 +175,7 @@ public class InputControls : IInputActionCollection
                     ""groups"": "";KeyboardAndMouse"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": true,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""down"",
@@ -224,8 +186,7 @@ public class InputControls : IInputActionCollection
                     ""groups"": "";KeyboardAndMouse"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": true,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""left"",
@@ -236,8 +197,7 @@ public class InputControls : IInputActionCollection
                     ""groups"": "";KeyboardAndMouse"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": true,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""right"",
@@ -248,8 +208,7 @@ public class InputControls : IInputActionCollection
                     ""groups"": "";KeyboardAndMouse"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": true,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""LeftJoystick"",
@@ -260,8 +219,7 @@ public class InputControls : IInputActionCollection
                     ""groups"": """",
                     ""action"": ""Movement"",
                     ""isComposite"": true,
-                    ""isPartOfComposite"": false,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": ""up"",
@@ -272,8 +230,7 @@ public class InputControls : IInputActionCollection
                     ""groups"": "";Gamepad"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": true,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""down"",
@@ -284,8 +241,7 @@ public class InputControls : IInputActionCollection
                     ""groups"": "";Gamepad"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": true,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""left"",
@@ -296,8 +252,7 @@ public class InputControls : IInputActionCollection
                     ""groups"": "";Gamepad"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": true,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""right"",
@@ -308,8 +263,7 @@ public class InputControls : IInputActionCollection
                     ""groups"": "";Gamepad"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": true,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": """",
@@ -320,8 +274,7 @@ public class InputControls : IInputActionCollection
                     ""groups"": ""Gamepad"",
                     ""action"": ""Interact"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
@@ -332,8 +285,7 @@ public class InputControls : IInputActionCollection
                     ""groups"": "";KeyboardAndMouse"",
                     ""action"": ""Interact"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
@@ -344,8 +296,7 @@ public class InputControls : IInputActionCollection
                     ""groups"": "";KeyboardAndMouse"",
                     ""action"": ""Inventory"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
@@ -356,8 +307,7 @@ public class InputControls : IInputActionCollection
                     ""groups"": "";Gamepad"",
                     ""action"": ""Inventory"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
@@ -368,8 +318,7 @@ public class InputControls : IInputActionCollection
                     ""groups"": "";KeyboardAndMouse"",
                     ""action"": ""Menu"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
@@ -380,8 +329,7 @@ public class InputControls : IInputActionCollection
                     ""groups"": "";Gamepad"",
                     ""action"": ""Menu"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
@@ -392,8 +340,7 @@ public class InputControls : IInputActionCollection
                     ""groups"": "";KeyboardAndMouse"",
                     ""action"": ""CameraMovement"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
@@ -404,8 +351,7 @@ public class InputControls : IInputActionCollection
                     ""groups"": "";KeyboardAndMouse"",
                     ""action"": ""CameraZoom"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
@@ -416,8 +362,7 @@ public class InputControls : IInputActionCollection
                     ""groups"": "";KeyboardAndMouse"",
                     ""action"": ""Jump"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
@@ -428,8 +373,7 @@ public class InputControls : IInputActionCollection
                     ""groups"": "";Gamepad"",
                     ""action"": ""Jump"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
@@ -440,8 +384,7 @@ public class InputControls : IInputActionCollection
                     ""groups"": "";KeyboardAndMouse"",
                     ""action"": ""CameraClick"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
@@ -452,8 +395,7 @@ public class InputControls : IInputActionCollection
                     ""groups"": "";KeyboardAndMouse"",
                     ""action"": ""RecenterCamera"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
@@ -464,8 +406,7 @@ public class InputControls : IInputActionCollection
                     ""groups"": "";Gamepad"",
                     ""action"": ""RecenterCamera"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
@@ -476,8 +417,7 @@ public class InputControls : IInputActionCollection
                     ""groups"": "";KeyboardAndMouse"",
                     ""action"": ""UseItem"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
@@ -488,8 +428,45 @@ public class InputControls : IInputActionCollection
                     ""groups"": "";Gamepad"",
                     ""action"": ""UseItem"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false,
-                    ""modifiers"": """"
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Debug"",
+            ""id"": ""11411269-64c8-43a5-8aa1-649f160e00e8"",
+            ""actions"": [
+                {
+                    ""name"": ""SpeedUpTime"",
+                    ""type"": ""Button"",
+                    ""id"": ""42f5c89b-8fc5-4fc4-8cb8-8e1d63649556"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""673d2f7f-3328-4eeb-87a3-57c8dd1161fe"",
+                    ""path"": ""<Keyboard>/f3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardAndMouse;Gamepad"",
+                    ""action"": ""SpeedUpTime"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a53aa028-f38b-4ebf-bf00-8bd13046fa21"",
+                    ""path"": ""<Keyboard>/numpad1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad;KeyboardAndMouse"",
+                    ""action"": ""SpeedUpTime"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -497,7 +474,6 @@ public class InputControls : IInputActionCollection
     ""controlSchemes"": [
         {
             ""name"": ""KeyboardAndMouse"",
-            ""basedOn"": """",
             ""bindingGroup"": ""KeyboardAndMouse"",
             ""devices"": [
                 {
@@ -514,7 +490,6 @@ public class InputControls : IInputActionCollection
         },
         {
             ""name"": ""Gamepad"",
-            ""basedOn"": """",
             ""bindingGroup"": ""Gamepad"",
             ""devices"": [
                 {
@@ -527,20 +502,23 @@ public class InputControls : IInputActionCollection
     ]
 }");
         // Player
-        m_Player = asset.GetActionMap("Player");
-        m_Player_Movement = m_Player.GetAction("Movement");
-        m_Player_Jump = m_Player.GetAction("Jump");
-        m_Player_Interact = m_Player.GetAction("Interact");
-        m_Player_UseItem = m_Player.GetAction("UseItem");
-        m_Player_Inventory = m_Player.GetAction("Inventory");
-        m_Player_Menu = m_Player.GetAction("Menu");
-        m_Player_CameraMovement = m_Player.GetAction("CameraMovement");
-        m_Player_CameraZoom = m_Player.GetAction("CameraZoom");
-        m_Player_CameraClick = m_Player.GetAction("CameraClick");
-        m_Player_RecenterCamera = m_Player.GetAction("RecenterCamera");
+        m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
+        m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
+        m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_UseItem = m_Player.FindAction("UseItem", throwIfNotFound: true);
+        m_Player_Inventory = m_Player.FindAction("Inventory", throwIfNotFound: true);
+        m_Player_Menu = m_Player.FindAction("Menu", throwIfNotFound: true);
+        m_Player_CameraMovement = m_Player.FindAction("CameraMovement", throwIfNotFound: true);
+        m_Player_CameraZoom = m_Player.FindAction("CameraZoom", throwIfNotFound: true);
+        m_Player_CameraClick = m_Player.FindAction("CameraClick", throwIfNotFound: true);
+        m_Player_RecenterCamera = m_Player.FindAction("RecenterCamera", throwIfNotFound: true);
+        // Debug
+        m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
+        m_Debug_SpeedUpTime = m_Debug.FindAction("SpeedUpTime", throwIfNotFound: true);
     }
 
-    ~InputControls()
+    public void Dispose()
     {
         UnityEngine.Object.Destroy(asset);
     }
@@ -557,10 +535,7 @@ public class InputControls : IInputActionCollection
         set => asset.devices = value;
     }
 
-    public ReadOnlyArray<InputControlScheme> controlSchemes
-    {
-        get => asset.controlSchemes;
-    }
+    public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
 
     public bool Contains(InputAction action)
     {
@@ -588,37 +563,36 @@ public class InputControls : IInputActionCollection
     }
 
     // Player
-    private InputActionMap m_Player;
+    private readonly InputActionMap m_Player;
     private IPlayerActions m_PlayerActionsCallbackInterface;
-    private InputAction m_Player_Movement;
-    private InputAction m_Player_Jump;
-    private InputAction m_Player_Interact;
-    private InputAction m_Player_UseItem;
-    private InputAction m_Player_Inventory;
-    private InputAction m_Player_Menu;
-    private InputAction m_Player_CameraMovement;
-    private InputAction m_Player_CameraZoom;
-    private InputAction m_Player_CameraClick;
-    private InputAction m_Player_RecenterCamera;
+    private readonly InputAction m_Player_Movement;
+    private readonly InputAction m_Player_Jump;
+    private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_UseItem;
+    private readonly InputAction m_Player_Inventory;
+    private readonly InputAction m_Player_Menu;
+    private readonly InputAction m_Player_CameraMovement;
+    private readonly InputAction m_Player_CameraZoom;
+    private readonly InputAction m_Player_CameraClick;
+    private readonly InputAction m_Player_RecenterCamera;
     public struct PlayerActions
     {
         private InputControls m_Wrapper;
         public PlayerActions(InputControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Movement { get { return m_Wrapper.m_Player_Movement; } }
-        public InputAction @Jump { get { return m_Wrapper.m_Player_Jump; } }
-        public InputAction @Interact { get { return m_Wrapper.m_Player_Interact; } }
-        public InputAction @UseItem { get { return m_Wrapper.m_Player_UseItem; } }
-        public InputAction @Inventory { get { return m_Wrapper.m_Player_Inventory; } }
-        public InputAction @Menu { get { return m_Wrapper.m_Player_Menu; } }
-        public InputAction @CameraMovement { get { return m_Wrapper.m_Player_CameraMovement; } }
-        public InputAction @CameraZoom { get { return m_Wrapper.m_Player_CameraZoom; } }
-        public InputAction @CameraClick { get { return m_Wrapper.m_Player_CameraClick; } }
-        public InputAction @RecenterCamera { get { return m_Wrapper.m_Player_RecenterCamera; } }
+        public InputAction @Movement => m_Wrapper.m_Player_Movement;
+        public InputAction @Jump => m_Wrapper.m_Player_Jump;
+        public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        public InputAction @UseItem => m_Wrapper.m_Player_UseItem;
+        public InputAction @Inventory => m_Wrapper.m_Player_Inventory;
+        public InputAction @Menu => m_Wrapper.m_Player_Menu;
+        public InputAction @CameraMovement => m_Wrapper.m_Player_CameraMovement;
+        public InputAction @CameraZoom => m_Wrapper.m_Player_CameraZoom;
+        public InputAction @CameraClick => m_Wrapper.m_Player_CameraClick;
+        public InputAction @RecenterCamera => m_Wrapper.m_Player_RecenterCamera;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
-        public bool enabled { get { return Get().enabled; } }
-        public InputActionMap Clone() { return Get().Clone(); }
+        public bool enabled => Get().enabled;
         public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
         public void SetCallbacks(IPlayerActions instance)
         {
@@ -691,19 +665,46 @@ public class InputControls : IInputActionCollection
             }
         }
     }
-    public PlayerActions @Player
+    public PlayerActions @Player => new PlayerActions(this);
+
+    // Debug
+    private readonly InputActionMap m_Debug;
+    private IDebugActions m_DebugActionsCallbackInterface;
+    private readonly InputAction m_Debug_SpeedUpTime;
+    public struct DebugActions
     {
-        get
+        private InputControls m_Wrapper;
+        public DebugActions(InputControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @SpeedUpTime => m_Wrapper.m_Debug_SpeedUpTime;
+        public InputActionMap Get() { return m_Wrapper.m_Debug; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DebugActions set) { return set.Get(); }
+        public void SetCallbacks(IDebugActions instance)
         {
-            return new PlayerActions(this);
+            if (m_Wrapper.m_DebugActionsCallbackInterface != null)
+            {
+                SpeedUpTime.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnSpeedUpTime;
+                SpeedUpTime.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnSpeedUpTime;
+                SpeedUpTime.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnSpeedUpTime;
+            }
+            m_Wrapper.m_DebugActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                SpeedUpTime.started += instance.OnSpeedUpTime;
+                SpeedUpTime.performed += instance.OnSpeedUpTime;
+                SpeedUpTime.canceled += instance.OnSpeedUpTime;
+            }
         }
     }
+    public DebugActions @Debug => new DebugActions(this);
     private int m_KeyboardAndMouseSchemeIndex = -1;
     public InputControlScheme KeyboardAndMouseScheme
     {
         get
         {
-            if (m_KeyboardAndMouseSchemeIndex == -1) m_KeyboardAndMouseSchemeIndex = asset.GetControlSchemeIndex("KeyboardAndMouse");
+            if (m_KeyboardAndMouseSchemeIndex == -1) m_KeyboardAndMouseSchemeIndex = asset.FindControlSchemeIndex("KeyboardAndMouse");
             return asset.controlSchemes[m_KeyboardAndMouseSchemeIndex];
         }
     }
@@ -712,7 +713,7 @@ public class InputControls : IInputActionCollection
     {
         get
         {
-            if (m_GamepadSchemeIndex == -1) m_GamepadSchemeIndex = asset.GetControlSchemeIndex("Gamepad");
+            if (m_GamepadSchemeIndex == -1) m_GamepadSchemeIndex = asset.FindControlSchemeIndex("Gamepad");
             return asset.controlSchemes[m_GamepadSchemeIndex];
         }
     }
@@ -728,5 +729,9 @@ public class InputControls : IInputActionCollection
         void OnCameraZoom(InputAction.CallbackContext context);
         void OnCameraClick(InputAction.CallbackContext context);
         void OnRecenterCamera(InputAction.CallbackContext context);
+    }
+    public interface IDebugActions
+    {
+        void OnSpeedUpTime(InputAction.CallbackContext context);
     }
 }

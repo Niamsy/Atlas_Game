@@ -478,6 +478,49 @@
                     "modifiers": ""
                 }
             ]
+        },
+        {
+            "name": "Debug",
+            "id": "11411269-64c8-43a5-8aa1-649f160e00e8",
+            "actions": [
+                {
+                    "name": "SpeedUpTime",
+                    "id": "42f5c89b-8fc5-4fc4-8cb8-8e1d63649556",
+                    "expectedControlLayout": "Button",
+                    "continuous": false,
+                    "passThrough": false,
+                    "initialStateCheck": false,
+                    "processors": "",
+                    "interactions": "",
+                    "bindings": []
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "673d2f7f-3328-4eeb-87a3-57c8dd1161fe",
+                    "path": "<Keyboard>/f3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";KeyboardAndMouse;Gamepad",
+                    "action": "SpeedUpTime",
+                    "isComposite": false,
+                    "isPartOfComposite": false,
+                    "modifiers": ""
+                },
+                {
+                    "name": "",
+                    "id": "a53aa028-f38b-4ebf-bf00-8bd13046fa21",
+                    "path": "<Keyboard>/numpad1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad;KeyboardAndMouse",
+                    "action": "SpeedUpTime",
+                    "isComposite": false,
+                    "isPartOfComposite": false,
+                    "modifiers": ""
+                }
+            ]
         }
     ],
     "controlSchemes": [

@@ -1,4 +1,5 @@
 ﻿using Game.DayNight;
+using Game.Map.DayNight;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

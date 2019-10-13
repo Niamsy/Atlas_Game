@@ -2,7 +2,7 @@ using Game.SavingSystem;
 using Game.SavingSystem.Datas;
 using UnityEngine;
 
-namespace Game.DayNight
+namespace Game.Map.DayNight
 {
     [RequireComponent(typeof(CalendarManager))]
     public class DayNightSaver : MapSavingBehaviour
@@ -19,8 +19,7 @@ namespace Game.DayNight
 
         protected override void LoadingMapData(MapData data)
         {
-//        public Date(int day, int month, int year, int hour, int minutes, int seconds)
-            _calendar.ActualDate = new Date(data.CalendarData.Day, data.CalendarData.Month, data.CalendarData.Year, data.CalendarData.Hours, data.CalendarData.Minutes, data.CalendarData.Seconds);
+            _calendar.ActualDate.Set(data.CalendarData.Day, data.CalendarData.Month, data.CalendarData.Year, data.CalendarData.Hours, data.CalendarData.Minutes, data.CalendarData.Seconds);
         }
 
         protected override void Awake()

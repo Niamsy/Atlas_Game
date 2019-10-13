@@ -1,8 +1,4 @@
-﻿using Game.DayNight;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using Game.Map.DayNight;
 
 
 namespace Plants.Plant
@@ -14,12 +10,5 @@ namespace Plants.Plant
             _plant = gameObject.GetComponentInParent<PlantModel>();
             CalendarManager.Instance.ActualDate.OnDayChanged += ProduceResources;
         }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
     }
-
 }

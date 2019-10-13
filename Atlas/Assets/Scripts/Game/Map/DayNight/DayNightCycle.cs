@@ -1,7 +1,5 @@
-﻿using UnityEngine;
-using UnityEngine.Experimental.Rendering.HDPipeline;
-using UnityEngine.Experimental.VFX;
-using UnityEngine.Rendering;
+﻿using Game.Map.DayNight;
+using UnityEngine;
 
 namespace Game.DayNight
 {
@@ -10,8 +8,8 @@ namespace Game.DayNight
         #region Public Variables
 
         [Header("Scene Ambiance")]
-        public Volume            DayVolume;
-        public Volume            NightVolume;
+       // public Volume            DayVolume;
+       // public Volume            NightVolume;
         public AnimationCurve    DayBlendOverDay = AnimationCurve.Linear(0, 0, 24, 0);
 
         [Header("Sun")]
@@ -26,7 +24,7 @@ namespace Game.DayNight
         public AnimationCurve   MoonIntensity = AnimationCurve.Linear(0, 0, 24, 0);
         public Gradient         MoonColor = new Gradient();
 
-        public VisualEffect     Stars;
+        //public VisualEffect     Stars;
         private readonly int    _starsDisplay = Shader.PropertyToID("Display");
         #endregion
 
@@ -62,10 +60,10 @@ namespace Game.DayNight
                     Quaternion.Euler(MoonPosition.Evaluate(dayAdvancement) - _latitude, _longitude, 0);
                 Moon.color = MoonColor.Evaluate(dayAdvancement01);
             }
-            Stars.SetBool(_starsDisplay, Moon.enabled);
+           // Stars.SetBool(_starsDisplay, Moon.enabled);
 
-            DayVolume.weight = DayBlendOverDay.Evaluate(dayAdvancement);
-            NightVolume.weight = 1-DayBlendOverDay.Evaluate(dayAdvancement);
+            //DayVolume.weight = DayBlendOverDay.Evaluate(dayAdvancement);
+            //NightVolume.weight = 1-DayBlendOverDay.Evaluate(dayAdvancement);
         }
     }
 }

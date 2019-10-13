@@ -1,6 +1,5 @@
-﻿using UnityEngine;
-using UnityEngine.Experimental.Rendering.HDPipeline;
-using UnityEngine.Rendering;
+﻿using Game.Map.DayNight;
+using UnityEngine;
 
 namespace Game.DayNight
 {
