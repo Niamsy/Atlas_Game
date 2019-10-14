@@ -1,11 +1,7 @@
 ﻿using Game.Inventory;
-using Game.Item.PlantSeed;
-using Game.Item.Tools;
-using Game.Item.Tools.Bucket;
 using Plants.Plant;
 using Player;
 using UnityEngine;
-using Tools;
 
 namespace Game.Item
 {
@@ -36,19 +32,6 @@ namespace Game.Item
                 playerController.InteractValue = anim.ToInt();
 
             PlayerInventory inventory = FindObjectOfType<PlayerInventory>();
-            Singleton<QuestManager>.Instance.UpdateQuestsWith(ObjType.PICKUP, "ITEM", null);
-            if (BaseStack.Slot.Content is BucketItem)
-            {
-                AchievementManager.Instance.achieve(AchievementManager.AchievementId.PickupBucket);
-            }
-            if (BaseStack.Slot.Content is ShovelItem)
-            {
-                AchievementManager.Instance.achieve(AchievementManager.AchievementId.PickupShovel);
-            }
-            if (BaseStack.Slot.Content is Seed)
-            {
-                AchievementManager.Instance.achieve(AchievementManager.AchievementId.PickupFirstSeed);
-            }
 
             ItemStack leftStack = inventory.AddItemStack(BaseStack.Slot);
             if (leftStack == null)
