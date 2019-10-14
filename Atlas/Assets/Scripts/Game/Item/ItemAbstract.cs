@@ -6,8 +6,8 @@ using UnityEngine;
 
 namespace Game.Item
 {
-    [Serializable]
-    public abstract class ItemAbstract : ScriptableObject
+    [Serializable,	CreateAssetMenu(fileName = "Item", menuName = "Item/Base", order = 1)]
+    public class ItemAbstract : ScriptableObject
     {
         [Header("Base item variables")]
         [SerializeField] private int _id = 0;
@@ -57,8 +57,9 @@ namespace Game.Item
                 Destroy(EquipedObject);
         }
 
-        public abstract void Use(ItemStack selfStack);
-        public abstract bool CanUse(Transform transform);
+        public virtual void Use(ItemStack selfStack) {}
+
+        public virtual bool CanUse(Transform transform) { return (false); }
         public virtual bool CancelUse(ItemStack selfStack) { return false; }
     }
 }

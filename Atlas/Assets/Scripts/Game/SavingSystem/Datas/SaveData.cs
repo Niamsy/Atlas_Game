@@ -1,5 +1,6 @@
 ﻿using System;
 using Game.DayNight;
+using Game.Map.DayNight;
 using UnityEngine;
 
 namespace Game.SavingSystem.Datas
