@@ -33,9 +33,16 @@ namespace Game.Questing
 
         public override void Show(bool display, bool force = false)
         {
-            TimeManager.Instance.PauseGame(display);
+            if (display == false)
+            {
+                TimeManager.Instance.PauseGame(false);
+            }
             base.Show(display, force);
-            // Reset Stuff here
+        }
+
+        public void PauseTime()
+        {
+            TimeManager.Instance.PauseGame(true);
         }
     }
 }
