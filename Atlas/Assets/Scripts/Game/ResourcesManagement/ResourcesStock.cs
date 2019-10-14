@@ -47,6 +47,11 @@ namespace Game.ResourcesManagement
             {
                 if (stock.Resource == resource)
                 {
+                    if (resource == Resource.Water)
+                    {
+                        var icon = this.GetComponentInParent<PlantWateringIcon>();
+                        icon.enabled = true;
+                    }
                     var rest = quantity - (stock.Limit - stock.Quantity);
                     if (rest < 0)
                         rest = 0;
@@ -72,6 +77,11 @@ namespace Game.ResourcesManagement
             {
                 if (stock.Resource == resource)
                 {
+                    if (resource == Resource.Water)
+                    {
+                        var icon = this.GetComponentInParent<PlantWateringIcon>();
+                        icon.enabled = false;
+                    }
                     var rest = stock.Quantity - quantity;
                     if (rest < 0)
                         rest = 0;
