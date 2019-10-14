@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Game.ResourcesManagement
 {
@@ -21,6 +23,10 @@ namespace Game.ResourcesManagement
         [SerializeField]
         private List<Stock>         _listOfStocks = new List<Stock>();
         public List<Stock>          ListOfStocks { get { return (_listOfStocks); } }
+
+        private Boolean iconDisplayed = false;
+        private int waterQuantity = 0;
+
         public Stock                this[Resource resource]
         {
             get
@@ -47,22 +53,49 @@ namespace Game.ResourcesManagement
             {
                 if (stock.Resource == resource)
                 {
-                    if (resource == Resource.Water)
-                    {
-                        var icon = this.GetComponentInParent<PlantWateringIcon>();
-                        icon.enabled = true;
-                    }
+                    showWaterIcon(resource, stock);
                     var rest = quantity - (stock.Limit - stock.Quantity);
                     if (rest < 0)
                         rest = 0;
                     var totalAdded = quantity - rest;
 
                     stock.Quantity += totalAdded;
-                    
+                    waterQuantity = stock.Quantity;
                     return (totalAdded);
                 }
             }
             return (quantity);
+        }
+
+        private void showWaterIcon(Resource resource, Stock stock)
+        {
+            if (resource == Resource.Water)
+            {
+                var icon = this.GetComponentInParent<PlantWateringIcon>();
+                if (icon != null && !iconDisplayed)
+                {
+                    icon.enabled = true;
+                    Canvas wtr = gameObject.transform.Find("Watering").gameObject.GetComponent<Canvas>();
+                    Debug.Log("Canvas Value + " + wtr);
+                    icon.WaterIcon = wtr;
+                    Image wtrf = wtr.transform.Find("WaterFilled").gameObject.GetComponentInChildren<Image>();
+                    icon.WaterDrop = wtrf;
+                    icon.PlantStock = ListOfStocks;
+                    icon.StartUpdate();
+                    StartCoroutine(hideWaterIcon(icon, stock, 3f));
+                    iconDisplayed = true;
+                }
+            }
+        }
+
+        private IEnumerator hideWaterIcon(PlantWateringIcon icon, Stock stock, float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            if (waterQuantity == stock.Quantity && iconDisplayed == true)
+            {
+                iconDisplayed = false;
+                icon.StopUpdate();
+            }
         }
 
         /// <summary>
@@ -77,11 +110,6 @@ namespace Game.ResourcesManagement
             {
                 if (stock.Resource == resource)
                 {
-                    if (resource == Resource.Water)
-                    {
-                        var icon = this.GetComponentInParent<PlantWateringIcon>();
-                        icon.enabled = false;
-                    }
                     var rest = stock.Quantity - quantity;
                     if (rest < 0)
                         rest = 0;
