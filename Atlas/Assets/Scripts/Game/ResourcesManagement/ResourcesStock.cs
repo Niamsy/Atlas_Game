@@ -26,6 +26,7 @@ namespace Game.ResourcesManagement
 
         private Boolean iconDisplayed = false;
         private int waterQuantity = 0;
+        private PlantWateringIcon icon = null;
 
         public Stock                this[Resource resource]
         {
@@ -39,6 +40,11 @@ namespace Game.ResourcesManagement
 
                 return (null);
             }
+        }
+
+        private void Awake()
+        {
+            icon = this.GetComponentInParent<PlantWateringIcon>();
         }
 
         /// <summary>
@@ -64,26 +70,29 @@ namespace Game.ResourcesManagement
                     return (totalAdded);
                 }
             }
+            waterQuantity = this[Resource.Water].Quantity;
             return (quantity);
         }
 
         private void showWaterIcon(Resource resource, Stock stock)
         {
-            if (resource == Resource.Water)
+            if (resource == Resource.Water && icon != null)
             {
-                var icon = this.GetComponentInParent<PlantWateringIcon>();
-                if (icon != null && !iconDisplayed)
+                if (!iconDisplayed)
                 {
-                    icon.enabled = true;
                     Canvas wtr = gameObject.transform.Find("Watering").gameObject.GetComponent<Canvas>();
-                    Debug.Log("Canvas Value + " + wtr);
                     icon.WaterIcon = wtr;
                     Image wtrf = wtr.transform.Find("WaterFilled").gameObject.GetComponentInChildren<Image>();
                     icon.WaterDrop = wtrf;
-                    icon.PlantStock = ListOfStocks;
+                    icon.PlantStock = stock;
                     icon.StartUpdate();
-                    StartCoroutine(hideWaterIcon(icon, stock, 3f));
+                    StartCoroutine(hideWaterIcon(icon, stock, 5f));
                     iconDisplayed = true;
+                }
+                else
+                {
+                    Debug.Log("Watering and stock quantity == " + stock.Quantity);
+                    icon.PlantStock = stock;
                 }
             }
         }
@@ -91,10 +100,15 @@ namespace Game.ResourcesManagement
         private IEnumerator hideWaterIcon(PlantWateringIcon icon, Stock stock, float delay)
         {
             yield return new WaitForSeconds(delay);
-            if (waterQuantity == stock.Quantity && iconDisplayed == true)
+            Debug.Log("Delay Passed Away + water Quantity " + waterQuantity.ToString() + " Stock Quantity " + stock.Quantity);
+            if (waterQuantity < stock.Quantity && iconDisplayed == true)
             {
                 iconDisplayed = false;
                 icon.StopUpdate();
+            }
+            else
+            {
+                StartCoroutine(hideWaterIcon(icon, this[Resource.Water], delay));
             }
         }
 

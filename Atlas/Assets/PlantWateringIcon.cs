@@ -18,8 +18,8 @@ public class PlantWateringIcon : MonoBehaviour
         }
     }
 
-    private List<Stock> _plantStock = null;
-    public List<Stock> PlantStock { get => _plantStock; set => _plantStock = value; }
+    private Stock _plantStock = null;
+    public Stock PlantStock { get => _plantStock; set => _plantStock = value; }
 
 
     // Start is called before the first frame update
@@ -31,7 +31,7 @@ public class PlantWateringIcon : MonoBehaviour
     public void StartUpdate()
     {
         WaterIcon.enabled = true;
-        InvokeRepeating("UpdateWaterFillAmount", 0f, 2f);
+        InvokeRepeating("UpdateWaterFillAmount", 0.1f, 1f);
     }
 
     public void StopUpdate()
@@ -46,24 +46,15 @@ public class PlantWateringIcon : MonoBehaviour
 
     void UpdateWaterFillAmount()
     {
-        Debug.Log("IMAGE YOU MUST FILL ENTER");
-        Stock stockw = null;
-        foreach (Stock stock in PlantStock)
-        {
-            if (stock.Resource == Resource.Water)
-            {
-                stockw = stock;
-                break;
-            }
-        }
-        Debug.Log("IMAGE YOU MUST FILL");
-        if (stockw != null)
-            setWaterDropResource(stockw.Quantity / stockw.Limit);
+        Debug.Log("IMAGE YOU MUST FILL ENTER : PlantStock Quantity : " + PlantStock.Quantity + " Plant Stock Limit : " + PlantStock.Limit);
+         if (PlantStock != null)
+            setWaterDropResource((float)PlantStock.Quantity / (float)PlantStock.Limit);
     }
 
     void setWaterDropResource(float amount)
     {
         Debug.Log("IMAGE IS FILLING " + amount.ToString());
+        Debug.Log("Water Drop : " + WaterDrop);
         WaterDrop.fillAmount = amount;
     }
 }
