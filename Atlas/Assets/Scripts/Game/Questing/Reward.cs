@@ -15,6 +15,12 @@ namespace Game.Questing
         [Header("Text")]
         [SerializeField] private LocalizedFormatText formatText;
 
+        public Reward(ItemAbstract reward, LocalizedFormatText formatText)
+        {
+            _reward = reward;
+            this.formatText = formatText;
+        }
+
         public ItemAbstract reward => _reward;
         public String Name => formatText.Format(_reward.Name);
     }

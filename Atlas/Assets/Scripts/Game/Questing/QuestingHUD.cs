@@ -4,11 +4,27 @@ using System;
 using Game.SavingSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 namespace Game.Questing
 {
     public class QuestingHUD : Menu.MenuWidget
     {
+        [SerializeField] private Button okButton = null;
+        [SerializeField] private DescriptionHUD descriptionHud = null;
+        [SerializeField] private AnnouncementHUD announcementHud = null;
+
+        private Quest _quest = null;
+
+        public void NewQuest(Quest quest)
+        {
+            Debug.Log("Received a new quest!");
+            _quest = quest;
+            descriptionHud.SetData(quest);
+            announcementHud.SetData(quest);
+            Show(true);
+        }
+        
         protected override void InitialiseWidget()
         {
         }
@@ -17,6 +33,9 @@ namespace Game.Questing
         {
             SaveManager.Instance.InputControls.Player.Quest.performed += OpenCloseQuesting;
             SaveManager.Instance.InputControls.Player.Quest.Enable();
+            okButton.onClick.AddListener(() => {
+                Show(false);
+            });
         }
 
         private void OnDisable()

@@ -9,8 +9,8 @@ namespace Game.Questing
     public class Quest : AData
     {
         [Header("Quest Data")] 
-        [SerializeField] private LocalizedText _name;
-        [SerializeField] private LocalizedText _description;
+        [SerializeField] private LocalizedText _name = null;
+        [SerializeField] private LocalizedText _description = null;
 
         [Header("Requirements")]
         [SerializeField] private Requirement[] requirements = new Requirement[0];

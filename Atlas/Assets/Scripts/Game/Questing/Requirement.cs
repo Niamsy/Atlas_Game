@@ -11,6 +11,13 @@ namespace Game.Questing
        [SerializeField] private ItemAbstract argument;
        [SerializeField] private int count;
 
+       public Requirement(Condition condition, ItemAbstract argument, int count)
+        {
+            this.condition = condition;
+            this.argument = argument;
+            this.count = count;
+        }
+       
         public string Description => condition.Format.Format(argument);
         public int Count => count;
 

@@ -8,7 +8,7 @@ namespace Game.Questing
     public class Objective : AData
     {
         [Header("Quest Data")] 
-        [SerializeField] private LocalizedText _goal;
+        [SerializeField] private LocalizedText _goal = null;
         
         [Header("Objectives Data")]
         [SerializeField] private Requirement[] requirements = new Requirement[0];
