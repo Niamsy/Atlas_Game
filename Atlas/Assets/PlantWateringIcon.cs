@@ -12,7 +12,7 @@ public class PlantWateringIcon : MonoBehaviour
 
     private Canvas _waterIcon = null;
     public Canvas   WaterIcon { get => _waterIcon;
-        set { Debug.Log("Canvas In setter Value + " + value);
+        set {
             if (value != null)
                 _waterIcon = value;
         }
@@ -37,7 +37,6 @@ public class PlantWateringIcon : MonoBehaviour
     public void StopUpdate()
     {
         WaterIcon.enabled = false;
-        Debug.Log("CANVAS GO AWAY");
         WaterDrop = null;
         WaterIcon = null;
         PlantStock = null;
@@ -46,15 +45,12 @@ public class PlantWateringIcon : MonoBehaviour
 
     void UpdateWaterFillAmount()
     {
-        Debug.Log("IMAGE YOU MUST FILL ENTER : PlantStock Quantity : " + PlantStock.Quantity + " Plant Stock Limit : " + PlantStock.Limit);
          if (PlantStock != null)
             setWaterDropResource((float)PlantStock.Quantity / (float)PlantStock.Limit);
     }
 
     void setWaterDropResource(float amount)
     {
-        Debug.Log("IMAGE IS FILLING " + amount.ToString());
-        Debug.Log("Water Drop : " + WaterDrop);
         WaterDrop.fillAmount = amount;
     }
 }

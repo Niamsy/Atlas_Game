@@ -91,7 +91,6 @@ namespace Game.ResourcesManagement
                 }
                 else
                 {
-                    Debug.Log("Watering and stock quantity == " + stock.Quantity);
                     icon.PlantStock = stock;
                 }
             }
@@ -100,7 +99,6 @@ namespace Game.ResourcesManagement
         private IEnumerator hideWaterIcon(PlantWateringIcon icon, Stock stock, float delay)
         {
             yield return new WaitForSeconds(delay);
-            Debug.Log("Delay Passed Away + water Quantity " + waterQuantity.ToString() + " Stock Quantity " + stock.Quantity);
             if (waterQuantity < stock.Quantity && iconDisplayed == true)
             {
                 iconDisplayed = false;

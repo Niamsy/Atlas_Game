@@ -14,6 +14,7 @@ namespace Game.ResourcesManagement.Consumer
         [SerializeField]
         protected int _starvationTimeLimit;
         protected bool _starved;
+        protected bool _starving = false;
         #endregion
 
         #region Properties Accessors
@@ -22,6 +23,13 @@ namespace Game.ResourcesManagement.Consumer
             get { return _starved; }
 
             set { _starved = value; }
+        }
+
+        public bool IsStarving
+        {
+            get => _starving;
+
+            set => _starving = value;
         }
 
         public int StarvationTimeLimit
@@ -75,12 +83,16 @@ namespace Game.ResourcesManagement.Consumer
                 if (LinkedStock[stock.Resource].Quantity == 0)
                 {
                     if (_starveCoroutine == null)
-                    _starveCoroutine = StartCoroutine("Starving");
+                    {
+                        _starveCoroutine = StartCoroutine("Starving");
+                        _starving = true;
+                    }
                 }
                 else
                 {
                     StopCoroutine("Starving");
                     _starveCoroutine = null;
+                    _starving = false;
                 }
             }
         }
