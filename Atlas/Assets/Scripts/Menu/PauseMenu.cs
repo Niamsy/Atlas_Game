@@ -1,5 +1,6 @@
 ﻿using System;
 using Game;
+using Game.Map.DayNight;
 using Game.SavingSystem;
 using Menu.Settings;
 using SceneManagement;
@@ -49,7 +50,11 @@ namespace Menu
 		
 		public override void Show(bool display, bool force = false)
 		{
-			TimeManager.Instance.PauseGame(display);
+			if (display)
+				TimeManager.AskForPause(this);
+			else
+				TimeManager.StopPause(this);
+			
 			base.Show(display, force);
 		}
 

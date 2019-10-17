@@ -1,6 +1,7 @@
 ﻿using AtlasAudio;
 using AtlasEvents;
 using Game;
+using Game.Map.DayNight;
 using Game.SavingSystem;
 using Menu.Inventory.ItemDescription;
 using SceneManagement;
@@ -43,7 +44,10 @@ namespace Menu.Inventory
 
         public override void Show(bool display, bool force = false)
         {
-            TimeManager.Instance.PauseGame(display);
+            if (display)
+                TimeManager.AskForPause(this);
+            else
+                TimeManager.StopPause(this);
             base.Show(display, force);
             _description.Reset();
         }
