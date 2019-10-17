@@ -68,7 +68,8 @@ namespace Game.HUD.Commons
         private void UpdateValue(float newValue)
         {
             _value = newValue;
-            _fill.fillAmount = ActualPercentage01;
+            if (_fill != null)
+                _fill.fillAmount = ActualPercentage01;
         }
 
         private void UpdateTargetValue(float newValue)
