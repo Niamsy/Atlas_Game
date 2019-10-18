@@ -11,8 +11,16 @@ namespace Game.Questing
 
         public void SetData(Reward reward)
         {
-            rewardName.text = reward.Name;
-            image.sprite = reward.reward.Sprite;
+            var item = reward.reward;
+            rewardName.text = item.Name + " x" + reward.Count;
+            if (image.sprite != null)
+            {
+                image.sprite = item.Sprite;
+            }
+            if (item.Category != null)
+            {
+                image.color = item.Category.Color;
+            }
         }
     }
 }

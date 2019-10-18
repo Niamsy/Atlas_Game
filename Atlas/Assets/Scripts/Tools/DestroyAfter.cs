@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace Tools
 {
@@ -8,11 +9,12 @@ namespace Tools
         
         private void Start()
         {
-            Invoke(nameof(DestroyThisInstance), countDown);
+            StartCoroutine(DestroyThisInstance());
         }
 
-        private void DestroyThisInstance()
+        private IEnumerator DestroyThisInstance()
         {
+            yield return new WaitForSecondsRealtime(countDown);
             Destroy(gameObject);
         } 
     }

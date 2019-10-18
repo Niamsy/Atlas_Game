@@ -22,9 +22,10 @@ namespace Game.Questing
             _quest = quest;
             descriptionHud.SetData(quest);
             announcementHud.SetData(quest);
-            Show(true);
+            if (!Displayed)
+                Show(true);
         }
-        
+
         protected override void InitialiseWidget()
         {
         }

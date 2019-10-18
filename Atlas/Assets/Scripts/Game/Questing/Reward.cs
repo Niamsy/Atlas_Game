@@ -9,19 +9,20 @@ namespace Game.Questing
     [Serializable]
     public struct Reward
     {
-        [Header("Object")]
-        [SerializeField] private ItemAbstract _reward;
-
-        [Header("Text")]
         [SerializeField] private LocalizedFormatText formatText;
-
-        public Reward(ItemAbstract reward, LocalizedFormatText formatText)
+        [SerializeField] private ItemAbstract _reward;
+        [SerializeField] private int count;
+        
+        public Reward(LocalizedFormatText formatText, ItemAbstract reward, int count)
         {
-            _reward = reward;
             this.formatText = formatText;
+            _reward = reward;
+            this.count = count;
         }
 
         public ItemAbstract reward => _reward;
         public String Name => formatText.Format(_reward.Name);
+
+        public int Count => count;
     }
 }
