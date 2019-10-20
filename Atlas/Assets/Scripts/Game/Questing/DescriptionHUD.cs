@@ -11,13 +11,13 @@ namespace Game.Questing
         [SerializeField] private Transform contentTransform = null;
         [SerializeField] private ObjectPool rewardPool = null;
 
-        private Quest _quest = null;
+        private LiveQuest _quest;
         
-        public void SetData(Quest quest)
+        public void SetData(LiveQuest quest)
         {
             _quest = quest;
-            xp.text = _quest.Xp + " XP";
-            description.text = _quest.Description;
+            xp.text = _quest.Quest.Xp + " XP";
+            description.text = _quest.Quest.Description;
             RefreshHUD();
         }
 
@@ -32,7 +32,7 @@ namespace Game.Questing
 
         private void AddRewards()
         {
-            foreach (var reward in _quest.Rewards)
+            foreach (var reward in _quest.Quest.Rewards)
             {
                 var rewardObj = rewardPool.GetObject();
                 rewardObj.transform.SetParent(contentTransform);

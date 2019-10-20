@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Game.Item;
 using Game.SavingSystem;
 using Game.SavingSystem.Datas;
 using Tools.Tools;
@@ -7,31 +9,62 @@ using UnityEngine;
 
 namespace Game.Questing
 {
+    [RequireComponent(typeof(QuestingHUD))]
     public class QuestingSaver : MapSavingBehaviour
     {
-        public struct LiveQuestData
+        private List<Quest> _quests;
+        private QuestingHUD _questingHud;
+        private readonly List<LiveQuest> _liveQuests = new List<LiveQuest>();
+        
+        public void AddQuest(Quest quest)
         {
-            public Quest Quest;
-            public int CurrentlyAccomplished;
+            _liveQuests.Add(new LiveQuest(quest));
+            _questingHud.Show(true);
+        }
 
-            public LiveQuestData(Quest quest, int currentlyAccomplished)
+        public void ValidateRequirement(Condition condition, ItemAbstract item, int count)
+        {
+            foreach (var liveQuest in _liveQuests)
             {
-                Quest = quest;
-                CurrentlyAccomplished = currentlyAccomplished;
+                var requirements = liveQuest.Requirements.Where(req =>
+                    req.Requirement.Condition.Id == condition.Id && req.Requirement.Argument.Id == item.Id);
+                
+                foreach (var liveRequirement in requirements)
+                {
+                    liveRequirement.IncrementAccomplished(count);
+                }
+
+                if (liveQuest.IsFinished)
+                {
+                    // TODO Trigger GUI for finished Quest
+                    // ON OK PRESSED, GIVE REWARDS TO PlAYER, REMOVE QUEST FROM LIST
+                }
             }
         }
         
-        private List<Quest> _quests;
-        private readonly List<LiveQuestData> _liveQuests = new List<LiveQuestData>();
+        protected override void Awake()
+        {
+            base.Awake();
+            _questingHud = GetComponent<QuestingHUD>();
+        }
 
-        public List<LiveQuestData> LiveQuests
+        public List<LiveQuest> LiveQuests
         {
             get => _liveQuests;
         }
 
+        //TODO change the questing menu to log quest
         private void OnEnable()
         {
+            SaveManager.Instance.InputControls.Player.Quest.performed += _questingHud.OpenCloseQuesting;
+            SaveManager.Instance.InputControls.Player.Quest.Enable();
             _quests = new AssetsLoader<Quest>().Load();
+        }
+
+        private void OnDisable()
+        {
+            SaveManager.Instance.InputControls.Player.Quest.performed -= _questingHud.OpenCloseQuesting;
+            SaveManager.Instance.InputControls.Player.Quest.Disable();
         }
 
         protected override void SavingMapData(MapData data)
@@ -46,7 +79,7 @@ namespace Game.Questing
                 var questSO = _quests.Find(quest => quest.Id == questData.Id);
                 if (questSO != null)
                 {
-                    LiveQuests.Add(new LiveQuestData(questSO, questData.CurrentlyAccomplished));
+                    LiveQuests.Add(new LiveQuest(questSO, questData.Requirements));
                 }
                 else
                 {

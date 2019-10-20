@@ -17,10 +17,10 @@ namespace Game.Questing
         [SerializeField] private Sprite questSprite = null;
         [SerializeField] private Sprite objectiveSprite = null;
         
-        public void SetData(Quest quest)
+        public void SetData(LiveQuest quest)
         {
             announcement.text = newQuest;
-            title.text = quest.Name;
+            title.text = quest.Quest.Name;
             image.sprite = questSprite;
         }
 

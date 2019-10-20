@@ -8,16 +8,40 @@ namespace Game.Questing
         [SerializeField] private TextMeshProUGUI _name = null;
         [SerializeField] private TextMeshProUGUI _count = null;
         [SerializeField] private Color validColor;
-        
-        public void SetRequirement(Requirement requirement, int currentCount)
+        private LiveRequirement _requirement = null;
+        public void SetRequirement(LiveRequirement requirement)
         {
-            _name.text = requirement.Description;
-            _count.text = $"{currentCount}/{requirement.Count}";
-            if (currentCount == requirement.Count)
+            if (_requirement != null)
+            {
+                _requirement.IncrementDelegate = null;
+            }
+            
+            _requirement = requirement;
+            _requirement.IncrementDelegate = Refresh;
+            _name.text = _requirement.Requirement.Description;
+            _count.text = $"{_requirement.CurrentlyAccomplished}/{_requirement.Requirement.Count}";
+            SetTextColor();
+        }
+
+        private void SetTextColor()
+        {
+            if (_requirement.CurrentlyAccomplished == _requirement.Requirement.Count)
             {
                 _count.color = validColor;
                 _name.color = validColor;
             }
+            else
+            {
+                _count.color = Color.white;
+                _name.color = Color.white;
+            }
+        }
+
+        private void Refresh()
+        {
+            _name.text = _requirement.Requirement.Description;
+            _count.text = $"{_requirement.CurrentlyAccomplished}/{_requirement.Requirement.Count}";
+            SetTextColor();
         }
     }
 }

@@ -11,20 +11,13 @@ namespace Game.Questing
         [SerializeField] private Transform _requirementsTransform = null;
         
         private ObjectPool _pool = null;
-        private Quest _quest = null;
-        private int _count = 0;
+        private LiveQuest _data;
         
-        public void SetData(Quest quest, ObjectPool pool)
+        public void SetData(LiveQuest data, ObjectPool pool)
         {
-            _quest = quest;
+            _data = data;
+            _name.text = _data.Quest.Name;
             _pool = pool;
-            _name.text = quest.Name;
-            _count = 0;
-        }
-
-        public void SetData(QuestingSaver.LiveQuestData data)
-        {
-            
         }
 
         public void ClearRequirements()
@@ -38,14 +31,14 @@ namespace Game.Questing
 
         public void AddRequirements()
         {
-            foreach (var requirement in _quest.Requirement)
+            foreach (var requirement in _data.Requirements)
             {
                 var requirementObj = _pool.GetObject();
                 requirementObj.transform.SetParent(_requirementsTransform);
                 requirementObj.transform.localScale = new Vector3(1, 1, 1);
                 var requirementHud = requirementObj.GetComponent<RequirementHUD>();
                 // TODO Get from save
-                requirementHud.SetRequirement(requirement, 0);
+                requirementHud.SetRequirement(requirement);
             }
         }
 

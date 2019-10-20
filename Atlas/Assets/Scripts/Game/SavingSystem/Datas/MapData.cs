@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Game.Crafting;
 using Game.DayNight;
 using Game.Questing;
@@ -93,17 +94,33 @@ namespace Game.SavingSystem.Datas
                 }
             }
         }
+
+        [Serializable]
+        public struct RequirementData
+        {
+            public GUID ConditionId;
+            public int ItemAbstractId;
+            public int CurrentlyAccomplished;
+            
+            public RequirementData(Requirement requirement, int currentlyAccomplished)
+            {
+                ConditionId = requirement.Condition.Id;
+                ItemAbstractId = requirement.Argument.Id;
+                CurrentlyAccomplished = currentlyAccomplished;
+            }
+        }
         
         [Serializable]
         public struct QuestData
         {
             public GUID Id;
-            public int CurrentlyAccomplished;
-
-            public QuestData(QuestingSaver.LiveQuestData data)
+            public RequirementData[] Requirements;
+            
+            public QuestData(LiveQuest data)
             {
                 Id = data.Quest.Id;
-                CurrentlyAccomplished = data.CurrentlyAccomplished;
+                Requirements = data.Requirements.Select(requirement =>
+                    new RequirementData(requirement.Requirement, requirement.CurrentlyAccomplished)).ToArray();
             }
         }
 

@@ -18,12 +18,14 @@ namespace Game.Questing
             this.count = count;
         }
        
-        public string Description => condition.Format.Format(argument);
+        public string Description => Condition.Format.Format(Argument);
         public int Count => count;
+        public Condition Condition => condition;
+        public ItemAbstract Argument => argument;
 
         public bool Validate(Condition other, ItemAbstract item)
         {
-            return other == condition && item.Id == argument.Id;
+            return other == Condition && item.Id == Argument.Id;
         }
     }
 }
