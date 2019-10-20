@@ -7,18 +7,6 @@ namespace Game.Questing
 {
     public class QuestHUD : MonoBehaviour
     {
-        public struct Save
-        {
-            public Save(GUID questId, int currentCount)
-            {
-                QuestId = questId;
-                CurrentCount = currentCount;
-            }
-
-            public GUID QuestId { get; }
-            public int CurrentCount { get; }
-        }
-        
         [SerializeField] private TextMeshProUGUI _name = null;
         [SerializeField] private Transform _requirementsTransform = null;
         
@@ -34,7 +22,7 @@ namespace Game.Questing
             _count = 0;
         }
 
-        public void SetData(Save save)
+        public void SetData(QuestingSaver.LiveQuestData data)
         {
             
         }

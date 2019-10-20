@@ -7,7 +7,7 @@ namespace Game.Questing
 {
     public class AData : ScriptableObject
     {
-        private void OnEnable()
+        protected void OnEnable()
         {
             if (Id.Empty())
             {

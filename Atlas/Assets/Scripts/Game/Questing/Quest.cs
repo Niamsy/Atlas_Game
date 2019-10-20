@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Permissions;
 using JetBrains.Annotations;
 using Localization;
 using UnityEngine;
@@ -11,7 +12,7 @@ namespace Game.Questing
         [Header("Quest Data")] 
         [SerializeField] private LocalizedText _name = null;
         [SerializeField] private LocalizedText _description = null;
-
+        
         [Header("Requirements")]
         [SerializeField] private Requirement[] requirements = new Requirement[0];
 

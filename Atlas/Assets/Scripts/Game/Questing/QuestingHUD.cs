@@ -1,13 +1,16 @@
 ﻿
 
 using System;
+using System.Linq;
 using Game.SavingSystem;
+using Tools.Tools;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace Game.Questing
 {
+    [RequireComponent(typeof(QuestingSaver))]
     public class QuestingHUD : Menu.MenuWidget
     {
         [SerializeField] private Button okButton = null;
@@ -15,6 +18,7 @@ namespace Game.Questing
         [SerializeField] private AnnouncementHUD announcementHud = null;
 
         private Quest _quest = null;
+        private QuestingSaver _saver = null;
 
         public void NewQuest(Quest quest)
         {
@@ -30,10 +34,17 @@ namespace Game.Questing
         {
         }
 
+        protected override void Awake()
+        {
+            base.Awake();
+            _saver = GetComponent<QuestingSaver>();
+        }
+
         private void OnEnable()
         {
             SaveManager.Instance.InputControls.Player.Quest.performed += OpenCloseQuesting;
             SaveManager.Instance.InputControls.Player.Quest.Enable();
+
             okButton.onClick.AddListener(() => {
                 Show(false);
             });
@@ -56,6 +67,14 @@ namespace Game.Questing
             if (display == false)
             {
                 TimeManager.Instance.PauseGame(false);
+                _quest = null;
+            }
+            else
+            {
+                if (_quest == null && _saver.LiveQuests.Count > 0)
+                {
+                    NewQuest(_saver.LiveQuests[0].Quest);
+                }
             }
             base.Show(display, force);
         }

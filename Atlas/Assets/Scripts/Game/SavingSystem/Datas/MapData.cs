@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using Game.Crafting;
 using Game.DayNight;
+using Game.Questing;
 using Game.ResourcesManagement;
 using Plants.Plant;
+using UnityEditor;
 using UnityEngine;
 
 namespace Game.SavingSystem.Datas
@@ -91,6 +93,25 @@ namespace Game.SavingSystem.Datas
                 }
             }
         }
+        
+        [Serializable]
+        public struct QuestData
+        {
+            public GUID Id;
+            public int CurrentlyAccomplished;
+
+            public QuestData(QuestingSaver.LiveQuestData data)
+            {
+                Id = data.Quest.Id;
+                CurrentlyAccomplished = data.CurrentlyAccomplished;
+            }
+        }
+
+        [Serializable]
+        public struct QuestingData
+        {
+            public QuestData[] Quests;
+        }
 
         public CraftingSaveData     Crafting;
         public PlantSaveData[]      Plants;
@@ -101,5 +122,6 @@ namespace Game.SavingSystem.Datas
         public DateData				CalendarData;
         public XPSaveData           XPData;
         public List<Stock>          PlayerResource;
+        public QuestingData         Questing;
     }
 }
