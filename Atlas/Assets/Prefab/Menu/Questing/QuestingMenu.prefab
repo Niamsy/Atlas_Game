@@ -85,6 +85,7 @@ GameObject:
   - component: {fileID: 5692775076319502063}
   - component: {fileID: 6746109378805999653}
   - component: {fileID: 9053713369600589590}
+  - component: {fileID: 6093669206029368229}
   m_Layer: 5
   m_Name: AnnouncementPanel
   m_TagString: Untagged
@@ -170,6 +171,18 @@ MonoBehaviour:
   newObjective: {fileID: 11400000, guid: 91ccfab02439a9543970f1c74e07657d, type: 2}
   questSprite: {fileID: 21300000, guid: d0ac25819d5f90446862bbad37e914d5, type: 3}
   objectiveSprite: {fileID: 21300000, guid: e9ead33d7b5734744ba80fd8222303df, type: 3}
+--- !u!225 &6093669206029368229
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910347851668106820}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &943440531660578369
 GameObject:
   m_ObjectHideFlags: 0
@@ -1336,6 +1349,7 @@ GameObject:
   - component: {fileID: 697409828834654168}
   - component: {fileID: 1587450766797692781}
   - component: {fileID: 232430605488122547}
+  - component: {fileID: 6176192416001080611}
   m_Layer: 5
   m_Name: DescriptionPanel
   m_TagString: Untagged
@@ -1433,6 +1447,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 9005162939321960976, guid: 10e917af51d736c4794c4a5cb87adf51, type: 3}
+--- !u!225 &6176192416001080611
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4063963130861712996}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &5022909650259341675
 GameObject:
   m_ObjectHideFlags: 0
@@ -2744,6 +2770,7 @@ GameObject:
   - component: {fileID: 4924399863523860083}
   - component: {fileID: 1318636532581655106}
   - component: {fileID: 3819645733312149918}
+  - component: {fileID: 1497264941424519619}
   m_Layer: 5
   m_Name: SideQuestPanel
   m_TagString: Untagged
@@ -2857,6 +2884,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 947569856952782435, guid: f7e2d85cd4de1014e9782705198dd274, type: 3}
+--- !u!225 &1497264941424519619
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7952967337365169907}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &7988406592164140986
 GameObject:
   m_ObjectHideFlags: 0

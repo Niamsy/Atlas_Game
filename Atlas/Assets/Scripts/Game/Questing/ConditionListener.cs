@@ -2,6 +2,7 @@
 using Game.Item;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace Game.Questing
 {
@@ -13,12 +14,13 @@ namespace Game.Questing
         [Tooltip("Questing events to register to.")]
         public ConditionEvent Event;
 
+        [FormerlySerializedAs("OnRaised")]
         [Tooltip("Response to invoke when Event is raised.")]
-        [SerializeField] private ConditionUnityEvent OnRaised = null;
+        [SerializeField] private ConditionUnityEvent onRaised = null;
 
         public void OnEventRaised(Condition condition, ItemAbstract itemAbstract, int count)
         {
-            OnRaised?.Invoke(condition, itemAbstract, count);
+            onRaised?.Invoke(condition, itemAbstract, count);
         }
 
         private void OnEnable()

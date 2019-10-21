@@ -1,4 +1,5 @@
-﻿using Boo.Lang;
+﻿using System.Linq;
+using Boo.Lang;
 using Game.Item;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ namespace Game.Questing
         private readonly List<IConditionEventListener> _listeners = new List<IConditionEventListener>();
         
         public void Raise(Condition condition, ItemAbstract itemAbstract, int count) {
-            for (var i = 0; i < _listeners.Count - 1; i--)
+            for (var i = _listeners.Count - 1; i >= 0; i--)
             {
                 _listeners[i].OnEventRaised(condition, itemAbstract, count);
             }
