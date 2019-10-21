@@ -18,7 +18,7 @@ namespace Game.Questing
             this.count = count;
         }
        
-        public string Description => Condition.Format.Format(Argument);
+        public string Description => Condition.Format.Format(Argument.Name);
         public int Count => count;
         public Condition Condition => condition;
         public ItemAbstract Argument => argument;

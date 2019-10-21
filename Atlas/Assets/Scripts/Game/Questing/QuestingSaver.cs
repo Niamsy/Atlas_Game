@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Game.Item;
 using Game.SavingSystem;
@@ -12,13 +11,17 @@ namespace Game.Questing
     [RequireComponent(typeof(QuestingHUD))]
     public class QuestingSaver : MapSavingBehaviour
     {
+        [SerializeField] private SideQuestPanelHUD _sideQuestPanelHud = null;
         private List<Quest> _quests;
         private QuestingHUD _questingHud;
         private readonly List<LiveQuest> _liveQuests = new List<LiveQuest>();
-        
+
         public void AddQuest(Quest quest)
         {
-            _liveQuests.Add(new LiveQuest(quest));
+            var liveQuest = new LiveQuest(quest);
+            _liveQuests.Add(liveQuest);
+            _questingHud.NewQuest(liveQuest);
+            _sideQuestPanelHud.AddQuest(liveQuest);
             _questingHud.Show(true);
         }
 
@@ -36,8 +39,9 @@ namespace Game.Questing
 
                 if (liveQuest.IsFinished)
                 {
-                    // TODO Trigger GUI for finished Quest
-                    // ON OK PRESSED, GIVE REWARDS TO PlAYER, REMOVE QUEST FROM LIST
+                    // Give Rewards to the player
+                    _sideQuestPanelHud.RemoveQuest(liveQuest);
+                    _liveQuests.Remove(liveQuest);
                 }
             }
         }

@@ -7,7 +7,7 @@ namespace Game.Questing
     {
         [SerializeField] private TextMeshProUGUI _name = null;
         [SerializeField] private TextMeshProUGUI _count = null;
-        [SerializeField] private Color validColor;
+        [SerializeField] private Color validColor = Color.green;
         private LiveRequirement _requirement = null;
         public void SetRequirement(LiveRequirement requirement)
         {

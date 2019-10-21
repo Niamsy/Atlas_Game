@@ -345,6 +345,7 @@ GameObject:
   - component: {fileID: 2509874160087443100}
   - component: {fileID: 9056329131130810084}
   - component: {fileID: 5724419444383438822}
+  - component: {fileID: 4794581424399416383}
   m_Layer: 0
   m_Name: Plant
   m_TagString: Untagged
@@ -651,6 +652,25 @@ MonoBehaviour:
     source: {fileID: 3117265421110278031}
     audio: {fileID: 11400000, guid: 427461d895982cf45b7b6e66dfb1c06b, type: 2}
   Event: {fileID: 11400000, guid: ea0225512934b70478d2da2c1c2b85ab, type: 2}
+--- !u!114 &4794581424399416383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6206562519876059882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d9c7046c904499ea8ab2aea85951fb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  condition: {fileID: 11400000, guid: 4485dd87b57a9c944888d5bc75c268c6, type: 2}
+  itemAbstract: {fileID: 0}
+  count: 1
+  Event: {fileID: 11400000, guid: 7982aa52f640cf44fa452f971b97ef0e, type: 2}
+  triggerOnStart: 1
+  triggerOnDestroy: 0
+  triggerOnce: 1
 --- !u!1 &8073323097795354555
 GameObject:
   m_ObjectHideFlags: 0

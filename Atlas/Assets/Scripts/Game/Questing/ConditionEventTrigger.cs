@@ -1,12 +1,14 @@
-﻿using System;
+﻿using Game.Item;
 using UnityEngine;
 
 namespace Game.Questing
 {
-    public class QuestingEventTrigger : MonoBehaviour
+    public class ConditionEventTrigger : MonoBehaviour
     {
-        public Quest quest = null;
-        public QuestingEvent Event = null;
+        public Condition condition = null;
+        public ItemAbstract itemAbstract = null;
+        public int count = 1;
+        public ConditionEvent Event = null;
         
         public bool triggerOnStart = true;
         public bool triggerOnDestroy = false;
@@ -33,7 +35,7 @@ namespace Game.Questing
 
         public void TriggerEvent()
         {
-            Event.Raise(quest);
+            Event.Raise(condition, itemAbstract, count);
         }
     }
 }

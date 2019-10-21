@@ -1,17 +1,18 @@
 ﻿using Boo.Lang;
+using Game.Item;
 using UnityEngine;
 
 namespace Game.Questing
 {
-    [CreateAssetMenu(menuName = "Questing/ConditionEvent")]
+    [CreateAssetMenu(menuName = "Questing/Condition Event")]
     public class ConditionEvent : ScriptableObject
     {
         private readonly List<IConditionEventListener> _listeners = new List<IConditionEventListener>();
         
-        public void Raise(Condition condition) {
+        public void Raise(Condition condition, ItemAbstract itemAbstract, int count) {
             for (var i = 0; i < _listeners.Count - 1; i--)
             {
-                _listeners[i].OnEventRaised(condition);
+                _listeners[i].OnEventRaised(condition, itemAbstract, count);
             }
         }
 

@@ -12,12 +12,15 @@ namespace Game.Questing
         
         private ObjectPool _pool = null;
         private LiveQuest _data;
+
+        public LiveQuest LiveQuest => _data;
         
-        public void SetData(LiveQuest data, ObjectPool pool)
+        public void SetLiveQuest(LiveQuest data, ObjectPool pool)
         {
             _data = data;
             _name.text = _data.Quest.Name;
             _pool = pool;
+            Refresh();
         }
 
         public void ClearRequirements()

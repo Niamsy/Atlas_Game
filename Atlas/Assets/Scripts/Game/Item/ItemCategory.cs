@@ -7,7 +7,7 @@ namespace Game.Item
     public class ItemCategory : ScriptableObject
     {
         [SerializeField] private LocalizedText _name = null;
-        [SerializeField] private Color color;
+        [SerializeField] private Color color = Color.cyan;
         
         public LocalizedText Name => _name;
         public Color Color => color;

@@ -12,6 +12,38 @@ PrefabInstance:
       propertyPath: m_Name
       value: 1005_Pine
       objectReference: {fileID: 0}
+    - target: {fileID: 61835651470404897, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: _listOfStocks.Array.data[0].Limit
+      value: 3500
+      objectReference: {fileID: 0}
+    - target: {fileID: 61835651470404897, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: _listOfStocks.Array.data[1].Limit
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6206562519876059879, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: OnLevelUp.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6206562519876059879, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: PlantStatistics
+      value: 
+      objectReference: {fileID: 11400000, guid: 14281a624e8304f478bbab277277cbc6,
+        type: 2}
+    - target: {fileID: 6206562519876059874, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: Slot._content
+      value: 
+      objectReference: {fileID: 11400000, guid: 23ea14286d3a76945ab0073331bd80ca,
+        type: 2}
+    - target: {fileID: 6206562519876059874, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: Slot._quantity
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6206562519876059875, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -66,38 +98,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 61835651470404897, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
-        type: 3}
-      propertyPath: _listOfStocks.Array.data[0].Limit
-      value: 3500
-      objectReference: {fileID: 0}
-    - target: {fileID: 61835651470404897, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
-        type: 3}
-      propertyPath: _listOfStocks.Array.data[1].Limit
-      value: 3000
-      objectReference: {fileID: 0}
-    - target: {fileID: 6206562519876059879, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
-        type: 3}
-      propertyPath: OnLevelUp.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 6206562519876059879, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
-        type: 3}
-      propertyPath: PlantStatistics
-      value: 
-      objectReference: {fileID: 11400000, guid: 14281a624e8304f478bbab277277cbc6,
-        type: 2}
-    - target: {fileID: 6206562519876059874, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
-        type: 3}
-      propertyPath: Slot._content
-      value: 
-      objectReference: {fileID: 11400000, guid: 23ea14286d3a76945ab0073331bd80ca,
-        type: 2}
-    - target: {fileID: 6206562519876059874, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
-        type: 3}
-      propertyPath: Slot._quantity
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6057376587732904097, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
         type: 3}
@@ -272,5 +272,17 @@ PrefabInstance:
       propertyPath: CraftableResources.Array.data[2].PeriodsToCreate.Array.data[4].harvestAllStage
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4794581424399416383, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: condition
+      value: 
+      objectReference: {fileID: 11400000, guid: b61e128b078dc104aab16a1359e68250,
+        type: 2}
+    - target: {fileID: 4794581424399416383, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: itemAbstract
+      value: 
+      objectReference: {fileID: 11400000, guid: 23ea14286d3a76945ab0073331bd80ca,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c3218684e4ac9a4aa60b424b4122b7d, type: 3}

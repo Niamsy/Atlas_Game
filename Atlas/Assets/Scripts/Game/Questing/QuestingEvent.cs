@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game.Questing
 {
-    [CreateAssetMenu(menuName = "Questing/QuestingEvent")]
+    [CreateAssetMenu(menuName = "Questing/Questing Event")]
     public class QuestingEvent : ScriptableObject
     {
         private readonly List<IQuestingEventListener> _listeners = new List<IQuestingEventListener>();
