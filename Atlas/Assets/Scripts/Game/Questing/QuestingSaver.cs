@@ -60,23 +60,27 @@ namespace Game.Questing
             _questingHud = GetComponent<QuestingHUD>();
         }
 
+        public void GiveRewards(LiveQuest quest)
+        {
+            
+        }
+        
         public List<LiveQuest> LiveQuests
         {
             get => _liveQuests;
         }
 
-        //TODO change the questing menu to log quest
         private void OnEnable()
         {
-            SaveManager.Instance.InputControls.Player.Quest.performed += _questingHud.OpenCloseQuesting;
-            SaveManager.Instance.InputControls.Player.Quest.Enable();
+//            SaveManager.Instance.InputControls.Player.Quest.performed += _questingHud.OpenCloseQuesting;
+//            SaveManager.Instance.InputControls.Player.Quest.Enable();
             _quests = new AssetsLoader<Quest>().Load();
         }
 
         private void OnDisable()
         {
-            SaveManager.Instance.InputControls.Player.Quest.performed -= _questingHud.OpenCloseQuesting;
-            SaveManager.Instance.InputControls.Player.Quest.Disable();
+//            SaveManager.Instance.InputControls.Player.Quest.performed -= _questingHud.OpenCloseQuesting;
+//            SaveManager.Instance.InputControls.Player.Quest.Disable();
         }
 
         protected override void SavingMapData(MapData data)

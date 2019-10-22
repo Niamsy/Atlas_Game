@@ -325,8 +325,10 @@ MonoBehaviour:
   _enableCursorOnDisplay: 1
   _displayed: 0
   okButton: {fileID: 8343910643998781622}
+  rewardButton: {fileID: 7643776972230714974}
   descriptionHud: {fileID: 1587450766797692781}
   announcementHud: {fileID: 9053713369600589590}
+  rewardHud: {fileID: 2378486761214022569}
 --- !u!114 &8844788019989176100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -427,7 +429,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -858,8 +860,8 @@ RectTransform:
   m_Father: {fileID: 2147847078444661848}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.8148376, y: 0.051236197}
-  m_AnchorMax: {x: 0.9376701, y: 0.1162362}
+  m_AnchorMin: {x: 0.05081722, y: 0.051236197}
+  m_AnchorMax: {x: 0.9376701, y: 0.123290844}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1464,10 +1466,10 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 24
+  m_fontSize: 36.55
   m_fontSizeBase: 24
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -1846,7 +1848,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6409201626716487924
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3167,7 +3169,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -759.6073, y: 331.1}
+  m_SizeDelta: {x: 0, y: 331.1}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &3987222733318211125
 MonoBehaviour:
@@ -3219,16 +3221,16 @@ GameObject:
   - component: {fileID: 2147847078444661848}
   - component: {fileID: 8924083895571468713}
   - component: {fileID: 362550135180642984}
-  - component: {fileID: 7667589077050877017}
   - component: {fileID: 5822667218278397767}
   - component: {fileID: 1869481641165811310}
+  - component: {fileID: 2378486761214022569}
   m_Layer: 5
   m_Name: QuestCompletePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2147847078444661848
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3289,22 +3291,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7667589077050877017
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6049121827407619490}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47266ec4641518d4b8bc3a638275fb34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xp: {fileID: 3578716576070304141}
-  description: {fileID: 0}
-  contentTransform: {fileID: 6289527928916305875}
-  rewardPool: {fileID: 5822667218278397767}
 --- !u!114 &5822667218278397767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3317,7 +3303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97c62044635788e44bc52c7774154a77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 9005162939321960976, guid: 10e917af51d736c4794c4a5cb87adf51, type: 3}
+  prefab: {fileID: 9005162939321960976, guid: b1d65b610c5be924e9c5dce2449afe7d, type: 3}
 --- !u!225 &1869481641165811310
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -3327,9 +3313,24 @@ CanvasGroup:
   m_GameObject: {fileID: 6049121827407619490}
   m_Enabled: 1
   m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!114 &2378486761214022569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6049121827407619490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bdf72514abc48bfba607675ff52f05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xp: {fileID: 3578716576070304141}
+  contentTransform: {fileID: 6289527928916305875}
+  rewardPool: {fileID: 5822667218278397767}
 --- !u!1 &6170523785162186442
 GameObject:
   m_ObjectHideFlags: 0
@@ -3719,7 +3720,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
