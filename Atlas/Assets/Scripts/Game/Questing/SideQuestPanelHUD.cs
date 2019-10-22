@@ -24,10 +24,10 @@ namespace Game.Questing
 
         public void RemoveQuest(LiveQuest quest)
         {
-            var quests = GetComponents<QuestHUD>().Where(it => it.LiveQuest.Quest.Id == quest.Quest.Id);
-
+            var quests = GetComponentsInChildren<QuestHUD>().Where(it => it.LiveQuest.Quest.Id == quest.Quest.Id);
             foreach (var questHud in quests)
             {
+                questHud.ClearRequirements();
                 questPool.ReturnObject(questHud.gameObject);
             }
 

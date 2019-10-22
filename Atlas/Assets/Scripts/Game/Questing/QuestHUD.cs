@@ -25,6 +25,7 @@ namespace Game.Questing
 
         public void ClearRequirements()
         {
+            Debug.Log("Clear Requirements CALLED");
             while (_requirementsTransform.childCount > 0)
             {
                 var toRemove = _requirementsTransform.GetChild(0).gameObject;

@@ -27,6 +27,8 @@ namespace Game.Questing
 
         public void ValidateRequirement(Condition condition, ItemAbstract item, int count)
         {
+            var toRemove = new List<LiveQuest>();
+            
             foreach (var liveQuest in _liveQuests)
             {
                 var requirements = liveQuest.Requirements.Where(req =>
@@ -40,9 +42,15 @@ namespace Game.Questing
                 if (liveQuest.IsFinished)
                 {
                     // Give Rewards to the player
-                    _sideQuestPanelHud.RemoveQuest(liveQuest);
-                    _liveQuests.Remove(liveQuest);
+                    _questingHud.QuestComplete(liveQuest);
+                    _questingHud.Show(true);
+                    toRemove.Add(liveQuest);
                 }
+            }
+            foreach (var liveQuest in toRemove)
+            {
+                _sideQuestPanelHud.RemoveQuest(liveQuest);
+                _liveQuests.Remove(liveQuest);
             }
         }
         

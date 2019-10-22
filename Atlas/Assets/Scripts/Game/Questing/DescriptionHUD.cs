@@ -17,7 +17,8 @@ namespace Game.Questing
         {
             _quest = quest;
             xp.text = _quest.Quest.Xp + " XP";
-            description.text = _quest.Quest.Description;
+            if (description != null)
+                description.text = _quest.Quest.Description;
             RefreshHUD();
         }
 

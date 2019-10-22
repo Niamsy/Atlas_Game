@@ -21,12 +21,17 @@ namespace Game.Questing
 
         public void NewQuest(LiveQuest quest)
         {
-            Debug.Log("Received a new quest!");
             _quest = quest;
             descriptionHud.SetData(quest);
-            announcementHud.SetData(quest);
+            announcementHud.NewQuest(quest);
             if (!Displayed)
                 Show(true);
+        }
+
+        public void QuestComplete(LiveQuest quest)
+        {
+            _quest = quest;
+            announcementHud.QuestComplete(quest);
         }
 
         protected override void InitialiseWidget()

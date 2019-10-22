@@ -13,18 +13,26 @@ namespace Game.Questing
 
         [SerializeField] private LocalizedText newQuest = null;
         [SerializeField] private LocalizedText newObjective = null;
+        [SerializeField] private LocalizedText questComplete = null;
 
         [SerializeField] private Sprite questSprite = null;
         [SerializeField] private Sprite objectiveSprite = null;
         
-        public void SetData(LiveQuest quest)
+        public void NewQuest(LiveQuest quest)
         {
             announcement.text = newQuest;
             title.text = quest.Quest.Name;
             image.sprite = questSprite;
         }
 
-        public void SetData(Objective objective)
+        public void QuestComplete(LiveQuest quest)
+        {
+            announcement.text = questComplete;
+            title.text = quest.Quest.Name;
+            image.sprite = questSprite;
+        }
+
+        public void NewObjective(Objective objective)
         {
             announcement.text = newObjective;
             title.text = objective.Goal;
