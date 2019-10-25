@@ -1,14 +1,15 @@
 ﻿using TMPro;
 using Tools;
-using UnityEditor;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Game.Questing
 {
-    public class QuestHUD : MonoBehaviour
+    public class QuestHud : MonoBehaviour, IPointerClickHandler
     {
         [SerializeField] private TextMeshProUGUI _name = null;
         [SerializeField] private Transform _requirementsTransform = null;
+        private SideQuestPanelHud.OnQuestClickDelegate _onClickDelegate = null;    
         
         private ObjectPool _pool = null;
         private LiveQuest _data;
@@ -25,7 +26,6 @@ namespace Game.Questing
 
         public void ClearRequirements()
         {
-            Debug.Log("Clear Requirements CALLED");
             while (_requirementsTransform.childCount > 0)
             {
                 var toRemove = _requirementsTransform.GetChild(0).gameObject;
@@ -50,6 +50,20 @@ namespace Game.Questing
         {
             ClearRequirements();
             AddRequirements();
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            _onClickDelegate?.Invoke(_data);
+        }
+
+        public void ConsumeLiveQuest(LiveQuest liveQuest)
+        {
+        }
+
+        public void SetOnOkClickDelegate(SideQuestPanelHud.OnQuestClickDelegate _delegate)
+        {
+            _onClickDelegate = _delegate;
         }
     }
 }

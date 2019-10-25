@@ -12,6 +12,7 @@ namespace Menu
         [SerializeField] private bool   _displayed;
         public bool                     Displayed => _displayed;
 
+        public Animator MenuAnimator => _animator;
         #endregion
         
         #region Animator Variables
@@ -38,7 +39,7 @@ namespace Menu
                 Cursor.lockState = display ? CursorLockMode.None : CursorLockMode.Locked;
             if (OnShow != null && !force)
                 OnShow(display);
-            _animator.SetBool(_hashShowed, display);
+            MenuAnimator.SetBool(_hashShowed, display);
             _displayed = display;
         }
         
