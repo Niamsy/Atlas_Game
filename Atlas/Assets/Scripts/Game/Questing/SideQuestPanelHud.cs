@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Game.Questing
 {
-    public class SideQuestPanelHUD : MonoBehaviour
+    public class SideQuestPanelHud : MonoBehaviour
     {
         [SerializeField] private ObjectPool questPool = null;
         [SerializeField] private ObjectPool requirementPool = null;

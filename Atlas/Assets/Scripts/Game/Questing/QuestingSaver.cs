@@ -8,21 +8,23 @@ using UnityEngine;
 
 namespace Game.Questing
 {
-    [RequireComponent(typeof(QuestingHUD))]
     public class QuestingSaver : MapSavingBehaviour
     {
-        [SerializeField] private SideQuestPanelHUD _sideQuestPanelHud = null;
+        [SerializeField] private SideQuestPanelHud _sideQuestPanelHud = null;
+        [SerializeField] private QuestingHud _newQuestHud = null;
+        [SerializeField] private QuestingHud _questCompleteHud = null;
+        [SerializeField] private QuestingHud _questLogHud = null;
+
         private List<Quest> _quests;
-        private QuestingHUD _questingHud;
         private readonly List<LiveQuest> _liveQuests = new List<LiveQuest>();
 
         public void AddQuest(Quest quest)
         {
             var liveQuest = new LiveQuest(quest);
             _liveQuests.Add(liveQuest);
-            _questingHud.NewQuest(liveQuest);
+            _newQuestHud.SetData(liveQuest);
             _sideQuestPanelHud.AddQuest(liveQuest);
-            _questingHud.Show(true);
+            _newQuestHud.Show(true);
         }
 
         public void ValidateRequirement(Condition condition, ItemAbstract item, int count)
@@ -39,25 +41,24 @@ namespace Game.Questing
                     liveRequirement.IncrementAccomplished(count);
                 }
 
-                if (liveQuest.IsFinished)
+                if (!liveQuest.IsFinished) continue;
+                
+                toRemove.Add(liveQuest);
+                _questCompleteHud.SetData(liveQuest);
+                _questCompleteHud.Show(true);
+                _questCompleteHud.SetDelegate(quest =>
                 {
                     // Give Rewards to the player
-                    _questingHud.QuestComplete(liveQuest);
-                    _questingHud.Show(true);
-                    toRemove.Add(liveQuest);
-                }
+                    Debug.Log("GIVE REWARDS TO THE PLAYER DAMN");
+                    GiveRewards(quest);
+                });
             }
+            
             foreach (var liveQuest in toRemove)
             {
                 _sideQuestPanelHud.RemoveQuest(liveQuest);
                 _liveQuests.Remove(liveQuest);
             }
-        }
-        
-        protected override void Awake()
-        {
-            base.Awake();
-            _questingHud = GetComponent<QuestingHUD>();
         }
 
         public void GiveRewards(LiveQuest quest)
@@ -72,15 +73,15 @@ namespace Game.Questing
 
         private void OnEnable()
         {
-//            SaveManager.Instance.InputControls.Player.Quest.performed += _questingHud.OpenCloseQuesting;
-//            SaveManager.Instance.InputControls.Player.Quest.Enable();
+            SaveManager.Instance.InputControls.Player.Quest.performed += _questLogHud.OpenCloseQuesting;
+            SaveManager.Instance.InputControls.Player.Quest.Enable();
             _quests = new AssetsLoader<Quest>().Load();
         }
 
         private void OnDisable()
         {
-//            SaveManager.Instance.InputControls.Player.Quest.performed -= _questingHud.OpenCloseQuesting;
-//            SaveManager.Instance.InputControls.Player.Quest.Disable();
+            SaveManager.Instance.InputControls.Player.Quest.performed -= _questLogHud.OpenCloseQuesting;
+            SaveManager.Instance.InputControls.Player.Quest.Disable();
         }
 
         protected override void SavingMapData(MapData data)
@@ -92,10 +93,10 @@ namespace Game.Questing
         {
             foreach (var questData in data.Questing.Quests)
             {
-                var questSO = _quests.Find(quest => quest.Id == questData.Id);
-                if (questSO != null)
+                var questSo = _quests.Find(quest => quest.Id == questData.Id);
+                if (questSo != null)
                 {
-                    LiveQuests.Add(new LiveQuest(questSO, questData.Requirements));
+                    LiveQuests.Add(new LiveQuest(questSo, questData.Requirements));
                 }
                 else
                 {

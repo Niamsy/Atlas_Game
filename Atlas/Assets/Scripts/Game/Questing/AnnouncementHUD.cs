@@ -1,42 +1,32 @@
 ﻿using Localization;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Game.Questing
 {
-    public class AnnouncementHUD : MonoBehaviour
+    public class AnnouncementHUD : ALiveQuestConsumer
     {
         [SerializeField] private TextMeshProUGUI announcement = null;
         [SerializeField] private TextMeshProUGUI title = null;
         [SerializeField] private Image image = null;
 
-        [SerializeField] private LocalizedText newQuest = null;
-        [SerializeField] private LocalizedText newObjective = null;
-        [SerializeField] private LocalizedText questComplete = null;
+        [FormerlySerializedAs("newQuest")] 
+        [SerializeField] private LocalizedText announcementTitle = null;
 
-        [SerializeField] private Sprite questSprite = null;
-        [SerializeField] private Sprite objectiveSprite = null;
-        
-        public void NewQuest(LiveQuest quest)
+        [FormerlySerializedAs("questSprite")] 
+        [SerializeField] private Sprite announcementSprite = null;
+
+        public override void ConsumeLiveQuest(LiveQuest liveQuest)
         {
-            announcement.text = newQuest;
-            title.text = quest.Quest.Name;
-            image.sprite = questSprite;
+            image.sprite = announcementSprite;
+            title.text = liveQuest.Quest.Name;
+            announcement.text = announcementTitle;
         }
 
-        public void QuestComplete(LiveQuest quest)
+        public override void SetOnOkClickDelegate(OnOkClickDelegate _delegate)
         {
-            announcement.text = questComplete;
-            title.text = quest.Quest.Name;
-            image.sprite = questSprite;
-        }
-
-        public void NewObjective(Objective objective)
-        {
-            announcement.text = newObjective;
-            title.text = objective.Goal;
-            image.sprite = objectiveSprite;
         }
     }
 }

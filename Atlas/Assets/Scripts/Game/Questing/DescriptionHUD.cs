@@ -1,25 +1,39 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using Tools;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Game.Questing
 {
-    public class DescriptionHUD : MonoBehaviour
+    public class DescriptionHud : ALiveQuestConsumer
     {
         [SerializeField] private TextMeshProUGUI xp = null;
         [SerializeField] private TextMeshProUGUI description = null;
         [SerializeField] private Transform contentTransform = null;
         [SerializeField] private ObjectPool rewardPool = null;
+        [SerializeField] private Button button = null;
 
         private LiveQuest _quest;
+        private OnOkClickDelegate _onOkClickDelegate = null;
         
-        public void SetData(LiveQuest quest)
+        public override void SetOnOkClickDelegate(OnOkClickDelegate _delegate)
+        {
+            _onOkClickDelegate = _delegate;
+        }
+
+        private void Awake()
+        {
+            button.onClick.AddListener(() => { _onOkClickDelegate?.Invoke(); });
+        }
+
+        public override void ConsumeLiveQuest(LiveQuest quest)
         {
             _quest = quest;
             xp.text = _quest.Quest.Xp + " XP";
             if (description != null)
                 description.text = _quest.Quest.Description;
-            RefreshHUD();
+            RefreshHud();
         }
 
         private void ClearRewards()
@@ -43,7 +57,7 @@ namespace Game.Questing
             }
         }
 
-        private void RefreshHUD()
+        private void RefreshHud()
         {
             ClearRewards();
             AddRewards();
