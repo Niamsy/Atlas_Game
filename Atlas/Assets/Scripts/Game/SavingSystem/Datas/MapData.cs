@@ -96,7 +96,8 @@ namespace Game.SavingSystem.Datas
         public PlantSaveData[]      Plants;
         public ItemDroppedsData[]   DroppedItems;
         public List<ItemBaseData>	Inventory;
-        public ItemBaseData			EquippedHand;
+        public List<ItemBaseData>	EquippedItems;
+        public int                  SelectedItems;
         public TransformSaveData	TransformData;
         public DateData				CalendarData;
         public XPSaveData           XPData;

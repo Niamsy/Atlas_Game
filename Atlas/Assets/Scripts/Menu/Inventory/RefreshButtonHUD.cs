@@ -35,17 +35,16 @@ namespace Menu.Inventory
 
         public void GetScannedPlantsFinished(bool success, string message, List<RequestManager.ScannedPlant> scannedPlants)
         {
-            Debug.Log("last get scanned plant = " + _lastGetScannedPlant);
             List<ItemStack> seeds = new List<ItemStack>();
             PlayerInventory inventory = FindObjectOfType<PlayerInventory>();
 
             scannedPlants.RemoveAll(s => DateTime.Compare(DateTime.Parse(s.scanned_at), _lastGetScannedPlant) <= 0);
             if (scannedPlants.Count > 0)
             {
-                foreach (var scanned_plant in scannedPlants)
+                foreach (var scannedPlant in scannedPlants)
                 {
                     var stack = new ItemStack();
-                    var seed = ItemFactory.GetItemForId(scanned_plant.id + 1000);
+                    var seed = ItemFactory.GetItemForId(scannedPlant.id + 1000);
                     if (seed)
                     {
                         stack.SetItem(seed, 1);

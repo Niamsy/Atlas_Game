@@ -431,7 +431,7 @@ namespace Networking
         {
             ScannedPlant[] scannedPlants = null;
 
-            if (!CanReceiveANewRequest || !IsConnected())
+	        if (!CanReceiveANewRequest || !IsConnected())
                 return (scannedPlants);
 
             _actualOperation = StartCoroutine(GetScannedPlantsCoroutine());
