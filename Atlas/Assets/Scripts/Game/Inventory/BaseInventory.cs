@@ -69,11 +69,7 @@ namespace Game.Inventory
             foreach (ItemStack itemStack in Slots)
             {
                 if (itemStack.FuseStack(newItem) && newItem.IsEmpty)
-                {
-                    Debug.Log("Fuse " + newItem.Content.Id);
-                    Debug.Log("Fuse " + itemStack.Content.Id);
                     return (null);
-                }
             }
             
 

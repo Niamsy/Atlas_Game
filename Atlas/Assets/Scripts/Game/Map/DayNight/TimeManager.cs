@@ -1,36 +1,29 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
-namespace Game
+namespace Game.Map.DayNight
 {
     public class TimeManager
     {
-        #region Singleton
-        private static TimeManager _instance = null;
-        public static TimeManager Instance
+        static private List<Object> _pauseAsker = new List<Object>();
+        static public bool IsGamePaused => (_pauseAsker.Count > 0);
+        static private float _gameSpeed = 1f;
+
+        static public void AskForPause(Object value)
         {
-            get
-            {
-                if (_instance == null)
-                    _instance = new TimeManager();
-                return (_instance);
-            }
-        }
-        #endregion
-    
-        private bool _gamePaused = false;
-        public bool IsGamePaused    { get { return (_gamePaused); } }
-        
-        private float _gameSpeed = 1f;
-    
-        public void PauseGame(bool paused)
-        {
-            _gamePaused = paused;
+            _pauseAsker.Add(value);
             UpdateGameSpeed();
         }
 
-        private void UpdateGameSpeed()
+        static public void StopPause(Object value)
         {
-            if (_gamePaused)
+            _pauseAsker.Remove(value);
+            UpdateGameSpeed();
+        }
+    
+        static private void UpdateGameSpeed()
+        {
+            if (IsGamePaused)
                 Time.timeScale = 0f;
             else
                 Time.timeScale = _gameSpeed;
