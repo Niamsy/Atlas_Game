@@ -51,6 +51,9 @@ namespace Game.Item
             return EquipedObject;
         }
 
+        [SerializeField] private ItemCategory _category = null;
+        public ItemCategory Category => _category;
+
         public virtual void UnEquip()
         {
             if (EquipedObject != null)

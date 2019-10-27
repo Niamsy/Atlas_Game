@@ -64,8 +64,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 45
@@ -287,6 +285,8 @@ MonoBehaviour:
   _Book: {fileID: 11400000, guid: 5f184b0a38b74b84e8d95bdae42c2e0b, type: 2}
   _craftingHUD: {fileID: 0}
   _camera: {fileID: 0}
+  _conditionEvent: {fileID: 11400000, guid: 7982aa52f640cf44fa452f971b97ef0e, type: 2}
+  _raisedCondition: {fileID: 11400000, guid: 67d764ca89ee6f647b995e8c25e1ae0b, type: 2}
 --- !u!95 &1578942677647969926
 Animator:
   serializedVersion: 3
@@ -338,6 +338,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1944311849047145332}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 0c721abed0d719a4290212c4ebe44aba,
+        type: 3}
+      propertyPath: m_Name
+      value: edc
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 0c721abed0d719a4290212c4ebe44aba,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -407,11 +412,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 0c721abed0d719a4290212c4ebe44aba,
-        type: 3}
-      propertyPath: m_Name
-      value: edc
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c721abed0d719a4290212c4ebe44aba, type: 3}

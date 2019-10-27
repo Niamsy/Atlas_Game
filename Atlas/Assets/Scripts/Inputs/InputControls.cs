@@ -97,6 +97,14 @@ public class InputControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""Quest"",
+                    ""type"": ""Button"",
+                    ""id"": ""8b0180f4-c61d-4e51-9d4c-9c7accfa40ba"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -429,6 +437,28 @@ public class InputControls : IInputActionCollection, IDisposable
                     ""action"": ""UseItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""64fd3d39-489f-41a4-8c5c-b92c9802cc13"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""Quest"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7c324179-ea51-42cc-b7ff-74081ab75a09"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Quest"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -513,6 +543,7 @@ public class InputControls : IInputActionCollection, IDisposable
         m_Player_CameraZoom = m_Player.FindAction("CameraZoom", throwIfNotFound: true);
         m_Player_CameraClick = m_Player.FindAction("CameraClick", throwIfNotFound: true);
         m_Player_RecenterCamera = m_Player.FindAction("RecenterCamera", throwIfNotFound: true);
+        m_Player_Quest = m_Player.FindAction("Quest", throwIfNotFound: true);
         // Debug
         m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
         m_Debug_SpeedUpTime = m_Debug.FindAction("SpeedUpTime", throwIfNotFound: true);
@@ -575,6 +606,7 @@ public class InputControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_CameraZoom;
     private readonly InputAction m_Player_CameraClick;
     private readonly InputAction m_Player_RecenterCamera;
+    private readonly InputAction m_Player_Quest;
     public struct PlayerActions
     {
         private InputControls m_Wrapper;
@@ -589,6 +621,7 @@ public class InputControls : IInputActionCollection, IDisposable
         public InputAction @CameraZoom => m_Wrapper.m_Player_CameraZoom;
         public InputAction @CameraClick => m_Wrapper.m_Player_CameraClick;
         public InputAction @RecenterCamera => m_Wrapper.m_Player_RecenterCamera;
+        public InputAction @Quest => m_Wrapper.m_Player_Quest;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -628,6 +661,9 @@ public class InputControls : IInputActionCollection, IDisposable
                 RecenterCamera.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRecenterCamera;
                 RecenterCamera.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRecenterCamera;
                 RecenterCamera.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRecenterCamera;
+                Quest.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuest;
+                Quest.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuest;
+                Quest.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuest;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -662,6 +698,9 @@ public class InputControls : IInputActionCollection, IDisposable
                 RecenterCamera.started += instance.OnRecenterCamera;
                 RecenterCamera.performed += instance.OnRecenterCamera;
                 RecenterCamera.canceled += instance.OnRecenterCamera;
+                Quest.started += instance.OnQuest;
+                Quest.performed += instance.OnQuest;
+                Quest.canceled += instance.OnQuest;
             }
         }
     }
@@ -729,6 +768,7 @@ public class InputControls : IInputActionCollection, IDisposable
         void OnCameraZoom(InputAction.CallbackContext context);
         void OnCameraClick(InputAction.CallbackContext context);
         void OnRecenterCamera(InputAction.CallbackContext context);
+        void OnQuest(InputAction.CallbackContext context);
     }
     public interface IDebugActions
     {

@@ -162,9 +162,9 @@ namespace Game.Inventory
             for (var i = 0; i < Slots.Capacity; i++)
             {
                 var itemStack = Slots[i];
-                if (itemStack.IsEmpty == false)
+                if (itemStack.IsEmpty == false && itemStack.Content.Id == itemToDestroy.Id)
                 {
-                    if (itemStack.Content.Id == itemToDestroy.Id)
+                    if (itemStack.Quantity - quantity >= 0)
                     {
                         quantity -= itemStack.Quantity;
                         stacksToEmpty.Add(itemStack);
