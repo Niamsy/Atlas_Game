@@ -10,13 +10,24 @@ PrefabInstance:
     - target: {fileID: 6206562519876059882, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
         type: 3}
       propertyPath: m_Name
-      value: 10006_Grass
+      value: 1006_Grass
       objectReference: {fileID: 0}
-    - target: {fileID: 6057376587732904097, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+    - target: {fileID: 61835651470404897, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
         type: 3}
-      propertyPath: CraftableResources.Array.size
-      value: 0
+      propertyPath: _listOfStocks.Array.data[1].Limit
+      value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 61835651470404897, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: _listOfStocks.Array.data[0].Limit
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6206562519876059879, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: PlantStatistics
+      value: 
+      objectReference: {fileID: 11400000, guid: 14281a624e8304f478bbab277277cbc6,
+        type: 2}
     - target: {fileID: 6206562519876059875, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -72,21 +83,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6206562519876059879, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+    - target: {fileID: 6057376587732904097, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
         type: 3}
-      propertyPath: PlantStatistics
-      value: 
-      objectReference: {fileID: 11400000, guid: 14281a624e8304f478bbab277277cbc6,
-        type: 2}
-    - target: {fileID: 61835651470404897, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
-        type: 3}
-      propertyPath: _listOfStocks.Array.data[1].Limit
-      value: 20
+      propertyPath: CraftableResources.Array.size
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 61835651470404897, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
-        type: 3}
-      propertyPath: _listOfStocks.Array.data[0].Limit
-      value: 20
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4794581424399416383, guid: 4c3218684e4ac9a4aa60b424b4122b7d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4c3218684e4ac9a4aa60b424b4122b7d, type: 3}

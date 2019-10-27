@@ -1,5 +1,6 @@
 ﻿using System;
 using Game.Inventory;
+using Game.Questing;
 using Plants.Plant;
 using UnityEngine;
 
@@ -9,6 +10,8 @@ namespace Game.Item.PlantSeed
      CreateAssetMenu(fileName = "Seed", menuName = "Item/Seed", order = 1)]
     public class Seed : ItemAbstract
     {
+        [SerializeField] private ConditionEvent _sowQuestEvent = null;
+        [SerializeField] private Condition _sowCondition = null;
         private Vector3 _location = new Vector3(0,0,0);
 
         public override void Use(ItemStack selfStack)
@@ -19,6 +22,7 @@ namespace Game.Item.PlantSeed
             PlantModel plantModel = Instantiate(PlantStatistics.Prefab, _location, new Quaternion(0,0,0,1)).GetComponent<PlantModel>();
             plantModel.Sow();
             plantModel.SetPlantName();
+            _sowQuestEvent.Raise(_sowCondition, this, 1);
         }
 
         public override bool CanUse(Transform transform)

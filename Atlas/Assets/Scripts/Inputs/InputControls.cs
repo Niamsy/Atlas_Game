@@ -161,6 +161,14 @@ public class InputControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""Quest"",
+                    ""type"": ""Button"",
+                    ""id"": ""8b0180f4-c61d-4e51-9d4c-9c7accfa40ba"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -507,6 +515,17 @@ public class InputControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""64fd3d39-489f-41a4-8c5c-b92c9802cc13"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""Quest"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""3c93925a-d199-4dd2-9aa6-33af11610a6a"",
                     ""path"": ""<Keyboard>/3"",
                     ""interactions"": """",
@@ -579,6 +598,17 @@ public class InputControls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""Select Field 7"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7c324179-ea51-42cc-b7ff-74081ab75a09"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Quest"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -673,6 +703,7 @@ public class InputControls : IInputActionCollection, IDisposable
         m_Player_SelectField6 = m_Player.FindAction("Select Field 6", throwIfNotFound: true);
         m_Player_SelectField7 = m_Player.FindAction("Select Field 7", throwIfNotFound: true);
         m_Player_SelectField8 = m_Player.FindAction("Select Field 8", throwIfNotFound: true);
+        m_Player_Quest = m_Player.FindAction("Quest", throwIfNotFound: true);
         // Debug
         m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
         m_Debug_SpeedUpTime = m_Debug.FindAction("SpeedUpTime", throwIfNotFound: true);
@@ -743,6 +774,7 @@ public class InputControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_SelectField6;
     private readonly InputAction m_Player_SelectField7;
     private readonly InputAction m_Player_SelectField8;
+    private readonly InputAction m_Player_Quest;
     public struct PlayerActions
     {
         private InputControls m_Wrapper;
@@ -765,6 +797,7 @@ public class InputControls : IInputActionCollection, IDisposable
         public InputAction @SelectField6 => m_Wrapper.m_Player_SelectField6;
         public InputAction @SelectField7 => m_Wrapper.m_Player_SelectField7;
         public InputAction @SelectField8 => m_Wrapper.m_Player_SelectField8;
+        public InputAction @Quest => m_Wrapper.m_Player_Quest;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -828,6 +861,9 @@ public class InputControls : IInputActionCollection, IDisposable
                 SelectField8.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectField8;
                 SelectField8.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectField8;
                 SelectField8.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectField8;
+                Quest.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuest;
+                Quest.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuest;
+                Quest.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuest;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -886,6 +922,9 @@ public class InputControls : IInputActionCollection, IDisposable
                 SelectField8.started += instance.OnSelectField8;
                 SelectField8.performed += instance.OnSelectField8;
                 SelectField8.canceled += instance.OnSelectField8;
+                Quest.started += instance.OnQuest;
+                Quest.performed += instance.OnQuest;
+                Quest.canceled += instance.OnQuest;
             }
         }
     }
@@ -961,6 +1000,7 @@ public class InputControls : IInputActionCollection, IDisposable
         void OnSelectField6(InputAction.CallbackContext context);
         void OnSelectField7(InputAction.CallbackContext context);
         void OnSelectField8(InputAction.CallbackContext context);
+        void OnQuest(InputAction.CallbackContext context);
     }
     public interface IDebugActions
     {
