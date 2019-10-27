@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AtlasAudio;
+using AtlasEvents;
 using Game.Inventory;
 using Game.Item;
 using Game.SavingSystem;
@@ -27,6 +29,10 @@ namespace Game.Questing
         [SerializeField] private LocalizedText warningText = null;
         [SerializeField] private PlayerController playerController = null;
         [SerializeField] private LevelingEvent _event = null;
+
+        [Header("Audio")] 
+        [SerializeField] private Audio requirementValidatedAudio = null;
+        [SerializeField] private AudioEvent validatedAudioEvent = null;
         
         private List<Quest> _quests;
         private readonly List<LiveQuest> _liveQuests = new List<LiveQuest>();
@@ -47,6 +53,7 @@ namespace Game.Questing
         public void ValidateRequirement(Condition condition, ItemAbstract item, int count)
         {
             var toRemove = new List<LiveQuest>();
+            var validated = false;
             
             foreach (var liveQuest in _liveQuests)
             {
@@ -56,6 +63,7 @@ namespace Game.Questing
                 foreach (var liveRequirement in requirements)
                 {
                     liveRequirement.IncrementAccomplished(count);
+                    validated = true;
                 }
 
                 if (!liveQuest.IsFinished) continue;
@@ -63,18 +71,25 @@ namespace Game.Questing
                 questCompleteHud.SetData(liveQuest);
                 questCompleteHud.SetDelegate(GiveRewards);
                 ShowCompletedQuestHud();
-                
-                if (_currentlySelectedQuest == null || liveQuest.Quest != _currentlySelectedQuest.Value.Quest) continue;
-                if (_liveQuests.Count > 0)
-                    _currentlySelectedQuest = _liveQuests.First();
-                else
-                    _currentlySelectedQuest = null;
+            }
+
+            if (validated)
+            {
+                if (validatedAudioEvent != null && requirementValidatedAudio != null)
+                {
+                    validatedAudioEvent.Raise(requirementValidatedAudio, null);
+                }
             }
             
             foreach (var liveQuest in toRemove)
             {
                 sideQuestPanelHud.RemoveQuest(liveQuest);
                 _liveQuests.Remove(liveQuest);
+                if (_currentlySelectedQuest == null || liveQuest.Quest.Id != _currentlySelectedQuest.Value.Quest.Id) continue;
+                if (_liveQuests.Count > 0)
+                    _currentlySelectedQuest = _liveQuests.First();
+                else
+                    _currentlySelectedQuest = null;
             }
         }
 
