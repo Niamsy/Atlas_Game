@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Game.Questing
 {
-    public class RewardHUD : MonoBehaviour
+    public class RewardHud : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI rewardName = null;
         [SerializeField] private Image image = null;

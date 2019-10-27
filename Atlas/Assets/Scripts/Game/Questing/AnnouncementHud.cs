@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Game.Questing
 {
-    public class AnnouncementHUD : ALiveQuestConsumer
+    public class AnnouncementHud : ALiveQuestConsumer
     {
         [SerializeField] private TextMeshProUGUI announcement = null;
         [SerializeField] private TextMeshProUGUI title = null;

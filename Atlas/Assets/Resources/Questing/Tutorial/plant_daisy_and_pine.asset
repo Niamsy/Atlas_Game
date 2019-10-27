@@ -10,16 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fce37d24c2e84390962209b7402f9d3c, type: 3}
-  m_Name: Quest1
+  m_Name: plant_daisy_and_pine
   m_EditorClassIdentifier: 
   _name: {fileID: 11400000, guid: 2cf3bce8b40dd984ca4d7b9158a711bf, type: 2}
   _description: {fileID: 11400000, guid: bf4ea7d4ece7f4549b2bcb4f938339f9, type: 2}
-  requirements:
+  requirementses:
   - condition: {fileID: 11400000, guid: 4485dd87b57a9c944888d5bc75c268c6, type: 2}
     argument: {fileID: 11400000, guid: 8b5338a7d62c7cb4390aee788fa8e191, type: 2}
+    description: {fileID: 11400000, guid: 6e5977c3060551f4894bfd648617ccd0, type: 2}
     count: 3
-  - condition: {fileID: 11400000, guid: b61e128b078dc104aab16a1359e68250, type: 2}
+  - condition: {fileID: 11400000, guid: 4485dd87b57a9c944888d5bc75c268c6, type: 2}
     argument: {fileID: 11400000, guid: 23ea14286d3a76945ab0073331bd80ca, type: 2}
+    description: {fileID: 11400000, guid: 90d7473bb6b4500469776ea02f5430d3, type: 2}
     count: 1
   _xp: 200
   _rewards:

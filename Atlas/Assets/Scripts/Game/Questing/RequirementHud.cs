@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game.Questing
 {
-    public class RequirementHUD : MonoBehaviour
+    public class RequirementHud : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _name = null;
         [SerializeField] private TextMeshProUGUI _count = null;

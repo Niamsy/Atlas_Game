@@ -1,26 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Game.Inventory;
 using Game.Item;
 using Game.SavingSystem;
 using Game.SavingSystem.Datas;
+using Leveling;
 using Localization;
+using Player;
 using TMPro;
 using Tools.Tools;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace Game.Questing
 {
     public class QuestingSaver : MapSavingBehaviour
     {
-        [SerializeField] private SideQuestPanelHud _sideQuestPanelHud = null;
-        [SerializeField] private QuestingHud _newQuestHud = null;
-        [SerializeField] private QuestingHud _questCompleteHud = null;
-        [SerializeField] private QuestingHud _questLogHud = null;
-        [SerializeField] private AnimationClip _closingAnimation = null;
+        [FormerlySerializedAs("_sideQuestPanelHud")] [SerializeField] private SideQuestPanelHud sideQuestPanelHud = null;
+        [FormerlySerializedAs("_newQuestHud")] [SerializeField] private QuestingHud newQuestHud = null;
+        [FormerlySerializedAs("_questCompleteHud")] [SerializeField] private QuestingHud questCompleteHud = null;
+        [FormerlySerializedAs("_questLogHud")] [SerializeField] private QuestingHud questLogHud = null;
+        [FormerlySerializedAs("_closingAnimation")] [SerializeField] private AnimationClip closingAnimation = null;
         [SerializeField] private GameObject warning = null;
         [SerializeField] private LocalizedText warningText = null;
+        [SerializeField] private PlayerController playerController = null;
+        [SerializeField] private LevelingEvent _event = null;
         
         private List<Quest> _quests;
         private readonly List<LiveQuest> _liveQuests = new List<LiveQuest>();
@@ -33,8 +39,8 @@ namespace Game.Questing
             var liveQuest = new LiveQuest(quest);
             _currentlySelectedQuest = liveQuest;
             _liveQuests.Add(liveQuest);
-            _newQuestHud.SetData(liveQuest);
-            _sideQuestPanelHud.ConsumeLiveQuest(liveQuest);
+            newQuestHud.SetData(liveQuest);
+            sideQuestPanelHud.ConsumeLiveQuest(liveQuest);
             ShowNewQuestHud();
         }
 
@@ -54,12 +60,8 @@ namespace Game.Questing
 
                 if (!liveQuest.IsFinished) continue;
                 toRemove.Add(liveQuest);
-                _questCompleteHud.SetData(liveQuest);
-                _questCompleteHud.SetDelegate(quest =>
-                {
-                    // Give Rewards to the player
-                    GiveRewards(quest);
-                });
+                questCompleteHud.SetData(liveQuest);
+                questCompleteHud.SetDelegate(GiveRewards);
                 ShowCompletedQuestHud();
                 
                 if (_currentlySelectedQuest == null || liveQuest.Quest != _currentlySelectedQuest.Value.Quest) continue;
@@ -71,14 +73,27 @@ namespace Game.Questing
             
             foreach (var liveQuest in toRemove)
             {
-                _sideQuestPanelHud.RemoveQuest(liveQuest);
+                sideQuestPanelHud.RemoveQuest(liveQuest);
                 _liveQuests.Remove(liveQuest);
             }
         }
 
         public void GiveRewards(LiveQuest quest)
         {
+            if (quest.Quest.Xp > 0)
+            {
+                _event.Raise(quest.Quest.Xp, 1);
+            }
             
+            var items = new List<ItemStack>();
+            foreach (var reward in quest.Quest.Rewards)
+            {
+                var item = new ItemStack();
+                item.SetItem(reward.reward, reward.Count);
+                items.Add(item);
+            }
+
+            playerController.Inventory.AddItemStacks(items);
         }
         
         public List<LiveQuest> LiveQuests
@@ -88,103 +103,103 @@ namespace Game.Questing
 
         private void OpenCloseQuestLog(InputAction.CallbackContext ctx)
         {
-            if (_newQuestHud.Displayed)
+            if (newQuestHud.Displayed)
             {
-                _newQuestHud.Show(false);
+                newQuestHud.Show(false);
                 return;
             }
 
-            if (_questCompleteHud.Displayed)
+            if (questCompleteHud.Displayed)
             {
-                _newQuestHud.Show(false);
+                newQuestHud.Show(false);
                 return;
             }
             
-            if (!_questLogHud.Displayed && !_currentlySelectedQuest.HasValue)
+            if (!questLogHud.Displayed && !_currentlySelectedQuest.HasValue)
             {
                 var warn = Instantiate(warning, transform);
                 warn.GetComponent<TextMeshProUGUI>().text = warningText;
                 warn.transform.localScale = new Vector3(1, 1, 1);
             } 
-            else if (!_questLogHud.Displayed && _currentlySelectedQuest != null)
+            else if (!questLogHud.Displayed && _currentlySelectedQuest != null)
             {
                 OnQuestClick(_currentlySelectedQuest.Value);
             }
             else
             {
-                _questLogHud.Show(false);
+                questLogHud.Show(false);
             }
         }
         
         private void ShowNewQuestHudDelay()
         {
-            _questCompleteHud.Show(true);
+            questCompleteHud.Show(true);
         }
         
         private void ShowNewQuestHud()
         {
-            if (_questLogHud.Displayed)
+            if (questLogHud.Displayed)
             {
-                _questLogHud.Show(false);
+                questLogHud.Show(false);
                 Invoke(nameof(ShowNewQuestHudDelay), closingTime);
             } 
-            else if (_questCompleteHud.Displayed)
+            else if (questCompleteHud.Displayed)
             {
-                _questCompleteHud.Show(false);
+                questCompleteHud.Show(false);
                 Invoke(nameof(ShowNewQuestHudDelay), closingTime);
             }
-            else if (!_newQuestHud.Displayed)
+            else if (!newQuestHud.Displayed)
             {
-                _newQuestHud.Show(true);
+                newQuestHud.Show(true);
             }
         }
 
         private void ShowCompletedQuestHudDelay()
         {
-            _questCompleteHud.Show(true);
+            questCompleteHud.Show(true);
         }
         
         private void ShowCompletedQuestHud()
         {
-            if (_questLogHud.Displayed)
+            if (questLogHud.Displayed)
             {
-                _questLogHud.Show(false);
+                questLogHud.Show(false);
                 Invoke(nameof(ShowCompletedQuestHudDelay), closingTime);
             } 
-            else if (_newQuestHud.Displayed)
+            else if (newQuestHud.Displayed)
             {
-                _newQuestHud.Show(false);
+                newQuestHud.Show(false);
                 Invoke(nameof(ShowCompletedQuestHudDelay), closingTime);
             }
-            else if (!_questCompleteHud.Displayed)
+            else if (!questCompleteHud.Displayed)
             {
-                _questCompleteHud.Show(true);
+                questCompleteHud.Show(true);
             }
         }
 
         private void ShowQuestLogDelay()
         {
-            _questLogHud.Show(true);
+            questLogHud.Show(true);
         }
 
         
         private void OnQuestClick(LiveQuest quest)
         {
             _currentlySelectedQuest = quest;
-            _questLogHud.SetData(_currentlySelectedQuest.Value);
-            if (_newQuestHud.Displayed)
+            questLogHud.SetData(_currentlySelectedQuest.Value);
+            if (newQuestHud.Displayed)
             {
-                _newQuestHud.Show(false);
+                newQuestHud.Show(false);
                 Invoke(nameof(ShowQuestLogDelay), closingTime);
             } 
-            else if (_questCompleteHud.Displayed)
+            else if (questCompleteHud.Displayed)
             {
-                _questCompleteHud.Show(false);
+                questCompleteHud.Show(false);
                 Invoke(nameof(ShowQuestLogDelay), closingTime);
             }
-            else if (!_questLogHud.Displayed)
+            else if (!questLogHud.Displayed)
             {
-                _questLogHud.Show(true);
+                questLogHud.Show(true);
             }
         }
 
@@ -193,8 +208,8 @@ namespace Game.Questing
             SaveManager.Instance.InputControls.Player.Quest.performed += OpenCloseQuestLog;
             SaveManager.Instance.InputControls.Player.Quest.Enable();
             _quests = new AssetsLoader<Quest>().Load();
-            _sideQuestPanelHud.SetOnOkClickDelegate(OnQuestClick);
-            closingTime = _closingAnimation.length;
+            sideQuestPanelHud.SetOnOkClickDelegate(OnQuestClick);
+            closingTime = closingAnimation.length;
         }
 
         private void OnDisable()

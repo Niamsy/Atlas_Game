@@ -40,7 +40,7 @@ namespace Game.Questing
                 var requirementObj = _pool.GetObject();
                 requirementObj.transform.SetParent(_requirementsTransform);
                 requirementObj.transform.localScale = new Vector3(1, 1, 1);
-                var requirementHud = requirementObj.GetComponent<RequirementHUD>();
+                var requirementHud = requirementObj.GetComponent<RequirementHud>();
                 // TODO Get from save
                 requirementHud.SetRequirement(requirement);
             }

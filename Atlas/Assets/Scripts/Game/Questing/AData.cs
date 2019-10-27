@@ -40,7 +40,7 @@ namespace Game.Questing
 
         public static bool operator ==(AData data1, AData data2)
         {
-            return data2 != null && data1 != null && data1.Id == data2.Id;
+            return data1.Id == data2.Id;
         }
 
         public static bool operator !=(AData data1, AData data2)

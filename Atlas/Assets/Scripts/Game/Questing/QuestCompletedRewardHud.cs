@@ -46,7 +46,7 @@ namespace Game.Questing
                 var rewardObj = rewardPool.GetObject();
                 rewardObj.transform.SetParent(contentTransform);
                 rewardObj.transform.localScale = new Vector3(1, 1, 1);
-                var rewardHud = rewardObj.GetComponent<RewardHUD>();
+                var rewardHud = rewardObj.GetComponent<RewardHud>();
                 rewardHud.SetData(reward);
             }
         }
