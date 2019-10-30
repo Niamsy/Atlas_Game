@@ -22,6 +22,7 @@ namespace Inputs
         private static void UpdateCursor()
         {
             Cursor.lockState = _cursorNeedObjects.Count == 0 ? CursorLockMode.Locked : CursorLockMode.None;
+            Cursor.visible = _cursorNeedObjects.Count != 0;
         }
     }
 }

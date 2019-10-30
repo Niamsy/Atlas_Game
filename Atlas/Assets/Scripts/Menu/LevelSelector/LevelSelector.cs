@@ -1,6 +1,7 @@
 ﻿using Game.Player.Stats;
 using System.Collections;
 using System.Collections.Generic;
+using SceneManagement;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -140,7 +141,7 @@ namespace Menu.LevelSelector
                             string sceneName = Levels[i].LevelSceneName;
                             Debug.Log("Btn name: " + btn.name);
                             Debug.Log("Scene name launched: " + sceneName);
-                            btn.onClick.AddListener(() => load.LoadSceneIndex(sceneName));
+                            btn.onClick.AddListener(() => SceneLoader.Instance.LoadScene(2, 1));
                         }
                     }
                 }
