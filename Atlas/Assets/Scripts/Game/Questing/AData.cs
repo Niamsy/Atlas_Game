@@ -38,14 +38,11 @@ namespace Game.Questing
             }
         }
 
-        public static bool operator ==(AData data1, AData data2)
+        public static bool Equals(AData data1, AData data2)
         {
-            return data1.Id == data2.Id;
-        }
-
-        public static bool operator !=(AData data1, AData data2)
-        {
-            return !(data1 == data2);
+            if (data1 == null || data2 == null)
+                return (data1 == null && data2 == null);
+            return  (data1.Id == data2.Id);
         }
         #endregion
     }

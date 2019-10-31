@@ -50,5 +50,13 @@ namespace Menu.Inventory
                 _handStackUI[x].SetAction(actions[x]);
             }
         }
+
+        private void Update()
+        {
+            if (_handSlot.SelectedItem && _handSlot.SelectedItem.CanUse(_handSlot.transform))
+                _useText.text = _handSlot.SelectedItem.UsageText;
+            else
+                _useText.text = "";
+        }
     }
 }
