@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Game.Inventory;
+using Game.Questing;
 using Game.SavingSystem;
 using Player;
 using UnityEngine;
@@ -12,17 +13,26 @@ namespace Game.Crafting
     [RequireComponent(typeof(CraftingSaver))]
     public class Crafter : AInteractable
     {
+        [Header("Crafting")]
         [SerializeField] private RecipeBook _Book = null;
-        [SerializeField] private CraftingMenuHUD _craftingHUD = null;
 
+        [Header("UI")]
+        [SerializeField] private CraftingMenuHUD _craftingHUD = null;
         private Collider _collider;
         private Canvas _guiCanvas;
         private List<Recipe.Product> _productsOngoing = new List<Recipe.Product>();
         private List<Recipe.Product> _productsFinished = new List<Recipe.Product>();
         private BaseInventory _inventory;
         private UnityAction<Recipe.Product, int> _productFinishedCB;
+        
+        [Tooltip("Camera to lock when the crafting menu is open")]
         [SerializeField] private CinemachineFreeLookInputConversion _camera = null;
         private bool isShown;
+
+        [Header("Questing")]
+        [Tooltip("Event raised when something have been crafted")]
+        [SerializeField] private ConditionEvent _conditionEvent = null;
+        [SerializeField] private Condition _raisedCondition = null;
         
         public RecipeBook RecipeBook => _Book;
 
@@ -140,6 +150,7 @@ namespace Game.Crafting
             }
 
             var product = _productsFinished[position];
+            _conditionEvent.Raise(_raisedCondition, product.Item, 1);
             _productsFinished.RemoveAt(position);
             return product;
         }
@@ -158,6 +169,7 @@ namespace Game.Crafting
         
         public bool Produce(Recipe recipe, BaseInventory inventory)
         {
+            
             
             if (!recipe.Ingredients.All(ingredient =>
                     inventory.DestroyFirsts(ingredient.Item, ingredient.RequiredQuantity))) return false;

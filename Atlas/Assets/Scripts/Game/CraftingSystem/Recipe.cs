@@ -3,6 +3,7 @@ using Game.Item;
 using UnityEngine;
 using System;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace Game
 {
@@ -86,7 +87,7 @@ namespace Game
             #region Public Accessors
             public Ingredient[] Ingredients => ingredients;
             public Product Produced => product;
-            public RecipeCategory Category => category;
+            public RecipeCategory RecipeCategory => recipeCategory;
             public bool isUnlocked => _unlocked;
             public int Duration => craftingDuration;
             #endregion
@@ -97,8 +98,9 @@ namespace Game
             #endregion
 
             #region Private Properties
+            [FormerlySerializedAs("category")]
             [Header("Recipe properties")]
-            [SerializeField] private RecipeCategory category = null;
+            [SerializeField] private RecipeCategory recipeCategory = null;
             [SerializeField][Tooltip("Duration in seconds for the crafting of the products")] private int craftingDuration = 5;
             [Space(10)][SerializeField] private Ingredient[] ingredients = Array.Empty<Ingredient>();
             [Space(10)][SerializeField] private Product product = null;

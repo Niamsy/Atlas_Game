@@ -1,4 +1,4 @@
-﻿using AtlasAudio;
+﻿    using AtlasAudio;
 using AtlasEvents;
 using Game;
 using Game.Map.DayNight;
@@ -50,11 +50,6 @@ namespace Menu.Inventory
                 TimeManager.StopPause(this);
             base.Show(display, force);
             _description.Reset();
-        }
-
-        public void QuitTheGame()
-        {
-            SceneLoader.Instance.QuitTheGame();
         }
     }
 }

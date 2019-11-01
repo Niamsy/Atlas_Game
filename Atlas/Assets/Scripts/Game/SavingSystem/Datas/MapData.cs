@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Game.Crafting;
 using Game.DayNight;
+using Game.Questing;
 using Game.ResourcesManagement;
 using Plants.Plant;
+//using UnityEditor;
 using UnityEngine;
 
 namespace Game.SavingSystem.Datas
@@ -92,14 +95,51 @@ namespace Game.SavingSystem.Datas
             }
         }
 
+        [Serializable]
+        public struct RequirementData
+        {
+            public Guid ConditionId;
+            public int ItemAbstractId;
+            public int CurrentlyAccomplished;
+            
+            public RequirementData(Requirement requirement, int currentlyAccomplished)
+            {
+                ConditionId = requirement.Condition.Id;
+                ItemAbstractId = requirement.Argument.Id;
+                CurrentlyAccomplished = currentlyAccomplished;
+            }
+        }
+        
+        [Serializable]
+        public struct QuestData
+        {
+            public Guid Id;
+            public RequirementData[] Requirements;
+            
+            public QuestData(LiveQuest data)
+            {
+                Id = data.Quest.Id;
+                Requirements = data.Requirements.Select(requirement =>
+                    new RequirementData(requirement.Requirement, requirement.CurrentlyAccomplished)).ToArray();
+            }
+        }
+
+        [Serializable]
+        public struct QuestingData
+        {
+            public QuestData[] Quests;
+        }
+
         public CraftingSaveData     Crafting;
         public PlantSaveData[]      Plants;
         public ItemDroppedsData[]   DroppedItems;
         public List<ItemBaseData>	Inventory;
-        public ItemBaseData			EquippedHand;
+        public List<ItemBaseData>	EquippedItems;
+        public int                  SelectedItems;
         public TransformSaveData	TransformData;
         public DateData				CalendarData;
         public XPSaveData           XPData;
         public List<Stock>          PlayerResource;
+        public QuestingData         Questing;
     }
 }

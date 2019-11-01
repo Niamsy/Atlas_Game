@@ -97,6 +97,78 @@ public class InputControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""Select Field 1"",
+                    ""type"": ""Button"",
+                    ""id"": ""bc110bcf-3531-422d-b8c4-f23c28ef4c77"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""Select Field 2"",
+                    ""type"": ""Button"",
+                    ""id"": ""ca1c2456-e390-4945-9884-93f0b17b093a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""Select Field 3"",
+                    ""type"": ""Button"",
+                    ""id"": ""7ae55088-ce76-4e2d-acb1-4afb21a25457"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""Select Field 4"",
+                    ""type"": ""Button"",
+                    ""id"": ""f1e51a72-c7f8-4261-8ab9-10a0095da2d1"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""Select Field 5"",
+                    ""type"": ""Button"",
+                    ""id"": ""0ae75eb9-f106-4716-97aa-335e61ff7133"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""Select Field 6"",
+                    ""type"": ""Button"",
+                    ""id"": ""91624c08-65eb-4f9e-98ab-a014b4048d2d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""Select Field 7"",
+                    ""type"": ""Button"",
+                    ""id"": ""342b3124-d7ed-4d4c-b2ca-08d87a288c4b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""Select Field 8"",
+                    ""type"": ""Button"",
+                    ""id"": ""d246dd5a-9818-47c8-8887-8a0a116d73bb"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""Quest"",
+                    ""type"": ""Button"",
+                    ""id"": ""8b0180f4-c61d-4e51-9d4c-9c7accfa40ba"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -429,6 +501,116 @@ public class InputControls : IInputActionCollection, IDisposable
                     ""action"": ""UseItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""22242db6-75c0-4b8c-8e0c-4f15a257cd21"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""Select Field 1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""64fd3d39-489f-41a4-8c5c-b92c9802cc13"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""Quest"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3c93925a-d199-4dd2-9aa6-33af11610a6a"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""Select Field 3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""35b4fa06-6e1c-46e2-8c65-ebf9f60b6cac"",
+                    ""path"": ""<Keyboard>/6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""Select Field 6"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3458c6dd-9665-4385-bc24-dda01d191eee"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""Select Field 2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2711ab4a-95e8-403b-893b-c4c25ab95e77"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""Select Field 5"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""af7a0c12-9007-4d9a-be08-3ab8984fbc7e"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""Select Field 4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""28b427e7-a9e6-4b2f-935e-3be88846c2da"",
+                    ""path"": ""<Keyboard>/8"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""Select Field 8"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ebaeee55-f5c9-4355-84e6-48c2d05e9cd4"",
+                    ""path"": ""<Keyboard>/7"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""Select Field 7"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7c324179-ea51-42cc-b7ff-74081ab75a09"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Quest"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -513,6 +695,15 @@ public class InputControls : IInputActionCollection, IDisposable
         m_Player_CameraZoom = m_Player.FindAction("CameraZoom", throwIfNotFound: true);
         m_Player_CameraClick = m_Player.FindAction("CameraClick", throwIfNotFound: true);
         m_Player_RecenterCamera = m_Player.FindAction("RecenterCamera", throwIfNotFound: true);
+        m_Player_SelectField1 = m_Player.FindAction("Select Field 1", throwIfNotFound: true);
+        m_Player_SelectField2 = m_Player.FindAction("Select Field 2", throwIfNotFound: true);
+        m_Player_SelectField3 = m_Player.FindAction("Select Field 3", throwIfNotFound: true);
+        m_Player_SelectField4 = m_Player.FindAction("Select Field 4", throwIfNotFound: true);
+        m_Player_SelectField5 = m_Player.FindAction("Select Field 5", throwIfNotFound: true);
+        m_Player_SelectField6 = m_Player.FindAction("Select Field 6", throwIfNotFound: true);
+        m_Player_SelectField7 = m_Player.FindAction("Select Field 7", throwIfNotFound: true);
+        m_Player_SelectField8 = m_Player.FindAction("Select Field 8", throwIfNotFound: true);
+        m_Player_Quest = m_Player.FindAction("Quest", throwIfNotFound: true);
         // Debug
         m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
         m_Debug_SpeedUpTime = m_Debug.FindAction("SpeedUpTime", throwIfNotFound: true);
@@ -575,6 +766,15 @@ public class InputControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_CameraZoom;
     private readonly InputAction m_Player_CameraClick;
     private readonly InputAction m_Player_RecenterCamera;
+    private readonly InputAction m_Player_SelectField1;
+    private readonly InputAction m_Player_SelectField2;
+    private readonly InputAction m_Player_SelectField3;
+    private readonly InputAction m_Player_SelectField4;
+    private readonly InputAction m_Player_SelectField5;
+    private readonly InputAction m_Player_SelectField6;
+    private readonly InputAction m_Player_SelectField7;
+    private readonly InputAction m_Player_SelectField8;
+    private readonly InputAction m_Player_Quest;
     public struct PlayerActions
     {
         private InputControls m_Wrapper;
@@ -589,6 +789,15 @@ public class InputControls : IInputActionCollection, IDisposable
         public InputAction @CameraZoom => m_Wrapper.m_Player_CameraZoom;
         public InputAction @CameraClick => m_Wrapper.m_Player_CameraClick;
         public InputAction @RecenterCamera => m_Wrapper.m_Player_RecenterCamera;
+        public InputAction @SelectField1 => m_Wrapper.m_Player_SelectField1;
+        public InputAction @SelectField2 => m_Wrapper.m_Player_SelectField2;
+        public InputAction @SelectField3 => m_Wrapper.m_Player_SelectField3;
+        public InputAction @SelectField4 => m_Wrapper.m_Player_SelectField4;
+        public InputAction @SelectField5 => m_Wrapper.m_Player_SelectField5;
+        public InputAction @SelectField6 => m_Wrapper.m_Player_SelectField6;
+        public InputAction @SelectField7 => m_Wrapper.m_Player_SelectField7;
+        public InputAction @SelectField8 => m_Wrapper.m_Player_SelectField8;
+        public InputAction @Quest => m_Wrapper.m_Player_Quest;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -628,6 +837,33 @@ public class InputControls : IInputActionCollection, IDisposable
                 RecenterCamera.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRecenterCamera;
                 RecenterCamera.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRecenterCamera;
                 RecenterCamera.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRecenterCamera;
+                SelectField1.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectField1;
+                SelectField1.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectField1;
+                SelectField1.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectField1;
+                SelectField2.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectField2;
+                SelectField2.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectField2;
+                SelectField2.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectField2;
+                SelectField3.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectField3;
+                SelectField3.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectField3;
+                SelectField3.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectField3;
+                SelectField4.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectField4;
+                SelectField4.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectField4;
+                SelectField4.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectField4;
+                SelectField5.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectField5;
+                SelectField5.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectField5;
+                SelectField5.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectField5;
+                SelectField6.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectField6;
+                SelectField6.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectField6;
+                SelectField6.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectField6;
+                SelectField7.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectField7;
+                SelectField7.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectField7;
+                SelectField7.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectField7;
+                SelectField8.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectField8;
+                SelectField8.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectField8;
+                SelectField8.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectField8;
+                Quest.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuest;
+                Quest.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuest;
+                Quest.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuest;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -662,6 +898,33 @@ public class InputControls : IInputActionCollection, IDisposable
                 RecenterCamera.started += instance.OnRecenterCamera;
                 RecenterCamera.performed += instance.OnRecenterCamera;
                 RecenterCamera.canceled += instance.OnRecenterCamera;
+                SelectField1.started += instance.OnSelectField1;
+                SelectField1.performed += instance.OnSelectField1;
+                SelectField1.canceled += instance.OnSelectField1;
+                SelectField2.started += instance.OnSelectField2;
+                SelectField2.performed += instance.OnSelectField2;
+                SelectField2.canceled += instance.OnSelectField2;
+                SelectField3.started += instance.OnSelectField3;
+                SelectField3.performed += instance.OnSelectField3;
+                SelectField3.canceled += instance.OnSelectField3;
+                SelectField4.started += instance.OnSelectField4;
+                SelectField4.performed += instance.OnSelectField4;
+                SelectField4.canceled += instance.OnSelectField4;
+                SelectField5.started += instance.OnSelectField5;
+                SelectField5.performed += instance.OnSelectField5;
+                SelectField5.canceled += instance.OnSelectField5;
+                SelectField6.started += instance.OnSelectField6;
+                SelectField6.performed += instance.OnSelectField6;
+                SelectField6.canceled += instance.OnSelectField6;
+                SelectField7.started += instance.OnSelectField7;
+                SelectField7.performed += instance.OnSelectField7;
+                SelectField7.canceled += instance.OnSelectField7;
+                SelectField8.started += instance.OnSelectField8;
+                SelectField8.performed += instance.OnSelectField8;
+                SelectField8.canceled += instance.OnSelectField8;
+                Quest.started += instance.OnQuest;
+                Quest.performed += instance.OnQuest;
+                Quest.canceled += instance.OnQuest;
             }
         }
     }
@@ -729,6 +992,15 @@ public class InputControls : IInputActionCollection, IDisposable
         void OnCameraZoom(InputAction.CallbackContext context);
         void OnCameraClick(InputAction.CallbackContext context);
         void OnRecenterCamera(InputAction.CallbackContext context);
+        void OnSelectField1(InputAction.CallbackContext context);
+        void OnSelectField2(InputAction.CallbackContext context);
+        void OnSelectField3(InputAction.CallbackContext context);
+        void OnSelectField4(InputAction.CallbackContext context);
+        void OnSelectField5(InputAction.CallbackContext context);
+        void OnSelectField6(InputAction.CallbackContext context);
+        void OnSelectField7(InputAction.CallbackContext context);
+        void OnSelectField8(InputAction.CallbackContext context);
+        void OnQuest(InputAction.CallbackContext context);
     }
     public interface IDebugActions
     {
