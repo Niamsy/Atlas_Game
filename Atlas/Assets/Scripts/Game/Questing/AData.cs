@@ -9,13 +9,13 @@ namespace Game.Questing
     {
         protected void OnEnable()
         {
-            if (Id.Empty())
+            if (Id == Guid.Empty)
             {
-                Id = GUID.Generate();
+                Id = Guid.NewGuid();
             }
         }
 
-        public GUID Id { get; private set; }
+        public Guid Id { get; private set; }
 
         #region Equality Operators
         protected bool Equals(AData other)

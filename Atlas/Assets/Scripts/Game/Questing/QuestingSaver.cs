@@ -240,6 +240,9 @@ namespace Game.Questing
 
         protected override void LoadingMapData(MapData data)
         {
+            if (data.Questing.Quests == null)
+                return;
+
             foreach (var questData in data.Questing.Quests)
             {
                 var questSo = _quests.Find(quest => quest.Id == questData.Id);

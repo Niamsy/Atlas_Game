@@ -6,7 +6,7 @@ using Game.DayNight;
 using Game.Questing;
 using Game.ResourcesManagement;
 using Plants.Plant;
-using UnityEditor;
+//using UnityEditor;
 using UnityEngine;
 
 namespace Game.SavingSystem.Datas
@@ -98,7 +98,7 @@ namespace Game.SavingSystem.Datas
         [Serializable]
         public struct RequirementData
         {
-            public GUID ConditionId;
+            public Guid ConditionId;
             public int ItemAbstractId;
             public int CurrentlyAccomplished;
             
@@ -113,7 +113,7 @@ namespace Game.SavingSystem.Datas
         [Serializable]
         public struct QuestData
         {
-            public GUID Id;
+            public Guid Id;
             public RequirementData[] Requirements;
             
             public QuestData(LiveQuest data)
