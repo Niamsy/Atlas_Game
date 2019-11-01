@@ -376,7 +376,7 @@ namespace Player
             if (IsGrounded && !IsInteracting && _handSlots.IsObjectUsable && !IsDead)
             {
                 ResetSpeed();
-                UseItemValue = _handSlots.EquippedItem.Animation.anim.ToInt();
+                UseItemValue = _handSlots.SelectedItem .Animation.anim.ToInt();
                 _handSlots.UseItem();
             }
         }
