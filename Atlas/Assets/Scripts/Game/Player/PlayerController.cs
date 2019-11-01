@@ -130,6 +130,8 @@ namespace Player
         }
 
         public Camera Camera => m_Camera;
+
+        public DeathType _deathType;
         
         #endregion
 
@@ -338,7 +340,9 @@ namespace Player
                 _handSlots.Drop();
                 m_Inventory.DropAll();
                 ResetSpeed();
+                _deathType = DeathType.Suffocation;
             }
+            
             return IsDead;
         }
 
@@ -372,7 +376,7 @@ namespace Player
             {
                 ResetSpeed();
                 UseItemValue = _handSlots.EquippedItem.Animation.anim.ToInt();
-                _handSlots.UseItem();
+                _handSlots.UseItem();    
             }
         }
 
