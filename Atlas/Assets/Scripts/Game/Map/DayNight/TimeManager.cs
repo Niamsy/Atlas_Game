@@ -3,25 +3,31 @@ using UnityEngine;
 
 namespace Game.Map.DayNight
 {
-    public class TimeManager
+    public static class TimeManager
     {
-        static private List<Object> _pauseAsker = new List<Object>();
-        static public bool IsGamePaused => (_pauseAsker.Count > 0);
-        static private float _gameSpeed = 1f;
+        private static List<Object> _pauseAsker = new List<Object>();
+        public static bool IsGamePaused => (_pauseAsker.Count > 0);
+        private static float _gameSpeed = 1f;
 
-        static public void AskForPause(Object value)
+        public static void AskForPause(Object value)
         {
+            if (_pauseAsker.Contains(value))
+                return;
+            
             _pauseAsker.Add(value);
             UpdateGameSpeed();
         }
 
-        static public void StopPause(Object value)
+        public static void StopPause(Object value)
         {
+            if (!_pauseAsker.Contains(value))
+                return;
+            
             _pauseAsker.Remove(value);
             UpdateGameSpeed();
         }
     
-        static private void UpdateGameSpeed()
+        private static void UpdateGameSpeed()
         {
             if (IsGamePaused)
                 Time.timeScale = 0f;

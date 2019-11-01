@@ -345,6 +345,7 @@ namespace Player
         public void Respawn()
         {
             m_PlayerStats.Resources[Resource.Oxygen].Quantity = m_PlayerStats.Resources[Resource.Oxygen].Limit;
+            m_PlayerStats.Resources[Resource.Energy].Quantity = m_PlayerStats.Resources[Resource.Energy].Limit;
             IsDead = false;
         }
         
