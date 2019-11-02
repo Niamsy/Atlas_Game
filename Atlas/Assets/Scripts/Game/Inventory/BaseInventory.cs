@@ -20,10 +20,14 @@ namespace Game.Inventory
         #region Initialisation / Destruction
         protected void InitMapWithSize(int size)
         {
-            Slots = new List<ItemStack>();
+            if (Slots == null)
+                Slots = new List<ItemStack>();
+    
             Slots.Capacity = size;
-            for (int x = 0; x < size; x++)
+            for (int x = Slots.Count; x < size; x++)
+            {
                 Slots.Add(new ItemStack());
+            }
         }
         #endregion
 
@@ -92,8 +96,16 @@ namespace Game.Inventory
         {
             Drop(stack, transform.forward);
         }
-        
+
         public void Drop(ItemStack stack, Vector3 dir)
+        {
+            DropFunction(stack, transform, transform.forward);
+            
+            if (OnDropItemAudio && OnDropItemEvent)
+                OnDropItemEvent.Raise(OnDropItemAudio, null);
+        }
+        
+        public static void DropFunction(ItemStack stack, Transform transform, Vector3 dir)
         {
             if (stack.IsEmpty)
                 return;
@@ -114,8 +126,6 @@ namespace Game.Inventory
                     itemStackB.Slot.SetItem(stack.Content, stack.Quantity);
 
                 stack.EmptyStack();
-                if (OnDropItemAudio && OnDropItemEvent)
-                    OnDropItemEvent.Raise(OnDropItemAudio, null);
             }
         }
 

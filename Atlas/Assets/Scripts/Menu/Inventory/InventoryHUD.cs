@@ -1,10 +1,8 @@
-﻿    using AtlasAudio;
+﻿using AtlasAudio;
 using AtlasEvents;
-using Game;
 using Game.Map.DayNight;
 using Game.SavingSystem;
 using Menu.Inventory.ItemDescription;
-using SceneManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
 

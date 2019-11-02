@@ -46,7 +46,7 @@ namespace Menu.Inventory
             
             for (int x = 0; x < HandSlots.NbOfItemSlots; x++)
             {
-                _handStackUI[x].SetItemStack(_handSlot.EquippedItemStack(x));
+                _handStackUI[x].SetItemStack(_handSlot[x]);
                 _handStackUI[x].SetAction(actions[x]);
             }
         }

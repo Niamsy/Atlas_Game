@@ -24,11 +24,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1759092918}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.617, y: 1.2890778, z: -0.023}
+  m_LocalRotation: {x: -0, y: 0.0000001872535, z: -0, w: 1}
+  m_LocalPosition: {x: 0.6170822, y: 1.2890854, z: -0.02308017}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4069770388400094}
+  m_Father: {fileID: 2593498912664995675}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1773428102 &228546086710176783
@@ -97,6 +97,7 @@ Transform:
   - {fileID: 4069770388400094}
   - {fileID: 4904671795951490497}
   - {fileID: 6172630279434084003}
+  - {fileID: 2593498912664995675}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 82.19701, z: 0}
@@ -131,7 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa49cca8de1df946aa5356cfcada448, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _handSlots: {fileID: 114326128495563644}
+  _handSlots: {fileID: 0}
   baseSpeed: 10
   desiredRotationSpeed: 0.3
   allowPlayerRotation: 0.1
@@ -152,6 +153,7 @@ MonoBehaviour:
     m_Bits: 512
   groundDistance: 0.5
   plantPosition: {x: 0, y: 0, z: 0}
+  _deathType: 0
 --- !u!114 &114171196635902840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,7 +383,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4069770388400094}
   - component: {fileID: 114687969587722362}
-  - component: {fileID: 114326128495563644}
   m_Layer: 0
   m_Name: Inventory
   m_TagString: Untagged
@@ -399,8 +400,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1759092919}
+  m_Children: []
   m_Father: {fileID: 4093741956441054}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -419,22 +419,6 @@ MonoBehaviour:
   Slots: []
   OnDropItemAudio: {fileID: 11400000, guid: a7789f9b7ce045f40a48c85ff830b9e8, type: 2}
   OnDropItemEvent: {fileID: 11400000, guid: 574abd74039cd5f40950fb2cf09f4dcb, type: 2}
---- !u!114 &114326128495563644
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1266824893386620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e0f8e4902c757d4b83bd414b09c000c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _equippedItemStack:
-    _content: {fileID: 0}
-    _quantity: 0
-  _handTransform: {fileID: 1759092919}
 --- !u!1 &178823426725365479
 GameObject:
   m_ObjectHideFlags: 0
@@ -693,6 +677,54 @@ MonoBehaviour:
   - Resource: 3
     Quantity: 1000
     Limit: 1000
+--- !u!1 &5144607089849438866
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2593498912664995675}
+  - component: {fileID: 5896993380159476454}
+  m_Layer: 0
+  m_Name: HandSlot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2593498912664995675
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5144607089849438866}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1759092919}
+  m_Father: {fileID: 4093741956441054}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5896993380159476454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5144607089849438866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e0f8e4902c757d4b83bd414b09c000c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Slots: []
+  OnDropItemAudio: {fileID: 0}
+  OnDropItemEvent: {fileID: 0}
+  _handTransform: {fileID: 1759092919}
 --- !u!1001 &7208604699746275140
 PrefabInstance:
   m_ObjectHideFlags: 0

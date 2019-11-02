@@ -10,15 +10,14 @@ using UnityEngine.InputSystem;
 namespace Game.Player
 {
     [RequireComponent(typeof(BaseInventory))]
-    public class HandSlots : MapSavingBehaviour
+    public class HandSlots : BaseInventory
     {
         public bool                        IsObjectUsable => SelectedItem != null && SelectedItemStack.Quantity > 0 && SelectedItem.CanUse(_handTransform);
 
         public const int                   NbOfItemSlots = 8;
-        private List<ItemStack>            _equippedItemStacks = null;
         private int                        _selectedIdx = 0;
         public ItemAbstract                SelectedItem => SelectedItemStack.Content;
-        public ItemStack                   SelectedItemStack => _equippedItemStacks[_selectedIdx];
+        public ItemStack                   SelectedItemStack => Slots[_selectedIdx];
         public delegate void               SelectSlotChanged(int newIdx);
         public event SelectSlotChanged     OnSelectSlotChanged;
 
@@ -28,20 +27,15 @@ namespace Game.Player
 
         private GameObject                 _equippedItemInstance = null;
         private List<InputAction>          _selectShortcuts = new List<InputAction>(NbOfItemSlots);
-        
-        public ItemStack EquippedItemStack(int idx)
-        {
-            return (_equippedItemStacks[idx]);
-        }
 
         #region Initialisation
-        protected override void Awake()
+        protected void Awake()
         {
-            base.Awake();
-            _equippedItemStacks = new List<ItemStack>(NbOfItemSlots);
-            for (int x = 0; x < NbOfItemSlots; x++)
-                _equippedItemStacks.Add(new ItemStack());
-            foreach (ItemStack stack in _equippedItemStacks)
+            InitMapWithSize(NbOfItemSlots);
+            SaveManager.BeforeSavingMapData += SavingMapData;
+            SaveManager.UponLoadingMapData += LoadingMapData;
+            
+            foreach (ItemStack stack in Slots)
                 stack.OnItemStackUpdated += OnEquippedUpdate;
 
             var playerInput = SaveManager.Instance.InputControls.Player;
@@ -62,9 +56,10 @@ namespace Game.Player
             ChangeSelectedSlot(_selectedIdx);    
         }
         
-        protected override void OnDestroy()
+        protected void OnDestroy()
         {
-            base.OnDestroy();
+            SaveManager.BeforeSavingMapData -= SavingMapData;
+            SaveManager.UponLoadingMapData -= LoadingMapData;
             
             foreach (InputAction act in _selectShortcuts)
                 act.performed -= ChangeSelectedSlot_Shortcut;
@@ -100,7 +95,7 @@ namespace Game.Player
         }
 
         #region Load/Saving Methods
-        protected override void SavingMapData(MapData data)
+        protected void SavingMapData(MapData data)
         {
             data.SelectedItems = _selectedIdx;
             
@@ -108,23 +103,23 @@ namespace Game.Player
             {
                 data.EquippedItems = new List<ItemBaseData>(NbOfItemSlots);
                 for (int x = 0; x < NbOfItemSlots; x++)
-                    data.EquippedItems.Add(new ItemBaseData(_equippedItemStacks[x]));
+                    data.EquippedItems.Add(new ItemBaseData(Slots[x]));
             }
             else
             {
                 for (int x = 0; x < NbOfItemSlots; x++)
-                    data.EquippedItems[x].SetObject(_equippedItemStacks[x]);
+                    data.EquippedItems[x].SetObject(Slots[x]);
             }
         }
         
-        protected override void LoadingMapData(MapData data)
+        protected void LoadingMapData(MapData data)
         {
             if (data.EquippedItems != null)
             {
                 for (int x = 0; x < NbOfItemSlots; x++)
                 {
                     if (data.EquippedItems[x] != null)
-                        _equippedItemStacks[x].SetFromGameData(data.EquippedItems[x]);
+                        Slots[x].SetFromGameData(data.EquippedItems[x]);
                 }
             }
         }
@@ -138,13 +133,8 @@ namespace Game.Player
 
         public void Drop()
         {
-            if (SelectedItem == null)
-                return;
-            GameObject droppedObject = Instantiate(SelectedItem.PrefabDroppedGO);
-            droppedObject.transform.position = transform.position + transform.forward + Vector3.up;
-            var itemStackB = droppedObject.GetComponent<ItemStackBehaviour>();
-            itemStackB.Slot.SetItem(SelectedItem, SelectedItemStack.Quantity);
-            SelectedItemStack.EmptyStack();
+            foreach (ItemStack itemStack in Slots)
+                DropFunction(itemStack, transform, transform.forward);
         }
 
         private void UpdateHand()

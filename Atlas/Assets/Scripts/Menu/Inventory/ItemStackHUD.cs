@@ -14,7 +14,6 @@ namespace Menu.Inventory
 
         [SerializeField] private Image     _sprite = null;
         [SerializeField] private Text      _quantity = null;
-        [SerializeField] private GameObject _dropHint = null;
 
         protected Button        Button = null;
         protected ItemStack     ActualStack = null;
@@ -82,8 +81,6 @@ namespace Menu.Inventory
             var position = _rectTransform.position;
             position.z = -1;
             _rectTransform.position = position;
-            if (_dropHint != null)
-                _dropHint.SetActive(true);
         }
 
         public void OnDrag(PointerEventData eventData)
@@ -93,8 +90,6 @@ namespace Menu.Inventory
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            if (_dropHint != null)
-                _dropHint.SetActive(false);
             _sprite.transform.position = _originalPosition;
             _sprite.transform.SetParent(transform);
             var position = _rectTransform.position;

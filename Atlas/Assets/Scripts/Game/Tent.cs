@@ -11,7 +11,6 @@ public class Tent : AInteractable
     private bool fading = false;
     public override void Interact(PlayerController playerController)
     {
-        Debug.Log("TIME BEFORE :" + Time.timeScale);
         if (fading == false)
         {
             fading = true;
