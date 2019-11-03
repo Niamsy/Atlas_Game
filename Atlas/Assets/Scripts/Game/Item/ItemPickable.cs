@@ -2,8 +2,6 @@
 using Plants.Plant;
 using Player;
 using UnityEngine;
-using Tools;
-using System.Collections.Generic;
 using UnityEngine.UI;
 
 namespace Game.Item
@@ -14,7 +12,9 @@ namespace Game.Item
 
         private PlantModel _modelPlant;
         [SerializeField]
-        public Text _hidedCanvas;
+        public Text _hidedCanvasName;
+        [SerializeField]
+        public Text _hidedCanvasUsage;
 
         protected virtual void Awake()
         {
@@ -22,27 +22,38 @@ namespace Game.Item
             if (gameObject)
             {
                 _modelPlant = gameObject.GetComponent<PlantModel>();
-                hideCanvas();
+                hideCanvas(_hidedCanvasName);
+                hideCanvas(_hidedCanvasUsage);
             }
         }
 
-        private void hideCanvas()
+        private void hideCanvas(Text canvas)
         {
-            if (_hidedCanvas != null)
+            if (_hidedCanvasName.text.Length <= 0 && BaseStack.Slot != null && BaseStack.Slot.Content != null)
             {
-                Color col = _hidedCanvas.color;
+                _hidedCanvasName.text = BaseStack.Slot.Content.Name;
+            }
+
+            if (canvas != null)
+            {
+                Color col = canvas.color;
                 col.a = 255;
-                _hidedCanvas.color = col;
+                canvas.color = col;
             }
         }
 
-        private void showCanvas()
+        private void showCanvas(Text canvas)
         {
-            if (_hidedCanvas != null)
+            if (_hidedCanvasName.text.Length <= 0 && BaseStack.Slot != null && BaseStack.Slot.Content != null)
             {
-                Color col = _hidedCanvas.color;
+                _hidedCanvasName.text = BaseStack.Slot.Content.Name;
+            }
+
+            if (canvas != null && canvas.text != "New Text")
+            {
+                Color col = canvas.color;
                 col.a = 0;
-                _hidedCanvas.color = col;
+                canvas.color = col;
             }
         }
 
@@ -66,7 +77,8 @@ namespace Game.Item
         {
             if (col.gameObject.CompareTag("Player"))
             {
-                hideCanvas();
+                hideCanvas(_hidedCanvasName);
+                hideCanvas(_hidedCanvasUsage);
             }
         }
 
@@ -74,7 +86,8 @@ namespace Game.Item
         {
             if (col.gameObject.CompareTag("Player"))
             {
-                showCanvas();
+                showCanvas(_hidedCanvasName);
+                showCanvas(_hidedCanvasUsage);
             }
         }
     }
