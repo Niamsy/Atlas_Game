@@ -8,15 +8,16 @@ namespace Game.Grid
     public class Node
     {
         private PlantModel m_Plant;
+        private bool _canGrowPlant = true;
 
-        public bool CanPlantGrow { get; set; }
+        public bool CanPlantGrow { get { return _canGrowPlant && Plant == null; } set { _canGrowPlant = value; } }
         public float MaxPlantSizeY { get; set; } = 0f;
         public PlantModel Plant
         {
             get { return m_Plant; }
             set
             {
-                if (CanPlantGrow && MaxPlantSizeY != 0 /*&& value.MeshRender.bounds.size.y <= MaxPlantSizeY*/)
+              //  if (CanPlantGrow && MaxPlantSizeY != 0 /*&& value.MeshRender.bounds.size.y <= MaxPlantSizeY*/)
                     m_Plant = value;
             }
         }
@@ -35,6 +36,16 @@ namespace Game.Grid
             Plant = plant;
             WorldPosition = worldPosition;
             GridPosition = gridPosition;
+        }
+
+        public void SowPlant(GameObject prefab)
+        {
+            //TODO check last level plant size with MaxLevelPlantSize
+            if (!CanPlantGrow)
+                return;
+            Plant = Object.Instantiate(prefab, new Vector3(WorldPosition.x, GroundLevel, WorldPosition.z), new Quaternion(0, 0, 0, 1)).GetComponent<PlantModel>();
+            Plant.Sow();
+            Plant.SetPlantName();
         }
     }
 }

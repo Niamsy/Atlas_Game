@@ -14,11 +14,14 @@ namespace Game.Map
         public static PlantSystem PlantsSystem => Instance != null ? Instance._plantsSystem : null;
         public static DroppedItemManager DroppedItemManager => Instance != null ? Instance._droppedItemManager : null;
 
+        public static Grid.WorldGrid WorldGrid => Instance != null ? Instance._worldGrid : null;
+
         #region Variables
         public bool LoadAndSave = true;
 
         [SerializeField] private PlantSystem _plantsSystem = null;
         [SerializeField] private DroppedItemManager _droppedItemManager = null;
+        [SerializeField] private Grid.WorldGrid _worldGrid = null;
         private SaveManager _saveManager = null;
         private int _sceneIndex = 0;
         #endregion

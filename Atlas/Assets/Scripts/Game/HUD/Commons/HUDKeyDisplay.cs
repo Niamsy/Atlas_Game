@@ -1,5 +1,4 @@
-﻿using System;
-using Game.SavingSystem;
+﻿using Game.SavingSystem;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,7 +13,7 @@ namespace Game.HUD.Commons
         {
             if (KeyListened != "")
             {
-                Keyboard_TextDisplay.text = SaveManager.Instance.InputControls.Player.Get().GetAction(KeyListened).controls[0].name.ToUpper();
+                Keyboard_TextDisplay.text = SaveManager.Instance.InputControls.Player.Get().FindAction(KeyListened).controls[0].name.ToUpper();
             }
         }
     }

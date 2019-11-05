@@ -9,14 +9,14 @@ namespace Game.Player
     [RequireComponent(typeof(BaseInventory))]
     public class HandSlots : MapSavingBehaviour
     {
-        public bool IsObjectUsable => (EquippedItem != null && EquippedItemStack.Quantity > 0) && _equippedItem.CanUse(_handTransform);
+        public bool IsObjectUsable => (EquippedItem != null && EquippedItemStack.Quantity > 0) && _equippedItem.CanUse(_PlayerTransform);
 
         [SerializeField] private ItemStack _equippedItemStack = null;
         [SerializeField] private Transform _handTransform = null;
 
         private ItemAbstract               _equippedItem = null;
         private GameObject                 _equippedItemInstance = null;
-        
+        private Transform                  _PlayerTransform = null;
         public ItemStack                   EquippedItemStack => _equippedItemStack;
         public ItemAbstract                EquippedItem => _equippedItem;
 
@@ -24,6 +24,7 @@ namespace Game.Player
         {
             base.Awake();
 
+            _PlayerTransform = GameObject.FindGameObjectWithTag("Player").transform;
             _equippedItemStack.OnItemStackUpdated += OnEquippedUpdate;
         }
 

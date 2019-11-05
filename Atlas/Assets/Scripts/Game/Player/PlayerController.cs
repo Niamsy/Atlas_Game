@@ -368,7 +368,7 @@ namespace Player
 
         private void UseItem(InputAction.CallbackContext ctx)
         {
-            if (IsGrounded && !IsInteracting && _handSlots.IsObjectUsable && !IsDead)
+            if (IsGrounded && UseItemValue == 0 && !IsInteracting && _handSlots.IsObjectUsable && !IsDead)
             {
                 ResetSpeed();
                 UseItemValue = _handSlots.EquippedItem.Animation.anim.ToInt();

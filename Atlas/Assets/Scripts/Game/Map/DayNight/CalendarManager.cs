@@ -1,8 +1,10 @@
 ﻿using System;
+using Game.SavingSystem;
 using Tools;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-namespace Game.DayNight
+namespace Game.Map.DayNight
 {
     [Serializable]
     public class Date
@@ -45,9 +47,7 @@ namespace Game.DayNight
 
         public int Year = 0;
 
-        public Date() {}
-        
-        public Date(int day, int month, int year, int hour, int minutes, int seconds)
+        public void Set(int day, int month, int year, int hour, int minutes, float seconds)
         {
             Day = day;
             Month = month;
@@ -56,12 +56,6 @@ namespace Game.DayNight
             Minutes = minutes;
             Seconds = seconds;
             
-        }
-        
-        public static Date FromRealDate()
-        {
-            DateTime date = DateTime.Now;
-            return new Date(date.Day, date.Month, date.Year, date.Hour, date.Minute, date.Second);
         }
 
         public int TotalTime
@@ -131,7 +125,6 @@ namespace Game.DayNight
     
         #region Public Variables
         public Date ActualDate;
-        public bool IsReal = false;
         
         public int DeltaTimeMultiplier = 1;
         #endregion
@@ -140,6 +133,11 @@ namespace Game.DayNight
         [HideInInspector]
         public float TimeMultiplier = 1f;
         #endregion
+
+#if UNITY_EDITOR
+        [Header("DEBUG")] public float Debug_SpeedUpValue = 10f;
+        private float _debugTimeMultiplier = 1f;
+#endif
 
         private void Awake()
         {
@@ -151,16 +149,39 @@ namespace Game.DayNight
             Instance = null;
         }
 
-        private void Start ()
-        {
-            if (IsReal)
-                ActualDate = Date.FromRealDate();
-        }
-
         private void Update()
         {
-            ActualDate.AddSeconds((Time.deltaTime * DeltaTimeMultiplier) * TimeMultiplier);
+            float multiplier = DeltaTimeMultiplier * TimeMultiplier;
+#if UNITY_EDITOR
+            multiplier *= _debugTimeMultiplier;
+#endif
+            ActualDate.AddSeconds(Time.deltaTime * multiplier);
+        }
+        
+#if UNITY_EDITOR
+        private void OnEnable()
+        {
+            SaveManager.Instance.InputControls.Debug.SpeedUpTime.performed += Debug_SpeedupTime;
+            SaveManager.Instance.InputControls.Debug.SpeedUpTime.canceled += Debug_ResetTime;
+            SaveManager.Instance.InputControls.Debug.SpeedUpTime.Enable();
         }
 
+        private void OnDisable()
+        {
+            SaveManager.Instance.InputControls.Debug.SpeedUpTime.Disable();
+            SaveManager.Instance.InputControls.Debug.SpeedUpTime.performed -= Debug_SpeedupTime;
+            SaveManager.Instance.InputControls.Debug.SpeedUpTime.canceled -= Debug_ResetTime;
+        }
+
+        private void Debug_SpeedupTime(InputAction.CallbackContext obj)
+        {
+            _debugTimeMultiplier = Debug_SpeedUpValue;
+        }
+
+        private void Debug_ResetTime(InputAction.CallbackContext obj)
+        {
+            _debugTimeMultiplier = 1;
+        }
+#endif
     }
 }

@@ -34,6 +34,8 @@ namespace Plants.Plant
         private GameObject _currentModel = null;
         [SerializeField]
         private Canvas _GuiCanvasName = null;
+        private Canvas levelUp = null;
+        private Canvas death = null;
         private bool _reachedFinalStage = false;
         private bool _isSowed = false;
 
@@ -76,6 +78,7 @@ namespace Plants.Plant
         public void GoToNextStage()
         {
             OnLevelUp.Invoke();
+            levelUp.enabled = false;
             GoToStage(current_stage + 1);
         }
 
@@ -153,7 +156,21 @@ namespace Plants.Plant
         public void UpdatePlantValue()
         {
             if (IsDead())
+            {
                 DestroyPlant();
+                return;
+            }
+
+            if (IsStarving())
+            {
+                if (death.enabled == false)
+                    death.enabled = true;
+            }
+            else
+            {
+                 if (death.enabled == true)
+                    death.enabled = false;
+            }
 
             if (!_reachedFinalStage && CanGoToNextStage())
                 GoToNextStage();
@@ -177,6 +194,8 @@ namespace Plants.Plant
         private void Awake()
         {
             MeshRender = GetComponent<MeshRenderer>();
+            levelUp = gameObject.transform.Find("LevelUp").GetComponent<Canvas>();
+            death = gameObject.transform.Find("Death").GetComponent<Canvas>();
             SetPlantName();
             LevelManager.PlantsSystem.AddPlantToTheMap(this);
         }
@@ -197,14 +216,30 @@ namespace Plants.Plant
             _consumer.StartInvoking();
         }
 
+        private bool IsStarving()
+        {
+            return _consumer.IsStarving;   
+        }
+
         private bool CanGoToNextStage()
         {
             foreach (var stock in _consumer.ConsumedStocks )
             {
                 if (stock.Quantity < stock.Limit)
+                {
+                    if (((float)stock.Quantity / (float)stock.Limit > 0.85f))
+                    {
+                        if (levelUp.enabled == false)
+                            levelUp.enabled = true;
+                    }
+                    else
+                    {
+                        if (levelUp.enabled == true)
+                            levelUp.enabled = false;
+                    }
                     return (false);
+                }
             }
-
             return (true);
         }
 
