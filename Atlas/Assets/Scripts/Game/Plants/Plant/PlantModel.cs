@@ -183,7 +183,6 @@ namespace Plants.Plant
                 var name = _GuiCanvasName.gameObject.GetComponentInChildren<LocalizedTextBehaviour>();
                 if (name)
                     name.LocalizedAsset = PlantStatistics.NameAsset;
-                _GuiCanvasName.gameObject.SetActive(false);
             }
         }
 
@@ -194,8 +193,14 @@ namespace Plants.Plant
         private void Awake()
         {
             MeshRender = GetComponent<MeshRenderer>();
-            levelUp = gameObject.transform.Find("LevelUp").GetComponent<Canvas>();
-            death = gameObject.transform.Find("Death").GetComponent<Canvas>();
+            Canvas hud = gameObject.transform.Find("HUD").gameObject.GetComponent<Canvas>();
+            foreach (var child in hud.GetComponentsInChildren<Canvas>())
+            {
+                if (child.name == "LevelUp")
+                    levelUp = child;
+                else if (child.name == "Death")
+                    death = child;
+            }
             SetPlantName();
             LevelManager.PlantsSystem.AddPlantToTheMap(this);
         }
@@ -246,17 +251,6 @@ namespace Plants.Plant
         private bool IsDead()
         {
             return (_consumer.Starved);
-        }
-
-        private void OnTriggerEnter(Collider col)
-        {
-            if (col.gameObject.CompareTag("Player"))
-                _GuiCanvasName.gameObject.SetActive(true);
-        }
-        private void OnTriggerExit(Collider col)
-        {
-            if (col.gameObject.CompareTag("Player"))
-                _GuiCanvasName.gameObject.SetActive(false);
         }
         #endregion
     }

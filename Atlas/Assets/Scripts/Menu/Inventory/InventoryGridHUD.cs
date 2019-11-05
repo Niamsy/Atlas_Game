@@ -9,7 +9,7 @@ namespace Menu.Inventory
         [SerializeField] private BaseInventory _actualBaseInventory = null;
         private List<ItemStackHUD> _slots = new List<ItemStackHUD>();
 
-        private void OnEnable()
+        private void Start()
         {
             _slots = new List<ItemStackHUD>(GetComponentsInChildren<ItemStackHUD>(true));
             if (_actualBaseInventory != null)

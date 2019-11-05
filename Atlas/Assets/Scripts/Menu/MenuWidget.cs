@@ -1,4 +1,5 @@
 ﻿using System;
+using Inputs;
 using UnityEngine;
 
 namespace Menu
@@ -12,6 +13,7 @@ namespace Menu
         [SerializeField] private bool   _displayed;
         public bool                     Displayed => _displayed;
 
+        public Animator MenuAnimator => _animator;
         #endregion
         
         #region Animator Variables
@@ -34,11 +36,16 @@ namespace Menu
         
         public virtual void Show(bool display, bool force = false)
         {
-            if (_enableCursorOnDisplay)
-                Cursor.lockState = display ? CursorLockMode.None : CursorLockMode.Locked;
+            if (_enableCursorOnDisplay && display != _displayed)
+            {
+                if (display)
+                   CursorTools.AskForCursor(this);
+                else
+                    CursorTools.LetGoCursor(this);
+            }
             if (OnShow != null && !force)
                 OnShow(display);
-            _animator.SetBool(_hashShowed, display);
+            MenuAnimator.SetBool(_hashShowed, display);
             _displayed = display;
         }
         

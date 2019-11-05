@@ -130,6 +130,8 @@ namespace Player
         }
 
         public Camera Camera => m_Camera;
+
+        public DeathType _deathType;
         
         #endregion
 
@@ -338,13 +340,16 @@ namespace Player
                 _handSlots.Drop();
                 m_Inventory.DropAll();
                 ResetSpeed();
+                _deathType = DeathType.Suffocation;
             }
+            
             return IsDead;
         }
 
         public void Respawn()
         {
             m_PlayerStats.Resources[Resource.Oxygen].Quantity = m_PlayerStats.Resources[Resource.Oxygen].Limit;
+            m_PlayerStats.Resources[Resource.Energy].Quantity = m_PlayerStats.Resources[Resource.Energy].Limit;
             IsDead = false;
         }
         
@@ -371,14 +376,14 @@ namespace Player
             if (IsGrounded && UseItemValue == 0 && !IsInteracting && _handSlots.IsObjectUsable && !IsDead)
             {
                 ResetSpeed();
-                UseItemValue = _handSlots.EquippedItem.Animation.anim.ToInt();
+                UseItemValue = _handSlots.SelectedItem .Animation.anim.ToInt();
                 _handSlots.UseItem();
             }
         }
 
         private void CancelUseItem(InputAction.CallbackContext ctx)
         {
-            if (IsUsingItem && _handSlots.EquippedItem != null && !IsDead)
+            if (IsUsingItem && _handSlots.SelectedItem != null && !IsDead)
             {
                 if (_handSlots.CancelUse())
                     UseItemValue = -1;

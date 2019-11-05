@@ -8,6 +8,5 @@ namespace Game.ResourcesManagement
         Light = 1,
         Oxygen = 2,
         Energy = 3
-        
     }
 }

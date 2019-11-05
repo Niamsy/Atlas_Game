@@ -11,7 +11,6 @@ public class Tent : AInteractable
     private bool fading = false;
     public override void Interact(PlayerController playerController)
     {
-        Debug.Log("TIME BEFORE :" + Time.timeScale);
         if (fading == false)
         {
             fading = true;
@@ -35,24 +34,10 @@ public class Tent : AInteractable
         Time.timeScale = 1;
         while (blackscreen.color.a >= 0f)
         {
-            Debug.Log(blackscreen.color.a);
             tempColor.a -= Time.deltaTime * 0.2f;
             blackscreen.color = tempColor;
             yield return null;
         }
         fading = false;
-        Debug.Log("DONE");
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using Game.Grid;
 using Game.Inventory;
+using Game.Questing;
 using Game.Map;
 using Plants.Plant;
 using UnityEngine;
@@ -11,6 +12,9 @@ namespace Game.Item.PlantSeed
      CreateAssetMenu(fileName = "Seed", menuName = "Item/Seed", order = 1)]
     public class Seed : ItemAbstract
     {
+        [SerializeField] private ConditionEvent _sowQuestEvent = null;
+        [SerializeField] private Condition _sowCondition = null;
+        private Vector3 _location = new Vector3(0,0,0);
         private Node _node = null;
         private Transform _sowDummy = null;
         private Transform SowDummy
@@ -32,6 +36,7 @@ namespace Game.Item.PlantSeed
             {
                 Debug.Log("node " + _node.WorldPosition);
                 _node.SowPlant(PlantStatistics.Prefab);
+                _sowQuestEvent.Raise(_sowCondition, this, 1);
             }
         }
 

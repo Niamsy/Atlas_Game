@@ -62,6 +62,7 @@ namespace Game.Map
             {
                 SceneLoader.OnSceneUnloading -= OnSceneUnloading;
                 SceneLoader.OnSceneLoading -= OnSceneLoading;
+
                 
                 SaveData();
                 

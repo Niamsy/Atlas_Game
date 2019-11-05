@@ -80,14 +80,21 @@ namespace Game.ResourcesManagement
             {
                 if (!iconDisplayed)
                 {
-                    Canvas wtr = gameObject.transform.Find("Watering").gameObject.GetComponent<Canvas>();
-                    icon.WaterIcon = wtr;
-                    Image wtrf = wtr.transform.Find("WaterFilled").gameObject.GetComponentInChildren<Image>();
-                    icon.WaterDrop = wtrf;
-                    icon.PlantStock = stock;
-                    icon.StartUpdate();
-                    StartCoroutine(hideWaterIcon(icon, stock, 5f));
-                    iconDisplayed = true;
+                    Canvas hud = gameObject.transform.Find("HUD").gameObject.GetComponent<Canvas>();
+                    foreach (var child in hud.GetComponentsInChildren<Canvas>())
+                    {
+                        if (child.name == "Watering")
+                        {
+                            Canvas wtr = child;
+                            icon.WaterIcon = wtr;
+                            Image wtrf = wtr.transform.Find("WaterFilled").gameObject.GetComponentInChildren<Image>();
+                            icon.WaterDrop = wtrf;
+                            icon.PlantStock = stock;
+                            icon.StartUpdate();
+                            StartCoroutine(hideWaterIcon(icon, stock, 5f));
+                            iconDisplayed = true;
+                        }
+                    }
                 }
                 else
                 {
@@ -99,7 +106,8 @@ namespace Game.ResourcesManagement
         private IEnumerator hideWaterIcon(PlantWateringIcon icon, Stock stock, float delay)
         {
             yield return new WaitForSeconds(delay);
-            if (waterQuantity < stock.Quantity && iconDisplayed == true)
+            Debug.Log("Delay Passed Away + water Quantity " + waterQuantity.ToString() + " Stock Quantity " + stock.Quantity);
+            if (waterQuantity != stock.Quantity && iconDisplayed == true)
             {
                 iconDisplayed = false;
                 icon.StopUpdate();
