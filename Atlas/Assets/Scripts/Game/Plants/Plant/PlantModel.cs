@@ -1,4 +1,5 @@
 ﻿using Game.DayNight;
+using Game.Insects;
 using Game.Map;
 using Game.ResourcesManagement;
 using Game.ResourcesManagement.Consumer;
@@ -9,7 +10,7 @@ using UnityEngine.Events;
 namespace Plants.Plant
 {
     [RequireComponent(typeof(PlantConsumer))]
-    public class PlantModel : MonoBehaviour
+    public class PlantModel : MonoBehaviour, IInteractableInsect
     {
         #region Custom Events
         public UnityEvent OnLevelUp;
@@ -38,6 +39,7 @@ namespace Plants.Plant
         private Canvas death = null;
         private bool _reachedFinalStage = false;
         private bool _isSowed = false;
+        private bool _isPollinate = false;
 
         #endregion
 
@@ -70,6 +72,11 @@ namespace Plants.Plant
         public bool IsSowed
         {
             get { return _isSowed; }
+        }
+
+        public bool IsPollinate
+        {
+            get { return _isPollinate; }
         }
 
         #endregion
@@ -251,6 +258,12 @@ namespace Plants.Plant
         private bool IsDead()
         {
             return (_consumer.Starved);
+        }
+
+        public void insectInteract(InsectAction action)
+        {
+            if (current_stage == last_stage)
+                _isPollinate = true;
         }
         #endregion
     }
