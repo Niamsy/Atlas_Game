@@ -40,6 +40,7 @@ namespace Plants.Plant
         private bool _reachedFinalStage = false;
         private bool _isSowed = false;
         private bool _isPollinate = false;
+        private bool _isCycleLifeComplete = false;
 
         #endregion
 
@@ -106,8 +107,12 @@ namespace Plants.Plant
                 PlayEffect(CurrentStage.GrowEffect);
             UpdateProducer();
             UpdateConsumers();
-            if (current_stage == PlantStatistics.Stages.Count - 1)
+            if (current_stage == last_stage)
+            {
                 _reachedFinalStage = true;
+                // TODO: Define in plant stats Energy (insect food : Nectar / pollen) for each plant
+                RessourceStock.AddResources(Resource.Energy, 200);
+            }
         }
         
         public void Sow()
@@ -159,7 +164,7 @@ namespace Plants.Plant
             InvokeRepeating("UpdatePlantValue", Random.Range(1f, 2f), 3f);
 
         }
-        
+
         public void UpdatePlantValue()
         {
             if (IsDead())
@@ -175,12 +180,17 @@ namespace Plants.Plant
             }
             else
             {
-                 if (death.enabled == true)
+                if (death.enabled == true)
                     death.enabled = false;
             }
 
             if (!_reachedFinalStage && CanGoToNextStage())
                 GoToNextStage();
+
+            if (current_stage == last_stage && RessourceStock[Resource.Energy].Quantity == 0)
+            {
+                _isCycleLifeComplete = true;
+            }
         }
 
         public void SetPlantName()
@@ -257,13 +267,16 @@ namespace Plants.Plant
 
         private bool IsDead()
         {
-            return (_consumer.Starved);
+            return (_consumer.Starved || _isCycleLifeComplete == true);
         }
 
-        public void insectInteract(InsectAction action)
+        public void insectInteract(InsectAction action, InsectConsumer consumer)
         {
             if (current_stage == last_stage)
+            {
                 _isPollinate = true;
+                consumer.LinkedStock.AddResources(Resource.Energy, RessourceStock.RemoveResources(Resource.Energy, 10));
+            }
         }
         #endregion
     }

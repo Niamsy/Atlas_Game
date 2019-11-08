@@ -15,6 +15,10 @@ namespace Game.Insects
         [SerializeField]
         public int maximumNumber;
 
+        // Change to adapt Insect model
+        [SerializeField]
+        public GameObject model;
+
         public int currentNumber = 2;
     }
 }

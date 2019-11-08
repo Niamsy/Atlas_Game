@@ -71,7 +71,10 @@ namespace Plants.Plant
             else
             {
                 if (_plant.IsPollinate)
+                {
+                    Debug.Log("FRUIT APPEARED !!!!!!!!!!!!");
                     return;// TODO : Craftable fruit
+                }
             }
         }
 
