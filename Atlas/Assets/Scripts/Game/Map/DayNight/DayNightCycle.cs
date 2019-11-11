@@ -15,7 +15,6 @@ namespace Game.DayNight
         public Gradient            AmbientColor = new Gradient();
         public AnimationCurve      SkyExposure = AnimationCurve.Linear(0, 0, 24, 0);
         public AnimationCurve      SkyThickness = AnimationCurve.Linear(0, 0, 24, 0);
-        public Material            Skybox;
 
         [Header("Sun")]
         public Light               Sun;
@@ -67,8 +66,8 @@ namespace Game.DayNight
             if (!Stars.isPlaying && Moon.enabled)
                 Stars.Play();
 
-            Skybox.SetFloat("_AtmosphereThickness", SkyThickness.Evaluate(dayAdvancement));
-            Skybox.SetFloat("_Exposure", SkyExposure.Evaluate(dayAdvancement));
+            RenderSettings.skybox.SetFloat("_AtmosphereThickness", SkyThickness.Evaluate(dayAdvancement));
+            RenderSettings.skybox.SetFloat("_Exposure", SkyExposure.Evaluate(dayAdvancement));
             DayVolume.weight = DayBlendOverDay.Evaluate(dayAdvancement);
             NightVolume.weight = 1-DayBlendOverDay.Evaluate(dayAdvancement);
         }
