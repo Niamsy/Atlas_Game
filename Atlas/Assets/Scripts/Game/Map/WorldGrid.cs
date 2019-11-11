@@ -9,6 +9,7 @@ namespace Game.Grid
     public class WorldGrid : MonoBehaviour
     {
         public LayerMask plantGrowthLayers;
+        public LayerMask ignoreLayers;
         public LayerMask plantLayer;
         public float findPlantDistance = 100.0f;
         public Vector2 gridWorldSize;
@@ -23,6 +24,8 @@ namespace Game.Grid
         public bool spawnPlant = false;
         public int numberOfPlantsInParentGameobject = 100;
         public GameObject[] plantsToSpawn;
+
+        public bool initOnEnable = false;
 
         public Node[,] Grid { get; protected set; }
 
@@ -45,9 +48,9 @@ namespace Game.Grid
         private void OnEnable()
         {
 #if UNITY_EDITOR
-            if (!Application.isPlaying)
+            if (!Application.isPlaying && initOnEnable)
             {
-               //InitGrid();
+                InitGrid();
                 SpawnPlant();
             }
 #endif
@@ -60,7 +63,7 @@ namespace Game.Grid
             gridSizeX = Mathf.RoundToInt(gridWorldSize.x / m_NodeDiameter);
             gridSizeY = Mathf.RoundToInt(gridWorldSize.y / m_NodeDiameter);
             CreateGrid();
-            inversePlantGrowthLayers = ~plantGrowthLayers.value;
+            inversePlantGrowthLayers = ~(plantGrowthLayers.value + ignoreLayers.value);
         }
 
         private void CreateGrid()

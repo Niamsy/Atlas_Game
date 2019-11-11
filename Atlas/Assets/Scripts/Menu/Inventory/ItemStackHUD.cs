@@ -22,6 +22,7 @@ namespace Menu.Inventory
         private Canvas          _rootCanvas = null;
         private bool _mouseOver = false;
         private bool ShouldBeDisplayed => ((ActualStack != null) && (!ActualStack.IsEmpty));
+        private GlowDeactivator _glowDeactivator = null;
 
         private Action<ItemStack> OnDrop;
         #endregion
@@ -31,6 +32,7 @@ namespace Menu.Inventory
             _rectTransform = GetComponent<RectTransform>();
             _rootCanvas = GetComponentInParent<Canvas>();
             Button = GetComponent<Button>();
+            _glowDeactivator = GetComponent<GlowDeactivator>();
         }
 
         private void Update()
@@ -61,6 +63,10 @@ namespace Menu.Inventory
             {
                 _quantity.text = ActualStack.Quantity.ToString();
                 _sprite.sprite = ActualStack.Content.Sprite;
+                if (_glowDeactivator != null)
+                {
+                    _glowDeactivator.SetGlowActive();
+                }
             }
         }
         
