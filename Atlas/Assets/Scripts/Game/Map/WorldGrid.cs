@@ -148,7 +148,6 @@ namespace Game.Grid
             return (completion * 100) / gridPercentMaxValue;
         }
 
-#if UNITY_EDITOR
         // to test
         public void SpawnPlant()
         {
@@ -205,6 +204,5 @@ namespace Game.Grid
                 }
             }
         }
-#endif
     }
 }
