@@ -8,14 +8,14 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: PoppyStage2
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 14ae3be9d18f4be4cbc9e230ee839ef1,
+    type: 3}
   m_ShaderKeywords: _NORMALMAP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2050
-  stringTagMap:
-    RenderType: Opaque
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses:
   - DistortionVectors
   - TransparentDepthPrepass
@@ -25,6 +25,14 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_63D5D01C:
+        m_Texture: {fileID: 2800000, guid: 95d4138137193e14c8be7736cd6becec, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_692F4852:
+        m_Texture: {fileID: 2800000, guid: 44b13b193e1521f48ac47882325bd940, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _AnisotropyMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -150,6 +158,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_74212A37: 0.4
+    - Vector1_8A8D7B14: 4
+    - Vector1_8CE147A5: 0.3
+    - Vector1_DE848F3E: 1
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ATDistance: 1
@@ -281,6 +293,7 @@ Material:
     - _ZTestModeDistortion: 4
     - _ZWrite: 1
     m_Colors:
+    - Vector2_9E40D24B: {r: 1, g: 1, b: 0, a: 0}
     - _BaseColor: {r: 0, g: 0, b: 0, a: 1}
     - _Color: {r: 0, g: 0, b: 0, a: 1}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
