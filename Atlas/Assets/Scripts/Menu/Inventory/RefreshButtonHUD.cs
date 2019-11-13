@@ -13,6 +13,8 @@ namespace Menu.Inventory
     public class RefreshButtonHUD : MonoBehaviour
     {
         [SerializeField] private Button _button = null;
+        [SerializeField] private RefreshPopupHandler refreshPopup;
+
         private DateTime _lastGetScannedPlant;
 
         void Start()
@@ -33,8 +35,14 @@ namespace Menu.Inventory
             _button.interactable &= RequestManager.Instance.CanReceiveANewRequest;
         }
 
+
         public void GetScannedPlantsFinished(bool success, string message, List<RequestManager.ScannedPlant> scannedPlants)
         {
+            refreshPopup.refreshResult(success, message);
+            if (!success)
+            {
+                return;
+            }
             List<ItemStack> seeds = new List<ItemStack>();
             PlayerInventory inventory = FindObjectOfType<PlayerInventory>();
 
