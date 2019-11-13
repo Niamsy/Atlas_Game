@@ -46,6 +46,7 @@ namespace Game.Grid
             Plant = Object.Instantiate(prefab, new Vector3(WorldPosition.x, GroundLevel, WorldPosition.z), new Quaternion(0, 0, 0, 1)).GetComponent<PlantModel>();
             Plant.Sow();
             Plant.SetPlantName();
+            Debug.Log("Sawing at pos: " + Plant.transform.position);
         }
     }
 }
