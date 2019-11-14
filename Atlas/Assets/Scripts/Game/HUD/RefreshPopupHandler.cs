@@ -20,7 +20,6 @@ public class RefreshPopupHandler : MonoBehaviour
 
     private void handlePopup(bool state, string Message)
     {
-        Debug.LogError("POPUP BEGIN");
         SuccessPopup.SetActive(state);
         FailurePopup.SetActive(!state);
         FailurePopupText.text += Message;
@@ -30,7 +29,6 @@ public class RefreshPopupHandler : MonoBehaviour
 
     private void hidePopups()
     {
-        Debug.LogError("HIDING POPUPS");
         SuccessPopup.SetActive(false);
         FailurePopup.SetActive(false);
         displaying = false;
