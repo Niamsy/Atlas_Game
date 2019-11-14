@@ -20,6 +20,9 @@ namespace Menu.Inventory
         public AudioEvent OnToggleGUIEvent = null;
         
         [SerializeField] private ItemDescriptionHUD _description = null;
+        [Header("Animation")] public GameObject _draganddrop = null;
+        private Animator dragAndDropAnimator = null;
+        private bool playOnce = false;
         
         protected override void InitialiseWidget()
         {
@@ -75,6 +78,7 @@ namespace Menu.Inventory
         {
             SaveManager.Instance.InputControls.Player.Inventory.performed += OpenCloseInventory;
             SaveManager.Instance.InputControls.Player.Inventory.Enable();
+            dragAndDropAnimator = _draganddrop.GetComponent<Animator>();
         }
 
         private void OnDisable()
@@ -89,6 +93,13 @@ namespace Menu.Inventory
             if (OnToggleGUIAudio && OnToggleGUIEvent)
             {
                 OnToggleGUIEvent.Raise(OnToggleGUIAudio, null);
+            }
+            if (dragAndDropAnimator && !playOnce)
+            {
+                dragAndDropAnimator.SetBool("Play", true);
+                Object.Destroy(_draganddrop, 4.2f);
+                _draganddrop = null;
+                playOnce = true;
             }
         }
 
