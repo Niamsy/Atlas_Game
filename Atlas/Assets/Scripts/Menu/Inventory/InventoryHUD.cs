@@ -13,7 +13,7 @@ namespace Menu.Inventory
 {
     public class InventoryHUD : MenuWidget
     {
-        public HandSlots HandSlot;
+        private HandSlots _handSlot;
         private List<InputAction> _shortcuts;
 
         [Header("Audio")] public Audio OnToggleGUIAudio = null;
@@ -23,6 +23,8 @@ namespace Menu.Inventory
         
         protected override void InitialiseWidget()
         {
+            _handSlot = FindObjectOfType<HandSlots>();
+            
             _shortcuts = new List<InputAction>();
             _shortcuts.Add(SaveManager.Instance.InputControls.Player.SelectField1);
             _shortcuts.Add(SaveManager.Instance.InputControls.Player.SelectField2);
@@ -32,6 +34,7 @@ namespace Menu.Inventory
             _shortcuts.Add(SaveManager.Instance.InputControls.Player.SelectField6);
             _shortcuts.Add(SaveManager.Instance.InputControls.Player.SelectField7);
             _shortcuts.Add(SaveManager.Instance.InputControls.Player.SelectField8);
+            
             foreach (InputAction action in _shortcuts)
             {
                 action.performed += ShortcutPressed;
@@ -56,7 +59,15 @@ namespace Menu.Inventory
             {
                 var stack = results[0].gameObject.GetComponent<ItemStackHUD>();
                 if (stack != null)
-                    HandSlot[index].SwapStack(stack.ActualStack);
+                    _handSlot[index].SwapStack(stack.ActualStack);
+            }
+        }
+
+        private void OnDestroy()
+        {
+            foreach (InputAction action in _shortcuts)
+            {
+                action.performed -= ShortcutPressed;
             }
         }
 
