@@ -14,6 +14,8 @@ namespace Menu.Main
         [SerializeField] private Button     _passwordLost = null;
 
         [SerializeField] private MenuWidget _nextWidget = null;
+        [SerializeField] private SavedIdHandler _saveId;
+
         #region Initialisation/Destruction
         protected override void InitialiseWidget()
         {
@@ -52,6 +54,10 @@ namespace Menu.Main
         public void Connect()
         {
             ActualRequestManager.Connect(_username.text, _password.text);
+            if (_saveId._save)
+            {
+                _saveId.setId(_username.text);
+            }
             UpdateButtonState();
         }
         private void ConnectionFinished(bool success, string message)

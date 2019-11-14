@@ -5,7 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SavedConnectionDatas", menuName = "Menu/SavedConnection", order = 2)]
 public class SavedConnectionDatas : ScriptableObject
 {
-    private string IdConnection;
+    [SerializeField] string IdConnection;
+
 
     public string getId()
     {
