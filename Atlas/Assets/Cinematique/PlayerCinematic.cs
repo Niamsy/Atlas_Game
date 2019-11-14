@@ -9,7 +9,7 @@ public class PlayerCinematic : MonoBehaviour
     void Start()
     {
         animator.SetFloat("InputMagnitude", 0.5f);
-        StartCoroutine(StopPlayer());
+        //StartCoroutine(StopPlayer());
     }
 
     public float speedRatio = 0.01f;
