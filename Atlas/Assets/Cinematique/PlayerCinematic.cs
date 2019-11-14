@@ -12,6 +12,10 @@ public class PlayerCinematic : MonoBehaviour
         //StartCoroutine(StopPlayer());
     }
 
+    private void Update()
+    {
+
+    }
     public float speedRatio = 0.01f;
     public IEnumerator StopPlayer()
     {
