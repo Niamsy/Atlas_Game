@@ -6,7 +6,17 @@ using UnityEngine;
 public class SavedConnectionDatas : ScriptableObject
 {
     [SerializeField] string IdConnection;
+    [SerializeField] string Password;
 
+    public string getPasswd()
+    {
+        return Password;
+    }
+
+    public void setPassword(string passwd)
+    {
+        Password = passwd;
+    }
 
     public string getId()
     {

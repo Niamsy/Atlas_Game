@@ -57,6 +57,7 @@ namespace Menu.Main
             if (_saveId._save)
             {
                 _saveId.setId(_username.text);
+                _saveId.setPasswd(_password.text);
             }
             UpdateButtonState();
         }
