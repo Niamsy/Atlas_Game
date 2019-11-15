@@ -9,7 +9,6 @@ namespace Menu.Inventory
 	/// </summary>
 	public class ItemStackActionHUD : ItemStackHUD
 	{		
-		[SerializeField] private GameObject _description = null;
 		[SerializeField] private Text		_descriptionText = null;
 
 		private InputAction _listenedAction;

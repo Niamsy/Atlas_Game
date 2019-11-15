@@ -331,7 +331,7 @@ MonoBehaviour:
     FieldOfView: 40
     OrthographicSize: 10
     NearClipPlane: 0.1
-    FarClipPlane: 5000
+    FarClipPlane: 1500
     Dutch: 0
     LensShift: {x: 0, y: 0}
   m_Transitions:
@@ -907,40 +907,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 1759092919, guid: e13aa2c6f7267b64288ae3cf3840f20e, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 8.7659685e-15
-      objectReference: {fileID: 0}
-    - target: {fileID: 1759092919, guid: e13aa2c6f7267b64288ae3cf3840f20e, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.00000009362675
-      objectReference: {fileID: 0}
-    - target: {fileID: 1759092919, guid: e13aa2c6f7267b64288ae3cf3840f20e, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.00000009362675
-      objectReference: {fileID: 0}
-    - target: {fileID: 1759092919, guid: e13aa2c6f7267b64288ae3cf3840f20e, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.6170948
-      objectReference: {fileID: 0}
-    - target: {fileID: 1759092919, guid: e13aa2c6f7267b64288ae3cf3840f20e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.2890854
-      objectReference: {fileID: 0}
-    - target: {fileID: 1759092919, guid: e13aa2c6f7267b64288ae3cf3840f20e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.023068607
-      objectReference: {fileID: 0}
-    - target: {fileID: 1200721314774352556, guid: e13aa2c6f7267b64288ae3cf3840f20e,
-        type: 3}
-      propertyPath: sounds.Array.data[0].source
-      value: 
-      objectReference: {fileID: 8980981359683275847}
-    - target: {fileID: 1200721314774352556, guid: e13aa2c6f7267b64288ae3cf3840f20e,
-        type: 3}
-      propertyPath: sounds.Array.data[1].source
-      value: 
-      objectReference: {fileID: 8980981359683275847}
     - target: {fileID: 4093741956441054, guid: e13aa2c6f7267b64288ae3cf3840f20e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -985,6 +951,40 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1759092919, guid: e13aa2c6f7267b64288ae3cf3840f20e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 8.7659685e-15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1759092919, guid: e13aa2c6f7267b64288ae3cf3840f20e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.00000009362675
+      objectReference: {fileID: 0}
+    - target: {fileID: 1759092919, guid: e13aa2c6f7267b64288ae3cf3840f20e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.00000009362675
+      objectReference: {fileID: 0}
+    - target: {fileID: 1759092919, guid: e13aa2c6f7267b64288ae3cf3840f20e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.6170948
+      objectReference: {fileID: 0}
+    - target: {fileID: 1759092919, guid: e13aa2c6f7267b64288ae3cf3840f20e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.2890854
+      objectReference: {fileID: 0}
+    - target: {fileID: 1759092919, guid: e13aa2c6f7267b64288ae3cf3840f20e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.023068607
+      objectReference: {fileID: 0}
+    - target: {fileID: 1200721314774352556, guid: e13aa2c6f7267b64288ae3cf3840f20e,
+        type: 3}
+      propertyPath: sounds.Array.data[0].source
+      value: 
+      objectReference: {fileID: 8980981359683275847}
+    - target: {fileID: 1200721314774352556, guid: e13aa2c6f7267b64288ae3cf3840f20e,
+        type: 3}
+      propertyPath: sounds.Array.data[1].source
+      value: 
+      objectReference: {fileID: 8980981359683275847}
     - target: {fileID: 2814572122784449201, guid: e13aa2c6f7267b64288ae3cf3840f20e,
         type: 3}
       propertyPath: m_Radius

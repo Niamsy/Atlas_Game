@@ -1,4 +1,5 @@
 ﻿using Game.Player.Stats;
+using Localization;
 using UnityEngine;
 using SceneManagement;
 using Player;
@@ -45,6 +46,7 @@ namespace Menu
         {
             if (_playerController.IsDead && !_isAlreadyDead)
             {
+                
                 _isAlreadyDead = true;
                 //_textComposant.localizedasset = ;
                 Show(true);

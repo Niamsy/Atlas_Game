@@ -8,7 +8,7 @@ namespace Player.Scripts
 
         public void Spawn()
         {
-            gameObject.transform.position = pos;
+            gameObject.transform.localPosition = pos;
         }
     }
 }

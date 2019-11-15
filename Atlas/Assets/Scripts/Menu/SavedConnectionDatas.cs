@@ -5,7 +5,18 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SavedConnectionDatas", menuName = "Menu/SavedConnection", order = 2)]
 public class SavedConnectionDatas : ScriptableObject
 {
-    private string IdConnection;
+    [SerializeField] string IdConnection;
+    [SerializeField] string Password;
+
+    public string getPasswd()
+    {
+        return Password;
+    }
+
+    public void setPassword(string passwd)
+    {
+        Password = passwd;
+    }
 
     public string getId()
     {

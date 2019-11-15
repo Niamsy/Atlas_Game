@@ -1,28 +1,84 @@
-﻿using AtlasAudio;
+﻿using System.Collections.Generic;
+using AtlasAudio;
 using AtlasEvents;
 using Game.Map.DayNight;
+using Game.Player;
 using Game.SavingSystem;
 using Menu.Inventory.ItemDescription;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 namespace Menu.Inventory
 {
     public class InventoryHUD : MenuWidget
     {
-        protected override void InitialiseWidget()
-        {
-        }
+        private HandSlots _handSlot;
+        private List<InputAction> _shortcuts;
 
         [Header("Audio")] public Audio OnToggleGUIAudio = null;
         public AudioEvent OnToggleGUIEvent = null;
         
         [SerializeField] private ItemDescriptionHUD _description = null;
+        [Header("Animation")] public GameObject _draganddrop = null;
+        private Animator dragAndDropAnimator = null;
+        private bool playOnce = false;
+        
+        protected override void InitialiseWidget()
+        {
+            _handSlot = FindObjectOfType<HandSlots>();
+            
+            _shortcuts = new List<InputAction>();
+            _shortcuts.Add(SaveManager.Instance.InputControls.Player.SelectField1);
+            _shortcuts.Add(SaveManager.Instance.InputControls.Player.SelectField2);
+            _shortcuts.Add(SaveManager.Instance.InputControls.Player.SelectField3);
+            _shortcuts.Add(SaveManager.Instance.InputControls.Player.SelectField4);
+            _shortcuts.Add(SaveManager.Instance.InputControls.Player.SelectField5);
+            _shortcuts.Add(SaveManager.Instance.InputControls.Player.SelectField6);
+            _shortcuts.Add(SaveManager.Instance.InputControls.Player.SelectField7);
+            _shortcuts.Add(SaveManager.Instance.InputControls.Player.SelectField8);
+            
+            foreach (InputAction action in _shortcuts)
+            {
+                action.performed += ShortcutPressed;
+            }
+        }
+
+        private void ShortcutPressed(InputAction.CallbackContext obj)
+        {
+            int index = _shortcuts.FindIndex(act => act == obj.action);
+                   
+            PointerEventData pointerData = new PointerEventData (EventSystem.current)
+            {
+                pointerId = -1,
+            };
+         
+            pointerData.position = Input.mousePosition;
+ 
+            List<RaycastResult> results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(pointerData, results);
+
+            if (results.Count > 0)
+            {
+                var stack = results[0].gameObject.GetComponent<ItemStackHUD>();
+                if (stack != null)
+                    _handSlot[index].SwapStack(stack.ActualStack);
+            }
+        }
+
+        private void OnDestroy()
+        {
+            foreach (InputAction action in _shortcuts)
+            {
+                action.performed -= ShortcutPressed;
+            }
+        }
 
         private void OnEnable()
         {
             SaveManager.Instance.InputControls.Player.Inventory.performed += OpenCloseInventory;
             SaveManager.Instance.InputControls.Player.Inventory.Enable();
+            dragAndDropAnimator = _draganddrop.GetComponent<Animator>();
         }
 
         private void OnDisable()
@@ -37,6 +93,13 @@ namespace Menu.Inventory
             if (OnToggleGUIAudio && OnToggleGUIEvent)
             {
                 OnToggleGUIEvent.Raise(OnToggleGUIAudio, null);
+            }
+            if (dragAndDropAnimator && !playOnce)
+            {
+                dragAndDropAnimator.SetBool("Play", true);
+                Object.Destroy(_draganddrop, 4.2f);
+                _draganddrop = null;
+                playOnce = true;
             }
         }
 
