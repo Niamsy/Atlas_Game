@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Text.RegularExpressions;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Menu.Main
@@ -12,7 +14,9 @@ namespace Menu.Main
         
         [SerializeField] private Button     _registerButton = null;
         [SerializeField] private Button     _returnButton = null;
-    
+
+        [SerializeField] private Text _successText = null;
+
         #region Initialisation/Destruction
         protected override void InitialiseWidget()
         {
@@ -52,8 +56,13 @@ namespace Menu.Main
         /// </summary>
         public void Register()
         {
-            ActualRequestManager.Register(_username.text, _emailAddress.text, _password.text);
-            UpdateButtonState();
+            if (isPasswordConform(_password.text))
+            {
+                _successText.text = "Your account has been successfully created";
+                StartCoroutine(Redirect());
+                ActualRequestManager.Register(_username.text, _emailAddress.text, _password.text);
+                UpdateButtonState();
+            }
         }
         private void RegisterFinished(bool success, string message)
         {
@@ -70,5 +79,24 @@ namespace Menu.Main
                 ErrorText.text = message;
         }
         #endregion
+
+        private bool isPasswordConform(string password)
+        {
+            if (Regex.Match(password, "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$").Success)
+            {
+                ErrorText.text = "";
+                return true;
+            } else
+            {
+                ErrorText.text = "Password should contain at least 8 characters, one uppercase letter and one number";
+                return false;
+            }
+        }
+
+        IEnumerator Redirect()
+        {
+            yield return new WaitForSeconds(4f);
+            _returnButton.onClick.Invoke();
+        }
     }
 }
