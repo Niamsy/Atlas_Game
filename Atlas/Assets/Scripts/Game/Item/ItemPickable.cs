@@ -1,4 +1,5 @@
 ﻿using Game.Inventory;
+using Game.Player;
 using Plants.Plant;
 using Player;
 using UnityEngine;
@@ -65,12 +66,19 @@ namespace Game.Item
                 playerController.InteractValue = anim.ToInt();
 
             PlayerInventory inventory = FindObjectOfType<PlayerInventory>();
+            HandSlots handSlot = FindObjectOfType<HandSlots>();
 
-            ItemStack leftStack = inventory.AddItemStack(BaseStack.Slot);
+            ItemStack leftStack = handSlot.AddItemStack(BaseStack.Slot);
             if (leftStack == null)
                 Destroy(gameObject);
             else
-                BaseStack.Slot = leftStack;
+            {
+                ItemStack leftStack2 = inventory.AddItemStack(BaseStack.Slot);
+                if (leftStack2 == null)
+                    Destroy(gameObject);
+                else
+                    BaseStack.Slot = leftStack2;
+            }
         }
 
         void OnTriggerEnter(Collider col)

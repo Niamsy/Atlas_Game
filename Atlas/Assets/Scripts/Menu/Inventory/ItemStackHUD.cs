@@ -16,7 +16,7 @@ namespace Menu.Inventory
         [SerializeField] private Text      _quantity = null;
 
         protected Button        Button = null;
-        protected ItemStack     ActualStack = null;
+        public ItemStack     ActualStack = null;
 
         private RectTransform    _rectTransform = null;
         private Canvas          _rootCanvas = null;
