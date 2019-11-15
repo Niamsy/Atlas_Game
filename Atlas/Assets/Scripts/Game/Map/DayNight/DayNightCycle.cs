@@ -66,8 +66,12 @@ namespace Game.DayNight
             if (!Stars.isPlaying && Moon.enabled)
                 Stars.Play();
 
-            RenderSettings.skybox.SetFloat("_AtmosphereThickness", SkyThickness.Evaluate(dayAdvancement));
-            RenderSettings.skybox.SetFloat("_Exposure", SkyExposure.Evaluate(dayAdvancement));
+            if (RenderSettings.skybox)
+            {
+                RenderSettings.skybox.SetFloat("_AtmosphereThickness", SkyThickness.Evaluate(dayAdvancement));
+                RenderSettings.skybox.SetFloat("_Exposure", SkyExposure.Evaluate(dayAdvancement));
+            }
+
             DayVolume.weight = DayBlendOverDay.Evaluate(dayAdvancement);
             NightVolume.weight = 1-DayBlendOverDay.Evaluate(dayAdvancement);
         }

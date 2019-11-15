@@ -171,7 +171,7 @@ namespace Game.SavingSystem
         {
 #if ATLAS_DEBUG
             Debug.Log("Loading map data of the scene " + sceneIndex);
-#endif  
+#endif
             _mapLoaded = LoadFromFile(MapFile_Path(sceneIndex, SelectedProfil.ID, AccountData.ID), ref _mapData);
             if (_mapLoaded && UponLoadingMapData != null)
                 UponLoadingMapData(_mapData);
