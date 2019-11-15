@@ -187,7 +187,7 @@ namespace Plants.Plant
             if (!_reachedFinalStage && CanGoToNextStage())
                 GoToNextStage();
 
-            if (current_stage == last_stage && RessourceStock[Resource.Energy].Quantity == 0)
+            if (current_stage == last_stage && RessourceStock[Resource.Energy] != null && RessourceStock[Resource.Energy].Quantity == 0)
             {
                 _isCycleLifeComplete = true;
             }

@@ -17,7 +17,10 @@ namespace Game.Insects
 
         // Change to adapt Insect model
         [SerializeField]
-        public GameObject model;
+        public GameObject hive;
+
+        [SerializeField]
+        public GameObject bees;
 
         public int currentNumber = 2;
     }
