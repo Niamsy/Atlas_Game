@@ -21,7 +21,5 @@ namespace Game.Insects
 
         [SerializeField]
         public GameObject bees;
-
-        public int currentNumber = 2;
     }
 }

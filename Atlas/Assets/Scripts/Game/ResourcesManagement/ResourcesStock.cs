@@ -74,6 +74,16 @@ namespace Game.ResourcesManagement
             return (quantity);
         }
 
+        public bool FindResource(Resource resource)
+        {
+            foreach (Stock stock in _listOfStocks)
+            {
+                if (stock.Resource == resource)
+                    return true;
+            }
+            return false;
+        }
+
         private void showWaterIcon(Resource resource, Stock stock)
         {
             if (resource == Resource.Water && icon != null)
@@ -106,7 +116,7 @@ namespace Game.ResourcesManagement
         private IEnumerator hideWaterIcon(PlantWateringIcon icon, Stock stock, float delay)
         {
             yield return new WaitForSeconds(delay);
-            Debug.Log("Delay Passed Away + water Quantity " + waterQuantity.ToString() + " Stock Quantity " + stock.Quantity);
+            //Debug.Log("Delay Passed Away + water Quantity " + waterQuantity.ToString() + " Stock Quantity " + stock.Quantity);
             if (waterQuantity != stock.Quantity && iconDisplayed == true)
             {
                 iconDisplayed = false;

@@ -67,22 +67,22 @@ namespace Game.ResourcesManagement.Consumer
             StartInvoking();
         }
 
-        public void Initialize(InsectSystem syst)
+        public void Initialize(int nb)
         {
             if (IsInvoking("ConsumeResource"))
                 CancelInvoke("ConsumeResource");
 
             ResourcesToConsume.RemoveAll(x => true);
             ResourcesToConsume.Add(Resource.Energy);
-            LinkedStock[Resource.Energy].Limit = syst.currentNumber * 5;
+            LinkedStock[Resource.Energy].Limit = nb * 5;
             ConsumedStock = new Stock
             {
                 Resource = Resource.Energy,
                 Quantity = 0,
-                Limit = syst.currentNumber * 5
+                Limit = nb * 5
             };
             ConsumptionRate.TickRate = _tickRate;
-            ConsumptionRate.ResourcePerTick = syst.currentNumber;
+            ConsumptionRate.ResourcePerTick = nb;
             _starved = false;
         }
 
@@ -94,9 +94,8 @@ namespace Game.ResourcesManagement.Consumer
         public override void ConsumeResource()
         {
             ConsumedStock.Quantity += LinkedStock.RemoveResources(ConsumedStock.Resource, ConsumptionRate.ResourcePerTick);
-            if (LinkedStock[Resource.Energy].Quantity >= LinkedStock[Resource.Energy].Limit)
+            if (LinkedStock[ConsumedStock.Resource].Quantity >= LinkedStock[ConsumedStock.Resource].Limit)
             {
-                LinkedStock[Resource.Energy].Quantity = LinkedStock[Resource.Energy].Limit;
                 Full = true;
             }
             else
@@ -117,10 +116,12 @@ namespace Game.ResourcesManagement.Consumer
             }
         }
 
-        public void updateRates(InsectSystem syst)
+        public void UpdateRates(int nb)
         {
-            LinkedStock[Resource.Energy].Limit = syst.currentNumber * 5;
-            ConsumptionRate.ResourcePerTick = syst.currentNumber;
+            LinkedStock[Resource.Energy].Limit = nb * 5;
+            ConsumedStock.Limit = nb * 5;
+            ConsumptionRate.ResourcePerTick = nb;
+            Full = false;
         }
 
         private Coroutine _starveCoroutine;

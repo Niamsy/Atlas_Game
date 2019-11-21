@@ -3,6 +3,7 @@ using Game.ResourcesManagement.Consumer;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.ParticleSystem;
 
 namespace Game.Insects
 {
@@ -18,14 +19,44 @@ namespace Game.Insects
         public InsectConsumer consumer;
 
         [SerializeField]
-        public int          radius;
-        protected bool      isActing;
+        [Range(1, 200)]
+        public int radius;
 
-        private Vector3     position;
+        [SerializeField]
+        public LayerMask _layer;
+
+        protected bool isActing;
+
+        private Vector3 position;
+
+        private new BoxCollider collider;
+
+        private int _currentNumber;
+
+        private EmissionModule emissionBeesStatic;
+
+        private EmissionModule emissionBeesMoving;
+
+        public int CurrentNumber
+        {
+            get { return _currentNumber; }
+            set { _currentNumber = value; }
+        }
 
         private void Awake()
         {
             position = gameObject.transform.position;
+            collider = gameObject.GetComponent<BoxCollider>();
+            collider.size = new Vector3(radius, radius, radius);
+            CurrentNumber = 2;
+            ParticleSystem[] systs = insect.bees.GetComponents<ParticleSystem>();
+            if (systs.Length == 2)
+            {
+                emissionBeesStatic = systs[0].emission;
+                emissionBeesStatic.enabled = true;
+                emissionBeesMoving = systs[1].emission;
+                emissionBeesMoving.enabled = true;
+            }
         }
 
         private void Start()
@@ -34,7 +65,7 @@ namespace Game.Insects
             InvokeRepeating("checkEvolving", 1.0f, 1.0f);
             if (insect != null)
             {
-                consumer.Initialize(insect);
+                consumer.Initialize(CurrentNumber);
                 consumer.StartInvoking();
             }
         }
@@ -43,22 +74,37 @@ namespace Game.Insects
         {
             if (consumer.Full)
             {
-                if (insect.currentNumber < insect.maximumNumber)
+                if (CurrentNumber < insect.maximumNumber)
                     Growth();
+            }
+            if (consumer.Starved)
+            {
+                if (CurrentNumber > 2)
+                    DeGrowth();
             }
         }
 
         private void Growth()
         {
-            insect.currentNumber *= 2;
-            if (insect.currentNumber > insect.maximumNumber)
-                insect.currentNumber = insect.maximumNumber;
-            consumer.updateRates(insect);
+            CurrentNumber *= 2;
+            if (CurrentNumber > insect.maximumNumber)
+                CurrentNumber = insect.maximumNumber;
+            consumer.UpdateRates(CurrentNumber);
+            //emissionBeesStatic.rateOverTime = CurrentNumber / 2;
+            //emissionBeesMoving.rateOverTime = CurrentNumber / 2;
+        }
+
+        private void DeGrowth()
+        {
+            CurrentNumber /= 2;
+            if (CurrentNumber < 2)
+                CurrentNumber = 2;
+            consumer.UpdateRates(CurrentNumber);
         }
 
         private void checkActing()
         {
-            Collider[] colliders = Physics.OverlapSphere(position, radius);
+            Collider[] colliders = Physics.OverlapBox(position, collider.size, Quaternion.identity, _layer);
             foreach (Collider col in colliders)
             {
                 foreach (InsectAction action in insect.actions)
@@ -66,7 +112,8 @@ namespace Game.Insects
                     var interactable = col.GetComponent<IInteractableInsect>();
                     if (interactable!= null)
                     {
-                        if (!consumer.Full)
+                        Debug.Log(interactable.ToString());
+                        if (!consumer.Full && CurrentNumber < insect.maximumNumber)
                             interactable.insectInteract(action, consumer);
                     }
                 }

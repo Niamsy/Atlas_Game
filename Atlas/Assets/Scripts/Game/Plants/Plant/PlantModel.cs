@@ -110,8 +110,6 @@ namespace Plants.Plant
             if (current_stage == last_stage)
             {
                 _reachedFinalStage = true;
-                // TODO: Define in plant stats Energy (insect food : Nectar / pollen) for each plant
-                RessourceStock.AddResources(Resource.Energy, 200);
             }
         }
         
@@ -272,10 +270,12 @@ namespace Plants.Plant
 
         public void insectInteract(InsectAction action, InsectConsumer consumer)
         {
-            if (current_stage == last_stage)
+            if (current_stage == last_stage && RessourceStock.FindResource(Resource.Energy) == true)
             {
                 _isPollinate = true;
-                consumer.LinkedStock.AddResources(Resource.Energy, RessourceStock.RemoveResources(Resource.Energy, 10));
+                consumer.LinkedStock.AddResources(Resource.Energy, RessourceStock.RemoveResources(Resource.Energy, 1));
+                Debug.Log("Miam");
+                Debug.Log(consumer.LinkedStock.ListOfStocks[0].Quantity);
             }
         }
         #endregion
