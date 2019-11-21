@@ -26,6 +26,9 @@ namespace Game.HUD
 
             var energyStock = m_Stats.Resources[Game.ResourcesManagement.Resource.Energy];
             CurrenttEnergyBar.Initialize(energyStock.Quantity, 0, energyStock.Limit);
+
+            var satietyStock = m_Stats.Resources[Game.ResourcesManagement.Resource.Satiety];
+            CurrentHungerBar.Initialize(satietyStock.Quantity, 0, satietyStock.Limit);
         }
 
         private void Update()
@@ -37,6 +40,9 @@ namespace Game.HUD
 
             var energyStock = m_Stats.Resources[Game.ResourcesManagement.Resource.Energy];
             CurrenttEnergyBar.SetValue(energyStock.Quantity);
+
+            var satietyStock = m_Stats.Resources[Game.ResourcesManagement.Resource.Satiety];
+            CurrentHungerBar.SetValue(satietyStock.Quantity);
 
             /*
         ratio = stats.playerHunger.getCurrent() / stats.playerHunger.getMax();
