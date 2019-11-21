@@ -252,7 +252,10 @@ namespace Game.SavingSystem
                 {
                     BinaryFormatter bf = new BinaryFormatter();
                     FileStream file = File.Open(path, FileMode.Open);
-                    data = (T)bf.Deserialize(file);
+                    object obj = bf.Deserialize(file);
+                    if (obj.GetType() != typeof(T))
+                        throw new SerializationException("The save file is of a invalid type." + obj.GetType() + " and " + typeof(T));
+                    data = (T)obj;
                     file.Close();
                     return (true);
                 }
