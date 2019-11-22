@@ -34,6 +34,9 @@ namespace Game.DayNight
             if (!PreviewInEditor && !Application.isPlaying)
                 return;
 #endif
+            if (m_Calendar == null)
+                return;
+            
             Date date = m_Calendar.ActualDate;
             var dayAdvancement = date.DayAdvancement;
             var dayAdvancement01 = date.DayAdvancement / Date.HourPerDay;
