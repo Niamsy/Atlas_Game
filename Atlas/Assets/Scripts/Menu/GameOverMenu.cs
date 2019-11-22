@@ -17,11 +17,10 @@ namespace Menu
         private Canvas           _canvas;
         private Spawner          _spawner;
         private bool             _isAlreadyDead; 
-        private LocalizedTextBehaviour             _textComposant;
         
-        [SerializeField] private LocalizedText     _name = null;
-        public string                              Oxygen_Death => (_name.Value);
-        public LocalizedText                       NameAsset => (_name);
+        private LocalizedTextBehaviour             _textComposant;
+        public LocalizedText     OxygenDeath;
+        public LocalizedText     DrowningDeath;
         
         protected override void InitialiseWidget()
         {
@@ -46,9 +45,8 @@ namespace Menu
         {
             if (_playerController.IsDead && !_isAlreadyDead)
             {
-                
                 _isAlreadyDead = true;
-                //_textComposant.localizedasset = ;
+                _textComposant.LocalizedAsset = OxygenDeath;
                 Show(true);
             }
         }
