@@ -1,49 +1,33 @@
 ﻿using Game.Inventory;
 using Game.ResourcesManagement;
+using Player;
 using UnityEngine;
 
 namespace Game.Item.Food
 {
-    [RequireComponent(typeof(ResourcesStock))]
+    [CreateAssetMenu(fileName = "Food", menuName = "Item/Food")]
     public class Food : ItemAbstract
     {
-        public ResourcesStock Stock;
-        public FoodProducer Producer;
-        private bool _isFeeding = false;
-
-        private void Awake()
-        {
-            Producer.gameObject.SetActive(false);
-            Producer.StockedResources = Stock;
-
-#if UNITY_EDITOR
-            if (Stock[Resource.Satiety] == null)
-                Debug.LogError("Food item doesn't have any satiety stock");
-#endif
-        }
-
-        private void Update()
-        {
-            if (_isFeeding && Producer.StockedResources[Resource.Satiety].Quantity == 0)
-                Producer.gameObject.SetActive(false);
-        }
+        private FoodProducer Producer = null;
 
         public override bool CanUse(Transform transform)
         {
-            if (Stock[Resource.Satiety].Quantity <= 0)
+            if (Producer && Producer.StockedResources[Resource.Satiety].Quantity <= 0)
                 return false;
             return true;
         }
 
         public override void Use(ItemStack selfStack)
         {
-            Producer.gameObject.SetActive(true);
+            var playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+            playerController.GetPlayerStats().Resources.AddResources(Resource.Satiety, Producer.StockedResources[Resource.Satiety].Quantity);
         }
 
-        public override bool CancelUse(ItemStack selfStack)
+        public override GameObject Equip(Transform parent)
         {
-            Producer.gameObject.SetActive(false);
-            return true;
+            var ret = base.Equip(parent);
+            Producer = ret.GetComponentInChildren<FoodProducer>();
+            return ret;
         }
     }
 
