@@ -12,6 +12,8 @@ namespace Game.ResourcesManagement.Consumer
         protected int _starvationTimeLimit;
         [SerializeField]
         protected int _tickRate;
+        [SerializeField]
+        protected int _rateMultiplicator;
 
         protected bool _starved;
         protected bool _starving = false;
@@ -74,12 +76,12 @@ namespace Game.ResourcesManagement.Consumer
 
             ResourcesToConsume.RemoveAll(x => true);
             ResourcesToConsume.Add(Resource.Energy);
-            LinkedStock[Resource.Energy].Limit = nb * 5;
+            LinkedStock[Resource.Energy].Limit = nb * _rateMultiplicator;
             ConsumedStock = new Stock
             {
                 Resource = Resource.Energy,
                 Quantity = 0,
-                Limit = nb * 5
+                Limit = nb * _rateMultiplicator
             };
             ConsumptionRate.TickRate = _tickRate;
             ConsumptionRate.ResourcePerTick = nb;
@@ -118,8 +120,8 @@ namespace Game.ResourcesManagement.Consumer
 
         public void UpdateRates(int nb)
         {
-            LinkedStock[Resource.Energy].Limit = nb * 5;
-            ConsumedStock.Limit = nb * 5;
+            LinkedStock[Resource.Energy].Limit = nb * _rateMultiplicator;
+            ConsumedStock.Limit = nb * _rateMultiplicator;
             ConsumptionRate.ResourcePerTick = nb;
             Full = false;
         }

@@ -227,7 +227,7 @@ namespace Plants.Plant
         }
         private void UpdateProducer()
         {
-            _producer.StockedResources[Resource.Oxygen].Limit = current_stage * 100;
+            _producer.UpdateRates(current_stage);
         }
 
         private void UpdateConsumers()
@@ -272,10 +272,13 @@ namespace Plants.Plant
         {
             if (current_stage == last_stage && RessourceStock.FindResource(Resource.Energy) == true)
             {
-                _isPollinate = true;
-                consumer.LinkedStock.AddResources(Resource.Energy, RessourceStock.RemoveResources(Resource.Energy, 1));
+                consumer.LinkedStock.AddResources(Resource.Energy, RessourceStock.RemoveResources(Resource.Energy, _producer.finalStageEnergyGiven));
                 Debug.Log("Miam");
                 Debug.Log(consumer.LinkedStock.ListOfStocks[0].Quantity);
+                if (!consumer.Starved)
+                    _isPollinate = true;
+                else
+                    _isPollinate = false;
             }
         }
         #endregion
