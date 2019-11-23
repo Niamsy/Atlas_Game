@@ -1,5 +1,86 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6451288328613792967
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5964806040026374874}
+  - component: {fileID: 5089678358747067583}
+  - component: {fileID: 3428237701106269936}
+  - component: {fileID: 6769939996189648728}
+  m_Layer: 11
+  m_Name: FoodProducer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5964806040026374874
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6451288328613792967}
+  m_LocalRotation: {x: -0, y: 0.99989915, z: -0, w: -0.0142014455}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2055629350061516565}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5089678358747067583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6451288328613792967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23df31ce563e414479a80af527ffb8e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ProductionRate:
+    TickRate: 0
+    ResourcePerTick: 0
+  ResourceGivenPerTick: 100
+  StockedResources: {fileID: 3428237701106269936}
+  ProducedResources: 04000000
+  _debugDisplay: 1
+--- !u!114 &3428237701106269936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6451288328613792967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43e8698d0207b7b4c99e9e7801956e2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _listOfStocks:
+  - Resource: 4
+    Quantity: 500
+    Limit: 500
+--- !u!65 &6769939996189648728
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6451288328613792967}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2, z: 1}
+  m_Center: {x: 0, y: -1, z: 0}
 --- !u!1001 &2055629350061915541
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58,3 +139,9 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 20500000, guid: 8ba740056308be44fb3c1a070b3227c4, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8ba740056308be44fb3c1a070b3227c4, type: 3}
+--- !u!4 &2055629350061516565 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: 8ba740056308be44fb3c1a070b3227c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 2055629350061915541}
+  m_PrefabAsset: {fileID: 0}
