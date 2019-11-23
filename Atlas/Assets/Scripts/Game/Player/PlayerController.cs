@@ -227,6 +227,10 @@ namespace Player
         {
             var InputX = m_InputX;
             var InputZ = m_InputZ;
+            if (InputZ < 0f)
+            {
+                InputZ /= 2f;
+            }
             if (m_PlayerStats.Resources[Resource.Energy].Quantity <= criticalEnergy)
             {
                 InputX /= 2f;
@@ -236,7 +240,7 @@ namespace Player
             m_Animator.SetFloat(_HashInputZ, InputZ, verticalAnimTime, Time.deltaTime * 2f);
 
             m_InputMagnitude = new Vector2(InputX, InputZ).sqrMagnitude;
-            if (m_InputMagnitude > allowPlayerRotation)
+            if (m_InputMagnitude > allowPlayerRotation && InputZ > -0.1f)
             {
                 m_Animator.SetFloat(_HashInputMagnitude, m_InputMagnitude, startAnimTime, Time.deltaTime);
                 RotatePlayerAndGetMoveDirection();
@@ -259,11 +263,11 @@ namespace Player
             {
                 GetInputMagnitude();
             }
-
-            m_MoveVector = m_DesiredMoveDirection * baseSpeed * m_InputMagnitude;
+            
+            m_MoveVector = m_InputMagnitude * (m_InputZ < 0 ? -baseSpeed : baseSpeed) * m_DesiredMoveDirection;
             m_VerticalVelocity -= gravity * Time.deltaTime;
             m_MoveVector.y = m_VerticalVelocity;
-            m_CharacterController.Move(m_MoveVector * Time.deltaTime);
+            m_CharacterController.Move(Time.deltaTime * m_MoveVector);
         }
 
         void RotatePlayerAndGetMoveDirection()
