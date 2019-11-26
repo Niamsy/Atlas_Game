@@ -243,7 +243,7 @@ namespace Plants.Plant
 
         private bool CanGoToNextStage()
         {
-            foreach (var stock in _consumer.ConsumedStocks )
+            foreach (var stock in _consumer.ConsumedStocks)
             {
                 if (stock.Quantity < stock.Limit)
                 {

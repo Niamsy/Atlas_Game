@@ -678,6 +678,9 @@ MonoBehaviour:
   - Resource: 3
     Quantity: 1000
     Limit: 1000
+  - Resource: 4
+    Quantity: 2000
+    Limit: 2000
 --- !u!1 &5144607089849438866
 GameObject:
   m_ObjectHideFlags: 0
@@ -763,11 +766,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4093741956441054}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 9b34983420347d643a7c4d8568bb4ccb,
-        type: 3}
-      propertyPath: m_Name
-      value: Atlas_Player
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 9b34983420347d643a7c4d8568bb4ccb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -837,6 +835,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 9b34983420347d643a7c4d8568bb4ccb,
+        type: 3}
+      propertyPath: m_Name
+      value: Atlas_Player
       objectReference: {fileID: 0}
     - target: {fileID: -6057140222963153312, guid: 9b34983420347d643a7c4d8568bb4ccb,
         type: 3}

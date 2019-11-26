@@ -5,6 +5,7 @@ using SceneManagement;
 using Player;
 using Player.Scripts;
 using UnityEngine.UI;
+using Localization;
     
 namespace Menu
 {
@@ -16,7 +17,10 @@ namespace Menu
         private Canvas           _canvas;
         private Spawner          _spawner;
         private bool             _isAlreadyDead; 
-        private Text             _textComposant;
+        
+        private LocalizedTextBehaviour             _textComposant;
+        public LocalizedText     OxygenDeath;
+        public LocalizedText     DrowningDeath;
         
         protected override void InitialiseWidget()
         {
@@ -27,10 +31,12 @@ namespace Menu
         void Start()
         {
             _canvas = GetComponent<Canvas>();
-            _textComposant = transform.GetChild(0).GetChild(0).GetComponent<Text>();
             _playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
             _playerStats = _playerController.GetComponentInChildren<PlayerStats>();
             _spawner = _playerController.GetComponentInChildren<Spawner>();
+
+            _textComposant = transform.GetChild(0).GetChild(0).GetComponent<LocalizedTextBehaviour>();
+
             Show(false);
         }
     
@@ -39,10 +45,8 @@ namespace Menu
         {
             if (_playerController.IsDead && !_isAlreadyDead)
             {
-                
                 _isAlreadyDead = true;
-                _textComposant.text = "GameOver";
-                //Debug.Log("TEEEST");    
+                _textComposant.LocalizedAsset = OxygenDeath;
                 Show(true);
             }
         }
