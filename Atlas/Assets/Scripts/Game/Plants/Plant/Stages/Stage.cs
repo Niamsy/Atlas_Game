@@ -12,6 +12,7 @@ namespace Plants
         [System.Serializable]
         public struct Need
         {
+
             public Resource       type;
             public int             quantity;
         }

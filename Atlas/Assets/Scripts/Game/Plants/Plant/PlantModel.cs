@@ -1,4 +1,5 @@
 ﻿using Game.DayNight;
+using Game.Insects;
 using Game.Map;
 using Game.ResourcesManagement;
 using Game.ResourcesManagement.Consumer;
@@ -9,7 +10,7 @@ using UnityEngine.Events;
 namespace Plants.Plant
 {
     [RequireComponent(typeof(PlantConsumer))]
-    public class PlantModel : MonoBehaviour
+    public class PlantModel : MonoBehaviour, IInteractableInsect
     {
         #region Custom Events
         public UnityEvent OnLevelUp;
@@ -38,6 +39,8 @@ namespace Plants.Plant
         private Canvas death = null;
         private bool _reachedFinalStage = false;
         private bool _isSowed = false;
+        private bool _isPollinate = false;
+        private bool _isCycleLifeComplete = false;
 
         #endregion
 
@@ -72,6 +75,11 @@ namespace Plants.Plant
             get { return _isSowed; }
         }
 
+        public bool IsPollinate
+        {
+            get { return _isPollinate; }
+        }
+
         #endregion
 
         #region Public Methods
@@ -99,8 +107,10 @@ namespace Plants.Plant
                 PlayEffect(CurrentStage.GrowEffect);
             UpdateProducer();
             UpdateConsumers();
-            if (current_stage == PlantStatistics.Stages.Count - 1)
+            if (current_stage == last_stage)
+            {
                 _reachedFinalStage = true;
+            }
         }
         
         public void Sow()
@@ -152,7 +162,7 @@ namespace Plants.Plant
             InvokeRepeating("UpdatePlantValue", Random.Range(1f, 2f), 3f);
 
         }
-        
+
         public void UpdatePlantValue()
         {
             if (IsDead())
@@ -168,12 +178,17 @@ namespace Plants.Plant
             }
             else
             {
-                 if (death.enabled == true)
+                if (death.enabled == true)
                     death.enabled = false;
             }
 
             if (!_reachedFinalStage && CanGoToNextStage())
                 GoToNextStage();
+
+            if (current_stage == last_stage && RessourceStock[Resource.Energy] != null && RessourceStock[Resource.Energy].Quantity == 0)
+            {
+                _isCycleLifeComplete = true;
+            }
         }
 
         public void SetPlantName()
@@ -212,7 +227,7 @@ namespace Plants.Plant
         }
         private void UpdateProducer()
         {
-            _producer.StockedResources[Resource.Oxygen].Limit = current_stage * 100;
+            _producer.UpdateRates(current_stage);
         }
 
         private void UpdateConsumers()
@@ -228,7 +243,7 @@ namespace Plants.Plant
 
         private bool CanGoToNextStage()
         {
-            foreach (var stock in _consumer.ConsumedStocks )
+            foreach (var stock in _consumer.ConsumedStocks)
             {
                 if (stock.Quantity < stock.Limit)
                 {
@@ -250,7 +265,21 @@ namespace Plants.Plant
 
         private bool IsDead()
         {
-            return (_consumer.Starved);
+            return (_consumer.Starved || _isCycleLifeComplete == true);
+        }
+
+        public void insectInteract(InsectAction action, InsectConsumer consumer)
+        {
+            if (current_stage == last_stage && RessourceStock.FindResource(Resource.Energy) == true)
+            {
+                consumer.LinkedStock.AddResources(Resource.Energy, RessourceStock.RemoveResources(Resource.Energy, _producer.finalStageEnergyGiven));
+                Debug.Log("Miam");
+                Debug.Log(consumer.LinkedStock.ListOfStocks[0].Quantity);
+                if (!consumer.Starved)
+                    _isPollinate = true;
+                else
+                    _isPollinate = false;
+            }
         }
         #endregion
     }

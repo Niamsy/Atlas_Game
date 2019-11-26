@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class PlantProducer : IProducer
 {
+    [SerializeField]
+    public int finalStageEnergyGiven = 1;
+
+    [SerializeField]
+    public int upgradeOxygenResourceMultiplicator = 100;
+
     protected override void Awake()
     {
         ProducedResources.RemoveAll(x => true);
@@ -16,6 +22,11 @@ public class PlantProducer : IProducer
     {
         StockedResources.AddResources(Resource.Oxygen, ProductionRate.ResourcePerTick);
         ShareResources();
+    }
+
+    public void UpdateRates(int stage)
+    {
+        StockedResources[Resource.Oxygen].Limit = stage * upgradeOxygenResourceMultiplicator;
     }
 
     private void OnDisable()

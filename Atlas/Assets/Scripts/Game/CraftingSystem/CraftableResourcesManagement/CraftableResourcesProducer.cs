@@ -66,8 +66,16 @@ namespace Plants.Plant
         {
             if (item is Seed)
                 GenerateGameObject(item as Seed, resources);
-            else
+            else if (item is ProducedResource)
                 GenerateGameObject(item as ProducedResource, resources);
+            else
+            {
+                if (_plant.IsPollinate)
+                {
+                    Debug.Log("FRUIT APPEARED !!!!!!!!!!!!");
+                    return;// TODO : Craftable fruit
+                }
+            }
         }
 
 

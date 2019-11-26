@@ -31,6 +31,7 @@ namespace Plants.Plant
     {
         public ItemAbstract             Resource;
         public List<PeriodToCreate>     PeriodsToCreate;
+        public bool                     needPollinate;
     }
 }
 

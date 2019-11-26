@@ -67,7 +67,6 @@ namespace Game.ResourcesManagement.Consumer
             ConsumptionRate.TickRate = rates.ConsumationRate;
             ConsumptionRate.ResourcePerTick = rates.QuantityConsumed;
             _starved = false;
-
         }
 
         public void StartInvoking()
