@@ -21,6 +21,7 @@ namespace Game.Item.Food
         {
             var playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
             playerController.GetPlayerStats().Resources.AddResources(Resource.Satiety, Producer.StockedResources[Resource.Satiety].Quantity);
+            selfStack.ModifyQuantity(selfStack.Quantity - 1);
         }
 
         public override GameObject Equip(Transform parent)
