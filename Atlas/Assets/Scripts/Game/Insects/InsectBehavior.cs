@@ -61,8 +61,8 @@ namespace Game.Insects
 
         private void Start()
         {
-            InvokeRepeating("checkActing", 10.0f, 10.0f);
-            InvokeRepeating("checkEvolving", 1.0f, 1.0f);
+            InvokeRepeating("CheckActing", 10.0f, 10.0f);
+            InvokeRepeating("CheckEvolving", 1.0f, 1.0f);
             if (insect != null)
             {
                 consumer.Initialize(CurrentNumber);
@@ -70,7 +70,7 @@ namespace Game.Insects
             }
         }
 
-        private void checkEvolving()
+        private void CheckEvolving()
         {
             if (consumer.Full)
             {
@@ -102,13 +102,14 @@ namespace Game.Insects
             consumer.UpdateRates(CurrentNumber);
         }
 
-        private void checkActing()
+        private void CheckActing()
         {
             Collider[] colliders = Physics.OverlapBox(position, collider.size, Quaternion.identity, _layer);
             foreach (Collider col in colliders)
             {
                 foreach (InsectAction action in insect.actions)
                 {
+                    Debug.Log("Check " + col);
                     var interactable = col.GetComponent<IInteractableInsect>();
                     if (interactable!= null)
                     {

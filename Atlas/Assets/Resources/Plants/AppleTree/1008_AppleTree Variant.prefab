@@ -17,17 +17,6 @@ PrefabInstance:
       propertyPath: _listOfStocks.Array.data[0].Limit
       value: 1500
       objectReference: {fileID: 0}
-    - target: {fileID: 6206562519876059879, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
-        type: 3}
-      propertyPath: PlantStatistics
-      value: 
-      objectReference: {fileID: 11400000, guid: e4237f196841f8d4f89dfd15e980720c,
-        type: 2}
-    - target: {fileID: 6206562519876059877, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
-        type: 3}
-      propertyPath: _hidedCanvasName
-      value: 
-      objectReference: {fileID: 6645746083917867304}
     - target: {fileID: 6206562519876059874, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
         type: 3}
       propertyPath: Slot._content
@@ -89,6 +78,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6206562519876059877, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: _hidedCanvasName
+      value: 
+      objectReference: {fileID: 6645746083917867304}
+    - target: {fileID: 6206562519876059879, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: PlantStatistics
+      value: 
+      objectReference: {fileID: 11400000, guid: e4237f196841f8d4f89dfd15e980720c,
+        type: 2}
     - target: {fileID: 6057376587732904097, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
         type: 3}
       propertyPath: CraftableResources.Array.size
@@ -205,6 +205,11 @@ PrefabInstance:
     - target: {fileID: 6057376587732904097, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
         type: 3}
       propertyPath: CraftableResources.Array.data[2].PeriodsToCreate.Array.data[0].harvestAllStage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6057376587732904097, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: CraftableResources.Array.data[2].needPollinate
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

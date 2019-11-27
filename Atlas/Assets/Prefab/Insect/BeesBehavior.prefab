@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2650209341253372659
+--- !u!1 &4522997480211926769
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,54 +8,110 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8801973993324080604}
-  - component: {fileID: 6155548162824121852}
-  - component: {fileID: 8250469328207524720}
-  m_Layer: 0
-  m_Name: BeesBehavior
+  - component: {fileID: 7812429463136589601}
+  - component: {fileID: 5606753369583366824}
+  m_Layer: 12
+  m_Name: Consumer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8801973993324080604
+--- !u!4 &7812429463136589601
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2650209341253372659}
+  m_GameObject: {fileID: 4522997480211926769}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.649078, y: 111.365105, z: -5.6205597}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 3722341730371872429}
-  m_Father: {fileID: 0}
+  m_Children: []
+  m_Father: {fileID: 2730832388978252880}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6155548162824121852
+--- !u!114 &5606753369583366824
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2650209341253372659}
+  m_GameObject: {fileID: 4522997480211926769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3a698312b5b8fc4eb81a404d19c85ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ResourcesToConsume: 03000000
+  ConsumptionRate:
+    TickRate: 5
+    ResourcePerTick: 2
+  LinkedStock: {fileID: 3295710258331140860}
+  _debugDisplay: 0
+  _starvationTimeLimit: 20
+  _tickRate: 5
+  _rateMultiplicator: 0
+--- !u!1 &8864305049123470207
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2730832388978252880}
+  - component: {fileID: 770079597446323312}
+  - component: {fileID: 3295710258331140860}
+  - component: {fileID: 8394523693311281475}
+  m_Layer: 0
+  m_Name: BeesBehavior 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2730832388978252880
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8864305049123470207}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1149.579, y: 110.18, z: -313.02}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 7812429463136589601}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &770079597446323312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8864305049123470207}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e6a3d8a8b95431f48a672197f1bf0243, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   insect: {fileID: 11400000, guid: b99f5e7d2305f8345adfe765a9bf8f8a, type: 2}
-  stocks: {fileID: 8250469328207524720}
-  consumer: {fileID: 1300424680013644580}
-  radius: 200
---- !u!114 &8250469328207524720
+  stocks: {fileID: 3295710258331140860}
+  consumer: {fileID: 5606753369583366824}
+  radius: 20
+  _layer:
+    serializedVersion: 2
+    m_Bits: 1
+--- !u!114 &3295710258331140860
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2650209341253372659}
+  m_GameObject: {fileID: 8864305049123470207}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 43e8698d0207b7b4c99e9e7801956e2f, type: 3}
@@ -65,54 +121,16 @@ MonoBehaviour:
   - Resource: 3
     Quantity: 0
     Limit: 10
---- !u!1 &6991789072526360445
-GameObject:
+--- !u!65 &8394523693311281475
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3722341730371872429}
-  - component: {fileID: 1300424680013644580}
-  m_Layer: 12
-  m_Name: Consumer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3722341730371872429
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6991789072526360445}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8801973993324080604}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1300424680013644580
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6991789072526360445}
+  m_GameObject: {fileID: 8864305049123470207}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3a698312b5b8fc4eb81a404d19c85ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ResourcesToConsume: 
-  ConsumptionRate:
-    TickRate: 0
-    ResourcePerTick: 0
-  LinkedStock: {fileID: 8250469328207524720}
-  _debugDisplay: 0
-  _starvationTimeLimit: 0
-  _tickRate: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
