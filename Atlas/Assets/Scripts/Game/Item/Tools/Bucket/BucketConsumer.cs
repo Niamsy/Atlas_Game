@@ -8,9 +8,19 @@ using Game.Questing;
 namespace Game.Item.Tools.Bucket
 {
     public class BucketConsumer : IConsumer
-    {
+    {   
         [SerializeField] private ConditionEvent _conditionEvent;
         [SerializeField] private Condition _raisedCondition;
+
+        public BucketConsumer()
+        {
+            print("JINIT LE BUCKET");
+            GameObject questingMenu = GameObject.Find("/--- World Menu ---/QuestingMenu");
+            ConditionListing cmp = questingMenu.GetComponent<ConditionListing>();
+            _conditionEvent = cmp.conditionEventRef;
+            _raisedCondition = questingMenu.GetComponent<ConditionListing>().conditionsRef[(int)ConditionListing.ConditionsName.WATER_PICKUP];
+        }
+
         protected override void Awake()
         {
             ResourcesToConsume.RemoveAll(x => true);
@@ -19,7 +29,7 @@ namespace Game.Item.Tools.Bucket
 
         public override void ReceiveResource(Resource resource, int quantity)
         {
-            print("Je suis le bucket je recoit de l'eau");
+            _conditionEvent.Raise(_raisedCondition, null, 1);
             base.ReceiveResource(resource, quantity);
         }
 
