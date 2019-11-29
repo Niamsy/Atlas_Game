@@ -8,18 +8,21 @@ namespace Game.Questing
     public struct LiveQuest
         {
             public readonly Quest Quest;
+            public readonly GameObject toSpawnReward;
             public readonly LiveRequirement[] Requirements;
             public bool IsFinished => Requirements.Length > 0 && Requirements.All(it => it.CurrentlyAccomplished >= it.Requirement.Count);
 
             public LiveQuest(Quest quest)
             {
                 Quest = quest;
+                toSpawnReward = quest.toSpawn;
                 Requirements = quest.Requirements.Select(questRequirement => new LiveRequirement(questRequirement, 0)).ToArray();
             }
 
             public LiveQuest(Quest quest, IEnumerable<MapData.RequirementData> requirementDatas)
             {
                 Quest = quest;
+                toSpawnReward = quest.toSpawn;
                 var requirements = new List<LiveRequirement>();
                 foreach (var requirementData in requirementDatas)
                 {

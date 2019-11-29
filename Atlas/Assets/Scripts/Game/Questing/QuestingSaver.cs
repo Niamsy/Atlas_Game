@@ -42,6 +42,7 @@ namespace Game.Questing
 
         public void AddQuest(Quest quest)
         {
+            print("Adding Quest");
             var liveQuest = new LiveQuest(quest);
             _currentlySelectedQuest = liveQuest;
             _liveQuests.Add(liveQuest);
@@ -99,7 +100,7 @@ namespace Game.Questing
             {
                 _event.Raise(quest.Quest.Xp, 1);
             }
-            
+            Instantiate(quest.toSpawnReward, transform.position, Quaternion.identity);
             var items = new List<ItemStack>();
             foreach (var reward in quest.Quest.Rewards)
             {
