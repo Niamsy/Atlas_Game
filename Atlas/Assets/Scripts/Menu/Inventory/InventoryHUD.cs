@@ -62,7 +62,9 @@ namespace Menu.Inventory
             {
                 var stack = results[0].gameObject.GetComponent<ItemStackHUD>();
                 if (stack != null)
+                {
                     _handSlot[index].SwapStack(stack.ActualStack);
+                }
             }
         }
 

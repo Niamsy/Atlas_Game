@@ -168,9 +168,7 @@ namespace Game.Crafting
         }
         
         public bool Produce(Recipe recipe, BaseInventory inventory)
-        {
-            
-            
+        {   
             if (!recipe.Ingredients.All(ingredient =>
                     inventory.DestroyFirsts(ingredient.Item, ingredient.RequiredQuantity))) return false;
 

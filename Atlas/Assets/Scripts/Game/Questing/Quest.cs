@@ -18,9 +18,11 @@ namespace Game.Questing
         [Header("Requirements")]
         [SerializeField] private Requirement[] requirementses = new Requirement[0];
 
-        [Header("Rewards")] [SerializeField] private int _xp = 0;
+        [Header("Rewards")]
+        [SerializeField] private int _xp = 0;
         [SerializeField] private Reward[] _rewards = new Reward[0];
-        
+        [SerializeField] public GameObject toSpawn;
+
         public LocalizedText Name => _name;
         public Requirement[] Requirements => requirementses;
         public LocalizedText Description => _description;

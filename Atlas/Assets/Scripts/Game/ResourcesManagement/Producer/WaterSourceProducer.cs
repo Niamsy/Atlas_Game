@@ -10,7 +10,7 @@ namespace Game.ResourcesManagement.Producer
         }
 
         public override void Produce()
-        {
+        {   
             StockedResources.AddResources(Resource.Water, ProductionRate.ResourcePerTick); 
             ShareResources();
         }
