@@ -37,7 +37,8 @@ namespace Game.Item.Tools.Bucket
         {
             if (newState == _isWatering)
                 return;
-            
+
+            print("I am watering : " + newState);
             _isWatering = newState;
 
             Producer.gameObject.SetActive(_isWatering);

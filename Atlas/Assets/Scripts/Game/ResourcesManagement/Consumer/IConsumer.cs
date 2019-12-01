@@ -48,7 +48,6 @@ namespace Game.ResourcesManagement.Consumer
         {
             if (producer == null || _linkedProducers.Contains(producer))
                 return;
-           
 #if UNITY_EDITOR
             if (_debugDisplay) Debug.Log(name + " subscribe " + producer.name);
 #endif
@@ -75,7 +74,7 @@ namespace Game.ResourcesManagement.Consumer
                 producer.RemoveConsumer(this, resources);
         }
 
-        public void ReceiveResource(Resource resource, int quantity)
+        public virtual void ReceiveResource(Resource resource, int quantity)
         {
             LinkedStock.AddResources(resource, quantity);
         }

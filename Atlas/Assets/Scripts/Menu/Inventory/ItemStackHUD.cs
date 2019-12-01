@@ -112,14 +112,17 @@ namespace Menu.Inventory
             List<RaycastResult> results = new List<RaycastResult>();
             EventSystem.current.RaycastAll(pointerData, results);
          
-            if (results.Count > 0)
+            if (results.Count > 1)
             {
                 var stack = results[0].gameObject.GetComponent<ItemStackHUD>();
                 if (stack != null)
                     ActualStack.SwapStack(stack.ActualStack);
             }
-            else if (results.Count == 0)
+            else
+            {
                 Drop();
+            }
+                
         }
         #endregion
 

@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b711fd0b07d4dac4e9f32fbb9c981529, type: 3}
+  m_Name: 1009_CherryTree_Statistics
+  m_EditorClassIdentifier: 
+  _name: {fileID: 11400000, guid: bfbb77ac4c054bd47af79263dc652154, type: 2}
+  _ID: 1
+  _prefab: {fileID: 7770037468018669779, guid: ed618808d76c5254b8ef5361e29e8764, type: 3}
+  _maxHeight: 15
+  _growthRate: {fileID: 11400000, guid: 3df0423d3e1d73e498e14a906672dd46, type: 2}
+  _growthDuration: 1
+  _reproduction: 17
+  _soilType: -1
+  _soilPh:
+    Min: 7
+    Max: 8
+  _soilHumidity:
+    Min: 0
+    Max: 10
+  _plantContainer: 1
+  _sunExposure:
+    Min: 0
+    Max: 30
+  _coldResistance:
+    Min: 0
+    Max: -3
+  _plantingPeriods: 000101010101000000010101
+  _floweringPeriods: 000001010100000000000000
+  _harvestPeriods: 000000010101000000000000
+  _cuttingPeriods: 010101000000000101000101
+  _stages:
+  - {fileID: 11400000, guid: 6c6267704d2e4c44bb5892673aeef6d6, type: 2}
+  - {fileID: 11400000, guid: becc99e709af0734f8371cbfd500e4ed, type: 2}
+  - {fileID: 11400000, guid: e22899bc9ee20d34c9d8c9bb71f271e8, type: 2}
+  - {fileID: 11400000, guid: e559b7782e8893e46a0eabd7ed3ca1da, type: 2}

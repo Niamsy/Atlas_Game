@@ -278,6 +278,8 @@ MonoBehaviour:
     ResourcePerTick: 2
   LinkedStock: {fileID: 2352312731682261971}
   _debugDisplay: 1
+  _conditionEvent: {fileID: 11400000, guid: 7982aa52f640cf44fa452f971b97ef0e, type: 2}
+  _raisedCondition: {fileID: 11400000, guid: ff6d19fcf7c85664ead205acfc4e61a8, type: 2}
 --- !u!65 &2392049935881049130
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -314,6 +316,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2531251082536335425}
     m_Modifications:
+    - target: {fileID: 836735107402981152, guid: 4712d345d73178f4c8401d889b41b158,
+        type: 3}
+      propertyPath: m_Name
+      value: WaterSource
+      objectReference: {fileID: 0}
     - target: {fileID: 5041642562817095367, guid: 4712d345d73178f4c8401d889b41b158,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -368,11 +375,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 836735107402981152, guid: 4712d345d73178f4c8401d889b41b158,
-        type: 3}
-      propertyPath: m_Name
-      value: WaterSource
       objectReference: {fileID: 0}
     - target: {fileID: 4993375153691146392, guid: 4712d345d73178f4c8401d889b41b158,
         type: 3}
