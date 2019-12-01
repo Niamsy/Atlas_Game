@@ -42,7 +42,7 @@ namespace Game.HUD
             CurrenttEnergyBar.SetValue(energyStock.Quantity);
 
             var satietyStock = m_Stats.Resources[Game.ResourcesManagement.Resource.Satiety];
-          //  CurrentHungerBar.SetValue(satietyStock.Quantity);
+            CurrentHungerBar.SetValue(satietyStock.Quantity);
 
             /*
         ratio = stats.playerHunger.getCurrent() / stats.playerHunger.getMax();
