@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using FileSystem;
+using UnityEngine;
 
 namespace Localization
 {

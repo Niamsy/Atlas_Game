@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Game.Questing;
 
 public class ConditionListing : MonoBehaviour
 {
-    [SerializeField] public ConditionEvent conditionEventRef;
-    [SerializeField] public List<Condition> conditionsRef;
+    public ConditionEvent ConditionEventRef = null;
+    public List<Condition> ConditionsRef = new List<Condition>();
 
     public enum ConditionsName {
         CRAFT,

@@ -7,6 +7,8 @@ namespace Menu.Settings.Content.Dropdown
     {
         [SerializeField] protected UnityEngine.UI.Dropdown  Dropdown;
         protected int                                       CurrentIndex;
+        
+        public override string Value() { return (Dropdown.value.ToString()); }
 
         public override void Initialization()
         {
@@ -24,7 +26,7 @@ namespace Menu.Settings.Content.Dropdown
                 actualOptions[x] = new UnityEngine.UI.Dropdown.OptionData(options[x]);
             Dropdown.options = actualOptions;
         }
-
+        
         protected abstract List<string> GetOptions();
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Game.HUD;
 using Game.Inventory;
 using Game.Item;
 using Game.SavingSystem;
@@ -13,7 +14,7 @@ namespace Menu.Inventory
     public class RefreshButtonHUD : MonoBehaviour
     {
         [SerializeField] private Button _button = null;
-        [SerializeField] private RefreshPopupHandler refreshPopup;
+        [SerializeField] private RefreshPopupHandler _refreshPopup = null;
 
         private DateTime _lastGetScannedPlant;
 
@@ -38,7 +39,7 @@ namespace Menu.Inventory
 
         public void GetScannedPlantsFinished(bool success, string message, List<RequestManager.ScannedPlant> scannedPlants)
         {
-            refreshPopup.refreshResult(success, message);
+            _refreshPopup.RefreshResult(success, message);
             if (!success)
             {
                 return;

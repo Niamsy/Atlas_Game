@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Game.ResourcesManagement
+﻿namespace Game.ResourcesManagement
 {
     public enum Resource
     {

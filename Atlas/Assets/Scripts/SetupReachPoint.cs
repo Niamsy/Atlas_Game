@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SetupReachPoint : MonoBehaviour
 {
-    [SerializeField] List<GameObject> _zones;
+    [SerializeField] List<GameObject> _zones = new List<GameObject>();
 
     void Start()
     {
