@@ -340,20 +340,29 @@ namespace Player
         {
             if (!IsDead && m_PlayerStats.Resources[Resource.Oxygen].Quantity <= 0)
             {
-                IsDead = true;
-                _handSlots.Drop();
-                m_Inventory.DropAll();
                 ResetSpeed();
-                _deathType = DeathType.Suffocation;
+                ExecuteDeath(DeathType.Suffocation);
+            } else if (!IsDead && m_PlayerStats.Resources[Resource.Satiety].Quantity <= 0)
+            {
+                ExecuteDeath(DeathType.Hunger);
             }
             
             return IsDead;
+        }
+
+        private void ExecuteDeath(DeathType type)
+        {
+            IsDead = true;
+            _handSlots.Drop();
+            m_Inventory.DropAll();
+            _deathType = type;
         }
 
         public void Respawn()
         {
             m_PlayerStats.Resources[Resource.Oxygen].Quantity = m_PlayerStats.Resources[Resource.Oxygen].Limit;
             m_PlayerStats.Resources[Resource.Energy].Quantity = m_PlayerStats.Resources[Resource.Energy].Limit;
+            m_PlayerStats.Resources[Resource.Satiety].Quantity = m_PlayerStats.Resources[Resource.Satiety].Limit;
             IsDead = false;
         }
         
