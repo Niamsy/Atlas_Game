@@ -10,7 +10,9 @@ namespace Menu.Settings.Content
         public abstract void LoadData();
 
         public abstract bool DidValueChanged();
-        
+       
+        public virtual void ReloadData() {}
+  
         #region OnValueDidChanged
         protected virtual void OnValueDidChanged()
         {
