@@ -100,7 +100,12 @@ namespace Game.Questing
             {
                 _event.Raise(quest.Quest.Xp, 1);
             }
-            Instantiate(quest.toSpawnReward, transform.position, Quaternion.identity);
+
+            if (quest.toSpawnReward != null)
+            {
+                Instantiate(quest.toSpawnReward, transform.position, Quaternion.identity);
+            }
+
             var items = new List<ItemStack>();
             foreach (var reward in quest.Quest.Rewards)
             {

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
 using Game.ResourcesManagement;
 using Game.ResourcesManagement.Consumer;
@@ -9,26 +10,20 @@ namespace Game.Item.Tools.Bucket
 {
     public class BucketConsumer : IConsumer
     {   
+        [Header("Bucket Consumer Variables")]
         [SerializeField] private ConditionEvent _conditionEvent;
         [SerializeField] private Condition _raisedCondition;
-
-        public BucketConsumer()
-        {
-            GameObject questingMenu = GameObject.Find("/--- World Menu ---/QuestingMenu");
-            ConditionListing cmp = questingMenu.GetComponent<ConditionListing>();
-            _conditionEvent = cmp.conditionEventRef;
-            _raisedCondition = questingMenu.GetComponent<ConditionListing>().conditionsRef[(int)ConditionListing.ConditionsName.WATER_PICKUP];
-        }
+        [SerializeField] private ItemAbstract _item;
 
         protected override void Awake()
         {
             ResourcesToConsume.RemoveAll(x => true);
             ResourcesToConsume.Add(Resource.Water);
         }
-
+        
         public override void ReceiveResource(Resource resource, int quantity)
         {
-            _conditionEvent.Raise(_raisedCondition, null, 1);
+            _conditionEvent.Raise(_raisedCondition, _item, 1);
             base.ReceiveResource(resource, quantity);
         }
 
