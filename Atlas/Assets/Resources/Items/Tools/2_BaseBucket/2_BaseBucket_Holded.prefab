@@ -88,6 +88,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1255832327026385988}
   - component: {fileID: 4250270448635555150}
+  - component: {fileID: 6330002320526604083}
   m_Layer: 11
   m_Name: Producer
   m_TagString: Untagged
@@ -122,12 +123,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ProductionRate:
-    TickRate: 0
+    TickRate: 0.25
     ResourcePerTick: 0
-  ResourceGivenPerTick: 1
+  ResourceGivenPerTick: 20
   StockedResources: {fileID: -1355363452610461131}
   ProducedResources: 00000000
   _debugDisplay: 0
+--- !u!136 &6330002320526604083
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264406831539127012}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1.0210247
+  m_Height: 2.0420494
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: -0.20019722}
 --- !u!1 &1421277894067583423
 GameObject:
   m_ObjectHideFlags: 0
@@ -356,12 +371,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8373356605388171733, guid: 4712d345d73178f4c8401d889b41b158,
+    - target: {fileID: 1998739639838258218, guid: 4712d345d73178f4c8401d889b41b158,
         type: 3}
       propertyPath: m_Layer
       value: 13
       objectReference: {fileID: 0}
-    - target: {fileID: 1998739639838258218, guid: 4712d345d73178f4c8401d889b41b158,
+    - target: {fileID: 8373356605388171733, guid: 4712d345d73178f4c8401d889b41b158,
         type: 3}
       propertyPath: m_Layer
       value: 13

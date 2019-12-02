@@ -14,8 +14,9 @@ namespace Menu.Settings.Content.Dropdown
             public string Text = "English";
         }
         
-        [SerializeField] private Language[]  _languages = null;
-        private SystemLanguage    _actualLanguage = SystemLanguage.English;
+        [SerializeField] private Language[]   _languages = null;
+        private SystemLanguage                _actualLanguage = SystemLanguage.English;
+
         protected override List<string> GetOptions()
         {
             List<string> options = new List<string>();
@@ -35,6 +36,12 @@ namespace Menu.Settings.Content.Dropdown
                     Dropdown.value = CurrentIndex;
                 }
             }
+        }
+        
+
+        public override void SaveData()
+        {
+            _fs.setConfigFileValue(FileSystem.Key.Lang, FileSystem.Section.Default, ((int)_actualLanguage).ToString());
         }
         
         public override bool DidValueChanged()
