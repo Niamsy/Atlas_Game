@@ -24,6 +24,10 @@ namespace Menu.Settings
 
         protected override void Awake()
         {
+#if UNITY_EDITOR
+            Tools.DevTools.BeforeSplashScreen_RuntimeMethod();   
+#endif
+            
             base.Awake();
             _fs = AtlasFileSystem.Instance;
 
@@ -97,6 +101,8 @@ namespace Menu.Settings
             
             foreach (SettingEntry entry in _settings)
                 entry.SaveData();
+            
+            AtlasFileSystem.Instance.saveConfig();
             
             Close();
         }

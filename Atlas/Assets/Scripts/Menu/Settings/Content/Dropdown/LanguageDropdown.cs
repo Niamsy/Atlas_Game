@@ -41,7 +41,7 @@ namespace Menu.Settings.Content.Dropdown
 
         public override void SaveData()
         {
-            _fs.setConfigFileValue(FileSystem.Key.Lang, FileSystem.Section.Default, ((int)_actualLanguage).ToString());
+            _fs.setConfigFileValue(FileSystem.Key.Lang, FileSystem.Section.Default, ((int)_languages[Dropdown.value].SystemLanguage).ToString());
         }
         
         public override bool DidValueChanged()
