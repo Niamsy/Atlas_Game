@@ -4,9 +4,7 @@ using UnityEngine;
 using SceneManagement;
 using Player;
 using Player.Scripts;
-using UnityEngine.UI;
-using Localization;
-    
+
 namespace Menu
 {
     [RequireComponent(typeof(PlayerController))]
@@ -20,7 +18,7 @@ namespace Menu
         
         private LocalizedTextBehaviour             _textComposant;
         public LocalizedText     OxygenDeath;
-        public LocalizedText     DrowningDeath;
+        public LocalizedText     HungerDeath;
         
         protected override void InitialiseWidget()
         {
@@ -46,7 +44,10 @@ namespace Menu
             if (_playerController.IsDead && !_isAlreadyDead)
             {
                 _isAlreadyDead = true;
-                _textComposant.LocalizedAsset = OxygenDeath;
+                if (_playerController._deathType == DeathType.Suffocation)
+                    _textComposant.LocalizedAsset = OxygenDeath;
+                else if (_playerController._deathType == DeathType.Hunger)
+                    _textComposant.LocalizedAsset = HungerDeath;
                 Show(true);
             }
         }

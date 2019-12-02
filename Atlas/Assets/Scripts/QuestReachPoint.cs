@@ -1,14 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Game.Questing;
 using Game.Item;
 
 public class QuestReachPoint : MonoBehaviour
 {
-    [SerializeField] public ItemAbstract id;
-    [SerializeField] private ConditionEvent _conditionEvent;
-    [SerializeField] private Condition _raisedCondition;
+    [SerializeField] public ItemAbstract id = null;
+    [SerializeField] private ConditionEvent _conditionEvent = null;
+    [SerializeField] private Condition _raisedCondition = null;
 
     private void OnTriggerEnter(Collider other)
     {

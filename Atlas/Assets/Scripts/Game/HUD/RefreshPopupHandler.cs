@@ -1,58 +1,52 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class RefreshPopupHandler : MonoBehaviour
+namespace Game.HUD
 {
-    [SerializeField] private GameObject SuccessPopup;
-    [SerializeField] private GameObject FailurePopup;
-    [SerializeField] private Text FailurePopupText;
-    [SerializeField] private float DisplayTime;
-
-    private float Timer;
-    private bool displaying = false;
-
-    private void Start()
+    public class RefreshPopupHandler : MonoBehaviour
     {
-        hidePopups();    
-    }
+        [SerializeField] private GameObject _successPopup = null;
+        [SerializeField] private GameObject _failurePopup = null;
+        [SerializeField] private Text _failurePopupText = null;
+        [SerializeField] private float _displayTime = 0;
 
-    private void handlePopup(bool state, string Message)
-    {
-        SuccessPopup.SetActive(state);
-        FailurePopup.SetActive(!state);
-        FailurePopupText.text += Message;
-        displaying = true;
-        Timer = 0;
-    }
+        private float _timer;
+        private bool _displaying = false;
 
-    private void hidePopups()
-    {
-        SuccessPopup.SetActive(false);
-        FailurePopup.SetActive(false);
-        displaying = false;
-    }
-
-    public void refreshResult(bool result, string Message) 
-    {
-        handlePopup(result, Message);
-        FailurePopupText.text = "";
-    }
-
-    void Update()
-    {
-       if (displaying)
+        private void Start()
         {
-            Timer += 0.1f; //(Time.deltatime == 0 WTF) ???
-            print("Delta : " + Time.deltaTime);
-            if (Timer > DisplayTime)
+            HidePopups();    
+        }
+
+        private void HandlePopup(bool state, string message)
+        {
+            _successPopup.SetActive(state);
+            _failurePopup.SetActive(!state);
+            _failurePopupText.text += message;
+            _displaying = true;
+            _timer = 0;
+        }
+
+        private void HidePopups()
+        {
+            _successPopup.SetActive(false);
+            _failurePopup.SetActive(false);
+            _displaying = false;
+        }
+
+        public void RefreshResult(bool result, string message) 
+        {
+            HandlePopup(result, message);
+            _failurePopupText.text = "";
+        }
+
+        void Update()
+        {
+            if (_displaying)
             {
-                hidePopups();
-            }
-            else
-            {
-                print(Timer + "/" + DisplayTime);
+                _timer += Time.fixedDeltaTime;
+                if (_timer > _displayTime)
+                    HidePopups();
             }
         }
     }
