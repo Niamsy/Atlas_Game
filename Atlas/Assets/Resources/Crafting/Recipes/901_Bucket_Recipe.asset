@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: 901_Bucket_Recipe
   m_EditorClassIdentifier: 
   _id: 901
-  _prefabDroppedGO: {fileID: 5971774499539682470, guid: 5c0a14272f26dfc48813d23b57c2281f,
-    type: 3}
+  _prefabDroppedGO: {fileID: 0}
   _prefabHoldedGO: {fileID: 1771555055226790, guid: 79d1d9fa07756604b9227460e8813ebb,
     type: 3}
   _sprite: {fileID: 21300000, guid: 86af52e4060d3de4ea2f49173ac81380, type: 3}
@@ -25,10 +24,12 @@ MonoBehaviour:
     anim: 0
   _category: {fileID: 11400000, guid: 62806329862f4d845abb908042cb7a6f, type: 2}
   recipeCategory: {fileID: 11400000, guid: 5861ba67b5aaa514f934d89fb92402b8, type: 2}
-  craftingDuration: 20003
+  craftingDuration: 20
   ingredients:
   - Item: {fileID: 11400000, guid: 4824eeff7dc4ef448bba42e327ba88eb, type: 2}
     RequiredQuantity: 5
+  - Item: {fileID: 11400000, guid: 284768b00b0acb24e951d9ec955b25bf, type: 2}
+    RequiredQuantity: 1
   product:
     Item: {fileID: 11400000, guid: eabb78ffc63b0f645bd421998e6940cf, type: 2}
     ProducedQuantity: 1

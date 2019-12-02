@@ -68,8 +68,10 @@ namespace Leveling
         private bool _CanGainXP = true;
         [SerializeField]
         private bool _ResetExperience = false;
+        #if UNITY_EDITOR
         [SerializeField]
         private bool RESET_IN_EDITOR = true;
+        #endif
         #endregion
 
         #region Public Methods

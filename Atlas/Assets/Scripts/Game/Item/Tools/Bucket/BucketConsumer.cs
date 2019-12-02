@@ -11,9 +11,9 @@ namespace Game.Item.Tools.Bucket
     public class BucketConsumer : IConsumer
     {   
         [Header("Bucket Consumer Variables")]
-        [SerializeField] private ConditionEvent _conditionEvent;
-        [SerializeField] private Condition _raisedCondition;
-        [SerializeField] private ItemAbstract _item;
+        [SerializeField] private ConditionEvent _conditionEvent = null;
+        [SerializeField] private Condition _raisedCondition = null;
+        [SerializeField] private ItemAbstract _item = null;
 
         protected override void Awake()
         {

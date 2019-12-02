@@ -1,14 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-
 
 public class SavedIdHandler : MonoBehaviour
 {
-    [SerializeField] SavedConnectionDatas _data;
-    [SerializeField] InputField _field;
-    [SerializeField] InputField _fieldMdp;
+    [SerializeField] private SavedConnectionDatas _data = null;
+    [SerializeField] private InputField _field = null;
+    [SerializeField] private InputField _fieldMdp = null;
 
     public bool _save;
 
@@ -38,7 +35,7 @@ public class SavedIdHandler : MonoBehaviour
 
     public void setId(string id)
     {
-        print("Set Id");
+        print("Set Id:" + id);
         _data.setId(id);
     }
 
