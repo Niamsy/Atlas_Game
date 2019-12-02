@@ -100,7 +100,9 @@ namespace Game.Questing
             {
                 _event.Raise(quest.Quest.Xp, 1);
             }
-            Instantiate(quest.toSpawnReward, transform.position, Quaternion.identity);
+            var go = Instantiate(quest.toSpawnReward, quest.positionToSpawn.position, Quaternion.identity);
+            go.transform.parent = gameObject.transform;
+            print("New Quest to parent : " + go.transform.parent);
             var items = new List<ItemStack>();
             foreach (var reward in quest.Quest.Rewards)
             {

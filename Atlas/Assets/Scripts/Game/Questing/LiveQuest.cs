@@ -9,12 +9,14 @@ namespace Game.Questing
         {
             public readonly Quest Quest;
             public readonly GameObject toSpawnReward;
+            public readonly Transform positionToSpawn;
             public readonly LiveRequirement[] Requirements;
             public bool IsFinished => Requirements.Length > 0 && Requirements.All(it => it.CurrentlyAccomplished >= it.Requirement.Count);
 
             public LiveQuest(Quest quest)
             {
                 Quest = quest;
+                positionToSpawn = quest.spawnPoint;
                 toSpawnReward = quest.toSpawn;
                 Requirements = quest.Requirements.Select(questRequirement => new LiveRequirement(questRequirement, 0)).ToArray();
             }
@@ -23,6 +25,7 @@ namespace Game.Questing
             {
                 Quest = quest;
                 toSpawnReward = quest.toSpawn;
+                positionToSpawn = quest.spawnPoint;
                 var requirements = new List<LiveRequirement>();
                 foreach (var requirementData in requirementDatas)
                 {

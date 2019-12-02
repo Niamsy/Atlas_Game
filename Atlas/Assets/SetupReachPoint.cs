@@ -6,13 +6,18 @@ public class SetupReachPoint : MonoBehaviour
 {
     [SerializeField] List<GameObject> _zones;
 
-    void Start()
+    private void Awake()
     {
-        foreach(GameObject go in _zones)
-        {
-            go.SetActive(true);
-        }    
+        init();
     }
 
-
+    public void init()
+    {
+        foreach (GameObject go in _zones)
+        {
+            go.SetActive(true);
+            go.transform.parent = transform.parent.transform;
+            print("Reach point parent set to : " + go.transform.parent);
+        }
+    }
 }

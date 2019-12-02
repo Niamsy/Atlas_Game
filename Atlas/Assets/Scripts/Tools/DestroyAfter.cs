@@ -15,6 +15,11 @@ namespace Tools
         private IEnumerator DestroyThisInstance()
         {
             yield return new WaitForSecondsRealtime(countDown);
+            var reach = gameObject.GetComponent<SetupReachPoint>();
+            if (reach != null)
+            {
+                reach.init();
+            }
             Destroy(gameObject);
         } 
     }
