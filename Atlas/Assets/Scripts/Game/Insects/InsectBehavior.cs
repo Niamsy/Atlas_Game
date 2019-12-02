@@ -49,7 +49,9 @@ namespace Game.Insects
             collider = gameObject.GetComponent<BoxCollider>();
             collider.size = new Vector3(radius, radius, radius);
             CurrentNumber = 2;
-            ParticleSystem[] systs = insect.bees.GetComponents<ParticleSystem>();
+            if (insect.bees == null) return;
+            var bee = Instantiate(insect.bees, transform);
+            ParticleSystem[] systs = bee.GetComponentsInChildren<ParticleSystem>();
             if (systs.Length == 2)
             {
                 emissionBeesStatic = systs[0].emission;
