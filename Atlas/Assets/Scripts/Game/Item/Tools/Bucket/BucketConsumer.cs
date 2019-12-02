@@ -14,7 +14,6 @@ namespace Game.Item.Tools.Bucket
 
         public BucketConsumer()
         {
-            print("JINIT LE BUCKET");
             GameObject questingMenu = GameObject.Find("/--- World Menu ---/QuestingMenu");
             ConditionListing cmp = questingMenu.GetComponent<ConditionListing>();
             _conditionEvent = cmp.conditionEventRef;

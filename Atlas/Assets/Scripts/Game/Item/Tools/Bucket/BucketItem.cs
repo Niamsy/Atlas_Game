@@ -9,9 +9,6 @@ namespace Game.Item.Tools.Bucket
 	CreateAssetMenu(fileName = "Bucket", menuName = "Item/Tool/Bucket", order = 1)]
 	public class BucketItem : Tool<BucketBehaviour>
 	{
-       public BucketItem()
-        {
-        }
 
         public override bool CanUse(Transform transform)
         {
