@@ -156,6 +156,14 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "Press"
+                },
+                {
+                    "name": "Glossary",
+                    "type": "Button",
+                    "id": "31dbf69c-815e-4e3b-ba8e-89f88a4e5a0c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press"
                 }
             ],
             "bindings": [
@@ -596,6 +604,17 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Quest",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "03fbc92d-c5bd-48a9-be35-4d610f1ecf7f",
+                    "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardAndMouse",
+                    "action": "Glossary",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
