@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b42e36417765924eb01b4499247336e, type: 3}
+  m_Name: 904_Tent_Recipe
+  m_EditorClassIdentifier: 
+  _id: 904
+  _prefabDroppedGO: {fileID: 0}
+  _prefabHoldedGO: {fileID: 0}
+  _sprite: {fileID: 21300000, guid: dca2e4e3630dd9f46a952598ed8e1299, type: 3}
+  _name: {fileID: 11400000, guid: d862d97ccc3d60841b92046975a132da, type: 2}
+  _description: {fileID: 11400000, guid: 435d1e90fa832de4a94c3fed768e96ae, type: 2}
+  _usageText: {fileID: 11400000, guid: 9e2f1df5fe34a5540b0b6c99d1efd0d1, type: 2}
+  _animation:
+    anim: 0
+  _category: {fileID: 11400000, guid: 62806329862f4d845abb908042cb7a6f, type: 2}
+  recipeCategory: {fileID: 11400000, guid: d980723dd009b6549acbeec1915054f4, type: 2}
+  craftingDuration: 5
+  ingredients:
+  - Item: {fileID: 11400000, guid: 284768b00b0acb24e951d9ec955b25bf, type: 2}
+    RequiredQuantity: 15
+  - Item: {fileID: 11400000, guid: 4824eeff7dc4ef448bba42e327ba88eb, type: 2}
+    RequiredQuantity: 50
+  product:
+    Item: {fileID: 11400000, guid: f8181365c668dd041a80c6771c823367, type: 2}
+    ProducedQuantity: 1
