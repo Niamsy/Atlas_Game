@@ -15,6 +15,16 @@ namespace Menu.Settings.Content.Dropdown
             Dropdown.onValueChanged.AddListener(useless => OnValueDidChanged());
         }
 
+        public override void ReloadData()
+        {
+            var options = GetOptions();
+            var actualOptions = Dropdown.options;
+           
+            for (int x = 0; x < options.Count; x++)
+                actualOptions[x] = new UnityEngine.UI.Dropdown.OptionData(options[x]);
+            Dropdown.options = actualOptions;
+        }
+
         protected abstract List<string> GetOptions();
     }
 }
