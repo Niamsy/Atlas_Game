@@ -77,6 +77,12 @@ namespace Game.SavingSystem
             InputControls = new InputControls();
             InputControls.Player.Enable();
 
+#if ATLAS_DEBUG
+            InputControls.Debug.Enable();
+#else
+            InputControls.Debug.Disable();
+#endif
+            
 #if UNITY_EDITOR
             if (AccountData != null)
             {

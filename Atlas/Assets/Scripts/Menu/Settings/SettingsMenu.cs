@@ -33,7 +33,8 @@ namespace Menu.Settings
 
         private void ReloadDataForNewLanguage(object sender, LocaleChangedEventArgs e)
         {
-            InitialiseWidget();
+            foreach (var setting in _settings)
+                setting.ReloadData();
         }
 
         protected override void InitialiseWidget()
