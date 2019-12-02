@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -116,8 +115,6 @@ namespace SceneManagement
                     if (OnSceneUnloading != null)
                         OnSceneUnloading(SceneManager.GetSceneAt(x).buildIndex);
                 }
-
-                throw new Exception();
             }
             catch (Exception e)
             {

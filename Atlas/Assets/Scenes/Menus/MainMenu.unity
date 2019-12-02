@@ -211,18 +211,6 @@ Transform:
   m_Father: {fileID: 1428143103}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &269787726 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114966921957498888, guid: 892f2fbbae158e647b9515a99dd9b494,
-    type: 3}
-  m_PrefabInstance: {fileID: 318509993}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d199490a83bb2b844b9695cbf13b01ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &318509993
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1179,16 +1167,6 @@ PrefabInstance:
       propertyPath: LoadLevel
       value: 
       objectReference: {fileID: 836047144}
-    - target: {fileID: 3794402723391266926, guid: 892f2fbbae158e647b9515a99dd9b494,
-        type: 3}
-      propertyPath: _field
-      value: 
-      objectReference: {fileID: 269787726}
-    - target: {fileID: 3794402723391266926, guid: 892f2fbbae158e647b9515a99dd9b494,
-        type: 3}
-      propertyPath: _fieldMdp
-      value: 
-      objectReference: {fileID: 1043144931}
     - target: {fileID: 4725900484388292129, guid: 892f2fbbae158e647b9515a99dd9b494,
         type: 3}
       propertyPath: Levels.Array.size
@@ -1367,18 +1345,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8295438639293387560}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1043144931 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114847901113133090, guid: 892f2fbbae158e647b9515a99dd9b494,
-    type: 3}
-  m_PrefabInstance: {fileID: 318509993}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d199490a83bb2b844b9695cbf13b01ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1133566753
 GameObject:
   m_ObjectHideFlags: 0
@@ -1390,7 +1356,6 @@ GameObject:
   - component: {fileID: 1133566756}
   - component: {fileID: 1133566755}
   - component: {fileID: 1133566754}
-  - component: {fileID: 1133566758}
   - component: {fileID: 1133566757}
   m_Layer: 0
   m_Name: Main Camera
@@ -1527,18 +1492,6 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
---- !u!114 &1133566758
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1133566753}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23c1ce4fb46143f46bc5cb5224c934f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1287503403
 GameObject:
   m_ObjectHideFlags: 0
@@ -3061,7 +3014,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8295438640213581153, guid: 12ad80aed3eeedb409437ccfd08aaafc, type: 3}
+    - {fileID: 8295438640213581154, guid: 12ad80aed3eeedb409437ccfd08aaafc, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 12ad80aed3eeedb409437ccfd08aaafc, type: 3}
 --- !u!108 &8295438639293387561 stripped
 Light:

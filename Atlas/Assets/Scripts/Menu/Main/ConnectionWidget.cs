@@ -1,5 +1,4 @@
-﻿using SceneManagement;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace Menu.Main
@@ -14,7 +13,7 @@ namespace Menu.Main
         [SerializeField] private Button     _passwordLost = null;
 
         [SerializeField] private MenuWidget _nextWidget = null;
-        [SerializeField] private SavedIdHandler _saveId;
+        [SerializeField] private SavedIdHandler _saveId = null;
 
         #region Initialisation/Destruction
         protected override void InitialiseWidget()

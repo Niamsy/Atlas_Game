@@ -4,8 +4,6 @@ using UnityEngine;
 using SceneManagement;
 using Player;
 using Player.Scripts;
-using UnityEngine.UI;
-using Localization;
     
 namespace Menu
 {
