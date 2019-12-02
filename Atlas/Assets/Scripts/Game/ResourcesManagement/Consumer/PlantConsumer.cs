@@ -41,7 +41,6 @@ namespace Game.ResourcesManagement.Consumer
 
         //private PlantStatistics _plantStats;
         //private List<Stage.Need> _needs;
-        [HideInInspector]
         public List<Stock> ConsumedStocks;
 
         #endregion

@@ -12,43 +12,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 1008_StrawBerryBush
       objectReference: {fileID: 0}
-    - target: {fileID: 61835651470404897, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
-        type: 3}
-      propertyPath: _listOfStocks.Array.data[0].Limit
-      value: 3500
-      objectReference: {fileID: 0}
-    - target: {fileID: 61835651470404897, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
-        type: 3}
-      propertyPath: _listOfStocks.Array.data[1].Limit
-      value: 3000
-      objectReference: {fileID: 0}
-    - target: {fileID: 6206562519876059879, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
-        type: 3}
-      propertyPath: OnLevelUp.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 6206562519876059879, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
-        type: 3}
-      propertyPath: PlantStatistics
-      value: 
-      objectReference: {fileID: 11400000, guid: ef2a4b6a5be48024aaa68386a939e99f,
-        type: 2}
-    - target: {fileID: 6206562519876059877, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
-        type: 3}
-      propertyPath: _hidedCanvasName
-      value: 
-      objectReference: {fileID: 4166896574339670241}
-    - target: {fileID: 6206562519876059874, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
-        type: 3}
-      propertyPath: Slot._content
-      value: 
-      objectReference: {fileID: 11400000, guid: 1d9aaaaf0191e014b8fec73b75452749,
-        type: 2}
-    - target: {fileID: 6206562519876059874, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
-        type: 3}
-      propertyPath: Slot._quantity
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 6206562519876059875, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -103,6 +66,48 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 61835651470404897, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: _listOfStocks.Array.data[0].Limit
+      value: 3500
+      objectReference: {fileID: 0}
+    - target: {fileID: 61835651470404897, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: _listOfStocks.Array.data[1].Limit
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 61835651470404897, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: _listOfStocks.Array.data[1].Quantity
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6206562519876059879, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: OnLevelUp.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6206562519876059879, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: PlantStatistics
+      value: 
+      objectReference: {fileID: 11400000, guid: ef2a4b6a5be48024aaa68386a939e99f,
+        type: 2}
+    - target: {fileID: 6206562519876059877, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: _hidedCanvasName
+      value: 
+      objectReference: {fileID: 4166896574339670241}
+    - target: {fileID: 6206562519876059874, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: Slot._content
+      value: 
+      objectReference: {fileID: 11400000, guid: 1d9aaaaf0191e014b8fec73b75452749,
+        type: 2}
+    - target: {fileID: 6206562519876059874, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: Slot._quantity
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6057376587732904097, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
         type: 3}
@@ -240,8 +245,7 @@ PrefabInstance:
         type: 3}
       propertyPath: CraftableResources.Array.data[0].Resource
       value: 
-      objectReference: {fileID: 11400000, guid: 45fea2abfef4082458daeb0d778a8b74,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 6057376587732904097, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
         type: 3}
       propertyPath: CraftableResources.Array.data[0].PeriodsToCreate.Array.data[1].Period
@@ -276,6 +280,11 @@ PrefabInstance:
         type: 3}
       propertyPath: CraftableResources.Array.data[0].PeriodsToCreate.Array.data[3].Quantity
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3964758700477677107, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: finalStageEnergyGiven
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4794581424399416383, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
         type: 3}
