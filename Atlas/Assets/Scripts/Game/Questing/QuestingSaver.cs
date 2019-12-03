@@ -55,14 +55,16 @@ namespace Game.Questing
         {
             var toRemove = new List<LiveQuest>();
             var validated = false;
-            
+            print("JE TEST LES REQUIREMENT pour l'item :" + item);
             foreach (var liveQuest in _liveQuests)
             {
                 var requirements = liveQuest.Requirements.Where(req =>
-                    req.Requirement.Condition.Id == condition.Id && req.Requirement.Argument.Id == item.Id);
+                    (req.Requirement.Condition.Id == condition.Id && req.Requirement.Argument == null) ||
+                    (req.Requirement.Condition.Id == condition.Id && req.Requirement.Argument.Id == item.Id));
                 
                 foreach (var liveRequirement in requirements)
                 {
+                    print("J'ai de requirement valide");
                     liveRequirement.IncrementAccomplished(count);
                     validated = true;
                 }
@@ -100,9 +102,18 @@ namespace Game.Questing
             {
                 _event.Raise(quest.Quest.Xp, 1);
             }
-            var go = Instantiate(quest.toSpawnReward, quest.positionToSpawn.position, Quaternion.identity);
-            go.transform.parent = gameObject.transform;
-            print("New Quest to parent : " + go.transform.parent);
+            if (quest.toSpawnReward != null)
+            {
+                Vector3 pos = Vector3.zero;
+                if (quest.positionToSpawn != null)
+                {
+                    pos = quest.positionToSpawn.position;
+                }
+                var go = Instantiate(quest.toSpawnReward, pos, Quaternion.identity);
+                go.transform.parent = gameObject.transform;
+                print("New Quest to parent : " + go.transform.parent);
+            }
+            
             var items = new List<ItemStack>();
             foreach (var reward in quest.Quest.Rewards)
             {
@@ -110,7 +121,6 @@ namespace Game.Questing
                 item.SetItem(reward.reward, reward.Count);
                 items.Add(item);
             }
-
             playerController.Inventory.AddItemStacks(items);
         }
         

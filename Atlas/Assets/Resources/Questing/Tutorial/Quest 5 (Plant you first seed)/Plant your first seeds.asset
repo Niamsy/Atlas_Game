@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fce37d24c2e84390962209b7402f9d3c, type: 3}
+  m_Name: Plant your first seeds
+  m_EditorClassIdentifier: 
+  _name: {fileID: 11400000, guid: ecb22f60fbbc0b34c9bfd4f88dcb86b3, type: 2}
+  _description: {fileID: 11400000, guid: 64d3734b9a1513b45ac1787c285f8fcc, type: 2}
+  requirementses:
+  - condition: {fileID: 11400000, guid: 4485dd87b57a9c944888d5bc75c268c6, type: 2}
+    argument: {fileID: 0}
+    description: {fileID: 11400000, guid: 590b6b185206d6041b9abca09f8c4084, type: 2}
+    count: 1
+  - condition: {fileID: 11400000, guid: c7baf2157ffab844d81da678b4228d5e, type: 2}
+    argument: {fileID: 0}
+    description: {fileID: 11400000, guid: b6f598b908b2a9543987677c8575ac56, type: 2}
+    count: 1
+  _xp: 400
+  _rewards: []
+  toSpawn: {fileID: 8245043310099490252, guid: b65982b319ea8274990aca5ddfb821f7, type: 3}
+  spawnPoint: {fileID: 7351027367821611002, guid: b65982b319ea8274990aca5ddfb821f7,
+    type: 3}

@@ -15,6 +15,7 @@ public class ConditionListing : MonoBehaviour
         USE,
         PICKUP,
         PLACE,
-        WATER_PICKUP
+        WATER_PICKUP,
+        WATERING
     };
 }

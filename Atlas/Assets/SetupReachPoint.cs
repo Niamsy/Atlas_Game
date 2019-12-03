@@ -16,7 +16,10 @@ public class SetupReachPoint : MonoBehaviour
         foreach (GameObject go in _zones)
         {
             go.SetActive(true);
-            go.transform.parent = transform.parent.transform;
+            if (transform.parent != null)
+            {
+                go.transform.parent = transform.parent.transform;
+            }
             print("Reach point parent set to : " + go.transform.parent);
         }
     }

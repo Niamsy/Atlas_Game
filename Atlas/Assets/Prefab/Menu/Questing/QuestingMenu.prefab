@@ -174,8 +174,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5298f40edf2589e468757c45caf93113, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  conditionEventRef: {fileID: 0}
-  conditionsRef: []
+  conditionEventRef: {fileID: 11400000, guid: 7982aa52f640cf44fa452f971b97ef0e, type: 2}
+  conditionsRef:
+  - {fileID: 11400000, guid: 67d764ca89ee6f647b995e8c25e1ae0b, type: 2}
+  - {fileID: 11400000, guid: 4485dd87b57a9c944888d5bc75c268c6, type: 2}
+  - {fileID: 11400000, guid: 397058a62a9babd42ad3bd91713aa40c, type: 2}
+  - {fileID: 11400000, guid: 3e564eaface0b6b45abcfa271e0d90e3, type: 2}
+  - {fileID: 11400000, guid: b1ab93ecf11a5e14ba39a6397a16b4e8, type: 2}
+  - {fileID: 11400000, guid: 8d4202a16b261bf4eab371b0fee517ca, type: 2}
+  - {fileID: 11400000, guid: ff6d19fcf7c85664ead205acfc4e61a8, type: 2}
+  - {fileID: 11400000, guid: c7baf2157ffab844d81da678b4228d5e, type: 2}
 --- !u!1001 &1980595596055127492
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -441,7 +449,7 @@ PrefabInstance:
     - target: {fileID: 7915287940304360393, guid: 1f9e7f03b91f2cd4f8d1db721f0d18d3,
         type: 3}
       propertyPath: m_Size
-      value: 1
+      value: 0.9999999
       objectReference: {fileID: 0}
     - target: {fileID: 7915287940304360393, guid: 1f9e7f03b91f2cd4f8d1db721f0d18d3,
         type: 3}
@@ -1090,7 +1098,7 @@ PrefabInstance:
     - target: {fileID: 7446985283570881068, guid: ad1ca2d0d1f37874fa43564ee1d9cc66,
         type: 3}
       propertyPath: m_Size
-      value: 1
+      value: 0.9999999
       objectReference: {fileID: 0}
     - target: {fileID: 7884352371605854198, guid: ad1ca2d0d1f37874fa43564ee1d9cc66,
         type: 3}

@@ -9,15 +9,25 @@ namespace Game.Item.Tools.Bucket
 {
     public class BucketConsumer : IConsumer
     {   
-        [SerializeField] private ConditionEvent _conditionEvent;
+        [SerializeField] public ConditionEvent _conditionEvent;
         [SerializeField] private Condition _raisedCondition;
 
-        public BucketConsumer()
+        private void Start()
         {
             GameObject questingMenu = GameObject.Find("/--- World Menu ---/QuestingMenu");
+            if (questingMenu == null)
+            {
+                Debug.LogError("Unable to notify quest from bucket filling");
+                return;
+            }
             ConditionListing cmp = questingMenu.GetComponent<ConditionListing>();
             _conditionEvent = cmp.conditionEventRef;
             _raisedCondition = questingMenu.GetComponent<ConditionListing>().conditionsRef[(int)ConditionListing.ConditionsName.WATER_PICKUP];
+        }
+
+        public BucketConsumer()
+        {
+
         }
 
         protected override void Awake()

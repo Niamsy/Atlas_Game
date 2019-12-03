@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fce37d24c2e84390962209b7402f9d3c, type: 3}
+  m_Name: Craft Item
+  m_EditorClassIdentifier: 
+  _name: {fileID: 11400000, guid: 9685b73552927034ca5c3a4130ea3f50, type: 2}
+  _description: {fileID: 11400000, guid: a6d53ae2268a4cd43bc558033a3f554a, type: 2}
+  requirementses:
+  - condition: {fileID: 11400000, guid: 67d764ca89ee6f647b995e8c25e1ae0b, type: 2}
+    argument: {fileID: 0}
+    description: {fileID: 11400000, guid: ef2cd7553d67ab74bb23316b809132d1, type: 2}
+    count: 1
+  _xp: 300
+  _rewards: []
+  toSpawn: {fileID: 0}
+  spawnPoint: {fileID: 0}
