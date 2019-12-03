@@ -23,19 +23,16 @@ public class SavedIdHandler : MonoBehaviour
 
     public void setSave(bool value)
     {
-        print("Set Save:" + value);
         _save = value;
     }
 
     public void setPasswd(string pass)
     {
-        print("Set Passwd:" + pass);
         _data.setPassword(pass);
     }
 
     public void setId(string id)
     {
-        print("Set Id:" + id);
         _data.setId(id);
     }
 

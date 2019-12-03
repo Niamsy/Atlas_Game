@@ -1049,18 +1049,13 @@ PrefabInstance:
       objectReference: {fileID: 1752590245}
     - target: {fileID: 8227145947223995880, guid: 892f2fbbae158e647b9515a99dd9b494,
         type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 836047145}
-    - target: {fileID: 8227145947223995880, guid: 892f2fbbae158e647b9515a99dd9b494,
-        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActiveInactive
+      value: UpdateSelectedLevelWidget
       objectReference: {fileID: 0}
     - target: {fileID: 8227145947223995880, guid: 892f2fbbae158e647b9515a99dd9b494,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8227145947223995880, guid: 892f2fbbae158e647b9515a99dd9b494,
         type: 3}
@@ -1085,13 +1080,13 @@ PrefabInstance:
     - target: {fileID: 8227145947223995880, guid: 892f2fbbae158e647b9515a99dd9b494,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8227145947223995880, guid: 892f2fbbae158e647b9515a99dd9b494,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 1693540965}
+      objectReference: {fileID: 0}
     - target: {fileID: 8227145947223995880, guid: 892f2fbbae158e647b9515a99dd9b494,
         type: 3}
       propertyPath: m_Navigation.m_SelectOnUp
@@ -1157,6 +1152,26 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8360902824979990451, guid: 892f2fbbae158e647b9515a99dd9b494,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8360902824979990451, guid: 892f2fbbae158e647b9515a99dd9b494,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8360902824979990451, guid: 892f2fbbae158e647b9515a99dd9b494,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8360902824979990451, guid: 892f2fbbae158e647b9515a99dd9b494,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 5291385937731525514, guid: 892f2fbbae158e647b9515a99dd9b494,
         type: 3}
       propertyPath: m_IsActive
@@ -1171,6 +1186,31 @@ PrefabInstance:
         type: 3}
       propertyPath: Levels.Array.size
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8877650436347648618, guid: 892f2fbbae158e647b9515a99dd9b494,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5863917525935785963, guid: 892f2fbbae158e647b9515a99dd9b494,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.19607843
+      objectReference: {fileID: 0}
+    - target: {fileID: 5863917525935785963, guid: 892f2fbbae158e647b9515a99dd9b494,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.19607843
+      objectReference: {fileID: 0}
+    - target: {fileID: 5863917525935785963, guid: 892f2fbbae158e647b9515a99dd9b494,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.19607843
+      objectReference: {fileID: 0}
+    - target: {fileID: 5863917525935785963, guid: 892f2fbbae158e647b9515a99dd9b494,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 892f2fbbae158e647b9515a99dd9b494, type: 3}
@@ -1848,12 +1888,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a59174c683642a1488be81ac3dc0d96a, type: 3}
---- !u!1 &1693540965 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3306651449920619286, guid: 892f2fbbae158e647b9515a99dd9b494,
-    type: 3}
-  m_PrefabInstance: {fileID: 318509993}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1711137188
 PrefabInstance:
   m_ObjectHideFlags: 0
