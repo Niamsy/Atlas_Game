@@ -42,7 +42,7 @@ namespace Menu.LevelSelector
             LevelInfo = levelInfo;
             ChallengeOneComplete = false;
             ChallengeTwoComplete = false;
-            
+            ChallengeThreeComplete = false;
         }
         
         public int NumberChallengeComplete()

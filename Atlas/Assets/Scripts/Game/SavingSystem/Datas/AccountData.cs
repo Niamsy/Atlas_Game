@@ -36,7 +36,7 @@ namespace Game.SavingSystem.Datas
     {
         public int    PlayerChallengeOwned = 0;
         public int    PlayerTimePlayed = 0;
-        public levelInfoData[] LevelInfoDatas = new[] { new levelInfoData() };
+        public levelInfoData[] LevelInfoDatas;
 
         public void SaveLevels(List<LiveLevelInfo> levelInfos)
         {
@@ -89,6 +89,14 @@ namespace Game.SavingSystem.Datas
 		public bool Challenge1Complete;
 		public bool Challenge2Complete;
 		public bool Challenge3Complete;
+
+		public levelInfoData(LevelInfo levelInfo)
+		{
+			LevelTitle = levelInfo.LevelTitle;
+			Challenge1Complete = false;
+			Challenge2Complete = false;
+			Challenge3Complete = false;
+		}
 		
 		public levelInfoData(LiveLevelInfo levelInfo)
 		{

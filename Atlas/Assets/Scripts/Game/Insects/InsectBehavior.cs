@@ -113,7 +113,6 @@ namespace Game.Insects
             {
                 foreach (InsectAction action in insect.actions)
                 {
-                    Debug.Log("Check " + col);
                     var interactable = col.GetComponent<IInteractableInsect>();
                     if (interactable!= null)
                     {

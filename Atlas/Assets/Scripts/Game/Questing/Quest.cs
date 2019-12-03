@@ -23,10 +23,14 @@ namespace Game.Questing
         [SerializeField] private Reward[] _rewards = new Reward[0];
         [SerializeField] public GameObject toSpawn;
 
+        [Header("Objective")] 
+        [SerializeField] private bool isObjective = false;
+        
         public LocalizedText Name => _name;
         public Requirement[] Requirements => requirementses;
         public LocalizedText Description => _description;
         public Reward[] Rewards => _rewards;
         public int Xp => _xp;
+        public bool IsObjective => isObjective;
     }
 }

@@ -86,8 +86,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2456c889cc67940bac0083bfc9f870, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uncompleteColor: {r: 1, g: 1, b: 1, a: 0.45490196}
-  completeColor: {r: 0.64937234, g: 0.8301887, b: 0.5991456, a: 1}
+  unCompleteSprite: {fileID: 0}
+  completeSprite: {fileID: 0}
   isComplete: 0
 --- !u!1 &1085052555327093448
 GameObject:
@@ -683,8 +683,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2456c889cc67940bac0083bfc9f870, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uncompleteColor: {r: 1, g: 1, b: 1, a: 0.45490196}
-  completeColor: {r: 0.64937234, g: 0.8301887, b: 0.5991456, a: 1}
+  unCompleteSprite: {fileID: 0}
+  completeSprite: {fileID: 0}
   isComplete: 0
 --- !u!1 &6544355285947776983
 GameObject:
@@ -869,6 +869,7 @@ GameObject:
   - component: {fileID: 8839504396936422448}
   - component: {fileID: 2635085555289137647}
   - component: {fileID: 3432990065554098245}
+  - component: {fileID: 8146709905368571517}
   m_Layer: 5
   m_Name: Objectives
   m_TagString: Untagged
@@ -938,7 +939,35 @@ MonoBehaviour:
   objective1: {fileID: 5747850042216412485}
   objective2: {fileID: 3173615923858933837}
   objective3: {fileID: 3437313275841686872}
-  levelComplete: {fileID: 8754905099683229426}
+  levelInfo: {fileID: 0}
+  levelComplete: {fileID: 6544355285947776983}
+--- !u!114 &8146709905368571517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7357228768656584448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4586b94a0d8a3a4a90ed85091d23809, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 212775a5891712c4aae195aea0744c35, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3432990065554098245}
+        m_MethodName: ValidateOneObjective
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8626263224515041647
 GameObject:
   m_ObjectHideFlags: 0
@@ -1025,6 +1054,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2456c889cc67940bac0083bfc9f870, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uncompleteColor: {r: 1, g: 1, b: 1, a: 0.45490196}
-  completeColor: {r: 0.64937234, g: 0.8301887, b: 0.5991456, a: 1}
+  unCompleteSprite: {fileID: 0}
+  completeSprite: {fileID: 0}
   isComplete: 0

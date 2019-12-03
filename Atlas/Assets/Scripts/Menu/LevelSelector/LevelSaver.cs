@@ -23,7 +23,7 @@ namespace Menu.LevelSelector
             foreach (var levelInfo in Levels)
             {
                 var index = levelInfoDatas.FindIndex(it => it.LevelTitle == levelInfo.LevelTitle);
-                _liveLevels.Add(index > 0 ? new LiveLevelInfo(levelInfo, levelInfoDatas[index]) : new LiveLevelInfo(levelInfo));
+                _liveLevels.Add(index >= 0 ? new LiveLevelInfo(levelInfo, levelInfoDatas[index]) : new LiveLevelInfo(levelInfo));
             }
         }
 

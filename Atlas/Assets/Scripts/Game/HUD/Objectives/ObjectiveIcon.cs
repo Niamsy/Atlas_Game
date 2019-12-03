@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace Game.HUD.Objectives
@@ -7,8 +6,8 @@ namespace Game.HUD.Objectives
     [RequireComponent(typeof(Image))]
     public class ObjectiveIcon : MonoBehaviour
     {
-        [SerializeField] private Color uncompleteColor = Color.white;
-        [SerializeField] private Color completeColor = Color.green;
+        [SerializeField] private Sprite unCompleteSprite = null;
+        [SerializeField] private Sprite completeSprite = null;
         [SerializeField] private bool isComplete = false;
 
         private Image _image = null;
@@ -26,9 +25,8 @@ namespace Game.HUD.Objectives
             isComplete = completed;
             
             if (_image == null) return;
-
-            _image.color = IsComplete ? completeColor : uncompleteColor;
-               
+            
+            _image.sprite = IsComplete ? completeSprite : unCompleteSprite;
         }
     }
 }
