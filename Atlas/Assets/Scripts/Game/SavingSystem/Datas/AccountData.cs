@@ -18,7 +18,9 @@ namespace Game.SavingSystem.Datas
 	    public DateTime						LastGetScannedPlant;
 	    public int 							ID = 0;
         public CharacterGlobalInfoData      CharacterGlobalInfo = new CharacterGlobalInfoData();
+        public XPSaveData                   XPData = new XPSaveData(0f, 200f, 0f, 1, false);
 
+        
         public AccountData(int id)
 	    {
 		    ID = id;
@@ -49,6 +51,25 @@ namespace Game.SavingSystem.Datas
 		{
 			ID = id;
 			Name = name;
+		}
+	}
+	
+	[Serializable]
+	public struct XPSaveData
+	{
+		public float PlayerXP;
+		public float RoofLevel;
+		public float FloorLevel;
+		public float PlayerLevel;
+		public bool NotFirstTime;
+
+		public XPSaveData(float playerXp, float roofLevel, float floorLevel, float playerLevel, bool notFirstTime)
+		{
+			PlayerXP = playerXp;
+			RoofLevel = roofLevel;
+			FloorLevel = floorLevel;
+			PlayerLevel = playerLevel;
+			NotFirstTime = notFirstTime;
 		}
 	}
 }

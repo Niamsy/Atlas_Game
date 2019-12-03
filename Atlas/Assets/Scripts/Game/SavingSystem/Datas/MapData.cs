@@ -48,16 +48,6 @@ namespace Game.SavingSystem.Datas
         }
 
         [Serializable]
-        public struct XPSaveData
-        {
-            public float PlayerXP;
-            public float RoofLevel;
-            public float FloorLevel;
-            public float PlayerLevel;
-            public bool NotFirstTime;
-        }
-
-        [Serializable]
         public struct ProductSaveData
         {
             public int Id;
@@ -142,7 +132,6 @@ namespace Game.SavingSystem.Datas
         public int                  SelectedItems;
         public TransformSaveData	TransformData;
         public DateData				CalendarData;
-        public XPSaveData           XPData;
         public List<Stock>          PlayerResource;
         public QuestingData         Questing;
     }

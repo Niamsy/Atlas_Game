@@ -4,7 +4,7 @@ using Game.SavingSystem.Datas;
 
 namespace Leveling
 {
-    public abstract class Experience : MapSavingBehaviour
+    public abstract class Experience : AccountSavingBehaviour
     {
         #region Public Accessors
         public int Level
@@ -75,7 +75,8 @@ namespace Leveling
         #endregion
 
         #region Public Methods
-        protected override void SavingMapData(MapData data)
+
+        protected override void SavingAccountData(AccountData data)
         {
             data.XPData.PlayerXP = CurrentXP;
             data.XPData.PlayerLevel = Level;
@@ -84,7 +85,7 @@ namespace Leveling
             data.XPData.NotFirstTime = !Reset;
         }
 
-        protected override void LoadingMapData(MapData data)
+        protected override void LoadingAccountData(AccountData data)
         {
             if (data.XPData.NotFirstTime)
             {
