@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Game.SavingSystem
 {
     [RequireComponent(typeof(Leveling.PlayerExperience))]
-    public class PlayerExperienceSaver : MapSavingBehaviour
+    public class PlayerExperienceSaver : AccountSavingBehaviour
     {
         private Leveling.PlayerExperience _PlayerExperience;
 
@@ -15,8 +15,7 @@ namespace Game.SavingSystem
             _PlayerExperience = GetComponent<Leveling.PlayerExperience>();
         }
 
-
-        protected override void SavingMapData(MapData data)
+        protected override void SavingAccountData(AccountData data)
         {
             data.XPData.PlayerXP = _PlayerExperience.CurrentXP;
             data.XPData.PlayerLevel = _PlayerExperience.Level;
@@ -24,12 +23,12 @@ namespace Game.SavingSystem
             data.XPData.FloorLevel = _PlayerExperience.LevelFloor;
         }
 
-        protected override void LoadingMapData(MapData data)
+        protected override void LoadingAccountData(AccountData data)
         {
             _PlayerExperience.CurrentXP = (int)data.XPData.PlayerXP;
             _PlayerExperience.LevelFloor = (int)data.XPData.FloorLevel;
             _PlayerExperience.LevelRoof = (int)data.XPData.RoofLevel;
-            _PlayerExperience.Level = (int)data.XPData.PlayerLevel;
+            _PlayerExperience.Level = (int)data.XPData.PlayerLevel;        
         }
     }
 }

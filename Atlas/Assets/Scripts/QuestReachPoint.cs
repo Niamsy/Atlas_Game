@@ -10,9 +10,7 @@ public class QuestReachPoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        ItemAbstract tmpItem = new ItemAbstract();
-        tmpItem.name = "reachpoint:" + id;
-        _conditionEvent.Raise(_raisedCondition, tmpItem, 1);
+        _conditionEvent.Raise(_raisedCondition, id, 1);
         gameObject.SetActive(false);
     }
 

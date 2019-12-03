@@ -251,15 +251,22 @@ namespace Game.Questing
 
             foreach (var questData in data.Questing.Quests)
             {
-                var questSo = _quests.Find(quest => quest.Id == questData.Id);
+                var questSo = _quests.Find(it => it.Id == questData.Id);
                 if (questSo != null)
                 {
                     LiveQuests.Add(new LiveQuest(questSo, questData.Requirements));
+                    continue;
                 }
-                else
+                Debug.LogWarning($"Quest with ID: {questData.Id} does not exist, trying by name...");
+                
+                var quest = _quests.Find(it => it.Name == questData.Name);
+                if (quest != null)
                 {
-                    Debug.LogWarning($"Quest with ID: {questData.Id} does not exist");
+                    LiveQuests.Add(new LiveQuest(quest, questData.Requirements));
+                    continue;
                 }
+                Debug.LogWarning($"Quest with Name: {questData.Name} does not exist, a " +
+                                 $"scriptable object is surely missing");
             }
         }
     }

@@ -14,20 +14,27 @@ namespace Tools
 
             try
             {
-                LocalizationManager.Instance.CurrentLanguage = (SystemLanguage)(fs.GetConfigIntValue(Key.Lang));
+                LocalizationManager.Instance.CurrentLanguage = (SystemLanguage) (fs.GetConfigIntValue(Key.Lang));
             }
-            catch (Exception e) {}
-            
+            catch (Exception e)
+            {
+                Debug.LogWarning(e);
+            }
+
             try
             {
                 int resolutionWidth = fs.GetConfigIntValue(Key.ResolutionWidth, Section.Graphical);
                 int resolutionHeight = fs.GetConfigIntValue(Key.ResolutionHeight, Section.Graphical);
-                FullScreenMode fullscreenEffect = (FullScreenMode) fs.GetConfigIntValue(Key.Fullscreen, Section.Graphical);
-             
+                FullScreenMode fullscreenEffect =
+                    (FullScreenMode) fs.GetConfigIntValue(Key.Fullscreen, Section.Graphical);
+
                 Screen.SetResolution(resolutionWidth, resolutionHeight, fullscreenEffect);
             }
-            catch (Exception e) {}
+            catch (Exception e)
+            {
+                Debug.LogWarning(e);
 
+            }
         }
     }
 }
