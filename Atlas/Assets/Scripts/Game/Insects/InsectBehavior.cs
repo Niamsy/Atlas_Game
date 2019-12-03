@@ -58,7 +58,7 @@ namespace Game.Insects
                 emissionBeesStatic.enabled = true;
                 emissionBeesMoving = systs[1].emission;
                 emissionBeesMoving.enabled = true;
-            }*/
+            }
         }
 
         private void Start()
