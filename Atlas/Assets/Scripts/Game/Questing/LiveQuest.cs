@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Game.SavingSystem.Datas;
 using UnityEngine;
@@ -26,17 +27,25 @@ namespace Game.Questing
                 var requirements = new List<LiveRequirement>();
                 foreach (var requirementData in requirementDatas)
                 {
-                    var requirement = quest.Requirements.Single(it =>
-                        it.Argument.Id == requirementData.ItemAbstractId &&
-                        it.Condition.Id == requirementData.ConditionId);
-
-                    if (!requirement.Equals(null))
+                    try
                     {
-                        requirements.Add(new LiveRequirement(requirement, requirementData.CurrentlyAccomplished));
-                    }
-                    else
+                        var requirement = quest.Requirements.Single(it =>
+                            it.Argument.Id == requirementData.ItemAbstractId &&
+                            (it.Condition.Id == requirementData.ConditionId || it.Condition.name == requirementData.ConditionName));
+                        
+                        if (!requirement.Equals(null))
+                        {
+                            requirements.Add(new LiveRequirement(requirement, requirementData.CurrentlyAccomplished));
+                        }
+                        else
+                        {
+                            Debug.LogWarning(
+                                $"Requirement with Condition ID: {requirementData.ConditionId} and Item Id : {requirementData.ItemAbstractId} does not exist in Quest : {quest.Name}");
+                        }
+                    } 
+                    catch (Exception e)
                     {
-                        Debug.LogWarning($"Requirement with Condition ID: {requirementData.ConditionId} and Item Id : {requirementData.ItemAbstractId} does not exist in Quest : {quest.Name}");
+                        Debug.LogWarning(e);    
                     }
                 }
 
