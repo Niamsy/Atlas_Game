@@ -73,7 +73,6 @@ namespace Menu.LevelSelector
                             CanvasGroup panel = ui.GetComponent<CanvasGroup>();
                             if (panel)
                             {
-                                Debug.Log("hola " + i);
                                 panel.alpha = 0;
                                 panel.interactable = false;
                                 disableLaunch = true;
@@ -101,17 +100,9 @@ namespace Menu.LevelSelector
                         Button btn = ui.GetComponent<Button>();
                         if (!disableLaunch)
                         {
-                            Debug.Log("holo " + i);
                             btn.enabled = false;
                             break;
                         }
-                        if (btn.enabled == true)
-                        {
-                            Debug.Log("I can launch scene : " + i);
-                        }
-                        string sceneName = levels[i].LevelInfo.LevelSceneName;
-                        Debug.Log("Btn name: " + btn.name);
-                        Debug.Log("Scene name launched: " + sceneName);
                         btn.onClick.AddListener(() => SceneLoader.Instance.LoadScene(2, 1));
                     }
                 }
