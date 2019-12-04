@@ -20,7 +20,6 @@ public class SetupReachPoint : MonoBehaviour
             {
                 go.transform.parent = transform.parent.transform;
             }
-            print("Reach point parent set to : " + go.transform.parent);
         }
     }
 }

@@ -63,7 +63,6 @@ namespace Game.Questing
         {
             var toRemove = new List<LiveQuest>();
             var validated = false;
-            print("JE TEST LES REQUIREMENT pour l'item :" + item);
             foreach (var liveQuest in _liveQuests)
             {
                 var requirements = liveQuest.Requirements.Where(req =>
@@ -72,7 +71,6 @@ namespace Game.Questing
                 
                 foreach (var liveRequirement in requirements)
                 {
-                    print("J'ai de requirement valide");
                     liveRequirement.IncrementAccomplished(count);
                     validated = true;
                 }
