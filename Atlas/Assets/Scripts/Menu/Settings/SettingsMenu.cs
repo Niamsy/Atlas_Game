@@ -95,7 +95,9 @@ namespace Menu.Settings
         private void OnSaveThenClose()
         {
             if (_resolution.DidValueChanged())
+            {
                 Screen.SetResolution(_resolution.ActualResolution().width, _resolution.ActualResolution().height, _fullscreen.ActualValue());
+            }
             else if (_fullscreen.DidValueChanged())
                 Screen.fullScreenMode = _fullscreen.ActualValue();
             

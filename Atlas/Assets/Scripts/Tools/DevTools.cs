@@ -27,7 +27,6 @@ namespace Tools
                 int resolutionHeight = fs.GetConfigIntValue(Key.ResolutionHeight, Section.Graphical);
                 FullScreenMode fullscreenEffect =
                     (FullScreenMode) fs.GetConfigIntValue(Key.Fullscreen, Section.Graphical);
-
                 Screen.SetResolution(resolutionWidth, resolutionHeight, fullscreenEffect);
             }
             catch (Exception e)

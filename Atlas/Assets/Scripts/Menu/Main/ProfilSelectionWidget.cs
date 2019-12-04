@@ -38,7 +38,6 @@ namespace Menu.Main
             if (data.Used == false) //Create
                 SaveManager.InstantiateProfilToUse(_saveManager.AccountData, data, "Game Profil " + data.ID);
             _saveManager.SelectProfilToUseForSave(data);
-            Debug.Log("Click on profile");
             levelSaver.UpdateSelectedLevelWidget();
             this.gameObject.SetActive(false);
             //SceneLoader.Instance.LoadScene(NextSceneIndex, MainMenuSceneIndex);
