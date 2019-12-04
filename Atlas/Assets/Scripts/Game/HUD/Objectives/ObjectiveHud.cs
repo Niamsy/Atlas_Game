@@ -1,24 +1,33 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Game.Notification;
 using Game.SavingSystem;
 using Game.SavingSystem.Datas;
 using Menu.LevelSelector;
-using TMPro;
 using UnityEngine;
 
 namespace Game.HUD.Objectives
 {
     public class ObjectiveHud : AccountAndMapSavingBehaviour
     {
+        [Header("Prefabs")]
         [SerializeField] private ObjectiveIcon objective1 = null;
         [SerializeField] private ObjectiveIcon objective2 = null;
         [SerializeField] private ObjectiveIcon objective3 = null;
+        
+        [Header("Current Level Info")]
         [SerializeField] private LevelInfo levelInfo = null;
+        
+        [Header("Level Complete")]
+        [SerializeField] private GameObject levelComplete = null;
+        
+        [Header("Notifications")] 
+        [SerializeField] private NotificationEvent _notificationEvent = null;
+        [SerializeField] private Game.Notification.Notification _notification = null;
 
         private LiveLevelInfo _currentLevel = null;
         private int _currentIndexLevel = -1;
         
-        [SerializeField] private GameObject levelComplete = null;
 
         protected override void Awake()
         {
@@ -41,12 +50,14 @@ namespace Game.HUD.Objectives
                 return;
             }
 
-            if (!objective3.IsComplete)
-            {
-                objective3.SetComplete(true);
-                _currentLevel.ChallengeThreeComplete = true;
-                levelComplete.SetActive(true);
-            }
+            if (objective3.IsComplete) return;
+            objective3.SetComplete(true);
+            _currentLevel.ChallengeThreeComplete = true;
+            levelComplete.SetActive(true);
+            
+            if (_notification == null || _notificationEvent == null) return;
+            
+            _notificationEvent.Raise(_notification);  
         }
 
         protected override void SavingAccountData(AccountData data)
@@ -83,11 +94,14 @@ namespace Game.HUD.Objectives
             objective1.SetComplete(_currentLevel.ChallengeOneComplete);
             objective2.SetComplete(_currentLevel.ChallengeTwoComplete);
             objective3.SetComplete(_currentLevel.ChallengeThreeComplete);
+
+            if (!objective1.IsComplete || !objective2.IsComplete || !objective3.IsComplete) return;
             
-            if (objective1.IsComplete && objective2.IsComplete && objective3.IsComplete)
-            {
-                levelComplete.SetActive(true);
-            }
+            levelComplete.SetActive(true);
+            
+            if (_notification == null || _notificationEvent == null) return;
+            
+            _notificationEvent.Raise(_notification);   
         }
     }
 }

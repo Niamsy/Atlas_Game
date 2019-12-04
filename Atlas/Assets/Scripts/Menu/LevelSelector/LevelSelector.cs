@@ -14,10 +14,12 @@ namespace Menu.LevelSelector
 
         [Header("Prefab Level")]
         [SerializeField]
-        public GameObject PrefabLevel;
+        public GameObject PrefabLevel = null;
         
         [SerializeField]
-        public CharacterDataInfo CharacterInfo;
+        public CharacterDataInfo CharacterInfo = null;
+
+        [SerializeField] private Sprite CompletedChallenge = null;
 
         protected override void InitialiseWidget()
         {
@@ -60,39 +62,13 @@ namespace Menu.LevelSelector
                         Image img = ui.GetComponent<Image>();
                         img.sprite = levels[i].LevelInfo.LevelImage;
                     }
-                    else if (ui.name == "Challenge1")
+                    else if (ui.name == "Challenge1" || ui.name == "Challenge2" || ui.name == "Challenge3")
                     {
-                        if (!levels[i].ChallengeOneComplete)
-                        {
-                            Image img = ui.GetComponent<Image>();
-                            var tempColor = img.color;
-                            tempColor.a = 0.5f;
-                            img.color = tempColor;
-                        }
-                    }
-                    else if (ui.name == "Challenge2")
-                    {
-                        if (!levels[i].ChallengeTwoComplete)
-                        {
-                            Image img = ui.GetComponent<Image>();
-                            var tempColor = img.color;
-                            tempColor.a = 0.5f;
-                            img.color = tempColor;
-                        }
-                    }
-                    else if (ui.name == "Challenge3")
-                    {
-                        if (!levels[i].ChallengeThreeComplete)
-                        {
-                            Image img = ui.GetComponent<Image>();
-                            var tempColor = img.color;
-                            tempColor.a = 0.5f;
-                            img.color = tempColor;
-                        }
+                        SetImageSprite(ui, levels[i]);
                     }
                     else if (ui.name == "PanelLocked")
                     {
-                        if (CharacterInfo.PlayerChallengeOwned >= levels[i].ChallengeOnThisLevelToUnlockComplete)
+                        if (CharacterInfo.PlayerChallengeOwned >= levels[i].LevelInfo.ChallengeOnThisLevelToUnlockComplete)
                         {
                             CanvasGroup panel = ui.GetComponent<CanvasGroup>();
                             if (panel)
@@ -115,7 +91,7 @@ namespace Menu.LevelSelector
                                 if (ui.name == "NumberChallengeAsking")
                                 {
                                     TextMeshProUGUI challengeAsking = ui.GetComponent<TextMeshProUGUI>();
-                                    challengeAsking.text = levels[i].ChallengeOnThisLevelToUnlockComplete.ToString();
+                                    challengeAsking.text = levels[i].LevelInfo.ChallengeOnThisLevelToUnlockComplete.ToString();
                                 }
                             }
                         }
@@ -138,6 +114,28 @@ namespace Menu.LevelSelector
                         Debug.Log("Scene name launched: " + sceneName);
                         btn.onClick.AddListener(() => SceneLoader.Instance.LoadScene(2, 1));
                     }
+                }
+            }
+        }
+
+        private void SetImageSprite(Component ui, LiveLevelInfo level)
+        {
+            var img = ui.GetComponent<Image>();
+            if (!level.ChallengeTwoComplete)
+            {
+                var tempColor = img.color;
+                tempColor.a = 0.5f;
+                img.color = tempColor;
+            }
+            else
+            {
+                if (CompletedChallenge != null)
+                {
+                    img.sprite = CompletedChallenge;
+                }
+                else
+                {
+                    img.color = new Color(166f, 212f, 153, 200f);
                 }
             }
         }

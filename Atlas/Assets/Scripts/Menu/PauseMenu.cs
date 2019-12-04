@@ -66,6 +66,11 @@ namespace Menu
 			SceneLoader.Instance.QuitTheGame();
 #endif
 		}
-		
+
+
+		public void LoadMainMenu(int sceneToUnload)
+		{
+			SceneLoader.Instance.LoadScene(1, sceneToUnload);
+		}
 	}
 }
