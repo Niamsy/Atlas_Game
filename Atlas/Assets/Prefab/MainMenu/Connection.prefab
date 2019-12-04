@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7961528191132075837}
   - component: {fileID: 2661283927992467397}
-  - component: {fileID: 8094723746040254658}
   m_Layer: 5
   m_Name: Toggle
   m_TagString: Untagged
@@ -84,35 +83,8 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8094723746040254658}
-        m_MethodName: setSave
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_IsOn: 1
---- !u!114 &8094723746040254658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4225905592302709387}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc3568b0b44316545981d39f01cc4e47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _data: {fileID: 11400000, guid: 67fc91c0a9a9609419e691a00974c24f, type: 2}
-  _field: {fileID: 5000720418724024484}
-  _fieldMdp: {fileID: 5000777865171097742}
-  _save: 1
 --- !u!1 &4969744412185136946
 GameObject:
   m_ObjectHideFlags: 0
@@ -1334,8 +1306,8 @@ MonoBehaviour:
   _connectionButton: {fileID: 5001698321213159650}
   _registerButton: {fileID: 5001714790049392268}
   _passwordLost: {fileID: 5002249870175532186}
+  _saveUsername: {fileID: 2661283927992467397}
   _nextWidget: {fileID: 0}
-  _saveId: {fileID: 8094723746040254658}
 --- !u!114 &2311934573190535313
 MonoBehaviour:
   m_ObjectHideFlags: 0
