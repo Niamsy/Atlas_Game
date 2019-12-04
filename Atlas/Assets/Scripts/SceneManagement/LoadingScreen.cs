@@ -30,10 +30,6 @@ namespace SceneManagement
                 int random = Random.Range(0, 5);
                 tip = tips[random].GetLoc("ENG");
             }
-            else
-            {
-                Debug.LogError("Cannot load game data!");
-            }
             return tip;
         }
     }
