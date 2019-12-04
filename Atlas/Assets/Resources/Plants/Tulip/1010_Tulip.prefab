@@ -10,8 +10,45 @@ PrefabInstance:
     - target: {fileID: 6206562519876059882, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
         type: 3}
       propertyPath: m_Name
-      value: 1007_Tulip
+      value: 1010_Tulip
       objectReference: {fileID: 0}
+    - target: {fileID: 61835651470404897, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: _listOfStocks.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 61835651470404897, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: _listOfStocks.Array.data[2].Resource
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 61835651470404897, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: _listOfStocks.Array.data[2].Limit
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 61835651470404897, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: _listOfStocks.Array.data[2].Quantity
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 6206562519876059879, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: PlantStatistics
+      value: 
+      objectReference: {fileID: 11400000, guid: 780fd38f1642b7440aebbd74f8ce6e54,
+        type: 2}
+    - target: {fileID: 6206562519876059877, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: _hidedCanvasName
+      value: 
+      objectReference: {fileID: 6448775171294162850}
+    - target: {fileID: 6206562519876059874, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
+        type: 3}
+      propertyPath: Slot._content
+      value: 
+      objectReference: {fileID: 11400000, guid: 154ed935a0a504d4d91c59d0dce1a84c,
+        type: 2}
     - target: {fileID: 6206562519876059875, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -67,37 +104,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 61835651470404897, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
-        type: 3}
-      propertyPath: _listOfStocks.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 61835651470404897, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
-        type: 3}
-      propertyPath: _listOfStocks.Array.data[2].Resource
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 61835651470404897, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
-        type: 3}
-      propertyPath: _listOfStocks.Array.data[2].Limit
-      value: 1500
-      objectReference: {fileID: 0}
-    - target: {fileID: 61835651470404897, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
-        type: 3}
-      propertyPath: _listOfStocks.Array.data[2].Quantity
-      value: 1500
-      objectReference: {fileID: 0}
-    - target: {fileID: 6206562519876059879, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
-        type: 3}
-      propertyPath: PlantStatistics
-      value: 
-      objectReference: {fileID: 11400000, guid: 780fd38f1642b7440aebbd74f8ce6e54,
-        type: 2}
-    - target: {fileID: 6206562519876059877, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
-        type: 3}
-      propertyPath: _hidedCanvasName
-      value: 
-      objectReference: {fileID: 6448775171294162850}
     - target: {fileID: 3964758700477677107, guid: 4c3218684e4ac9a4aa60b424b4122b7d,
         type: 3}
       propertyPath: finalStageEnergyGiven
