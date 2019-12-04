@@ -21,7 +21,6 @@ namespace Game.SavingSystem.Datas
 	    public ProfilData[]					Profils = new ProfilData[MaxNumberOfProfils];
 	    public DateTime						LastGetScannedPlant;
 	    public int 							ID = 0;
-        public CharacterGlobalInfoData      CharacterGlobalInfo = new CharacterGlobalInfoData();
         public XPSaveData                   XPData = new XPSaveData(0f, 200f, 0f, 1, false);
         
         public AccountData(int id)
@@ -50,7 +49,9 @@ namespace Game.SavingSystem.Datas
 		public int 							ID = 0;
 
 		public string						Name = "Empty name";
-		
+
+		public CharacterGlobalInfoData      CharacterGlobalInfo = new CharacterGlobalInfoData();
+
 		/// <summary>
 		/// True if the Profil contains some save
 		/// </summary>

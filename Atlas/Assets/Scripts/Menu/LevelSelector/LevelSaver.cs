@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Game.SavingSystem;
 using Game.SavingSystem.Datas;
@@ -12,18 +13,26 @@ namespace Menu.LevelSelector
         [SerializeField] private GameObject _prefab = null;
         private List<LiveLevelInfo> _liveLevels = new List<LiveLevelInfo>();
 
+        private ProfilData _profilData = null;
+
         protected override void SavingAccountData(AccountData data)
         {
-            data.CharacterGlobalInfo.SaveLevels(_liveLevels);
+            _profilData?.CharacterGlobalInfo?.SaveLevels(_liveLevels);
         }
 
         protected override void LoadingAccountData(AccountData data)
         {
-            var levelInfoDatas = data.CharacterGlobalInfo.LevelInfoDatas.ToList();
+            _profilData = SaveManager.Instance.SelectedProfil;
+
+            if (_profilData == null) return;
+            
+            var levelInfoDatas = _profilData.CharacterGlobalInfo.LevelInfoDatas.ToList();
             foreach (var levelInfo in Levels)
             {
                 var index = levelInfoDatas.FindIndex(it => it.LevelTitle == levelInfo.LevelTitle);
-                _liveLevels.Add(index >= 0 ? new LiveLevelInfo(levelInfo, levelInfoDatas[index]) : new LiveLevelInfo(levelInfo));
+                _liveLevels.Add(index >= 0
+                    ? new LiveLevelInfo(levelInfo, levelInfoDatas[index])
+                    : new LiveLevelInfo(levelInfo));
             }
         }
 

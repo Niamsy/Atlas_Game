@@ -27,6 +27,7 @@ namespace Game.HUD.Objectives
 
         private LiveLevelInfo _currentLevel = null;
         private int _currentIndexLevel = -1;
+        private ProfilData _profilData = null;
         
 
         protected override void Awake()
@@ -62,23 +63,26 @@ namespace Game.HUD.Objectives
 
         protected override void SavingAccountData(AccountData data)
         {
+            if (_profilData == null) return;
             if (_currentIndexLevel < 0)
             {
-                data.CharacterGlobalInfo.SaveLevels(new List<LiveLevelInfo>{ _currentLevel });   
+                _profilData.CharacterGlobalInfo.SaveLevels(new List<LiveLevelInfo>{ _currentLevel });   
             }
             else
             {
-                data.CharacterGlobalInfo.LevelInfoDatas[_currentIndexLevel].Challenge1Complete = objective1.IsComplete;
-                data.CharacterGlobalInfo.LevelInfoDatas[_currentIndexLevel].Challenge2Complete = objective2.IsComplete;
-                data.CharacterGlobalInfo.LevelInfoDatas[_currentIndexLevel].Challenge3Complete = objective3.IsComplete;    
+                _profilData.CharacterGlobalInfo.LevelInfoDatas[_currentIndexLevel].Challenge1Complete = objective1.IsComplete;
+                _profilData.CharacterGlobalInfo.LevelInfoDatas[_currentIndexLevel].Challenge2Complete = objective2.IsComplete;
+                _profilData.CharacterGlobalInfo.LevelInfoDatas[_currentIndexLevel].Challenge3Complete = objective3.IsComplete;    
             }
         }
 
         protected override void LoadingAccountData(AccountData data)
         {
+            _profilData = SaveManager.Instance.SelectedProfil;
             if (levelInfo == null) return;
-
-            var index = data.CharacterGlobalInfo.LevelInfoDatas.ToList()
+            if (_profilData == null) return;
+            
+            var index = _profilData.CharacterGlobalInfo.LevelInfoDatas.ToList()
                 .FindIndex(it => it.LevelTitle == levelInfo.LevelTitle);
             _currentIndexLevel = index;
 
@@ -88,7 +92,7 @@ namespace Game.HUD.Objectives
             }
             else
             {
-                _currentLevel = new LiveLevelInfo(levelInfo, data.CharacterGlobalInfo.LevelInfoDatas[index]);
+                _currentLevel = new LiveLevelInfo(levelInfo, _profilData.CharacterGlobalInfo.LevelInfoDatas[index]);
             }
             
             objective1.SetComplete(_currentLevel.ChallengeOneComplete);
