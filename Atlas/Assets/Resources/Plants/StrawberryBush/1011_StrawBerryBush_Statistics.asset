@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b711fd0b07d4dac4e9f32fbb9c981529, type: 3}
-  m_Name: 1008_StrawBerryBush_Statistics
+  m_Name: 1011_StrawBerryBush_Statistics
   m_EditorClassIdentifier: 
   _name: {fileID: 11400000, guid: f9e3c73770f59e646a2090a9d315317a, type: 2}
   _ID: 1008
   _prefab: {fileID: 944314888139332633, guid: 56506f26877520c46adf15f560ad7fe4, type: 3}
-  _maxHeight: 0.5
-  _growthRate: {fileID: 11400000, guid: b3109efbadc41074f8835a24597d9823, type: 2}
+  _maxHeight: 0.45
+  _growthRate: {fileID: 11400000, guid: f9c6d5d5ed641694cbf966f3abbe7aca, type: 2}
   _growthDuration: 20
-  _reproduction: 1
-  _soilType: -1
+  _reproduction: 11
+  _soilType: 12
   _soilPh:
-    Min: 3
-    Max: 7.2
+    Min: 7
+    Max: 14
   _soilHumidity:
     Min: 10
     Max: 50
@@ -33,10 +33,10 @@ MonoBehaviour:
   _coldResistance:
     Min: 0
     Max: 100
-  _plantingPeriods: 000000010100000101000000
-  _floweringPeriods: 000000010100000000000000
-  _harvestPeriods: 000000000000000000010101
-  _cuttingPeriods: 010101000000000000000101
+  _plantingPeriods: 000001010000000101010000
+  _floweringPeriods: 000001010101010100000000
+  _harvestPeriods: 000000000101010101010000
+  _cuttingPeriods: 000000000000000000000000
   _stages:
   - {fileID: 11400000, guid: 471b2c82b294da3449e7497222b90065, type: 2}
   - {fileID: 11400000, guid: b83d8427f1d8b8047b04086aa9163077, type: 2}

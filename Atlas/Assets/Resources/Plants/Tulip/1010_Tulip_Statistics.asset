@@ -10,32 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b711fd0b07d4dac4e9f32fbb9c981529, type: 3}
-  m_Name: 1007_Tulip_Statistics
+  m_Name: 1010_Tulip_Statistics
   m_EditorClassIdentifier: 
   _name: {fileID: 11400000, guid: a8b9989b6fbfba446b45decd1ea85d5a, type: 2}
   _ID: 1007
   _prefab: {fileID: 7905943671327839066, guid: 546f615dfc6f6e1459a12983ae226d45, type: 3}
-  _maxHeight: 0.15
-  _growthRate: {fileID: 11400000, guid: b3109efbadc41074f8835a24597d9823, type: 2}
+  _maxHeight: 1
+  _growthRate: {fileID: 11400000, guid: f9c6d5d5ed641694cbf966f3abbe7aca, type: 2}
   _growthDuration: 20
-  _reproduction: 1
-  _soilType: 1
+  _reproduction: 2
+  _soilType: 8
   _soilPh:
-    Min: 7
-    Max: 14
+    Min: 0
+    Max: 7
   _soilHumidity:
-    Min: 25
-    Max: 50
+    Min: 0
+    Max: 25
   _plantContainer: -1
   _sunExposure:
-    Min: 75
+    Min: 50
     Max: 100
   _coldResistance:
-    Min: 0
+    Min: 75
     Max: 100
-  _plantingPeriods: 000000010000000000000000
-  _floweringPeriods: 000000010101010000000000
-  _harvestPeriods: 000000000000000000000000
+  _plantingPeriods: 000000000000000001010101
+  _floweringPeriods: 000001010100000000000000
+  _harvestPeriods: 000001010100000000000000
   _cuttingPeriods: 000000000000000000000000
   _stages:
   - {fileID: 11400000, guid: 28c025e842ac19945bd5bdd87b2a726d, type: 2}
