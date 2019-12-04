@@ -271,8 +271,6 @@ namespace Plants.Plant
 
         public void insectInteract(InsectAction action, InsectConsumer consumer)
         {
-            Debug.Log("Prepare to miam");
-
             if (current_stage == last_stage && RessourceStock.FindResource(Resource.Energy) == true)
             {
                 consumer.LinkedStock.AddResources(Resource.Energy, RessourceStock.RemoveResources(Resource.Energy, _producer.finalStageEnergyGiven * 3));
