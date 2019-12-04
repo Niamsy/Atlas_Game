@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using FileSystem;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Menu.Main
@@ -11,10 +13,30 @@ namespace Menu.Main
         [SerializeField] private Button     _connectionButton = null;
         [SerializeField] private Button     _registerButton = null;
         [SerializeField] private Button     _passwordLost = null;
+        [SerializeField] private Toggle     _saveUsername = null;
 
         [SerializeField] private MenuWidget _nextWidget = null;
-        [SerializeField] private SavedIdHandler _saveId = null;
 
+        private AtlasFileSystem _fs;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            
+            _fs = AtlasFileSystem.Instance;
+
+            try
+            {
+                _username.text = _fs.getConfigValue(Key.Username, Section.Default);
+                _password.text = _fs.getConfigValue(Key.Password, Section.Default);
+                _saveUsername.isOn = _fs.GetConfigBoolValue(Key.SaveUsername, Section.Default);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+        
         #region Initialisation/Destruction
         protected override void InitialiseWidget()
         {
@@ -53,11 +75,6 @@ namespace Menu.Main
         public void Connect()
         {
             ActualRequestManager.Connect(_username.text, _password.text);
-            if (_saveId._save)
-            {
-                _saveId.setId(_username.text);
-                _saveId.setPasswd(_password.text);
-            }
             UpdateButtonState();
         }
         private void ConnectionFinished(bool success, string message)
@@ -66,11 +83,24 @@ namespace Menu.Main
 
             if (success)
             {
+                if (_saveUsername.isOn)
+                    SaveValue(_username.text, _password.text);
+                else
+                    SaveValue("", "");
+                
                 Close();
                 _nextWidget.Open();
             }
             else
                 ErrorText.text = message;
+        }
+
+        public void SaveValue(string username, string password)
+        {
+            _fs.setConfigFileValue(Key.SaveUsername, Section.Default, (_saveUsername.isOn).ToString());
+
+            _fs.setConfigFileValue(Key.Password, Section.Default, password);
+            _fs.setConfigFileValue(Key.Username, Section.Default, username);
         }
         #endregion
     }

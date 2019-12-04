@@ -7,6 +7,9 @@
         public static string ResolutionWidth = "Width";
         public static string ResolutionHeight = "Width";
         public static string Fullscreen = "Fullscreen";
+        public static string Password = "Password";
+        public static string Username = "Username";
+        public static string SaveUsername = "SaveUsername";
     }
 
     public static class Section
@@ -54,6 +57,10 @@
         public int GetConfigIntValue(string key, string section = "Default")
         {
             return int.Parse(getConfigValue(key, section));
+        }
+        public bool GetConfigBoolValue(string key, string section = "Default")
+        {
+            return bool.Parse(getConfigValue(key, section));
         }
     
         public void setConfigFileValue(string key, string section, string value)
