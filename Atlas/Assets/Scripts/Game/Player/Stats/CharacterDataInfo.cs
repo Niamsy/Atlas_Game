@@ -42,24 +42,26 @@ namespace Game.Player.Stats
 
         private FloatVariable   _playerTimePlayed = null;
 
+        private ProfilData _profilData = null;
+
         #endregion
 
         #region Public Methods
         protected override void SavingAccountData(AccountData data)
         {
-            if (data != null)
-            {
-                data.CharacterGlobalInfo.PlayerChallengeOwned = PlayerChallengeOwned;
-                data.CharacterGlobalInfo.PlayerTimePlayed = PlayerTimePlayed;
-            }
+            if (_profilData == null) return;
+            
+            _profilData.CharacterGlobalInfo.PlayerChallengeOwned = PlayerChallengeOwned;
+            _profilData.CharacterGlobalInfo.PlayerTimePlayed = PlayerTimePlayed;
         }
 
         protected override void LoadingAccountData(AccountData data)
         {
-            if (data != null && data.CharacterGlobalInfo != null)
+            _profilData = SaveManager.Instance.SelectedProfil;
+            if (data != null && _profilData?.CharacterGlobalInfo != null)
             {
-                PlayerTimePlayed = data.CharacterGlobalInfo.PlayerTimePlayed;
-                PlayerChallengeOwned = data.CharacterGlobalInfo.PlayerChallengeOwned;
+                PlayerTimePlayed = _profilData.CharacterGlobalInfo.PlayerTimePlayed;
+                PlayerChallengeOwned = _profilData.CharacterGlobalInfo.PlayerChallengeOwned;
             }
             else
             {

@@ -90,18 +90,18 @@ namespace Game.ResourcesManagement.Consumer
 
         public void StartInvoking()
         {
-            InvokeRepeating("ConsumeResource", Random.Range(1f, 3f), ConsumptionRate.TickRate);
+            InvokeRepeating("ConsumeResource", Random.Range(10f, 8f), ConsumptionRate.TickRate);
         }
 
         public override void ConsumeResource()
         {
-            ConsumedStock.Quantity += LinkedStock.RemoveResources(ConsumedStock.Resource, ConsumptionRate.ResourcePerTick);
             if (LinkedStock[ConsumedStock.Resource].Quantity >= LinkedStock[ConsumedStock.Resource].Limit)
             {
                 Full = true;
             }
-            else
+            else if (LinkedStock[ConsumedStock.Resource].Quantity <= LinkedStock[ConsumedStock.Resource].Limit / 2)
                 Full = false;
+            ConsumedStock.Quantity += LinkedStock.RemoveResources(ConsumedStock.Resource, ConsumptionRate.ResourcePerTick);
             if (LinkedStock[ConsumedStock.Resource].Quantity == 0)
             {
                 if (_starveCoroutine == null)
@@ -114,6 +114,7 @@ namespace Game.ResourcesManagement.Consumer
             {
                 StopCoroutine("Starving");
                 _starveCoroutine = null;
+                _starved = false;
                 _starving = false;
             }
         }

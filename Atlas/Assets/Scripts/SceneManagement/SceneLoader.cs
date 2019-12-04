@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -70,8 +69,7 @@ namespace SceneManagement
             #endif
             yield return null;
             SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(_startUpSceneIndex));
-            if (OnSceneLoading != null)
-                OnSceneLoading(_startUpSceneIndex);
+            OnSceneLoading?.Invoke(_startUpSceneIndex);
         }
 
         public void LoadScene(int sceneToLoad, int sceneToUnload)
@@ -85,14 +83,12 @@ namespace SceneManagement
         {
             Progress = 0f;
             _loadingScreen.SetActive(true);
-            if (OnSceneUnloading != null)
-                OnSceneUnloading(sceneToUnload);
+            OnSceneUnloading?.Invoke(sceneToUnload);
             yield return DoAsyncOperationUntil(SceneManager.UnloadSceneAsync(sceneToUnload), 0f, 0.5f);
             yield return DoAsyncOperationUntil(SceneManager.LoadSceneAsync(sceneToLoad, LoadSceneMode.Additive), 0.5f, 0.5f);
             yield return null;
             SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(sceneToLoad));
-            if (OnSceneLoading != null)
-                OnSceneLoading(sceneToLoad);
+            OnSceneLoading?.Invoke(sceneToLoad);
             _loadingScreen.SetActive(false);
             _loading = null;
         }
@@ -116,8 +112,6 @@ namespace SceneManagement
                     if (OnSceneUnloading != null)
                         OnSceneUnloading(SceneManager.GetSceneAt(x).buildIndex);
                 }
-
-                throw new Exception();
             }
             catch (Exception e)
             {

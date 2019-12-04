@@ -45,7 +45,9 @@ namespace Game.Item.PlantSeed
             LayerMask layerMask = LayerMask.GetMask("Ground");
             Camera camera = Camera.main;
             // Ray ray = new Ray(transform.position, camera.transform.forward * 2000.0f);
-          //  Debug.Log("Use position: " + SowDummy.position);
+            //  Debug.Log("Use position: " + SowDummy.position);
+            if (LevelManager.WorldGrid == null || SowDummy == null) return false;
+            
             _node = LevelManager.WorldGrid.NodeFromWorldPoint(SowDummy.position);
             return _node.CanPlantGrow;
         }

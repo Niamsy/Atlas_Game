@@ -15,20 +15,29 @@ using Tools.Tools;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
+using Event = AtlasEvents.Event;
 
 namespace Game.Questing
 {
     public class QuestingSaver : MapSavingBehaviour
     {
+        [Header("Quest Hud")]
         [FormerlySerializedAs("_sideQuestPanelHud")] [SerializeField] private SideQuestPanelHud sideQuestPanelHud = null;
         [FormerlySerializedAs("_newQuestHud")] [SerializeField] private QuestingHud newQuestHud = null;
         [FormerlySerializedAs("_questCompleteHud")] [SerializeField] private QuestingHud questCompleteHud = null;
         [FormerlySerializedAs("_questLogHud")] [SerializeField] private QuestingHud questLogHud = null;
         [FormerlySerializedAs("_closingAnimation")] [SerializeField] private AnimationClip closingAnimation = null;
+        
+        [Header("Warning")]
         [SerializeField] private GameObject warning = null;
         [SerializeField] private LocalizedText warningText = null;
+        
+        [Header("Player")]
         [SerializeField] private PlayerController playerController = null;
+        
+        [Header("Events")]
         [SerializeField] private LevelingEvent _event = null;
+        [SerializeField] private Event _objectiveEvent = null;
 
         [Header("Audio")] 
         [SerializeField] private Audio requirementValidatedAudio = null;
@@ -42,7 +51,6 @@ namespace Game.Questing
 
         public void AddQuest(Quest quest)
         {
-            print("Adding Quest");
             var liveQuest = new LiveQuest(quest);
             _currentlySelectedQuest = liveQuest;
             _liveQuests.Add(liveQuest);
@@ -102,6 +110,12 @@ namespace Game.Questing
             {
                 _event.Raise(quest.Quest.Xp, 1);
             }
+
+            if (quest.Quest.IsObjective && _objectiveEvent != null)
+            {
+                _objectiveEvent.Raise();
+            }
+            
             if (quest.toSpawnReward != null)
             {
                 Vector3 pos = Vector3.zero;
@@ -122,6 +136,8 @@ namespace Game.Questing
                 items.Add(item);
             }
             playerController.Inventory.AddItemStacks(items);
+            
+            
         }
         
         public List<LiveQuest> LiveQuests
@@ -258,15 +274,22 @@ namespace Game.Questing
 
             foreach (var questData in data.Questing.Quests)
             {
-                var questSo = _quests.Find(quest => quest.Id == questData.Id);
+                var questSo = _quests.Find(it => it.Id == questData.Id);
                 if (questSo != null)
                 {
                     LiveQuests.Add(new LiveQuest(questSo, questData.Requirements));
+                    continue;
                 }
-                else
+                Debug.Log($"Quest with ID: {questData.Id} does not exist, trying by name...");
+                
+                var quest = _quests.Find(it => it.Name == questData.Name);
+                if (quest != null)
                 {
-                    Debug.LogWarning($"Quest with ID: {questData.Id} does not exist");
+                    LiveQuests.Add(new LiveQuest(quest, questData.Requirements));
+                    continue;
                 }
+                Debug.LogWarning($"Quest with Name: {questData.Name} does not exist, a " +
+                                 "scriptable object is surely missing");
             }
         }
     }

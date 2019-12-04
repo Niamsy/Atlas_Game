@@ -321,6 +321,8 @@ MonoBehaviour:
   StockedResources: {fileID: 61835651470404897}
   ProducedResources: 02000000
   _debugDisplay: 0
+  finalStageEnergyGiven: 1
+  upgradeOxygenResourceMultiplicator: 100
 --- !u!135 &539353680344262507
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1211,6 +1213,12 @@ MonoBehaviour:
   LinkedStock: {fileID: 61835651470404897}
   _debugDisplay: 0
   _starvationTimeLimit: 25
+  _conditionEvent: {fileID: 11400000, guid: 7982aa52f640cf44fa452f971b97ef0e, type: 2}
+  _conditionToTrigger: {fileID: 11400000, guid: c7baf2157ffab844d81da678b4228d5e,
+    type: 2}
+  TriggerInterval: 5
+  TriggerMinimumQuantity: 5
+  TriggerOnRessource: 00000000
   ConsumedStocks: []
 --- !u!135 &5160994437039645798
 SphereCollider:

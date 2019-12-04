@@ -169,6 +169,14 @@ public class InputControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""Glossary"",
+                    ""type"": ""Button"",
+                    ""id"": ""31dbf69c-815e-4e3b-ba8e-89f88a4e5a0c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -611,6 +619,17 @@ public class InputControls : IInputActionCollection, IDisposable
                     ""action"": ""Quest"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""03fbc92d-c5bd-48a9-be35-4d610f1ecf7f"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""Glossary"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -704,6 +723,7 @@ public class InputControls : IInputActionCollection, IDisposable
         m_Player_SelectField7 = m_Player.FindAction("Select Field 7", throwIfNotFound: true);
         m_Player_SelectField8 = m_Player.FindAction("Select Field 8", throwIfNotFound: true);
         m_Player_Quest = m_Player.FindAction("Quest", throwIfNotFound: true);
+        m_Player_Glossary = m_Player.FindAction("Glossary", throwIfNotFound: true);
         // Debug
         m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
         m_Debug_SpeedUpTime = m_Debug.FindAction("SpeedUpTime", throwIfNotFound: true);
@@ -775,6 +795,7 @@ public class InputControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_SelectField7;
     private readonly InputAction m_Player_SelectField8;
     private readonly InputAction m_Player_Quest;
+    private readonly InputAction m_Player_Glossary;
     public struct PlayerActions
     {
         private InputControls m_Wrapper;
@@ -798,6 +819,7 @@ public class InputControls : IInputActionCollection, IDisposable
         public InputAction @SelectField7 => m_Wrapper.m_Player_SelectField7;
         public InputAction @SelectField8 => m_Wrapper.m_Player_SelectField8;
         public InputAction @Quest => m_Wrapper.m_Player_Quest;
+        public InputAction @Glossary => m_Wrapper.m_Player_Glossary;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -864,6 +886,9 @@ public class InputControls : IInputActionCollection, IDisposable
                 Quest.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuest;
                 Quest.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuest;
                 Quest.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuest;
+                Glossary.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGlossary;
+                Glossary.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGlossary;
+                Glossary.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGlossary;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -925,6 +950,9 @@ public class InputControls : IInputActionCollection, IDisposable
                 Quest.started += instance.OnQuest;
                 Quest.performed += instance.OnQuest;
                 Quest.canceled += instance.OnQuest;
+                Glossary.started += instance.OnGlossary;
+                Glossary.performed += instance.OnGlossary;
+                Glossary.canceled += instance.OnGlossary;
             }
         }
     }
@@ -1001,6 +1029,7 @@ public class InputControls : IInputActionCollection, IDisposable
         void OnSelectField7(InputAction.CallbackContext context);
         void OnSelectField8(InputAction.CallbackContext context);
         void OnQuest(InputAction.CallbackContext context);
+        void OnGlossary(InputAction.CallbackContext context);
     }
     public interface IDebugActions
     {

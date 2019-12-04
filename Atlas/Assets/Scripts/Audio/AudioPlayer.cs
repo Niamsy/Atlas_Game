@@ -78,7 +78,9 @@ namespace AtlasAudio {
 
             foreach (string removed in toRemove)
             {
+                #if UNITY_EDITOR
                 if (_SHOW_SOUND_DEBUG) Debug.Log("Stopped " + removed);
+                #endif
                 musics.Remove(removed);
             }
         }

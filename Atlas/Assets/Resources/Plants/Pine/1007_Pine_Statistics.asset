@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b711fd0b07d4dac4e9f32fbb9c981529, type: 3}
+  m_Name: 1005_Pine_Statistics
+  m_EditorClassIdentifier: 
+  _name: {fileID: 11400000, guid: bad97385af1edeb408d78b44cf4bd28d, type: 2}
+  _ID: 1
+  _prefab: {fileID: 944314888139332633, guid: 855a211b914a5b241bcdec06a7955006, type: 3}
+  _maxHeight: 45
+  _growthRate: {fileID: 11400000, guid: 3df0423d3e1d73e498e14a906672dd46, type: 2}
+  _growthDuration: 50
+  _reproduction: 1
+  _soilType: -1
+  _soilPh:
+    Min: 3
+    Max: 7.2
+  _soilHumidity:
+    Min: 10
+    Max: 50
+  _plantContainer: -1
+  _sunExposure:
+    Min: 50
+    Max: 100
+  _coldResistance:
+    Min: 0
+    Max: 100
+  _plantingPeriods: 000000010100000101000000
+  _floweringPeriods: 000000010100000000000000
+  _harvestPeriods: 000000000000000000010101
+  _cuttingPeriods: 010101000000000000000101
+  _stages:
+  - {fileID: 11400000, guid: 2643144ef2c5c5845afe2487f90fe647, type: 2}
+  - {fileID: 11400000, guid: e3dab4ab629be264c9a3d7c57e094dc3, type: 2}
+  - {fileID: 11400000, guid: 856cbc5519a7a1a44a4aeb488c937ee5, type: 2}
+  - {fileID: 11400000, guid: 278ea258e1bdff545a258478a2c34c0b, type: 2}
+  - {fileID: 11400000, guid: f7194e8223f7d164797a588012e7ea06, type: 2}

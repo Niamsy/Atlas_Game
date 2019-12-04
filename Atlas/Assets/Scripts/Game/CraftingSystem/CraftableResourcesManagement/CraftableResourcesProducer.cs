@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Game.Map.DayNight;
 using UnityEngine;
+using Game.Item.Food;
 
 namespace Plants.Plant
 {
@@ -64,44 +65,19 @@ namespace Plants.Plant
 
         protected virtual void GenerateGameObject(ItemAbstract item, PeriodToCreate resources)
         {
-            if (item is Seed)
-                GenerateGameObject(item as Seed, resources);
-            else if (item is ProducedResource)
-                GenerateGameObject(item as ProducedResource, resources);
-            else
+
+            if (!(item is Food) || (item is Food && _plant.IsPollinate))
             {
-                if (_plant.IsPollinate)
-                {
-                    Debug.Log("FRUIT APPEARED !!!!!!!!!!!!");
-                    return;// TODO : Craftable fruit
-                }
+                var position = transform.position + Vector3.up + transform.forward.normalized;
+                GameObject droppedObject = Instantiate(item.PrefabDroppedGO, position, Quaternion.identity);
+                var itemStack = droppedObject.GetComponent<ItemStackBehaviour>();
+                if (resources.Quantity == 1)
+                    itemStack.Slot.SetItem(item, Random.Range(resources.Quantity, resources.Quantity));
+                else
+                    itemStack.Slot.SetItem(item, Random.Range(resources.Quantity, resources.Quantity * 2));
+                var rb = droppedObject.GetComponent<Rigidbody>();
+                rb.AddForce(transform.forward.normalized * 0.1f);
             }
-        }
-
-
-        protected virtual void GenerateGameObject(Seed item, PeriodToCreate resources)
-        {
-            var position = transform.position + Vector3.up + transform.forward.normalized;
-            int quantity = Random.Range(resources.Quantity, resources.Quantity * 2);
-            ItemStackBehaviour iStack = item.PrefabDroppedGO.GetComponent<ItemStackBehaviour>();
-            iStack.Slot.SetItem(item, quantity);
-            ItemDropped iDropped = item.PrefabDroppedGO.GetComponent<ItemDropped>();
-            iDropped.anim = AInteractable.InteractAnim.pick;
-            iDropped.BaseStack = iStack;
-            GameObject droppedObject = Instantiate(item.PrefabDroppedGO, position, Quaternion.identity);
-            var rb = droppedObject.GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward.normalized * 0.1f);
-        }
-
-        protected virtual void GenerateGameObject(ProducedResource item, PeriodToCreate resources)
-        {
-            var position = transform.position + Vector3.up + transform.forward.normalized;
-            GameObject droppedObject = Instantiate(item.PrefabDroppedGO, position, Quaternion.identity);
-            var itemStack = droppedObject.GetComponent<ItemStackBehaviour>();
-            if (resources.Quantity != 1)
-                itemStack.Slot.SetItem(item, Random.Range(resources.Quantity, resources.Quantity * 2));
-            var rb = droppedObject.GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward.normalized * 0.1f);
         }
 
         protected virtual bool IsHarvestPeriod()

@@ -110,6 +110,7 @@ namespace Plants.Plant
             if (current_stage == last_stage)
             {
                 _reachedFinalStage = true;
+                RessourceStock.AddResources(Resource.Energy, _producer.finalStageEnergyGiven);
             }
         }
         
@@ -221,7 +222,7 @@ namespace Plants.Plant
         }
 
         private void OnDestroy()
-        {
+        {   
             if (LevelManager.PlantsSystem != null)
                 LevelManager.PlantsSystem.RemovePlantFromTheMap(this);
         }
@@ -270,11 +271,11 @@ namespace Plants.Plant
 
         public void insectInteract(InsectAction action, InsectConsumer consumer)
         {
+            Debug.Log("Prepare to miam");
+
             if (current_stage == last_stage && RessourceStock.FindResource(Resource.Energy) == true)
             {
-                consumer.LinkedStock.AddResources(Resource.Energy, RessourceStock.RemoveResources(Resource.Energy, _producer.finalStageEnergyGiven));
-                Debug.Log("Miam");
-                Debug.Log(consumer.LinkedStock.ListOfStocks[0].Quantity);
+                consumer.LinkedStock.AddResources(Resource.Energy, RessourceStock.RemoveResources(Resource.Energy, _producer.finalStageEnergyGiven * 3));
                 if (!consumer.Starved)
                     _isPollinate = true;
                 else

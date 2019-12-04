@@ -15,28 +15,28 @@ MonoBehaviour:
   _name: {fileID: 11400000, guid: 9683ee65ea08fb640b1dba0ae05464a1, type: 2}
   _ID: 1
   _prefab: {fileID: 3344395467607839104, guid: 3c112cdaa3ead1149b849557b9570dd2, type: 3}
-  _maxHeight: 1
+  _maxHeight: 0.2
   _growthRate: {fileID: 11400000, guid: b3109efbadc41074f8835a24597d9823, type: 2}
-  _growthDuration: 20
+  _growthDuration: 8
   _reproduction: 1
   _soilType: 4
   _soilPh:
-    Min: 0
-    Max: 0
+    Min: 7
+    Max: 8
   _soilHumidity:
     Min: 0
-    Max: 0
-  _plantContainer: 1
+    Max: 25
+  _plantContainer: -1
   _sunExposure:
     Min: 0
-    Max: 0
+    Max: 50
   _coldResistance:
-    Min: 0
+    Min: -20
     Max: 0
-  _plantingPeriods: 000000000000000000000000
-  _floweringPeriods: 000000000000000000000000
-  _harvestPeriods: 000000000000000000000000
-  _cuttingPeriods: 000000000000000000000000
+  _plantingPeriods: 010000000000000000000101
+  _floweringPeriods: 000000000101010101010000
+  _harvestPeriods: 000000000101010101010000
+  _cuttingPeriods: 000001000000000000000000
   _stages:
   - {fileID: 11400000, guid: 2a8724715c899034f900293e87fb4ac9, type: 2}
   - {fileID: 11400000, guid: 25f4c078823085341831c97ca016c9e0, type: 2}

@@ -1,4 +1,5 @@
-﻿using Localization;
+﻿using FileSystem;
+using Localization;
 using Menu.Settings.Content;
 using Menu.Settings.Content.Dropdown;
 using UnityEngine;
@@ -18,11 +19,20 @@ namespace Menu.Settings
         [SerializeField] private Button             _close = null;
         
         private SettingEntry[] _settings = null;
+        private AtlasFileSystem _fs;
         #endregion
 
         protected override void Awake()
         {
+#if UNITY_EDITOR
+            Tools.DevTools.BeforeSplashScreen_RuntimeMethod();   
+#endif
+            
             base.Awake();
+            _fs = AtlasFileSystem.Instance;
+
+            LocalizationManager.Instance.CurrentLanguage = (SystemLanguage)(_fs.GetConfigIntValue(Key.Lang));;
+
             LocalizationManager.Instance.LocaleChanged += ReloadDataForNewLanguage;
         }
 
@@ -33,7 +43,8 @@ namespace Menu.Settings
 
         private void ReloadDataForNewLanguage(object sender, LocaleChangedEventArgs e)
         {
-            InitialiseWidget();
+            foreach (var setting in _settings)
+                setting.ReloadData();
         }
 
         protected override void InitialiseWidget()
@@ -87,6 +98,11 @@ namespace Menu.Settings
                 Screen.SetResolution(_resolution.ActualResolution().width, _resolution.ActualResolution().height, _fullscreen.ActualValue());
             else if (_fullscreen.DidValueChanged())
                 Screen.fullScreenMode = _fullscreen.ActualValue();
+            
+            foreach (SettingEntry entry in _settings)
+                entry.SaveData();
+            
+            AtlasFileSystem.Instance.saveConfig();
             
             Close();
         }

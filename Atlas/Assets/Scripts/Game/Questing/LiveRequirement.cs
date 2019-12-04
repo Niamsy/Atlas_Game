@@ -27,7 +27,7 @@ namespace Game.Questing
             {
                 CurrentlyAccomplished += value;
             }
-            IncrementDelegate.Invoke();
+            IncrementDelegate?.Invoke();
         }
     }
 }

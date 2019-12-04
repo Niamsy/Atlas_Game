@@ -6,6 +6,7 @@ namespace Game.ResourcesManagement.Consumer
 {
     public abstract class IConsumer : MonoBehaviour
     {
+        [Header("Base Consumer Variables")]
         public List<Resource>           ResourcesToConsume;
         public Rate                     ConsumptionRate;
         public ResourcesStock           LinkedStock;

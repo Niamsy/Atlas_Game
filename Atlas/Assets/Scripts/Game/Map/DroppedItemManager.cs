@@ -11,8 +11,8 @@ namespace Game.Map
     public class DroppedItemManager : MapSavingBehaviour
     {
         private List<ItemDropped> _itemsDropped = new List<ItemDropped>();
-        [SerializeField] private ConditionEvent _conditionEvent;
-        [SerializeField] private Condition _raisedCondition;
+        [SerializeField] private ConditionEvent _conditionEvent = null;
+        [SerializeField] private Condition _raisedCondition = null;
 
 
         #region Load/Save
