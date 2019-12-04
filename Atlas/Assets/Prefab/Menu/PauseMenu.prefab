@@ -387,6 +387,7 @@ GameObject:
   - component: {fileID: 4765709866166630594}
   - component: {fileID: 4643109738632596342}
   - component: {fileID: 4659942120947608118}
+  - component: {fileID: 8809956588218464753}
   m_Layer: 5
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -449,6 +450,37 @@ MonoBehaviour:
   _enableCursorOnDisplay: 1
   _displayed: 0
   _settings: {fileID: 2417012139669766679}
+  SceneToLoad: 1
+  SceneToUnLoad: 2
+  levelCompleteNotification: {fileID: 0}
+  nextLevelCompleteButton: {fileID: 0}
+--- !u!114 &8809956588218464753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4699758999155179136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e40167938b5224419a0093080dba84e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: aec237870bbdc8e4e829f1d6234679b7, type: 2}
+  onRaised:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4659942120947608118}
+        m_MethodName: ReceivedNotification
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4700123066848685754
 GameObject:
   m_ObjectHideFlags: 0
@@ -929,14 +961,13 @@ GameObject:
   - component: {fileID: 2265630774876269551}
   - component: {fileID: 24309945972135330}
   - component: {fileID: 5247728291609987573}
-  - component: {fileID: 7731638049475215820}
   m_Layer: 5
-  m_Name: Main Menu
+  m_Name: NextLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2265630774876269551
 RectTransform:
   m_ObjectHideFlags: 0
@@ -952,9 +983,9 @@ RectTransform:
   m_Father: {fileID: 4764882762785468880}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 250, y: -231.19876}
   m_SizeDelta: {x: 250, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &24309945972135330
@@ -1019,18 +1050,6 @@ MonoBehaviour:
           m_StringArgument: MainMenu
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &7731638049475215820
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6911023112935830801}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a4d53c1f8ee67f47b812745fd0fdf87, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7612375476188122938
 GameObject:
   m_ObjectHideFlags: 0
@@ -1108,7 +1127,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Main Menu
+  m_Text: Next Level
 --- !u!114 &12951813289179010
 MonoBehaviour:
   m_ObjectHideFlags: 0

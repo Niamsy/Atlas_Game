@@ -1,6 +1,5 @@
-﻿using System;
-using Game;
-using Game.Map.DayNight;
+﻿using Game.Map.DayNight;
+using Game.Notification;
 using Game.SavingSystem;
 using Menu.Settings;
 using SceneManagement;
@@ -13,7 +12,13 @@ namespace Menu
 	{
 		[Header("Pause specifics")]
 		[SerializeField] private SettingsMenu _settings = null;
-        
+
+		[Header("Level Complete")]
+		[SerializeField] private int SceneToLoad = 1;
+		[SerializeField] private int SceneToUnLoad = 2;
+		[SerializeField] private Notification levelCompleteNotification = null;
+		[SerializeField] private GameObject nextLevelCompleteButton = null;
+		
 		protected override void InitialiseWidget()
 		{
 			_settings.OnShow += ExitSetting;
@@ -68,9 +73,16 @@ namespace Menu
 		}
 
 
-		public void LoadMainMenu(int sceneToUnload)
+		public void LoadNextLevel()
 		{
-			SceneLoader.Instance.LoadScene(1, sceneToUnload);
+			SceneLoader.Instance.LoadScene(SceneToLoad, SceneToUnLoad);
 		}
+
+		public void ReceivedNotification(Game.Notification.Notification notification)
+		{
+			if (notification != levelCompleteNotification || nextLevelCompleteButton == null) return;
+			
+			nextLevelCompleteButton.SetActive(true);
+		} 
 	}
 }
