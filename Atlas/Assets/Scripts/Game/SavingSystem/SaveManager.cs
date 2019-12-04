@@ -32,16 +32,12 @@ namespace Game.SavingSystem
         public delegate void ProfilSaveDelegate(AccountData accountData);
 
         public delegate void MapSaveDelegate(MapData mapData);
-        public delegate void ProfilAndMapSaveDelegate(AccountData data, MapData mapData);
     
         public static event ProfilSaveDelegate BeforeSavingAccountData;
         public static event ProfilSaveDelegate UponLoadingAccountData;
 
         public static event MapSaveDelegate BeforeSavingMapData;
         public static event MapSaveDelegate UponLoadingMapData;
-        
-        public static event ProfilAndMapSaveDelegate BeforeLoadingAccountAndMapData;
-        public static event ProfilAndMapSaveDelegate UponLoadingAccountAndMapData;
 
 
         public InputControls InputControls { get; set; }

@@ -642,7 +642,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0adcdf26c19928c4aac82b8a78f167e0, type: 2}
   - {fileID: 11400000, guid: 2523f0c443eb31a43ab1d392b9882097, type: 2}
   - {fileID: 11400000, guid: e19195f2e02e42f44a573fb665bc3ad5, type: 2}
-  _levelSelector: {fileID: 4725900484388292129}
   _prefab: {fileID: 3306651449920619286}
 --- !u!95 &8877650436347648618
 Animator:
@@ -692,6 +691,7 @@ MonoBehaviour:
   PrefabLevel: {fileID: 1390153002294809652, guid: e21307e6813376747b97f6f695c1f122,
     type: 3}
   CharacterInfo: {fileID: 4610594484008260266}
+  CompletedChallenge: {fileID: 21300000, guid: 532f4d40e8d4f3341b8c6fb3851b4c41, type: 3}
 --- !u!114 &6263111637439074020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -730,7 +730,7 @@ MonoBehaviour:
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 4453671737839037962}
   m_HorizontalScrollbarVisibility: 0
-  m_VerticalScrollbarVisibility: 0
+  m_VerticalScrollbarVisibility: 1
   m_HorizontalScrollbarSpacing: 0
   m_VerticalScrollbarSpacing: 0
   m_OnValueChanged:
@@ -1164,9 +1164,9 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5863917525935785963}
   m_HandleRect: {fileID: 8360902824979990451}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
-  m_NumberOfSteps: 1
+  m_NumberOfSteps: 2
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

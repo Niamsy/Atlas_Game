@@ -49,10 +49,7 @@ namespace Menu.LevelSelector
         {
             return ((ChallengeOneComplete) ? 1 : 0) + ((ChallengeTwoComplete) ? 1 : 0) + ((ChallengeThreeComplete) ? 1 : 0);
         }
-
-        [Header("Level")]
-        [SerializeField] private int            _challengeOnThisLevelToUnlock = 0;
-        public int                              ChallengeOnThisLevelToUnlockComplete => (_challengeOnThisLevelToUnlock);
+        
         public bool                             IsComplete => NumberChallengeComplete() == 3;
     }
 }

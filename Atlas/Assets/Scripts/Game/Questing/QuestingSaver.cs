@@ -272,7 +272,7 @@ namespace Game.Questing
                     LiveQuests.Add(new LiveQuest(questSo, questData.Requirements));
                     continue;
                 }
-                Debug.LogWarning($"Quest with ID: {questData.Id} does not exist, trying by name...");
+                Debug.Log($"Quest with ID: {questData.Id} does not exist, trying by name...");
                 
                 var quest = _quests.Find(it => it.Name == questData.Name);
                 if (quest != null)
@@ -281,7 +281,7 @@ namespace Game.Questing
                     continue;
                 }
                 Debug.LogWarning($"Quest with Name: {questData.Name} does not exist, a " +
-                                 $"scriptable object is surely missing");
+                                 "scriptable object is surely missing");
             }
         }
     }
