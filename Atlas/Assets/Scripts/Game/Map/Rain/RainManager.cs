@@ -20,6 +20,7 @@ public class RainManager : MonoBehaviour
         intensity = rainScript.RainIntensity;
         rainScript.RainIntensity = 0;
         timeleft = Duration;
+        Debug.Log(intensity);
     }
 
     // Update is called once per frame
@@ -28,6 +29,7 @@ public class RainManager : MonoBehaviour
         if (timeleft <= 0)
         {
             float rand = Random.value;
+            Debug.Log("rand " + rand);
             if (rand <= Frequency)
             {
                 rainScript.RainIntensity = intensity;
@@ -63,10 +65,10 @@ public class RainManager : MonoBehaviour
             if (plant == null)
                 continue;
 
-            var consumer = plant.GetComponent<PlantConsumer>();
+            var consumer = plant.Consumer;
             if (consumer != null)
             {
-                Debug.Log("Consumer not null, give to " + plant.name);
+                Debug.Log("Consumer not null, give to " + plant.name + " " + rainScript.RainIntensity);
                 consumer.ReceiveResource(Game.ResourcesManagement.Resource.Water, (int)(rainScript.RainIntensity * 10));
             }
         }
