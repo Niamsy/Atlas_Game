@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Game.Map.DayNight;
 using UnityEngine.InputSystem;
 using Game.SavingSystem;
+using Menu.Inventory.ItemDescription;
 using Networking;
 using Plants;
 using Plants.Plant;
@@ -19,6 +20,8 @@ namespace Menu.Glossary
         private PlantStatistics[] allPlants;
         public GridLayoutGroup grid;
         public GameObject buttonPrefab;
+
+        public PlantStatsDescriptionHUD Description;
         
         // Start is called before the first frame update
         void Start()
@@ -33,7 +36,7 @@ namespace Menu.Glossary
                 var button = Instantiate(buttonPrefab, grid.transform);
                 var gBut = button.GetComponent<GlossaryButton>();
                 if (gBut != null)
-                    gBut.SetPlantStat(plant);
+                    gBut.SetPlantStat(plant, Description);
             }
         }
 
