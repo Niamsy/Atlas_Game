@@ -493,9 +493,9 @@ namespace Networking
                 OnGetScannedPlantsRequestFinished(success, errorMsg, scannedPlants);
         }
         
-        public ScannedPlant[] Glossary()
+        public GlossaryData[] Glossary()
         {
-	        ScannedPlant[] glossary = null;
+	        GlossaryData[] glossary = null;
 	        
 	        if (!CanReceiveANewRequest || !IsConnected())
 		        return (glossary);
@@ -508,7 +508,7 @@ namespace Networking
 
         private IEnumerator GlossaryCoroutine()
         {
-	        List<ScannedPlant> glossary = new List<ScannedPlant>();
+	        List<ScannedPlant> scannedPlants = new List<ScannedPlant>();
 
 	        UnityWebRequest getRequest = UnityWebRequest.Get(ApiAdress + GlossaryPath);
 	        getRequest.method = UnityWebRequest.kHttpVerbGET;
@@ -522,9 +522,8 @@ namespace Networking
 	        string errorMsg = "";
 	        if (success)
 	        {
-		        GlossaryData bodyReturn = JsonUtility.FromJson<GlossaryData>(getRequest.downloadHandler.text);
-		        Debug.Log(bodyReturn);
-		       foreach (var plant in bodyReturn.array)
+		        var array = JsonHelper.GetJsonArray<PlantData>(getRequest.downloadHandler.text);
+		       foreach (var plant in array)
 		       {
 					Debug.Log("plant glossary : " +  plant);   
 		       }
@@ -548,14 +547,19 @@ namespace Networking
 		        }
 	        }
 
+	        
 	        CleanForNextRequest();
-	        if (OnConnectionFinished != null)
-		        OnConnectionFinished(success, errorMsg);
+	        if (OnGlossaryRequestFinish != null)
+		        OnGlossaryRequestFinish(success, errorMsg, scannedPlants);
         }
 
         public event GetScannedPlantsRequestFinishedDelegate OnGetScannedPlantsRequestFinished;
+        public event GetScannedPlantsRequestFinishedDelegate OnGlossaryRequestFinish;
+
         #endregion
     }
+	
+	
 	
 	
 }

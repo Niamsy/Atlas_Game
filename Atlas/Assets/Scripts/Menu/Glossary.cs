@@ -14,7 +14,6 @@ namespace Menu.Glossary
         void Start()
         {
             Debug.Log("---- Glossary ----");
-            var listplant = RequestManager.Instance.Glossary();
         }
 
         // Update is called once per frame    
@@ -29,6 +28,7 @@ namespace Menu.Glossary
         }
         private void OnEnable()
         { 
+            var listplant = RequestManager.Instance.Glossary();
             SaveManager.Instance.InputControls.Player.Glossary.performed += OpenCloseGlossary;
             SaveManager.Instance.InputControls.Player.Glossary.Enable();
         }
