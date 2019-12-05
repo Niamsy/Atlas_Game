@@ -11,6 +11,7 @@ using Game.Map.DayNight;
 using Game.Player;
 using Game.SavingSystem;
 using Menu.Inventory.ItemDescription;
+using Networking;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -23,10 +24,11 @@ namespace Menu.Glossary
         // Start is called before the first frame update
         void Start()
         {
-            
+            Debug.Log("---- Glossary ----");
+            var listplant = RequestManager.Instance.Glossary();
         }
 
-        // Update is called once per frame
+        // Update is called once per frame    
         void Update()
         {
 
@@ -37,7 +39,7 @@ namespace Menu.Glossary
          
         }
         private void OnEnable()
-        {
+        { 
             SaveManager.Instance.InputControls.Player.Glossary.performed += OpenCloseGlossary;
             SaveManager.Instance.InputControls.Player.Glossary.Enable();
         }

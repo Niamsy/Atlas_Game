@@ -95,6 +95,20 @@ namespace Networking
             public int id = 0;
             public string scanned_at = "";
         }
+        
+        [Serializable]
+        public sealed class PlantData
+        {
+	        public string name = "";
+	        public string scientific_name = "";
+
+        }
+        
+        [Serializable]
+        public sealed class GlossaryData
+        {
+	        public PlantData[] array = null;
+        }
 
         #endregion
 
@@ -479,7 +493,7 @@ namespace Networking
                 OnGetScannedPlantsRequestFinished(success, errorMsg, scannedPlants);
         }
         
-        public ScannedPlant[] Glossary(string username, string password)
+        public ScannedPlant[] Glossary()
         {
 	        ScannedPlant[] glossary = null;
 	        
@@ -504,12 +518,16 @@ namespace Networking
 	        
 	        bool success = (getRequest.responseCode == 200);
 
-	        BodyReturnApiToken bodyReturn = JsonUtility.FromJson<BodyReturnApiToken>(getRequest.downloadHandler.text);
 
 	        string errorMsg = "";
 	        if (success)
 	        {
-		       glossary.AddRange(JsonHelper.GetJsonArray<ScannedPlant>(getRequest.downloadHandler.text));
+		        GlossaryData bodyReturn = JsonUtility.FromJson<GlossaryData>(getRequest.downloadHandler.text);
+		        Debug.Log(bodyReturn);
+		       foreach (var plant in bodyReturn.array)
+		       {
+					Debug.Log("plant glossary : " +  plant);   
+		       }
 	        }
 	        else
 	        {
