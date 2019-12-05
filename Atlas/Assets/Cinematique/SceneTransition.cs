@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using SceneManagement;
 
 public class SceneTransition : MonoBehaviour
 {
     float TimerTransition = 18.0f;
     float ElapsedTime = 0.0f;
+    bool done = false;
 
 
     // Update is called once per frame
@@ -15,7 +16,11 @@ public class SceneTransition : MonoBehaviour
         ElapsedTime += Time.deltaTime;
         if (ElapsedTime > TimerTransition)
         {
-            SceneManager.LoadScene(1);
+            if (!done)
+            {
+                done = true;
+                SceneLoader.Instance.LoadScene(1, 4);
+            }
         }
     }
 }
