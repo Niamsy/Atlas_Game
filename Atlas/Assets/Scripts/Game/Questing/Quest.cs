@@ -22,11 +22,16 @@ namespace Game.Questing
         [SerializeField] private int _xp = 0;
         [SerializeField] private Reward[] _rewards = new Reward[0];
         [SerializeField] public GameObject toSpawn;
+        [SerializeField] public Transform spawnPoint;
 
+        [Header("Objective")] 
+        [SerializeField] private bool isObjective = false;
+        
         public LocalizedText Name => _name;
         public Requirement[] Requirements => requirementses;
         public LocalizedText Description => _description;
         public Reward[] Rewards => _rewards;
         public int Xp => _xp;
+        public bool IsObjective => isObjective;
     }
 }

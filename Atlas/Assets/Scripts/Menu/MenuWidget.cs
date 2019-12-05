@@ -45,7 +45,8 @@ namespace Menu
             }
             if (OnShow != null && !force)
                 OnShow(display);
-            MenuAnimator.SetBool(_hashShowed, display);
+            if (MenuAnimator != null)
+                MenuAnimator.SetBool(_hashShowed, display);
             _displayed = display;
         }
         

@@ -1,163 +1,134 @@
-﻿using Game.Player.Stats;
-using System.Collections;
+﻿using System.Collections;
+using Game.Player.Stats;
 using System.Collections.Generic;
 using SceneManagement;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Menu.LevelSelector
 {
     public class LevelSelector : MenuWidget
     {
-        private LevelInfo       _currentLevel;
+        private LiveLevelInfo  _currentLevel;
 
         [Header("Prefab Level")]
         [SerializeField]
-        public GameObject PrefabLevel;
-
+        public GameObject PrefabLevel = null;
+        
         [SerializeField]
-        public List<LevelInfo>  Levels;
+        public CharacterDataInfo CharacterInfo = null;
 
-        [SerializeField]
-        public CharacterDataInfo CharacterInfo;
-
-        [SerializeField]
-        public LoadLevel load;
+        [SerializeField] private Sprite CompletedChallenge = null;
 
         protected override void InitialiseWidget()
         {
-            if (Levels.Count > 0)
+        }
+
+        public void UpdateWidget(List<LiveLevelInfo> levels)
+        {
+            if (levels.Count > 0)
             {
-                _currentLevel = Levels[0];
+                _currentLevel = levels[0];
             }
-            bool disableLaunch = false;
-            for (int i = 0; i < Levels.Count; ++i)
+
+            for (int i = 0; i < levels.Count; ++i)
             {
-                disableLaunch = false;
+                var disableLaunch = false;
                 GameObject level = Instantiate(PrefabLevel, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
                 level.transform.SetParent(GameObject.Find("ListLevels").transform, false);
                 level.name = "Level " + i;
                 GameObject child = level.transform.Find("Level").gameObject;
-                foreach (Transform ui in child.GetComponentsInChildren<Transform>())
+                var transforms = child.GetComponentsInChildren<Transform>();
+                foreach (Transform ui in transforms)
                 {
-                    if (ui)
+                    if (ui.name == "LevelTitle")
                     {
- 
-                        if (ui.name == "LevelTitle")
+                        TextMeshProUGUI levelTitle = ui.GetComponent<TextMeshProUGUI>();
+                        levelTitle.text = levels[i].LevelInfo.LevelTitle;
+                    }
+                    else if (ui.name == "LevelDescription")
+                    {
+                        TextMeshProUGUI levelDesc = ui.GetComponent<TextMeshProUGUI>();
+                        levelDesc.text = levels[i].LevelInfo.LevelDescription;
+                    }
+                    else if (ui.name == "PlayTime")
+                    {
+                        TextMeshProUGUI timePlayed = ui.GetComponent<TextMeshProUGUI>();
+                        timePlayed.text = CharacterInfo.GetTimePlayedToString();
+                    }
+                    else if (ui.name == "LevelImage")
+                    {
+                        Image img = ui.GetComponent<Image>();
+                        img.sprite = levels[i].LevelInfo.LevelImage;
+                    }
+                    else if (ui.name == "Challenge1" || ui.name == "Challenge2" || ui.name == "Challenge3")
+                    {
+                        SetImageSprite(ui, levels[i]);
+                    }
+                    else if (ui.name == "PanelLocked")
+                    {
+                        if (CharacterInfo.PlayerChallengeOwned >= levels[i].LevelInfo.ChallengeOnThisLevelToUnlockComplete)
                         {
-                            TextMeshProUGUI levelTitle = ui.GetComponent<TextMeshProUGUI>();
-                            levelTitle.text = Levels[i].LevelTitle;
-                        }
-                        else if (ui.name == "LevelDescription")
-                        {
-                            TextMeshProUGUI levelDesc = ui.GetComponent<TextMeshProUGUI>();
-                            levelDesc.text = Levels[i].LevelDescription;
-                        }
-                        else if (ui.name == "PlayTime")
-                        {
-                            TextMeshProUGUI timePlayed = ui.GetComponent<TextMeshProUGUI>();
-                            timePlayed.text = CharacterInfo.GetTimePlayedToString();
-                        }
-                        else if (ui.name == "LevelImage")
-                        {
-                            Image img = ui.GetComponent<Image>();
-                            img.sprite = Levels[i].LevelImage;
-                        }
-                        else if (ui.name == "Challenge1")
-                        {
-                            if (!Levels[i].ChallengeOneComplete)
+                            CanvasGroup panel = ui.GetComponent<CanvasGroup>();
+                            if (panel)
                             {
-                                Image img = ui.GetComponent<Image>();
-                                var tempColor = img.color;
-                                tempColor.a = 0.5f;
-                                img.color = tempColor;
+                                panel.alpha = 0;
+                                panel.interactable = false;
+                                disableLaunch = true;
                             }
                         }
-                        else if (ui.name == "Challenge2")
+                        else
                         {
-                            if (!Levels[i].ChallengeTwoComplete)
+                            foreach (Transform uipanel in ui.GetComponentsInChildren<Transform>())
                             {
-                                Image img = ui.GetComponent<Image>();
-                                var tempColor = img.color;
-                                tempColor.a = 0.5f;
-                                img.color = tempColor;
-                            }
-                        }
-                        else if (ui.name == "Challenge3")
-                        {
-                            if (!Levels[i].ChallengeThreeComplete)
-                            {
-                                Image img = ui.GetComponent<Image>();
-                                var tempColor = img.color;
-                                tempColor.a = 0.5f;
-                                img.color = tempColor;
-                            }
-                        }
-                        else if (ui.name == "PanelLocked")
-                        {
-                            if (CharacterInfo.PlayerChallengeOwned >= Levels[i].ChallengeOnThisLevelToUnlockComplete)
-                            {
-                                CanvasGroup panel = ui.GetComponent<CanvasGroup>();
-                                if (panel)
+                                if (ui.name == "NumberChallengeComplete")
                                 {
-                                    Debug.Log("hola " + i);
-                                    panel.alpha = 0;
-                                    panel.interactable = false;
-                                    disableLaunch = true;
+                                    TextMeshProUGUI challengeComplete = ui.GetComponent<TextMeshProUGUI>();
+                                    challengeComplete.text = levels[i].NumberChallengeComplete().ToString();
                                 }
-                            }
-                            else
-                            {
-                                foreach (Transform uipanel in ui.GetComponentsInChildren<Transform>())
+                                if (ui.name == "NumberChallengeAsking")
                                 {
-                                    if (ui.name == "NumberChallengeComplete")
-                                    {
-                                        TextMeshProUGUI challengeComplete = ui.GetComponent<TextMeshProUGUI>();
-                                        challengeComplete.text = Levels[i].NumberChallengeComplete().ToString();
-                                    }
-                                    if (ui.name == "NumberChallengeAsking")
-                                    {
-                                        TextMeshProUGUI challengeAsking = ui.GetComponent<TextMeshProUGUI>();
-                                        challengeAsking.text = Levels[i].ChallengeOnThisLevelToUnlockComplete.ToString();
-                                    }
+                                    TextMeshProUGUI challengeAsking = ui.GetComponent<TextMeshProUGUI>();
+                                    challengeAsking.text = levels[i].LevelInfo.ChallengeOnThisLevelToUnlockComplete.ToString();
                                 }
                             }
                         }
-                        else if (ui.name == "LaunchLevelButton")
+                    }
+                    else if (ui.name == "LaunchLevelButton")
+                    {
+                        Button btn = ui.GetComponent<Button>();
+                        if (!disableLaunch)
                         {
-                            Button btn = ui.GetComponent<Button>();
-                            if (!disableLaunch)
-                            {
-                                Debug.Log("holo " + i);
-                                btn.enabled = false;
-                                break;
-                            }
-                            if (btn.enabled == true)
-                            {
-                                Debug.Log("I can launch scene : " + i);
-                            }
-                            string sceneName = Levels[i].LevelSceneName;
-                            Debug.Log("Btn name: " + btn.name);
-                            Debug.Log("Scene name launched: " + sceneName);
-                            btn.onClick.AddListener(() => SceneLoader.Instance.LoadScene(2, 1));
+                            btn.enabled = false;
+                            break;
                         }
+                        btn.onClick.AddListener(() => SceneLoader.Instance.LoadScene(2, 1));
                     }
                 }
             }
         }
 
-        // Start is called before the first frame update
-        void Start()
+        private void SetImageSprite(Component ui, LiveLevelInfo level)
         {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
+            var img = ui.GetComponent<Image>();
+            if (!level.ChallengeTwoComplete)
+            {
+                var tempColor = img.color;
+                tempColor.a = 0.5f;
+                img.color = tempColor;
+            }
+            else
+            {
+                if (CompletedChallenge != null)
+                {
+                    img.sprite = CompletedChallenge;
+                }
+                else
+                {
+                    img.color = new Color(166f, 212f, 153, 200f);
+                }
+            }
         }
     }
 }

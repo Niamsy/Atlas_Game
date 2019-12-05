@@ -63,7 +63,7 @@ namespace Game.Insects
 
         private void Start()
         {
-            InvokeRepeating("CheckActing", 10.0f, 10.0f);
+            InvokeRepeating("CheckActing", 5.0f, 5.0f);
             InvokeRepeating("CheckEvolving", 1.0f, 1.0f);
             if (insect != null)
             {
@@ -88,6 +88,7 @@ namespace Game.Insects
 
         private void Growth()
         {
+            Debug.Log("GROWTH");
             CurrentNumber *= 2;
             if (CurrentNumber > insect.maximumNumber)
                 CurrentNumber = insect.maximumNumber;
@@ -98,6 +99,7 @@ namespace Game.Insects
 
         private void DeGrowth()
         {
+            Debug.Log("DEGROWTH ");
             CurrentNumber /= 2;
             if (CurrentNumber < 2)
                 CurrentNumber = 2;
@@ -111,13 +113,15 @@ namespace Game.Insects
             {
                 foreach (InsectAction action in insect.actions)
                 {
-                    Debug.Log("Check " + col);
                     var interactable = col.GetComponent<IInteractableInsect>();
                     if (interactable!= null)
                     {
                         Debug.Log(interactable.ToString());
                         if (!consumer.Full && CurrentNumber < insect.maximumNumber)
-                            interactable.insectInteract(action, consumer);
+                        {
+                            for (int i = 0; i < CurrentNumber / 2; i++)
+                                interactable.insectInteract(action, consumer);
+                        }
                     }
                 }
             }

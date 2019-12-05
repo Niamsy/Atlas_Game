@@ -30,6 +30,7 @@ namespace Game.SavingSystem
                                             (null) : (AccountData.Profils[_selectedProfil]);
         
         public delegate void ProfilSaveDelegate(AccountData accountData);
+
         public delegate void MapSaveDelegate(MapData mapData);
     
         public static event ProfilSaveDelegate BeforeSavingAccountData;
@@ -37,6 +38,7 @@ namespace Game.SavingSystem
 
         public static event MapSaveDelegate BeforeSavingMapData;
         public static event MapSaveDelegate UponLoadingMapData;
+
 
         public InputControls InputControls { get; set; }
 
@@ -134,10 +136,9 @@ namespace Game.SavingSystem
         {
             if (AccountData == null)
                 return (false);
-            
-            if (BeforeSavingAccountData != null)
-                BeforeSavingAccountData(AccountData);
-            
+
+            BeforeSavingAccountData?.Invoke(AccountData);
+
             return (SaveInFile(AccountFile_Path(AccountData.ID), AccountData));
         }
         
@@ -161,15 +162,18 @@ namespace Game.SavingSystem
         #region Map Data
         public bool SaveMapData(int sceneIndex)
         {
-            if (BeforeSavingMapData != null)
-                BeforeSavingMapData(_mapData);
+            BeforeSavingMapData?.Invoke(_mapData);
+            if (_accountLoaded && AccountData != null)
+            {
+                BeforeSavingAccountData?.Invoke(_accountData);
+                SaveInFile(AccountFile_Path(AccountData.ID), AccountData);
+            }
 #if ATLAS_DEBUG
             Debug.Log("Saving map data of the scene " + sceneIndex);
 #endif  
             CheckSaveDirectory(SaveDirectory_Path());
             CheckSaveDirectory(AccountDirectory_Path(AccountData.ID));
             CheckSaveDirectory(ProfilDirectory_Path(SelectedProfil.ID, AccountData.ID));
-
             return (SaveInFile(MapFile_Path(sceneIndex, SelectedProfil.ID, AccountData.ID), _mapData));
         }
 
@@ -179,8 +183,12 @@ namespace Game.SavingSystem
             Debug.Log("Loading map data of the scene " + sceneIndex);
 #endif
             _mapLoaded = LoadFromFile(MapFile_Path(sceneIndex, SelectedProfil.ID, AccountData.ID), ref _mapData);
-            if (_mapLoaded && UponLoadingMapData != null)
-                UponLoadingMapData(_mapData);
+            if (_mapLoaded)
+                UponLoadingMapData?.Invoke(_mapData);
+            
+            if (_accountLoaded)
+                UponLoadingAccountData?.Invoke(_accountData);
+            
             if (_mapData == null)
             {
                 _mapData = new MapData();

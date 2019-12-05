@@ -1,20 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Game.Map.DayNight;
-using UnityEngine;
+﻿using Game.Map.DayNight;
 using UnityEngine.InputSystem;
 using Game.SavingSystem;
-using System.Collections.Generic;
-using AtlasAudio;
-using AtlasEvents;
-using Game.Map.DayNight;
-using Game.Player;
-using Game.SavingSystem;
-using Menu.Inventory.ItemDescription;
 using Networking;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
+
 
 
 namespace Menu.Glossary

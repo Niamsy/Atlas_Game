@@ -48,16 +48,6 @@ namespace Game.SavingSystem.Datas
         }
 
         [Serializable]
-        public struct XPSaveData
-        {
-            public float PlayerXP;
-            public float RoofLevel;
-            public float FloorLevel;
-            public float PlayerLevel;
-            public bool NotFirstTime;
-        }
-
-        [Serializable]
         public struct ProductSaveData
         {
             public int Id;
@@ -101,12 +91,14 @@ namespace Game.SavingSystem.Datas
             public Guid ConditionId;
             public int ItemAbstractId;
             public int CurrentlyAccomplished;
-            
+            public String ConditionName;
+
             public RequirementData(Requirement requirement, int currentlyAccomplished)
             {
                 ConditionId = requirement.Condition.Id;
                 ItemAbstractId = requirement.Argument.Id;
                 CurrentlyAccomplished = currentlyAccomplished;
+                ConditionName = requirement.Condition.name;
             }
         }
         
@@ -114,11 +106,13 @@ namespace Game.SavingSystem.Datas
         public struct QuestData
         {
             public Guid Id;
+            public String Name;
             public RequirementData[] Requirements;
             
             public QuestData(LiveQuest data)
             {
                 Id = data.Quest.Id;
+                Name = data.Quest.Name;
                 Requirements = data.Requirements.Select(requirement =>
                     new RequirementData(requirement.Requirement, requirement.CurrentlyAccomplished)).ToArray();
             }
@@ -128,6 +122,7 @@ namespace Game.SavingSystem.Datas
         public struct QuestingData
         {
             public QuestData[] Quests;
+            public QuestData[] QuestsDone;
         }
 
         public CraftingSaveData     Crafting;
@@ -138,7 +133,6 @@ namespace Game.SavingSystem.Datas
         public int                  SelectedItems;
         public TransformSaveData	TransformData;
         public DateData				CalendarData;
-        public XPSaveData           XPData;
         public List<Stock>          PlayerResource;
         public QuestingData         Questing;
     }

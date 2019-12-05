@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fce37d24c2e84390962209b7402f9d3c, type: 3}
+  m_Name: FindOxygen
+  m_EditorClassIdentifier: 
+  _name: {fileID: 11400000, guid: c181bfff714582e4095943f3e7cd40a6, type: 2}
+  _description: {fileID: 11400000, guid: 32b72af1e8c96954383ce8328146f5e1, type: 2}
+  requirementses:
+  - condition: {fileID: 11400000, guid: 397058a62a9babd42ad3bd91713aa40c, type: 2}
+    argument: {fileID: 11400000, guid: 55de5acd89341f247a9b27e89ff160b6, type: 2}
+    description: {fileID: 11400000, guid: 28943a55cee90124d9d95100257a8e47, type: 2}
+    count: 1
+  _xp: 100
+  _rewards: []
+  toSpawn: {fileID: 8245043310099490252, guid: 6988da4ee0b17544ca40ae7c7a0ab8f2, type: 3}
+  spawnPoint: {fileID: 7351027367821611002, guid: 6988da4ee0b17544ca40ae7c7a0ab8f2,
+    type: 3}

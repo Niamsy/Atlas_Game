@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 1212966524133060850}
   - component: {fileID: 3600137688009967338}
   - component: {fileID: 8343087925193160577}
-  - component: {fileID: 7938482938017425144}
   m_Layer: 5
   m_Name: QuestingMenu
   m_TagString: Untagged
@@ -104,6 +103,7 @@ MonoBehaviour:
   warningText: {fileID: 11400000, guid: 0b5fff416e3bc29428f544b52e5be9ad, type: 2}
   playerController: {fileID: 0}
   _event: {fileID: 11400000, guid: 65924e170003f0f42b67fa4e94e11a60, type: 2}
+  _objectiveEvent: {fileID: 11400000, guid: 212775a5891712c4aae195aea0744c35, type: 2}
   requirementValidatedAudio: {fileID: 11400000, guid: a88251038585ec2409e589751fe78d2b,
     type: 2}
   validatedAudioEvent: {fileID: 11400000, guid: 574abd74039cd5f40950fb2cf09f4dcb,
@@ -162,20 +162,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &7938482938017425144
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7658956520345960592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5298f40edf2589e468757c45caf93113, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  conditionEventRef: {fileID: 0}
-  conditionsRef: []
 --- !u!1001 &1980595596055127492
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -441,7 +427,7 @@ PrefabInstance:
     - target: {fileID: 7915287940304360393, guid: 1f9e7f03b91f2cd4f8d1db721f0d18d3,
         type: 3}
       propertyPath: m_Size
-      value: 1
+      value: 0.9999999
       objectReference: {fileID: 0}
     - target: {fileID: 7915287940304360393, guid: 1f9e7f03b91f2cd4f8d1db721f0d18d3,
         type: 3}
@@ -1090,7 +1076,7 @@ PrefabInstance:
     - target: {fileID: 7446985283570881068, guid: ad1ca2d0d1f37874fa43564ee1d9cc66,
         type: 3}
       propertyPath: m_Size
-      value: 1
+      value: 0.9999999
       objectReference: {fileID: 0}
     - target: {fileID: 7884352371605854198, guid: ad1ca2d0d1f37874fa43564ee1d9cc66,
         type: 3}

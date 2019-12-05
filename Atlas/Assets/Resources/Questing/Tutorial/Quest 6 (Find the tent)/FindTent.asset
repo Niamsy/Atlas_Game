@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fce37d24c2e84390962209b7402f9d3c, type: 3}
+  m_Name: FindTent
+  m_EditorClassIdentifier: 
+  _name: {fileID: 11400000, guid: c9961d123f4aa884c8b97d404d529129, type: 2}
+  _description: {fileID: 11400000, guid: 03afe5f83cb030b49a33ae451a062949, type: 2}
+  requirementses:
+  - condition: {fileID: 11400000, guid: 397058a62a9babd42ad3bd91713aa40c, type: 2}
+    argument: {fileID: 11400000, guid: 55de5acd89341f247a9b27e89ff160b6, type: 2}
+    description: {fileID: 11400000, guid: 53e752d91d5ca3441a9d99ffb5a3c7e5, type: 2}
+    count: 1
+  _xp: 100
+  _rewards: []
+  toSpawn: {fileID: 8245043310099490252, guid: 0415a6d8962e45444a1533ff309be3bf, type: 3}
+  spawnPoint: {fileID: 7351027367821611002, guid: 0415a6d8962e45444a1533ff309be3bf,
+    type: 3}

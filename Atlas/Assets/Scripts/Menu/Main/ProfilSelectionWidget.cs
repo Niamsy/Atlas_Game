@@ -1,5 +1,6 @@
 ﻿using Game.SavingSystem;
 using Game.SavingSystem.Datas;
+using Menu.LevelSelector;
 using SceneManagement;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ namespace Menu.Main
     {
         public ProfilDisplay[] Displays = new ProfilDisplay[5];
         private SaveManager _saveManager = null;
-        public GameObject LoadLevel = null;
+        public LevelSaver levelSaver = null;
 
         protected override void InitialiseWidget()
         {
@@ -37,8 +38,7 @@ namespace Menu.Main
             if (data.Used == false) //Create
                 SaveManager.InstantiateProfilToUse(_saveManager.AccountData, data, "Game Profil " + data.ID);
             _saveManager.SelectProfilToUseForSave(data);
-            Debug.Log("Click on profile");
-            LoadLevel.SetActive(true);
+            levelSaver.UpdateSelectedLevelWidget();
             this.gameObject.SetActive(false);
             //SceneLoader.Instance.LoadScene(NextSceneIndex, MainMenuSceneIndex);
         }

@@ -14,6 +14,7 @@ namespace Game.Map
         [SerializeField] private ConditionEvent _conditionEvent = null;
         [SerializeField] private Condition _raisedCondition = null;
 
+
         #region Load/Save
         protected override void LoadingMapData(MapData data)
         {
@@ -52,7 +53,8 @@ namespace Game.Map
                 Debug.LogWarning("Unset Item Base in dropped item " + itemDropped.name);
             } else
             {
-                _conditionEvent.Raise(_raisedCondition, itemDropped.item, 1);
+                int qte = itemDropped.BaseStack.Slot.Quantity;                
+                _conditionEvent.Raise(_raisedCondition, itemDropped.item, (qte == 0) ? 1 : qte);
             }
             _itemsDropped.Remove(itemDropped);
         }

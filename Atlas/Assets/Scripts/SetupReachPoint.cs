@@ -5,14 +5,28 @@ using UnityEngine;
 public class SetupReachPoint : MonoBehaviour
 {
     [SerializeField] List<GameObject> _zones = new List<GameObject>();
-
-    void Start()
+    private bool canSetup = true;
+    
+    private void Start()
     {
-        foreach(GameObject go in _zones)
-        {
-            go.SetActive(true);
-        }    
+        Invoke(nameof(init), 3.0f);
     }
 
+    public void init()
+    {
+        if (!canSetup) return;
+        foreach (var go in _zones)
+        {
+            go.SetActive(true);
+            if (transform.parent != null)
+            {
+                go.transform.parent = transform.parent.transform;
+            }
+        }
+    }
 
+    public void CancelSetup()
+    {
+        canSetup = false;
+    }
 }

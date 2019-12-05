@@ -65,13 +65,14 @@ namespace Plants.Plant
 
         protected virtual void GenerateGameObject(ItemAbstract item, PeriodToCreate resources)
         {
-
             if (!(item is Food) || (item is Food && _plant.IsPollinate))
             {
                 var position = transform.position + Vector3.up + transform.forward.normalized;
                 GameObject droppedObject = Instantiate(item.PrefabDroppedGO, position, Quaternion.identity);
                 var itemStack = droppedObject.GetComponent<ItemStackBehaviour>();
-                if (resources.Quantity != 1)
+                if (resources.Quantity == 1)
+                    itemStack.Slot.SetItem(item, Random.Range(resources.Quantity, resources.Quantity));
+                else
                     itemStack.Slot.SetItem(item, Random.Range(resources.Quantity, resources.Quantity * 2));
                 var rb = droppedObject.GetComponent<Rigidbody>();
                 rb.AddForce(transform.forward.normalized * 0.1f);
