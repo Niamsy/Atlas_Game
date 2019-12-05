@@ -42,9 +42,10 @@ namespace Game.Questing
         [Header("Audio")] 
         [SerializeField] private Audio requirementValidatedAudio = null;
         [SerializeField] private AudioEvent validatedAudioEvent = null;
-        
+
         private List<Quest> _quests;
         private readonly List<LiveQuest> _liveQuests = new List<LiveQuest>();
+        private List<LiveQuest> _questsDone = new List<LiveQuest>();
         private LiveQuest? _currentlySelectedQuest = null;
 
         private float closingTime = 0f;
@@ -94,6 +95,7 @@ namespace Game.Questing
             {
                 sideQuestPanelHud.RemoveQuest(liveQuest);
                 _liveQuests.Remove(liveQuest);
+                _questsDone.Add(liveQuest);
                 if (_currentlySelectedQuest == null || liveQuest.Quest.Id != _currentlySelectedQuest.Value.Quest.Id) continue;
                 if (_liveQuests.Count > 0)
                     _currentlySelectedQuest = _liveQuests.First();
@@ -263,6 +265,19 @@ namespace Game.Questing
         protected override void SavingMapData(MapData data)
         {
             data.Questing.Quests = LiveQuests.Select(liveQuest => new MapData.QuestData(liveQuest)).ToArray();
+
+            if (_questsDone.Count == 0) return;
+            if (data.Questing.QuestsDone == null || data.Questing.QuestsDone.Length == 0)
+            {
+                data.Questing.QuestsDone = _questsDone.Select(it => new MapData.QuestData(it)).ToArray();
+            }
+            else
+            {
+                var allQuestsDone = new MapData.QuestData[data.Questing.QuestsDone.Length + _questsDone.Count];
+                data.Questing.QuestsDone.CopyTo(allQuestsDone, 0);
+                _questsDone.Select(it => new MapData.QuestData(it)).ToArray().CopyTo(allQuestsDone, data.Questing.QuestsDone.Length);
+                data.Questing.QuestsDone = allQuestsDone;
+            }
         }
 
         protected override void LoadingMapData(MapData data)

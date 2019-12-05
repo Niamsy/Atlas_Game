@@ -243,7 +243,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  Skybox: {fileID: 2100000, guid: 31145c48aa982cd4a98a37e63f4bfcd0, type: 2}
   Sun: {fileID: 108036781025223375}
   SunPosition:
     serializedVersion: 2
@@ -5629,6 +5628,7 @@ MonoBehaviour:
   LoadAndSave: 1
   _plantsSystem: {fileID: 2924533693654465018}
   _droppedItemManager: {fileID: 8435871627945785566}
+  _worldGrid: {fileID: 0}
 --- !u!114 &8435871627945785566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5641,6 +5641,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 329232ba3f7e7544cb1968cc751caee2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _conditionEvent: {fileID: 11400000, guid: 7982aa52f640cf44fa452f971b97ef0e, type: 2}
+  _raisedCondition: {fileID: 11400000, guid: b1ab93ecf11a5e14ba39a6397a16b4e8, type: 2}
 --- !u!114 &2924533693654465018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5668,7 +5670,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _autoSaveEffect: {fileID: 1467040789807890906}
-  DelayBetweenSave: 15
+  DelayBetweenSave: 5
 --- !u!1 &8628178528775642161
 GameObject:
   m_ObjectHideFlags: 0
