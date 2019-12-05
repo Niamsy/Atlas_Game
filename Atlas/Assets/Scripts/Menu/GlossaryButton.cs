@@ -9,7 +9,7 @@ namespace Menu
     public class GlossaryButton : MonoBehaviour
     {
         private PlantStatistics plantStat;
-        public Text buttonName
+        public Text buttonName;
         private void Start()
         {
             InitButton();
