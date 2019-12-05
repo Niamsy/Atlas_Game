@@ -22,18 +22,19 @@ namespace Menu.LevelSelector
         {
             _profilData = SaveManager.Instance.SelectedProfil;
 
-            if (_profilData == null || _profilData.CharacterGlobalInfo == null ||
-                _profilData.CharacterGlobalInfo.LevelInfoDatas == null)
-            {
-                for (int index = 0; index < Levels.Count; index++)
-                    _liveLevels.Add(new LiveLevelInfo(Levels[index]));
-                
+            if (_profilData == null)
                 return;
+
+            LevelInfoData[] levelInfoDatas = _profilData.CharacterGlobalInfo.LevelInfoDatas;
+            for (int index = 0; index < Levels.Count; index++)
+            {
+                if (levelInfoDatas != null && index < levelInfoDatas.Length)
+                    _liveLevels.Add(new LiveLevelInfo(Levels[index], levelInfoDatas[index]));
+                else
+                    _liveLevels.Add(new LiveLevelInfo(Levels[index]));
             }
             
-            LevelInfoData[] levelInfoDatas = _profilData.CharacterGlobalInfo.LevelInfoDatas;
-            for (int index = 0; index < levelInfoDatas.Length && index < Levels.Count; index++)
-                _liveLevels.Add(new LiveLevelInfo(Levels[index], levelInfoDatas[index]));
+            _profilData?.CharacterGlobalInfo?.SaveLevels(_liveLevels);
         }
 
         public void UpdateSelectedLevelWidget()
