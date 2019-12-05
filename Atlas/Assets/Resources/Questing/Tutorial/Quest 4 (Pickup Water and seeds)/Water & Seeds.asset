@@ -20,15 +20,14 @@ MonoBehaviour:
     description: {fileID: 11400000, guid: 10d8bf2cdb67ecd44b2fc443f648f669, type: 2}
     count: 1
   - condition: {fileID: 11400000, guid: b1ab93ecf11a5e14ba39a6397a16b4e8, type: 2}
-    argument: {fileID: 11400000, guid: 8b5338a7d62c7cb4390aee788fa8e191, type: 2}
-    description: {fileID: 11400000, guid: cd2589586c2ef264080e62122238642a, type: 2}
-    count: 1
-  - condition: {fileID: 11400000, guid: b1ab93ecf11a5e14ba39a6397a16b4e8, type: 2}
     argument: {fileID: 11400000, guid: 1bbe0c572130e8c46b5ba5305f522551, type: 2}
     description: {fileID: 11400000, guid: 10a6befb0b0fe17499ac4db0f81aa329, type: 2}
     count: 1
   _xp: 500
-  _rewards: []
+  _rewards:
+  - formatText: {fileID: 0}
+    _reward: {fileID: 11400000, guid: 95e0753ab60d7774392758a8210a6059, type: 2}
+    count: 10
   toSpawn: {fileID: 8245043310099490252, guid: 66b8418676764724283a1d763cbfc6ad, type: 3}
   spawnPoint: {fileID: 0}
   isObjective: 0

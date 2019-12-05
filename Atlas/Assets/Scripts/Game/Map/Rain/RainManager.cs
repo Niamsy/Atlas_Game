@@ -29,7 +29,6 @@ public class RainManager : MonoBehaviour
         if (timeleft <= 0)
         {
             float rand = Random.value;
-            Debug.Log("rand " + rand);
             if (rand <= Frequency)
             {
                 rainScript.RainIntensity = intensity;
