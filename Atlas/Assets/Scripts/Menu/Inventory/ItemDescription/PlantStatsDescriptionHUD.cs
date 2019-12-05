@@ -41,6 +41,11 @@ namespace Menu.Inventory.ItemDescription
             UpdateDisplay();
         }
 
+        public void Start()
+        {
+            UpdateDisplay();
+        }
+
         public void UpdateDisplay()
         {
             gameObject.SetActive(_ps != null);
