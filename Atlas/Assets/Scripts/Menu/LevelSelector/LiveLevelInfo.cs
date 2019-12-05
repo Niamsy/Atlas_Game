@@ -29,7 +29,7 @@ namespace Menu.LevelSelector
             set { _challenge_three_complete = value; }
         }
 
-        public LiveLevelInfo(LevelInfo levelInfo, levelInfoData levelInfoData)
+        public LiveLevelInfo(LevelInfo levelInfo, LevelInfoData levelInfoData)
         {
             LevelInfo = levelInfo;
             ChallengeOneComplete = levelInfoData.Challenge1Complete;
