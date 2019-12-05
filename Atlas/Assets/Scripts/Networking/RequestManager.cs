@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using FileSystem;
 using Game.SavingSystem;
 using Game.SavingSystem.Datas;
+using Plants;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -515,8 +516,11 @@ namespace Networking
 		        var array = JsonHelper.GetJsonArray<PlantData>(getRequest.downloadHandler.text);
 		       foreach (var plant in array)
 		       {
-					Debug.Log("plant glossary : " +  plant);
-					
+					var ps = PlantSystem.GetPlantForName(plant.scientific_name);
+					if (ps != null)
+					{
+						scannedPlants.Add(new ScannedPlant{ id = ps.ID, scanned_at = "" });
+					}
 		       }
 	        }
 	        else

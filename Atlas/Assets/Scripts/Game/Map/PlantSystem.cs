@@ -103,6 +103,27 @@ namespace Plants
             Debug.LogError("Plant of id:" + id + " not found");
             return (null);
         }
+        
+        public static PlantStatistics GetPlantForName(string name)
+        {
+            if (_allPlantStats == null)
+                Create();
+
+            foreach (var item in _allPlantStats)
+                if (item.ScientificName == name)
+                    return (item);
+
+            Debug.LogError("Plant of id:" + name + " not found");
+            return (null);
+        }
+
+        public  static PlantStatistics[] GetAllPlantStats()
+        {
+            if (_allPlantStats == null)
+                Create();
+            return _allPlantStats;
+        }
+
         #endregion
 
         #endregion
