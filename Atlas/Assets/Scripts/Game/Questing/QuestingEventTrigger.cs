@@ -33,6 +33,8 @@ namespace Game.Questing
 
         public void TriggerEvent()
         {
+            if (quest == null) return;
+            if (Event == null) return;
             Event.Raise(quest);
         }
     }

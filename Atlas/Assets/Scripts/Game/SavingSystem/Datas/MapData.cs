@@ -122,6 +122,7 @@ namespace Game.SavingSystem.Datas
         public struct QuestingData
         {
             public QuestData[] Quests;
+            public QuestData[] QuestsDone;
         }
 
         public CraftingSaveData     Crafting;

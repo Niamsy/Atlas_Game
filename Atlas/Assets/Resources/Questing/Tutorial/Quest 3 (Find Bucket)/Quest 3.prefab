@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7351027367821611002}
   - component: {fileID: 7860950373515010652}
   - component: {fileID: 3732613167801242792}
+  - component: {fileID: 1898281203518202878}
   m_Layer: 5
   m_Name: Quest 3
   m_TagString: Untagged
@@ -59,6 +60,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quest: {fileID: 11400000, guid: 5b84a2d2eeef240428325b8f21420d1e, type: 2}
   Event: {fileID: 11400000, guid: 4d2eb925629ee1d47b5773f178d7338e, type: 2}
-  triggerOnStart: 1
-  triggerOnDestroy: 0
+  triggerOnStart: 0
+  triggerOnDestroy: 1
   triggerOnce: 0
+--- !u!114 &1898281203518202878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8245043310099490252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f00d14b2509381d429cd546028a685de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quest: {fileID: 11400000, guid: 5b84a2d2eeef240428325b8f21420d1e, type: 2}
