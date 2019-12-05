@@ -65,7 +65,6 @@ namespace Plants.Plant
 
         protected virtual void GenerateGameObject(ItemAbstract item, PeriodToCreate resources)
         {
-
             if (!(item is Food) || (item is Food && _plant.IsPollinate))
             {
                 var position = transform.position + Vector3.up + transform.forward.normalized;
