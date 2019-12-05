@@ -31,7 +31,9 @@ namespace Menu.Glossary
             foreach (var plant in allPlants)
             {
                 var button = Instantiate(buttonPrefab, grid.transform);
-                button.name = plant.name;
+                var gBut = button.GetComponent<GlossaryButton>();
+                if (gBut != null)
+                    gBut.SetPlantStat(plant);
             }
         }
 
@@ -47,17 +49,9 @@ namespace Menu.Glossary
                 listID.Add(tmp.id);
             }
         }
-
-        // Update is called once per frame    
-        void Update()
-        {
-
-        }
         
-        protected override void InitialiseWidget()
-        {
-         
-        }
+        protected override void InitialiseWidget() {}
+        
         private void OnEnable()
         {
             SaveManager.Instance.InputControls.Player.Glossary.performed += OpenCloseGlossary;

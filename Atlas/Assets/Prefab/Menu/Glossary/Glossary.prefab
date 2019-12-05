@@ -197,7 +197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51c011c4063080845ba56077d24ac0d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enableCursorOnDisplay: 0
+  _enableCursorOnDisplay: 1
   _displayed: 0
   grid: {fileID: 1567400999306233457}
   buttonPrefab: {fileID: 8217698839648018605, guid: 5a8c01c71d8f73a429b7f98d8f586999,
@@ -1142,16 +1142,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1677824206175224897}
     m_Modifications:
-    - target: {fileID: 8217698839648018605, guid: 5a8c01c71d8f73a429b7f98d8f586999,
-        type: 3}
-      propertyPath: m_Name
-      value: GlossaryButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 8217698839648018605, guid: 5a8c01c71d8f73a429b7f98d8f586999,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1919411782330824758, guid: 5a8c01c71d8f73a429b7f98d8f586999,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1256,6 +1246,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8217698839648018605, guid: 5a8c01c71d8f73a429b7f98d8f586999,
+        type: 3}
+      propertyPath: m_Name
+      value: GlossaryButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 8217698839648018605, guid: 5a8c01c71d8f73a429b7f98d8f586999,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a8c01c71d8f73a429b7f98d8f586999, type: 3}

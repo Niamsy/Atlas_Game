@@ -1,5 +1,4 @@
-﻿using System;
-using Plants;
+﻿using Localization;
 using Plants.Plant;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,26 +7,37 @@ namespace Menu
 {
     public class GlossaryButton : MonoBehaviour
     {
-        private PlantStatistics plantStat;
-        public Text buttonName;
-        private void Start()
+        public Text                Title;
+
+        private PlantStatistics    _plantStat;
+
+        private void Awake()
         {
-            InitButton();
+            LocalizationManager.Instance.LocaleChanged += ReloadDataForNewLanguage;
         }
 
-        void InitButton()
+        private void OnDestroy()
         {
-            
+            LocalizationManager.Instance.LocaleChanged -= ReloadDataForNewLanguage;
         }
 
-        void DisplayInfoOnClick()
+        public void SetPlantStat(PlantStatistics plantStatistics)
         {
-            
+            _plantStat = plantStatistics;
+            UpdateButton();
         }
 
-        void HideInfoOnClick()
+        private void ReloadDataForNewLanguage(object sender, LocaleChangedEventArgs e)
         {
+            UpdateButton();
+        }
+        
+        public void UpdateButton()
+        {
+            if (_plantStat == null)
+                return;
             
+            Title.text = _plantStat.Name;
         }
         
     }
