@@ -33,6 +33,8 @@ namespace Menu.Glossary
             
             foreach (var plant in allPlants)
             {
+                if (plant.ScientificName == "grass")
+                    continue;
                 var button = Instantiate(buttonPrefab, grid.transform);
                 var gBut = button.GetComponent<GlossaryButton>();
                 if (gBut != null)
