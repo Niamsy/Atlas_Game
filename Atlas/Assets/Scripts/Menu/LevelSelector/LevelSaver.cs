@@ -24,7 +24,7 @@ namespace Menu.LevelSelector
         {
             _profilData = SaveManager.Instance.SelectedProfil;
 
-            if (_profilData == null) return;
+            if (_profilData?.CharacterGlobalInfo?.LevelInfoDatas == null) return;
             
             var levelInfoDatas = _profilData.CharacterGlobalInfo.LevelInfoDatas.ToList();
             foreach (var levelInfo in Levels)
