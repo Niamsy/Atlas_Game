@@ -12,10 +12,6 @@ namespace Game.Item
         public ItemStackBehaviour BaseStack;
 
         private PlantModel _modelPlant;
-        [SerializeField]
-        public Text _hidedCanvasName;
-        [SerializeField]
-        public Text _hidedCanvasUsage;
 
         protected virtual void Awake()
         {
@@ -81,7 +77,7 @@ namespace Game.Item
             }
         }
 
-        void OnTriggerEnter(Collider col)
+        protected override void OnTriggerEnter(Collider col)
         {
             if (col.gameObject.CompareTag("Player"))
             {
@@ -90,7 +86,7 @@ namespace Game.Item
             }
         }
 
-        void OnTriggerExit(Collider col)
+        protected override void OnTriggerExit(Collider col)
         {
             if (col.gameObject.CompareTag("Player"))
             {

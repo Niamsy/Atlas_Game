@@ -52,6 +52,21 @@ namespace Game.Crafting
             _toRemove = new List<int>();
         }
 
+        private void triggerCanvas(bool visible)
+        {
+            Color colName = _hidedCanvasName.color;
+            Color colUsage = _hidedCanvasUsage.color;
+            colName.a = 0;
+            colUsage.a = 0;
+            if (visible)
+            {
+                colName.a = 255;
+                colUsage.a = 255;
+            }
+            _hidedCanvasUsage.color = colUsage;
+            _hidedCanvasName.color = colName;
+        }
+
         public override void Interact(PlayerController playerController)
         {
             isShown = !isShown;
@@ -94,17 +109,19 @@ namespace Game.Crafting
             _toRemove.Clear();
         }
 
-        private void OnTriggerEnter(Collider col)
+        protected override void OnTriggerEnter(Collider col)
         {
             if (!col.gameObject.CompareTag("Player")) return;
             if (_guiCanvas && _guiCanvas.gameObject)
             {
                 _guiCanvas.gameObject.SetActive(true);
             }
+            if (_hidedCanvasName != null && _hidedCanvasUsage != null)
+                triggerCanvas(true);
             //SaveManager.Instance.InputControls.Player.Interact.performed += _craftingHUD.OpenCloseCraftingMenu;
         }
 
-        private void OnTriggerExit(Collider col)
+        protected override void OnTriggerExit(Collider col)
         {
             if (!col.gameObject.CompareTag("Player")) return;
             if (_guiCanvas)
@@ -114,6 +131,8 @@ namespace Game.Crafting
                 _camera.lockCamera = false;
                 _guiCanvas.gameObject.SetActive(false);
             }
+            if (_hidedCanvasName != null && _hidedCanvasUsage != null)
+                triggerCanvas(false);
             //SaveManager.Instance.InputControls.Player.Interact.performed += _craftingHUD.OpenCloseCraftingMenu;
         }
 
