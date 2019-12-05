@@ -95,6 +95,13 @@ namespace Networking
             public int id = 0;
             public string scanned_at = "";
         }
+        
+        [Serializable]
+        public sealed class PlantData
+        {
+	        public string name = "";
+	        public string scientific_name = "";
+        }
 
         #endregion
 
@@ -479,22 +486,19 @@ namespace Networking
                 OnGetScannedPlantsRequestFinished(success, errorMsg, scannedPlants);
         }
         
-        public ScannedPlant[] Glossary(string username, string password)
+        public bool Glossary()
         {
-	        ScannedPlant[] glossary = null;
-	        
 	        if (!CanReceiveANewRequest || !IsConnected())
-		        return (glossary);
-			
-			
+		        return (false);
+
 	        _actualOperation = StartCoroutine(GlossaryCoroutine());
 			
-	        return (glossary);
+	        return (true);
         }
 
         private IEnumerator GlossaryCoroutine()
         {
-	        List<ScannedPlant> glossary = new List<ScannedPlant>();
+	        List<ScannedPlant> scannedPlants = new List<ScannedPlant>();
 
 	        UnityWebRequest getRequest = UnityWebRequest.Get(ApiAdress + GlossaryPath);
 	        getRequest.method = UnityWebRequest.kHttpVerbGET;
@@ -504,12 +508,16 @@ namespace Networking
 	        
 	        bool success = (getRequest.responseCode == 200);
 
-	        BodyReturnApiToken bodyReturn = JsonUtility.FromJson<BodyReturnApiToken>(getRequest.downloadHandler.text);
 
 	        string errorMsg = "";
 	        if (success)
 	        {
-		       glossary.AddRange(JsonHelper.GetJsonArray<ScannedPlant>(getRequest.downloadHandler.text));
+		        var array = JsonHelper.GetJsonArray<PlantData>(getRequest.downloadHandler.text);
+		       foreach (var plant in array)
+		       {
+					Debug.Log("plant glossary : " +  plant);
+					
+		       }
 	        }
 	        else
 	        {
@@ -530,14 +538,19 @@ namespace Networking
 		        }
 	        }
 
+	        
 	        CleanForNextRequest();
-	        if (OnConnectionFinished != null)
-		        OnConnectionFinished(success, errorMsg);
+	        if (OnGlossaryRequestFinish != null)
+		        OnGlossaryRequestFinish(success, errorMsg, scannedPlants);
         }
 
         public event GetScannedPlantsRequestFinishedDelegate OnGetScannedPlantsRequestFinished;
+        public event GetScannedPlantsRequestFinishedDelegate OnGlossaryRequestFinish;
+
         #endregion
     }
+	
+	
 	
 	
 }

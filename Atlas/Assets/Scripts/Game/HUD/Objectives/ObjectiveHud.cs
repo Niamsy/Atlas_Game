@@ -79,8 +79,8 @@ namespace Game.HUD.Objectives
         protected override void LoadingAccountData(AccountData data)
         {
             _profilData = SaveManager.Instance.SelectedProfil;
-            if (levelInfo == null) return;
-            if (_profilData == null) return;
+            
+            if (levelInfo == null && _profilData == null) return;
             
             var index = _profilData.CharacterGlobalInfo.LevelInfoDatas.ToList()
                 .FindIndex(it => it.LevelTitle == levelInfo.LevelTitle);

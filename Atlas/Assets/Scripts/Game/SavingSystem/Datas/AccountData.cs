@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using Menu.LevelSelector;
-using UnityEngine;
 
 namespace Game.SavingSystem.Datas
 {
@@ -35,11 +32,16 @@ namespace Game.SavingSystem.Datas
     {
         public int    PlayerChallengeOwned = 0;
         public int    PlayerTimePlayed = 0;
-        public levelInfoData[] LevelInfoDatas;
+        public LevelInfoData[] LevelInfoDatas;
 
         public void SaveLevels(List<LiveLevelInfo> levelInfos)
         {
-	        LevelInfoDatas = levelInfos.Select(info => new levelInfoData(info)).ToArray();
+	        LevelInfoDatas = new LevelInfoData[levelInfos.Count];
+	        for (int x = 0; x < levelInfos.Count; x++)
+	        {
+		        LiveLevelInfo info = levelInfos[x];
+		        LevelInfoDatas[x] = new LevelInfoData(info);
+	        }
         }
     }
 
@@ -84,14 +86,14 @@ namespace Game.SavingSystem.Datas
 	}
 
 	[Serializable]
-	public struct levelInfoData
+	public struct LevelInfoData
 	{
 		public string LevelTitle;
 		public bool Challenge1Complete;
 		public bool Challenge2Complete;
 		public bool Challenge3Complete;
 
-		public levelInfoData(LevelInfo levelInfo)
+		public LevelInfoData(LevelInfo levelInfo)
 		{
 			LevelTitle = levelInfo.LevelTitle;
 			Challenge1Complete = false;
@@ -99,7 +101,7 @@ namespace Game.SavingSystem.Datas
 			Challenge3Complete = false;
 		}
 		
-		public levelInfoData(LiveLevelInfo levelInfo)
+		public LevelInfoData(LiveLevelInfo levelInfo)
 		{
 			LevelTitle = levelInfo.LevelInfo.LevelTitle;
 			Challenge1Complete = levelInfo.ChallengeOneComplete;
