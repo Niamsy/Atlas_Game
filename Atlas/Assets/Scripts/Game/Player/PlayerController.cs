@@ -129,6 +129,8 @@ namespace Player
             set { _isEquippedSlotUsed = value; }
         }
 
+        public bool Asleep { get; set; }
+
         public Camera Camera => m_Camera;
 
         public DeathType _deathType;
@@ -253,6 +255,8 @@ namespace Player
 
         void Update()
         {
+            if (Asleep)
+                return;
             if (CheckForDeath())
                 return;
             //CheckForGrounded();

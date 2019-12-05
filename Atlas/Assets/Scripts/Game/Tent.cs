@@ -13,14 +13,15 @@ public class Tent : AInteractable
     {
         if (fading == false)
         {
+            playerController.Asleep = true;
             fading = true;
             var energy = playerController.GetPlayerStats().Resources[Resource.Energy];
             energy.Quantity = energy.Limit;
-            var corout = StartCoroutine(Fade());
+            var corout = StartCoroutine(Fade(playerController));
         }
     }
 
-    IEnumerator Fade()
+    IEnumerator Fade(PlayerController playerController)
     {
         var tempColor = blackscreen.color;
 
@@ -32,6 +33,7 @@ public class Tent : AInteractable
             yield return null;
         }
         Time.timeScale = 1;
+        playerController.Asleep = false;
         while (blackscreen.color.a >= 0f)
         {
             tempColor.a -= Time.deltaTime * 0.2f;
