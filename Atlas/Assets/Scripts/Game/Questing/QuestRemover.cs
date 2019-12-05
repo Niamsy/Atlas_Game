@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Game.SavingSystem;
 using Game.SavingSystem.Datas;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
 namespace Game.Questing
