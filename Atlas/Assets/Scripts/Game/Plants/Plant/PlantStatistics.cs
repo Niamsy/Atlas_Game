@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using JetBrains.Annotations;
 using Localization;
 using Tools;
 using UnityEngine;
@@ -43,6 +44,8 @@ namespace Plants.Plant
         [Header("Main")]
         [SerializeField] private LocalizedText     _name = null;
         public string                              Name => (_name.Value);
+
+        public string                              ScientificName = "";
         public LocalizedText                       NameAsset => (_name);
         [SerializeField] private int               _ID = 1;
         public int                                 ID => (_ID);

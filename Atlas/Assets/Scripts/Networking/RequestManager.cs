@@ -101,13 +101,6 @@ namespace Networking
         {
 	        public string name = "";
 	        public string scientific_name = "";
-
-        }
-        
-        [Serializable]
-        public sealed class GlossaryData
-        {
-	        public PlantData[] array = null;
         }
 
         #endregion
@@ -493,17 +486,14 @@ namespace Networking
                 OnGetScannedPlantsRequestFinished(success, errorMsg, scannedPlants);
         }
         
-        public GlossaryData[] Glossary()
+        public bool Glossary()
         {
-	        GlossaryData[] glossary = null;
-	        
 	        if (!CanReceiveANewRequest || !IsConnected())
-		        return (glossary);
-			
-			
+		        return (false);
+
 	        _actualOperation = StartCoroutine(GlossaryCoroutine());
 			
-	        return (glossary);
+	        return (true);
         }
 
         private IEnumerator GlossaryCoroutine()
@@ -525,7 +515,8 @@ namespace Networking
 		        var array = JsonHelper.GetJsonArray<PlantData>(getRequest.downloadHandler.text);
 		       foreach (var plant in array)
 		       {
-					Debug.Log("plant glossary : " +  plant);   
+					Debug.Log("plant glossary : " +  plant);
+					
 		       }
 	        }
 	        else
