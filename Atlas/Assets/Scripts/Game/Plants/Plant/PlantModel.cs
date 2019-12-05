@@ -46,6 +46,8 @@ namespace Plants.Plant
 
         #region Public Accessors
 
+        public PlantConsumer Consumer {  get { return _consumer; } }
+
         public MeshRenderer MeshRender
         {
             get;

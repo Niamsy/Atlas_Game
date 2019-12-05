@@ -46,9 +46,12 @@ MonoBehaviour:
   plantGrowthLayers:
     serializedVersion: 2
     m_Bits: 512
-  plantLayer:
+  ignoreLayers:
     serializedVersion: 2
     m_Bits: 0
+  plantLayer:
+    serializedVersion: 2
+    m_Bits: 16384
   findPlantDistance: 100
   gridWorldSize: {x: 512, y: 512}
   nodeRadius: 1
@@ -58,3 +61,4 @@ MonoBehaviour:
   spawnPlant: 0
   numberOfPlantsInParentGameobject: 5000
   plantsToSpawn: []
+  initOnEnable: 0
