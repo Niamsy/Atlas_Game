@@ -21,14 +21,20 @@ namespace Plants.Plant
             _plant = gameObject.GetComponentInParent<PlantModel>();
             _plant.OnDeath.AddListener(ProduceDeathResources);
             if (CalendarManager.Instance)
+            {
                 CalendarManager.Instance.ActualDate.OnDayChanged += ProduceResources;
+                CalendarManager.Instance.ActualDate.OnHourChanged += ProduceResources;
+            }
         }
 
         protected virtual void OnDestroy()
         {
             _plant.OnDeath.RemoveListener(ProduceDeathResources);
             if (CalendarManager.Instance)
+            {
                 CalendarManager.Instance.ActualDate.OnDayChanged -= ProduceResources;
+                CalendarManager.Instance.ActualDate.OnHourChanged += ProduceResources;
+            }
         }
 
         protected virtual void ProduceResources()

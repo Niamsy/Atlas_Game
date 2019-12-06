@@ -33,7 +33,10 @@ namespace Game.Map.DayNight
         public static readonly int MonthPerYear = 12;
 
         public delegate void DayChanged();
+
+        public delegate void HourChanged();
         public event DayChanged OnDayChanged;
+        public event HourChanged OnHourChanged;
 
         public float DayAdvancement
         {
@@ -108,11 +111,14 @@ namespace Game.Map.DayNight
 
             ret = MyMath.AddWithRetenueFloat(ref Seconds, addedTime + fRet, SecondsPerMinute);
             ret = MyMath.AddWithRetenue(ref Minutes, ret, MinutesPerHour);
+            if (ret > 0) // If ret >0 then it will be next day
+            {
+                OnHourChanged?.Invoke();
+            }
             ret = MyMath.AddWithRetenue(ref Hours, ret, HourPerDay);
             if (ret > 0) // If ret >0 then it will be next day
             {
-                if (OnDayChanged != null)
-                    OnDayChanged();
+                OnDayChanged?.Invoke();
             }
             ret = MyMath.AddWithRetenue(ref Day, ret, DayPerMonth);
             ret = MyMath.AddWithRetenue(ref Month, ret, MonthPerYear);

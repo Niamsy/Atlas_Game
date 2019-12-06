@@ -41,7 +41,7 @@ public class RainManager : MonoBehaviour
         }
         else if (timeleft > 0)
         {
-            if (WorldGrid?.Grid != null)
+            if (WorldGrid != null && WorldGrid.Grid != null)
             {
                 GiveWater();
             }
@@ -56,8 +56,6 @@ public class RainManager : MonoBehaviour
 
     void GiveWater()
     {
-        Debug.Log("Give Water begins");
-
         foreach (Node cell in WorldGrid.Grid)
         {
             var plant = cell.Plant;
@@ -71,6 +69,5 @@ public class RainManager : MonoBehaviour
                 consumer.ReceiveResource(Game.ResourcesManagement.Resource.Water, (int)(rainScript.RainIntensity * 10));
             }
         }
-        Debug.Log("Give Water done");
     }
 }

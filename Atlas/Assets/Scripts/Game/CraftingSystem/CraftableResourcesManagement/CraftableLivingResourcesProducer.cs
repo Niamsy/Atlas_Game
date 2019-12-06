@@ -9,6 +9,7 @@ namespace Plants.Plant
         {
             _plant = gameObject.GetComponentInParent<PlantModel>();
             CalendarManager.Instance.ActualDate.OnDayChanged += ProduceResources;
+            CalendarManager.Instance.ActualDate.OnHourChanged += ProduceResources;
         }
     }
 }
