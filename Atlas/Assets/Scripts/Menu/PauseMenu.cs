@@ -75,7 +75,8 @@ namespace Menu
 
 		public void LoadNextLevel()
 		{
-			SceneLoader.Instance.LoadScene(SceneToLoad, SceneToUnLoad);
+            TimeManager.StopPause(this);
+            SceneLoader.Instance.LoadScene(SceneToLoad, SceneToUnLoad);
 		}
 
 		public void ReceivedNotification(Game.Notification.Notification notification)

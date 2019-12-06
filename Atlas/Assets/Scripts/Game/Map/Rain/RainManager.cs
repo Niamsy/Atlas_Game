@@ -41,7 +41,7 @@ public class RainManager : MonoBehaviour
         }
         else if (timeleft > 0)
         {
-            if (WorldGrid.Grid != null)
+            if (WorldGrid?.Grid != null)
             {
                 GiveWater();
             }

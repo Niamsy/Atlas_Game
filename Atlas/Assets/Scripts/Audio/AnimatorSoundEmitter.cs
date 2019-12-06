@@ -53,7 +53,8 @@ namespace Player
         {
             if (sound.source == null)
             {
-                Event.Raise(sound.audio, null);
+                if (Event != null)
+                    Event.Raise(sound.audio, null);
             }
             else
             {

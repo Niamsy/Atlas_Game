@@ -79,22 +79,19 @@ namespace Game.HUD.Objectives
         protected override void LoadingAccountData(AccountData data)
         {
             _profilData = SaveManager.Instance.SelectedProfil;
-            
-            if (levelInfo == null && _profilData == null) return;
-            
+            if (levelInfo == null)
+                return;
+            _currentLevel = new LiveLevelInfo(levelInfo);
+            if (_profilData == null)
+                return;
             var index = _profilData.CharacterGlobalInfo.LevelInfoDatas.ToList()
                 .FindIndex(it => it.LevelTitle == levelInfo.LevelTitle);
             _currentIndexLevel = index;
 
-            if (_currentIndexLevel < 0)
-            {
-                _currentLevel = new LiveLevelInfo(levelInfo);
-            }
-            else
+            if (_currentIndexLevel >= 0)
             {
                 _currentLevel = new LiveLevelInfo(levelInfo, _profilData.CharacterGlobalInfo.LevelInfoDatas[index]);
             }
-            
             objective1.SetComplete(_currentLevel.ChallengeOneComplete);
             objective2.SetComplete(_currentLevel.ChallengeTwoComplete);
             objective3.SetComplete(_currentLevel.ChallengeThreeComplete);
