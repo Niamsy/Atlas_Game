@@ -40,20 +40,23 @@ namespace Game.HUD.Objectives
             if (!objective1.IsComplete)
             {
                 objective1.SetComplete(true);
-                _currentLevel.ChallengeOneComplete = true;
+                if (_currentLevel != null)
+                    _currentLevel.ChallengeOneComplete = true;
                 return;
             }
 
             if (!objective2.IsComplete)
             {
                 objective2.SetComplete(true);
-                _currentLevel.ChallengeTwoComplete = true;
+                if (_currentLevel != null)
+                    _currentLevel.ChallengeTwoComplete = true;
                 return;
             }
 
             if (objective3.IsComplete) return;
             objective3.SetComplete(true);
-            _currentLevel.ChallengeThreeComplete = true;
+            if (_currentLevel != null)
+                _currentLevel.ChallengeThreeComplete = true;
             levelComplete.SetActive(true);
             
             if (_notification == null || _notificationEvent == null) return;

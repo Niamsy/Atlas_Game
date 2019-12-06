@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AtlasAudio;
 using AtlasEvents;
 using Game.Map.DayNight;
@@ -74,6 +75,14 @@ namespace Game.Questing
         public void PauseTime()
         {
             TimeManager.AskForPause(this);
+        }
+
+        private void OnDestroy()
+        {
+            if (TimeManager.IsGamePaused)
+            {
+                TimeManager.StopPause(this);
+            }
         }
     }
 }

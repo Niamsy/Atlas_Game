@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Game.SavingSystem;
 using Game.SavingSystem.Datas;
 using UnityEngine;
@@ -22,18 +23,24 @@ namespace Menu.LevelSelector
         {
             _profilData = SaveManager.Instance.SelectedProfil;
 
-            if (_profilData == null)
-                return;
-
-            LevelInfoData[] levelInfoDatas = _profilData.CharacterGlobalInfo.LevelInfoDatas;
-            for (int index = 0; index < Levels.Count; index++)
+            if (_profilData == null || _profilData.CharacterGlobalInfo.LevelInfoDatas == null)
             {
-                if (levelInfoDatas != null && index < levelInfoDatas.Length)
-                    _liveLevels.Add(new LiveLevelInfo(Levels[index], levelInfoDatas[index]));
-                else
-                    _liveLevels.Add(new LiveLevelInfo(Levels[index]));
+                foreach (var level in Levels)
+                {
+                    _liveLevels.Add(new LiveLevelInfo(level));
+                } 
             }
-            
+            else
+            {
+                var levelInfoDatas = _profilData.CharacterGlobalInfo.LevelInfoDatas.ToList();
+                foreach (var levelInfo in Levels)
+                {
+                    var index = levelInfoDatas.FindIndex(it => it.LevelTitle == levelInfo.LevelTitle);
+                    _liveLevels.Add(index >= 0
+                        ? new LiveLevelInfo(levelInfo, levelInfoDatas[index])
+                        : new LiveLevelInfo(levelInfo));
+                }
+            }
             _profilData?.CharacterGlobalInfo?.SaveLevels(_liveLevels);
         }
 
