@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Game.HUD
@@ -7,7 +8,7 @@ namespace Game.HUD
     {
         [SerializeField] private GameObject _successPopup = null;
         [SerializeField] private GameObject _failurePopup = null;
-        [SerializeField] private Text _failurePopupText = null;
+        [SerializeField] private TextMeshProUGUI _failurePopupText = null;
         [SerializeField] private float _displayTime = 0;
 
         private float _timer;
