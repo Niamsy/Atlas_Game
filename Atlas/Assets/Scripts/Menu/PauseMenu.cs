@@ -75,7 +75,10 @@ namespace Menu
 
 		public void LoadNextLevel()
 		{
-            TimeManager.StopPause(this);
+			if (TimeManager.IsGamePaused)
+			{
+				TimeManager.StopPause(this);
+			}
             SceneLoader.Instance.LoadScene(SceneToLoad, SceneToUnLoad);
 		}
 

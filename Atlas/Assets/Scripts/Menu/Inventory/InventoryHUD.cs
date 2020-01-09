@@ -74,6 +74,11 @@ namespace Menu.Inventory
             {
                 action.performed -= ShortcutPressed;
             }
+            
+            if (TimeManager.IsGamePaused)
+            {
+                TimeManager.StopPause(this);
+            }
         }
 
         private void OnEnable()

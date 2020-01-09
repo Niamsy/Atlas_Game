@@ -44,6 +44,10 @@ namespace Menu.Glossary
 
         private void OnDestroy()
         {
+            if (TimeManager.IsGamePaused)
+            {
+                TimeManager.StopPause(this);
+            }
             RequestManager.Instance.OnGlossaryRequestFinish -= OnRequestFinish;
         }
 
