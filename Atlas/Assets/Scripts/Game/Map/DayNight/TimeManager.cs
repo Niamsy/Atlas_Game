@@ -11,7 +11,7 @@ namespace Game.Map.DayNight
 
         public static void AskForPause(Object value)
         {
-            if (_pauseAsker.Contains(value))
+            if (_pauseAsker.Contains(value) || value == null)
                 return;
             
             _pauseAsker.Add(value);
