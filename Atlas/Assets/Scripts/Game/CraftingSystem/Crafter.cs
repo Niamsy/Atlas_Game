@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Game.Inventory;
+using Game.Item;
+using Game.Notification;
 using Game.Questing;
 using Game.SavingSystem;
+using Menu.Inventory;
 using Player;
 using UnityEngine;
 using UnityEngine.Events;
@@ -18,6 +22,8 @@ namespace Game.Crafting
 
         [Header("UI")]
         [SerializeField] private CraftingMenuHUD _craftingHUD = null;
+
+        [SerializeField] private HandSlotHUD _handSlot = null;
         private Collider _collider;
         private Canvas _guiCanvas;
         private List<Recipe.Product> _productsOngoing = new List<Recipe.Product>();
@@ -33,6 +39,10 @@ namespace Game.Crafting
         [Tooltip("Event raised when something have been crafted")]
         [SerializeField] private ConditionEvent _conditionEvent = null;
         [SerializeField] private Condition _raisedCondition = null;
+
+        [Header("Notification System")] 
+        [SerializeField] private NotificationEvent _notificationEvent = null;
+        [SerializeField] private Notification.Notification _raisedNotification = null;
         
         public RecipeBook RecipeBook => _Book;
 
@@ -139,7 +149,8 @@ namespace Game.Crafting
         
         public bool CanProduce(Recipe recipe, BaseInventory inventory)
         {
-            return recipe.Ingredients.All(ingredient => inventory.HasEnoughItems(ingredient.Item, ingredient.RequiredQuantity));
+            return recipe.Ingredients.All(ingredient => inventory.CountItems(ingredient.Item) + 
+                                                        _handSlot.CountItems(ingredient.Item) >= ingredient.RequiredQuantity);
         }
 
         private void UpdatePositions(List<Recipe.Product> products)
@@ -158,6 +169,10 @@ namespace Game.Crafting
             UpdatePositions(_productsFinished);
             _productFinishedCB?.Invoke(product, product.Position);
             product.ClearListeners();
+
+            if (_notificationEvent == null || _raisedNotification == null) return;
+            _raisedNotification.Sprite = product.Item.Sprite;
+            _notificationEvent.Raise(_raisedNotification);
         }
 
         public Recipe.Product GetFinishedProduct(int position)
@@ -169,7 +184,9 @@ namespace Game.Crafting
             }
 
             var product = _productsFinished[position];
-            _conditionEvent.Raise(_raisedCondition, product.Item, 1);
+            if (_conditionEvent != null && _raisedCondition != null)
+                _conditionEvent.Raise(_raisedCondition, product.Item, 1);
+
             _productsFinished.RemoveAt(position);
             return product;
         }
@@ -185,11 +202,25 @@ namespace Game.Crafting
             _productsOngoing.RemoveAt(position);
             UpdatePositions(_productsOngoing);
         }
-        
+
         public bool Produce(Recipe recipe, BaseInventory inventory)
         {   
-            if (!recipe.Ingredients.All(ingredient =>
-                    inventory.DestroyFirsts(ingredient.Item, ingredient.RequiredQuantity))) return false;
+            var itemsToDestroy = recipe.Ingredients.Select(ingredient => (ingredient.Item, ingredient.RequiredQuantity)).ToList();
+
+            for (var i = 0; i < recipe.Ingredients.Length; i++)
+            {
+                var remain = itemsToDestroy[i];
+                var removed = inventory.DestroyFirsts(remain.Item, remain.RequiredQuantity);
+                
+                Debug.Log(remain.ToString());
+                remain.RequiredQuantity -= removed;
+                Debug.Log(remain.ToString());
+                
+                if (remain.RequiredQuantity > 0)
+                {
+                    _handSlot.DestroyFirsts(remain.Item, remain.RequiredQuantity);
+                }
+            }
 
             var product = recipe.Produced.GetClone(recipe.Duration);
             _productsOngoing.Add(product);

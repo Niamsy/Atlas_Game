@@ -13,7 +13,12 @@ namespace Game.Notification
         
         public LocalizedText Title => title;
         public LocalizedText Description => description;
-        public Sprite Sprite => sprite;
+        public Sprite Sprite
+        {
+            get => sprite;
+            set => sprite = value;
+        }
+
         public Color Color => color;
     }
 }

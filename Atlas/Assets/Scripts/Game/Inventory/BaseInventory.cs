@@ -165,32 +165,35 @@ namespace Game.Inventory
         // Be sure to check the presence of required items with CountItems before
         // Destroy the first items encountered in the inventory until the required quantity 
         // is reached or all items are destroyed
-        public bool DestroyFirsts(Item.ItemAbstract itemToDestroy, int quantity)
+        public int DestroyFirsts(Item.ItemAbstract itemToDestroy, int toRemove)
         {
             var stacksToEmpty = new List<ItemStack>();
+            var total = 0;
             
             for (var i = 0; i < Slots.Capacity; i++)
             {
                 var itemStack = Slots[i];
                 if (itemStack.IsEmpty == false && itemStack.Content.Id == itemToDestroy.Id)
                 {
-                    if (itemStack.Quantity - quantity >= 0)
+                    if (itemStack.Quantity - toRemove <= 0)
                     {
-                        quantity -= itemStack.Quantity;
+                        toRemove -= itemStack.Quantity;
                         stacksToEmpty.Add(itemStack);
+                        total += itemStack.Quantity;
                     }
                     else
                     {
-                        itemStack.ModifyQuantity(itemStack.Quantity - quantity);
-                        quantity = 0;
+                        itemStack.ModifyQuantity(itemStack.Quantity - toRemove);
+                        total += toRemove;
+                        toRemove = 0;
                     }
                 }
 
-                if (quantity <= 0) break;
+                if (toRemove <= 0) break;
             }
             
             stacksToEmpty.ForEach(stack => stack.EmptyStack());
-            return true;
+            return total;
         }
     }
 }
