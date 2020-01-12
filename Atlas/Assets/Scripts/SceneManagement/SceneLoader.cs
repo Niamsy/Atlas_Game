@@ -10,6 +10,7 @@ namespace SceneManagement
         #if UNITY_EDITOR
         public static System.Collections.Generic.List<string> ActualLoadedScenes;
         public static int ActiveLoadedScenes;
+        public static bool FromGame = false;
         #endif
         [SerializeField] private int _startUpSceneIndex = 1;
         

@@ -113,7 +113,7 @@ namespace Plants
                 if (item.ScientificName == name)
                     return (item);
 
-            Debug.LogError("Plant of id:" + name + " not found");
+            Debug.LogWarning("Plant of id:" + name + " not found");
             return (null);
         }
 
