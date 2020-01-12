@@ -82,6 +82,17 @@ namespace Menu
             SceneLoader.Instance.LoadScene(SceneToLoad, SceneToUnLoad);
 		}
 
+		public void LoadMainMenu()
+		{
+			if (TimeManager.IsGamePaused)
+			{
+				TimeManager.StopPause(this);
+			}
+
+			SceneLoader.FromGame = true;
+			SceneLoader.Instance.LoadScene(1, SceneToUnLoad);
+		}
+
 		public void ReceivedNotification(Game.Notification.Notification notification)
 		{
 			if (notification != levelCompleteNotification || nextLevelCompleteButton == null) return;

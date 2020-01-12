@@ -55,7 +55,7 @@ namespace Menu.Glossary
         {
             foreach (var tmp in scannedPlants)
             {
-                listID.Add(tmp.id);
+                listID?.Add(tmp.id);
             }
         }
         

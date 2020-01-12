@@ -1,5 +1,8 @@
 ﻿using System;
 using FileSystem;
+using Game.SavingSystem;
+using Menu.LevelSelector;
+using SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,12 +20,30 @@ namespace Menu.Main
 
         [SerializeField] private MenuWidget _nextWidget = null;
 
+        [SerializeField] private LevelSaver _levelMenu = null;
         private AtlasFileSystem _fs;
+        private bool _connected = false;
 
         protected override void Awake()
         {
-            base.Awake();
+            if (SceneLoader.FromGame)
+            {
+                SceneLoader.FromGame = false;
+                if (SaveManager.Instance.SelectedProfil != null)
+                {
+                    SaveManager.InstantiateProfilToUse(SaveManager.Instance.AccountData,
+                        SaveManager.Instance.SelectedProfil, SaveManager.Instance.SelectedProfil.Name);
+                    SaveManager.Instance.SelectProfilToUseForSave(SaveManager.Instance.SelectedProfil);
+                    SaveManager.Instance.ReloadAccountData();
+                }
+
+                if (_levelMenu)
+                    _levelMenu.UpdateSelectedLevelWidget();
+                gameObject.SetActive(false);
+                return;
+            }
             
+            base.Awake();
             _fs = AtlasFileSystem.Instance;
 
             try
@@ -41,6 +62,7 @@ namespace Menu.Main
         protected override void InitialiseWidget()
         {
             ActualRequestManager.OnConnectionFinished += ConnectionFinished;
+            _connected = true;
 
             _connectionButton.onClick.AddListener(Connect);
             _username.onValueChanged.AddListener(UpdateButtonState_StringListener);
@@ -51,7 +73,8 @@ namespace Menu.Main
 
         private void OnDestroy()
         {
-            ActualRequestManager.OnConnectionFinished -= ConnectionFinished;
+            if (_connected)
+                ActualRequestManager.OnConnectionFinished -= ConnectionFinished;
         }
         #endregion
 
