@@ -5,6 +5,7 @@ using SceneManagement;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Game.SavingSystem;
 
 namespace Menu.LevelSelector
 {
@@ -25,7 +26,7 @@ namespace Menu.LevelSelector
         {
         }
 
-        public void UpdateWidget(List<LiveLevelInfo> levels)
+        public void UpdateWidget(List<LiveLevelInfo> levels, int nbChallengeComplete)
         {
             if (levels.Count > 0)
             {
@@ -68,7 +69,12 @@ namespace Menu.LevelSelector
                     }
                     else if (ui.name == "PanelLocked")
                     {
-                        if (CharacterInfo.PlayerChallengeOwned >= levels[i].LevelInfo.ChallengeOnThisLevelToUnlockComplete)
+                        if (i >= 1)
+                        {
+                            Debug.Log("Has unlock " + nbChallengeComplete);
+                            Debug.Log("to Unlock" + levels[i].LevelInfo.ChallengeOnThisLevelToUnlockComplete);
+                        }
+                        if (nbChallengeComplete >= levels[i].LevelInfo.ChallengeOnThisLevelToUnlockComplete)
                         {
                             CanvasGroup panel = ui.GetComponent<CanvasGroup>();
                             if (panel)
@@ -103,7 +109,11 @@ namespace Menu.LevelSelector
                             btn.enabled = false;
                             break;
                         }
-                        btn.onClick.AddListener(() => SceneLoader.Instance.LoadScene(2, 1));
+                        int sceneIndex = i + 2;
+                        btn.onClick.AddListener(() => {
+                            Debug.Log("Scene to load :" + sceneIndex);
+                            SceneLoader.Instance.LoadScene(sceneIndex, 1);
+                            });
                     }
                 }
             }

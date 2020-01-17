@@ -33,13 +33,18 @@ namespace Menu.LevelSelector
             else
             {
                 var levelInfoDatas = _profilData.CharacterGlobalInfo.LevelInfoDatas.ToList();
+                int nbChallengeDone = 0;
                 foreach (var levelInfo in Levels)
                 {
                     var index = levelInfoDatas.FindIndex(it => it.LevelTitle == levelInfo.LevelTitle);
                     _liveLevels.Add(index >= 0
                         ? new LiveLevelInfo(levelInfo, levelInfoDatas[index])
                         : new LiveLevelInfo(levelInfo));
+                    nbChallengeDone += _liveLevels.Last().NumberChallengeComplete();
+                    Debug.Log("NbChallenge on level :" + _liveLevels.Count + " : " + nbChallengeDone);
                 }
+                _profilData.CharacterGlobalInfo.PlayerChallengeOwned = nbChallengeDone;
+                Debug.Log("Total :" + _profilData.CharacterGlobalInfo.PlayerChallengeOwned);
             }
             _profilData?.CharacterGlobalInfo?.SaveLevels(_liveLevels);
         }
@@ -49,7 +54,7 @@ namespace Menu.LevelSelector
             _prefab.SetActive(true);
             var levelSelector = _prefab.GetComponent<LevelSelector>();
             
-            levelSelector.UpdateWidget(_liveLevels);
+            levelSelector.UpdateWidget(_liveLevels, _profilData.CharacterGlobalInfo.PlayerChallengeOwned);
             levelSelector.Show(true);
         }
     }
