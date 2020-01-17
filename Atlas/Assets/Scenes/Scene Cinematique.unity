@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -138,7 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1e9dae7d9cd398499441fae0cf2affe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToPress: 3
+  timeToPress: 1
 --- !u!1001 &895889802
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -146,11 +146,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7191415729882507351, guid: ac5e036bd65587d469e98428241016b1,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 574175035905673121, guid: ac5e036bd65587d469e98428241016b1,
         type: 3}
       propertyPath: m_Name
@@ -160,6 +155,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7191415729882507351, guid: ac5e036bd65587d469e98428241016b1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2448452576498392000, guid: ac5e036bd65587d469e98428241016b1,
         type: 3}
