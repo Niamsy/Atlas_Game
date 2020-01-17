@@ -14,6 +14,12 @@ namespace Menu.LevelSelector
 
         private ProfilData _profilData = null;
 
+        protected override void Awake()
+        {
+            base.Awake();
+            //SaveManager.Instance.ReloadAccountData();
+        }
+
         protected override void SavingAccountData(AccountData data)
         {
             _profilData?.CharacterGlobalInfo?.SaveLevels(_liveLevels);

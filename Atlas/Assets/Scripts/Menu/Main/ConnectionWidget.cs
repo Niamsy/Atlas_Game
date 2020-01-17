@@ -31,14 +31,15 @@ namespace Menu.Main
                 SceneLoader.FromGame = false;
                 if (SaveManager.Instance.SelectedProfil != null)
                 {
-                    SaveManager.InstantiateProfilToUse(SaveManager.Instance.AccountData,
-                        SaveManager.Instance.SelectedProfil, SaveManager.Instance.SelectedProfil.Name);
-                    SaveManager.Instance.SelectProfilToUseForSave(SaveManager.Instance.SelectedProfil);
+                    // SaveManager.InstantiateProfilToUse(SaveManager.Instance.AccountData,
+                    //     SaveManager.Instance.SelectedProfil, SaveManager.Instance.SelectedProfil.Name);
+                    // SaveManager.Instance.SelectProfilToUseForSave(SaveManager.Instance.SelectedProfil);
                     SaveManager.Instance.ReloadAccountData();
                 }
-
+             
                 if (_levelMenu)
                     _levelMenu.UpdateSelectedLevelWidget();
+                
                 gameObject.SetActive(false);
                 return;
             }
