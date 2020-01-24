@@ -52,9 +52,12 @@ namespace Menu.Main
 
             try
             {
-                _username.text = _fs.getConfigValue(Key.Username, Section.Default);
-                _password.text = _fs.getConfigValue(Key.Password, Section.Default);
                 _saveUsername.isOn = _fs.GetConfigBoolValue(Key.SaveUsername, Section.Default);
+                if (_saveUsername.isOn)
+                {
+                    _username.text = _fs.getConfigValue(Key.Username, Section.Default);
+                    _password.text = _fs.getConfigValue(Key.Password, Section.Default);
+                }
             }
             catch (Exception e)
             {
@@ -77,6 +80,10 @@ namespace Menu.Main
 
         private void OnDestroy()
         {
+            if (_saveUsername.isOn)
+                SaveValue(_username.text, _password.text);
+            else
+                SaveValue("", "");
             if (_connected)
                 ActualRequestManager.OnConnectionFinished -= ConnectionFinished;
         }

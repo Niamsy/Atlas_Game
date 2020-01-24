@@ -64,9 +64,12 @@ namespace Menu.LevelSelector
         {
             _prefab.SetActive(true);
             var levelSelector = _prefab.GetComponent<LevelSelector>();
-            
-            levelSelector.UpdateWidget(_liveLevels, _profilData.CharacterGlobalInfo.PlayerChallengeOwned);
-            levelSelector.Show(true);
+
+            if (levelSelector != null)
+            {
+                levelSelector.UpdateWidget(_liveLevels, _profilData?.CharacterGlobalInfo?.PlayerChallengeOwned ?? 0);
+                levelSelector.Show(true);
+            }
         }
     }
 }
