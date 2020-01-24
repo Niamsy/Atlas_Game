@@ -55,6 +55,11 @@ namespace Menu.LevelSelector
             _profilData?.CharacterGlobalInfo?.SaveLevels(_liveLevels);
         }
 
+        public void forceReloadData(AccountData data)
+        {
+            LoadingAccountData(data);
+        }
+
         public void UpdateSelectedLevelWidget()
         {
             _prefab.SetActive(true);

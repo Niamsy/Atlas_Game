@@ -29,14 +29,17 @@ namespace Menu.Main
             if (SceneLoader.FromGame)
             {
                 SceneLoader.FromGame = false;
+
                 if (SaveManager.Instance.SelectedProfil != null)
                 {
                     // SaveManager.InstantiateProfilToUse(SaveManager.Instance.AccountData,
                     //     SaveManager.Instance.SelectedProfil, SaveManager.Instance.SelectedProfil.Name);
                     // SaveManager.Instance.SelectProfilToUseForSave(SaveManager.Instance.SelectedProfil);
+
                     SaveManager.Instance.ReloadAccountData();
+                    _levelMenu.forceReloadData(SaveManager.Instance.AccountData);
                 }
-             
+
                 if (_levelMenu)
                     _levelMenu.UpdateSelectedLevelWidget();
                 
