@@ -85,7 +85,7 @@ namespace Game.HUD.Objectives
             if (levelInfo == null)
                 return;
             _currentLevel = new LiveLevelInfo(levelInfo);
-            if (_profilData == null)
+            if (_profilData?.CharacterGlobalInfo?.LevelInfoDatas == null)
                 return;
             var index = _profilData.CharacterGlobalInfo.LevelInfoDatas.ToList()
                 .FindIndex(it => it.LevelTitle == levelInfo.LevelTitle);

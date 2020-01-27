@@ -57,7 +57,7 @@ namespace Menu.LevelSelector
 
         public void forceReloadData(AccountData data)
         {
-            LoadingAccountData(data);
+            //LoadingAccountData(data);
         }
 
         public void UpdateSelectedLevelWidget()
