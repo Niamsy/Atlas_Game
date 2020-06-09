@@ -1,6 +1,9 @@
 ﻿using Game.SavingSystem;
 using Game.SavingSystem.Datas;
+using Menu.LevelSelector;
 using SceneManagement;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Menu.Main
 {
@@ -8,10 +11,8 @@ namespace Menu.Main
     {
         public ProfilDisplay[] Displays = new ProfilDisplay[5];
         private SaveManager _saveManager = null;
-        
-        public int NextSceneIndex = 2;
-        public int MainMenuSceneIndex = 1;
-        
+        public LevelSaver levelSaver = null;
+
         protected override void InitialiseWidget()
         {
             _saveManager = SaveManager.Instance;
@@ -38,7 +39,9 @@ namespace Menu.Main
             if (data.Used == false) //Create
                 SaveManager.InstantiateProfilToUse(_saveManager.AccountData, data, "Game Profil " + data.ID);
             _saveManager.SelectProfilToUseForSave(data);
-            SceneLoader.Instance.LoadScene(NextSceneIndex, MainMenuSceneIndex);
+            levelSaver.UpdateSelectedLevelWidget();
+            this.gameObject.SetActive(false);
+            //SceneLoader.Instance.LoadScene(NextSceneIndex, MainMenuSceneIndex);
         }
     }
 }

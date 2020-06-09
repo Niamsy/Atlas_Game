@@ -35,6 +35,12 @@ namespace Menu.Settings.Content.Dropdown
             }
         }
 
+        public override void SaveData()
+        {
+            _fs.setConfigFileValue(FileSystem.Key.ResolutionWidth, FileSystem.Section.Graphical, ActualResolution().width.ToString());
+            _fs.setConfigFileValue(FileSystem.Key.ResolutionHeight, FileSystem.Section.Graphical, ActualResolution().height.ToString());
+        }
+        
         private bool ResolutionAreSame(Resolution res1, Resolution res2)
         {
             return (res1.width == res2.width && res1.height == res2.height);

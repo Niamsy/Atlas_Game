@@ -6,14 +6,13 @@ namespace Game.ResourcesManagement.Consumer
 {
     public abstract class IConsumer : MonoBehaviour
     {
+        [Header("Base Consumer Variables")]
         public List<Resource>           ResourcesToConsume;
         public Rate                     ConsumptionRate;
         public ResourcesStock           LinkedStock;
 
         private List<IProducer>         _linkedProducers = new List<IProducer>();
         
-        public abstract void            ConsumeResource();
-
         #if UNITY_EDITOR
         [Header("Debug"), SerializeField]
         private bool _debugDisplay = false;
@@ -40,11 +39,16 @@ namespace Game.ResourcesManagement.Consumer
                 UnsubscribeToProducer(producer);
         }
 
+        public virtual void ConsumeResource()
+        {
+            foreach (var resource in ResourcesToConsume)
+                LinkedStock.RemoveResources(resource, ConsumptionRate.ResourcePerTick);
+        }
+
         public void SubscribeToProducer(IProducer producer)
         {
             if (producer == null || _linkedProducers.Contains(producer))
                 return;
-           
 #if UNITY_EDITOR
             if (_debugDisplay) Debug.Log(name + " subscribe " + producer.name);
 #endif
@@ -71,7 +75,7 @@ namespace Game.ResourcesManagement.Consumer
                 producer.RemoveConsumer(this, resources);
         }
 
-        public void ReceiveResource(Resource resource, int quantity)
+        public virtual void ReceiveResource(Resource resource, int quantity)
         {
             LinkedStock.AddResources(resource, quantity);
         }

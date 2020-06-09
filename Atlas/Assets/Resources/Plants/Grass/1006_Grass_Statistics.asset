@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b711fd0b07d4dac4e9f32fbb9c981529, type: 3}
+  m_Name: 1006_Grass_Statistics
+  m_EditorClassIdentifier: 
+  _name: {fileID: 11400000, guid: 61641dcf2afcfe14e99088485049c631, type: 2}
+  ScientificName: grass
+  _ID: 1006
+  _prefab: {fileID: 4959721022312101125, guid: cf2973ecbf026e346b57b4f0db5dd946, type: 3}
+  _maxHeight: 50
+  _growthRate: {fileID: 11400000, guid: f9c6d5d5ed641694cbf966f3abbe7aca, type: 2}
+  _growthDuration: 50
+  _reproduction: 0
+  _soilType: -1
+  _soilPh:
+    Min: 3
+    Max: 7.2
+  _soilHumidity:
+    Min: 10
+    Max: 50
+  _plantContainer: -1
+  _sunExposure:
+    Min: 50
+    Max: 100
+  _coldResistance:
+    Min: 0
+    Max: 100
+  _plantingPeriods: 010101010101010101010101
+  _floweringPeriods: 000000000000000000000000
+  _harvestPeriods: 000000000000000000000000
+  _cuttingPeriods: 000000000000000000000000
+  _stages:
+  - {fileID: 0}

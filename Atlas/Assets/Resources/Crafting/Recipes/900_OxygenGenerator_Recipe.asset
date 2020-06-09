@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b42e36417765924eb01b4499247336e, type: 3}
+  m_Name: 900_OxygenGenerator_Recipe
+  m_EditorClassIdentifier: 
+  _id: 900
+  _prefabDroppedGO: {fileID: 1322586485597028303, guid: ebb61db5c7058894cbc8200756edef0c,
+    type: 3}
+  _prefabHoldedGO: {fileID: 1322586485597028303, guid: ebb61db5c7058894cbc8200756edef0c,
+    type: 3}
+  _sprite: {fileID: 21300000, guid: 429ae9ca295dd414c8f303173d805f5e, type: 3}
+  _name: {fileID: 11400000, guid: ade851ffba10830478b0bb386d176a04, type: 2}
+  _description: {fileID: 11400000, guid: 0adf76c0d3dcab841aae4235bf921cf1, type: 2}
+  _usageText: {fileID: 11400000, guid: 7475420d254ebf542b587448305c81a7, type: 2}
+  _animation:
+    anim: 0
+  _category: {fileID: 11400000, guid: 62806329862f4d845abb908042cb7a6f, type: 2}
+  recipeCategory: {fileID: 11400000, guid: a046ff6db5bb53341a61748dfc4661a9, type: 2}
+  craftingDuration: 60
+  ingredients:
+  - Item: {fileID: 11400000, guid: 4824eeff7dc4ef448bba42e327ba88eb, type: 2}
+    RequiredQuantity: 10
+  - Item: {fileID: 11400000, guid: 284768b00b0acb24e951d9ec955b25bf, type: 2}
+    RequiredQuantity: 10
+  product:
+    Item: {fileID: 11400000, guid: 655f0347d8107bd46a7d37ad710efb7d, type: 2}
+    ProducedQuantity: 1

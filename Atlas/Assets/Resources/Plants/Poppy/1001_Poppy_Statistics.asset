@@ -13,16 +13,17 @@ MonoBehaviour:
   m_Name: 1001_Poppy_Statistics
   m_EditorClassIdentifier: 
   _name: {fileID: 11400000, guid: 28917d7740ffefe4fb7cb11a2252ae60, type: 2}
+  ScientificName: papaver rhoeas
   _ID: 1001
   _prefab: {fileID: 3542190157137659734, guid: 09fbbefcba9fd744dbc46d889e130b3d, type: 3}
-  _maxHeight: 1
+  _maxHeight: 0.15
   _growthRate: {fileID: 11400000, guid: b3109efbadc41074f8835a24597d9823, type: 2}
-  _growthDuration: 20
-  _reproduction: 1
-  _soilType: 1
+  _growthDuration: 1
+  _reproduction: 0
+  _soilType: -1
   _soilPh:
     Min: 7
-    Max: 14
+    Max: 8
   _soilHumidity:
     Min: 25
     Max: 50
@@ -35,7 +36,7 @@ MonoBehaviour:
     Max: 100
   _plantingPeriods: 000000010000000000000000
   _floweringPeriods: 000000010101010000000000
-  _harvestPeriods: 000000000000000000000000
+  _harvestPeriods: 000000010101010000000000
   _cuttingPeriods: 000000000000000000000000
   _stages:
   - {fileID: 11400000, guid: 06d6c70d73bb34e4ea47a94ef10a459e, type: 2}

@@ -1,4 +1,8 @@
-﻿using SceneManagement;
+﻿using System;
+using FileSystem;
+using Game.SavingSystem;
+using Menu.LevelSelector;
+using SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,12 +16,60 @@ namespace Menu.Main
         [SerializeField] private Button     _connectionButton = null;
         [SerializeField] private Button     _registerButton = null;
         [SerializeField] private Button     _passwordLost = null;
+        [SerializeField] private Toggle     _saveUsername = null;
 
         [SerializeField] private MenuWidget _nextWidget = null;
+
+        [SerializeField] private LevelSaver _levelMenu = null;
+        private AtlasFileSystem _fs;
+        private bool _connected = false;
+
+        protected override void Awake()
+        {
+            if (SceneLoader.FromGame)
+            {
+                SceneLoader.FromGame = false;
+
+                if (SaveManager.Instance.SelectedProfil != null)
+                {
+                    // SaveManager.InstantiateProfilToUse(SaveManager.Instance.AccountData,
+                    //     SaveManager.Instance.SelectedProfil, SaveManager.Instance.SelectedProfil.Name);
+                    // SaveManager.Instance.SelectProfilToUseForSave(SaveManager.Instance.SelectedProfil);
+
+                    SaveManager.Instance.ReloadAccountData();
+                    _levelMenu.forceReloadData(SaveManager.Instance.AccountData);
+                }
+
+                if (_levelMenu)
+                    _levelMenu.UpdateSelectedLevelWidget();
+                
+                gameObject.SetActive(false);
+                return;
+            }
+            
+            base.Awake();
+            _fs = AtlasFileSystem.Instance;
+
+            try
+            {
+                _saveUsername.isOn = _fs.GetConfigBoolValue(Key.SaveUsername, Section.Default);
+                if (_saveUsername.isOn)
+                {
+                    _username.text = _fs.getConfigValue(Key.Username, Section.Default);
+                    _password.text = _fs.getConfigValue(Key.Password, Section.Default);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+        
         #region Initialisation/Destruction
         protected override void InitialiseWidget()
         {
             ActualRequestManager.OnConnectionFinished += ConnectionFinished;
+            _connected = true;
 
             _connectionButton.onClick.AddListener(Connect);
             _username.onValueChanged.AddListener(UpdateButtonState_StringListener);
@@ -28,7 +80,12 @@ namespace Menu.Main
 
         private void OnDestroy()
         {
-            ActualRequestManager.OnConnectionFinished -= ConnectionFinished;
+            if (_saveUsername.isOn)
+                SaveValue(_username.text, _password.text);
+            else
+                SaveValue("", "");
+            if (_connected)
+                ActualRequestManager.OnConnectionFinished -= ConnectionFinished;
         }
         #endregion
 
@@ -60,11 +117,24 @@ namespace Menu.Main
 
             if (success)
             {
+                if (_saveUsername.isOn)
+                    SaveValue(_username.text, _password.text);
+                else
+                    SaveValue("", "");
+                
                 Close();
                 _nextWidget.Open();
             }
             else
                 ErrorText.text = message;
+        }
+
+        public void SaveValue(string username, string password)
+        {
+            _fs.setConfigFileValue(Key.SaveUsername, Section.Default, (_saveUsername.isOn).ToString());
+
+            _fs.setConfigFileValue(Key.Password, Section.Default, password);
+            _fs.setConfigFileValue(Key.Username, Section.Default, username);
         }
         #endregion
     }

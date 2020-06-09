@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using Game.SavingSystem.Datas;
@@ -30,6 +29,7 @@ namespace Game.SavingSystem
                                             (null) : (AccountData.Profils[_selectedProfil]);
         
         public delegate void ProfilSaveDelegate(AccountData accountData);
+
         public delegate void MapSaveDelegate(MapData mapData);
     
         public static event ProfilSaveDelegate BeforeSavingAccountData;
@@ -37,6 +37,7 @@ namespace Game.SavingSystem
 
         public static event MapSaveDelegate BeforeSavingMapData;
         public static event MapSaveDelegate UponLoadingMapData;
+
 
         public InputControls InputControls { get; set; }
 
@@ -63,10 +64,13 @@ namespace Game.SavingSystem
 
         private void OnApplicationFocus(bool hasFocus)
         {
-            if (hasFocus)
-                InputControls.Player.Enable();
-            else
-                InputControls.Player.Disable();
+            if (InputControls != null)
+            {
+                if (hasFocus)
+                    InputControls.Player.Enable();
+                else
+                    InputControls.Player.Disable();
+            }
         }
         
         private void Init()
@@ -74,6 +78,12 @@ namespace Game.SavingSystem
             InputControls = new InputControls();
             InputControls.Player.Enable();
 
+#if ATLAS_DEBUG
+            InputControls.Debug.Enable();
+#else
+            InputControls.Debug.Disable();
+#endif
+            
 #if UNITY_EDITOR
             if (AccountData != null)
             {
@@ -125,10 +135,9 @@ namespace Game.SavingSystem
         {
             if (AccountData == null)
                 return (false);
-            
-            if (BeforeSavingAccountData != null)
-                BeforeSavingAccountData(AccountData);
-            
+
+            BeforeSavingAccountData?.Invoke(AccountData);
+
             return (SaveInFile(AccountFile_Path(AccountData.ID), AccountData));
         }
         
@@ -152,15 +161,18 @@ namespace Game.SavingSystem
         #region Map Data
         public bool SaveMapData(int sceneIndex)
         {
-            if (BeforeSavingMapData != null)
-                BeforeSavingMapData(_mapData);
+            BeforeSavingMapData?.Invoke(_mapData);
+            if (_accountLoaded && AccountData != null)
+            {
+                BeforeSavingAccountData?.Invoke(_accountData);
+                SaveInFile(AccountFile_Path(AccountData.ID), AccountData);
+            }
 #if ATLAS_DEBUG
             Debug.Log("Saving map data of the scene " + sceneIndex);
 #endif  
             CheckSaveDirectory(SaveDirectory_Path());
             CheckSaveDirectory(AccountDirectory_Path(AccountData.ID));
             CheckSaveDirectory(ProfilDirectory_Path(SelectedProfil.ID, AccountData.ID));
-
             return (SaveInFile(MapFile_Path(sceneIndex, SelectedProfil.ID, AccountData.ID), _mapData));
         }
 
@@ -168,10 +180,14 @@ namespace Game.SavingSystem
         {
 #if ATLAS_DEBUG
             Debug.Log("Loading map data of the scene " + sceneIndex);
-#endif  
+#endif
             _mapLoaded = LoadFromFile(MapFile_Path(sceneIndex, SelectedProfil.ID, AccountData.ID), ref _mapData);
-            if (_mapLoaded && UponLoadingMapData != null)
-                UponLoadingMapData(_mapData);
+            if (_mapLoaded)
+                UponLoadingMapData?.Invoke(_mapData);
+            
+            if (_accountLoaded)
+                UponLoadingAccountData?.Invoke(_accountData);
+            
             if (_mapData == null)
             {
                 _mapData = new MapData();
@@ -249,7 +265,10 @@ namespace Game.SavingSystem
                 {
                     BinaryFormatter bf = new BinaryFormatter();
                     FileStream file = File.Open(path, FileMode.Open);
-                    data = (T)bf.Deserialize(file);
+                    object obj = bf.Deserialize(file);
+                    if (obj.GetType() != typeof(T))
+                        throw new SerializationException("The save file is of a invalid type." + obj.GetType() + " and " + typeof(T));
+                    data = (T)obj;
                     file.Close();
                     return (true);
                 }

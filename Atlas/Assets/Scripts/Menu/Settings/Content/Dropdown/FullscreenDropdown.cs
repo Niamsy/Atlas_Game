@@ -40,6 +40,11 @@ namespace Menu.Settings.Content.Dropdown
             }
         }
 
+        public override void SaveData()
+        {
+            _fs.setConfigFileValue(FileSystem.Key.Fullscreen, FileSystem.Section.Graphical, ((int)ActualValue()).ToString());
+        }
+        
         public FullScreenMode ActualValue() { return Modes[Dropdown.value].Mode;}
         public override bool DidValueChanged() { return (_currentMode != ActualValue()); }
     }

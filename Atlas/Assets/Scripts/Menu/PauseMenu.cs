@@ -1,5 +1,5 @@
-﻿using System;
-using Game;
+﻿using Game.Map.DayNight;
+using Game.Notification;
 using Game.SavingSystem;
 using Menu.Settings;
 using SceneManagement;
@@ -12,7 +12,13 @@ namespace Menu
 	{
 		[Header("Pause specifics")]
 		[SerializeField] private SettingsMenu _settings = null;
-        
+
+		[Header("Level Complete")]
+		[SerializeField] private int SceneToLoad = 1;
+		[SerializeField] private int SceneToUnLoad = 2;
+		[SerializeField] private Notification levelCompleteNotification = null;
+		[SerializeField] private GameObject nextLevelCompleteButton = null;
+		
 		protected override void InitialiseWidget()
 		{
 			_settings.OnShow += ExitSetting;
@@ -49,14 +55,49 @@ namespace Menu
 		
 		public override void Show(bool display, bool force = false)
 		{
-			TimeManager.Instance.PauseGame(display);
+			if (display)
+				TimeManager.AskForPause(this);
+			else
+				TimeManager.StopPause(this);
+			
 			base.Show(display, force);
 		}
 
 		public void QuitTheGame()
 		{
+#if UNITY_EDITOR
+			UnityEditor.EditorApplication.isPlaying = false;
+#else
 			SceneLoader.Instance.QuitTheGame();
+#endif
 		}
-		
+
+
+		public void LoadNextLevel()
+		{
+			if (TimeManager.IsGamePaused)
+			{
+				TimeManager.StopPause(this);
+			}
+            SceneLoader.Instance.LoadScene(SceneToLoad, SceneToUnLoad);
+		}
+
+		public void LoadMainMenu()
+		{
+			if (TimeManager.IsGamePaused)
+			{
+				TimeManager.StopPause(this);
+			}
+
+			SceneLoader.FromGame = true;
+			SceneLoader.Instance.LoadScene(1, SceneToUnLoad);
+		}
+
+		public void ReceivedNotification(Game.Notification.Notification notification)
+		{
+			if (notification != levelCompleteNotification || nextLevelCompleteButton == null) return;
+			
+			nextLevelCompleteButton.SetActive(true);
+		} 
 	}
 }

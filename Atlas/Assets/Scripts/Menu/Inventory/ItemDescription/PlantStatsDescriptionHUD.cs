@@ -1,12 +1,19 @@
 ﻿using Game.Item;
 using Game.Item.PlantSeed;
 using Menu.Inventory.ItemDescription.Details;
+using Plants.Plant;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Menu.Inventory.ItemDescription
 {
-    public class PlantStatsDescriptionHUD : ASubItemDescriptionHUD
+    public class PlantStatsDescriptionHUD : MonoBehaviour
     {
+        private PlantStatistics _ps;
+        
+        [SerializeField] private Text		_name = null;
+        [SerializeField] private Text		_scientifName = null;
+        
         [SerializeField] private FloatDisplay _maxHeight = null;
         [SerializeField] private FloatDisplay _growthDuration = null;
 
@@ -27,38 +34,43 @@ namespace Menu.Inventory.ItemDescription
         [SerializeField] private GrowthRate GrowthRate;
         */
         
-        private Seed _item;
-
-        public override void SetItem(ItemAbstract item)
+        public void SetPlant(PlantStatistics plantStat)
         {
-            Seed seedItem = item as Seed;
-            _item = seedItem;
+            _ps = plantStat;
             
             UpdateDisplay();
         }
 
-        public override void UpdateDisplay()
+        public void Start()
         {
-            gameObject.SetActive(_item != null);
+            UpdateDisplay();
+        }
+
+        public void UpdateDisplay()
+        {
+            gameObject.SetActive(_ps != null);
         
-            if (_item != null)
+            if (_ps != null)
             {
-                _maxHeight.SetValue(_item.PlantStatistics.MaxHeight);
-                _growthDuration.SetValue(_item.PlantStatistics.GrowthDuration);
+                _name.text = _ps.Name;
+                _scientifName.text = _ps.ScientificName;
                 
-                _soilPh.SetValue(_item.PlantStatistics.SoilPh);
-                _soilHumidity.SetValue(_item.PlantStatistics.SoilHumidity);
-                _soilType.SetValue((short)_item.PlantStatistics.SoilType);
+                _maxHeight.SetValue(_ps.MaxHeight);
+                _growthDuration.SetValue(_ps.GrowthDuration);
+                
+                _soilPh.SetValue(_ps.SoilPh);
+                _soilHumidity.SetValue(_ps.SoilHumidity);
+                _soilType.SetValue((short)_ps.SoilType);
 
-                _sunExposure.SetValue(_item.PlantStatistics.SunExposure);
-                _coldResistance.SetValue(_item.PlantStatistics.ColdResistance);
-                _reproductions.SetValue((short)_item.PlantStatistics.Reproductions);
-                _plantContainers.SetValue((short)_item.PlantStatistics.PlantContainers);
+                _sunExposure.SetValue(_ps.SunExposure);
+                _coldResistance.SetValue(_ps.ColdResistance);
+                _reproductions.SetValue((short)_ps.Reproductions);
+                _plantContainers.SetValue((short)_ps.PlantContainers);
 
-                _plantingPeriods.SetValue(_item.PlantStatistics.PlantingPeriods);
-                _floweringPeriods.SetValue(_item.PlantStatistics.FloweringPeriods);
-                _harvestPeriods.SetValue(_item.PlantStatistics.HarvestPeriods);
-                _cuttingPeriods.SetValue(_item.PlantStatistics.CuttingPeriods);
+                _plantingPeriods.SetValue(_ps.PlantingPeriods);
+                _floweringPeriods.SetValue(_ps.FloweringPeriods);
+                _harvestPeriods.SetValue(_ps.HarvestPeriods);
+                _cuttingPeriods.SetValue(_ps.CuttingPeriods);
             }
         }
     }

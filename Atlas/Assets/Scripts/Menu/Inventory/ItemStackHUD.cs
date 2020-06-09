@@ -14,15 +14,15 @@ namespace Menu.Inventory
 
         [SerializeField] private Image     _sprite = null;
         [SerializeField] private Text      _quantity = null;
-        [SerializeField] private GameObject _dropHint = null;
 
         protected Button        Button = null;
-        protected ItemStack     ActualStack = null;
+        public ItemStack     ActualStack = null;
 
         private RectTransform    _rectTransform = null;
         private Canvas          _rootCanvas = null;
         private bool _mouseOver = false;
         private bool ShouldBeDisplayed => ((ActualStack != null) && (!ActualStack.IsEmpty));
+        private GlowDeactivator _glowDeactivator = null;
 
         private Action<ItemStack> OnDrop;
         #endregion
@@ -32,6 +32,7 @@ namespace Menu.Inventory
             _rectTransform = GetComponent<RectTransform>();
             _rootCanvas = GetComponentInParent<Canvas>();
             Button = GetComponent<Button>();
+            _glowDeactivator = GetComponent<GlowDeactivator>();
         }
 
         private void Update()
@@ -62,6 +63,10 @@ namespace Menu.Inventory
             {
                 _quantity.text = ActualStack.Quantity.ToString();
                 _sprite.sprite = ActualStack.Content.Sprite;
+                if (_glowDeactivator != null)
+                {
+                    _glowDeactivator.SetGlowActive();
+                }
             }
         }
         
@@ -82,8 +87,6 @@ namespace Menu.Inventory
             var position = _rectTransform.position;
             position.z = -1;
             _rectTransform.position = position;
-            if (_dropHint != null)
-                _dropHint.SetActive(true);
         }
 
         public void OnDrag(PointerEventData eventData)
@@ -93,8 +96,6 @@ namespace Menu.Inventory
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            if (_dropHint != null)
-                _dropHint.SetActive(false);
             _sprite.transform.position = _originalPosition;
             _sprite.transform.SetParent(transform);
             var position = _rectTransform.position;
@@ -111,14 +112,17 @@ namespace Menu.Inventory
             List<RaycastResult> results = new List<RaycastResult>();
             EventSystem.current.RaycastAll(pointerData, results);
          
-            if (results.Count > 0)
+            if (results.Count > 1)
             {
                 var stack = results[0].gameObject.GetComponent<ItemStackHUD>();
                 if (stack != null)
                     ActualStack.SwapStack(stack.ActualStack);
             }
-            else if (results.Count == 0)
+            else
+            {
                 Drop();
+            }
+                
         }
         #endregion
 

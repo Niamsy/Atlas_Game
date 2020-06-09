@@ -20,10 +20,14 @@ namespace Game.Inventory
         #region Initialisation / Destruction
         protected void InitMapWithSize(int size)
         {
-            Slots = new List<ItemStack>();
+            if (Slots == null)
+                Slots = new List<ItemStack>();
+    
             Slots.Capacity = size;
-            for (int x = 0; x < size; x++)
+            for (int x = Slots.Count; x < size; x++)
+            {
                 Slots.Add(new ItemStack());
+            }
         }
         #endregion
 
@@ -69,11 +73,7 @@ namespace Game.Inventory
             foreach (ItemStack itemStack in Slots)
             {
                 if (itemStack.FuseStack(newItem) && newItem.IsEmpty)
-                {
-                    Debug.Log("Fuse " + newItem.Content.Id);
-                    Debug.Log("Fuse " + itemStack.Content.Id);
                     return (null);
-                }
             }
             
 
@@ -96,8 +96,16 @@ namespace Game.Inventory
         {
             Drop(stack, transform.forward);
         }
-        
+
         public void Drop(ItemStack stack, Vector3 dir)
+        {
+            DropFunction(stack, transform, transform.forward);
+            
+            if (OnDropItemAudio && OnDropItemEvent)
+                OnDropItemEvent.Raise(OnDropItemAudio, null);
+        }
+        
+        public static void DropFunction(ItemStack stack, Transform transform, Vector3 dir)
         {
             if (stack.IsEmpty)
                 return;
@@ -114,10 +122,10 @@ namespace Game.Inventory
                 var itemStackB = droppedObject.GetComponent<ItemStackBehaviour>();
                 var rb = droppedObject.GetComponent<Rigidbody>();
                 rb.AddForce(dir.normalized * 0.1f);
-                itemStackB.Slot.SetItem(stack.Content, stack.Quantity);
+                if (itemStackB)
+                    itemStackB.Slot.SetItem(stack.Content, stack.Quantity);
+
                 stack.EmptyStack();
-                if (OnDropItemAudio && OnDropItemEvent)
-                    OnDropItemEvent.Raise(OnDropItemAudio, null);
             }
         }
 
@@ -142,36 +150,50 @@ namespace Game.Inventory
 
             foreach (ItemStack itemStack in Slots)
             {
-                if (itemStack.Content.Id == item.Id)
+                if (itemStack.Content && itemStack.Content.Id == item.Id)
                     total += itemStack.Quantity;
             }
 
             return total;
         }
 
+        public bool HasEnoughItems(Item.ItemAbstract item, int quantity)
+        {
+            return CountItems(item) >= quantity;
+        }
+
         // Be sure to check the presence of required items with CountItems before
         // Destroy the first items encountered in the inventory until the required quantity 
         // is reached or all items are destroyed
-        public void DestroyFirsts(Item.ItemAbstract itemToDestroy, int quantity)
+        public int DestroyFirsts(Item.ItemAbstract itemToDestroy, int toRemove)
         {
-            foreach (ItemStack itemStack in Slots)
+            var stacksToEmpty = new List<ItemStack>();
+            var total = 0;
+            
+            for (var i = 0; i < Slots.Capacity; i++)
             {
-                if (itemStack.Content.Id == itemToDestroy.Id)
+                var itemStack = Slots[i];
+                if (itemStack.IsEmpty == false && itemStack.Content.Id == itemToDestroy.Id)
                 {
-                    if (itemStack.Quantity <= quantity)
+                    if (itemStack.Quantity - toRemove <= 0)
                     {
-                        quantity -= itemStack.Quantity;
-                        itemStack.EmptyStack();
+                        toRemove -= itemStack.Quantity;
+                        stacksToEmpty.Add(itemStack);
+                        total += itemStack.Quantity;
                     }
                     else
                     {
-                        itemStack.ModifyQuantity(itemStack.Quantity - quantity);
-                        quantity = 0;
+                        itemStack.ModifyQuantity(itemStack.Quantity - toRemove);
+                        total += toRemove;
+                        toRemove = 0;
                     }
                 }
 
-                if (quantity <= 0) break;
+                if (toRemove <= 0) break;
             }
+            
+            stacksToEmpty.ForEach(stack => stack.EmptyStack());
+            return total;
         }
     }
 }

@@ -1,67 +1,96 @@
-﻿public class AtlasFileSystem
+﻿namespace FileSystem
 {
-
-    #region private Variable
-    private ConfigFileManager __configFileManager = new ConfigFileManager();
-    #endregion
-
-    #region Item dataHolders
-    private ItemDataHolder<int> __plants;
-    private ItemDataHolder<int> __tools;
-    private ItemDataHolder<int> __items;
-    #endregion
-
-    #region public Variables
-    #endregion
-
-    #region Singleton
-    private static AtlasFileSystem _instance = null;
-    public static AtlasFileSystem Instance
+    public static class Key
     {
-        get
+        public static string Lang = "Lang";
+            
+        public static string ResolutionWidth = "Width";
+        public static string ResolutionHeight = "Height";
+        public static string Fullscreen = "Fullscreen";
+        public static string Password = "Password";
+        public static string Username = "Username";
+        public static string SaveUsername = "SaveUsername";
+    }
+
+    public static class Section
+    {
+        public static string Graphical = "Graphical";
+        public static string Default = "Default";
+    }
+    
+    public class AtlasFileSystem
+    {
+        
+        #region private Variable
+        private ConfigFileManager __configFileManager = new ConfigFileManager();
+        #endregion
+
+        #region Item dataHolders
+        private ItemDataHolder<int> __plants;
+        private ItemDataHolder<int> __tools;
+        private ItemDataHolder<int> __items;
+        #endregion
+
+        #region public Variables
+        #endregion
+
+        #region Singleton
+        private static AtlasFileSystem _instance = null;
+        public static AtlasFileSystem Instance
         {
-            if (_instance == null)
-                _instance = new AtlasFileSystem();
-            return (_instance);
+            get
+            {
+                if (_instance == null)
+                    _instance = new AtlasFileSystem();
+                return (_instance);
+            }
         }
-    }
 
-    private AtlasFileSystem(){}
-    #endregion
+        private AtlasFileSystem(){}
+        #endregion
 
-    #region ConfigFile
-    public string getConfigValue(string key, string section = "Default")
-    {
-        return __configFileManager.getConfigValue(key, section);
-    }
-    
-    public void setConfigFileValue(string Section, string Key, string Value)
-    {
-        __configFileManager.setConfigValue(Key, Value, Section);
-    }
-    
-
-    public void saveConfig()
-    {
-        __configFileManager.saveConfig();
-    }
-    #endregion
-
-    #region ItemInformations
-
-    public ItemObjType getItemData<ItemObjType>(ItemType type, string itemName) {
-        switch (type)
+        #region ConfigFile
+        public string getConfigValue(string key, string section = "Default")
         {
-            case ItemType.Equipment:
-            case ItemType.Item:
-            case ItemType.Plant:
-            case ItemType.Structure:
-            case ItemType.Tool:
-                return default(ItemObjType);
-            default:
-                return default(ItemObjType);
+            return __configFileManager.getConfigValue(key, section);
         }
-    }
+        public int GetConfigIntValue(string key, string section = "Default")
+        {
+            return int.Parse(getConfigValue(key, section));
+        }
+        public bool GetConfigBoolValue(string key, string section = "Default")
+        {
+            return bool.Parse(getConfigValue(key, section));
+        }
     
-    #endregion
+        public void setConfigFileValue(string key, string section, string value)
+        {
+            __configFileManager.setConfigValue(key, value, section);
+        }
+    
+
+        public void saveConfig()
+        {
+            __configFileManager.saveConfig();
+        }
+        #endregion
+
+        #region ItemInformations
+
+        public ItemObjType getItemData<ItemObjType>(ItemType type, string itemName) {
+            switch (type)
+            {
+                case ItemType.Equipment:
+                case ItemType.Item:
+                case ItemType.Plant:
+                case ItemType.Structure:
+                case ItemType.Tool:
+                    return default(ItemObjType);
+                default:
+                    return default(ItemObjType);
+            }
+        }
+    
+        #endregion
+    }
 }

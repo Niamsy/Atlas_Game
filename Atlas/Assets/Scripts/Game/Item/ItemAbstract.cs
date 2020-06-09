@@ -1,25 +1,32 @@
 ﻿using System;
 using Game.Inventory;
-using InputManagement;
 using Localization;
 using Player.Scripts;
 using UnityEngine;
 
 namespace Game.Item
 {
-    [Serializable]
-    public abstract class ItemAbstract : ScriptableObject
+    [Serializable,	CreateAssetMenu(fileName = "Item", menuName = "Item/Base", order = 1)]
+    public class ItemAbstract : ScriptableObject
     {
         [Header("Base item variables")]
         [SerializeField] private int _id = 0;
         public int Id => _id;
 
         [SerializeField] private GameObject _prefabDroppedGO = null;
-        public GameObject PrefabDroppedGO => _prefabDroppedGO;
+        public GameObject PrefabDroppedGO
+        {
+            get => _prefabDroppedGO;
+            set => _prefabDroppedGO = value;
+        }
 
         protected GameObject EquipedObject;
         [SerializeField] private GameObject _prefabHoldedGO = null;
-        public GameObject PrefabHoldedGO => _prefabHoldedGO;
+        public GameObject PrefabHoldedGO
+        {
+            get => _prefabHoldedGO;
+            set => _prefabHoldedGO = value;
+        }
 
         public virtual int MaxStackSize => 100;
 
@@ -44,14 +51,18 @@ namespace Game.Item
             return EquipedObject;
         }
 
+        [SerializeField] private ItemCategory _category = null;
+        public ItemCategory Category => _category;
+
         public virtual void UnEquip()
         {
             if (EquipedObject != null)
                 Destroy(EquipedObject);
         }
 
-        public abstract void Use(ItemStack selfStack);
-        public abstract bool CanUse(Transform transform);
+        public virtual void Use(ItemStack selfStack) {}
+
+        public virtual bool CanUse(Transform transform) { return (false); }
         public virtual bool CancelUse(ItemStack selfStack) { return false; }
     }
 }
