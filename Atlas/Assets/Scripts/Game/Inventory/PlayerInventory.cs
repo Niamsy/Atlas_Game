@@ -6,7 +6,7 @@ namespace Game.Inventory
 {
     public class PlayerInventory : BaseInventory
 	{
-		private readonly int _inventorySize = 84;
+		private readonly int _inventorySize = 64;
 
         protected void Awake()
 		{

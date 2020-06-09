@@ -1,4 +1,5 @@
 ﻿using Game.Player.Stats;
+using Localization;
 using UnityEngine;
 using SceneManagement;
 using Player;
@@ -13,7 +14,12 @@ namespace Menu
         private PlayerStats      _playerStats;
         private Canvas           _canvas;
         private Spawner          _spawner;
-        private bool _isAlreadyDead;
+        private bool             _isAlreadyDead; 
+        
+        private LocalizedTextBehaviour             _textComposant;
+        public LocalizedText     OxygenDeath;
+        public LocalizedText     HungerDeath;
+        
         protected override void InitialiseWidget()
         {
             
@@ -26,34 +32,34 @@ namespace Menu
             _playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
             _playerStats = _playerController.GetComponentInChildren<PlayerStats>();
             _spawner = _playerController.GetComponentInChildren<Spawner>();
+
+            _textComposant = transform.GetChild(0).GetChild(0).GetComponent<LocalizedTextBehaviour>();
+
             Show(false);
         }
-
+    
         // Update is called once per frame
         void Update()
         {
             if (_playerController.IsDead && !_isAlreadyDead)
             {
                 _isAlreadyDead = true;
+                if (_playerController._deathType == DeathType.Suffocation)
+                    _textComposant.LocalizedAsset = OxygenDeath;
+                else if (_playerController._deathType == DeathType.Hunger)
+                    _textComposant.LocalizedAsset = HungerDeath;
                 Show(true);
             }
         }
 
         public void Quit()
         {
-#if UNITY_EDITOR
-            // Application.Quit() does not work in the editor so
-            // UnityEditor.EditorApplication.isPlaying need to be set to false to end the game
-            UnityEditor.EditorApplication.isPlaying = false;
-#else
-         SceneLoader.Instance.QuitTheGame();
-#endif
+            SceneLoader.Instance.QuitTheGame();
         }
 
         public void ContinueGame()
         {
-            _playerStats.Resources[Game.ResourcesManagement.Resource.Oxygen].Quantity = _playerStats.Resources[Game.ResourcesManagement.Resource.Oxygen].Limit;
-            _playerController.CheckForDeath();
+            _playerController.Respawn();
             _spawner.Spawn();
             _isAlreadyDead = false;
             Show(false);

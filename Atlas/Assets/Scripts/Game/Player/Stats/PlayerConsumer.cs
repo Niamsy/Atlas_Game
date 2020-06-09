@@ -6,6 +6,9 @@ namespace Game.Player.Stats
 {
     public class PlayerConsumer : IConsumer
     {
+
+        public Resource SelectedResource;
+
         private void Start()
         {
             StartInvoking();
@@ -13,9 +16,7 @@ namespace Game.Player.Stats
 
         protected override void Awake()
         {
-            base.Awake();
-            ResourcesToConsume.RemoveAll(x => true);
-            ResourcesToConsume.Add(Resource.Oxygen);
+           
         }
 
         public void StartInvoking()
@@ -30,7 +31,7 @@ namespace Game.Player.Stats
 
         public override void ConsumeResource()
         {
-            LinkedStock.RemoveResources(Resource.Oxygen, ConsumptionRate.ResourcePerTick);
+            LinkedStock.RemoveResources(this.ResourcesToConsume[0], ConsumptionRate.ResourcePerTick);
         }
     }
 }

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using FileSystem;
 using Game.SavingSystem;
 using Game.SavingSystem.Datas;
+using Plants;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -30,8 +32,8 @@ namespace Networking
 		public static string DisconnectionPath { get { return ("disconnection"); } }
 		public static string RegisterPath { get { return ("user/registration"); } }
 		public static string ResetPasswordPath { get { return ("user/resetPassword"); } }
-
-        public static string GetScannedPlantsPath { get { return ("user/plants"); } }
+		public static string GetScannedPlantsPath { get { return ("user/plants"); } }
+        public static string GlossaryPath { get { return ("user/glossary"); } }
 
 		#endregion
 
@@ -93,6 +95,13 @@ namespace Networking
         {
             public int id = 0;
             public string scanned_at = "";
+        }
+        
+        [Serializable]
+        public sealed class PlantData
+        {
+	        public string name = "";
+	        public string scientific_name = "";
         }
 
         #endregion
@@ -431,7 +440,7 @@ namespace Networking
         {
             ScannedPlant[] scannedPlants = null;
 
-            if (!CanReceiveANewRequest || !IsConnected())
+	        if (!CanReceiveANewRequest || !IsConnected())
                 return (scannedPlants);
 
             _actualOperation = StartCoroutine(GetScannedPlantsCoroutine());
@@ -477,8 +486,75 @@ namespace Networking
             if (OnGetScannedPlantsRequestFinished != null)
                 OnGetScannedPlantsRequestFinished(success, errorMsg, scannedPlants);
         }
+        
+        public bool Glossary()
+        {
+	        if (!CanReceiveANewRequest || !IsConnected())
+		        return (false);
+
+	        _actualOperation = StartCoroutine(GlossaryCoroutine());
+			
+	        return (true);
+        }
+
+        private IEnumerator GlossaryCoroutine()
+        {
+	        List<ScannedPlant> scannedPlants = new List<ScannedPlant>();
+
+	        UnityWebRequest getRequest = UnityWebRequest.Get(ApiAdress + GlossaryPath);
+	        getRequest.method = UnityWebRequest.kHttpVerbGET;
+	        getRequest.SetRequestHeader("api_token", _apiToken);
+	        getRequest.SetRequestHeader("Content-Type", "application/json");
+	        yield return getRequest.SendWebRequest();
+	        
+	        bool success = (getRequest.responseCode == 200);
+
+
+	        string errorMsg = "";
+	        if (success)
+	        {
+		        var array = JsonHelper.GetJsonArray<PlantData>(getRequest.downloadHandler.text);
+		       foreach (var plant in array)
+		       {
+					var ps = PlantSystem.GetPlantForName(plant.scientific_name);
+					if (ps != null)
+					{
+						scannedPlants.Add(new ScannedPlant{ id = ps.ID, scanned_at = "" });
+					}
+		       }
+	        }
+	        else
+	        {
+#if ATLAS_DEBUG
+		        Debug.Log("ERROR HTTP " + getRequest.url + ": " + getRequest.responseCode + ":" + getRequest.error);
+#endif
+		        switch (getRequest.responseCode)
+		        {
+			        case (500):
+				        errorMsg = _errorDictionnary.ApiError;
+				        break;
+			        case (0):
+				        errorMsg = _errorDictionnary.ApiUnreachable;
+				        break;
+			        default:
+				        errorMsg = _errorDictionnary.UnknowError;
+				        break;
+		        }
+	        }
+
+	        
+	        CleanForNextRequest();
+	        if (OnGlossaryRequestFinish != null)
+		        OnGlossaryRequestFinish(success, errorMsg, scannedPlants);
+        }
 
         public event GetScannedPlantsRequestFinishedDelegate OnGetScannedPlantsRequestFinished;
+        public event GetScannedPlantsRequestFinishedDelegate OnGlossaryRequestFinish;
+
         #endregion
     }
+	
+	
+	
+	
 }

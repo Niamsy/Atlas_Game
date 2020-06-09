@@ -25,7 +25,7 @@ namespace Game.Crafting
         #endregion
 
         [SerializeField]
-        private List<Chapter> _Chapters = null;
+        private List<Chapter> _Chapters = new List<Chapter>();
 
         public List<Chapter> Chapters => _Chapters;
         

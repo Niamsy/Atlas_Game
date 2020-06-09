@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using UnityEditor;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,6 +13,7 @@ namespace SceneManagement
         #endif
         [SerializeField] private int _startUpSceneIndex = 1;
         
+        public static bool FromGame = false;
         private static SceneLoader _instance = null;
         public static SceneLoader Instance
         {
@@ -69,8 +70,7 @@ namespace SceneManagement
             #endif
             yield return null;
             SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(_startUpSceneIndex));
-            if (OnSceneLoading != null)
-                OnSceneLoading(_startUpSceneIndex);
+            OnSceneLoading?.Invoke(_startUpSceneIndex);
         }
 
         public void LoadScene(int sceneToLoad, int sceneToUnload)
@@ -84,14 +84,12 @@ namespace SceneManagement
         {
             Progress = 0f;
             _loadingScreen.SetActive(true);
-            if (OnSceneUnloading != null)
-                OnSceneUnloading(sceneToUnload);
+            OnSceneUnloading?.Invoke(sceneToUnload);
             yield return DoAsyncOperationUntil(SceneManager.UnloadSceneAsync(sceneToUnload), 0f, 0.5f);
             yield return DoAsyncOperationUntil(SceneManager.LoadSceneAsync(sceneToLoad, LoadSceneMode.Additive), 0.5f, 0.5f);
             yield return null;
             SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(sceneToLoad));
-            if (OnSceneLoading != null)
-                OnSceneLoading(sceneToLoad);
+            OnSceneLoading?.Invoke(sceneToLoad);
             _loadingScreen.SetActive(false);
             _loading = null;
         }
@@ -108,15 +106,24 @@ namespace SceneManagement
 
         public void QuitTheGame()
         {
-            for (int x = 0; x < SceneManager.sceneCount; x++)
+            try
             {
-                if (OnSceneUnloading != null)
-                    OnSceneUnloading(SceneManager.GetSceneAt(x).buildIndex);
+                for (int x = 0; x < SceneManager.sceneCount; x++)
+                {
+                    if (OnSceneUnloading != null)
+                        OnSceneUnloading(SceneManager.GetSceneAt(x).buildIndex);
+                }
             }
-
-            Application.Quit();
+            catch (Exception e)
+            {
+                #if ATLAS_DEBUG
+                Debug.LogException(e);
+                #endif
+            }
             #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
+            #else
+            Application.Quit();
             #endif
         }
     }

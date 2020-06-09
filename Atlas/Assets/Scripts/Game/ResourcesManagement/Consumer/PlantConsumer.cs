@@ -1,10 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using JetBrains.Annotations;
+using System.Linq;
+using Game.Inventory;
+using Game.Item;
+using Game.Questing;
 using Plants;
 using Plants.GrowerSystem;
 using Plants.Plant;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Game.ResourcesManagement.Consumer
 {
@@ -13,7 +18,14 @@ namespace Game.ResourcesManagement.Consumer
         #region Protected Variables
         [SerializeField]
         protected int _starvationTimeLimit;
+
+        [SerializeField] private ConditionEvent _conditionEvent = null;
+        [SerializeField] private Condition _conditionToTrigger = null;
+        [SerializeField] private int TriggerInterval = 5;
+        [SerializeField] private int TriggerMinimumQuantity = 5;
+        [SerializeField] private Resource[] TriggerOnRessource = new []{Resource.Water};
         protected bool _starved;
+        protected bool _starving = false;
         #endregion
 
         #region Properties Accessors
@@ -22,6 +34,13 @@ namespace Game.ResourcesManagement.Consumer
             get { return _starved; }
 
             set { _starved = value; }
+        }
+
+        public bool IsStarving
+        {
+            get => _starving;
+
+            set => _starving = value;
         }
 
         public int StarvationTimeLimit
@@ -33,7 +52,6 @@ namespace Game.ResourcesManagement.Consumer
 
         //private PlantStatistics _plantStats;
         //private List<Stage.Need> _needs;
-        [HideInInspector]
         public List<Stock> ConsumedStocks;
 
         #endregion
@@ -59,7 +77,6 @@ namespace Game.ResourcesManagement.Consumer
             ConsumptionRate.TickRate = rates.ConsumationRate;
             ConsumptionRate.ResourcePerTick = rates.QuantityConsumed;
             _starved = false;
-
         }
 
         public void StartInvoking()
@@ -72,15 +89,20 @@ namespace Game.ResourcesManagement.Consumer
             foreach (var stock in ConsumedStocks)
             {
                 stock.Quantity += LinkedStock.RemoveResources(stock.Resource, ConsumptionRate.ResourcePerTick);
+                TriggerEvent(stock);
                 if (LinkedStock[stock.Resource].Quantity == 0)
                 {
                     if (_starveCoroutine == null)
-                    _starveCoroutine = StartCoroutine("Starving");
+                    {
+                        _starveCoroutine = StartCoroutine("Starving");
+                        _starving = true;
+                    }
                 }
                 else
                 {
                     StopCoroutine("Starving");
                     _starveCoroutine = null;
+                    _starving = false;
                 }
             }
         }
@@ -88,8 +110,32 @@ namespace Game.ResourcesManagement.Consumer
 
         #region Private Methods
 
+        private bool ShouldTriggerEvent()
+        { 
+            return true;
+            return Math.Abs(Time.deltaTime % TriggerInterval) <= 0.01f;
+        }
+        
+        private void TriggerEvent(Stock stock)
+        {
+            if (!ShouldTriggerEvent()) return;
+            if (!TriggerOnRessource.Contains(stock.Resource)) return;
+            if (stock.Quantity < TriggerMinimumQuantity) return;
+            if (_conditionEvent == null || _conditionToTrigger == null) return;
+            if (_seed == null) return;
+            
+            _conditionEvent.Raise(_conditionToTrigger, _seed ,1);
+        }
+
+        private ItemAbstract _seed = null;
+        
         private void Start()
         {
+            var parent = GetComponentInParent<ItemStackBehaviour>();
+            if (parent != null)
+            {
+                _seed = parent.Slot.Content;
+            }
             StartInvoking();
         }
 

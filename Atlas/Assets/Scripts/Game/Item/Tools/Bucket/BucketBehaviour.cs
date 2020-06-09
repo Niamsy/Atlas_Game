@@ -1,5 +1,6 @@
 ﻿using Game.ResourcesManagement;
 using UnityEngine;
+using Game.Questing;
 
 namespace Game.Item.Tools.Bucket
 {
@@ -9,11 +10,11 @@ namespace Game.Item.Tools.Bucket
         public BucketProducer Producer;
         public BucketConsumer Consumer;
         public ResourcesStock Stock;
-        
+
         public GameObject ProducerParticle;
 
         private bool _isWatering = false;
-        
+
         private void Awake()
         {
             Producer.gameObject.SetActive(false);
@@ -26,7 +27,7 @@ namespace Game.Item.Tools.Bucket
                 Debug.LogError("Bucket Consumer & Producers doesn't share the same Stock. Repair that");
             #endif
         }
-
+        
         private void Update()
         {
             if (_isWatering && Producer.StockedResources[Resource.Water].Quantity == 0)
@@ -37,9 +38,8 @@ namespace Game.Item.Tools.Bucket
         {
             if (newState == _isWatering)
                 return;
-            
-            _isWatering = newState;
 
+            _isWatering = newState;
             Producer.gameObject.SetActive(_isWatering);
             Consumer.gameObject.SetActive(!_isWatering);
             ProducerParticle.gameObject.SetActive(_isWatering);
